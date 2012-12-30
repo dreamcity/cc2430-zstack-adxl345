@@ -1,0 +1,468 @@
+###############################################################################
+#                                                                             #
+# IAR 8051 C/C++ Compiler V7.30B/W32                    28/Dec/2012  21:17:57 #
+# Copyright 2004-2007 IAR Systems. All rights reserved.                       #
+#                                                                             #
+#    Core               =  plain                                              #
+#    Code model         =  banked                                             #
+#    Data model         =  large                                              #
+#    Calling convention =  xdata reentrant                                    #
+#    Constant location  =  data                                               #
+#    Dptr setup         =  1,16                                               #
+#    Source file        =  C:\Texas Instruments\ZStack-1.4.3-1.2.1\Projects\z #
+#                          stack\Samples\AXDApp\Drivers\adxl345.c             #
+#    Command line       =  -f "C:\Texas Instruments\ZStack-1.4.3-1.2.1\Projec #
+#                          ts\zstack\Samples\AXDApp\CC2430DB\..\..\..\Tools\C #
+#                          C2430DB\f8wCoord.cfg" (-DCPU32MHZ                  #
+#                          -DFORCE_MAC_NEAR -DROOT=__near_func                #
+#                          -DMAC_CFG_APP_PENDING_QUEUE=TRUE                   #
+#                          -DZDO_COORDINATOR -DRTR_NWK -DBLINK_LEDS           #
+#                          "-DCONST=const __code" -DGENERIC=__generic) -f     #
+#                          "C:\Texas Instruments\ZStack-1.4.3-1.2.1\Projects\ #
+#                          zstack\Samples\AXDApp\CC2430DB\..\..\..\Tools\CC24 #
+#                          30DB\f8wConfig.cfg" (-DSECURE=0                    #
+#                          -DDEFAULT_CHANLIST=0x00000800                      #
+#                          -DZDAPP_CONFIG_PAN_ID=0xFFFF                       #
+#                          -DNWK_START_DELAY=100 -DEXTENDED_JOINING_RANDOM_MA #
+#                          SK=0x007F -DBEACON_REQUEST_DELAY=100               #
+#                          -DBEACON_REQ_DELAY_MASK=0x00FF                     #
+#                          -DROUTE_EXPIRY_TIME=30 -DAPSC_ACK_WAIT_DURATION_PO #
+#                          LLED=3000 -DNWK_INDIRECT_MSG_TIMEOUT=7             #
+#                          -DMAX_RREQ_ENTRIES=10 -DAPSC_MAX_FRAME_RETRIES=3   #
+#                          -DNWK_MAX_DATA_RETRIES=2                           #
+#                          -DMAX_POLL_FAILURE_RETRIES=2 -DMAX_BCAST=9         #
+#                          -DAPS_MAX_GROUPS=16 -DMAX_RTG_ENTRIES=20           #
+#                          -DNWK_MAX_BINDING_ENTRIES=10                       #
+#                          -DMAX_BINDING_CLUSTER_IDS=5 "-DDEFAULT_KEY={0x01,  #
+#                          0x03, 0x05, 0x07, 0x09, 0x0B, 0x0D, 0x0F, 0x00,    #
+#                          0x02, 0x04, 0x06, 0x08, 0x0A, 0x0C, 0x0D}"         #
+#                          -DRFD_RCVC_ALWAYS_ON=FALSE -DPOLL_RATE=1000        #
+#                          -DQUEUED_POLL_RATE=100 -DRESPONSE_POLL_RATE=100)   #
+#                          -DREJOIN_POLL_RATE=440 "C:\Texas                   #
+#                          Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\Sam #
+#                          ples\AXDApp\Drivers\adxl345.c" -D CC2430DB -D      #
+#                          REFLECTOR -D xZTOOL_P2 -D xMT_TASK -D              #
+#                          xMT_ZDO_FUNC -D xLCD_SUPPORTED=DEBUG -lC           #
+#                          "C:\Texas Instruments\ZStack-1.4.3-1.2.1\Projects\ #
+#                          zstack\Samples\AXDApp\CC2430DB\CoordinatorDB\List\ #
+#                          " -lA "C:\Texas Instruments\ZStack-1.4.3-1.2.1\Pro #
+#                          jects\zstack\Samples\AXDApp\CC2430DB\CoordinatorDB #
+#                          \List\" --diag_suppress Pe001,Pa010 --diag_remark  #
+#                          pe550 -o "C:\Texas Instruments\ZStack-1.4.3-1.2.1\ #
+#                          Projects\zstack\Samples\AXDApp\CC2430DB\Coordinato #
+#                          rDB\Obj\" -e --require_prototypes -z9              #
+#                          --no_code_motion --debug --core=plain --dptr=16,1  #
+#                          --data_model=large --code_model=banked             #
+#                          --calling_convention=xdata_reentrant               #
+#                          --place_constants=data --nr_virtual_regs 8 -I      #
+#                          "C:\Texas Instruments\ZStack-1.4.3-1.2.1\Projects\ #
+#                          zstack\Samples\AXDApp\CC2430DB\" -I "C:\Texas      #
+#                          Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\Sam #
+#                          ples\AXDApp\CC2430DB\..\SOURCE\" -I "C:\Texas      #
+#                          Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\Sam #
+#                          ples\AXDApp\CC2430DB\..\..\..\ZMAIN\TI2430DB\" -I  #
+#                          "C:\Texas Instruments\ZStack-1.4.3-1.2.1\Projects\ #
+#                          zstack\Samples\AXDApp\CC2430DB\..\..\..\..\..\COMP #
+#                          ONENTS\MT\" -I "C:\Texas                           #
+#                          Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\Sam #
+#                          ples\AXDApp\CC2430DB\..\..\..\..\..\COMPONENTS\HAL #
+#                          \INCLUDE\" -I "C:\Texas Instruments\ZStack-1.4.3-1 #
+#                          .2.1\Projects\zstack\Samples\AXDApp\CC2430DB\..\.. #
+#                          \..\..\..\COMPONENTS\HAL\TARGET\CC2430DB\" -I      #
+#                          "C:\Texas Instruments\ZStack-1.4.3-1.2.1\Projects\ #
+#                          zstack\Samples\AXDApp\CC2430DB\..\..\..\..\..\COMP #
+#                          ONENTS\OSAL\MCU\CCSOC\" -I "C:\Texas               #
+#                          Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\Sam #
+#                          ples\AXDApp\CC2430DB\..\..\..\..\..\COMPONENTS\OSA #
+#                          L\INCLUDE\" -I "C:\Texas                           #
+#                          Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\Sam #
+#                          ples\AXDApp\CC2430DB\..\..\..\..\..\COMPONENTS\STA #
+#                          CK\AF\" -I "C:\Texas Instruments\ZStack-1.4.3-1.2. #
+#                          1\Projects\zstack\Samples\AXDApp\CC2430DB\..\..\.. #
+#                          \..\..\COMPONENTS\STACK\NWK\" -I "C:\Texas         #
+#                          Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\Sam #
+#                          ples\AXDApp\CC2430DB\..\..\..\..\..\COMPONENTS\STA #
+#                          CK\SEC\" -I "C:\Texas Instruments\ZStack-1.4.3-1.2 #
+#                          .1\Projects\zstack\Samples\AXDApp\CC2430DB\..\..\. #
+#                          .\..\..\COMPONENTS\STACK\SYS\" -I "C:\Texas        #
+#                          Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\Sam #
+#                          ples\AXDApp\CC2430DB\..\..\..\..\..\COMPONENTS\STA #
+#                          CK\ZDO\" -I "C:\Texas Instruments\ZStack-1.4.3-1.2 #
+#                          .1\Projects\zstack\Samples\AXDApp\CC2430DB\..\..\. #
+#                          .\..\..\COMPONENTS\ZMAC\F8W\" -I "C:\Texas         #
+#                          Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\Sam #
+#                          ples\AXDApp\CC2430DB\..\..\..\..\..\COMPONENTS\ZMA #
+#                          C\" -I "C:\Texas Instruments\ZStack-1.4.3-1.2.1\Pr #
+#                          ojects\zstack\Samples\AXDApp\CC2430DB\..\..\..\..\ #
+#                          ..\COMPONENTS\SERVICES\SADDR\" -I "C:\Texas        #
+#                          Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\Sam #
+#                          ples\AXDApp\CC2430DB\..\..\..\..\..\COMPONENTS\SER #
+#                          VICES\SDATA\" -I "C:\Texas                         #
+#                          Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\Sam #
+#                          ples\AXDApp\CC2430DB\..\..\..\..\..\COMPONENTS\MAC #
+#                          \INCLUDE\" -I "C:\Texas Instruments\ZStack-1.4.3-1 #
+#                          .2.1\Projects\zstack\Samples\AXDApp\CC2430DB\..\.. #
+#                          \..\..\..\COMPONENTS\MAC\HIGH_LEVEL\" -I           #
+#                          "C:\Texas Instruments\ZStack-1.4.3-1.2.1\Projects\ #
+#                          zstack\Samples\AXDApp\CC2430DB\..\..\..\..\..\COMP #
+#                          ONENTS\MAC\LOW_LEVEL\SRF03\" -I "C:\Texas          #
+#                          Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\Sam #
+#                          ples\AXDApp\CC2430DB\..\..\..\..\..\COMPONENTS\MAC #
+#                          \LOW_LEVEL\SRF03\SINGLE_CHIP\" -I "C:\Program      #
+#                          Files\IAR Systems\Embedded Workbench 4.0           #
+#                          Evaluation version\8051\INC\" -I "C:\Program       #
+#                          Files\IAR Systems\Embedded Workbench 4.0           #
+#                          Evaluation version\8051\INC\CLIB\"                 #
+#    List file          =  C:\Texas Instruments\ZStack-1.4.3-1.2.1\Projects\z #
+#                          stack\Samples\AXDApp\CC2430DB\CoordinatorDB\List\a #
+#                          dxl345.lst                                         #
+#    Object file        =  C:\Texas Instruments\ZStack-1.4.3-1.2.1\Projects\z #
+#                          stack\Samples\AXDApp\CC2430DB\CoordinatorDB\Obj\ad #
+#                          xl345.r51                                          #
+#                                                                             #
+#                                                                             #
+###############################################################################
+
+C:\Texas Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\Samples\AXDApp\Drivers\adxl345.c
+      1          #include <ioCC2430.h>
+      2          #include <string.h>
+      3          #include <math.h>
+      4          #include <stdio.h>
+      5          #include "adxl345.h"
+      6          //#include "LCD3310.h"
+      7          #define SCL     P1_2   
+                         ^
+Warning[Pe047]: incompatible redefinition of macro "SCL" (declared at line 13
+          of "C:\Texas
+          Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\Samples\AXDApp\Drivers
+          \adxl345.h")
+      8          #define SDA     P1_3
+                         ^
+Warning[Pe047]: incompatible redefinition of macro "SDA" (declared at line 14
+          of "C:\Texas
+          Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\Samples\AXDApp\Drivers
+          \adxl345.h")
+      9          
+     10          #define SDADirOut P1DIR|=0x08;      //xxxx1M01
+     11          #define SDADirIn  P1DIR&=~0x08;
+     12          
+     13          #define TRUE 1
+     14          #define FALSE 0
+     15          #define	SlaveAddress 0xA6 //定义器件在IIC总线中的从地址,根据ALT  ADDRESS地址引脚不同修改
+     16          
+     17          unsigned char BUF[8];
+     18          int  dis_data;
+     19          
+     20          char wan,qian,bai,shi,ge;
+                      ^
+Error[Pe147]: declaration is incompatible with "INT8U __xdata wan" (declared
+          at line 22 of "C:\Texas
+          Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\Samples\AXDApp\Drivers
+          \adxl345.h")
+
+  char wan,qian,bai,shi,ge;
+           ^
+"C:\Texas Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\Samples\AXDApp\Drivers\adxl345.c",20  Error[Pe147]: 
+          declaration is incompatible with "INT8U __xdata qian" (declared at
+          line 22 of "C:\Texas
+          Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\Samples\AXDApp\Drivers
+          \adxl345.h")
+
+  char wan,qian,bai,shi,ge;
+                ^
+"C:\Texas Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\Samples\AXDApp\Drivers\adxl345.c",20  Error[Pe147]: 
+          declaration is incompatible with "INT8U __xdata bai" (declared at
+          line 22 of "C:\Texas
+          Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\Samples\AXDApp\Drivers
+          \adxl345.h")
+
+  char wan,qian,bai,shi,ge;
+                    ^
+"C:\Texas Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\Samples\AXDApp\Drivers\adxl345.c",20  Error[Pe147]: 
+          declaration is incompatible with "INT8U __xdata shi" (declared at
+          line 22 of "C:\Texas
+          Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\Samples\AXDApp\Drivers
+          \adxl345.h")
+
+  char wan,qian,bai,shi,ge;
+                        ^
+"C:\Texas Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\Samples\AXDApp\Drivers\adxl345.c",20  Error[Pe147]: 
+          declaration is incompatible with "INT8U __xdata ge" (declared at
+          line 22 of "C:\Texas
+          Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\Samples\AXDApp\Drivers
+          \adxl345.h")
+     21          
+     22          void initUARTtest(void);
+     23          void UartTX_Send_String(char *Data,int len);
+     24          void conversion(uint temp_data);
+                                 ^
+Error[Pe020]: identifier "uint" is undefined
+     25          
+     26          void Sendack(unsigned char h);
+     27          unsigned char I2C_Check_ack();
+     28          
+     29          void I2C_Start_1(void);
+     30          void I2C_Stop_1(void);
+     31          
+     32          void WriteI2CByte_1(uchar b);
+                                     ^
+Error[Pe020]: identifier "uchar" is undefined
+     33          unsigned char ReadI2CByte_1(void);
+     34          
+     35          unsigned char Single_Read_ADXL345(uchar REG_Address);
+                                                   ^
+Error[Pe020]: identifier "uchar" is undefined
+     36          void Single_Write_ADXL345(uchar REG_Address,uchar REG_data);
+                                           ^
+Error[Pe020]: identifier "uchar" is undefined
+
+  void Single_Write_ADXL345(uchar REG_Address,uchar REG_data);
+                                              ^
+"C:\Texas Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\Samples\AXDApp\Drivers\adxl345.c",36  Error[Pe020]: 
+          identifier "uchar" is undefined
+     37          
+     38          void Init_ADXL345();
+     39          
+     40          void Delay_1u(unsigned int microSecs);
+     41          void Delay(uint n);
+                            ^
+Error[Pe020]: identifier "uint" is undefined
+     42          
+     43          
+     44          void Multiple_read_ADXL345(void);
+     45          
+     46          void Delay(uint n)      //(5/32)*n   us
+                            ^
+Error[Pe020]: identifier "uint" is undefined
+     47          {
+     48          	uint d;
+                 	^
+Error[Pe020]: identifier "uint" is undefined
+     49          	for(d=0;d<n;d++);
+     50          	for(d=0;d<n;d++);
+     51          	for(d=0;d<n;d++);
+     52          	for(d=0;d<n;d++);
+     53          	for(d=0;d<n;d++);
+     54          }
+     55          
+     56          void Delay_1u(unsigned int microSecs) {
+     57            while(microSecs--)
+     58            {
+     59              /* 32 NOPs == 1 usecs */
+     60              asm("nop"); asm("nop"); asm("nop"); asm("nop"); asm("nop");
+     61              asm("nop"); asm("nop"); asm("nop"); asm("nop"); asm("nop");
+     62              asm("nop"); asm("nop"); asm("nop"); asm("nop"); asm("nop");
+     63              asm("nop"); asm("nop"); asm("nop"); asm("nop"); asm("nop");
+     64              asm("nop"); asm("nop"); asm("nop"); asm("nop"); asm("nop");
+     65              asm("nop"); asm("nop"); asm("nop"); asm("nop"); asm("nop");
+     66              asm("nop"); asm("nop");
+     67            }
+     68          }
+     69          
+     70          void conversion(uint temp_data)   
+                                 ^
+Error[Pe020]: identifier "uint" is undefined
+     71          {   
+     72              wan=temp_data/10000; 
+     73              temp_data=temp_data%10000;   //取余运算 
+     74          	qian=temp_data/1000; 
+     75              temp_data=temp_data%1000;    //取余运算 
+     76              bai=temp_data/100; 
+     77              temp_data=temp_data%100;     //取余运算 
+     78              shi=temp_data/10; 
+     79              temp_data=temp_data%10;      //取余运算 
+     80              ge=temp_data; 	
+     81          } 
+     82          
+     83          void I2C_Start_1(void)
+     84              {
+     85                  /*启动I2C总线的函数，当SCL为高电平时使SDA产生一个负跳变*/
+     86                  SDADirOut;
+     87                  Delay_1u(1); 
+     88                  SDA=1;
+     89                  SCL=1;
+     90                  Delay_1u(5);
+     91                  SDA=0;
+     92                  Delay_1u(5);
+     93                  SCL=0;
+     94                  Delay_1u(5);
+     95              }
+     96          
+     97              void I2C_Stop_1(void)
+     98              {
+     99                  /*终止I2C总线，当SCL为高电平时使SDA产生一个正跳变*/
+    100                  SCL=0;
+    101                  Delay_1u(1);
+    102                  SDADirOut;
+    103                  Delay_1u(1);
+    104                  SDA=0;
+    105                  Delay_1u(5);
+    106                  SCL=1;
+    107                  Delay_1u(5);
+    108                  SDA=1;
+    109                  Delay_1u(5);
+    110              }
+    111          
+    112          void Sendack(unsigned char h){
+    113                  SCL=0;
+    114                  Delay_1u(5);
+    115                  SDADirOut;
+    116                  Delay(5);
+    117                  SDA=h&0x01;
+    118                  Delay_1u(5);
+    119                  SCL=1;
+    120                  Delay_1u(5);
+    121                  SCL=0;
+    122                  Delay_1u(5);
+    123              }
+    124          
+    125          unsigned char I2C_Check_ack(void){
+                               ^
+Error[Pa045]: function "I2C_Check_ack" has no prototype
+    126              SCL=0;
+    127              Delay_1u(5);
+    128              SDADirOut;
+    129              SDA=1;
+    130              SDADirIn;
+    131              Delay_1u(5);          //此处是否有必要使SDA先拉高？！？！
+    132              SCL=1;
+    133              Delay_1u(5);
+    134              if(SDA==1)
+    135              {
+    136                SCL=0;
+    137                return 0;  //er
+    138              }
+    139              SCL=0;
+    140              return 1;
+    141          }
+    142          
+    143              
+    144          
+    145          
+    146              void WriteI2CByte_1(unsigned char b)
+    147              {
+    148                  /*向I2C总线写一个字节*/
+    149                  unsigned char e=8;
+    150                  SDADirOut;
+    151                  while(e--){
+    152                    SCL=0;
+    153                    Delay_1u(5);
+    154                    if(b&0x80)SDA=1;
+    155                    else SDA=0;
+    156                    b<<=1;
+    157                    Delay_1u(3);
+    158                    SCL=1;
+    159                    Delay_1u(5);
+    160                  }
+    161                  SCL=0;
+    162                  I2C_Check_ack();
+    163              }
+    164          
+    165          unsigned char ReadI2CByte_1(void)
+    166              {
+    167                  /*从I2C总线读一个字节*/
+    168              unsigned char i=8;
+    169              unsigned char c=0;
+    170              SCL=0;
+    171              SDADirOut;
+    172              SDA=1;
+    173              Delay_1u(3);
+    174              SDADirIn;
+    175              while(i--){
+    176                c<<=1;
+    177                SCL=0;
+    178                Delay_1u(5);
+    179                SCL=1;
+    180                Delay_1u(5);
+    181                if(SDA==1)c|=0x01;
+    182                else c&=0xfe;
+    183              }
+    184              SCL=0;
+    185              SDADirOut;
+    186              return c; 
+    187              }
+    188          //******单字节写入******************************************* 
+    189          
+    190          void Single_Write_ADXL345(uchar REG_Address,uchar REG_data) 
+                                           ^
+Error[Pe020]: identifier "uchar" is undefined
+
+  void Single_Write_ADXL345(uchar REG_Address,uchar REG_data) 
+                                              ^
+"C:\Texas Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\Samples\AXDApp\Drivers\adxl345.c",190  Error[Pe020]: 
+          identifier "uchar" is undefined
+    191          { 
+    192              I2C_Start_1();                  //起始信号 
+    193              WriteI2CByte_1(SlaveAddress);   //发送设备地址+写信号 
+    194              WriteI2CByte_1(REG_Address);    //内部寄存器地址，请参考中文pdf22页  
+    195              WriteI2CByte_1(REG_data);       //内部寄存器数据，请参考中文pdf22页  
+    196              I2C_Stop_1();                   //发送停止信号 
+    197          } 
+    198          
+    199          //********单字节读取***************************************** 
+    200          unsigned char Single_Read_ADXL345(uchar REG_Address) 
+                                                   ^
+Error[Pe020]: identifier "uchar" is undefined
+    201          {  uchar REG_data;
+                    ^
+Error[Pe020]: identifier "uchar" is undefined
+    202              I2C_Start_1();                          //起始信号 
+    203              WriteI2CByte_1(SlaveAddress);           //发送设备地址+写信号 
+    204              WriteI2CByte_1(REG_Address);                   //发送存储单元地址，从0开始	
+    205              I2C_Start_1();                          //起始信号 
+    206              WriteI2CByte_1(SlaveAddress+1);         //发送设备地址+读信号 
+    207              REG_data=ReadI2CByte_1();              //读出寄存器数据 
+    208              Sendack(1);   
+    209              I2C_Stop_1();                           //停止信号 
+    210              return REG_data;  
+                            ^
+Warning[Pe1056]: returning pointer to local variable
+    211          } 
+    212          
+    213          void Init_ADXL345() 
+    214          { 
+    215            P1DIR = 0x0C;
+    216             Single_Write_ADXL345(0x31,0x0B);   //测量范围,正负16g，13位模式 
+    217             Single_Write_ADXL345(0x2C,0x0F);   //速率设定为12.5 参考pdf13页 
+    218             Single_Write_ADXL345(0x2D,0x08);   //选择电源模式   参考pdf24页 
+    219             Single_Write_ADXL345(0x2E,0x80);   //使能 DATA_READY 中断 
+    220             Single_Write_ADXL345(0x1E,0x00);   //X 偏移量 根据测试传感器的状态写入pdf29页 
+    221             Single_Write_ADXL345(0x1F,0x00);   //Y 偏移量 根据测试传感器的状态写入pdf29页 
+    222             Single_Write_ADXL345(0x20,0x05);   //Z 偏移量 根据测试传感器的状态写入pdf29页 
+    223          } 
+    224          
+    225          //********************************************************* 
+    226          // 
+    227          //连续读出ADXL345内部加速度数据，地址范围0x32~0x37 
+    228          // 
+    229          //********************************************************* 
+    230          void Multiple_read_ADXL345(void) 
+    231          {   uchar f; 
+                     ^
+Error[Pe020]: identifier "uchar" is undefined
+    232              I2C_Start_1();                          //起始信号 
+    233              WriteI2CByte_1(SlaveAddress);           //发送设备地址+写信号 
+    234              WriteI2CByte_1(0x32);                   //发送存储单元地址，从0x32开始	
+    235              I2C_Start_1();                          //起始信号 
+    236              WriteI2CByte_1(SlaveAddress+1);         //发送设备地址+读信号 
+    237           for (f=0; f<6; f++)                      //连续读取6个地址数据，存储中BUF 
+    238              { 
+    239                  BUF[f] = ReadI2CByte_1();          //BUF[0]存储0x32地址中的数据 
+    240                if (f == 5) 
+    241                  { 
+    242                    Sendack(1);                //最后一个数据需要回NOACK 
+    243                  } 
+    244                  else 
+    245                  { 
+    246                    Sendack(0);                //回应ACK 
+    247                 } 
+    248             } 
+    249              I2C_Stop_1();                          //停止信号 
+    250              Delay(500);
+    251              Delay(500);
+    252              Delay(500);
+    253              Delay(500);
+    254          } 
+
+Errors: 20
+Warnings: 3

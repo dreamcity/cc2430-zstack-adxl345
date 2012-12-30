@@ -1,0 +1,817 @@
+///////////////////////////////////////////////////////////////////////////////
+//                                                                            /
+// IAR 8051 C/C++ Compiler V7.30B/W32                   28/Dec/2012  21:17:10 /
+// Copyright 2004-2007 IAR Systems. All rights reserved.                      /
+//                                                                            /
+//    Core               =  plain                                             /
+//    Code model         =  banked                                            /
+//    Data model         =  large                                             /
+//    Calling convention =  xdata reentrant                                   /
+//    Constant location  =  data                                              /
+//    Dptr setup         =  1,16                                              /
+//    Source file        =  C:\Texas Instruments\ZStack-1.4.3-1.2.1\Component /
+//                          s\mt\SPIMgr.c                                     /
+//    Command line       =  -f "C:\Texas Instruments\ZStack-1.4.3-1.2.1\Proje /
+//                          cts\zstack\Samples\AXDApp\CC2430DB\..\..\..\Tools /
+//                          \CC2430DB\f8wCoord.cfg" (-DCPU32MHZ               /
+//                          -DFORCE_MAC_NEAR -DROOT=__near_func               /
+//                          -DMAC_CFG_APP_PENDING_QUEUE=TRUE                  /
+//                          -DZDO_COORDINATOR -DRTR_NWK -DBLINK_LEDS          /
+//                          "-DCONST=const __code" -DGENERIC=__generic) -f    /
+//                          "C:\Texas Instruments\ZStack-1.4.3-1.2.1\Projects /
+//                          \zstack\Samples\AXDApp\CC2430DB\..\..\..\Tools\CC /
+//                          2430DB\f8wConfig.cfg" (-DSECURE=0                 /
+//                          -DDEFAULT_CHANLIST=0x00000800                     /
+//                          -DZDAPP_CONFIG_PAN_ID=0xFFFF                      /
+//                          -DNWK_START_DELAY=100 -DEXTENDED_JOINING_RANDOM_M /
+//                          ASK=0x007F -DBEACON_REQUEST_DELAY=100             /
+//                          -DBEACON_REQ_DELAY_MASK=0x00FF                    /
+//                          -DROUTE_EXPIRY_TIME=30 -DAPSC_ACK_WAIT_DURATION_P /
+//                          OLLED=3000 -DNWK_INDIRECT_MSG_TIMEOUT=7           /
+//                          -DMAX_RREQ_ENTRIES=10 -DAPSC_MAX_FRAME_RETRIES=3  /
+//                          -DNWK_MAX_DATA_RETRIES=2                          /
+//                          -DMAX_POLL_FAILURE_RETRIES=2 -DMAX_BCAST=9        /
+//                          -DAPS_MAX_GROUPS=16 -DMAX_RTG_ENTRIES=20          /
+//                          -DNWK_MAX_BINDING_ENTRIES=10                      /
+//                          -DMAX_BINDING_CLUSTER_IDS=5                       /
+//                          "-DDEFAULT_KEY={0x01, 0x03, 0x05, 0x07, 0x09,     /
+//                          0x0B, 0x0D, 0x0F, 0x00, 0x02, 0x04, 0x06, 0x08,   /
+//                          0x0A, 0x0C, 0x0D}" -DRFD_RCVC_ALWAYS_ON=FALSE     /
+//                          -DPOLL_RATE=1000 -DQUEUED_POLL_RATE=100           /
+//                          -DRESPONSE_POLL_RATE=100) -DREJOIN_POLL_RATE=440  /
+//                          "C:\Texas Instruments\ZStack-1.4.3-1.2.1\Componen /
+//                          ts\mt\SPIMgr.c" -D CC2430DB -D REFLECTOR -D       /
+//                          xZTOOL_P2 -D xMT_TASK -D xMT_ZDO_FUNC -D          /
+//                          xLCD_SUPPORTED=DEBUG -lC "C:\Texas                /
+//                          Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\Sa /
+//                          mples\AXDApp\CC2430DB\CoordinatorDB\List\" -lA    /
+//                          "C:\Texas Instruments\ZStack-1.4.3-1.2.1\Projects /
+//                          \zstack\Samples\AXDApp\CC2430DB\CoordinatorDB\Lis /
+//                          t\" --diag_suppress Pe001,Pa010 --diag_remark     /
+//                          pe550 -o "C:\Texas Instruments\ZStack-1.4.3-1.2.1 /
+//                          \Projects\zstack\Samples\AXDApp\CC2430DB\Coordina /
+//                          torDB\Obj\" -e --require_prototypes -z9           /
+//                          --no_code_motion --debug --core=plain             /
+//                          --dptr=16,1 --data_model=large                    /
+//                          --code_model=banked --calling_convention=xdata_re /
+//                          entrant --place_constants=data --nr_virtual_regs  /
+//                          8 -I "C:\Texas Instruments\ZStack-1.4.3-1.2.1\Pro /
+//                          jects\zstack\Samples\AXDApp\CC2430DB\" -I         /
+//                          "C:\Texas Instruments\ZStack-1.4.3-1.2.1\Projects /
+//                          \zstack\Samples\AXDApp\CC2430DB\..\SOURCE\" -I    /
+//                          "C:\Texas Instruments\ZStack-1.4.3-1.2.1\Projects /
+//                          \zstack\Samples\AXDApp\CC2430DB\..\..\..\ZMAIN\TI /
+//                          2430DB\" -I "C:\Texas Instruments\ZStack-1.4.3-1. /
+//                          2.1\Projects\zstack\Samples\AXDApp\CC2430DB\..\.. /
+//                          \..\..\..\COMPONENTS\MT\" -I "C:\Texas            /
+//                          Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\Sa /
+//                          mples\AXDApp\CC2430DB\..\..\..\..\..\COMPONENTS\H /
+//                          AL\INCLUDE\" -I "C:\Texas                         /
+//                          Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\Sa /
+//                          mples\AXDApp\CC2430DB\..\..\..\..\..\COMPONENTS\H /
+//                          AL\TARGET\CC2430DB\" -I "C:\Texas                 /
+//                          Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\Sa /
+//                          mples\AXDApp\CC2430DB\..\..\..\..\..\COMPONENTS\O /
+//                          SAL\MCU\CCSOC\" -I "C:\Texas                      /
+//                          Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\Sa /
+//                          mples\AXDApp\CC2430DB\..\..\..\..\..\COMPONENTS\O /
+//                          SAL\INCLUDE\" -I "C:\Texas                        /
+//                          Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\Sa /
+//                          mples\AXDApp\CC2430DB\..\..\..\..\..\COMPONENTS\S /
+//                          TACK\AF\" -I "C:\Texas Instruments\ZStack-1.4.3-1 /
+//                          .2.1\Projects\zstack\Samples\AXDApp\CC2430DB\..\. /
+//                          .\..\..\..\COMPONENTS\STACK\NWK\" -I "C:\Texas    /
+//                          Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\Sa /
+//                          mples\AXDApp\CC2430DB\..\..\..\..\..\COMPONENTS\S /
+//                          TACK\SEC\" -I "C:\Texas                           /
+//                          Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\Sa /
+//                          mples\AXDApp\CC2430DB\..\..\..\..\..\COMPONENTS\S /
+//                          TACK\SYS\" -I "C:\Texas                           /
+//                          Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\Sa /
+//                          mples\AXDApp\CC2430DB\..\..\..\..\..\COMPONENTS\S /
+//                          TACK\ZDO\" -I "C:\Texas                           /
+//                          Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\Sa /
+//                          mples\AXDApp\CC2430DB\..\..\..\..\..\COMPONENTS\Z /
+//                          MAC\F8W\" -I "C:\Texas Instruments\ZStack-1.4.3-1 /
+//                          .2.1\Projects\zstack\Samples\AXDApp\CC2430DB\..\. /
+//                          .\..\..\..\COMPONENTS\ZMAC\" -I "C:\Texas         /
+//                          Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\Sa /
+//                          mples\AXDApp\CC2430DB\..\..\..\..\..\COMPONENTS\S /
+//                          ERVICES\SADDR\" -I "C:\Texas                      /
+//                          Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\Sa /
+//                          mples\AXDApp\CC2430DB\..\..\..\..\..\COMPONENTS\S /
+//                          ERVICES\SDATA\" -I "C:\Texas                      /
+//                          Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\Sa /
+//                          mples\AXDApp\CC2430DB\..\..\..\..\..\COMPONENTS\M /
+//                          AC\INCLUDE\" -I "C:\Texas                         /
+//                          Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\Sa /
+//                          mples\AXDApp\CC2430DB\..\..\..\..\..\COMPONENTS\M /
+//                          AC\HIGH_LEVEL\" -I "C:\Texas                      /
+//                          Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\Sa /
+//                          mples\AXDApp\CC2430DB\..\..\..\..\..\COMPONENTS\M /
+//                          AC\LOW_LEVEL\SRF03\" -I "C:\Texas                 /
+//                          Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\Sa /
+//                          mples\AXDApp\CC2430DB\..\..\..\..\..\COMPONENTS\M /
+//                          AC\LOW_LEVEL\SRF03\SINGLE_CHIP\" -I "C:\Program   /
+//                          Files\IAR Systems\Embedded Workbench 4.0          /
+//                          Evaluation version\8051\INC\" -I "C:\Program      /
+//                          Files\IAR Systems\Embedded Workbench 4.0          /
+//                          Evaluation version\8051\INC\CLIB\"                /
+//    List file          =  C:\Texas Instruments\ZStack-1.4.3-1.2.1\Projects\ /
+//                          zstack\Samples\AXDApp\CC2430DB\CoordinatorDB\List /
+//                          \SPIMgr.s51                                       /
+//                                                                            /
+//                                                                            /
+///////////////////////////////////////////////////////////////////////////////
+
+        NAME SPIMgr
+
+        RTMODEL "__calling_convention", "xdata_reentrant"
+        RTMODEL "__code_model", "banked"
+        RTMODEL "__core", "plain"
+        RTMODEL "__data_model", "large"
+        RTMODEL "__dptr_size", "16"
+        RTMODEL "__extended_stack", "disabled"
+        RTMODEL "__location_for_constants", "data"
+        RTMODEL "__number_of_dptrs", "1"
+        RTMODEL "__rt_version", "1"
+
+        RSEG DOVERLAY:DATA:NOROOT(0)
+        RSEG IOVERLAY:IDATA:NOROOT(0)
+        RSEG ISTACK:IDATA:NOROOT(0)
+        RSEG PSTACK:XDATA:NOROOT(0)
+        RSEG XSTACK:XDATA:NOROOT(0)
+
+        EXTERN ?BANKED_ENTER_XDATA
+        EXTERN ?BANKED_LEAVE_XDATA
+        EXTERN ?BDISPATCH
+        EXTERN ?BRET
+        EXTERN __INIT_XDATA_Z
+
+        PUBLIC ??SPIMgr_CalcFCS?relay
+        FUNCTION ??SPIMgr_CalcFCS?relay,0203H
+        PUBLIC ??SPIMgr_Init?relay
+        FUNCTION ??SPIMgr_Init?relay,0203H
+        PUBLIC ??SPIMgr_RegisterTaskID?relay
+        FUNCTION ??SPIMgr_RegisterTaskID?relay,0203H
+        PUBLIC App_TaskID
+        PUBLIC SPIMgr_CalcFCS
+        FUNCTION SPIMgr_CalcFCS,0203H
+        ARGFRAME XSTACK, 0, STACK
+        LOCFRAME XSTACK, 9, STACK
+        PUBLIC SPIMgr_Init
+        FUNCTION SPIMgr_Init,0203H
+        ARGFRAME XSTACK, 0, STACK
+        LOCFRAME ISTACK, 2, STACK
+        PUBLIC SPIMgr_RegisterTaskID
+        FUNCTION SPIMgr_RegisterTaskID,0203H
+        ARGFRAME XSTACK, 0, STACK
+        LOCFRAME ISTACK, 2, STACK
+        
+        CFI Names cfiNames0
+        CFI StackFrame CFA_SP SP DATA
+        CFI StackFrame CFA_PSP16 PSP16 XDATA
+        CFI StackFrame CFA_XSP16 XSP16 XDATA
+        CFI StaticOverlayFrame CFA_IOVERLAY IOVERLAY
+        CFI StaticOverlayFrame CFA_DOVERLAY DOVERLAY
+        CFI Resource `PSW.CY`:1, `B.BR0`:1, `B.BR1`:1, `B.BR2`:1, `B.BR3`:1
+        CFI Resource `B.BR4`:1, `B.BR5`:1, `B.BR6`:1, `B.BR7`:1, `VB.BR8`:1
+        CFI Resource `VB.BR9`:1, `VB.BR10`:1, `VB.BR11`:1, `VB.BR12`:1
+        CFI Resource `VB.BR13`:1, `VB.BR14`:1, `VB.BR15`:1, VB:8, B:8, A:8
+        CFI Resource PSW:8, DPL0:8, DPH0:8, R0:8, R1:8, R2:8, R3:8, R4:8, R5:8
+        CFI Resource R6:8, R7:8, V0:8, V1:8, V2:8, V3:8, V4:8, V5:8, V6:8, V7:8
+        CFI Resource SP:8, PSPH:8, PSPL:8, PSP16:16, XSPH:8, XSPL:8, XSP16:16
+        CFI VirtualResource ?RET:24
+        CFI Resource ?BRET_EXT:8
+        CFI VirtualResource ?RET_HIGH:8, ?RET_LOW:8
+        CFI ResourceParts PSP16 PSPH, PSPL
+        CFI ResourceParts XSP16 XSPH, XSPL
+        CFI ResourceParts ?RET ?BRET_EXT, ?RET_HIGH, ?RET_LOW
+        CFI EndNames cfiNames0
+        
+        CFI Common cfiCommon0 Using cfiNames0
+        CFI CodeAlign 1
+        CFI DataAlign -1
+        CFI ReturnAddress ?RET CODE
+        CFI CFA_DOVERLAY Used
+        CFI CFA_IOVERLAY Used
+        CFI CFA_SP SP+-3
+        CFI CFA_PSP16 PSP16+0
+        CFI CFA_XSP16 XSP16+0
+        CFI `PSW.CY` SameValue
+        CFI `B.BR0` SameValue
+        CFI `B.BR1` SameValue
+        CFI `B.BR2` SameValue
+        CFI `B.BR3` SameValue
+        CFI `B.BR4` SameValue
+        CFI `B.BR5` SameValue
+        CFI `B.BR6` SameValue
+        CFI `B.BR7` SameValue
+        CFI `VB.BR8` SameValue
+        CFI `VB.BR9` SameValue
+        CFI `VB.BR10` SameValue
+        CFI `VB.BR11` SameValue
+        CFI `VB.BR12` SameValue
+        CFI `VB.BR13` SameValue
+        CFI `VB.BR14` SameValue
+        CFI `VB.BR15` SameValue
+        CFI VB SameValue
+        CFI B Undefined
+        CFI A Undefined
+        CFI PSW SameValue
+        CFI DPL0 SameValue
+        CFI DPH0 SameValue
+        CFI R0 Undefined
+        CFI R1 Undefined
+        CFI R2 Undefined
+        CFI R3 Undefined
+        CFI R4 Undefined
+        CFI R5 Undefined
+        CFI R6 SameValue
+        CFI R7 SameValue
+        CFI V0 SameValue
+        CFI V1 SameValue
+        CFI V2 SameValue
+        CFI V3 SameValue
+        CFI V4 SameValue
+        CFI V5 SameValue
+        CFI V6 SameValue
+        CFI V7 SameValue
+        CFI PSPH Undefined
+        CFI PSPL Undefined
+        CFI XSPH Undefined
+        CFI XSPL Undefined
+        CFI ?RET Concat
+        CFI ?BRET_EXT Frame(CFA_SP, 3)
+        CFI ?RET_HIGH Frame(CFA_SP, 2)
+        CFI ?RET_LOW Frame(CFA_SP, 1)
+        CFI EndCommon cfiCommon0
+        
+SPIMgr_CalcFCS      SYMBOL "SPIMgr_CalcFCS"
+??SPIMgr_CalcFCS?relay SYMBOL "?relay", SPIMgr_CalcFCS
+SPIMgr_Init         SYMBOL "SPIMgr_Init"
+??SPIMgr_Init?relay SYMBOL "?relay", SPIMgr_Init
+SPIMgr_RegisterTaskID SYMBOL "SPIMgr_RegisterTaskID"
+??SPIMgr_RegisterTaskID?relay SYMBOL "?relay", SPIMgr_RegisterTaskID
+
+// C:\Texas Instruments\ZStack-1.4.3-1.2.1\Components\mt\SPIMgr.c
+//    1 /**************************************************************************************************
+//    2   Filename:       SPIMgr.c
+//    3   Revised:        $Date: 2007-10-28 18:43:04 -0700 (Sun, 28 Oct 2007) $
+//    4   Revision:       $Revision: 15800 $
+//    5 
+//    6   Description:    This module handles anything dealing with the serial port.
+//    7 
+//    8 
+//    9   Copyright 2005-2007 Texas Instruments Incorporated. All rights reserved.
+//   10 
+//   11   IMPORTANT: Your use of this Software is limited to those specific rights
+//   12   granted under the terms of a software license agreement between the user
+//   13   who downloaded the software, his/her employer (which must be your employer)
+//   14   and Texas Instruments Incorporated (the "License").  You may not use this
+//   15   Software unless you agree to abide by the terms of the License. The License
+//   16   limits your use, and you acknowledge, that the Software may not be modified,
+//   17   copied or distributed unless embedded on a Texas Instruments microcontroller
+//   18   or used solely and exclusively in conjunction with a Texas Instruments radio
+//   19   frequency transceiver, which is integrated into your product.  Other than for
+//   20   the foregoing purpose, you may not use, reproduce, copy, prepare derivative
+//   21   works of, modify, distribute, perform, display or sell this Software and/or
+//   22   its documentation for any purpose.
+//   23 
+//   24   YOU FURTHER ACKNOWLEDGE AND AGREE THAT THE SOFTWARE AND DOCUMENTATION ARE
+//   25   PROVIDED “AS IS” WITHOUT WARRANTY OF ANY KIND, EITHER EXPRESS OR IMPLIED, 
+//   26   INCLUDING WITHOUT LIMITATION, ANY WARRANTY OF MERCHANTABILITY, TITLE, 
+//   27   NON-INFRINGEMENT AND FITNESS FOR A PARTICULAR PURPOSE. IN NO EVENT SHALL
+//   28   TEXAS INSTRUMENTS OR ITS LICENSORS BE LIABLE OR OBLIGATED UNDER CONTRACT,
+//   29   NEGLIGENCE, STRICT LIABILITY, CONTRIBUTION, BREACH OF WARRANTY, OR OTHER
+//   30   LEGAL EQUITABLE THEORY ANY DIRECT OR INDIRECT DAMAGES OR EXPENSES
+//   31   INCLUDING BUT NOT LIMITED TO ANY INCIDENTAL, SPECIAL, INDIRECT, PUNITIVE
+//   32   OR CONSEQUENTIAL DAMAGES, LOST PROFITS OR LOST DATA, COST OF PROCUREMENT
+//   33   OF SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
+//   34   (INCLUDING BUT NOT LIMITED TO ANY DEFENSE THEREOF), OR OTHER SIMILAR COSTS.
+//   35 
+//   36   Should you have any questions regarding your right to use this Software,
+//   37   contact Texas Instruments Incorporated at www.TI.com. 
+//   38 **************************************************************************************************/
+//   39 
+//   40 /***************************************************************************************************
+//   41  *                                           INCLUDES
+//   42  ***************************************************************************************************/
+//   43 #include "ZComDef.h"
+//   44 #include "OSAL.h"
+//   45 #include "hal_uart.h"
+//   46 #include "MTEL.h"
+//   47 #include "SPIMgr.h"
+//   48 #include "OSAL_Memory.h"
+//   49 
+//   50 /***************************************************************************************************
+//   51  *                                            MACROS
+//   52  ***************************************************************************************************/
+//   53 
+//   54 /***************************************************************************************************
+//   55  *                                           CONSTANTS
+//   56  ***************************************************************************************************/
+//   57 
+//   58 /* State values for ZTool protocal */
+//   59 #define SOP_STATE      0x00
+//   60 #define CMD_STATE1     0x01
+//   61 #define CMD_STATE2     0x02
+//   62 #define LEN_STATE      0x03
+//   63 #define DATA_STATE     0x04
+//   64 #define FCS_STATE      0x05
+//   65 
+//   66 /***************************************************************************************************
+//   67  *                                            TYPEDEFS
+//   68  ***************************************************************************************************/
+//   69 
+//   70 /***************************************************************************************************
+//   71  *                                         GLOBAL VARIABLES
+//   72  ***************************************************************************************************/
+
+        RSEG XDATA_Z:XDATA:NOROOT(0)
+//   73 byte App_TaskID;
+App_TaskID:
+        DS 1
+        REQUIRE __INIT_XDATA_Z
+//   74 
+//   75 /* ZTool protocal parameters */
+//   76 
+//   77 #if defined (ZTOOL_P1) || defined (ZTOOL_P2)
+//   78 uint8 state;
+//   79 uint8  CMD_Token[2];
+//   80 uint8  LEN_Token;
+//   81 uint8  FSC_Token;
+//   82 mtOSALSerialData_t  *SPI_Msg;
+//   83 uint8  tempDataLen;
+//   84 #endif //ZTOOL
+//   85 
+//   86 #if defined (ZAPP_P1) || defined (ZAPP_P2)
+//   87 uint16  SPIMgr_MaxZAppBufLen;
+//   88 bool    SPIMgr_ZAppRxStatus;
+//   89 #endif
+//   90 
+//   91 
+//   92 /***************************************************************************************************
+//   93  *                                          LOCAL FUNCTIONS
+//   94  ***************************************************************************************************/
+//   95 
+//   96 /***************************************************************************************************
+//   97  * @fn      SPIMgr_Init
+//   98  *
+//   99  * @brief
+//  100  *
+//  101  * @param   None
+//  102  *
+//  103  * @return  None
+//  104 ***************************************************************************************************/
+
+        RSEG BANKED_CODE:CODE:NOROOT(0)
+//  105 void SPIMgr_Init ()
+SPIMgr_Init:
+        CFI Block cfiBlock0 Using cfiCommon0
+        CFI Function SPIMgr_Init
+//  106 {
+        PUSH    DPL
+        CFI DPL0 Frame(CFA_SP, 4)
+        CFI CFA_SP SP+-4
+        PUSH    DPH
+        CFI DPH0 Frame(CFA_SP, 5)
+        CFI CFA_SP SP+-5
+        ; Saved register size: 2
+        ; Auto size: 0
+//  107   halUARTCfg_t uartConfig;
+//  108 
+//  109   /* Initialize APP ID */
+//  110   App_TaskID = 0;
+        CLR     A
+        CFI EndBlock cfiBlock0
+        REQUIRE ?Subroutine0
+        ; // Fall through to label ?Subroutine0
+//  111 
+//  112   /* UART Configuration */
+//  113   uartConfig.configured           = TRUE;
+//  114   uartConfig.baudRate             = SPI_MGR_DEFAULT_BAUDRATE;
+//  115   uartConfig.flowControl          = SPI_MGR_DEFAULT_OVERFLOW;
+//  116   uartConfig.flowControlThreshold = SPI_MGR_DEFAULT_THRESHOLD;
+//  117   uartConfig.rx.maxBufSize        = SPI_MGR_DEFAULT_MAX_RX_BUFF;
+//  118   uartConfig.tx.maxBufSize        = SPI_MGR_DEFAULT_MAX_TX_BUFF;
+//  119   uartConfig.idleTimeout          = SPI_MGR_DEFAULT_IDLE_TIMEOUT;
+//  120   uartConfig.intEnable            = TRUE;
+//  121 #if defined (ZTOOL_P1) || defined (ZTOOL_P2)
+//  122   uartConfig.callBackFunc         = SPIMgr_ProcessZToolData;
+//  123 #elif defined (ZAPP_P1) || defined (ZAPP_P2)
+//  124   uartConfig.callBackFunc         = SPIMgr_ProcessZAppData;
+//  125 #else
+//  126   uartConfig.callBackFunc         = NULL;
+//  127 #endif
+//  128 
+//  129   /* Start UART */
+//  130 #if defined (SPI_MGR_DEFAULT_PORT)
+//  131   HalUARTOpen (SPI_MGR_DEFAULT_PORT, &uartConfig);
+//  132 #else
+//  133   /* Silence IAR compiler warning */
+//  134   (void)uartConfig;
+//  135 #endif
+//  136 
+//  137   /* Initialize for ZApp */
+//  138 #if defined (ZAPP_P1) || defined (ZAPP_P2)
+//  139   /* Default max bytes that ZAPP can take */
+//  140   SPIMgr_MaxZAppBufLen  = 1;
+//  141   SPIMgr_ZAppRxStatus   = SPI_MGR_ZAPP_RX_READY;
+//  142 #endif
+//  143 
+//  144 
+//  145 }
+
+        RSEG BANKED_CODE:CODE:NOROOT(0)
+?Subroutine0:
+        CFI Block cfiBlock1 Using cfiCommon0
+        CFI NoFunction
+        CFI CFA_SP SP+-5
+        CFI DPL0 Frame(CFA_SP, 4)
+        CFI DPH0 Frame(CFA_SP, 5)
+        MOV     DPTR,#App_TaskID
+        MOVX    @DPTR,A
+        POP     DPH
+        CFI CFA_SP SP+-4
+        CFI DPH0 SameValue
+        POP     DPL
+        CFI CFA_SP SP+-3
+        CFI DPL0 SameValue
+        LJMP    ?BRET
+        CFI EndBlock cfiBlock1
+//  146 
+//  147 /***************************************************************************************************
+//  148  * @fn      MT_SerialRegisterTaskID
+//  149  *
+//  150  * @brief
+//  151  *
+//  152  *   This function registers the taskID of the application so it knows
+//  153  *   where to send the messages whent they come in.
+//  154  *
+//  155  * @param   void
+//  156  *
+//  157  * @return  void
+//  158  ***************************************************************************************************/
+
+        RSEG BANKED_CODE:CODE:NOROOT(0)
+//  159 void SPIMgr_RegisterTaskID( byte taskID )
+SPIMgr_RegisterTaskID:
+        CFI Block cfiBlock2 Using cfiCommon0
+        CFI Function SPIMgr_RegisterTaskID
+//  160 {
+        PUSH    DPL
+        CFI DPL0 Frame(CFA_SP, 4)
+        CFI CFA_SP SP+-4
+        PUSH    DPH
+        CFI DPH0 Frame(CFA_SP, 5)
+        CFI CFA_SP SP+-5
+        ; Saved register size: 2
+        ; Auto size: 0
+//  161   App_TaskID = taskID;
+        MOV     A,R1
+        SJMP    ?Subroutine0
+        CFI EndBlock cfiBlock2
+//  162 }
+//  163 
+//  164 /***************************************************************************************************
+//  165  * @fn      SPIMgr_CalcFCS
+//  166  *
+//  167  * @brief
+//  168  *
+//  169  *   Calculate the FCS of a message buffer by XOR'ing each byte.
+//  170  *   Remember to NOT include SOP and FCS fields, so start at the CMD
+//  171  *   field.
+//  172  *
+//  173  * @param   byte *msg_ptr - message pointer
+//  174  * @param   byte len - length (in bytes) of message
+//  175  *
+//  176  * @return  result byte
+//  177  ***************************************************************************************************/
+
+        RSEG BANKED_CODE:CODE:NOROOT(0)
+//  178 byte SPIMgr_CalcFCS( uint8 *msg_ptr, uint8 len )
+SPIMgr_CalcFCS:
+        CFI Block cfiBlock3 Using cfiCommon0
+        CFI Function SPIMgr_CalcFCS
+//  179 {
+        MOV     A,#-0x9
+        LCALL   ?BANKED_ENTER_XDATA
+        CFI DPH0 load(1, XDATA, add(CFA_XSP16, literal(-1)))
+        CFI DPL0 load(1, XDATA, add(CFA_XSP16, literal(-2)))
+        CFI ?BRET_EXT load(1, XDATA, add(CFA_XSP16, literal(-3)))
+        CFI ?RET_HIGH load(1, XDATA, add(CFA_XSP16, literal(-4)))
+        CFI ?RET_LOW load(1, XDATA, add(CFA_XSP16, literal(-5)))
+        CFI R7 load(1, XDATA, add(CFA_XSP16, literal(-6)))
+        CFI V0 load(1, XDATA, add(CFA_XSP16, literal(-7)))
+        CFI VB load(1, XDATA, add(CFA_XSP16, literal(-8)))
+        CFI R6 load(1, XDATA, add(CFA_XSP16, literal(-9)))
+        CFI CFA_SP SP+0
+        CFI CFA_XSP16 add(XSP16, 9)
+        ; Saved register size: 9
+        ; Auto size: 0
+        MOV     A,R1
+        MOV     R4,A
+//  180   byte x;
+//  181   byte xorResult;
+//  182 
+//  183   xorResult = 0;
+        MOV     R1,#0x0
+//  184 
+//  185   for ( x = 0; x < len; x++, msg_ptr++ )
+        MOV     R5,#0x0
+        SJMP    ??SPIMgr_CalcFCS_0
+//  186     xorResult = xorResult ^ *msg_ptr;
+??SPIMgr_CalcFCS_1:
+        MOV     DPL,R2
+        MOV     DPH,R3
+        MOVX    A,@DPTR
+        XCH     A,R1
+        XRL     A,R1
+        MOV     R1,A
+        INC     R5
+        INC     DPTR
+        MOV     R2,DPL
+        MOV     R3,DPH
+??SPIMgr_CalcFCS_0:
+        MOV     A,R5
+        CLR     C
+        SUBB    A,R4
+        JC      ??SPIMgr_CalcFCS_1
+//  187 
+//  188   return ( xorResult );
+        MOV     R7,#0x1
+        LJMP    ?BANKED_LEAVE_XDATA
+        CFI EndBlock cfiBlock3
+//  189 }
+
+        RSEG BANK_RELAYS:CODE:REORDER:NOROOT(0)
+??SPIMgr_Init?relay:
+        LCALL   ?BDISPATCH
+        DATA
+        DC24    SPIMgr_Init
+
+        RSEG BANK_RELAYS:CODE:REORDER:NOROOT(0)
+??SPIMgr_RegisterTaskID?relay:
+        LCALL   ?BDISPATCH
+        DATA
+        DC24    SPIMgr_RegisterTaskID
+
+        RSEG BANK_RELAYS:CODE:REORDER:NOROOT(0)
+??SPIMgr_CalcFCS?relay:
+        LCALL   ?BDISPATCH
+        DATA
+        DC24    SPIMgr_CalcFCS
+
+        END
+//  190 
+//  191 
+//  192 #if defined (ZTOOL_P1) || defined (ZTOOL_P2)
+//  193 /***************************************************************************************************
+//  194  * @fn      SPIMgr_ProcessZToolRxData
+//  195  *
+//  196  * @brief   | SOP | CMD  |   Data Length   | FSC  |
+//  197  *          |  1  |  2   |       1         |  1   |
+//  198  *
+//  199  *          Parses the data and determine either is SPI or just simply serial data
+//  200  *          then send the data to correct place (MT or APP)
+//  201  *
+//  202  * @param   pBuffer  - pointer to the buffer that contains the data
+//  203  *          length   - length of the buffer
+//  204  *
+//  205  *
+//  206  * @return  None
+//  207  ***************************************************************************************************/
+//  208 void SPIMgr_ProcessZToolData ( uint8 port, uint8 event )
+//  209 {
+//  210   uint8  ch;
+//  211 
+//  212   /* Verify events */
+//  213   if (event == HAL_UART_TX_FULL)
+//  214   {
+//  215     // Do something when TX if full
+//  216     return;
+//  217   }
+//  218 
+//  219   if (event & (HAL_UART_RX_FULL | HAL_UART_RX_ABOUT_FULL | HAL_UART_RX_TIMEOUT))
+//  220   {
+//  221     while (Hal_UART_RxBufLen(SPI_MGR_DEFAULT_PORT))
+//  222     {
+//  223       HalUARTRead (SPI_MGR_DEFAULT_PORT, &ch, 1);
+//  224 
+//  225       switch (state)
+//  226       {
+//  227         case SOP_STATE:
+//  228           if (ch == SOP_VALUE)
+//  229             state = CMD_STATE1;
+//  230           break;
+//  231 
+//  232         case CMD_STATE1:
+//  233           CMD_Token[0] = ch;
+//  234           state = CMD_STATE2;
+//  235           break;
+//  236 
+//  237         case CMD_STATE2:
+//  238           CMD_Token[1] = ch;
+//  239           state = LEN_STATE;
+//  240           break;
+//  241 
+//  242         case LEN_STATE:
+//  243           LEN_Token = ch;
+//  244           if (ch == 0)
+//  245             state = FCS_STATE;
+//  246           else
+//  247             state = DATA_STATE;
+//  248 
+//  249           tempDataLen = 0;
+//  250 
+//  251           /* Allocate memory for the data */
+//  252           SPI_Msg = (mtOSALSerialData_t *)osal_msg_allocate( sizeof ( mtOSALSerialData_t ) + 2+1+LEN_Token );
+//  253 
+//  254           if (SPI_Msg)
+//  255           {
+//  256             /* Fill up what we can */
+//  257             SPI_Msg->hdr.event = CMD_SERIAL_MSG;
+//  258             SPI_Msg->msg = (uint8*)(SPI_Msg+1);
+//  259             SPI_Msg->msg[0] = CMD_Token[0];
+//  260             SPI_Msg->msg[1] = CMD_Token[1];
+//  261             SPI_Msg->msg[2] = LEN_Token;
+//  262           }
+//  263           else
+//  264           {
+//  265             state = SOP_STATE;
+//  266             return;
+//  267           }
+//  268 
+//  269           break;
+//  270 
+//  271         case DATA_STATE:
+//  272             SPI_Msg->msg[3 + tempDataLen++] = ch;
+//  273             if ( tempDataLen == LEN_Token )
+//  274               state = FCS_STATE;
+//  275           break;
+//  276 
+//  277         case FCS_STATE:
+//  278 
+//  279           FSC_Token = ch;
+//  280 
+//  281           /* Make sure it's correct */
+//  282           if ((SPIMgr_CalcFCS ((uint8*)&SPI_Msg->msg[0], 2 + 1 + LEN_Token) == FSC_Token))
+//  283           {
+//  284             osal_msg_send( MT_TaskID, (byte *)SPI_Msg );
+//  285           }
+//  286           else
+//  287           {
+//  288             /* deallocate the msg */
+//  289             osal_msg_deallocate ( (uint8 *)SPI_Msg);
+//  290           }
+//  291 
+//  292           /* Reset the state, send or discard the buffers at this point */
+//  293           state = SOP_STATE;
+//  294 
+//  295           break;
+//  296 
+//  297         default:
+//  298          break;
+//  299       }
+//  300 
+//  301 
+//  302     }
+//  303   }
+//  304 }
+//  305 #endif //ZTOOL
+//  306 
+//  307 #if defined (ZAPP_P1) || defined (ZAPP_P2)
+//  308 /***************************************************************************************************
+//  309  * @fn      SPIMgr_ProcessZAppRxData
+//  310  *
+//  311  * @brief   | SOP | CMD  |   Data Length   | FSC  |
+//  312  *          |  1  |  2   |       1         |  1   |
+//  313  *
+//  314  *          Parses the data and determine either is SPI or just simply serial data
+//  315  *          then send the data to correct place (MT or APP)
+//  316  *
+//  317  * @param   pBuffer  - pointer to the buffer that contains the data
+//  318  *          length   - length of the buffer
+//  319  *
+//  320  *
+//  321  * @return  None
+//  322  ***************************************************************************************************/
+//  323 void SPIMgr_ProcessZAppData ( uint8 port, uint8 event )
+//  324 {
+//  325 
+//  326   osal_event_hdr_t  *msg_ptr;
+//  327   uint16 length = 0;
+//  328   uint16 rxBufLen  = Hal_UART_RxBufLen(SPI_MGR_DEFAULT_PORT);
+//  329 
+//  330   /*
+//  331      If maxZAppBufferLength is 0 or larger than current length
+//  332      the entire length of the current buffer is returned.
+//  333   */
+//  334   if ((SPIMgr_MaxZAppBufLen != 0) && (SPIMgr_MaxZAppBufLen <= rxBufLen))
+//  335   {
+//  336     length = SPIMgr_MaxZAppBufLen;
+//  337   }
+//  338   else
+//  339   {
+//  340     length = rxBufLen;
+//  341   }
+//  342 
+//  343   /* Verify events */
+//  344   if (event == HAL_UART_TX_FULL)
+//  345   {
+//  346     // Do something when TX if full
+//  347     return;
+//  348   }
+//  349 
+//  350   if (event & ( HAL_UART_RX_FULL | HAL_UART_RX_ABOUT_FULL | HAL_UART_RX_TIMEOUT))
+//  351   {
+//  352     if ( App_TaskID )
+//  353     {
+//  354       /*
+//  355          If Application is ready to receive and there is something
+//  356          in the Rx buffer then send it up
+//  357       */
+//  358       if ((SPIMgr_ZAppRxStatus == SPI_MGR_ZAPP_RX_READY ) && (length != 0))
+//  359       {
+//  360         /* Disable App flow control until it processes the current data */
+//  361          SPIMgr_AppFlowControl ( SPI_MGR_ZAPP_RX_NOT_READY );
+//  362 
+//  363         /* 2 more bytes are added, 1 for CMD type, other for length */
+//  364         msg_ptr = (osal_event_hdr_t *)osal_msg_allocate( length + sizeof(osal_event_hdr_t) );
+//  365         if ( msg_ptr )
+//  366         {
+//  367           msg_ptr->event = SPI_INCOMING_ZAPP_DATA;
+//  368           msg_ptr->status = length;
+//  369 
+//  370           /* Read the data of Rx buffer */
+//  371           HalUARTRead( SPI_MGR_DEFAULT_PORT, (uint8 *)(msg_ptr + 1), length );
+//  372 
+//  373           /* Send the raw data to application...or where ever */
+//  374           osal_msg_send( App_TaskID, (uint8 *)msg_ptr );
+//  375         }
+//  376       }
+//  377     }
+//  378   }
+//  379 }
+//  380 
+//  381 /***************************************************************************************************
+//  382  * @fn      SPIMgr_ZAppBufferLengthRegister
+//  383  *
+//  384  * @brief
+//  385  *
+//  386  * @param   maxLen - Max Length that the application wants at a time
+//  387  *
+//  388  * @return  None
+//  389  *
+//  390  ***************************************************************************************************/
+//  391 void SPIMgr_ZAppBufferLengthRegister ( uint16 maxLen )
+//  392 {
+//  393   /* If the maxLen is larger than the RX buff, something is not right */
+//  394   if (maxLen <= SPI_MGR_DEFAULT_MAX_RX_BUFF)
+//  395     SPIMgr_MaxZAppBufLen = maxLen;
+//  396   else
+//  397     SPIMgr_MaxZAppBufLen = 1; /* default is 1 byte */
+//  398 }
+//  399 
+//  400 /***************************************************************************************************
+//  401  * @fn      SPIMgr_AppFlowControl
+//  402  *
+//  403  * @brief
+//  404  *
+//  405  * @param   status - ready to send or not
+//  406  *
+//  407  * @return  None
+//  408  *
+//  409  ***************************************************************************************************/
+//  410 void SPIMgr_AppFlowControl ( bool status )
+//  411 {
+//  412 
+//  413   /* Make sure only update if needed */
+//  414   if (status != SPIMgr_ZAppRxStatus )
+//  415   {
+//  416     SPIMgr_ZAppRxStatus = status;
+//  417   }
+//  418 
+//  419   /* App is ready to read again, ProcessZAppData have to be triggered too */
+//  420   if (status == SPI_MGR_ZAPP_RX_READY)
+//  421   {
+//  422     SPIMgr_ProcessZAppData ( SPI_MGR_DEFAULT_PORT, HAL_UART_RX_TIMEOUT );
+//  423   }
+//  424 
+//  425 }
+//  426 
+//  427 #endif //ZAPP
+//  428 
+//  429 /***************************************************************************************************
+//  430 ***************************************************************************************************/
+// 
+// 60 bytes in segment BANKED_CODE
+// 18 bytes in segment BANK_RELAYS
+//  1 byte  in segment XDATA_Z
+// 
+// 78 bytes of CODE  memory
+//  1 byte  of XDATA memory
+//
+//Errors: none
+//Warnings: none

@@ -1,0 +1,2044 @@
+///////////////////////////////////////////////////////////////////////////////
+//                                                                            /
+// IAR 8051 C/C++ Compiler V7.30B/W32                   28/Dec/2012  21:17:10 /
+// Copyright 2004-2007 IAR Systems. All rights reserved.                      /
+//                                                                            /
+//    Core               =  plain                                             /
+//    Code model         =  banked                                            /
+//    Data model         =  large                                             /
+//    Calling convention =  xdata reentrant                                   /
+//    Constant location  =  data                                              /
+//    Dptr setup         =  1,16                                              /
+//    Source file        =  C:\Texas Instruments\ZStack-1.4.3-1.2.1\Component /
+//                          s\mt\MTEL.c                                       /
+//    Command line       =  -f "C:\Texas Instruments\ZStack-1.4.3-1.2.1\Proje /
+//                          cts\zstack\Samples\AXDApp\CC2430DB\..\..\..\Tools /
+//                          \CC2430DB\f8wCoord.cfg" (-DCPU32MHZ               /
+//                          -DFORCE_MAC_NEAR -DROOT=__near_func               /
+//                          -DMAC_CFG_APP_PENDING_QUEUE=TRUE                  /
+//                          -DZDO_COORDINATOR -DRTR_NWK -DBLINK_LEDS          /
+//                          "-DCONST=const __code" -DGENERIC=__generic) -f    /
+//                          "C:\Texas Instruments\ZStack-1.4.3-1.2.1\Projects /
+//                          \zstack\Samples\AXDApp\CC2430DB\..\..\..\Tools\CC /
+//                          2430DB\f8wConfig.cfg" (-DSECURE=0                 /
+//                          -DDEFAULT_CHANLIST=0x00000800                     /
+//                          -DZDAPP_CONFIG_PAN_ID=0xFFFF                      /
+//                          -DNWK_START_DELAY=100 -DEXTENDED_JOINING_RANDOM_M /
+//                          ASK=0x007F -DBEACON_REQUEST_DELAY=100             /
+//                          -DBEACON_REQ_DELAY_MASK=0x00FF                    /
+//                          -DROUTE_EXPIRY_TIME=30 -DAPSC_ACK_WAIT_DURATION_P /
+//                          OLLED=3000 -DNWK_INDIRECT_MSG_TIMEOUT=7           /
+//                          -DMAX_RREQ_ENTRIES=10 -DAPSC_MAX_FRAME_RETRIES=3  /
+//                          -DNWK_MAX_DATA_RETRIES=2                          /
+//                          -DMAX_POLL_FAILURE_RETRIES=2 -DMAX_BCAST=9        /
+//                          -DAPS_MAX_GROUPS=16 -DMAX_RTG_ENTRIES=20          /
+//                          -DNWK_MAX_BINDING_ENTRIES=10                      /
+//                          -DMAX_BINDING_CLUSTER_IDS=5                       /
+//                          "-DDEFAULT_KEY={0x01, 0x03, 0x05, 0x07, 0x09,     /
+//                          0x0B, 0x0D, 0x0F, 0x00, 0x02, 0x04, 0x06, 0x08,   /
+//                          0x0A, 0x0C, 0x0D}" -DRFD_RCVC_ALWAYS_ON=FALSE     /
+//                          -DPOLL_RATE=1000 -DQUEUED_POLL_RATE=100           /
+//                          -DRESPONSE_POLL_RATE=100) -DREJOIN_POLL_RATE=440  /
+//                          "C:\Texas Instruments\ZStack-1.4.3-1.2.1\Componen /
+//                          ts\mt\MTEL.c" -D CC2430DB -D REFLECTOR -D         /
+//                          xZTOOL_P2 -D xMT_TASK -D xMT_ZDO_FUNC -D          /
+//                          xLCD_SUPPORTED=DEBUG -lC "C:\Texas                /
+//                          Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\Sa /
+//                          mples\AXDApp\CC2430DB\CoordinatorDB\List\" -lA    /
+//                          "C:\Texas Instruments\ZStack-1.4.3-1.2.1\Projects /
+//                          \zstack\Samples\AXDApp\CC2430DB\CoordinatorDB\Lis /
+//                          t\" --diag_suppress Pe001,Pa010 --diag_remark     /
+//                          pe550 -o "C:\Texas Instruments\ZStack-1.4.3-1.2.1 /
+//                          \Projects\zstack\Samples\AXDApp\CC2430DB\Coordina /
+//                          torDB\Obj\" -e --require_prototypes -z9           /
+//                          --no_code_motion --debug --core=plain             /
+//                          --dptr=16,1 --data_model=large                    /
+//                          --code_model=banked --calling_convention=xdata_re /
+//                          entrant --place_constants=data --nr_virtual_regs  /
+//                          8 -I "C:\Texas Instruments\ZStack-1.4.3-1.2.1\Pro /
+//                          jects\zstack\Samples\AXDApp\CC2430DB\" -I         /
+//                          "C:\Texas Instruments\ZStack-1.4.3-1.2.1\Projects /
+//                          \zstack\Samples\AXDApp\CC2430DB\..\SOURCE\" -I    /
+//                          "C:\Texas Instruments\ZStack-1.4.3-1.2.1\Projects /
+//                          \zstack\Samples\AXDApp\CC2430DB\..\..\..\ZMAIN\TI /
+//                          2430DB\" -I "C:\Texas Instruments\ZStack-1.4.3-1. /
+//                          2.1\Projects\zstack\Samples\AXDApp\CC2430DB\..\.. /
+//                          \..\..\..\COMPONENTS\MT\" -I "C:\Texas            /
+//                          Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\Sa /
+//                          mples\AXDApp\CC2430DB\..\..\..\..\..\COMPONENTS\H /
+//                          AL\INCLUDE\" -I "C:\Texas                         /
+//                          Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\Sa /
+//                          mples\AXDApp\CC2430DB\..\..\..\..\..\COMPONENTS\H /
+//                          AL\TARGET\CC2430DB\" -I "C:\Texas                 /
+//                          Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\Sa /
+//                          mples\AXDApp\CC2430DB\..\..\..\..\..\COMPONENTS\O /
+//                          SAL\MCU\CCSOC\" -I "C:\Texas                      /
+//                          Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\Sa /
+//                          mples\AXDApp\CC2430DB\..\..\..\..\..\COMPONENTS\O /
+//                          SAL\INCLUDE\" -I "C:\Texas                        /
+//                          Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\Sa /
+//                          mples\AXDApp\CC2430DB\..\..\..\..\..\COMPONENTS\S /
+//                          TACK\AF\" -I "C:\Texas Instruments\ZStack-1.4.3-1 /
+//                          .2.1\Projects\zstack\Samples\AXDApp\CC2430DB\..\. /
+//                          .\..\..\..\COMPONENTS\STACK\NWK\" -I "C:\Texas    /
+//                          Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\Sa /
+//                          mples\AXDApp\CC2430DB\..\..\..\..\..\COMPONENTS\S /
+//                          TACK\SEC\" -I "C:\Texas                           /
+//                          Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\Sa /
+//                          mples\AXDApp\CC2430DB\..\..\..\..\..\COMPONENTS\S /
+//                          TACK\SYS\" -I "C:\Texas                           /
+//                          Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\Sa /
+//                          mples\AXDApp\CC2430DB\..\..\..\..\..\COMPONENTS\S /
+//                          TACK\ZDO\" -I "C:\Texas                           /
+//                          Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\Sa /
+//                          mples\AXDApp\CC2430DB\..\..\..\..\..\COMPONENTS\Z /
+//                          MAC\F8W\" -I "C:\Texas Instruments\ZStack-1.4.3-1 /
+//                          .2.1\Projects\zstack\Samples\AXDApp\CC2430DB\..\. /
+//                          .\..\..\..\COMPONENTS\ZMAC\" -I "C:\Texas         /
+//                          Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\Sa /
+//                          mples\AXDApp\CC2430DB\..\..\..\..\..\COMPONENTS\S /
+//                          ERVICES\SADDR\" -I "C:\Texas                      /
+//                          Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\Sa /
+//                          mples\AXDApp\CC2430DB\..\..\..\..\..\COMPONENTS\S /
+//                          ERVICES\SDATA\" -I "C:\Texas                      /
+//                          Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\Sa /
+//                          mples\AXDApp\CC2430DB\..\..\..\..\..\COMPONENTS\M /
+//                          AC\INCLUDE\" -I "C:\Texas                         /
+//                          Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\Sa /
+//                          mples\AXDApp\CC2430DB\..\..\..\..\..\COMPONENTS\M /
+//                          AC\HIGH_LEVEL\" -I "C:\Texas                      /
+//                          Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\Sa /
+//                          mples\AXDApp\CC2430DB\..\..\..\..\..\COMPONENTS\M /
+//                          AC\LOW_LEVEL\SRF03\" -I "C:\Texas                 /
+//                          Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\Sa /
+//                          mples\AXDApp\CC2430DB\..\..\..\..\..\COMPONENTS\M /
+//                          AC\LOW_LEVEL\SRF03\SINGLE_CHIP\" -I "C:\Program   /
+//                          Files\IAR Systems\Embedded Workbench 4.0          /
+//                          Evaluation version\8051\INC\" -I "C:\Program      /
+//                          Files\IAR Systems\Embedded Workbench 4.0          /
+//                          Evaluation version\8051\INC\CLIB\"                /
+//    List file          =  C:\Texas Instruments\ZStack-1.4.3-1.2.1\Projects\ /
+//                          zstack\Samples\AXDApp\CC2430DB\CoordinatorDB\List /
+//                          \MTEL.s51                                         /
+//                                                                            /
+//                                                                            /
+///////////////////////////////////////////////////////////////////////////////
+
+        NAME MTEL
+
+        RTMODEL "__calling_convention", "xdata_reentrant"
+        RTMODEL "__code_model", "banked"
+        RTMODEL "__core", "plain"
+        RTMODEL "__data_model", "large"
+        RTMODEL "__dptr_size", "16"
+        RTMODEL "__extended_stack", "disabled"
+        RTMODEL "__location_for_constants", "data"
+        RTMODEL "__number_of_dptrs", "1"
+        RTMODEL "__rt_version", "1"
+
+        RSEG DOVERLAY:DATA:NOROOT(0)
+        RSEG IOVERLAY:IDATA:NOROOT(0)
+        RSEG ISTACK:IDATA:NOROOT(0)
+        RSEG PSTACK:XDATA:NOROOT(0)
+        RSEG XSTACK:XDATA:NOROOT(0)
+
+
+        END
+// C:\Texas Instruments\ZStack-1.4.3-1.2.1\Components\mt\MTEL.c
+//    1 /**************************************************************************************************
+//    2   Filename:       MTEL.c
+//    3   Revised:        $Date: 2007-12-07 14:27:57 -0800 (Fri, 07 Dec 2007) $
+//    4   Revision:       $Revision: 16045 $
+//    5 
+//    6   Description:    MonitorTest Event Loop functions. Everything in the MonitorTest Task.
+//    7 
+//    8 
+//    9   Copyright 2004-2007 Texas Instruments Incorporated. All rights reserved.
+//   10 
+//   11   IMPORTANT: Your use of this Software is limited to those specific rights
+//   12   granted under the terms of a software license agreement between the user
+//   13   who downloaded the software, his/her employer (which must be your employer)
+//   14   and Texas Instruments Incorporated (the "License").  You may not use this
+//   15   Software unless you agree to abide by the terms of the License. The License
+//   16   limits your use, and you acknowledge, that the Software may not be modified,
+//   17   copied or distributed unless embedded on a Texas Instruments microcontroller
+//   18   or used solely and exclusively in conjunction with a Texas Instruments radio
+//   19   frequency transceiver, which is integrated into your product.  Other than for
+//   20   the foregoing purpose, you may not use, reproduce, copy, prepare derivative
+//   21   works of, modify, distribute, perform, display or sell this Software and/or
+//   22   its documentation for any purpose.
+//   23 
+//   24   YOU FURTHER ACKNOWLEDGE AND AGREE THAT THE SOFTWARE AND DOCUMENTATION ARE
+//   25   PROVIDED “AS IS” WITHOUT WARRANTY OF ANY KIND, EITHER EXPRESS OR IMPLIED, 
+//   26   INCLUDING WITHOUT LIMITATION, ANY WARRANTY OF MERCHANTABILITY, TITLE, 
+//   27   NON-INFRINGEMENT AND FITNESS FOR A PARTICULAR PURPOSE. IN NO EVENT SHALL
+//   28   TEXAS INSTRUMENTS OR ITS LICENSORS BE LIABLE OR OBLIGATED UNDER CONTRACT,
+//   29   NEGLIGENCE, STRICT LIABILITY, CONTRIBUTION, BREACH OF WARRANTY, OR OTHER
+//   30   LEGAL EQUITABLE THEORY ANY DIRECT OR INDIRECT DAMAGES OR EXPENSES
+//   31   INCLUDING BUT NOT LIMITED TO ANY INCIDENTAL, SPECIAL, INDIRECT, PUNITIVE
+//   32   OR CONSEQUENTIAL DAMAGES, LOST PROFITS OR LOST DATA, COST OF PROCUREMENT
+//   33   OF SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
+//   34   (INCLUDING BUT NOT LIMITED TO ANY DEFENSE THEREOF), OR OTHER SIMILAR COSTS.
+//   35 
+//   36   Should you have any questions regarding your right to use this Software,
+//   37   contact Texas Instruments Incorporated at www.TI.com. 
+//   38 **************************************************************************************************/
+//   39 
+//   40 #if defined( MT_TASK )
+//   41 
+//   42 /*********************************************************************
+//   43  * INCLUDES
+//   44  */
+//   45 #include "ZComDef.h"
+//   46 #include "OnBoard.h"
+//   47 #include "OSAL.h"
+//   48 #include "OSAL_Memory.h"
+//   49 #include "OSAL_Nv.h"
+//   50 #include "MTEL.h"
+//   51 #include "DebugTrace.h"
+//   52 #include "ZMAC.h"
+//   53 
+//   54 #if !defined ( NONWK )
+//   55   #include "NLMEDE.h"
+//   56   #include "nwk_bufs.h"
+//   57   #include "ZDObject.h"
+//   58   #include "ssp.h"
+//   59   #include "nwk_util.h"
+//   60 #endif
+//   61 
+//   62 #if defined( MT_MAC_FUNC ) || defined( MT_MAC_CB_FUNC )
+//   63   #include "MT_MAC.h"
+//   64 #endif
+//   65 #if defined( MT_NWK_FUNC ) || defined( MT_NWK_CB_FUNC )
+//   66   #include "MT_NWK.h"
+//   67   #include "nwk.h"
+//   68   #include "nwk_bufs.h"
+//   69 #endif
+//   70 #if defined( MT_AF_FUNC ) || defined( MT_AF_CB_FUNC )
+//   71   #include "MT_AF.h"
+//   72 #endif
+//   73 #if defined( MT_USER_TEST_FUNC )
+//   74   #include "AF.h"
+//   75 #endif
+//   76 #if defined( MT_ZDO_FUNC )
+//   77   #include "MT_ZDO.h"
+//   78 #endif
+//   79 #if defined (MT_SAPI_FUNC)
+//   80 	#include "MT_SAPI.h"
+//   81 #endif
+//   82 #if defined( APP_TP )
+//   83  #include "TestProfile.h"
+//   84 #endif
+//   85 #if defined( APP_TP2 )
+//   86  #include "TestProfile2.h"
+//   87 #endif
+//   88 
+//   89 #if defined(APP_TGEN)
+//   90   #include "TrafficGenApp.h"
+//   91 #endif
+//   92 #if defined(APP_DEBUG)
+//   93 	#include "DebugApp.h"
+//   94 #endif
+//   95 #if defined (NWK_TEST)
+//   96 	#include "HWTTApp.h"
+//   97 #endif
+//   98 
+//   99 /* HAL */
+//  100 #include "hal_uart.h"
+//  101 #include "hal_led.h"
+//  102 #include "hal_key.h"
+//  103 #include "hal_mailbox.h"
+//  104 #include "SPIMgr.h"
+//  105 
+//  106 /*********************************************************************
+//  107  * MACROS
+//  108  */
+//  109 #define MTEL_DEBUG_INFO( nParams, p1, p2, p3 ) DEBUG_INFO( COMPID_MTEL, nParams, p1, p2, p3 )
+//  110 
+//  111 #if defined( EXTERNAL_RAM )
+//  112   #define IS_MEM_VALID( Addr )  \ 
+//  113         /* Check for valid internal RAM address. */\ 
+//  114     ( ( (((Addr) >= MCU_RAM_BEG) && ((Addr) <= MCU_RAM_END)) ||  \ 
+//  115         /* Check for valid external RAM address. */\ 
+//  116         (((Addr) >= EXT_RAM_BEG) && ((Addr) <= EXT_RAM_END)) ) ? TRUE : FALSE )
+//  117 #else
+//  118   #define IS_MEM_VALID( Addr )  \ 
+//  119         /* Check for valid internal RAM address. */\ 
+//  120     ( ( ((Addr) >= MCU_RAM_BEG) && ((Addr) <= MCU_RAM_END) ) ? TRUE : FALSE )
+//  121 #endif
+//  122 
+//  123 /*********************************************************************
+//  124  * CONSTANTS
+//  125  */
+//  126 
+//  127 #ifdef ZPORT
+//  128 const char *MTVersionString[] = {"1.00 (F8W1.4.3-ZP)", "1.10 (F8W1.4.3-ZP)"};
+//  129 #else
+//  130 const char *MTVersionString[] = {"1.00 (F8W1.4.3)", "1.10 (F8W1.4.3)"};
+//  131 #endif
+//  132 
+//  133 /*********************************************************************
+//  134  * TYPEDEFS
+//  135  */
+//  136 
+//  137 /*********************************************************************
+//  138  * GLOBAL VARIABLES
+//  139  */
+//  140 byte MT_TaskID;
+//  141 byte debugThreshold;
+//  142 byte debugCompId;
+//  143 
+//  144 UINT16 save_cmd;
+//  145 
+//  146 //DEBUG
+//  147 uint32 longvar;
+//  148 uint16 *temp_glob_ptr1;
+//  149 uint16 *temp_glob_ptr2;
+//  150 
+//  151 /*********************************************************************
+//  152  * EXTERNAL VARIABLES
+//  153  */
+//  154 
+//  155 /*********************************************************************
+//  156  * EXTERNAL FUNCTIONS
+//  157  */
+//  158 extern unsigned int mac_sim_eventLoop( void );
+//  159 
+//  160 #ifdef MACSIM
+//  161   // Used to pass Zignet message
+//  162   extern void MACSIM_TranslateMsg( byte *buf, byte bLen );
+//  163 #endif
+//  164 
+//  165 /*********************************************************************
+//  166  * LOCAL VARIABLES
+//  167  */
+//  168 
+//  169 /*********************************************************************
+//  170  * LOCAL FUNCTIONS
+//  171  */
+//  172 void MT_MsgQueueInit( void );
+//  173 void MT_ProcessCommand( mtOSALSerialData_t *msg );
+//  174 void MT_ProcessSerialCommand( byte *msg );
+//  175 byte MT_RAMRead( UINT16 addr, byte *pData );
+//  176 byte MT_RAMWrite( UINT16 addr , byte val );
+//  177 void MT_ProcessDebugMsg( mtDebugMsg_t *pData );
+//  178 void MT_ProcessDebugStr( mtDebugStr_t *pData );
+//  179 byte MT_SetDebugThreshold( byte comp_id, byte threshold );
+//  180 void MT_SendErrorNotification( byte err );
+//  181 void MT_ResetMsgQueue( void );
+//  182 byte MT_QueueMsg( byte *msg , byte len );
+//  183 void MT_ProcessQueue( void );
+//  184 void MT_SendSPIRespMsg( byte ret, uint16 cmd_id, byte msgLen, byte respLen);
+//  185 void MT_Reset(byte typID);
+//  186 byte MT_ProcessSetNV( byte *pData );
+//  187 void MT_ProcessGetNV( byte *pData );
+//  188 void MT_ProcessGetNvInfo( void );
+//  189 void MT_ProcessGetDeviceInfo( void );
+//  190 byte MTProcessAppMsg( byte *pData, byte len );
+//  191 void MTProcessAppRspMsg( byte *pData, byte len );
+//  192 
+//  193 #if (defined HAL_LED) && (HAL_LED == TRUE)
+//  194 byte MTProcessLedControl( byte *pData );
+//  195 #endif
+//  196 
+//  197 #if defined ( MT_USER_TEST_FUNC )
+//  198 void MT_ProcessAppUserCmd( byte *pData );
+//  199 #endif
+//  200 
+//  201 /*********************************************************************
+//  202  * @fn      MT_TaskInit
+//  203  *
+//  204  * @brief
+//  205  *
+//  206  *   MonitorTest Task Initialization.  This function is put into the
+//  207  *   task table.
+//  208  *
+//  209  * @param   byte task_id - task ID of the MT Task
+//  210  *
+//  211  * @return  void
+//  212  *
+//  213  *********************************************************************/
+//  214 void MT_TaskInit( byte task_id )
+//  215 {
+//  216   MT_TaskID = task_id;
+//  217 
+//  218   debugThreshold = 0;
+//  219   debugCompId = 0;
+//  220 
+//  221   // Initialize the Serial port
+//  222   SPIMgr_Init();
+//  223 
+//  224 } /* MT_TaskInit() */
+//  225 
+//  226 #ifdef ZTOOL_PORT
+//  227 /*********************************************************************
+//  228  * @fn      MT_IndReset()
+//  229  *
+//  230  * @brief   Sends a ZTOOL "reset response" message.
+//  231  *
+//  232  * @param   None
+//  233  *
+//  234  * @return  None
+//  235  *
+//  236  *********************************************************************/
+//  237 void MT_IndReset( void )
+//  238 {
+//  239 
+//  240   byte rsp = 0;  // Reset type==0 indicates Z-Stack reset
+//  241 
+//  242   // Send out Reset Response message
+//  243   MT_BuildAndSendZToolResponse( (SPI_0DATA_MSG_LEN + sizeof( rsp )),
+//  244                                 (SPI_RESPONSE_BIT | SPI_CMD_SYS_RESET),
+//  245                                 sizeof( rsp ), &rsp );
+//  246 }
+//  247 #endif
+//  248 
+//  249 /*********************************************************************
+//  250  * @fn      MT_ProcessEvent
+//  251  *
+//  252  * @brief
+//  253  *
+//  254  *   MonitorTest Task Event Processor.  This task is put into the
+//  255  *   task table.
+//  256  *
+//  257  * @param   byte task_id - task ID of the MT Task
+//  258  * @param   UINT16 events - event(s) for the MT Task
+//  259  *
+//  260  * @return  void
+//  261  */
+//  262 UINT16 MT_ProcessEvent( byte task_id, UINT16 events )
+//  263 {
+//  264   uint8 *msg_ptr;
+//  265 
+//  266   // Could be multiple events, so switch won't work
+//  267 
+//  268   if ( events & SYS_EVENT_MSG )
+//  269   {
+//  270     while ( (msg_ptr = osal_msg_receive( MT_TaskID )) )
+//  271     {
+//  272       MT_ProcessCommand( (mtOSALSerialData_t *)msg_ptr );
+//  273     }
+//  274 
+//  275     // Return unproccessed events
+//  276     return (events ^ SYS_EVENT_MSG);
+//  277   }
+//  278 
+//  279 #if defined (ZTOOL_P1) || defined (ZTOOL_P2)
+//  280   if ( events & MT_ZTOOL_SERIAL_RCV_BUFFER_FULL )
+//  281   {
+//  282     // Do sometype of error processing
+//  283     MT_SendErrorNotification(RECEIVE_BUFFER_FULL);
+//  284 
+//  285     // Return unproccessed events
+//  286     return (events ^ MT_ZTOOL_SERIAL_RCV_BUFFER_FULL);
+//  287   }
+//  288 #endif
+//  289 
+//  290   // Discard or make more handlers
+//  291   return 0;
+//  292 
+//  293 } /* MT_ProcessEvent() */
+//  294 
+//  295 #if defined (ZTOOL_P1) || defined (ZTOOL_P2)
+//  296 /*********************************************************************
+//  297  * @fn      MT_BuildSPIMsg
+//  298  *
+//  299  * @brief
+//  300  *
+//  301  *   Format an SPI message.
+//  302  *
+//  303  * @param   UINT16 cmd - command id
+//  304  * @param   byte *msg - pointer to message buffer
+//  305  * @param   byte dataLen - length of data field
+//  306  * @param   byte *pData - pointer to data field
+//  307  *
+//  308  * @return  void
+//  309  */
+//  310 void MT_BuildSPIMsg( UINT16 cmd, byte *msg, byte dataLen, byte *pData )
+//  311 {
+//  312   byte *msgPtr;
+//  313 
+//  314   *msg++ = SOP_VALUE;
+//  315 
+//  316   msgPtr = msg;
+//  317 
+//  318   *msg++ = (byte)(HI_UINT16( cmd ));
+//  319   *msg++ = (byte)(LO_UINT16( cmd ));
+//  320 
+//  321   if ( pData )
+//  322   {
+//  323     *msg++ = dataLen;
+//  324 
+//  325     msg = osal_memcpy( msg, pData, dataLen );
+//  326   }
+//  327   else
+//  328     *msg++ = 0;
+//  329 
+//  330   *msg = SPIMgr_CalcFCS( msgPtr, (byte)(3 + dataLen) );
+//  331 }
+//  332 #endif
+//  333 
+//  334 #if defined (ZTOOL_P1) || defined (ZTOOL_P2)
+//  335 /*********************************************************************
+//  336  * @fn      MT_BuildAndSendZToolResponse
+//  337  *
+//  338  * @brief
+//  339  *
+//  340  *   Build and send a ZTOOL msg
+//  341  *
+//  342  * @param   byte err
+//  343  *
+//  344  * @return  void
+//  345  */
+//  346 void MT_BuildAndSendZToolResponse( byte msgLen, uint16 cmd,
+//  347                                    byte dataLen, byte *pData )
+//  348 {
+//  349   byte *msg_ptr;
+//  350 
+//  351   // Get a message buffer to build response message
+//  352   msg_ptr = osal_mem_alloc( msgLen );
+//  353   if ( msg_ptr )
+//  354   {
+//  355 #ifdef SPI_MGR_DEFAULT_PORT
+//  356     MT_BuildSPIMsg( cmd, msg_ptr, dataLen, pData );
+//  357     HalUARTWrite ( SPI_MGR_DEFAULT_PORT, msg_ptr, msgLen );
+//  358 #endif
+//  359     osal_mem_free( msg_ptr );
+//  360   }
+//  361 }
+//  362 #endif
+//  363 
+//  364 #if defined (ZTOOL_P1) || defined (ZTOOL_P2)
+//  365 /*********************************************************************
+//  366  * @fn      MT_BuildAndSendZToolCB
+//  367  *
+//  368  * @brief
+//  369  *
+//  370  *   Build and send a ZTOOL Callback msg
+//  371  *
+//  372  * @param   len - length of data portion of the message
+//  373  *
+//  374  * @return  void
+//  375  */
+//  376 void MT_BuildAndSendZToolCB( uint16 callbackID, byte len, byte *pData )
+//  377 {
+//  378   byte msgLen;
+//  379   mtOSALSerialData_t *msgPtr;
+//  380   byte *msg;
+//  381 
+//  382   msgLen = sizeof ( mtOSALSerialData_t ) + SPI_0DATA_MSG_LEN + len;
+//  383 
+//  384   msgPtr = (mtOSALSerialData_t *)osal_msg_allocate( msgLen );
+//  385   if ( msgPtr )
+//  386   {
+//  387     msgPtr->hdr.event = CB_FUNC;
+//  388     msgPtr->msg = (uint8 *)(msgPtr+1);
+//  389     msg = msgPtr->msg;
+//  390 
+//  391     //First byte is used as the event type for MT
+//  392     *msg++ = SOP_VALUE;
+//  393     *msg++ = HI_UINT16( callbackID );
+//  394     *msg++ = LO_UINT16( callbackID );
+//  395     *msg++ = len;
+//  396 
+//  397     //Fill up the data bytes
+//  398     osal_memcpy( msg, pData, len );
+//  399 
+//  400     osal_msg_send( MT_TaskID, (uint8 *)msgPtr );
+//  401   }
+//  402 }
+//  403 #endif
+//  404 
+//  405 /*********************************************************************
+//  406  * @fn      MT_ProcessCommand
+//  407  *
+//  408  * @brief
+//  409  *
+//  410  *   Process Event Messages.
+//  411  *
+//  412  * @param   byte *msg - pointer to event message
+//  413  *
+//  414  * @return
+//  415  */
+//  416 void MT_ProcessCommand( mtOSALSerialData_t *msg )
+//  417 {
+//  418   byte deallocate;
+//  419 #if defined (ZTOOL_P1) || defined (ZTOOL_P2)
+//  420   byte *msg_ptr;
+//  421   byte len;
+//  422 
+//  423   // A little setup for AF, CB_FUNC and MT_SYS_APP_RSP_MSG
+//  424   msg_ptr = msg->msg;
+//  425 #endif // ZTOOL
+//  426 
+//  427   deallocate = true;
+//  428 
+//  429   // Use the first byte of the message as the command ID
+//  430   switch ( msg->hdr.event )
+//  431   {
+//  432 #if defined (ZTOOL_P1) || defined (ZTOOL_P2)
+//  433     case CMD_SERIAL_MSG:
+//  434       MT_ProcessSerialCommand( msg->msg );
+//  435       break;
+//  436 
+//  437     case CMD_DEBUG_MSG:
+//  438       MT_ProcessDebugMsg( (mtDebugMsg_t *)msg );
+//  439       break;
+//  440 
+//  441     case CMD_DEBUG_STR:
+//  442       MT_ProcessDebugStr( (mtDebugStr_t *)msg );
+//  443       break;
+//  444 
+//  445     case CB_FUNC:
+//  446       /*
+//  447         Build SPI message here instead of redundantly calling MT_BuildSPIMsg
+//  448         because we have copied data already in the allocated message
+//  449       */
+//  450 
+//  451       /* msg_ptr is the beginning of the intended SPI message */
+//  452       len = SPI_0DATA_MSG_LEN + msg_ptr[DATALEN_FIELD];
+//  453 
+//  454       /*
+//  455         FCS goes to the last byte in the message and is calculated over all
+//  456         the bytes except FCS and SOP
+//  457       */
+//  458       msg_ptr[len-1] = SPIMgr_CalcFCS( msg_ptr + 1 , (byte)(len-2) );
+//  459 
+//  460 #ifdef SPI_MGR_DEFAULT_PORT
+//  461       HalUARTWrite ( SPI_MGR_DEFAULT_PORT, msg_ptr, len );
+//  462 #endif
+//  463       break;
+//  464 
+//  465 #if !defined ( NONWK )
+//  466     case MT_SYS_APP_RSP_MSG:
+//  467       len = SPI_0DATA_MSG_LEN + msg_ptr[DATALEN_FIELD];
+//  468       MTProcessAppRspMsg( msg_ptr, len );
+//  469       break;
+//  470 #endif  // NONWK
+//  471 #endif  // ZTOOL
+//  472 
+//  473     default:
+//  474       break;
+//  475   }
+//  476 
+//  477   if ( deallocate )
+//  478   {
+//  479     osal_msg_deallocate( (uint8 *)msg );
+//  480   }
+//  481 }
+//  482 
+//  483 #if defined (ZTOOL_P1) || defined (ZTOOL_P2)
+//  484 /*********************************************************************
+//  485  * @fn      MT_ProcessDebugMsg
+//  486  *
+//  487  * @brief
+//  488  *
+//  489  *   Build and send a debug message.
+//  490  *
+//  491  * @param   byte *data - pointer to the data portion of the debug message
+//  492  *
+//  493  * @return  void
+//  494  */
+//  495 void MT_ProcessDebugMsg( mtDebugMsg_t *msg )
+//  496 {
+//  497   byte *msg_ptr;
+//  498   byte dataLen;
+//  499   uint8 buf[11];
+//  500   uint8 *pBuf;
+//  501 
+//  502   // Calculate the data length based
+//  503   dataLen = 5 + (msg->numParams * sizeof ( uint16 ));
+//  504 
+//  505   // Get a message buffer to build the debug message
+//  506   msg_ptr = osal_msg_allocate( (byte)(SPI_0DATA_MSG_LEN + dataLen + 1) );
+//  507   if ( msg_ptr )
+//  508   {
+//  509     // Build the message
+//  510     pBuf = buf;
+//  511     *pBuf++ = msg->compID;
+//  512     *pBuf++ = msg->severity;
+//  513     *pBuf++ = msg->numParams;
+//  514 
+//  515     if ( msg->numParams >= 1 )
+//  516     {
+//  517       *pBuf++ = HI_UINT16( msg->param1 );
+//  518       *pBuf++ = LO_UINT16( msg->param1 );
+//  519     }
+//  520 
+//  521     if ( msg->numParams >= 2 )
+//  522     {
+//  523       *pBuf++ = HI_UINT16( msg->param2 );
+//  524       *pBuf++ = LO_UINT16( msg->param2 );
+//  525     }
+//  526 
+//  527     if ( msg->numParams == 3 )
+//  528     {
+//  529       *pBuf++ = HI_UINT16( msg->param3 );
+//  530       *pBuf++ = LO_UINT16( msg->param3 );
+//  531     }
+//  532 
+//  533     *pBuf++ = HI_UINT16( msg->timestamp );
+//  534     *pBuf++ = LO_UINT16( msg->timestamp );
+//  535 
+//  536 #ifdef SPI_MGR_DEFAULT_PORT
+//  537     MT_BuildSPIMsg( SPI_CMD_DEBUG_MSG, &msg_ptr[1], dataLen, buf );
+//  538     HalUARTWrite ( SPI_MGR_DEFAULT_PORT, &msg_ptr[1], SPI_0DATA_MSG_LEN + dataLen );
+//  539 #endif
+//  540     osal_msg_deallocate( msg_ptr );
+//  541   }
+//  542 }
+//  543 #endif // ZTOOL
+//  544 
+//  545 #if defined (ZTOOL_P1) || defined (ZTOOL_P2)
+//  546 /*********************************************************************
+//  547  * @fn      MT_ProcessDebugStr
+//  548  *
+//  549  * @brief
+//  550  *
+//  551  *   Build and send a debug string.
+//  552  *
+//  553  * @param   byte *dstr - pointer to the data portion of the debug message
+//  554  *
+//  555  * @return  void
+//  556  */
+//  557 void MT_ProcessDebugStr( mtDebugStr_t *dstr )
+//  558 {
+//  559   byte *msg_ptr;
+//  560 
+//  561   // Get a message buffer to build the debug message
+//  562   msg_ptr = osal_mem_alloc( (byte)(SPI_0DATA_MSG_LEN + dstr->sln) );
+//  563   if ( msg_ptr )
+//  564   {
+//  565 #ifdef SPI_MGR_DEFAULT_PORT
+//  566     MT_BuildSPIMsg( SPI_RESPONSE_BIT | SPI_SYS_STRING_MSG, msg_ptr, dstr->sln, dstr->pString );
+//  567     HalUARTWrite ( SPI_MGR_DEFAULT_PORT, msg_ptr, SPI_0DATA_MSG_LEN + dstr->sln );
+//  568 #endif
+//  569     osal_mem_free( msg_ptr );
+//  570   }
+//  571 }
+//  572 #endif // ZTOOL
+//  573 
+//  574 #if defined (ZTOOL_P1) || defined (ZTOOL_P2)
+//  575 /*********************************************************************
+//  576  * @fn      MT_ProcessSetNV
+//  577  *
+//  578  * @brief
+//  579  *
+//  580  *   The Set NV serial message.
+//  581  *
+//  582  * @param   byte *msg - pointer to the data
+//  583  *
+//  584  * @return  ZSuccess if successful
+//  585  *
+//  586  * @MT SPI_CMD_SYS_SET_NV
+//  587  */
+//  588 byte MT_ProcessSetNV( byte *pData )
+//  589 {
+//  590   uint16  attrib;
+//  591   uint16  attlen;
+//  592 
+//  593   attrib = (uint16) *pData;
+//  594   pData += 2;   // skip additional byte containing len field
+//  595   attlen = osal_nv_item_len( attrib );
+//  596 
+//  597   return osal_nv_write( attrib, 0, attlen, pData );
+//  598 }
+//  599 #endif
+//  600 
+//  601 #if defined (ZTOOL_P1) || defined (ZTOOL_P2)
+//  602 /*********************************************************************
+//  603  * @fn      MT_ProcessGetNV
+//  604  *
+//  605  * @brief
+//  606  *
+//  607  *   The Get NV serial message.
+//  608  *
+//  609  * @param   byte *msg - pointer to the data
+//  610  *
+//  611  * @return  void
+//  612  *
+//  613  * @MT SPI_CMD_SYS_GET_NV
+//  614  *
+//  615  */
+//  616 void MT_ProcessGetNV( byte *pData )
+//  617 {
+//  618   uint16  attrib;
+//  619   uint16 attlen;
+//  620   uint16 buflen;
+//  621   uint8 *buf;
+//  622 
+//  623   attrib = (uint16)*pData;
+//  624   attlen = osal_nv_item_len( attrib );
+//  625 
+//  626   buflen = attlen + 3;
+//  627   buf = osal_mem_alloc( buflen );
+//  628   if ( buf != NULL )
+//  629   {
+//  630     osal_memset( buf, 0, buflen );
+//  631 
+//  632     buf[0] = osal_nv_read( attrib, 0, attlen, &buf[3] );
+//  633     buf[1] = (uint8)attrib;
+//  634     buf[2] = attlen;
+//  635 
+//  636     MT_BuildAndSendZToolResponse( (SPI_0DATA_MSG_LEN + buflen),
+//  637                                   (SPI_RESPONSE_BIT | SPI_CMD_SYS_GET_NV),
+//  638                                   buflen, buf );
+//  639     osal_mem_free( buf );
+//  640   }
+//  641 }
+//  642 #endif
+//  643 
+//  644 #if defined (ZTOOL_P1) || defined (ZTOOL_P2)
+//  645 #if !defined ( NONWK )
+//  646 /***************************************************************************************************
+//  647  * @fn      MT_ProcessGetNvInfo
+//  648  *
+//  649  * @brief
+//  650  *
+//  651  *   The Get NV Info serial message.
+//  652  *
+//  653  * @param   byte *msg - pointer to the data
+//  654  *
+//  655  * @return  void
+//  656  *
+//  657  * @MT SPI_CMD_SYS_GET_NV_INFO
+//  658  *
+//  659  ***************************************************************************************************/
+//  660 void MT_ProcessGetNvInfo( void )
+//  661 {
+//  662   uint8 len;
+//  663   uint8 stat;
+//  664   uint8 *buf;
+//  665   uint8 *pBuf;
+//  666   uint16 tmp16;
+//  667   uint32 tmp32;
+//  668 
+//  669   // Get required length of buffer
+//  670   // Status + ExtAddr + ChanList + PanID  + SecLevel + PreCfgKey
+//  671   len = 1 + Z_EXTADDR_LEN + 4 + 2 + 1 + SEC_KEY_LEN;
+//  672 
+//  673   buf = osal_mem_alloc( len );
+//  674   if ( buf )
+//  675   {
+//  676     // Assume NV not available
+//  677     osal_memset( buf, 0xFF, len );
+//  678 
+//  679     // Skip over status
+//  680     pBuf = buf + 1;
+//  681 
+//  682     // Start with 64-bit extended address
+//  683     stat = osal_nv_read( ZCD_NV_EXTADDR, 0, Z_EXTADDR_LEN, pBuf );
+//  684     if ( stat ) stat = 0x01;
+//  685     MT_ReverseBytes( pBuf, Z_EXTADDR_LEN );
+//  686     pBuf += Z_EXTADDR_LEN;
+//  687 
+//  688     // Scan channel list (bit mask)
+//  689     if (  osal_nv_read( ZCD_NV_CHANLIST, 0, sizeof( tmp32 ), &tmp32 ) )
+//  690       stat |= 0x02;
+//  691     else
+//  692     {
+//  693       pBuf[0] = BREAK_UINT32( tmp32, 3 );
+//  694       pBuf[1] = BREAK_UINT32( tmp32, 2 );
+//  695       pBuf[2] = BREAK_UINT32( tmp32, 1 );
+//  696       pBuf[3] = BREAK_UINT32( tmp32, 0 );
+//  697     }
+//  698     pBuf += sizeof( tmp32 );
+//  699 
+//  700     // ZigBee PanID
+//  701     if ( osal_nv_read( ZCD_NV_PANID, 0, sizeof( tmp16 ), &tmp16 ) )
+//  702       stat |= 0x04;
+//  703     else
+//  704     {
+//  705       pBuf[0] = HI_UINT16( tmp16 );
+//  706       pBuf[1] = LO_UINT16( tmp16 );
+//  707     }
+//  708     pBuf += sizeof( tmp16 );
+//  709 
+//  710     // Security level
+//  711     if ( osal_nv_read( ZCD_NV_SECURITY_LEVEL, 0, sizeof( uint8 ), pBuf++ ) )
+//  712       stat |= 0x08;
+//  713 
+//  714     // Pre-configured security key
+//  715     if ( osal_nv_read( ZCD_NV_PRECFGKEY, 0, SEC_KEY_LEN, pBuf ) )
+//  716       stat |= 0x10;
+//  717 
+//  718     // Status bit mask - bit=1 indicates failure
+//  719     *buf = stat;
+//  720 
+//  721     MT_BuildAndSendZToolResponse( (SPI_0DATA_MSG_LEN + len),
+//  722                                   (SPI_RESPONSE_BIT | SPI_CMD_SYS_GET_NV_INFO),
+//  723                                   len, buf );
+//  724 
+//  725     osal_mem_free( buf );
+//  726   }
+//  727 }
+//  728 #endif  // NONWK
+//  729 #endif  // ZTOOL
+//  730 
+//  731 #if defined (ZTOOL_P1) || defined (ZTOOL_P2)
+//  732 #define DEVICE_INFO_RESPONSE_LEN 46
+//  733 #define TYPE_COORDINATOR         1
+//  734 #define TYPE_ROUTER              2
+//  735 #define TYPE_ENDDEVICE           4
+//  736 /***************************************************************************************************
+//  737  * @fn      MT_ProcessGetDeviceInfo
+//  738  *
+//  739  * @brief
+//  740  *
+//  741  *   The Get Device Info serial message.
+//  742  *
+//  743  * @param   byte *msg - pointer to the data
+//  744  *
+//  745  * @return  void
+//  746  ***************************************************************************************************/
+//  747 void MT_ProcessGetDeviceInfo( void )
+//  748 {
+//  749   byte *buf;
+//  750   byte *pBuf;
+//  751   uint8 deviceType = 0;
+//  752   uint16 shortAddr;
+//  753   uint16 *assocList;
+//  754   byte assocCnt;
+//  755   uint16 *puint16;
+//  756   byte x;
+//  757 
+//  758   buf = osal_mem_alloc( DEVICE_INFO_RESPONSE_LEN );
+//  759   if ( buf )
+//  760   {
+//  761     pBuf = buf;
+//  762 
+//  763     *pBuf++ = ZSUCCESS;
+//  764 
+//  765     osal_nv_read( ZCD_NV_EXTADDR, 0, Z_EXTADDR_LEN, pBuf );
+//  766     // Outgoing extended address needs to be reversed
+//  767     MT_ReverseBytes( pBuf, Z_EXTADDR_LEN );
+//  768     pBuf += Z_EXTADDR_LEN;
+//  769 
+//  770 #if !defined( NONWK )
+//  771     shortAddr = NLME_GetShortAddr();
+//  772 #else
+//  773     shortAddr = 0;
+//  774 #endif
+//  775 
+//  776     *pBuf++ = HI_UINT16( shortAddr );
+//  777     *pBuf++ = LO_UINT16( shortAddr );
+//  778 
+//  779     // Return device type
+//  780 #if !defined( NONWK )
+//  781 #if defined (ZDO_COORDINATOR)
+//  782     deviceType |= (uint8) TYPE_COORDINATOR;
+//  783   #if defined (SOFT_START)
+//  784     deviceType |= (uint8) TYPE_ROUTER;
+//  785   #endif
+//  786 #endif
+//  787 #if defined (RTR_NWK) && !defined (ZDO_COORDINATOR)
+//  788     deviceType |= (uint8) TYPE_ROUTER;
+//  789 #elif !defined (RTR_NWK)
+//  790     deviceType |= (uint8) TYPE_ENDDEVICE;
+//  791 #endif
+//  792 #endif
+//  793     *pBuf++ = (byte) deviceType;
+//  794 
+//  795     //Return device state
+//  796 #if !defined( NONWK )
+//  797     *pBuf++ = (byte)devState;
+//  798 #else
+//  799     *pBuf++ = (byte)0;
+//  800 #endif
+//  801 
+//  802 #if defined(RTR_NWK) && !defined( NONWK )
+//  803     assocList = AssocMakeList( &assocCnt );
+//  804 #else
+//  805     assocCnt = 0;
+//  806     assocList = NULL;
+//  807 #endif
+//  808 
+//  809     *pBuf++ = assocCnt;
+//  810 
+//  811     // upto 16 devices
+//  812     osal_memset( pBuf, 0, (16 * sizeof(uint16)) );
+//  813     puint16 = assocList;
+//  814     for ( x = 0; x < assocCnt; x++ )
+//  815     {
+//  816       *pBuf++ = HI_UINT16( *puint16 );
+//  817       *pBuf++ = LO_UINT16( *puint16 );
+//  818       puint16++;
+//  819     }
+//  820 
+//  821     if ( assocList )
+//  822       osal_mem_free( assocList );
+//  823 
+//  824     MT_BuildAndSendZToolResponse( (SPI_0DATA_MSG_LEN + DEVICE_INFO_RESPONSE_LEN),
+//  825                                   (SPI_RESPONSE_BIT | SPI_CMD_SYS_GET_DEVICE_INFO),
+//  826                                   DEVICE_INFO_RESPONSE_LEN, buf );
+//  827 
+//  828     osal_mem_free( buf );
+//  829   }
+//  830 }
+//  831 #endif
+//  832 
+//  833 #if defined (ZTOOL_P1) || defined (ZTOOL_P2)
+//  834 /***************************************************************************************************
+//  835  * @fn      MT_ProcessSerialCommand
+//  836  *
+//  837  * @brief
+//  838  *
+//  839  *   Process Serial Message.
+//  840  *
+//  841  * @param   byte *msg - pointer to event message
+//  842  *
+//  843  * @return  void
+//  844  ***************************************************************************************************/
+//  845 void MT_ProcessSerialCommand( byte *msg )
+//  846 {
+//  847   UINT16 cmd;
+//  848   UINT16 callbackID;
+//  849   byte len;
+//  850   byte ret;
+//  851   byte *pData;
+//  852   uint16 tmp16;
+//  853   uint32 tmp32;
+//  854   byte extAddr[Z_EXTADDR_LEN];
+//  855   byte *retValue;
+//  856   byte x = 0;
+//  857 #if !defined ( NONWK )
+//  858   uint16 attLen;
+//  859 #endif // NONWK
+//  860 
+//  861   // dig out header info
+//  862   cmd = BUILD_UINT16( msg[1], msg[0] );
+//  863   save_cmd = cmd;
+//  864   len = msg[2];
+//  865   pData = &msg[3];
+//  866 
+//  867     // Setup for return;
+//  868     len = 0;
+//  869     retValue = &ret;
+//  870 
+//  871     //Process the contents of the message
+//  872     switch ( cmd )
+//  873     {
+//  874 #ifdef MACSIM
+//  875       case SPI_CMD_ZIGNET_DATA:
+//  876         MACSIM_TranslateMsg( pData, len );
+//  877         break;
+//  878 #endif
+//  879 
+//  880       case SPI_CMD_SYS_RAM_READ:
+//  881         extAddr[0] = MT_RAMRead( (UINT16)BUILD_UINT16( pData[1], pData[0] ), &extAddr[1] );
+//  882         len = MT_RAM_READ_RESP_LEN;
+//  883         retValue = extAddr;
+//  884         break;
+//  885 
+//  886       case SPI_CMD_SYS_RAM_WRITE:
+//  887         ret = MT_RAMWrite( (UINT16)BUILD_UINT16( pData[1], pData[0] ), pData[2] );
+//  888         len = MT_RAM_WRITE_RESP_LEN;
+//  889         break;
+//  890 
+//  891       case SPI_CMD_SYS_SET_DEBUG_THRESHOLD:
+//  892         ret = MT_SetDebugThreshold( pData[0], pData[1] );
+//  893         len = 1;
+//  894         break;
+//  895 
+//  896       case SPI_CMD_TRACE_SUB:
+//  897         break;
+//  898 
+//  899       case SPI_CMD_SYS_RESET:
+//  900         MT_Reset( pData[0] );
+//  901         break;
+//  902 
+//  903       case SPI_CMD_SYS_CALLBACK_SUB_CMD:
+//  904         // a callback value of 0xFFFF turns on all available callbacks
+//  905         callbackID = BUILD_UINT16( pData[1] , pData[0] );
+//  906         if ( callbackID == 0xFFFF )
+//  907         {
+//  908           // What is the action
+//  909           if ( pData[2] )
+//  910           {
+//  911             // Turn on
+//  912 #if defined( MT_MAC_CB_FUNC )
+//  913             _macCallbackSub = 0xFFFF;
+//  914 #endif
+//  915 #if defined( MT_NWK_CB_FUNC )
+//  916             _nwkCallbackSub = 0xFFFF;
+//  917 #endif
+//  918 
+//  919 #if defined( MT_ZDO_FUNC )
+//  920             _zdoCallbackSub = 0xFFFFFFFF;
+//  921 #endif
+//  922 #if defined( MT_AF_CB_FUNC )
+//  923             _afCallbackSub = 0xFFFF;
+//  924 #endif
+//  925 #if defined( MT_SAPI_CB_FUNC )
+//  926             _sapiCallbackSub = 0xFFFF;
+//  927 #endif
+//  928           }
+//  929           else
+//  930           {
+//  931             // Turn off
+//  932 #if defined( MT_MAC_CB_FUNC )
+//  933             _macCallbackSub = 0x0000;
+//  934 #endif
+//  935 #if defined( MT_NWK_CB_FUNC )
+//  936             _nwkCallbackSub = 0x0000;
+//  937 #endif
+//  938 
+//  939 #if defined( MT_ZDO_FUNC )
+//  940             _zdoCallbackSub = 0x00000000;
+//  941 #endif
+//  942 #if defined( MT_AF_CB_FUNC )
+//  943             _afCallbackSub = 0x0000;
+//  944 #endif
+//  945 #if defined( MT_SAPI_CB_FUNC )
+//  946             _sapiCallbackSub = 0x0000;
+//  947 #endif
+//  948           }
+//  949         }
+//  950         else
+//  951         {
+//  952           //First check which layer callbacks are desired and then set the preference
+//  953 
+//  954 #if defined( MT_MAC_CB_FUNC )
+//  955           //If it is a MAC callback, set the corresponding callback subscription bit
+//  956           if (( callbackID & 0xFFF0 ) == SPI_MAC_CB_TYPE )
+//  957           {
+//  958             //Based on the action field, either enable or disable subscription
+//  959             if ( pData[2] )
+//  960               _macCallbackSub |=  ( 1 << ( pData[1] & 0x0F ) );
+//  961             else
+//  962               _macCallbackSub &= ~( 1 << ( pData[1] & 0x0F ) );
+//  963           }
+//  964 #endif
+//  965 
+//  966 #if defined( MT_NWK_CB_FUNC )
+//  967           //If it is a NWK callback, set the corresponding callback subscription bit
+//  968           if (( callbackID & 0xFFF0 ) == SPI_NWK_CB_TYPE )
+//  969           {
+//  970 
+//  971             //Based on the action field, either enable or disable subscription
+//  972             if ( pData[2] )
+//  973               _nwkCallbackSub |=  ( 1 << ( pData[1] & 0x0F ) ) ;
+//  974             else
+//  975               _nwkCallbackSub &= ~( 1 << ( pData[1] & 0x0F ) );
+//  976           }
+//  977 #endif
+//  978 
+//  979 #if defined( MT_ZDO_FUNC )
+//  980           //If it is a APS callback, set the corresponding callback subscription bit
+//  981           if ( ((callbackID & 0xFFF0) == SPI_ZDO_CB_TYPE) ||
+//  982                ((callbackID & 0xFFF0) == SPI_ZDO_CB2_TYPE) )
+//  983           {
+//  984             //Based on the action field, either enable or disable subscription
+//  985             if ( pData[2] )
+//  986               _zdoCallbackSub |=  ( 1L << ( pData[1] & 0x1F ) );
+//  987             else
+//  988               _zdoCallbackSub &= ~( 1L << ( pData[1] & 0x1F ) );
+//  989           }
+//  990 #endif
+//  991 
+//  992 #if defined( MT_AF_CB_FUNC )
+//  993           // Set the corresponding callback subscription bit for an AF callback.
+//  994           if (( callbackID & 0xFFF0 ) == SPI_AF_CB_TYPE )
+//  995           {
+//  996             // Based on the action field, either enable or disable subscription.
+//  997             if ( pData[2] )
+//  998               _afCallbackSub |=  ( 1 << ( pData[1] & 0x0F ) );
+//  999             else
+// 1000               _afCallbackSub &= ~( 1 << ( pData[1] & 0x0F ) );
+// 1001           }
+// 1002 #endif
+// 1003 #if defined( MT_SAPI_CB_FUNC )
+// 1004           // Set the corresponding callback subscription bit for an SAPI callback.
+// 1005           if (( callbackID & 0xFFF0 ) == SPI_SAPI_CB_TYPE )
+// 1006           {
+// 1007             // Based on the action field, either enable or disable subscription.
+// 1008             if ( pData[2] )
+// 1009               _sapiCallbackSub |=  ( 1 << ( pData[1] & 0x0F ) );
+// 1010             else
+// 1011               _sapiCallbackSub &= ~( 1 << ( pData[1] & 0x0F ) );
+// 1012           }
+// 1013 #endif
+// 1014         }
+// 1015         len = 1;
+// 1016         ret = ZSUCCESS;
+// 1017         break;
+// 1018 
+// 1019       case SPI_CMD_SYS_PING:
+// 1020         // Get a message buffer to build response message
+// 1021         // The Ping response now has capabilities included
+// 1022 
+// 1023         // Build Capabilities
+// 1024         tmp16 = MT_CAP_MAC | MT_CAP_NWK | MT_CAP_AF |
+// 1025                 MT_CAP_ZDO | MT_CAP_USER_TEST | MT_CAP_SAPI_FUNC;
+// 1026 
+// 1027         // Convert to high byte first into temp buffer
+// 1028         extAddr[0] = HI_UINT16( tmp16 );
+// 1029         extAddr[1] = LO_UINT16( tmp16 );
+// 1030         len = sizeof ( tmp16 );
+// 1031         retValue = extAddr;
+// 1032         break;
+// 1033 
+// 1034       case SPI_CMD_SYS_VERSION:
+// 1035         {
+// 1036 #if !defined ( NONWK )
+// 1037           uint8 i = NLME_GetProtocolVersion() - 1;
+// 1038 #else
+// 1039           uint8 i = 1;   // just say '1.1' -- irrelevant if stack isn't there anyway
+// 1040 #endif
+// 1041 
+// 1042           // Get a message buffer to build response message
+// 1043           len      = (byte)(osal_strlen( (char *)MTVersionString[i] ));
+// 1044           retValue = (byte *)MTVersionString[i];
+// 1045         }
+// 1046           break;
+// 1047 
+// 1048       case SPI_CMD_SYS_SET_EXTADDR:
+// 1049         // Incoming extended address is reversed
+// 1050         MT_ReverseBytes( pData, Z_EXTADDR_LEN );
+// 1051 
+// 1052         if ( ZMacSetReq( ZMacExtAddr, pData ) == ZMacSuccess )
+// 1053           ret = osal_nv_write( ZCD_NV_EXTADDR, 0, Z_EXTADDR_LEN, pData );
+// 1054         else
+// 1055           ret = 1;
+// 1056         len = 1;
+// 1057         break;
+// 1058 
+// 1059       case SPI_CMD_SYS_GET_EXTADDR:
+// 1060         ZMacGetReq( ZMacExtAddr, extAddr );
+// 1061 
+// 1062         // Outgoing extended address needs to be reversed
+// 1063         MT_ReverseBytes( extAddr, Z_EXTADDR_LEN );
+// 1064 
+// 1065         len = Z_EXTADDR_LEN;
+// 1066         retValue = extAddr;
+// 1067         break;
+// 1068 
+// 1069 #if !defined ( NONWK )
+// 1070       case SPI_CMD_SYS_SET_PANID:
+// 1071         tmp16 = BUILD_UINT16( pData[1], pData[0] );
+// 1072         attLen = osal_nv_item_len( ZCD_NV_PANID );
+// 1073         ret = osal_nv_write( ZCD_NV_PANID, 0, attLen, &tmp16 );
+// 1074         len = 1;
+// 1075         break;
+// 1076 
+// 1077       case SPI_CMD_SYS_SET_CHANNELS:
+// 1078         tmp32 = BUILD_UINT32( pData[3], pData[2], pData[1], pData[0] );
+// 1079         attLen = osal_nv_item_len( ZCD_NV_CHANLIST );
+// 1080         ret = osal_nv_write( ZCD_NV_CHANLIST, 0, attLen, &tmp32 );
+// 1081         len = 1;
+// 1082         break;
+// 1083 
+// 1084       case SPI_CMD_SYS_SET_SECLEVEL:
+// 1085         attLen = osal_nv_item_len( ZCD_NV_SECURITY_LEVEL );
+// 1086         ret = osal_nv_write( ZCD_NV_SECURITY_LEVEL, 0, attLen, pData );
+// 1087         len = 1;
+// 1088         break;
+// 1089 
+// 1090       case SPI_CMD_SYS_SET_PRECFGKEY:
+// 1091         attLen = osal_nv_item_len( ZCD_NV_PRECFGKEY );
+// 1092         ret = osal_nv_write( ZCD_NV_PRECFGKEY, 0, attLen, pData );
+// 1093         len = 1;
+// 1094         break;
+// 1095 
+// 1096       case SPI_CMD_SYS_GET_NV_INFO:
+// 1097         MT_ProcessGetNvInfo();
+// 1098         break;
+// 1099 #endif // NONWK
+// 1100 
+// 1101       case SPI_CMD_SYS_GET_DEVICE_INFO:
+// 1102         MT_ProcessGetDeviceInfo();
+// 1103         break;
+// 1104 
+// 1105       case SPI_CMD_SYS_SET_NV:
+// 1106         ret = MT_ProcessSetNV( pData );
+// 1107         len = 1;
+// 1108         break;
+// 1109 
+// 1110       case SPI_CMD_SYS_GET_NV:
+// 1111         MT_ProcessGetNV( pData );
+// 1112         break;
+// 1113 
+// 1114       case SPI_CMD_SYS_TIME_ALIVE:
+// 1115         // Time since last reset (seconds)
+// 1116         tmp32 = osal_GetSystemClock() / 1000;
+// 1117         // Convert to high byte first into temp buffer
+// 1118         extAddr[0] = BREAK_UINT32( tmp32, 3 );
+// 1119         extAddr[1] = BREAK_UINT32( tmp32, 2 );
+// 1120         extAddr[2] = BREAK_UINT32( tmp32, 1 );
+// 1121         extAddr[3] = BREAK_UINT32( tmp32, 0 );
+// 1122         len = sizeof ( tmp32 );
+// 1123         retValue = extAddr;
+// 1124         break;
+// 1125 
+// 1126       case SPI_CMD_SYS_KEY_EVENT:
+// 1127         // Translate between SPI values to device values
+// 1128         if ( pData[1] & 0x01 )
+// 1129           x |= HAL_KEY_SW_1;
+// 1130         if ( pData[1] & 0x02 )
+// 1131           x |= HAL_KEY_SW_2;
+// 1132         if ( pData[1] & 0x04 )
+// 1133           x |= HAL_KEY_SW_3;
+// 1134         if ( pData[1] & 0x08 )
+// 1135           x |= HAL_KEY_SW_4;
+// 1136 #if defined ( HAL_KEY_SW_5 )
+// 1137         if ( pData[1] & 0x10 )
+// 1138           x |= HAL_KEY_SW_5;
+// 1139 #endif
+// 1140 #if defined ( HAL_KEY_SW_6 )
+// 1141         if ( pData[1] & 0x20 )
+// 1142           x |= HAL_KEY_SW_6;
+// 1143 #endif
+// 1144 #if defined ( HAL_KEY_SW_7 )
+// 1145         if ( pData[1] & 0x40 )
+// 1146           x |= HAL_KEY_SW_7;
+// 1147 #endif
+// 1148 #if defined ( HAL_KEY_SW_8 )
+// 1149         if ( pData[1] & 0x80 )
+// 1150           x |= HAL_KEY_SW_8;
+// 1151 #endif
+// 1152         ret = OnBoard_SendKeys( x, pData[0]  );
+// 1153         len = 1;
+// 1154         break;
+// 1155 
+// 1156       case SPI_CMD_SYS_HEARTBEAT:
+// 1157         ret = ZSUCCESS;
+// 1158         len = 1;
+// 1159         break;
+// 1160 
+// 1161 #if !defined ( NONWK )
+// 1162       case SPI_CMD_SYS_APP_MSG:
+// 1163         ret = MTProcessAppMsg( pData, msg[2] );
+// 1164         len = 0;
+// 1165         break;
+// 1166 #endif // NONWK
+// 1167 
+// 1168       case SPI_CMD_SYS_LED_CONTROL:
+// 1169 #if (defined HAL_LED) && (HAL_LED == TRUE)
+// 1170         ret = MTProcessLedControl( pData );
+// 1171         len = 1;
+// 1172 #endif
+// 1173         break;
+// 1174 
+// 1175 #ifdef MT_MAC_FUNC
+// 1176       case SPI_CMD_MAC_INIT:
+// 1177       case SPI_CMD_MAC_ASSOCIATE_REQ:
+// 1178       case SPI_CMD_MAC_ASSOCIATE_RSP:
+// 1179       case SPI_CMD_MAC_DISASSOCIATE_REQ:
+// 1180       case SPI_CMD_MAC_DATA_REQ:
+// 1181       case SPI_CMD_MAC_GET_REQ:
+// 1182       case SPI_CMD_MAC_SET_REQ:
+// 1183       case SPI_CMD_MAC_START_REQ:
+// 1184       case SPI_CMD_MAC_SCAN_REQ:
+// 1185       case SPI_CMD_MAC_RESET_REQ:
+// 1186       case SPI_CMD_MAC_GTS_REQ:
+// 1187       case SPI_CMD_MAC_ORPHAN_RSP:
+// 1188       case SPI_CMD_MAC_RX_ENABLE_REQ:
+// 1189       case SPI_CMD_MAC_SYNC_REQ:
+// 1190       case SPI_CMD_MAC_POLL_REQ:
+// 1191       case SPI_CMD_MAC_PURGE_REQ:
+// 1192         MT_MacCommandProcessing( cmd , len , pData );
+// 1193         break;
+// 1194 #endif
+// 1195 
+// 1196 #ifdef MT_NWK_FUNC
+// 1197       case SPI_CMD_NWK_INIT:
+// 1198       case SPI_CMD_NLDE_DATA_REQ:
+// 1199       case SPI_CMD_NLME_INIT_COORD_REQ:
+// 1200       case SPI_CMD_NLME_PERMIT_JOINING_REQ:
+// 1201       case SPI_CMD_NLME_JOIN_REQ:
+// 1202       case SPI_CMD_NLME_LEAVE_REQ:
+// 1203       case SPI_CMD_NLME_RESET_REQ:
+// 1204       case SPI_CMD_NLME_RX_STATE_REQ:
+// 1205       case SPI_CMD_NLME_GET_REQ:
+// 1206       case SPI_CMD_NLME_SET_REQ:
+// 1207       case SPI_CMD_NLME_NWK_DISC_REQ:
+// 1208       case SPI_CMD_NLME_ROUTE_DISC_REQ:
+// 1209       case SPI_CMD_NLME_DIRECT_JOIN_REQ:
+// 1210       case SPI_CMD_NLME_ORPHAN_JOIN_REQ:
+// 1211       case SPI_CMD_NLME_START_ROUTER_REQ:
+// 1212         MT_NwkCommandProcessing( cmd , len , pData );
+// 1213         break;
+// 1214 #endif
+// 1215 
+// 1216 #ifdef MT_ZDO_FUNC
+// 1217       case SPI_CMD_ZDO_AUTO_ENDDEVICEBIND_REQ:
+// 1218       case SPI_CMD_ZDO_AUTO_FIND_DESTINATION_REQ:
+// 1219       case SPI_CMD_ZDO_NWK_ADDR_REQ:
+// 1220       case SPI_CMD_ZDO_IEEE_ADDR_REQ:
+// 1221       case SPI_CMD_ZDO_NODE_DESC_REQ:
+// 1222       case SPI_CMD_ZDO_POWER_DESC_REQ:
+// 1223       case SPI_CMD_ZDO_SIMPLE_DESC_REQ:
+// 1224       case SPI_CMD_ZDO_ACTIVE_EPINT_REQ:
+// 1225       case SPI_CMD_ZDO_MATCH_DESC_REQ:
+// 1226       case SPI_CMD_ZDO_COMPLEX_DESC_REQ:
+// 1227       case SPI_CMD_ZDO_USER_DESC_REQ:
+// 1228       case SPI_CMD_ZDO_END_DEV_BIND_REQ:
+// 1229       case SPI_CMD_ZDO_BIND_REQ:
+// 1230       case SPI_CMD_ZDO_UNBIND_REQ:
+// 1231       case SPI_CMD_ZDO_MGMT_NWKDISC_REQ:
+// 1232       case SPI_CMD_ZDO_MGMT_LQI_REQ:
+// 1233       case SPI_CMD_ZDO_MGMT_RTG_REQ:
+// 1234       case SPI_CMD_ZDO_MGMT_BIND_REQ:
+// 1235       case SPI_CMD_ZDO_MGMT_DIRECT_JOIN_REQ:
+// 1236       case SPI_CMD_ZDO_USER_DESC_SET:
+// 1237       case SPI_CMD_ZDO_END_DEV_ANNCE:
+// 1238       case SPI_CMD_ZDO_MGMT_LEAVE_REQ:
+// 1239       case SPI_CMD_ZDO_MGMT_PERMIT_JOIN_REQ:
+// 1240       case SPI_CMD_ZDO_SERVERDISC_REQ:
+// 1241       case SPI_CMD_ZDO_NETWORK_START_REQ:
+// 1242         MT_ZdoCommandProcessing( cmd , len , pData );
+// 1243         break;
+// 1244 #endif
+// 1245 
+// 1246 #if defined ( MT_AF_FUNC )
+// 1247       case SPI_CMD_AF_INIT:
+// 1248       case SPI_CMD_AF_REGISTER:
+// 1249       case SPI_CMD_AF_SENDMSG:
+// 1250         MT_afCommandProcessing( cmd , len , pData );
+// 1251         break;
+// 1252 #endif
+// 1253 
+// 1254 #if defined ( MT_SAPI_FUNC )
+// 1255       case SPI_CMD_SAPI_SYS_RESET:
+// 1256       case SPI_CMD_SAPI_START_REQ:
+// 1257       case SPI_CMD_SAPI_BIND_DEVICE:
+// 1258       case SPI_CMD_SAPI_ALLOW_BIND:
+// 1259       case SPI_CMD_SAPI_SEND_DATA:
+// 1260       case SPI_CMD_SAPI_READ_CFG:
+// 1261       case SPI_CMD_SAPI_WRITE_CFG:
+// 1262       case SPI_CMD_SAPI_GET_DEV_INFO:
+// 1263       case SPI_CMD_SAPI_FIND_DEV:
+// 1264       case SPI_CMD_SAPI_PMT_JOIN:
+// 1265         ret = MT_sapiCommandProcessing( cmd , len , pData );
+// 1266         if ( ret == 0xff )
+// 1267           len = 0;
+// 1268         else
+// 1269           len = 1;
+// 1270         break;
+// 1271 #endif
+// 1272 
+// 1273 #if defined ( MT_USER_TEST_FUNC )
+// 1274       case SPI_CMD_USER_TEST:
+// 1275         MT_ProcessAppUserCmd( pData );
+// 1276         break;
+// 1277 #endif
+// 1278 
+// 1279       default:
+// 1280         break;
+// 1281     }
+// 1282 
+// 1283     if ( len )
+// 1284     {
+// 1285       MT_BuildAndSendZToolResponse( (SPI_0DATA_MSG_LEN + len),
+// 1286                                     (SPI_RESPONSE_BIT | cmd),
+// 1287                                     len, retValue );
+// 1288     }
+// 1289   }
+// 1290 #endif // ZTOOL
+// 1291 
+// 1292 #if (defined HAL_LED) && (HAL_LED == TRUE)
+// 1293 /***************************************************************************************************
+// 1294  * @fn      MTProcessLedControl
+// 1295  *
+// 1296  * @brief
+// 1297  *
+// 1298  *   Process the LED Control Message
+// 1299  *
+// 1300  * @param   data - input serial buffer
+// 1301  *
+// 1302  * @return  status
+// 1303  ***************************************************************************************************/
+// 1304 byte MTProcessLedControl( byte *pData )
+// 1305 {
+// 1306   byte iLed;
+// 1307   byte Led;
+// 1308   byte iMode;
+// 1309   byte Mode;
+// 1310 
+// 1311   iLed = *pData++;
+// 1312   iMode = *pData;
+// 1313 
+// 1314   if ( iLed == 1 )
+// 1315     Led = HAL_LED_1;
+// 1316   else if ( iLed == 2 )
+// 1317     Led = HAL_LED_2;
+// 1318   else if ( iLed == 3 )
+// 1319     Led = HAL_LED_3;
+// 1320   else if ( iLed == 4 )
+// 1321     Led = HAL_LED_4;
+// 1322   else if ( iLed == 0xFF )
+// 1323     Led = HAL_LED_ALL;
+// 1324   else
+// 1325     Led = 0;
+// 1326 
+// 1327   if ( iMode == 0 )
+// 1328     Mode = HAL_LED_MODE_OFF;
+// 1329   else if ( iMode == 1 )
+// 1330     Mode = HAL_LED_MODE_ON;
+// 1331   else if ( iMode == 2 )
+// 1332     Mode = HAL_LED_MODE_BLINK;
+// 1333   else if ( iMode == 3 )
+// 1334     Mode = HAL_LED_MODE_FLASH;
+// 1335   else if ( iMode == 4 )
+// 1336     Mode = HAL_LED_MODE_TOGGLE;
+// 1337   else
+// 1338     Led = 0;
+// 1339 
+// 1340   if ( Led != 0 )
+// 1341   {
+// 1342     HalLedSet (Led, Mode );
+// 1343     return ( ZSuccess );
+// 1344   }
+// 1345   else
+// 1346     return ( ZFailure );
+// 1347 }
+// 1348 #endif // HAL_LED
+// 1349 
+// 1350 #if !defined ( NONWK )
+// 1351 /*********************************************************************
+// 1352  * @fn      MTProcessAppMsg
+// 1353  *
+// 1354  * @brief
+// 1355  *
+// 1356  *   Process the User App Message
+// 1357  *
+// 1358  * @param   data - input serial buffer
+// 1359  * @param   len - data length
+// 1360  *
+// 1361  * @return  status
+// 1362  */
+// 1363 byte MTProcessAppMsg( byte *pData, byte len )
+// 1364 {
+// 1365   byte ret = ZFailure;
+// 1366   byte endpoint;
+// 1367   endPointDesc_t *epDesc;
+// 1368   mtSysAppMsg_t *msg;
+// 1369 
+// 1370   // Get the endpoint and skip past it.
+// 1371   endpoint = *pData++;
+// 1372   len--;
+// 1373 
+// 1374   // Look up the endpoint
+// 1375   epDesc = afFindEndPointDesc( endpoint );
+// 1376 
+// 1377   if ( epDesc )
+// 1378   {
+// 1379     // Build and send the message to the APP
+// 1380     msg = (mtSysAppMsg_t *)osal_msg_allocate( sizeof( mtSysAppMsg_t ) + len );
+// 1381     if ( msg )
+// 1382     {
+// 1383       msg->hdr.event = MT_SYS_APP_MSG;
+// 1384       msg->endpoint = endpoint;
+// 1385       msg->appDataLen = len;
+// 1386       msg->appData = (uint8*)(msg+1);
+// 1387 
+// 1388       osal_memcpy( msg->appData, pData, len );
+// 1389 
+// 1390       osal_msg_send( *(epDesc->task_id), (uint8 *)msg );
+// 1391 
+// 1392       ret = ZSuccess;
+// 1393     }
+// 1394   }
+// 1395 
+// 1396   return ret;
+// 1397 }
+// 1398 #endif // NONWK
+// 1399 
+// 1400 #if defined ( ZTOOL_PORT )
+// 1401 /*********************************************************************
+// 1402  * @fn      MTProcessAppRspMsg
+// 1403  *
+// 1404  * @brief
+// 1405  *
+// 1406  *   Process the User App Response Message
+// 1407  *
+// 1408  * @param   data - output serial buffer.  The first byte must be the
+// 1409  *          endpoint that send this message.
+// 1410  * @param   len - data length
+// 1411  *
+// 1412  * @return  none
+// 1413  */
+// 1414 void MTProcessAppRspMsg( byte *pData, byte len )
+// 1415 {
+// 1416   // Send out Reset Response message
+// 1417   MT_BuildAndSendZToolResponse( (SPI_0DATA_MSG_LEN + len),
+// 1418                                 (SPI_RESPONSE_BIT | SPI_CMD_SYS_APP_MSG),
+// 1419                                 len, pData );
+// 1420 }
+// 1421 #endif // ZTOOL_PORT
+// 1422 
+// 1423 
+// 1424 #if defined (ZTOOL_P1) || defined (ZTOOL_P2)
+// 1425 #if defined ( MT_USER_TEST_FUNC )
+// 1426 /*********************************************************************
+// 1427  * @fn      MT_ProcessAppUserCmd
+// 1428  *
+// 1429  * @brief
+// 1430  *
+// 1431  *   Temp function for testing
+// 1432  *
+// 1433  * @param   data - received message
+// 1434  *
+// 1435  * @return  void
+// 1436  */
+// 1437 void MT_ProcessAppUserCmd( byte *pData) 						
+// 1438 {
+// 1439   uint16 app_cmd;
+// 1440   byte srcEp;
+// 1441   uint16 param1;
+// 1442   uint16 param2;
+// 1443   byte len;
+// 1444   uint16 ret;
+// 1445 
+// 1446   ret = INVALID_TASK;     //should be changed later
+// 1447 
+// 1448   srcEp = *pData++;
+// 1449 
+// 1450   app_cmd = BUILD_UINT16( pData[1] , pData[0] );
+// 1451   pData = pData + sizeof( uint16 );
+// 1452 
+// 1453   param1 = BUILD_UINT16( pData[1] , pData[0] );
+// 1454   pData = pData + sizeof( uint16 );
+// 1455 
+// 1456   param2 = BUILD_UINT16( pData[1] , pData[0] );
+// 1457 
+// 1458   len = SPI_RESP_MSG_LEN_DEFAULT;
+// 1459 
+// 1460 
+// 1461   switch ( app_cmd )
+// 1462   {
+// 1463 
+// 1464 #if defined (APP_TGEN)
+// 1465     case TGEN_START:
+// 1466       TrafficGenApp_SendCmdMSG( param1, param2, TRAFFICGENAPP_CMD_START );
+// 1467       ret = ZSUCCESS;
+// 1468       break;
+// 1469 
+// 1470     case TGEN_STOP:
+// 1471       TrafficGenApp_SendCmdMSG( param1, param2, TRAFFICGENAPP_CMD_STOP );
+// 1472       ret = ZSUCCESS;
+// 1473       break;
+// 1474 
+// 1475     case TGEN_COUNT:
+// 1476       ret = TrafficGenApp_CountPkt( param1, param2 );
+// 1477       return;		// so that spi_resp is not sent...
+// 1478       //ret = ZSUCCESS;
+// 1479       break;				
+// 1480 #endif
+// 1481 
+// 1482 #if defined (NWK_TEST)
+// 1483     case HW_TEST:
+// 1484       HwApp_Start( HI_UINT16(param1), LO_UINT16(param1), HI_UINT16(param2),
+// 1485                     1000, LO_UINT16(param2), 3, 0 );
+// 1486       break;
+// 1487 
+// 1488     case HW_DISPLAY_RESULT:
+// 1489       HwApp_TestInfo();
+// 1490       break;
+// 1491 
+// 1492     case HW_SEND_STATUS:
+// 1493       HwApp_SendStats();
+// 1494       break;
+// 1495 #endif
+// 1496 
+// 1497 #if defined( APP_TP ) || defined ( APP_TP2 )
+// 1498   #if defined( APP_TP )
+// 1499     case TP_SEND_NODATA:
+// 1500       ret = TestProfileApp_SendNoData( srcEp, (byte)param1 );
+// 1501       break;
+// 1502   #endif // APP_TP
+// 1503 			
+// 1504     case TP_SEND_BUFFERTEST:
+// 1505       ret = TestProfileApp_SendBufferReq( srcEp, (byte)param1 );
+// 1506       break;
+// 1507 			
+// 1508   #if defined( APP_TP )
+// 1509     case TP_SEND_UINT8:
+// 1510       ret = TestProfileApp_SendUint8( srcEp, (byte)param1 );
+// 1511       break;
+// 1512 
+// 1513     case TP_SEND_INT8:
+// 1514       ret = TestProfileApp_SendInt8( srcEp, (byte)param1 );
+// 1515       break;
+// 1516 
+// 1517     case TP_SEND_UINT16:
+// 1518       ret = TestProfileApp_SendUint16( srcEp, (byte)param1 );
+// 1519       break;
+// 1520 
+// 1521     case TP_SEND_INT16:
+// 1522       ret = TestProfileApp_SendInt16( srcEp, (byte)param1 );
+// 1523       break;
+// 1524 
+// 1525     case TP_SEND_SEMIPREC:
+// 1526       ret = TestProfileApp_SendSemiPrec( srcEp, (byte)param1 );
+// 1527       break;
+// 1528 
+// 1529     case TP_SEND_FREEFORM:
+// 1530       ret = TestProfileApp_SendFreeFormReq( srcEp, (byte)param1 );
+// 1531       break;
+// 1532 			
+// 1533   #else // APP_TP
+// 1534     case TP_SEND_FREEFORM:
+// 1535       ret = TestProfileApp_SendFreeFormReq(srcEp, (byte)param1, (byte)param2);
+// 1536       break;
+// 1537   #endif
+// 1538 			
+// 1539   #if defined( APP_TP )
+// 1540     case TP_SEND_ABS_TIME:
+// 1541       ret = TestProfileApp_SendAbsTime( srcEp, (byte)param1 );
+// 1542       break;
+// 1543 
+// 1544     case TP_SEND_REL_TIME:
+// 1545       ret = TestProfileApp_SendRelativeTime( srcEp, (byte)param1 );
+// 1546       break;
+// 1547 
+// 1548     case TP_SEND_CHAR_STRING:
+// 1549       ret = TestProfileApp_SendCharString( srcEp, (byte)param1 );
+// 1550       break;
+// 1551 
+// 1552     case TP_SEND_OCTET_STRING:
+// 1553       ret = TestProfileApp_SendOctetString( srcEp, (byte)param1 );
+// 1554       break;		
+// 1555   #endif // APP_TP
+// 1556 				
+// 1557     case TP_SET_DSTADDRESS:			
+// 1558       ret = TestProfileApp_SetDestAddress(HI_UINT16(param1), LO_UINT16(param1), param2);
+// 1559       break;	
+// 1560 
+// 1561   #if defined( APP_TP2 )
+// 1562     case TP_SEND_BUFFER_GROUP:
+// 1563       ret = TestProfileApp_SendBufferGroup( srcEp, (byte)param1 );
+// 1564       break;
+// 1565   #endif // APP_TP
+// 1566 
+// 1567     case TP_SEND_BUFFER:
+// 1568       ret = TestProfileApp_SendBuffer( srcEp, (byte)param1 );
+// 1569       break;
+// 1570 				
+// 1571   #if defined( APP_TP )
+// 1572     case TP_SEND_MULT_KVP_8BIT:
+// 1573       TestProfileApp_SendMultiKVP_8bit( srcEp, (byte)param1 );
+// 1574       ret = ZSuccess;
+// 1575       break;
+// 1576 
+// 1577     case TP_SEND_MULT_KVP_16BIT:
+// 1578       TestProfileApp_SendMultiKVP_16bit( srcEp, (byte)param1 );
+// 1579       ret = ZSuccess;
+// 1580       break;
+// 1581 
+// 1582     case TP_SEND_MULT_KVP_TIME:
+// 1583       TestProfileApp_SendMultiKVP_Time( srcEp, (byte)param1 );
+// 1584       ret = ZSuccess;
+// 1585       break;
+// 1586 
+// 1587     case TP_SEND_MULT_KVP_STRING:
+// 1588       TestProfileApp_SendMultiKVP_String( srcEp, (byte)param1 );
+// 1589       ret = ZSuccess;
+// 1590       break;
+// 1591 
+// 1592     case TP_SEND_MULTI_KVP_STR_TIME:
+// 1593       ret = ZSuccess;
+// 1594       TestProfileApp_SendMultiKVP_String_Time( srcEp, (byte)param1 );
+// 1595       break;
+// 1596   #endif // APP_TP
+// 1597 				
+// 1598     case TP_SEND_COUNTED_PKTS:
+// 1599       TestProfileApp_SendCountedPktsReq(HI_UINT16(param1), LO_UINT16(param1), param2);
+// 1600       ret = ZSuccess;
+// 1601       break;
+// 1602 
+// 1603     case TP_SEND_RESET_COUNTER:
+// 1604       TestProfileApp_CountedPakts_ResetCounterReq( (byte)param1 );
+// 1605       ret = ZSuccess;
+// 1606       break;
+// 1607 
+// 1608     case TP_SEND_GET_COUNTER:
+// 1609       TestProfileApp_CountedPakts_GetCounterReq( srcEp, (byte)param1 );
+// 1610       ret = ZSuccess;
+// 1611       break;
+// 1612 				
+// 1613     case TP_SET_PERMIT_JOIN:
+// 1614   #if defined ( RTR_NWK )
+// 1615       NLME_PermitJoiningRequest( (byte)param1 );
+// 1616       ret = ZSuccess;
+// 1617   #else
+// 1618       ret = ZFailure;
+// 1619   #endif
+// 1620       break;
+// 1621 
+// 1622   #if defined ( APP_TP2 )
+// 1623     case TP_ADD_GROUP:
+// 1624       ret = TestProfileApp_SetGroup( srcEp, param1 );
+// 1625       break;
+// 1626 
+// 1627     case TP_REMOVE_GROUP:
+// 1628       ret = TestProfileApp_RemoveGroup( srcEp, param1 );
+// 1629       break;
+// 1630 
+// 1631     case TP_SEND_UPDATE_KEY:
+// 1632       ret = TestProfileApp_UpdateKey( srcEp, (uint8)param1, param2 );
+// 1633       break;
+// 1634 
+// 1635     case TP_SEND_SWITCH_KEY:
+// 1636       ret = TestProfileApp_SwitchKey(  srcEp, (uint8)param1, param2 );
+// 1637       break;
+// 1638 			
+// 1639     case TP_SEND_BUFFERTEST_GROUP:
+// 1640       ret = TestProfileApp_SendBufferGroupReq( srcEp, (byte)param1 );
+// 1641       break;
+// 1642 
+// 1643     case TP_SEND_ROUTE_DISC_REQ:
+// 1644       ret = TestProfileApp_SendRouteDiscReq( srcEp, param1,
+// 1645                                   HI_UINT16( param2 ), LO_UINT16( param2 ) );
+// 1646       break;
+// 1647 
+// 1648     case TP_SEND_ROUTE_DISCOVERY:
+// 1649 #if defined ( RTR_NWK )
+// 1650       ret = TestProfileApp_SendRouteDiscovery( param1,
+// 1651                                   HI_UINT16( param2 ), LO_UINT16( param2 ) );
+// 1652 #endif
+// 1653       break;
+// 1654 
+// 1655   #endif // APP_TP2
+// 1656 
+// 1657 #endif  // APP_TP || APP_TP2
+// 1658 
+// 1659 #if defined ( OSAL_TOTAL_MEM )
+// 1660     case OSAL_MEM_STACK_HIGH_WATER:
+// 1661     case OSAL_MEM_HEAP_HIGH_WATER:
+// 1662       if ( app_cmd == OSAL_MEM_STACK_HIGH_WATER)
+// 1663         param1 = osal_stack_used();
+// 1664       else
+// 1665         param1 = osal_heap_high_water();
+// 1666       pData[0] = HI_UINT16( param1 );
+// 1667       pData[1] = LO_UINT16( param1 );
+// 1668 
+// 1669       // The pData for this response will only send one byte,
+// 1670       // so we are going to call it twice.
+// 1671       //        MT_BuildAndSendZToolResponse( (SPI_0DATA_MSG_LEN + sizeof( uint16 )),
+// 1672       //                                    (SPI_CMD_USER_TEST | SPI_RESPONSE_BIT),
+// 1673       //                                    sizeof( uint16 ), pData );
+// 1674       MT_SendSPIRespMsg( pData[0], SPI_CMD_USER_TEST, SPI_RESP_MSG_LEN_DEFAULT, 1);
+// 1675       MT_SendSPIRespMsg( pData[1], SPI_CMD_USER_TEST, SPI_RESP_MSG_LEN_DEFAULT, 1);
+// 1676       return;
+// 1677 #endif
+// 1678 
+// 1679 #if defined ( APP_DEBUG )
+// 1680     case DEBUG_GET:
+// 1681       DebugApp_SendQuery( param1 );
+// 1682       ret = ZSUCCESS;
+// 1683       break;
+// 1684 #endif
+// 1685 
+// 1686 #if defined ( APP_TP2 )
+// 1687     case TP_SEND_BCAST_RSP:
+// 1688       ret = TestProfileApp_SendBcastRsp( srcEp, (byte)param1 );
+// 1689       break;
+// 1690 #endif
+// 1691 			
+// 1692     default:
+// 1693       break;
+// 1694   }
+// 1695 
+// 1696   MT_SendSPIRespMsg( ( byte )ret, SPI_CMD_USER_TEST, len, 1);
+// 1697 
+// 1698 }
+// 1699 #endif // MT_USER_TEST_FUNC
+// 1700 #endif // ZTOOL
+// 1701 
+// 1702 #if defined (ZTOOL_P1) || defined (ZTOOL_P2)
+// 1703 /***************************************************************************************************
+// 1704  * @fn      MT_RAMRead
+// 1705  *
+// 1706  * @brief
+// 1707  *
+// 1708  *   Process Serial Message.
+// 1709  *
+// 1710  * @param   UINT16 addr - address to read from
+// 1711  * @param   pData - pointer to buffer to put read data
+// 1712  *
+// 1713  * @return  ZSuccess or ZFailure
+// 1714  *
+// 1715  * @MT SPI_CMD_SYS_RAM_READ
+// 1716  *
+// 1717  ***************************************************************************************************/
+// 1718 byte MT_RAMRead( UINT16 addr, byte *pData  )
+// 1719 {
+// 1720   byte *pAddr;
+// 1721 
+// 1722   if ( IS_MEM_VALID( addr ) )
+// 1723   {
+// 1724     pAddr = (byte *)addr;
+// 1725     *pData = *pAddr;
+// 1726     return ( (byte)ZSuccess );
+// 1727   }
+// 1728   else
+// 1729   {
+// 1730     *pData = 0;
+// 1731     return ( (byte)ZFailure );
+// 1732   }
+// 1733 }
+// 1734 #endif
+// 1735 
+// 1736 #if defined (ZTOOL_P1) || defined (ZTOOL_P2)
+// 1737 /***************************************************************************************************
+// 1738  * @fn      MT_RAMWrite
+// 1739  *
+// 1740  * @brief
+// 1741  *
+// 1742  *   Process Serial Message.
+// 1743  *
+// 1744  * @param   UINT16 addr - address to write at
+// 1745  * @param   byte val  - values to fill in the above address and the next
+// 1746  *
+// 1747  * @return  ZSuccess or ZFailure
+// 1748  *
+// 1749  * @MT SPI_CMD_SYS_RAM_WRITE
+// 1750  *
+// 1751  ***************************************************************************************************/
+// 1752 byte MT_RAMWrite( UINT16 addr, byte val )
+// 1753 {
+// 1754   if ( IS_MEM_VALID( addr ) )
+// 1755   {
+// 1756     *((byte*)(addr)) = val;
+// 1757     return ( (byte)ZSuccess );
+// 1758   }
+// 1759   else
+// 1760     return ( (byte)ZFailure );
+// 1761 }
+// 1762 #endif
+// 1763 
+// 1764 #if defined (ZTOOL_P1) || defined (ZTOOL_P2)
+// 1765 /***************************************************************************************************
+// 1766  * @fn      MT_SetDebugThreshold
+// 1767  *
+// 1768  * @brief
+// 1769  *
+// 1770  *   Set Debug Threshold for software components.
+// 1771  *
+// 1772  * @param   comp_id   - software component ID.
+// 1773  * @param   threshold - threshold value for reporting debug messages.
+// 1774  *
+// 1775  * @return  ZSuccess
+// 1776  *
+// 1777  * @MT SPI_CMD_SYS_SET_DEBUG_THRESHOLD
+// 1778  *
+// 1779  ***************************************************************************************************/
+// 1780 byte MT_SetDebugThreshold( byte compID, byte threshold )
+// 1781 {
+// 1782   // *** RKJ - for now if we get any threshold message, set it on
+// 1783   debugThreshold = threshold;
+// 1784   debugCompId = compID;
+// 1785 
+// 1786   return ( (byte)ZSuccess );
+// 1787 }
+// 1788 #endif
+// 1789 
+// 1790 /***************************************************************************************************
+// 1791  * @fn      MT_Reset
+// 1792  *
+// 1793  * @brief
+// 1794  *
+// 1795  *   Reset/reprogram the device.
+// 1796  *
+// 1797  * @param   typID: 0=reset, 1=serial bootloader
+// 1798  *
+// 1799  * @return  void
+// 1800  *
+// 1801  * @MT SPI_CMD_SYS_RESET
+// 1802  ***************************************************************************************************/
+// 1803 void MT_Reset( byte typID )
+// 1804 {
+// 1805   if ( typID )
+// 1806   {
+// 1807     // Jump to bootloader
+// 1808     BootLoader();
+// 1809   }
+// 1810   else
+// 1811   {
+// 1812     // Restart this program
+// 1813     SystemReset();
+// 1814   }
+// 1815 }
+// 1816 
+// 1817 #if defined (ZTOOL_P1) || defined (ZTOOL_P2)
+// 1818 /***************************************************************************************************
+// 1819  * @fn      MT_SendErrorNotification
+// 1820  *
+// 1821  * @brief
+// 1822  *
+// 1823  *   Send Error Notofication Message to Test Tool.
+// 1824  *
+// 1825  * @param   byte err
+// 1826  *
+// 1827  * @return  void
+// 1828  ***************************************************************************************************/
+// 1829 void MT_SendErrorNotification( byte err )
+// 1830 {
+// 1831   MT_BuildAndSendZToolResponse( (SPI_0DATA_MSG_LEN + 1),
+// 1832                               (SPI_RESPONSE_BIT | SPI_CMD_SYS_RAM_WRITE),
+// 1833                               1, &err );
+// 1834 }
+// 1835 #endif
+// 1836 
+// 1837 /***************************************************************************************************
+// 1838  * @fn      MT_ReverseBytes
+// 1839  *
+// 1840  * @brief
+// 1841  *
+// 1842  *   Reverses bytes within an array
+// 1843  *
+// 1844  * @param   data - ptr to data buffer to reverse
+// 1845  * @param    len - number of bytes in buffer
+// 1846  *
+// 1847  * @return  void
+// 1848  ***************************************************************************************************/
+// 1849 void MT_ReverseBytes( byte *pData, byte len )
+// 1850 {
+// 1851   byte i,j;
+// 1852   byte temp;
+// 1853 
+// 1854   for ( i = 0, j = len-1; len > 1; len-=2 ) {
+// 1855     temp = pData[i];
+// 1856     pData[i++] = pData[j];
+// 1857     pData[j--] = temp;
+// 1858   }
+// 1859 }
+// 1860 
+// 1861 /***************************************************************************************************
+// 1862  * @fn      MT_SendSPIRespMsg
+// 1863  *
+// 1864  * @brief
+// 1865  *
+// 1866  *   This function is used to process messages in the queue
+// 1867  *
+// 1868  * @param   none
+// 1869  *
+// 1870  * @return  void
+// 1871  ***************************************************************************************************/
+// 1872 void MT_SendSPIRespMsg( byte ret, uint16 cmd_id, byte msgLen, byte respLen)
+// 1873 {
+// 1874   byte *msgPtr;
+// 1875 
+// 1876   msgPtr = osal_mem_alloc( msgLen );
+// 1877   if ( msgPtr )
+// 1878   {
+// 1879 #if defined (ZTOOL_P1) || defined (ZTOOL_P2)
+// 1880     MT_BuildSPIMsg( (SPI_RESPONSE_BIT | cmd_id), msgPtr, respLen, &ret );
+// 1881     HalUARTWrite ( SPI_MGR_DEFAULT_PORT, msgPtr, msgLen );
+// 1882 #endif
+// 1883 
+// 1884     osal_mem_free( msgPtr );
+// 1885   }
+// 1886 }
+// 1887 
+// 1888 #endif  // MT_TASK
+// 1889 
+// 1890 /***************************************************************************************************
+// 1891 ***************************************************************************************************/
+// 
+// 
+// 0 bytes of memory
+//
+//Errors: none
+//Warnings: none

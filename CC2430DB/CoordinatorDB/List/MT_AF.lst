@@ -1,0 +1,428 @@
+###############################################################################
+#                                                                             #
+# IAR 8051 C/C++ Compiler V7.30B/W32                    28/Dec/2012  21:16:51 #
+# Copyright 2004-2007 IAR Systems. All rights reserved.                       #
+#                                                                             #
+#    Core               =  plain                                              #
+#    Code model         =  banked                                             #
+#    Data model         =  large                                              #
+#    Calling convention =  xdata reentrant                                    #
+#    Constant location  =  data                                               #
+#    Dptr setup         =  1,16                                               #
+#    Source file        =  C:\Texas Instruments\ZStack-1.4.3-1.2.1\Components #
+#                          \mt\MT_AF.c                                        #
+#    Command line       =  -f "C:\Texas Instruments\ZStack-1.4.3-1.2.1\Projec #
+#                          ts\zstack\Samples\AXDApp\CC2430DB\..\..\..\Tools\C #
+#                          C2430DB\f8wCoord.cfg" (-DCPU32MHZ                  #
+#                          -DFORCE_MAC_NEAR -DROOT=__near_func                #
+#                          -DMAC_CFG_APP_PENDING_QUEUE=TRUE                   #
+#                          -DZDO_COORDINATOR -DRTR_NWK -DBLINK_LEDS           #
+#                          "-DCONST=const __code" -DGENERIC=__generic) -f     #
+#                          "C:\Texas Instruments\ZStack-1.4.3-1.2.1\Projects\ #
+#                          zstack\Samples\AXDApp\CC2430DB\..\..\..\Tools\CC24 #
+#                          30DB\f8wConfig.cfg" (-DSECURE=0                    #
+#                          -DDEFAULT_CHANLIST=0x00000800                      #
+#                          -DZDAPP_CONFIG_PAN_ID=0xFFFF                       #
+#                          -DNWK_START_DELAY=100 -DEXTENDED_JOINING_RANDOM_MA #
+#                          SK=0x007F -DBEACON_REQUEST_DELAY=100               #
+#                          -DBEACON_REQ_DELAY_MASK=0x00FF                     #
+#                          -DROUTE_EXPIRY_TIME=30 -DAPSC_ACK_WAIT_DURATION_PO #
+#                          LLED=3000 -DNWK_INDIRECT_MSG_TIMEOUT=7             #
+#                          -DMAX_RREQ_ENTRIES=10 -DAPSC_MAX_FRAME_RETRIES=3   #
+#                          -DNWK_MAX_DATA_RETRIES=2                           #
+#                          -DMAX_POLL_FAILURE_RETRIES=2 -DMAX_BCAST=9         #
+#                          -DAPS_MAX_GROUPS=16 -DMAX_RTG_ENTRIES=20           #
+#                          -DNWK_MAX_BINDING_ENTRIES=10                       #
+#                          -DMAX_BINDING_CLUSTER_IDS=5 "-DDEFAULT_KEY={0x01,  #
+#                          0x03, 0x05, 0x07, 0x09, 0x0B, 0x0D, 0x0F, 0x00,    #
+#                          0x02, 0x04, 0x06, 0x08, 0x0A, 0x0C, 0x0D}"         #
+#                          -DRFD_RCVC_ALWAYS_ON=FALSE -DPOLL_RATE=1000        #
+#                          -DQUEUED_POLL_RATE=100 -DRESPONSE_POLL_RATE=100)   #
+#                          -DREJOIN_POLL_RATE=440 "C:\Texas                   #
+#                          Instruments\ZStack-1.4.3-1.2.1\Components\mt\MT_AF #
+#                          .c" -D CC2430DB -D REFLECTOR -D xZTOOL_P2 -D       #
+#                          xMT_TASK -D xMT_ZDO_FUNC -D xLCD_SUPPORTED=DEBUG   #
+#                          -lC "C:\Texas Instruments\ZStack-1.4.3-1.2.1\Proje #
+#                          cts\zstack\Samples\AXDApp\CC2430DB\CoordinatorDB\L #
+#                          ist\" -lA "C:\Texas Instruments\ZStack-1.4.3-1.2.1 #
+#                          \Projects\zstack\Samples\AXDApp\CC2430DB\Coordinat #
+#                          orDB\List\" --diag_suppress Pe001,Pa010            #
+#                          --diag_remark pe550 -o "C:\Texas                   #
+#                          Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\Sam #
+#                          ples\AXDApp\CC2430DB\CoordinatorDB\Obj\" -e        #
+#                          --require_prototypes -z9 --no_code_motion --debug  #
+#                          --core=plain --dptr=16,1 --data_model=large        #
+#                          --code_model=banked --calling_convention=xdata_ree #
+#                          ntrant --place_constants=data --nr_virtual_regs 8  #
+#                          -I "C:\Texas Instruments\ZStack-1.4.3-1.2.1\Projec #
+#                          ts\zstack\Samples\AXDApp\CC2430DB\" -I "C:\Texas   #
+#                          Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\Sam #
+#                          ples\AXDApp\CC2430DB\..\SOURCE\" -I "C:\Texas      #
+#                          Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\Sam #
+#                          ples\AXDApp\CC2430DB\..\..\..\ZMAIN\TI2430DB\" -I  #
+#                          "C:\Texas Instruments\ZStack-1.4.3-1.2.1\Projects\ #
+#                          zstack\Samples\AXDApp\CC2430DB\..\..\..\..\..\COMP #
+#                          ONENTS\MT\" -I "C:\Texas                           #
+#                          Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\Sam #
+#                          ples\AXDApp\CC2430DB\..\..\..\..\..\COMPONENTS\HAL #
+#                          \INCLUDE\" -I "C:\Texas Instruments\ZStack-1.4.3-1 #
+#                          .2.1\Projects\zstack\Samples\AXDApp\CC2430DB\..\.. #
+#                          \..\..\..\COMPONENTS\HAL\TARGET\CC2430DB\" -I      #
+#                          "C:\Texas Instruments\ZStack-1.4.3-1.2.1\Projects\ #
+#                          zstack\Samples\AXDApp\CC2430DB\..\..\..\..\..\COMP #
+#                          ONENTS\OSAL\MCU\CCSOC\" -I "C:\Texas               #
+#                          Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\Sam #
+#                          ples\AXDApp\CC2430DB\..\..\..\..\..\COMPONENTS\OSA #
+#                          L\INCLUDE\" -I "C:\Texas                           #
+#                          Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\Sam #
+#                          ples\AXDApp\CC2430DB\..\..\..\..\..\COMPONENTS\STA #
+#                          CK\AF\" -I "C:\Texas Instruments\ZStack-1.4.3-1.2. #
+#                          1\Projects\zstack\Samples\AXDApp\CC2430DB\..\..\.. #
+#                          \..\..\COMPONENTS\STACK\NWK\" -I "C:\Texas         #
+#                          Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\Sam #
+#                          ples\AXDApp\CC2430DB\..\..\..\..\..\COMPONENTS\STA #
+#                          CK\SEC\" -I "C:\Texas Instruments\ZStack-1.4.3-1.2 #
+#                          .1\Projects\zstack\Samples\AXDApp\CC2430DB\..\..\. #
+#                          .\..\..\COMPONENTS\STACK\SYS\" -I "C:\Texas        #
+#                          Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\Sam #
+#                          ples\AXDApp\CC2430DB\..\..\..\..\..\COMPONENTS\STA #
+#                          CK\ZDO\" -I "C:\Texas Instruments\ZStack-1.4.3-1.2 #
+#                          .1\Projects\zstack\Samples\AXDApp\CC2430DB\..\..\. #
+#                          .\..\..\COMPONENTS\ZMAC\F8W\" -I "C:\Texas         #
+#                          Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\Sam #
+#                          ples\AXDApp\CC2430DB\..\..\..\..\..\COMPONENTS\ZMA #
+#                          C\" -I "C:\Texas Instruments\ZStack-1.4.3-1.2.1\Pr #
+#                          ojects\zstack\Samples\AXDApp\CC2430DB\..\..\..\..\ #
+#                          ..\COMPONENTS\SERVICES\SADDR\" -I "C:\Texas        #
+#                          Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\Sam #
+#                          ples\AXDApp\CC2430DB\..\..\..\..\..\COMPONENTS\SER #
+#                          VICES\SDATA\" -I "C:\Texas                         #
+#                          Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\Sam #
+#                          ples\AXDApp\CC2430DB\..\..\..\..\..\COMPONENTS\MAC #
+#                          \INCLUDE\" -I "C:\Texas Instruments\ZStack-1.4.3-1 #
+#                          .2.1\Projects\zstack\Samples\AXDApp\CC2430DB\..\.. #
+#                          \..\..\..\COMPONENTS\MAC\HIGH_LEVEL\" -I           #
+#                          "C:\Texas Instruments\ZStack-1.4.3-1.2.1\Projects\ #
+#                          zstack\Samples\AXDApp\CC2430DB\..\..\..\..\..\COMP #
+#                          ONENTS\MAC\LOW_LEVEL\SRF03\" -I "C:\Texas          #
+#                          Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\Sam #
+#                          ples\AXDApp\CC2430DB\..\..\..\..\..\COMPONENTS\MAC #
+#                          \LOW_LEVEL\SRF03\SINGLE_CHIP\" -I "C:\Program      #
+#                          Files\IAR Systems\Embedded Workbench 4.0           #
+#                          Evaluation version\8051\INC\" -I "C:\Program       #
+#                          Files\IAR Systems\Embedded Workbench 4.0           #
+#                          Evaluation version\8051\INC\CLIB\"                 #
+#    List file          =  C:\Texas Instruments\ZStack-1.4.3-1.2.1\Projects\z #
+#                          stack\Samples\AXDApp\CC2430DB\CoordinatorDB\List\M #
+#                          T_AF.lst                                           #
+#    Object file        =  C:\Texas Instruments\ZStack-1.4.3-1.2.1\Projects\z #
+#                          stack\Samples\AXDApp\CC2430DB\CoordinatorDB\Obj\MT #
+#                          _AF.r51                                            #
+#                                                                             #
+#                                                                             #
+###############################################################################
+
+C:\Texas Instruments\ZStack-1.4.3-1.2.1\Components\mt\MT_AF.c
+      1          /**************************************************************************************************
+      2            Filename:       MT_AF.c
+      3            Revised:        $Date: 2007-10-28 18:43:04 -0700 (Sun, 28 Oct 2007) $
+      4            Revision:       $Revision: 15800 $
+      5          
+      6            Description:    MonitorTest functions for the AF layer.
+      7          
+      8          
+      9            Copyright 2004-2007 Texas Instruments Incorporated. All rights reserved.
+     10          
+     11            IMPORTANT: Your use of this Software is limited to those specific rights
+     12            granted under the terms of a software license agreement between the user
+     13            who downloaded the software, his/her employer (which must be your employer)
+     14            and Texas Instruments Incorporated (the "License").  You may not use this
+     15            Software unless you agree to abide by the terms of the License. The License
+     16            limits your use, and you acknowledge, that the Software may not be modified,
+     17            copied or distributed unless embedded on a Texas Instruments microcontroller
+     18            or used solely and exclusively in conjunction with a Texas Instruments radio
+     19            frequency transceiver, which is integrated into your product.  Other than for
+     20            the foregoing purpose, you may not use, reproduce, copy, prepare derivative
+     21            works of, modify, distribute, perform, display or sell this Software and/or
+     22            its documentation for any purpose.
+     23          
+     24            YOU FURTHER ACKNOWLEDGE AND AGREE THAT THE SOFTWARE AND DOCUMENTATION ARE
+     25            PROVIDED “AS IS” WITHOUT WARRANTY OF ANY KIND, EITHER EXPRESS OR IMPLIED, 
+     26            INCLUDING WITHOUT LIMITATION, ANY WARRANTY OF MERCHANTABILITY, TITLE, 
+     27            NON-INFRINGEMENT AND FITNESS FOR A PARTICULAR PURPOSE. IN NO EVENT SHALL
+     28            TEXAS INSTRUMENTS OR ITS LICENSORS BE LIABLE OR OBLIGATED UNDER CONTRACT,
+     29            NEGLIGENCE, STRICT LIABILITY, CONTRIBUTION, BREACH OF WARRANTY, OR OTHER
+     30            LEGAL EQUITABLE THEORY ANY DIRECT OR INDIRECT DAMAGES OR EXPENSES
+     31            INCLUDING BUT NOT LIMITED TO ANY INCIDENTAL, SPECIAL, INDIRECT, PUNITIVE
+     32            OR CONSEQUENTIAL DAMAGES, LOST PROFITS OR LOST DATA, COST OF PROCUREMENT
+     33            OF SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
+     34            (INCLUDING BUT NOT LIMITED TO ANY DEFENSE THEREOF), OR OTHER SIMILAR COSTS.
+     35          
+     36            Should you have any questions regarding your right to use this Software,
+     37            contact Texas Instruments Incorporated at www.TI.com. 
+     38          **************************************************************************************************/
+     39          
+     40          /*********************************************************************
+     41           * INCLUDES
+     42           */
+     43          #include "ZComDef.h"
+     44          #include "OSAL.h"
+     45          #include "MTEL.h"
+     46          #include "MT_AF.h"
+     47          #include "nwk.h"
+     48          #include "OnBoard.h"
+     49          #include "SPIMgr.h"
+     50          
+     51          /*********************************************************************
+     52           * MACROS
+     53           */
+     54          
+     55          /*********************************************************************
+     56           * CONSTANTS
+     57           */
+     58          
+     59          /*********************************************************************
+     60           * TYPEDEFS
+     61           */
+     62          
+     63          /*********************************************************************
+     64           * GLOBAL VARIABLES
+     65           */
+     66          
+     67          #if defined ( MT_AF_CB_FUNC )
+     68          uint16 _afCallbackSub;
+     69          #endif
+     70          
+     71          /*********************************************************************
+     72           * EXTERNAL VARIABLES
+     73           */
+     74          
+     75          /*********************************************************************
+     76           * EXTERNAL FUNCTIONS
+     77           */
+     78          
+     79          /*********************************************************************
+     80           * LOCAL VARIABLES
+     81           */
+     82          
+     83          /*********************************************************************
+     84           * LOCAL FUNCTIONS
+     85           */
+     86          
+     87          #if defined ( MT_AF_FUNC )
+     88          /*********************************************************************
+     89           * @fn      MT_afCommandProcessing
+     90           *
+     91           * @brief
+     92           *
+     93           *   Process all the AF commands that are issued by test tool
+     94           *
+     95           * @param   cmd_id - Command ID
+     96           * @param   len    - Length of received SPI data message
+     97           * @param   data   - pointer to received SPI data message
+     98           *
+     99           * @return  none
+    100           */
+    101          void MT_afCommandProcessing( uint16 cmd_id , byte len , byte *pData )
+    102          {
+    103            byte i;
+    104            endPointDesc_t *epDesc;
+    105            uint8 af_stat = afStatus_FAILED;
+    106          
+    107            switch (cmd_id)
+    108            {
+    109              case SPI_CMD_AF_INIT:
+    110                afInit();
+    111                break;
+    112          
+    113              case SPI_CMD_AF_REGISTER:
+    114          
+    115                if ( afFindEndPointDesc( *pData ) != NULL )
+    116                {
+    117                  af_stat = ZApsDuplicateEntry;
+    118                }
+    119                else
+    120                {
+    121                  af_stat = ZMemError;
+    122                  epDesc = ( endPointDesc_t * )osal_mem_alloc( sizeof( endPointDesc_t ) );
+    123                  if ( epDesc )
+    124                  {
+    125                    epDesc->simpleDesc = ( SimpleDescriptionFormat_t * )
+    126                                osal_mem_alloc( sizeof( SimpleDescriptionFormat_t ) );
+    127                    if ( epDesc->simpleDesc )
+    128                    {
+    129                      af_stat = ZSuccess;
+    130                      epDesc->task_id = &MT_TaskID;
+    131                      epDesc->endPoint = *pData++;
+    132                      epDesc->simpleDesc->EndPoint = epDesc->endPoint;
+    133                      epDesc->simpleDesc->AppProfId = BUILD_UINT16( pData[1],pData[0]);
+    134                      pData += 2;
+    135                      epDesc->simpleDesc->AppDeviceId = BUILD_UINT16( pData[1],pData[0]);
+    136                      pData += 2;
+    137                      epDesc->simpleDesc->AppDevVer = (*pData++) & AF_APP_DEV_VER_MASK ;
+    138                      epDesc->simpleDesc->Reserved = (*pData++) & AF_APP_FLAGS_MASK ;
+    139          
+    140                      epDesc->simpleDesc->AppNumInClusters = *pData++;
+    141                      if (epDesc->simpleDesc->AppNumInClusters)
+    142                      {
+    143                        epDesc->simpleDesc->pAppInClusterList = (uint16 *)
+    144                            osal_mem_alloc((epDesc->simpleDesc->AppNumInClusters)*sizeof(uint16));
+    145                        if(  epDesc->simpleDesc->pAppInClusterList )
+    146                        {
+    147                          for (i=0; i<(epDesc->simpleDesc->AppNumInClusters); i++, pData+=2)
+    148                          {
+    149                            epDesc->simpleDesc->pAppInClusterList[i] = BUILD_UINT16(pData[1], pData[0]);
+    150                          }
+    151                        }
+    152                        else
+    153                        {
+    154                          af_stat = ZMemError;
+    155                        }
+    156                      }
+    157                      epDesc->simpleDesc->AppNumOutClusters = *pData++;
+    158                      if (epDesc->simpleDesc->AppNumOutClusters)
+    159                      {
+    160                        epDesc->simpleDesc->pAppOutClusterList = (uint16 *)
+    161                          osal_mem_alloc((epDesc->simpleDesc->AppNumOutClusters)*sizeof(uint16));
+    162                        if ( epDesc->simpleDesc->AppNumOutClusters )
+    163                        {
+    164                          for (i=0; i<(epDesc->simpleDesc->AppNumOutClusters); i++, pData+=2)
+    165                          {
+    166                            epDesc->simpleDesc->pAppOutClusterList[i] = BUILD_UINT16(pData[1], pData[0]);
+    167                          }
+    168                        }
+    169                        else
+    170                        {
+    171                          af_stat = ZMemError;
+    172                        }
+    173                      }
+    174                      epDesc->latencyReq = (afNetworkLatencyReq_t)*pData;
+    175                    }
+    176                  }
+    177          
+    178                  if ( af_stat == ZSuccess )
+    179                  {
+    180                    af_stat = afRegister( epDesc );
+    181                  }
+    182          
+    183                  if ( af_stat != ZSuccess )
+    184                  {
+    185                    if (epDesc->simpleDesc)
+    186                    {
+    187                      if (epDesc->simpleDesc->pAppInClusterList)
+    188                        osal_mem_free(epDesc->simpleDesc->pAppInClusterList);
+    189          
+    190                      if (epDesc->simpleDesc->AppNumOutClusters)
+    191                        osal_mem_free(epDesc->simpleDesc->pAppOutClusterList);
+    192          
+    193                      osal_mem_free(epDesc->simpleDesc);
+    194                    }
+    195          
+    196                    if (epDesc)
+    197                      osal_mem_free(epDesc);
+    198                  }
+    199                }
+    200          
+    201                len = SPI_0DATA_MSG_LEN + SPI_RESP_LEN_AF_DEFAULT;
+    202                MT_SendSPIRespMsg( af_stat, SPI_CMD_AF_REGISTER, len, SPI_RESP_LEN_AF_DEFAULT );
+    203          
+    204                break;
+    205          
+    206              case SPI_CMD_AF_SENDMSG:
+    207              {
+    208                afAddrType_t dstAddr;
+    209                endPointDesc_t *srcEP;
+    210          
+    211                /* transId, srcEP, dstAddr, dstEP, cId, len, data, txoptions, radius */
+    212          
+    213                dstAddr.addrMode = afAddr16Bit;
+    214                dstAddr.addr.shortAddr = BUILD_UINT16( pData[3], pData[2] );
+    215                dstAddr.endPoint = pData[4];
+    216                srcEP = afFindEndPointDesc( pData[1] );
+    217          
+    218                af_stat = AF_DataRequest( &dstAddr, srcEP, BUILD_UINT16( pData[6], pData[5] ),
+    219                                           pData[7], pData+8, pData, *(pData+8+pData[7]), *(pData+9+pData[7]) );
+    220                                                                                   //pData[9], pData[10] );
+    221          
+    222                len = SPI_0DATA_MSG_LEN + SPI_RESP_LEN_AF_DEFAULT;
+    223                MT_SendSPIRespMsg( af_stat, SPI_CMD_AF_SENDMSG,
+    224                                       len, SPI_RESP_LEN_AF_DEFAULT );
+    225              }
+    226              break;
+    227          
+    228            }
+    229          }
+    230          /***************************************************************************************************
+    231           * @fn      MT_AfDataConfirm
+    232           *
+    233           * @brief   Process
+    234           *
+    235           * @param
+    236           *
+    237           * @return  none
+    238           ***************************************************************************************************/
+    239          void MT_AfDataConfirm( uint8 endPoint, uint8 transID, ZStatus_t status )
+    240          {
+    241            uint8 buf[3];
+    242          
+    243            buf[0] = status;
+    244            buf[1] = endPoint;
+    245            buf[2] = transID;
+    246          
+    247          #if defined (ZTOOL_P1) || defined (ZTOOL_P2)
+    248            MT_BuildAndSendZToolCB( SPI_CB_AF_DATA_CNF, 3, buf );
+    249          #endif
+    250          }
+    251          #endif  // #if defined ( MT_AF_FUNC )
+    252          
+    253          #if defined ( MT_AF_CB_FUNC )
+    254          /*********************************************************************
+    255           * @fn          af_MTCB_IncomingData
+    256           *
+    257           * @brief       Process the callback subscription for AF Incoming data.
+    258           *
+    259           * @param       pkt - Incoming AF data.
+    260           *
+    261           * @return      none
+    262           */
+    263          void af_MTCB_IncomingData( void *pkt )
+    264          {
+    265            afIncomingMSGPacket_t *MSGpkt = (afIncomingMSGPacket_t *)pkt;
+    266            uint8 *memPtr, *ptr;
+    267            uint8 len = 9 + MSGpkt->cmd.DataLength;
+    268          
+    269            memPtr = osal_mem_alloc( len );
+    270            if ( memPtr )
+    271            {
+    272              ptr = memPtr;
+    273          
+    274              //*ptr++ = MSGpkt->hdr.event;
+    275              *ptr++ = HI_UINT16( MSGpkt->srcAddr.addr.shortAddr );
+    276              *ptr++ = LO_UINT16( MSGpkt->srcAddr.addr.shortAddr );
+    277              *ptr++ = MSGpkt->srcAddr.endPoint;
+    278              *ptr++ = MSGpkt->endPoint;
+    279              *ptr++ = HI_UINT16( MSGpkt->clusterId );
+    280              *ptr++ = LO_UINT16( MSGpkt->clusterId );
+    281              *ptr++ = MSGpkt->cmd.DataLength;
+    282              ptr = osal_memcpy( ptr, MSGpkt->cmd.Data, MSGpkt->cmd.DataLength );
+    283              *ptr++ = MSGpkt->wasBroadcast;
+    284              *ptr++ = MSGpkt->LinkQuality;
+    285          
+    286          #if defined (ZTOOL_P1) || defined (ZTOOL_P2)
+    287              MT_BuildAndSendZToolCB( SPI_CB_AF_DATA_IND, len, memPtr );
+    288          #endif
+    289              osal_mem_free( memPtr );
+    290            }
+    291          }
+    292          #endif  // #if defined ( MT_AF_CB_FUNC )
+    293          
+    294          /*********************************************************************
+    295          *********************************************************************/
+
+
+ 
+ 
+ 0 bytes of memory
+
+Errors: none
+Warnings: none

@@ -1,0 +1,333 @@
+///////////////////////////////////////////////////////////////////////////////
+//                                                                            /
+// IAR 8051 C/C++ Compiler V7.30B/W32                   20/Dec/2012  21:41:02 /
+// Copyright 2004-2007 IAR Systems. All rights reserved.                      /
+//                                                                            /
+//    Core               =  plain                                             /
+//    Code model         =  banked                                            /
+//    Data model         =  large                                             /
+//    Calling convention =  xdata reentrant                                   /
+//    Constant location  =  data                                              /
+//    Dptr setup         =  1,16                                              /
+//    Source file        =  C:\Texas Instruments\ZStack-1.4.3-1.2.1\Component /
+//                          s\stack\zdo\ZDConfig.c                            /
+//    Command line       =  -f "C:\Texas Instruments\ZStack-1.4.3-1.2.1\Proje /
+//                          cts\zstack\Samples\AXDApp\CC2430DB\..\..\..\Tools /
+//                          \CC2430DB\f8wEndev.cfg" (-DCPU32MHZ               /
+//                          -DFORCE_MAC_NEAR -DROOT=__near_func               /
+//                          -DMAC_OPT_FFD=0 -DBLINK_LEDS "-DCONST=const       /
+//                          __code" -DGENERIC=__generic) -f "C:\Texas         /
+//                          Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\Sa /
+//                          mples\AXDApp\CC2430DB\..\..\..\Tools\CC2430DB\f8w /
+//                          Config.cfg" (-DSECURE=0                           /
+//                          -DDEFAULT_CHANLIST=0x00000800                     /
+//                          -DZDAPP_CONFIG_PAN_ID=0xFFFF                      /
+//                          -DNWK_START_DELAY=100 -DEXTENDED_JOINING_RANDOM_M /
+//                          ASK=0x007F -DBEACON_REQUEST_DELAY=100             /
+//                          -DBEACON_REQ_DELAY_MASK=0x00FF                    /
+//                          -DROUTE_EXPIRY_TIME=30 -DAPSC_ACK_WAIT_DURATION_P /
+//                          OLLED=3000 -DNWK_INDIRECT_MSG_TIMEOUT=7           /
+//                          -DMAX_RREQ_ENTRIES=10 -DAPSC_MAX_FRAME_RETRIES=3  /
+//                          -DNWK_MAX_DATA_RETRIES=2                          /
+//                          -DMAX_POLL_FAILURE_RETRIES=2 -DMAX_BCAST=9        /
+//                          -DAPS_MAX_GROUPS=16 -DMAX_RTG_ENTRIES=20          /
+//                          -DNWK_MAX_BINDING_ENTRIES=10                      /
+//                          -DMAX_BINDING_CLUSTER_IDS=5                       /
+//                          "-DDEFAULT_KEY={0x01, 0x03, 0x05, 0x07, 0x09,     /
+//                          0x0B, 0x0D, 0x0F, 0x00, 0x02, 0x04, 0x06, 0x08,   /
+//                          0x0A, 0x0C, 0x0D}" -DRFD_RCVC_ALWAYS_ON=FALSE     /
+//                          -DPOLL_RATE=1000 -DQUEUED_POLL_RATE=100           /
+//                          -DRESPONSE_POLL_RATE=100) -DREJOIN_POLL_RATE=440  /
+//                          "C:\Texas Instruments\ZStack-1.4.3-1.2.1\Componen /
+//                          ts\stack\zdo\ZDConfig.c" -D CC2430DB -D           /
+//                          NWK_AUTO_POLL -D REFLECTOR -D xZTOOL_P2 -D        /
+//                          xMT_TASK -D xMT_ZDO_FUNC -D xLCD_SUPPORTED=DEBUG  /
+//                          -D xPOWER_SAVING -lC "C:\Texas                    /
+//                          Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\Sa /
+//                          mples\AXDApp\CC2430DB\EndDeviceDB\List\" -lA      /
+//                          "C:\Texas Instruments\ZStack-1.4.3-1.2.1\Projects /
+//                          \zstack\Samples\AXDApp\CC2430DB\EndDeviceDB\List\ /
+//                          " --diag_suppress Pe001,Pa010 --diag_remark       /
+//                          pe550 -o "C:\Texas Instruments\ZStack-1.4.3-1.2.1 /
+//                          \Projects\zstack\Samples\AXDApp\CC2430DB\EndDevic /
+//                          eDB\Obj\" -e --require_prototypes -z9             /
+//                          --no_code_motion --debug --core=plain             /
+//                          --dptr=16,1 --data_model=large                    /
+//                          --code_model=banked --calling_convention=xdata_re /
+//                          entrant --place_constants=data --nr_virtual_regs  /
+//                          8 -I "C:\Texas Instruments\ZStack-1.4.3-1.2.1\Pro /
+//                          jects\zstack\Samples\AXDApp\CC2430DB\" -I         /
+//                          "C:\Texas Instruments\ZStack-1.4.3-1.2.1\Projects /
+//                          \zstack\Samples\AXDApp\CC2430DB\..\SOURCE\" -I    /
+//                          "C:\Texas Instruments\ZStack-1.4.3-1.2.1\Projects /
+//                          \zstack\Samples\AXDApp\CC2430DB\..\Drivers\" -I   /
+//                          "C:\Texas Instruments\ZStack-1.4.3-1.2.1\Projects /
+//                          \zstack\Samples\AXDApp\CC2430DB\..\..\..\ZMAIN\TI /
+//                          2430DB\" -I "C:\Texas Instruments\ZStack-1.4.3-1. /
+//                          2.1\Projects\zstack\Samples\AXDApp\CC2430DB\..\.. /
+//                          \..\..\..\COMPONENTS\MT\" -I "C:\Texas            /
+//                          Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\Sa /
+//                          mples\AXDApp\CC2430DB\..\..\..\..\..\COMPONENTS\H /
+//                          AL\INCLUDE\" -I "C:\Texas                         /
+//                          Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\Sa /
+//                          mples\AXDApp\CC2430DB\..\..\..\..\..\COMPONENTS\H /
+//                          AL\TARGET\CC2430DB\" -I "C:\Texas                 /
+//                          Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\Sa /
+//                          mples\AXDApp\CC2430DB\..\..\..\..\..\COMPONENTS\O /
+//                          SAL\MCU\CCSOC\" -I "C:\Texas                      /
+//                          Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\Sa /
+//                          mples\AXDApp\CC2430DB\..\..\..\..\..\COMPONENTS\O /
+//                          SAL\INCLUDE\" -I "C:\Texas                        /
+//                          Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\Sa /
+//                          mples\AXDApp\CC2430DB\..\..\..\..\..\COMPONENTS\S /
+//                          TACK\AF\" -I "C:\Texas Instruments\ZStack-1.4.3-1 /
+//                          .2.1\Projects\zstack\Samples\AXDApp\CC2430DB\..\. /
+//                          .\..\..\..\COMPONENTS\STACK\NWK\" -I "C:\Texas    /
+//                          Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\Sa /
+//                          mples\AXDApp\CC2430DB\..\..\..\..\..\COMPONENTS\S /
+//                          TACK\SEC\" -I "C:\Texas                           /
+//                          Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\Sa /
+//                          mples\AXDApp\CC2430DB\..\..\..\..\..\COMPONENTS\S /
+//                          TACK\SYS\" -I "C:\Texas                           /
+//                          Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\Sa /
+//                          mples\AXDApp\CC2430DB\..\..\..\..\..\COMPONENTS\S /
+//                          TACK\ZDO\" -I "C:\Texas                           /
+//                          Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\Sa /
+//                          mples\AXDApp\CC2430DB\..\..\..\..\..\COMPONENTS\Z /
+//                          MAC\F8W\" -I "C:\Texas Instruments\ZStack-1.4.3-1 /
+//                          .2.1\Projects\zstack\Samples\AXDApp\CC2430DB\..\. /
+//                          .\..\..\..\COMPONENTS\ZMAC\" -I "C:\Texas         /
+//                          Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\Sa /
+//                          mples\AXDApp\CC2430DB\..\..\..\..\..\COMPONENTS\S /
+//                          ERVICES\SADDR\" -I "C:\Texas                      /
+//                          Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\Sa /
+//                          mples\AXDApp\CC2430DB\..\..\..\..\..\COMPONENTS\S /
+//                          ERVICES\SDATA\" -I "C:\Texas                      /
+//                          Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\Sa /
+//                          mples\AXDApp\CC2430DB\..\..\..\..\..\COMPONENTS\M /
+//                          AC\INCLUDE\" -I "C:\Texas                         /
+//                          Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\Sa /
+//                          mples\AXDApp\CC2430DB\..\..\..\..\..\COMPONENTS\M /
+//                          AC\HIGH_LEVEL\" -I "C:\Texas                      /
+//                          Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\Sa /
+//                          mples\AXDApp\CC2430DB\..\..\..\..\..\COMPONENTS\M /
+//                          AC\LOW_LEVEL\SRF03\" -I "C:\Texas                 /
+//                          Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\Sa /
+//                          mples\AXDApp\CC2430DB\..\..\..\..\..\COMPONENTS\M /
+//                          AC\LOW_LEVEL\SRF03\SINGLE_CHIP\" -I "C:\Program   /
+//                          Files\IAR Systems\Embedded Workbench 4.0          /
+//                          Evaluation version\8051\INC\" -I "C:\Program      /
+//                          Files\IAR Systems\Embedded Workbench 4.0          /
+//                          Evaluation version\8051\INC\CLIB\"                /
+//    List file          =  C:\Texas Instruments\ZStack-1.4.3-1.2.1\Projects\ /
+//                          zstack\Samples\AXDApp\CC2430DB\EndDeviceDB\List\Z /
+//                          DConfig.s51                                       /
+//                                                                            /
+//                                                                            /
+///////////////////////////////////////////////////////////////////////////////
+
+        NAME ZDConfig
+
+        RTMODEL "__calling_convention", "xdata_reentrant"
+        RTMODEL "__code_model", "banked"
+        RTMODEL "__core", "plain"
+        RTMODEL "__data_model", "large"
+        RTMODEL "__dptr_size", "16"
+        RTMODEL "__extended_stack", "disabled"
+        RTMODEL "__location_for_constants", "data"
+        RTMODEL "__number_of_dptrs", "1"
+        RTMODEL "__rt_version", "1"
+
+        RSEG DOVERLAY:DATA:NOROOT(0)
+        RSEG IOVERLAY:IDATA:NOROOT(0)
+        RSEG ISTACK:IDATA:NOROOT(0)
+        RSEG PSTACK:XDATA:NOROOT(0)
+        RSEG XSTACK:XDATA:NOROOT(0)
+
+        EXTERN __INIT_XDATA_I
+
+        PUBLIC ZDO_Config_Node_Descriptor
+        PUBLIC ZDO_Config_Power_Descriptor
+// C:\Texas Instruments\ZStack-1.4.3-1.2.1\Components\stack\zdo\ZDConfig.c
+//    1 /**************************************************************************************************
+//    2   Filename:       ZDConfig.c
+//    3   Revised:        $Date: 2007-10-28 18:43:04 -0700 (Sun, 28 Oct 2007) $
+//    4   Revision:       $Revision: 15800 $
+//    5 
+//    6   Description:    This file contains the configuration attributes for the Zigbee Device Object.
+//    7                   These are references to Configuration items that MUST be defined in ZDApp.c.
+//    8                   The names mustn't change.
+//    9 
+//   10 
+//   11   Copyright 2004-2007 Texas Instruments Incorporated. All rights reserved.
+//   12 
+//   13   IMPORTANT: Your use of this Software is limited to those specific rights
+//   14   granted under the terms of a software license agreement between the user
+//   15   who downloaded the software, his/her employer (which must be your employer)
+//   16   and Texas Instruments Incorporated (the "License").  You may not use this
+//   17   Software unless you agree to abide by the terms of the License. The License
+//   18   limits your use, and you acknowledge, that the Software may not be modified,
+//   19   copied or distributed unless embedded on a Texas Instruments microcontroller
+//   20   or used solely and exclusively in conjunction with a Texas Instruments radio
+//   21   frequency transceiver, which is integrated into your product.  Other than for
+//   22   the foregoing purpose, you may not use, reproduce, copy, prepare derivative
+//   23   works of, modify, distribute, perform, display or sell this Software and/or
+//   24   its documentation for any purpose.
+//   25 
+//   26   YOU FURTHER ACKNOWLEDGE AND AGREE THAT THE SOFTWARE AND DOCUMENTATION ARE
+//   27   PROVIDED “AS IS” WITHOUT WARRANTY OF ANY KIND, EITHER EXPRESS OR IMPLIED, 
+//   28   INCLUDING WITHOUT LIMITATION, ANY WARRANTY OF MERCHANTABILITY, TITLE, 
+//   29   NON-INFRINGEMENT AND FITNESS FOR A PARTICULAR PURPOSE. IN NO EVENT SHALL
+//   30   TEXAS INSTRUMENTS OR ITS LICENSORS BE LIABLE OR OBLIGATED UNDER CONTRACT,
+//   31   NEGLIGENCE, STRICT LIABILITY, CONTRIBUTION, BREACH OF WARRANTY, OR OTHER
+//   32   LEGAL EQUITABLE THEORY ANY DIRECT OR INDIRECT DAMAGES OR EXPENSES
+//   33   INCLUDING BUT NOT LIMITED TO ANY INCIDENTAL, SPECIAL, INDIRECT, PUNITIVE
+//   34   OR CONSEQUENTIAL DAMAGES, LOST PROFITS OR LOST DATA, COST OF PROCUREMENT
+//   35   OF SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
+//   36   (INCLUDING BUT NOT LIMITED TO ANY DEFENSE THEREOF), OR OTHER SIMILAR COSTS.
+//   37 
+//   38   Should you have any questions regarding your right to use this Software,
+//   39   contact Texas Instruments Incorporated at www.TI.com. 
+//   40 **************************************************************************************************/
+//   41 
+//   42 /*********************************************************************
+//   43  * INCLUDES
+//   44  */
+//   45 #include "ZComdef.h"
+//   46 #include "AF.h"
+//   47 #include "ZDObject.h"
+//   48 #include "ZDConfig.h"
+//   49 
+//   50  /*********************************************************************
+//   51  * MACROS
+//   52  */
+//   53 
+//   54 /*********************************************************************
+//   55  * CONSTANTS
+//   56  */
+//   57 
+//   58 /*********************************************************************
+//   59  * TYPEDEFS
+//   60  */
+//   61 
+//   62 /*********************************************************************
+//   63  * GLOBAL VARIABLES
+//   64  */
+//   65 
+//   66 /*********************************************************************
+//   67  * EXTERNAL VARIABLES
+//   68  */
+//   69 
+//   70 /*********************************************************************
+//   71  * EXTERNAL FUNCTIONS
+//   72  */
+//   73 
+//   74 /*********************************************************************
+//   75  * LOCAL FUNCTIONS
+//   76  */
+//   77 
+//   78 /*********************************************************************
+//   79  * LOCAL VARIABLES
+//   80  */
+//   81 
+
+        RSEG XDATA_I:XDATA:NOROOT(0)
+        DATA
+//   82 NodeDescriptorFormat_t ZDO_Config_Node_Descriptor =
+ZDO_Config_Node_Descriptor:
+        DS 10
+        REQUIRE `?<Initializer for ZDO_Config_Node_Descriptor>`
+        REQUIRE __INIT_XDATA_I
+//   83 {
+//   84 #if defined( ZDO_COORDINATOR ) && !defined( SOFT_START )
+//   85   NODETYPE_COORDINATOR,
+//   86 #elif defined (RTR_NWK)
+//   87 	NODETYPE_ROUTER,
+//   88 #else
+//   89   NODETYPE_DEVICE,          // Logical Type
+//   90 #endif
+//   91   0,                        // User Descriptor Available is set later.
+//   92   0,                        // Complex Descriptor Available is set later.
+//   93   0,			              		// Reserved
+//   94   0,	        	            // NO APS flags
+//   95   NODEFREQ_2400,            // Frequency Band
+//   96   // MAC Capabilities
+//   97 #if defined (RTR_NWK)
+//   98   (
+//   99   #if defined( ZDO_COORDINATOR ) || defined( SOFT_START )
+//  100     CAPINFO_ALTPANCOORD |
+//  101   #endif
+//  102     CAPINFO_DEVICETYPE_FFD |
+//  103     CAPINFO_POWER_AC |
+//  104     CAPINFO_RCVR_ON_IDLE ),
+//  105 #else
+//  106   CAPINFO_DEVICETYPE_RFD
+//  107   #if ( RFD_RCVC_ALWAYS_ON == TRUE)
+//  108     | CAPINFO_RCVR_ON_IDLE
+//  109   #endif
+//  110   ,
+//  111 #endif
+//  112   { 0x00, 0x00 },           // Manfacturer Code - *YOU FILL IN*
+//  113   MAX_BUFFER_SIZE,          // Maximum Buffer Size.
+//  114   // The maximum transfer size field isn't used and spec says to set to 0.
+//  115   {0, 0},
+//  116   ( 0
+//  117 #if defined( ZDO_COORDINATOR ) && ( SECURE != 0 )    
+//  118     | PRIM_TRUST_CENTER
+//  119 #endif      
+//  120   )
+//  121 };
+//  122 
+
+        RSEG XDATA_I:XDATA:NOROOT(0)
+        DATA
+//  123 NodePowerDescriptorFormat_t ZDO_Config_Power_Descriptor =
+ZDO_Config_Power_Descriptor:
+        DS 2
+        REQUIRE `?<Initializer for ZDO_Config_Power_Descriptor>`
+        REQUIRE __INIT_XDATA_I
+
+        RSEG XDATA_ID:CODE:NOROOT(0)
+        DATA
+`?<Initializer for ZDO_Config_Node_Descriptor>`:
+        DB 2, 64, 0, 0, 0, 80, 0, 0
+        DW 0
+
+        RSEG XDATA_ID:CODE:NOROOT(0)
+        DATA
+`?<Initializer for ZDO_Config_Power_Descriptor>`:
+        DB 33, 130
+
+        END
+//  124 {
+//  125 #if defined ( RTR_NWK )
+//  126   NODECURPWR_RCVR_ALWAYS_ON,
+//  127   NODEAVAILPWR_MAINS,       // available power sources
+//  128   NODEAVAILPWR_MAINS,       // current power source
+//  129   NODEPOWER_LEVEL_100       // Power Level
+//  130 #else
+//  131   // Assume End Device
+//  132 #if defined ( NWK_AUTO_POLL )
+//  133   NODECURPWR_RCVR_AUTO,
+//  134 #else
+//  135   NODECURPWR_RCVR_STIM,
+//  136 #endif
+//  137   NODEAVAILPWR_RECHARGE,    // available power sources
+//  138   NODEAVAILPWR_RECHARGE,    // current power source
+//  139   NODEPOWER_LEVEL_66        // Power Level
+//  140 #endif
+//  141 };
+//  142 
+//  143 /*********************************************************************
+//  144 *********************************************************************/
+//  145 
+//  146 
+// 
+// 12 bytes in segment XDATA_I
+// 12 bytes in segment XDATA_ID
+// 
+// 12 bytes of CODE  memory
+// 12 bytes of XDATA memory
+//
+//Errors: none
+//Warnings: none

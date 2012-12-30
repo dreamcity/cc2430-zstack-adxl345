@@ -1,0 +1,2217 @@
+///////////////////////////////////////////////////////////////////////////////
+//                                                                            /
+// IAR 8051 C/C++ Compiler V7.30B/W32                   28/Dec/2012  21:16:59 /
+// Copyright 2004-2007 IAR Systems. All rights reserved.                      /
+//                                                                            /
+//    Core               =  plain                                             /
+//    Code model         =  banked                                            /
+//    Data model         =  large                                             /
+//    Calling convention =  xdata reentrant                                   /
+//    Constant location  =  data                                              /
+//    Dptr setup         =  1,16                                              /
+//    Source file        =  C:\Texas Instruments\ZStack-1.4.3-1.2.1\Component /
+//                          s\hal\target\CC2430DB\hal_uart.c                  /
+//    Command line       =  -f "C:\Texas Instruments\ZStack-1.4.3-1.2.1\Proje /
+//                          cts\zstack\Samples\AXDApp\CC2430DB\..\..\..\Tools /
+//                          \CC2430DB\f8wCoord.cfg" (-DCPU32MHZ               /
+//                          -DFORCE_MAC_NEAR -DROOT=__near_func               /
+//                          -DMAC_CFG_APP_PENDING_QUEUE=TRUE                  /
+//                          -DZDO_COORDINATOR -DRTR_NWK -DBLINK_LEDS          /
+//                          "-DCONST=const __code" -DGENERIC=__generic) -f    /
+//                          "C:\Texas Instruments\ZStack-1.4.3-1.2.1\Projects /
+//                          \zstack\Samples\AXDApp\CC2430DB\..\..\..\Tools\CC /
+//                          2430DB\f8wConfig.cfg" (-DSECURE=0                 /
+//                          -DDEFAULT_CHANLIST=0x00000800                     /
+//                          -DZDAPP_CONFIG_PAN_ID=0xFFFF                      /
+//                          -DNWK_START_DELAY=100 -DEXTENDED_JOINING_RANDOM_M /
+//                          ASK=0x007F -DBEACON_REQUEST_DELAY=100             /
+//                          -DBEACON_REQ_DELAY_MASK=0x00FF                    /
+//                          -DROUTE_EXPIRY_TIME=30 -DAPSC_ACK_WAIT_DURATION_P /
+//                          OLLED=3000 -DNWK_INDIRECT_MSG_TIMEOUT=7           /
+//                          -DMAX_RREQ_ENTRIES=10 -DAPSC_MAX_FRAME_RETRIES=3  /
+//                          -DNWK_MAX_DATA_RETRIES=2                          /
+//                          -DMAX_POLL_FAILURE_RETRIES=2 -DMAX_BCAST=9        /
+//                          -DAPS_MAX_GROUPS=16 -DMAX_RTG_ENTRIES=20          /
+//                          -DNWK_MAX_BINDING_ENTRIES=10                      /
+//                          -DMAX_BINDING_CLUSTER_IDS=5                       /
+//                          "-DDEFAULT_KEY={0x01, 0x03, 0x05, 0x07, 0x09,     /
+//                          0x0B, 0x0D, 0x0F, 0x00, 0x02, 0x04, 0x06, 0x08,   /
+//                          0x0A, 0x0C, 0x0D}" -DRFD_RCVC_ALWAYS_ON=FALSE     /
+//                          -DPOLL_RATE=1000 -DQUEUED_POLL_RATE=100           /
+//                          -DRESPONSE_POLL_RATE=100) -DREJOIN_POLL_RATE=440  /
+//                          "C:\Texas Instruments\ZStack-1.4.3-1.2.1\Componen /
+//                          ts\hal\target\CC2430DB\hal_uart.c" -D CC2430DB    /
+//                          -D REFLECTOR -D xZTOOL_P2 -D xMT_TASK -D          /
+//                          xMT_ZDO_FUNC -D xLCD_SUPPORTED=DEBUG -lC          /
+//                          "C:\Texas Instruments\ZStack-1.4.3-1.2.1\Projects /
+//                          \zstack\Samples\AXDApp\CC2430DB\CoordinatorDB\Lis /
+//                          t\" -lA "C:\Texas Instruments\ZStack-1.4.3-1.2.1\ /
+//                          Projects\zstack\Samples\AXDApp\CC2430DB\Coordinat /
+//                          orDB\List\" --diag_suppress Pe001,Pa010           /
+//                          --diag_remark pe550 -o "C:\Texas                  /
+//                          Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\Sa /
+//                          mples\AXDApp\CC2430DB\CoordinatorDB\Obj\" -e      /
+//                          --require_prototypes -z9 --no_code_motion         /
+//                          --debug --core=plain --dptr=16,1                  /
+//                          --data_model=large --code_model=banked            /
+//                          --calling_convention=xdata_reentrant              /
+//                          --place_constants=data --nr_virtual_regs 8 -I     /
+//                          "C:\Texas Instruments\ZStack-1.4.3-1.2.1\Projects /
+//                          \zstack\Samples\AXDApp\CC2430DB\" -I "C:\Texas    /
+//                          Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\Sa /
+//                          mples\AXDApp\CC2430DB\..\SOURCE\" -I "C:\Texas    /
+//                          Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\Sa /
+//                          mples\AXDApp\CC2430DB\..\..\..\ZMAIN\TI2430DB\"   /
+//                          -I "C:\Texas Instruments\ZStack-1.4.3-1.2.1\Proje /
+//                          cts\zstack\Samples\AXDApp\CC2430DB\..\..\..\..\.. /
+//                          \COMPONENTS\MT\" -I "C:\Texas                     /
+//                          Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\Sa /
+//                          mples\AXDApp\CC2430DB\..\..\..\..\..\COMPONENTS\H /
+//                          AL\INCLUDE\" -I "C:\Texas                         /
+//                          Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\Sa /
+//                          mples\AXDApp\CC2430DB\..\..\..\..\..\COMPONENTS\H /
+//                          AL\TARGET\CC2430DB\" -I "C:\Texas                 /
+//                          Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\Sa /
+//                          mples\AXDApp\CC2430DB\..\..\..\..\..\COMPONENTS\O /
+//                          SAL\MCU\CCSOC\" -I "C:\Texas                      /
+//                          Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\Sa /
+//                          mples\AXDApp\CC2430DB\..\..\..\..\..\COMPONENTS\O /
+//                          SAL\INCLUDE\" -I "C:\Texas                        /
+//                          Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\Sa /
+//                          mples\AXDApp\CC2430DB\..\..\..\..\..\COMPONENTS\S /
+//                          TACK\AF\" -I "C:\Texas Instruments\ZStack-1.4.3-1 /
+//                          .2.1\Projects\zstack\Samples\AXDApp\CC2430DB\..\. /
+//                          .\..\..\..\COMPONENTS\STACK\NWK\" -I "C:\Texas    /
+//                          Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\Sa /
+//                          mples\AXDApp\CC2430DB\..\..\..\..\..\COMPONENTS\S /
+//                          TACK\SEC\" -I "C:\Texas                           /
+//                          Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\Sa /
+//                          mples\AXDApp\CC2430DB\..\..\..\..\..\COMPONENTS\S /
+//                          TACK\SYS\" -I "C:\Texas                           /
+//                          Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\Sa /
+//                          mples\AXDApp\CC2430DB\..\..\..\..\..\COMPONENTS\S /
+//                          TACK\ZDO\" -I "C:\Texas                           /
+//                          Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\Sa /
+//                          mples\AXDApp\CC2430DB\..\..\..\..\..\COMPONENTS\Z /
+//                          MAC\F8W\" -I "C:\Texas Instruments\ZStack-1.4.3-1 /
+//                          .2.1\Projects\zstack\Samples\AXDApp\CC2430DB\..\. /
+//                          .\..\..\..\COMPONENTS\ZMAC\" -I "C:\Texas         /
+//                          Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\Sa /
+//                          mples\AXDApp\CC2430DB\..\..\..\..\..\COMPONENTS\S /
+//                          ERVICES\SADDR\" -I "C:\Texas                      /
+//                          Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\Sa /
+//                          mples\AXDApp\CC2430DB\..\..\..\..\..\COMPONENTS\S /
+//                          ERVICES\SDATA\" -I "C:\Texas                      /
+//                          Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\Sa /
+//                          mples\AXDApp\CC2430DB\..\..\..\..\..\COMPONENTS\M /
+//                          AC\INCLUDE\" -I "C:\Texas                         /
+//                          Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\Sa /
+//                          mples\AXDApp\CC2430DB\..\..\..\..\..\COMPONENTS\M /
+//                          AC\HIGH_LEVEL\" -I "C:\Texas                      /
+//                          Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\Sa /
+//                          mples\AXDApp\CC2430DB\..\..\..\..\..\COMPONENTS\M /
+//                          AC\LOW_LEVEL\SRF03\" -I "C:\Texas                 /
+//                          Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\Sa /
+//                          mples\AXDApp\CC2430DB\..\..\..\..\..\COMPONENTS\M /
+//                          AC\LOW_LEVEL\SRF03\SINGLE_CHIP\" -I "C:\Program   /
+//                          Files\IAR Systems\Embedded Workbench 4.0          /
+//                          Evaluation version\8051\INC\" -I "C:\Program      /
+//                          Files\IAR Systems\Embedded Workbench 4.0          /
+//                          Evaluation version\8051\INC\CLIB\"                /
+//    List file          =  C:\Texas Instruments\ZStack-1.4.3-1.2.1\Projects\ /
+//                          zstack\Samples\AXDApp\CC2430DB\CoordinatorDB\List /
+//                          \hal_uart.s51                                     /
+//                                                                            /
+//                                                                            /
+///////////////////////////////////////////////////////////////////////////////
+
+        NAME hal_uart
+
+        RTMODEL "__calling_convention", "xdata_reentrant"
+        RTMODEL "__code_model", "banked"
+        RTMODEL "__core", "plain"
+        RTMODEL "__data_model", "large"
+        RTMODEL "__dptr_size", "16"
+        RTMODEL "__extended_stack", "disabled"
+        RTMODEL "__location_for_constants", "data"
+        RTMODEL "__number_of_dptrs", "1"
+        RTMODEL "__rt_version", "1"
+
+        RSEG DOVERLAY:DATA:NOROOT(0)
+        RSEG IOVERLAY:IDATA:NOROOT(0)
+        RSEG ISTACK:IDATA:NOROOT(0)
+        RSEG PSTACK:XDATA:NOROOT(0)
+        RSEG XSTACK:XDATA:NOROOT(0)
+
+        EXTERN ?BANKED_ENTER_XDATA
+        EXTERN ?BANKED_LEAVE_XDATA
+        EXTERN ?BDISPATCH
+        EXTERN ?BRET
+        EXTERN ?V0
+
+        PUBLIC ??HalUARTClose?relay
+        FUNCTION ??HalUARTClose?relay,0203H
+        PUBLIC ??HalUARTInit?relay
+        FUNCTION ??HalUARTInit?relay,0203H
+        PUBLIC ??HalUARTOpen?relay
+        FUNCTION ??HalUARTOpen?relay,0203H
+        PUBLIC ??HalUARTPoll?relay
+        FUNCTION ??HalUARTPoll?relay,0203H
+        PUBLIC ??HalUARTRead?relay
+        FUNCTION ??HalUARTRead?relay,0203H
+        PUBLIC ??HalUARTWrite?relay
+        FUNCTION ??HalUARTWrite?relay,0203H
+        PUBLIC ??Hal_UART_RxBufLen?relay
+        FUNCTION ??Hal_UART_RxBufLen?relay,0203H
+        PUBLIC HalUARTClose
+        FUNCTION HalUARTClose,0203H
+        ARGFRAME XSTACK, 0, STACK
+        PUBLIC HalUARTInit
+        FUNCTION HalUARTInit,0203H
+        ARGFRAME XSTACK, 0, STACK
+        PUBLIC HalUARTOpen
+        FUNCTION HalUARTOpen,021203H
+        ARGFRAME XSTACK, 0, STACK
+        LOCFRAME ISTACK, 1, STACK
+        LOCFRAME XSTACK, 12, STACK
+        PUBLIC HalUARTPoll
+        FUNCTION HalUARTPoll,0203H
+        ARGFRAME XSTACK, 0, STACK
+        PUBLIC HalUARTRead
+        FUNCTION HalUARTRead,0203H
+        ARGFRAME XSTACK, 0, STACK
+        LOCFRAME ISTACK, 1, STACK
+        LOCFRAME XSTACK, 10, STACK
+        PUBLIC HalUARTWrite
+        FUNCTION HalUARTWrite,0203H
+        ARGFRAME XSTACK, 0, STACK
+        LOCFRAME ISTACK, 1, STACK
+        LOCFRAME XSTACK, 9, STACK
+        PUBLIC Hal_UART_RxBufLen
+        FUNCTION Hal_UART_RxBufLen,0203H
+        ARGFRAME XSTACK, 0, STACK
+        LOCFRAME ISTACK, 3, STACK
+        PUBWEAK P2DIR
+        
+        CFI Names cfiNames0
+        CFI StackFrame CFA_SP SP DATA
+        CFI StackFrame CFA_PSP16 PSP16 XDATA
+        CFI StackFrame CFA_XSP16 XSP16 XDATA
+        CFI StaticOverlayFrame CFA_IOVERLAY IOVERLAY
+        CFI StaticOverlayFrame CFA_DOVERLAY DOVERLAY
+        CFI Resource `PSW.CY`:1, `B.BR0`:1, `B.BR1`:1, `B.BR2`:1, `B.BR3`:1
+        CFI Resource `B.BR4`:1, `B.BR5`:1, `B.BR6`:1, `B.BR7`:1, `VB.BR8`:1
+        CFI Resource `VB.BR9`:1, `VB.BR10`:1, `VB.BR11`:1, `VB.BR12`:1
+        CFI Resource `VB.BR13`:1, `VB.BR14`:1, `VB.BR15`:1, VB:8, B:8, A:8
+        CFI Resource PSW:8, DPL0:8, DPH0:8, R0:8, R1:8, R2:8, R3:8, R4:8, R5:8
+        CFI Resource R6:8, R7:8, V0:8, V1:8, V2:8, V3:8, V4:8, V5:8, V6:8, V7:8
+        CFI Resource SP:8, PSPH:8, PSPL:8, PSP16:16, XSPH:8, XSPL:8, XSP16:16
+        CFI VirtualResource ?RET:24
+        CFI Resource ?BRET_EXT:8
+        CFI VirtualResource ?RET_HIGH:8, ?RET_LOW:8
+        CFI ResourceParts PSP16 PSPH, PSPL
+        CFI ResourceParts XSP16 XSPH, XSPL
+        CFI ResourceParts ?RET ?BRET_EXT, ?RET_HIGH, ?RET_LOW
+        CFI EndNames cfiNames0
+        
+        CFI Common cfiCommon0 Using cfiNames0
+        CFI CodeAlign 1
+        CFI DataAlign -1
+        CFI ReturnAddress ?RET CODE
+        CFI CFA_DOVERLAY Used
+        CFI CFA_IOVERLAY Used
+        CFI CFA_SP SP+-3
+        CFI CFA_PSP16 PSP16+0
+        CFI CFA_XSP16 XSP16+0
+        CFI `PSW.CY` SameValue
+        CFI `B.BR0` SameValue
+        CFI `B.BR1` SameValue
+        CFI `B.BR2` SameValue
+        CFI `B.BR3` SameValue
+        CFI `B.BR4` SameValue
+        CFI `B.BR5` SameValue
+        CFI `B.BR6` SameValue
+        CFI `B.BR7` SameValue
+        CFI `VB.BR8` SameValue
+        CFI `VB.BR9` SameValue
+        CFI `VB.BR10` SameValue
+        CFI `VB.BR11` SameValue
+        CFI `VB.BR12` SameValue
+        CFI `VB.BR13` SameValue
+        CFI `VB.BR14` SameValue
+        CFI `VB.BR15` SameValue
+        CFI VB SameValue
+        CFI B Undefined
+        CFI A Undefined
+        CFI PSW SameValue
+        CFI DPL0 SameValue
+        CFI DPH0 SameValue
+        CFI R0 Undefined
+        CFI R1 Undefined
+        CFI R2 Undefined
+        CFI R3 Undefined
+        CFI R4 Undefined
+        CFI R5 Undefined
+        CFI R6 SameValue
+        CFI R7 SameValue
+        CFI V0 SameValue
+        CFI V1 SameValue
+        CFI V2 SameValue
+        CFI V3 SameValue
+        CFI V4 SameValue
+        CFI V5 SameValue
+        CFI V6 SameValue
+        CFI V7 SameValue
+        CFI PSPH Undefined
+        CFI PSPL Undefined
+        CFI XSPH Undefined
+        CFI XSPL Undefined
+        CFI ?RET Concat
+        CFI ?BRET_EXT Frame(CFA_SP, 3)
+        CFI ?RET_HIGH Frame(CFA_SP, 2)
+        CFI ?RET_LOW Frame(CFA_SP, 1)
+        CFI EndCommon cfiCommon0
+        
+        
+        CFI Common cfiCommon1 Using cfiNames0
+        CFI CodeAlign 1
+        CFI DataAlign -1
+        CFI ReturnAddress ?RET CODE
+        CFI CFA_DOVERLAY Used
+        CFI CFA_IOVERLAY Used
+        CFI CFA_SP SP+-2
+        CFI CFA_PSP16 PSP16+0
+        CFI CFA_XSP16 XSP16+0
+        CFI `PSW.CY` SameValue
+        CFI `B.BR0` SameValue
+        CFI `B.BR1` SameValue
+        CFI `B.BR2` SameValue
+        CFI `B.BR3` SameValue
+        CFI `B.BR4` SameValue
+        CFI `B.BR5` SameValue
+        CFI `B.BR6` SameValue
+        CFI `B.BR7` SameValue
+        CFI `VB.BR8` SameValue
+        CFI `VB.BR9` SameValue
+        CFI `VB.BR10` SameValue
+        CFI `VB.BR11` SameValue
+        CFI `VB.BR12` SameValue
+        CFI `VB.BR13` SameValue
+        CFI `VB.BR14` SameValue
+        CFI `VB.BR15` SameValue
+        CFI VB SameValue
+        CFI B SameValue
+        CFI A SameValue
+        CFI PSW SameValue
+        CFI DPL0 SameValue
+        CFI DPH0 SameValue
+        CFI R0 SameValue
+        CFI R1 SameValue
+        CFI R2 SameValue
+        CFI R3 SameValue
+        CFI R4 SameValue
+        CFI R5 SameValue
+        CFI R6 SameValue
+        CFI R7 SameValue
+        CFI V0 SameValue
+        CFI V1 SameValue
+        CFI V2 SameValue
+        CFI V3 SameValue
+        CFI V4 SameValue
+        CFI V5 SameValue
+        CFI V6 SameValue
+        CFI V7 SameValue
+        CFI PSPH Undefined
+        CFI PSPL Undefined
+        CFI XSPH Undefined
+        CFI XSPL Undefined
+        CFI ?RET Concat
+        CFI ?BRET_EXT SameValue
+        CFI ?RET_HIGH Frame(CFA_SP, 2)
+        CFI ?RET_LOW Frame(CFA_SP, 1)
+        CFI EndCommon cfiCommon1
+        
+osal_mem_alloc      SYMBOL "osal_mem_alloc"
+??osal_mem_alloc?relay SYMBOL "?relay", osal_mem_alloc
+HalUARTClose        SYMBOL "HalUARTClose"
+??HalUARTClose?relay SYMBOL "?relay", HalUARTClose
+HalUARTInit         SYMBOL "HalUARTInit"
+??HalUARTInit?relay SYMBOL "?relay", HalUARTInit
+HalUARTOpen         SYMBOL "HalUARTOpen"
+??HalUARTOpen?relay SYMBOL "?relay", HalUARTOpen
+HalUARTPoll         SYMBOL "HalUARTPoll"
+??HalUARTPoll?relay SYMBOL "?relay", HalUARTPoll
+HalUARTRead         SYMBOL "HalUARTRead"
+??HalUARTRead?relay SYMBOL "?relay", HalUARTRead
+HalUARTWrite        SYMBOL "HalUARTWrite"
+??HalUARTWrite?relay SYMBOL "?relay", HalUARTWrite
+Hal_UART_RxBufLen   SYMBOL "Hal_UART_RxBufLen"
+??Hal_UART_RxBufLen?relay SYMBOL "?relay", Hal_UART_RxBufLen
+
+        EXTERN osal_mem_alloc
+        FUNCTION osal_mem_alloc,0202H
+        ARGFRAME ISTACK, 0, STACK
+        ARGFRAME PSTACK, 0, STACK
+        ARGFRAME XSTACK, 12, STACK
+        ARGFRAME IOVERLAY, 0, STATIC
+        ARGFRAME DOVERLAY, 0, STATIC
+        EXTERN ??osal_mem_alloc?relay
+        FUNCTION ??osal_mem_alloc?relay,00H
+
+// C:\Texas Instruments\ZStack-1.4.3-1.2.1\Components\hal\target\CC2430DB\hal_uart.c
+//    1 /**************************************************************************************************
+//    2   Filename:       _hal_uart.c
+//    3   Revised:        $Date: 2007-11-01 08:44:53 -0700 (Thu, 01 Nov 2007) $
+//    4   Revision:       $Revision: 15821 $
+//    5 
+//    6   Description: This file contains the interface to the H/W UART driver.
+//    7 
+//    8 
+//    9   Copyright 2006-2007 Texas Instruments Incorporated. All rights reserved.
+//   10 
+//   11   IMPORTANT: Your use of this Software is limited to those specific rights
+//   12   granted under the terms of a software license agreement between the user
+//   13   who downloaded the software, his/her employer (which must be your employer)
+//   14   and Texas Instruments Incorporated (the "License").  You may not use this
+//   15   Software unless you agree to abide by the terms of the License. The License
+//   16   limits your use, and you acknowledge, that the Software may not be modified,
+//   17   copied or distributed unless embedded on a Texas Instruments microcontroller
+//   18   or used solely and exclusively in conjunction with a Texas Instruments radio
+//   19   frequency transceiver, which is integrated into your product.  Other than for
+//   20   the foregoing purpose, you may not use, reproduce, copy, prepare derivative
+//   21   works of, modify, distribute, perform, display or sell this Software and/or
+//   22   its documentation for any purpose.
+//   23 
+//   24   YOU FURTHER ACKNOWLEDGE AND AGREE THAT THE SOFTWARE AND DOCUMENTATION ARE
+//   25   PROVIDED “AS IS” WITHOUT WARRANTY OF ANY KIND, EITHER EXPRESS OR IMPLIED, 
+//   26   INCLUDING WITHOUT LIMITATION, ANY WARRANTY OF MERCHANTABILITY, TITLE, 
+//   27   NON-INFRINGEMENT AND FITNESS FOR A PARTICULAR PURPOSE. IN NO EVENT SHALL
+//   28   TEXAS INSTRUMENTS OR ITS LICENSORS BE LIABLE OR OBLIGATED UNDER CONTRACT,
+//   29   NEGLIGENCE, STRICT LIABILITY, CONTRIBUTION, BREACH OF WARRANTY, OR OTHER
+//   30   LEGAL EQUITABLE THEORY ANY DIRECT OR INDIRECT DAMAGES OR EXPENSES
+//   31   INCLUDING BUT NOT LIMITED TO ANY INCIDENTAL, SPECIAL, INDIRECT, PUNITIVE
+//   32   OR CONSEQUENTIAL DAMAGES, LOST PROFITS OR LOST DATA, COST OF PROCUREMENT
+//   33   OF SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
+//   34   (INCLUDING BUT NOT LIMITED TO ANY DEFENSE THEREOF), OR OTHER SIMILAR COSTS.
+//   35 
+//   36   Should you have any questions regarding your right to use this Software,
+//   37   contact Texas Instruments Incorporated at www.TI.com. 
+//   38 **************************************************************************************************/
+//   39 
+//   40 /*********************************************************************
+//   41  * INCLUDES
+//   42  */
+//   43 
+//   44 #include "hal_types.h"
+//   45 #include "hal_assert.h"
+//   46 #include "hal_board.h"
+
+        ASEGN SFR_AN:DATA:NOROOT,0ffH
+// unsigned char volatile __sfr P2DIR
+P2DIR:
+        DS 1
+//   47 #include "hal_defs.h"
+//   48 #if defined( HAL_UART_DMA ) && HAL_UART_DMA
+//   49   #include "hal_dma.h"
+//   50 #endif
+//   51 #include "hal_mcu.h"
+//   52 #include "hal_uart.h"
+//   53 #include "osal.h"
+//   54 
+//   55 /*********************************************************************
+//   56  * MACROS
+//   57  */
+//   58 
+//   59 #if !defined ( HAL_UART_DEBUG )
+//   60   #define HAL_UART_DEBUG  FALSE
+//   61 #endif
+//   62 
+//   63 #if !defined ( HAL_UART_CLOSE )
+//   64   #define HAL_UART_CLOSE  FALSE
+//   65 #endif
+//   66 
+//   67 #if !defined ( HAL_UART_BIG_TX_BUF )
+//   68   #define HAL_UART_BIG_TX_BUF  FALSE
+//   69 #endif
+//   70 
+//   71 /*
+//   72  *  The MAC_ASSERT macro is for use during debugging.
+//   73  *  The given expression must evaluate as "true" or else fatal error occurs.
+//   74  *  At that point, the call stack feature of the debugger can pinpoint where
+//   75  *  the problem occurred.
+//   76  *
+//   77  *  To disable this feature and save code size, the project should define
+//   78  *  HAL_UART_DEBUG to FALSE.
+//   79  */
+//   80 #if ( HAL_UART_DEBUG )
+//   81   #define HAL_UART_ASSERT( expr)        HAL_ASSERT( expr )
+//   82 #else
+//   83   #define HAL_UART_ASSERT( expr )
+//   84 #endif
+//   85 
+//   86 #define P2DIR_PRIPO               0xC0
+//   87 #if HAL_UART_0_ENABLE
+//   88   #define HAL_UART_PRIPO          0x00
+//   89 #else
+//   90   #define HAL_UART_PRIPO          0x40
+//   91 #endif
+//   92 
+//   93 #define HAL_UART_0_PERCFG_BIT     0x01  // USART0 on P0, so clear this bit.
+//   94 #define HAL_UART_0_P0_RX_TX       0x0c  // Peripheral I/O Select for Rx/Tx.
+//   95 #define HAL_UART_0_P0_RTS         0x10  // Peripheral I/O Select for RTS.
+//   96 #define HAL_UART_0_P0_CTS         0x20  // Peripheral I/O Select for CTS.
+//   97 
+//   98 #define HAL_UART_1_PERCFG_BIT     0x02  // USART1 on P1, so set this bit.
+//   99 #define HAL_UART_1_P1_RTS         0x10  // Peripheral I/O Select for RTS.
+//  100 #define HAL_UART_1_P1_CTS         0x20  // Peripheral I/O Select for CTS.
+//  101 #define HAL_UART_1_P1_RX_TX       0xC0  // Peripheral I/O Select for Rx/Tx.
+//  102 
+//  103 #define TX_AVAIL( cfg ) \ 
+//  104   ((cfg->txTail == cfg->txHead) ? (cfg->txMax-1) : \ 
+//  105   ((cfg->txTail >  cfg->txHead) ? (cfg->txTail - cfg->txHead - 1) : \ 
+//  106                      (cfg->txMax - cfg->txHead + cfg->txTail)))
+//  107 
+//  108 #define RX0_FLOW_ON  ( P0 &= ~HAL_UART_0_P0_CTS )
+//  109 #define RX0_FLOW_OFF ( P0 |= HAL_UART_0_P0_CTS )
+//  110 #define RX1_FLOW_ON  ( P1 &= ~HAL_UART_1_P1_CTS)
+//  111 #define RX1_FLOW_OFF ( P1 |= HAL_UART_1_P1_CTS )
+//  112 
+//  113 #define RX_STOP_FLOW( cfg ) { \ 
+//  114   if ( !(cfg->flag & UART_CFG_U1F) ) \ 
+//  115   { \ 
+//  116     RX0_FLOW_OFF; \ 
+//  117   } \ 
+//  118   else \ 
+//  119   { \ 
+//  120     RX1_FLOW_OFF; \ 
+//  121   } \ 
+//  122   if ( cfg->flag & UART_CFG_DMA ) \ 
+//  123   { \ 
+//  124     cfg->rxTick = DMA_RX_DLY; \ 
+//  125   } \ 
+//  126   cfg->flag |= UART_CFG_RXF; \ 
+//  127 }
+//  128 
+//  129 #define RX_STRT_FLOW( cfg ) { \ 
+//  130   if ( !(cfg->flag & UART_CFG_U1F) ) \ 
+//  131   { \ 
+//  132     RX0_FLOW_ON; \ 
+//  133   } \ 
+//  134   else \ 
+//  135   { \ 
+//  136     RX1_FLOW_ON; \ 
+//  137   } \ 
+//  138   cfg->flag &= ~UART_CFG_RXF; \ 
+//  139 }
+//  140 
+//  141 #define UART_RX_AVAIL( cfg ) \ 
+//  142   ( (cfg->rxHead >= cfg->rxTail) ? (cfg->rxHead - cfg->rxTail) : \ 
+//  143                                    (cfg->rxMax - cfg->rxTail + cfg->rxHead +1 ) )
+//  144 
+//  145 /* Need to leave enough of the Rx buffer free to handle the incoming bytes
+//  146  * after asserting flow control, but before the transmitter has obeyed it.
+//  147  * At the max expected baud rate of 115.2k, 16 bytes will only take ~1.3 msecs,
+//  148  * but at the min expected baud rate of 38.4k, they could take ~4.2 msecs.
+//  149  * SAFE_RX_MIN and DMA_RX_DLY must both be consistent according to
+//  150  * the min & max expected baud rate.
+//  151  */
+//  152 #if !defined( SAFE_RX_MIN )
+//  153   #define SAFE_RX_MIN  48  // bytes - max expected per poll @ 115.2k
+//  154   // 16 bytes @ 38.4 kBaud -> 4.16 msecs -> 138 32-kHz ticks.
+//  155   #define DMA_RX_DLY  140
+//  156   //  2 bytes @ 38.4 kBaud -> 0.52 msecs ->  17 32-kHz ticks.
+//  157   #define DMA_TX_DLY   20
+//  158 #endif
+//  159 
+//  160 // The timeout tick is at 32-kHz, so multiply msecs by 33.
+//  161 #define RX_MSECS_TO_TICKS  33
+//  162 
+//  163 // The timeout only supports 1 byte.
+//  164 #if !defined( HAL_UART_RX_IDLE )
+//  165   #define HAL_UART_RX_IDLE  (6 * RX_MSECS_TO_TICKS)
+//  166 #endif
+//  167 
+//  168 // Only supporting 1 of the 2 USART modules to be driven by DMA at a time.
+//  169 #if HAL_UART_DMA == 1
+//  170   #define DMATRIG_RX  HAL_DMA_TRIG_URX0
+//  171   #define DMATRIG_TX  HAL_DMA_TRIG_UTX0
+//  172   #define DMA_UDBUF   HAL_DMA_U0DBUF
+//  173   #define DMA_PAD     U0BAUD
+//  174 #elif HAL_UART_DMA == 2
+//  175   #define DMATRIG_RX  HAL_DMA_TRIG_URX1
+//  176   #define DMATRIG_TX  HAL_DMA_TRIG_UTX1
+//  177   #define DMA_UDBUF   HAL_DMA_U1DBUF
+//  178   #define DMA_PAD     U1BAUD
+//  179 #endif
+//  180 
+//  181 #define DMA_RX( cfg ) { \ 
+//  182   volatile uint8 ft2430 = U0DBUF; \ 
+//  183   \ 
+//  184   halDMADesc_t *ch = HAL_DMA_GET_DESC1234( HAL_DMA_CH_RX ); \ 
+//  185   \ 
+//  186   HAL_DMA_SET_DEST( ch, cfg->rxBuf ); \ 
+//  187   \ 
+//  188   HAL_DMA_SET_LEN( ch, cfg->rxMax ); \ 
+//  189   \ 
+//  190   HAL_DMA_CLEAR_IRQ( HAL_DMA_CH_RX ); \ 
+//  191   \ 
+//  192   HAL_DMA_ARM_CH( HAL_DMA_CH_RX ); \ 
+//  193 }
+//  194 
+//  195 #define DMA_TX( cfg ) { \ 
+//  196   halDMADesc_t *ch = HAL_DMA_GET_DESC1234( HAL_DMA_CH_TX ); \ 
+//  197   \ 
+//  198   HAL_DMA_SET_SOURCE( ch, (cfg->txBuf + cfg->txTail) ); \ 
+//  199   \ 
+//  200   HAL_DMA_SET_LEN( ch, cfg->txCnt ); \ 
+//  201   \ 
+//  202   HAL_DMA_CLEAR_IRQ( HAL_DMA_CH_TX ); \ 
+//  203   \ 
+//  204   HAL_DMA_ARM_CH( HAL_DMA_CH_TX ); \ 
+//  205   \ 
+//  206   HAL_DMA_START_CH( HAL_DMA_CH_TX ); \ 
+//  207 }
+//  208 
+//  209 /*********************************************************************
+//  210  * TYPEDEFS
+//  211  */
+//  212 
+//  213 typedef struct
+//  214 {
+//  215   uint8 *rxBuf;
+//  216   uint8 rxHead;
+//  217   uint8 rxTail;
+//  218   uint8 rxMax;
+//  219   uint8 rxCnt;
+//  220   uint8 rxTick;
+//  221   uint8 rxHigh;
+//  222 
+//  223   uint8 *txBuf;
+//  224 #if HAL_UART_BIG_TX_BUF
+//  225   uint16 txHead;
+//  226   uint16 txTail;
+//  227   uint16 txMax;
+//  228   uint16 txCnt;
+//  229 #else
+//  230   uint8 txHead;
+//  231   uint8 txTail;
+//  232   uint8 txMax;
+//  233   uint8 txCnt;
+//  234 #endif
+//  235   uint8 txTick;
+//  236 
+//  237   uint8 flag;
+//  238 
+//  239   halUARTCBack_t rxCB;
+//  240 } uartCfg_t;
+//  241 
+//  242 /*********************************************************************
+//  243  * CONSTANTS
+//  244  */
+//  245 
+//  246 // Used by DMA macros to shift 1 to create a mask for DMA registers.
+//  247 #define HAL_DMA_CH_TX    3
+//  248 #define HAL_DMA_CH_RX    4
+//  249 
+//  250 #define HAL_DMA_U0DBUF  0xDFC1
+//  251 #define HAL_DMA_U1DBUF  0xDFF9
+//  252 
+//  253 // UxCSR - USART Control and Status Register.
+//  254 #define CSR_MODE      0x80
+//  255 #define CSR_RE        0x40
+//  256 #define CSR_SLAVE     0x20
+//  257 #define CSR_FE        0x10
+//  258 #define CSR_ERR       0x08
+//  259 #define CSR_RX_BYTE   0x04
+//  260 #define CSR_TX_BYTE   0x02
+//  261 #define CSR_ACTIVE    0x01
+//  262 
+//  263 // UxUCR - USART UART Control Register.
+//  264 #define UCR_FLUSH     0x80
+//  265 #define UCR_FLOW      0x40
+//  266 #define UCR_D9        0x20
+//  267 #define UCR_BIT9      0x10
+//  268 #define UCR_PARITY    0x08
+//  269 #define UCR_SPB       0x04
+//  270 #define UCR_STOP      0x02
+//  271 #define UCR_START     0x01
+//  272 
+//  273 #define UTX0IE        0x04
+//  274 #define UTX1IE        0x08
+//  275 
+//  276 #define UART_CFG_U1F  0x80  // USART1 flag bit.
+//  277 #define UART_CFG_DMA  0x40  // Port is using DMA.
+//  278 #define UART_CFG_FLW  0x20  // Port is using flow control.
+//  279 #define UART_CFG_SP4  0x10
+//  280 #define UART_CFG_SP3  0x08
+//  281 #define UART_CFG_SP2  0x04
+//  282 #define UART_CFG_RXF  0x02  // Rx flow is disabled.
+//  283 #define UART_CFG_TXF  0x01  // Tx is in process.
+//  284 
+//  285 /*********************************************************************
+//  286  * GLOBAL VARIABLES
+//  287  */
+//  288 
+//  289 /*********************************************************************
+//  290  * GLOBAL FUNCTIONS
+//  291  */
+//  292 
+//  293 /*********************************************************************
+//  294  * LOCAL VARIABLES
+//  295  */
+//  296 
+//  297 #if HAL_UART_0_ENABLE
+//  298 static uartCfg_t *cfg0;
+//  299 #endif
+//  300 #if HAL_UART_1_ENABLE
+//  301 static uartCfg_t *cfg1;
+//  302 #endif
+//  303 
+//  304 /*********************************************************************
+//  305  * LOCAL FUNCTIONS
+//  306  */
+//  307 
+//  308 #if HAL_UART_DMA
+//  309 static void pollDMA( uartCfg_t *cfg );
+//  310 #endif
+//  311 #if HAL_UART_ISR
+//  312 static void pollISR( uartCfg_t *cfg );
+//  313 #endif
+//  314 
+//  315 #if HAL_UART_DMA
+//  316 /******************************************************************************
+//  317  * @fn      pollDMA
+//  318  *
+//  319  * @brief   Poll a USART module implemented by DMA.
+//  320  *
+//  321  * @param   cfg - USART configuration structure.
+//  322  *
+//  323  * @return  none
+//  324  *****************************************************************************/
+//  325 static void pollDMA( uartCfg_t *cfg )
+//  326 {
+//  327   const uint8 cnt = cfg->rxHead;
+//  328   uint8 *pad = cfg->rxBuf+(cfg->rxHead*2);
+//  329 
+//  330   // Pack the received bytes to the front of the queue.
+//  331   while ( (*pad == DMA_PAD) && (cfg->rxHead < cfg->rxMax) )
+//  332   {
+//  333     cfg->rxBuf[cfg->rxHead++] = *(pad+1);
+//  334     pad += 2;
+//  335   }
+//  336 
+//  337   if ( !(cfg->flag & UART_CFG_RXF) )
+//  338   {
+//  339     /* It is necessary to stop Rx flow and wait for H/W-enqueued bytes still
+//  340      * incoming to stop before resetting the DMA Rx engine. If DMA Rx is
+//  341      * aborted during incoming data, a byte may be lost inside the engine
+//  342      * during the 2-step transfer process of read/write.
+//  343      */
+//  344     if ( cfg->rxHead >= (cfg->rxMax - SAFE_RX_MIN) )
+//  345     {
+//  346       RX_STOP_FLOW( cfg );
+//  347     }
+//  348     // If anything received, reset the Rx idle timer.
+//  349     else if ( cfg->rxHead != cnt )
+//  350     {
+//  351       cfg->rxTick = HAL_UART_RX_IDLE;
+//  352     }
+//  353   }
+//  354   else if ( !cfg->rxTick && (cfg->rxHead == cfg->rxTail) )
+//  355   {
+//  356     HAL_DMA_ABORT_CH( HAL_DMA_CH_RX );
+//  357     cfg->rxHead = cfg->rxTail = 0;
+//  358     osal_memset( cfg->rxBuf, ~DMA_PAD, cfg->rxMax*2 );
+//  359     DMA_RX( cfg );
+//  360     RX_STRT_FLOW( cfg );
+//  361   }
+//  362 
+//  363   if ( HAL_DMA_CHECK_IRQ( HAL_DMA_CH_TX ) )
+//  364   {
+//  365     HAL_DMA_CLEAR_IRQ( HAL_DMA_CH_TX );
+//  366     cfg->flag &= ~UART_CFG_TXF;
+//  367     cfg->txTick = DMA_TX_DLY;
+//  368 
+//  369     if ( (cfg->txMax - cfg->txCnt) < cfg->txTail )
+//  370     {
+//  371       cfg->txTail = 0;  // DMA can only run to the end of the Tx buffer.
+//  372     }
+//  373     else
+//  374     {
+//  375       cfg->txTail += cfg->txCnt;
+//  376     }
+//  377   }
+//  378   else if ( !(cfg->flag & UART_CFG_TXF) && !cfg->txTick )
+//  379   {
+//  380     if ( cfg->txTail != cfg->txHead )
+//  381     {
+//  382       if ( cfg->txTail < cfg->txHead )
+//  383       {
+//  384         cfg->txCnt = cfg->txHead - cfg->txTail;
+//  385       }
+//  386       else  // Can only run DMA engine up to max, then restart at zero.
+//  387       {
+//  388         cfg->txCnt = cfg->txMax - cfg->txTail + 1;
+//  389       }
+//  390 
+//  391       cfg->flag |= UART_CFG_TXF;
+//  392       DMA_TX( cfg );
+//  393     }
+//  394   }
+//  395 }
+//  396 #endif
+//  397 
+//  398 #if HAL_UART_ISR
+//  399 /******************************************************************************
+//  400  * @fn      pollISR
+//  401  *
+//  402  * @brief   Poll a USART module implemented by ISR.
+//  403  *
+//  404  * @param   cfg - USART configuration structure.
+//  405  *
+//  406  * @return  none
+//  407  *****************************************************************************/
+//  408 static void pollISR( uartCfg_t *cfg )
+//  409 {
+//  410   uint8 cnt = UART_RX_AVAIL( cfg );
+//  411 
+//  412   if ( !(cfg->flag & UART_CFG_RXF) )
+//  413   {
+//  414     // If anything received, reset the Rx idle timer.
+//  415     if ( cfg->rxCnt != cnt )
+//  416     {
+//  417       cfg->rxTick = HAL_UART_RX_IDLE;
+//  418       cfg->rxCnt = cnt;
+//  419     }
+//  420 
+//  421     /* It is necessary to stop Rx flow in advance of a full Rx buffer because
+//  422      * bytes can keep coming while sending H/W fifo flushes.
+//  423      */
+//  424     if ( cfg->rxCnt >= (cfg->rxMax - SAFE_RX_MIN) )
+//  425     {
+//  426       RX_STOP_FLOW( cfg );
+//  427     }
+//  428   }
+//  429 }
+//  430 #endif
+//  431 
+//  432 /******************************************************************************
+//  433  * @fn      HalUARTInit
+//  434  *
+//  435  * @brief   Initialize the UART
+//  436  *
+//  437  * @param   none
+//  438  *
+//  439  * @return  none
+//  440  *****************************************************************************/
+
+        RSEG BANKED_CODE:CODE:NOROOT(0)
+//  441 void HalUARTInit( void )
+HalUARTInit:
+        CFI Block cfiBlock0 Using cfiCommon0
+        CFI Function HalUARTInit
+//  442 {
+        ; Saved register size: 0
+        ; Auto size: 0
+//  443 #if HAL_UART_DMA
+//  444   halDMADesc_t *ch;
+//  445 #endif
+//  446 
+//  447   // Set P2 priority - USART0 over USART1 if both are defined.
+//  448   P2DIR &= ~P2DIR_PRIPO;
+        ANL     0xff,#0x3f
+        MOV     A,0xff
+//  449   P2DIR |= HAL_UART_PRIPO;
+        ORL     0xff,#0x40
+//  450 
+//  451 #if HAL_UART_0_ENABLE
+//  452   // Set UART0 I/O location to P0.
+//  453   PERCFG &= ~HAL_UART_0_PERCFG_BIT;
+//  454 
+//  455   /* Enable Tx and Rx on P0 */
+//  456   P0SEL |= HAL_UART_0_P0_RX_TX;
+//  457 
+//  458   /* Make sure ADC doesnt use this */
+//  459   ADCCFG &= ~HAL_UART_0_P0_RX_TX;
+//  460 
+//  461   /* Mode is UART Mode */
+//  462   U0CSR = CSR_MODE;
+//  463 
+//  464   /* Flush it */
+//  465   U0UCR = UCR_FLUSH;
+//  466 #endif
+//  467 
+//  468 #if HAL_UART_1_ENABLE
+//  469   // Set UART1 I/O location to P1.
+//  470   PERCFG |= HAL_UART_1_PERCFG_BIT;
+//  471 
+//  472   /* Enable Tx and Rx on P1 */
+//  473   P1SEL  |= HAL_UART_1_P1_RX_TX;
+//  474 
+//  475   /* Make sure ADC doesnt use this */
+//  476   ADCCFG &= ~HAL_UART_1_P1_RX_TX;
+//  477 
+//  478   /* Mode is UART Mode */
+//  479   U1CSR = CSR_MODE;
+//  480 
+//  481   /* Flush it */
+//  482   U1UCR = UCR_FLUSH;
+//  483 #endif
+//  484 
+//  485 #if HAL_UART_DMA
+//  486   // Setup Tx by DMA.
+//  487   ch = HAL_DMA_GET_DESC1234( HAL_DMA_CH_TX );
+//  488 
+//  489   // The start address of the destination.
+//  490   HAL_DMA_SET_DEST( ch, DMA_UDBUF );
+//  491 
+//  492   // Using the length field to determine how many bytes to transfer.
+//  493   HAL_DMA_SET_VLEN( ch, HAL_DMA_VLEN_USE_LEN );
+//  494 
+//  495   // One byte is transferred each time.
+//  496   HAL_DMA_SET_WORD_SIZE( ch, HAL_DMA_WORDSIZE_BYTE );
+//  497 
+//  498   // The bytes are transferred 1-by-1 on Tx Complete trigger.
+//  499   HAL_DMA_SET_TRIG_MODE( ch, HAL_DMA_TMODE_SINGLE );
+//  500   HAL_DMA_SET_TRIG_SRC( ch, DMATRIG_TX );
+//  501 
+//  502   // The source address is decremented by 1 byte after each transfer.
+//  503   HAL_DMA_SET_SRC_INC( ch, HAL_DMA_SRCINC_1 );
+//  504 
+//  505   // The destination address is constant - the Tx Data Buffer.
+//  506   HAL_DMA_SET_DST_INC( ch, HAL_DMA_DSTINC_0 );
+//  507 
+//  508   // The DMA is to be polled and shall not issue an IRQ upon completion.
+//  509   HAL_DMA_SET_IRQ( ch, HAL_DMA_IRQMASK_DISABLE );
+//  510 
+//  511   // Xfer all 8 bits of a byte xfer.
+//  512   HAL_DMA_SET_M8( ch, HAL_DMA_M8_USE_8_BITS );
+//  513 
+//  514   // DMA Tx has shared priority for memory access - every other one.
+//  515   HAL_DMA_SET_PRIORITY( ch, HAL_DMA_PRI_HIGH );
+//  516 
+//  517   // Setup Rx by DMA.
+//  518   ch = HAL_DMA_GET_DESC1234( HAL_DMA_CH_RX );
+//  519 
+//  520   // The start address of the source.
+//  521   HAL_DMA_SET_SOURCE( ch, DMA_UDBUF );
+//  522 
+//  523   // Using the length field to determine how many bytes to transfer.
+//  524   HAL_DMA_SET_VLEN( ch, HAL_DMA_VLEN_USE_LEN );
+//  525 
+//  526   /* The trick is to cfg DMA to xfer 2 bytes for every 1 byte of Rx.
+//  527    * The byte after the Rx Data Buffer is the Baud Cfg Register,
+//  528    * which always has a known value. So init Rx buffer to inverse of that
+//  529    * known value. DMA word xfer will flip the bytes, so every valid Rx byte
+//  530    * in the Rx buffer will be preceded by a DMA_PAD char equal to the
+//  531    * Baud Cfg Register value.
+//  532    */
+//  533   HAL_DMA_SET_WORD_SIZE( ch, HAL_DMA_WORDSIZE_WORD );
+//  534 
+//  535   // The bytes are transferred 1-by-1 on Rx Complete trigger.
+//  536   HAL_DMA_SET_TRIG_MODE( ch, HAL_DMA_TMODE_SINGLE );
+//  537   HAL_DMA_SET_TRIG_SRC( ch, DMATRIG_RX );
+//  538 
+//  539   // The source address is constant - the Rx Data Buffer.
+//  540   HAL_DMA_SET_SRC_INC( ch, HAL_DMA_SRCINC_0 );
+//  541 
+//  542   // The destination address is incremented by 1 word after each transfer.
+//  543   HAL_DMA_SET_DST_INC( ch, HAL_DMA_DSTINC_1 );
+//  544 
+//  545   // The DMA is to be polled and shall not issue an IRQ upon completion.
+//  546   HAL_DMA_SET_IRQ( ch, HAL_DMA_IRQMASK_DISABLE );
+//  547 
+//  548   // Xfer all 8 bits of a byte xfer.
+//  549   HAL_DMA_SET_M8( ch, HAL_DMA_M8_USE_8_BITS );
+//  550 
+//  551   // DMA has highest priority for memory access.
+//  552   HAL_DMA_SET_PRIORITY( ch, HAL_DMA_PRI_HIGH );
+//  553 #endif
+//  554 }
+        LJMP    ?BRET
+        CFI EndBlock cfiBlock0
+        REQUIRE P2DIR
+//  555 
+//  556 /******************************************************************************
+//  557  * @fn      HalUARTOpen
+//  558  *
+//  559  * @brief   Open a port according tp the configuration specified by parameter.
+//  560  *
+//  561  * @param   port   - UART port
+//  562  *          config - contains configuration information
+//  563  *
+//  564  * @return  Status of the function call
+//  565  *****************************************************************************/
+
+        RSEG BANKED_CODE:CODE:NOROOT(0)
+//  566 uint8 HalUARTOpen( uint8 port, halUARTCfg_t *config )
+HalUARTOpen:
+        CFI Block cfiBlock1 Using cfiCommon0
+        CFI Function HalUARTOpen
+//  567 {
+        FUNCALL HalUARTOpen, osal_mem_alloc
+        LOCFRAME ISTACK, 0, STACK
+        LOCFRAME PSTACK, 0, STACK
+        LOCFRAME XSTACK, 12, STACK
+        LOCFRAME IOVERLAY, 0, STATIC
+        LOCFRAME DOVERLAY, 0, STATIC
+        ARGFRAME ISTACK, 0, STACK
+        ARGFRAME PSTACK, 0, STACK
+        ARGFRAME XSTACK, 12, STACK
+        ARGFRAME IOVERLAY, 0, STATIC
+        ARGFRAME DOVERLAY, 0, STATIC
+        FUNCALL HalUARTOpen, osal_mem_alloc
+        LOCFRAME ISTACK, 0, STACK
+        LOCFRAME PSTACK, 0, STACK
+        LOCFRAME XSTACK, 12, STACK
+        LOCFRAME IOVERLAY, 0, STATIC
+        LOCFRAME DOVERLAY, 0, STATIC
+        ARGFRAME ISTACK, 0, STACK
+        ARGFRAME PSTACK, 0, STACK
+        ARGFRAME XSTACK, 12, STACK
+        ARGFRAME IOVERLAY, 0, STATIC
+        ARGFRAME DOVERLAY, 0, STATIC
+        MOV     A,#-0xc
+        LCALL   ?BANKED_ENTER_XDATA
+        CFI DPH0 load(1, XDATA, add(CFA_XSP16, literal(-1)))
+        CFI DPL0 load(1, XDATA, add(CFA_XSP16, literal(-2)))
+        CFI ?BRET_EXT load(1, XDATA, add(CFA_XSP16, literal(-3)))
+        CFI ?RET_HIGH load(1, XDATA, add(CFA_XSP16, literal(-4)))
+        CFI ?RET_LOW load(1, XDATA, add(CFA_XSP16, literal(-5)))
+        CFI R7 load(1, XDATA, add(CFA_XSP16, literal(-6)))
+        CFI V3 load(1, XDATA, add(CFA_XSP16, literal(-7)))
+        CFI V2 load(1, XDATA, add(CFA_XSP16, literal(-8)))
+        CFI V1 load(1, XDATA, add(CFA_XSP16, literal(-9)))
+        CFI V0 load(1, XDATA, add(CFA_XSP16, literal(-10)))
+        CFI VB load(1, XDATA, add(CFA_XSP16, literal(-11)))
+        CFI R6 load(1, XDATA, add(CFA_XSP16, literal(-12)))
+        CFI CFA_SP SP+0
+        CFI CFA_XSP16 add(XSP16, 12)
+        ; Saved register size: 12
+        ; Auto size: 0
+        MOV     ?V0 + 0,R2
+        MOV     ?V0 + 1,R3
+//  568   uartCfg_t **cfgPP = NULL;
+//  569   uartCfg_t *cfg;
+//  570 
+//  571 #if HAL_UART_0_ENABLE
+//  572   if ( port == HAL_UART_PORT_0 )
+//  573   {
+//  574     cfgPP = &cfg0;
+//  575   }
+//  576 #endif
+//  577 
+//  578 #if HAL_UART_1_ENABLE
+//  579   if ( port == HAL_UART_PORT_1 )
+//  580   {
+//  581     cfgPP = &cfg1;
+//  582   }
+//  583 #endif
+//  584 
+//  585   HAL_UART_ASSERT( cfgPP );
+//  586 
+//  587 #if HAL_UART_CLOSE
+//  588   // Protect against user re-opening port before closing it.
+//  589   HalUARTClose( port );
+//  590 #else
+//  591   HAL_UART_ASSERT( *cfgPP == NULL );
+//  592 #endif
+//  593 
+//  594   HAL_UART_ASSERT( (config->baudRate == HAL_UART_BR_38400) ||
+//  595                    (config->baudRate == HAL_UART_BR_115200) );
+//  596 
+//  597   /* Whereas runtime heap alloc can be expected to fail - one-shot system
+//  598    * initialization must succeed, so no check for alloc fail.
+//  599    */
+//  600   *cfgPP = (uartCfg_t *)osal_mem_alloc( sizeof( uartCfg_t ) );
+        ; Setup parameters for call to function osal_mem_alloc
+        MOV     R2,#0x12
+        MOV     R3,#0x0
+        LCALL   ??osal_mem_alloc?relay
+        MOV     DPTR,#0x0
+        MOV     A,R2
+        MOVX    @DPTR,A
+        INC     DPTR
+        MOV     A,R3
+        MOVX    @DPTR,A
+//  601   cfg = *cfgPP;
+        MOV     DPTR,#0x0
+        MOVX    A,@DPTR
+        MOV     R6,A
+        INC     DPTR
+        MOVX    A,@DPTR
+        MOV     R7,A
+//  602   HAL_UART_ASSERT( cfg );
+//  603 
+//  604   cfg->rxMax = config->rx.maxBufSize;
+        MOV     A,?V0 + 0
+        ADD     A,#0xa
+        MOV     ?V0 + 2,A
+        MOV     A,?V0 + 1
+        ADDC    A,#0x0
+        MOV     ?V0 + 3,A
+        MOV     DPL,?V0 + 2
+        MOV     DPH,A
+        MOVX    A,@DPTR
+        MOV     DPL,R6
+        MOV     DPH,R7
+        INC     DPTR
+        INC     DPTR
+        INC     DPTR
+        INC     DPTR
+        MOVX    @DPTR,A
+//  605 
+//  606 #if !HAL_UART_BIG_TX_BUF
+//  607   HAL_UART_ASSERT( (config->tx.maxBufSize < 256) );
+//  608 #endif
+//  609   cfg->txMax = config->tx.maxBufSize;
+        MOV     A,R6
+        ADD     A,#0xc
+        MOV     R0,A
+        MOV     A,R7
+        ADDC    A,#0x0
+        MOV     R1,A
+        MOV     A,?V0 + 0
+        ADD     A,#0x12
+        MOV     DPL,A
+        MOV     A,?V0 + 1
+        ADDC    A,#0x0
+        MOV     DPH,A
+        MOVX    A,@DPTR
+        MOV     DPL,R0
+        MOV     DPH,R1
+        MOVX    @DPTR,A
+//  610   cfg->txBuf = osal_mem_alloc( cfg->txMax+1 );
+        ; Setup parameters for call to function osal_mem_alloc
+        MOV     R0,A
+        MOV     A,#0x1
+        ADD     A,R0
+        MOV     R2,A
+        CLR     A
+        ADDC    A,#0x0
+        MOV     R3,A
+        LCALL   ??osal_mem_alloc?relay
+        MOV     DPL,R6
+        MOV     DPH,R7
+        INC     DPTR
+        INC     DPTR
+        INC     DPTR
+        INC     DPTR
+        INC     DPTR
+        INC     DPTR
+        INC     DPTR
+        INC     DPTR
+        MOV     A,R2
+        MOVX    @DPTR,A
+        INC     DPTR
+        MOV     A,R3
+        MOVX    @DPTR,A
+//  611 
+//  612   cfg->rxHead = cfg->rxTail = 0;
+        CLR     A
+        MOV     DPL,R6
+        MOV     DPH,R7
+        INC     DPTR
+        INC     DPTR
+        INC     DPTR
+        MOVX    @DPTR,A
+        MOV     DPL,R6
+        MOV     DPH,R7
+        INC     DPTR
+        INC     DPTR
+        MOVX    @DPTR,A
+//  613   cfg->txHead = cfg->txTail = 0;
+        MOV     A,R6
+        ADD     A,#0xb
+        MOV     DPL,A
+        MOV     A,R7
+        ADDC    A,#0x0
+        MOV     DPH,A
+        CLR     A
+        MOVX    @DPTR,A
+        MOV     DPL,R6
+        MOV     DPH,R7
+        INC     DPTR
+        INC     DPTR
+        INC     DPTR
+        INC     DPTR
+        INC     DPTR
+        INC     DPTR
+        INC     DPTR
+        INC     DPTR
+        INC     DPTR
+        INC     DPTR
+        MOVX    @DPTR,A
+//  614   cfg->rxHigh = config->rx.maxBufSize - config->flowControlThreshold;
+        MOV     DPL,?V0 + 0
+        MOV     DPH,?V0 + 1
+        INC     DPTR
+        INC     DPTR
+        INC     DPTR
+        MOVX    A,@DPTR
+        MOV     R0,A
+        MOV     DPL,?V0 + 2
+        MOV     DPH,?V0 + 3
+        MOVX    A,@DPTR
+        CLR     C
+        SUBB    A,R0
+        MOV     DPL,R6
+        MOV     DPH,R7
+        INC     DPTR
+        INC     DPTR
+        INC     DPTR
+        INC     DPTR
+        INC     DPTR
+        INC     DPTR
+        INC     DPTR
+        MOVX    @DPTR,A
+//  615   cfg->rxCB = config->callBackFunc;
+        MOV     A,?V0 + 0
+        ADD     A,#0x1b
+        MOV     DPL,A
+        MOV     A,?V0 + 1
+        ADDC    A,#0x0
+        MOV     DPH,A
+        MOVX    A,@DPTR
+        MOV     R0,A
+        INC     DPTR
+        MOVX    A,@DPTR
+        MOV     R1,A
+        MOV     A,R6
+        ADD     A,#0x10
+        MOV     DPL,A
+        MOV     A,R7
+        ADDC    A,#0x0
+        MOV     DPH,A
+        MOV     A,R0
+        MOVX    @DPTR,A
+        INC     DPTR
+        MOV     A,R1
+        MOVX    @DPTR,A
+//  616 
+//  617 #if HAL_UART_0_ENABLE
+//  618   if ( port == HAL_UART_PORT_0 )
+//  619   {
+//  620     // Only supporting 38400 or 115200 for code size - other is possible.
+//  621     U0BAUD = (config->baudRate == HAL_UART_BR_38400) ? 59 : 216;
+//  622     U0GCR = (config->baudRate == HAL_UART_BR_38400) ? 10 : 11;
+//  623 
+//  624     U0CSR |= CSR_RE;
+//  625 
+//  626 #if HAL_UART_DMA == 1
+//  627     cfg->flag = UART_CFG_DMA;
+//  628     HAL_UART_ASSERT( (config->rx.maxBufSize <= 128) );
+//  629     HAL_UART_ASSERT( (config->rx.maxBufSize > SAFE_RX_MIN) );
+//  630     cfg->rxBuf = osal_mem_alloc( cfg->rxMax*2 );
+//  631     osal_memset( cfg->rxBuf, ~DMA_PAD, cfg->rxMax*2 );
+//  632     DMA_RX( cfg );
+//  633 #else
+//  634     cfg->flag = 0;
+//  635     HAL_UART_ASSERT( (config->rx.maxBufSize < 256) );
+//  636     cfg->rxBuf = osal_mem_alloc( cfg->rxMax+1 );
+//  637     URX0IE = 1;
+//  638     IEN2 |= UTX0IE;
+//  639 #endif
+//  640 
+//  641     // 8 bits/char; no parity; 1 stop bit; stop bit hi.
+//  642     if ( config->flowControl )
+//  643     {
+//  644       cfg->flag |= UART_CFG_FLW;
+//  645       U0UCR = UCR_FLOW | UCR_STOP;
+//  646       // Must rely on H/W for RTS (i.e. Tx stops when receiver negates CTS.)
+//  647       P0SEL |= HAL_UART_0_P0_RTS;
+//  648       // Cannot use H/W for CTS as DMA does not clear the Rx bytes properly.
+//  649       P0DIR |= HAL_UART_0_P0_CTS;
+//  650       RX0_FLOW_ON;
+//  651     }
+//  652     else
+//  653     {
+//  654       U0UCR = UCR_STOP;
+//  655     }
+//  656     }
+//  657 #endif
+//  658 
+//  659 #if HAL_UART_1_ENABLE
+//  660   if ( port == HAL_UART_PORT_1 )
+//  661   {
+//  662     // Only supporting 38400 or 115200 for code size - other is possible.
+//  663     U1BAUD = (config->baudRate == HAL_UART_BR_38400) ? 59 : 216;
+//  664     U1GCR = (config->baudRate == HAL_UART_BR_38400) ? 10 : 11;
+//  665 
+//  666     U1CSR |= CSR_RE;
+//  667 
+//  668 #if HAL_UART_DMA == 2
+//  669     cfg->flag = (UART_CFG_U1F | UART_CFG_DMA);
+//  670     HAL_UART_ASSERT( (config->rx.maxBufSize <= 128) );
+//  671     HAL_UART_ASSERT( (config->rx.maxBufSize > SAFE_RX_MIN) );
+//  672     cfg->rxBuf = osal_mem_alloc( cfg->rxMax*2 );
+//  673     osal_memset( cfg->rxBuf, ~DMA_PAD, cfg->rxMax*2 );
+//  674     DMA_RX( cfg );
+//  675 #else
+//  676     cfg->flag = UART_CFG_U1F;
+//  677     HAL_UART_ASSERT( (config->rx.maxBufSize < 256) );
+//  678     cfg->rxBuf = osal_mem_alloc( cfg->rxMax+1 );
+//  679     URX1IE = 1;
+//  680     IEN2 |= UTX1IE;
+//  681 #endif
+//  682 
+//  683     // 8 bits/char; no parity; 1 stop bit; stop bit hi.
+//  684     if ( config->flowControl )
+//  685     {
+//  686       cfg->flag |= UART_CFG_FLW;
+//  687       U1UCR = UCR_FLOW | UCR_STOP;
+//  688       // Must rely on H/W for RTS (i.e. Tx stops when receiver negates CTS.)
+//  689       P1SEL |= HAL_UART_1_P1_RTS;
+//  690       // Cannot use H/W for CTS as DMA does not clear the Rx bytes properly.
+//  691       P1DIR |= HAL_UART_1_P1_CTS;
+//  692       RX1_FLOW_ON;
+//  693     }
+//  694     else
+//  695     {
+//  696       U1UCR = UCR_STOP;
+//  697     }
+//  698   }
+//  699 #endif
+//  700 
+//  701   return HAL_UART_SUCCESS;
+        MOV     R1,#0x0
+        MOV     R7,#0x4
+        LJMP    ?BANKED_LEAVE_XDATA
+        CFI EndBlock cfiBlock1
+//  702 }
+//  703 
+//  704 /******************************************************************************
+//  705  * @fn      HalUARTClose
+//  706  *
+//  707  * @brief   Close the UART
+//  708  *
+//  709  * @param   port - UART port
+//  710  *
+//  711  * @return  none
+//  712  *****************************************************************************/
+
+        RSEG BANKED_CODE:CODE:NOROOT(0)
+//  713 void HalUARTClose( uint8 port )
+HalUARTClose:
+        CFI Block cfiBlock2 Using cfiCommon0
+        CFI Function HalUARTClose
+//  714 {
+        ; Saved register size: 0
+        ; Auto size: 0
+//  715 #if HAL_UART_CLOSE
+//  716   uartCfg_t *cfg;
+//  717 
+//  718 #if HAL_UART_0_ENABLE
+//  719   if ( port == HAL_UART_PORT_0 )
+//  720   {
+//  721     U0CSR &= ~CSR_RE;
+//  722 #if HAL_UART_DMA == 1
+//  723     HAL_DMA_ABORT_CH( HAL_DMA_CH_RX );
+//  724     HAL_DMA_ABORT_CH( HAL_DMA_CH_TX );
+//  725 #else
+//  726     URX0IE = 0;
+//  727 #endif
+//  728     cfg = cfg0;
+//  729     cfg0 = NULL;
+//  730   }
+//  731 #endif
+//  732 #if HAL_UART_1_ENABLE
+//  733   if ( port == HAL_UART_PORT_1 )
+//  734   {
+//  735     U1CSR &= ~CSR_RE;
+//  736 #if HAL_UART_DMA == 2
+//  737     HAL_DMA_ABORT_CH( HAL_DMA_CH_RX );
+//  738     HAL_DMA_ABORT_CH( HAL_DMA_CH_TX );
+//  739 #else
+//  740     URX1IE = 0;
+//  741 #endif
+//  742     cfg = cfg1;
+//  743     cfg1 = NULL;
+//  744   }
+//  745 #endif
+//  746 
+//  747   if ( cfg )
+//  748   {
+//  749     if ( cfg->rxBuf )
+//  750     {
+//  751       osal_mem_free( cfg->rxBuf );
+//  752     }
+//  753     if ( cfg->txBuf )
+//  754     {
+//  755       osal_mem_free( cfg->txBuf );
+//  756     }
+//  757     osal_mem_free( cfg );
+//  758   }
+//  759 #endif
+//  760 }
+        LJMP    ?BRET
+        CFI EndBlock cfiBlock2
+//  761 
+//  762 /******************************************************************************
+//  763  * @fn      HalUARTPoll
+//  764  *
+//  765  * @brief   Poll the UART.
+//  766  *
+//  767  * @param   none
+//  768  *
+//  769  * @return  none
+//  770  *****************************************************************************/
+
+        RSEG BANKED_CODE:CODE:NOROOT(0)
+//  771 void HalUARTPoll( void )
+HalUARTPoll:
+        CFI Block cfiBlock3 Using cfiCommon0
+        CFI Function HalUARTPoll
+//  772 {
+        ; Saved register size: 0
+        ; Auto size: 0
+//  773 #if ( HAL_UART_0_ENABLE | HAL_UART_1_ENABLE )
+//  774   static uint8 tickShdw;
+//  775   uartCfg_t *cfg;
+//  776   uint8 tick;
+//  777 
+//  778 #if HAL_UART_0_ENABLE
+//  779   if ( cfg0 )
+//  780   {
+//  781     cfg = cfg0;
+//  782   }
+//  783 #endif
+//  784 #if HAL_UART_1_ENABLE
+//  785   if ( cfg1 )
+//  786   {
+//  787     cfg = cfg1;
+//  788   }
+//  789 #endif
+//  790 
+//  791   // Use the LSB of the sleep timer (ST0 must be read first anyway).
+//  792   tick = ST0 - tickShdw;
+//  793   tickShdw = ST0;
+//  794 
+//  795   do
+//  796   {
+//  797     if ( cfg->txTick > tick )
+//  798     {
+//  799       cfg->txTick -= tick;
+//  800     }
+//  801     else
+//  802     {
+//  803       cfg->txTick = 0;
+//  804     }
+//  805 
+//  806     if ( cfg->rxTick > tick )
+//  807     {
+//  808       cfg->rxTick -= tick;
+//  809     }
+//  810     else
+//  811     {
+//  812       cfg->rxTick = 0;
+//  813     }
+//  814 
+//  815 #if HAL_UART_ISR
+//  816 #if HAL_UART_DMA
+//  817     if ( cfg->flag & UART_CFG_DMA )
+//  818     {
+//  819       pollDMA( cfg );
+//  820     }
+//  821     else
+//  822 #endif
+//  823       {
+//  824       pollISR( cfg );
+//  825       }
+//  826 #elif HAL_UART_DMA
+//  827     pollDMA( cfg );
+//  828 #endif
+//  829 
+//  830     /* The following logic makes continuous callbacks on any eligible flag
+//  831      * until the condition corresponding to the flag is rectified.
+//  832      * So even if new data is not received, continuous callbacks are made.
+//  833      */
+//  834       if ( cfg->rxHead != cfg->rxTail )
+//  835       {
+//  836       uint8 evt;
+//  837 
+//  838       if ( cfg->rxHead >= (cfg->rxMax - SAFE_RX_MIN) )
+//  839       {
+//  840         evt = HAL_UART_RX_FULL;
+//  841       }
+//  842       else if ( cfg->rxHigh && (cfg->rxHead >= cfg->rxHigh) )
+//  843       {
+//  844         evt = HAL_UART_RX_ABOUT_FULL;
+//  845     }
+//  846       else if ( cfg->rxTick == 0 )
+//  847     {
+//  848         evt = HAL_UART_RX_TIMEOUT;
+//  849     }
+//  850     else
+//  851     {
+//  852         evt = 0;
+//  853     }
+//  854 
+//  855     if ( evt && cfg->rxCB )
+//  856     {
+//  857         cfg->rxCB( ((cfg->flag & UART_CFG_U1F)!=0), evt );
+//  858     }
+//  859     }
+//  860 
+//  861 #if HAL_UART_0_ENABLE
+//  862     if ( cfg == cfg0 )
+//  863     {
+//  864 #if HAL_UART_1_ENABLE
+//  865       if ( cfg1 )
+//  866       {
+//  867         cfg = cfg1;
+//  868       }
+//  869       else
+//  870 #endif
+//  871         break;
+//  872     }
+//  873     else
+//  874 #endif
+//  875       break;
+//  876 
+//  877   } while ( TRUE );
+//  878 #else
+//  879   return;
+        LJMP    ?BRET
+        CFI EndBlock cfiBlock3
+//  880 #endif
+//  881 }
+//  882 
+//  883 /**************************************************************************************************
+//  884  * @fn      Hal_UART_RxBufLen()
+//  885  *
+//  886  * @brief   Calculate Rx Buffer length - the number of bytes in the buffer.
+//  887  *
+//  888  * @param   port - UART port
+//  889  *
+//  890  * @return  length of current Rx Buffer
+//  891  **************************************************************************************************/
+
+        RSEG BANKED_CODE:CODE:NOROOT(0)
+//  892 uint16 Hal_UART_RxBufLen( uint8 port )
+Hal_UART_RxBufLen:
+        CFI Block cfiBlock4 Using cfiCommon0
+        CFI Function Hal_UART_RxBufLen
+//  893 {
+        PUSH    DPL
+        CFI DPL0 Frame(CFA_SP, 4)
+        CFI CFA_SP SP+-4
+        PUSH    DPH
+        CFI DPH0 Frame(CFA_SP, 5)
+        CFI CFA_SP SP+-5
+        ; Saved register size: 2
+        ; Auto size: 0
+//  894   uartCfg_t *cfg = NULL;
+//  895 
+//  896 #if HAL_UART_0_ENABLE
+//  897   if ( port == HAL_UART_PORT_0 )
+//  898   {
+//  899     cfg = cfg0;
+//  900   }
+//  901 #endif
+//  902 #if HAL_UART_1_ENABLE
+//  903   if ( port == HAL_UART_PORT_1 )
+//  904   {
+//  905     cfg = cfg1;
+//  906   }
+//  907 #endif
+//  908 
+//  909   HAL_UART_ASSERT( cfg );
+//  910 
+//  911   return UART_RX_AVAIL( cfg );
+        MOV     DPTR,#0x2
+        MOVX    A,@DPTR
+        PUSH    A
+        CFI CFA_SP SP+-6
+        MOV     DPTR,#0x3
+        MOVX    A,@DPTR
+        MOV     R2,A
+        POP     A
+        CFI CFA_SP SP+-5
+        CLR     C
+        SUBB    A,R2
+        JC      ??Hal_UART_RxBufLen_0
+        MOV     DPTR,#0x2
+        MOVX    A,@DPTR
+        CLR     C
+        SUBB    A,R2
+        MOV     R2,A
+        CLR     A
+        SUBB    A,#0x0
+        SJMP    ??Hal_UART_RxBufLen_1
+??Hal_UART_RxBufLen_0:
+        MOV     DPTR,#0x4
+        MOVX    A,@DPTR
+        CLR     C
+        SUBB    A,R2
+        MOV     R0,A
+        CLR     A
+        SUBB    A,#0x0
+        MOV     R1,A
+        MOV     DPTR,#0x2
+        MOVX    A,@DPTR
+        ADD     A,R0
+        MOV     R0,A
+        CLR     A
+        ADDC    A,R1
+        MOV     R1,A
+        MOV     A,#0x1
+        ADD     A,R0
+        MOV     R2,A
+        CLR     A
+        ADDC    A,R1
+??Hal_UART_RxBufLen_1:
+        MOV     R3,A
+        POP     DPH
+        CFI DPH0 SameValue
+        CFI CFA_SP SP+-4
+        POP     DPL
+        CFI DPL0 SameValue
+        CFI CFA_SP SP+-3
+        LJMP    ?BRET
+        CFI EndBlock cfiBlock4
+//  912 }
+//  913 
+//  914 /*****************************************************************************
+//  915  * @fn      HalUARTRead
+//  916  *
+//  917  * @brief   Read a buffer from the UART
+//  918  *
+//  919  * @param   port - USART module designation
+//  920  *          buf  - valid data buffer at least 'len' bytes in size
+//  921  *          len  - max length number of bytes to copy to 'buf'
+//  922  *
+//  923  * @return  length of buffer that was read
+//  924  *****************************************************************************/
+
+        RSEG BANKED_CODE:CODE:NOROOT(0)
+//  925 uint16 HalUARTRead( uint8 port, uint8 *buf, uint16 len )
+HalUARTRead:
+        CFI Block cfiBlock5 Using cfiCommon0
+        CFI Function HalUARTRead
+//  926 {
+        MOV     A,#-0xa
+        LCALL   ?BANKED_ENTER_XDATA
+        CFI DPH0 load(1, XDATA, add(CFA_XSP16, literal(-1)))
+        CFI DPL0 load(1, XDATA, add(CFA_XSP16, literal(-2)))
+        CFI ?BRET_EXT load(1, XDATA, add(CFA_XSP16, literal(-3)))
+        CFI ?RET_HIGH load(1, XDATA, add(CFA_XSP16, literal(-4)))
+        CFI ?RET_LOW load(1, XDATA, add(CFA_XSP16, literal(-5)))
+        CFI R7 load(1, XDATA, add(CFA_XSP16, literal(-6)))
+        CFI V1 load(1, XDATA, add(CFA_XSP16, literal(-7)))
+        CFI V0 load(1, XDATA, add(CFA_XSP16, literal(-8)))
+        CFI VB load(1, XDATA, add(CFA_XSP16, literal(-9)))
+        CFI R6 load(1, XDATA, add(CFA_XSP16, literal(-10)))
+        CFI CFA_SP SP+0
+        CFI CFA_XSP16 add(XSP16, 10)
+        ; Saved register size: 10
+        ; Auto size: 0
+//  927   uartCfg_t *cfg = NULL;
+//  928   uint8 cnt = 0;
+        MOV     R7,#0x0
+        SJMP    ??HalUARTRead_0
+//  929 
+//  930 #if HAL_UART_0_ENABLE
+//  931   if ( port == HAL_UART_PORT_0 )
+//  932   {
+//  933     cfg = cfg0;
+//  934   }
+//  935 #endif
+//  936 #if HAL_UART_1_ENABLE
+//  937   if ( port == HAL_UART_PORT_1 )
+//  938   {
+//  939     cfg = cfg1;
+//  940   }
+//  941 #endif
+//  942 
+//  943   HAL_UART_ASSERT( cfg );
+//  944 
+//  945   while ( (cfg->rxTail != cfg->rxHead) && (cnt < len) )
+//  946   {
+//  947     *buf++ = cfg->rxBuf[cfg->rxTail];
+//  948     if ( cfg->rxTail == cfg->rxMax )
+//  949     {
+//  950       cfg->rxTail = 0;
+//  951     }
+//  952     else
+//  953     {
+//  954       cfg->rxTail++;
+??HalUARTRead_1:
+        MOV     DPTR,#0x3
+        MOVX    A,@DPTR
+        INC     A
+??HalUARTRead_2:
+        MOVX    @DPTR,A
+//  955     }
+//  956     cnt++;
+        INC     R7
+??HalUARTRead_0:
+        MOV     DPTR,#0x3
+        MOVX    A,@DPTR
+        MOV     R6,A
+        MOV     DPTR,#0x2
+        MOVX    A,@DPTR
+        XRL     A,R6
+        JZ      ??HalUARTRead_3
+        MOV     ?V0 + 0,R7
+        CLR     C
+        MOV     A,?V0 + 0
+        SUBB    A,R4
+        CLR     A
+        SUBB    A,R5
+        JNC     ??HalUARTRead_3
+        MOV     DPTR,#0x3
+        MOVX    A,@DPTR
+        MOV     R0,A
+        MOV     DPTR,#0x0
+        LCALL   ?Subroutine1 & 0xFFFF
+??CrossCallReturnLabel_2:
+        MOVX    A,@DPTR
+        MOV     DPL,R2
+        MOV     DPH,R3
+        MOVX    @DPTR,A
+        INC     DPTR
+        MOV     R2,DPL
+        MOV     R3,DPH
+        MOV     DPTR,#0x3
+        MOVX    A,@DPTR
+        MOV     R6,A
+        MOV     DPTR,#0x4
+        MOVX    A,@DPTR
+        XRL     A,R6
+        JNZ     ??HalUARTRead_1
+        CLR     A
+        MOV     DPTR,#0x3
+        SJMP    ??HalUARTRead_2
+//  957   }
+//  958 
+//  959 #if HAL_UART_DMA
+//  960   #if HAL_UART_ISR
+//  961   if ( cfg->flag & UART_CFG_DMA )
+//  962   #endif
+//  963   {
+//  964     /* If there is no flow control on a DMA-driven UART, the Rx Head & Tail
+//  965      * pointers must be reset to zero after every read in order to preserve the
+//  966      * full length of the Rx buffer. This implies that every Read must read all
+//  967      * of the Rx bytes available, or the pointers will not be reset and the
+//  968      * next incoming packet may not fit in the Rx buffer space remaining - thus
+//  969      * the end portion of the incoming packet that does not fit would be lost.
+//  970      */
+//  971     if ( !(cfg->flag & UART_CFG_FLW) )
+//  972     {
+//  973       // This is a trick to trigger the DMA abort and restart logic in pollDMA.
+//  974       cfg->flag |= UART_CFG_RXF;
+//  975     }
+//  976   }
+//  977 #endif
+//  978 
+//  979 #if HAL_UART_ISR
+//  980   #if HAL_UART_DMA
+//  981   if ( !(cfg->flag & UART_CFG_DMA) )
+//  982   #endif
+//  983   {
+//  984     cfg->rxCnt = UART_RX_AVAIL( cfg );
+//  985 
+//  986     if ( cfg->flag & UART_CFG_RXF )
+//  987     {
+//  988       if ( cfg->rxCnt < (cfg->rxMax - SAFE_RX_MIN) )
+//  989       {
+//  990         RX_STRT_FLOW( cfg );
+//  991       }
+//  992     }
+//  993   }
+//  994 #endif
+//  995 
+//  996   return cnt;
+??HalUARTRead_3:
+        MOV     A,R7
+        MOV     R2,A
+        MOV     R3,#0x0
+        MOV     R7,#0x2
+        LJMP    ?BANKED_LEAVE_XDATA
+        CFI EndBlock cfiBlock5
+//  997 }
+//  998 
+//  999 /******************************************************************************
+// 1000  * @fn      HalUARTWrite
+// 1001  *
+// 1002  * @brief   Write a buffer to the UART.
+// 1003  *
+// 1004  * @param   port    - UART port
+// 1005  *          pBuffer - pointer to the buffer that will be written, not freed
+// 1006  *          length  - length of
+// 1007  *
+// 1008  * @return  length of the buffer that was sent
+// 1009  *****************************************************************************/
+
+        RSEG BANKED_CODE:CODE:NOROOT(0)
+// 1010 uint16 HalUARTWrite( uint8 port, uint8 *buf, uint16 len )
+HalUARTWrite:
+        CFI Block cfiBlock6 Using cfiCommon0
+        CFI Function HalUARTWrite
+// 1011 {
+        MOV     A,#-0x9
+        LCALL   ?BANKED_ENTER_XDATA
+        CFI DPH0 load(1, XDATA, add(CFA_XSP16, literal(-1)))
+        CFI DPL0 load(1, XDATA, add(CFA_XSP16, literal(-2)))
+        CFI ?BRET_EXT load(1, XDATA, add(CFA_XSP16, literal(-3)))
+        CFI ?RET_HIGH load(1, XDATA, add(CFA_XSP16, literal(-4)))
+        CFI ?RET_LOW load(1, XDATA, add(CFA_XSP16, literal(-5)))
+        CFI R7 load(1, XDATA, add(CFA_XSP16, literal(-6)))
+        CFI V0 load(1, XDATA, add(CFA_XSP16, literal(-7)))
+        CFI VB load(1, XDATA, add(CFA_XSP16, literal(-8)))
+        CFI R6 load(1, XDATA, add(CFA_XSP16, literal(-9)))
+        CFI CFA_SP SP+0
+        CFI CFA_XSP16 add(XSP16, 9)
+        ; Saved register size: 9
+        ; Auto size: 0
+// 1012   uartCfg_t *cfg = NULL;
+// 1013   uint8 cnt;
+// 1014 
+// 1015 #if HAL_UART_0_ENABLE
+// 1016   if ( port == HAL_UART_PORT_0 )
+// 1017   {
+// 1018     cfg = cfg0;
+// 1019   }
+// 1020 #endif
+// 1021 #if HAL_UART_1_ENABLE
+// 1022   if ( port == HAL_UART_PORT_1 )
+// 1023   {
+// 1024     cfg = cfg1;
+// 1025   }
+// 1026 #endif
+// 1027 
+// 1028   HAL_UART_ASSERT( cfg );
+// 1029 
+// 1030   if ( cfg->txHead == cfg->txTail )
+// 1031   {
+// 1032 #if HAL_UART_DMA
+// 1033     // When pointers are equal, reset to zero to get max len w/out wrapping.
+// 1034     cfg->txHead = cfg->txTail = 0;
+// 1035 #endif
+// 1036 #if HAL_UART_ISR
+// 1037 #if HAL_UART_DMA
+// 1038     if ( !(cfg->flag & UART_CFG_DMA) )
+// 1039 #endif
+// 1040     {
+// 1041       cfg->flag &= ~UART_CFG_TXF;
+// 1042     }
+// 1043 #endif
+// 1044   }
+// 1045 
+// 1046   // Accept "all-or-none" on write request.
+// 1047   if ( TX_AVAIL( cfg ) < len )
+        MOV     DPTR,#0xb
+        MOVX    A,@DPTR
+        MOV     R6,A
+        MOV     DPTR,#0xa
+        MOVX    A,@DPTR
+        XRL     A,R6
+        JNZ     ??HalUARTWrite_0
+        MOV     DPTR,#0xc
+        MOVX    A,@DPTR
+        MOV     R0,A
+        MOV     A,#-0x1
+        ADD     A,R0
+        MOV     R6,A
+        MOV     A,#-0x1
+        ADDC    A,#0x0
+        SJMP    ??HalUARTWrite_1
+??HalUARTWrite_0:
+        MOVX    A,@DPTR
+        MOV     DPTR,#0xb
+        CLR     C
+        SUBB    A,R6
+        JNC     ??HalUARTWrite_2
+        LCALL   ?Subroutine0 & 0xFFFF
+??CrossCallReturnLabel_0:
+        MOV     A,#-0x1
+        ADD     A,R0
+        DEC     R0
+        MOV     A,#-0x1
+        SJMP    ??HalUARTWrite_3
+??HalUARTWrite_2:
+        MOV     DPTR,#0xc
+        LCALL   ?Subroutine0 & 0xFFFF
+??CrossCallReturnLabel_1:
+        MOV     DPTR,#0xb
+        MOVX    A,@DPTR
+        ADD     A,R0
+        MOV     R0,A
+        CLR     A
+??HalUARTWrite_3:
+        ADDC    A,R1
+        MOV     R1,A
+        MOV     A,R0
+        MOV     R6,A
+        MOV     A,R1
+??HalUARTWrite_1:
+        MOV     R7,A
+        CLR     C
+        MOV     A,R6
+        SUBB    A,R4
+        MOV     A,R7
+        SUBB    A,R5
+        JNC     ??HalUARTWrite_4
+// 1048   {
+// 1049     return 0;
+        MOV     R2,#0x0
+        MOV     R3,#0x0
+        SJMP    ??HalUARTWrite_5
+// 1050   }
+// 1051 
+// 1052   for ( cnt = len; cnt; cnt-- )
+??HalUARTWrite_4:
+        MOV     A,R4
+        MOV     R7,A
+        SJMP    ??HalUARTWrite_6
+// 1053   {
+// 1054     cfg->txBuf[ cfg->txHead ] = *buf++;
+// 1055 
+// 1056     if ( cfg->txHead == cfg->txMax )
+// 1057     {
+// 1058       cfg->txHead = 0;
+// 1059     }
+// 1060     else
+// 1061     {
+// 1062       cfg->txHead++;
+??HalUARTWrite_7:
+        MOV     DPTR,#0xa
+        MOVX    A,@DPTR
+        INC     A
+??HalUARTWrite_8:
+        MOVX    @DPTR,A
+// 1063     }
+        DEC     R7
+??HalUARTWrite_6:
+        MOV     A,R7
+        JZ      ??HalUARTWrite_9
+        MOV     DPL,R2
+        MOV     DPH,R3
+        MOVX    A,@DPTR
+        PUSH    A
+        CFI CFA_SP SP+-1
+        MOV     DPTR,#0xa
+        MOVX    A,@DPTR
+        MOV     R0,A
+        MOV     DPTR,#0x8
+        LCALL   ?Subroutine1 & 0xFFFF
+??CrossCallReturnLabel_3:
+        POP     A
+        CFI CFA_SP SP+0
+        MOVX    @DPTR,A
+        MOV     DPL,R2
+        MOV     DPH,R3
+        INC     DPTR
+        MOV     R2,DPL
+        MOV     R3,DPH
+        MOV     DPTR,#0xa
+        MOVX    A,@DPTR
+        MOV     R6,A
+        MOV     DPTR,#0xc
+        MOVX    A,@DPTR
+        XRL     A,R6
+        JNZ     ??HalUARTWrite_7
+        CLR     A
+        MOV     DPTR,#0xa
+        SJMP    ??HalUARTWrite_8
+// 1064   }
+// 1065 
+// 1066 #if HAL_UART_ISR
+// 1067 #if HAL_UART_DMA
+// 1068   if ( !(cfg->flag & UART_CFG_DMA) )
+// 1069 #endif
+// 1070   {
+// 1071     if ( !(cfg->flag & UART_CFG_TXF) && len )
+// 1072     {
+// 1073       cfg->flag |= UART_CFG_TXF;
+// 1074       if ( !(cfg->flag & UART_CFG_U1F) )
+// 1075       {
+// 1076         U0DBUF = cfg->txBuf[cfg->txTail];
+// 1077       }
+// 1078       else
+// 1079       {
+// 1080         U1DBUF = cfg->txBuf[cfg->txTail];
+// 1081       }
+// 1082     }
+// 1083   }
+// 1084 #endif
+// 1085 
+// 1086   return len;
+??HalUARTWrite_9:
+        MOV     A,R4
+        MOV     R2,A
+        MOV     A,R5
+        MOV     R3,A
+??HalUARTWrite_5:
+        MOV     R7,#0x1
+        LJMP    ?BANKED_LEAVE_XDATA
+        CFI EndBlock cfiBlock6
+// 1087 }
+
+        RSEG BANKED_CODE:CODE:NOROOT(0)
+?Subroutine1:
+        CFI Block cfiCond7 Using cfiCommon0
+        CFI NoFunction
+        CFI Conditional ??CrossCallReturnLabel_2
+        CFI R6 load(1, XDATA, add(CFA_XSP16, literal(-10)))
+        CFI VB load(1, XDATA, add(CFA_XSP16, literal(-9)))
+        CFI V0 load(1, XDATA, add(CFA_XSP16, literal(-8)))
+        CFI V1 load(1, XDATA, add(CFA_XSP16, literal(-7)))
+        CFI R7 load(1, XDATA, add(CFA_XSP16, literal(-6)))
+        CFI ?RET_LOW load(1, XDATA, add(CFA_XSP16, literal(-5)))
+        CFI ?RET_HIGH load(1, XDATA, add(CFA_XSP16, literal(-4)))
+        CFI ?BRET_EXT load(1, XDATA, add(CFA_XSP16, literal(-3)))
+        CFI DPL0 load(1, XDATA, add(CFA_XSP16, literal(-2)))
+        CFI DPH0 load(1, XDATA, add(CFA_XSP16, literal(-1)))
+        CFI CFA_SP SP+0
+        CFI CFA_XSP16 add(XSP16, 10)
+        CFI Block cfiCond8 Using cfiCommon0
+        CFI (cfiCond8) NoFunction
+        CFI (cfiCond8) Conditional ??CrossCallReturnLabel_3
+        CFI (cfiCond8) R6 load(1, XDATA, add(CFA_XSP16, literal(-9)))
+        CFI (cfiCond8) VB load(1, XDATA, add(CFA_XSP16, literal(-8)))
+        CFI (cfiCond8) V0 load(1, XDATA, add(CFA_XSP16, literal(-7)))
+        CFI (cfiCond8) R7 load(1, XDATA, add(CFA_XSP16, literal(-6)))
+        CFI (cfiCond8) ?RET_LOW load(1, XDATA, add(CFA_XSP16, literal(-5)))
+        CFI (cfiCond8) ?RET_HIGH load(1, XDATA, add(CFA_XSP16, literal(-4)))
+        CFI (cfiCond8) ?BRET_EXT load(1, XDATA, add(CFA_XSP16, literal(-3)))
+        CFI (cfiCond8) DPL0 load(1, XDATA, add(CFA_XSP16, literal(-2)))
+        CFI (cfiCond8) DPH0 load(1, XDATA, add(CFA_XSP16, literal(-1)))
+        CFI (cfiCond8) CFA_SP SP+-1
+        CFI (cfiCond8) CFA_XSP16 add(XSP16, 9)
+        CFI Block cfiPicker9 Using cfiCommon1
+        CFI (cfiPicker9) NoFunction
+        CFI (cfiPicker9) Picker
+        MOVX    A,@DPTR
+        ADD     A,R0
+        MOV     R6,A
+        INC     DPTR
+        MOVX    A,@DPTR
+        ADDC    A,#0x0
+        MOV     DPL,R6
+        MOV     DPH,A
+        RET
+        CFI EndBlock cfiCond7
+        CFI EndBlock cfiCond8
+        CFI EndBlock cfiPicker9
+
+        RSEG BANKED_CODE:CODE:NOROOT(0)
+?Subroutine0:
+        CFI Block cfiCond10 Using cfiCommon0
+        CFI NoFunction
+        CFI Conditional ??CrossCallReturnLabel_0
+        CFI R6 load(1, XDATA, add(CFA_XSP16, literal(-9)))
+        CFI VB load(1, XDATA, add(CFA_XSP16, literal(-8)))
+        CFI V0 load(1, XDATA, add(CFA_XSP16, literal(-7)))
+        CFI R7 load(1, XDATA, add(CFA_XSP16, literal(-6)))
+        CFI ?RET_LOW load(1, XDATA, add(CFA_XSP16, literal(-5)))
+        CFI ?RET_HIGH load(1, XDATA, add(CFA_XSP16, literal(-4)))
+        CFI ?BRET_EXT load(1, XDATA, add(CFA_XSP16, literal(-3)))
+        CFI DPL0 load(1, XDATA, add(CFA_XSP16, literal(-2)))
+        CFI DPH0 load(1, XDATA, add(CFA_XSP16, literal(-1)))
+        CFI CFA_SP SP+0
+        CFI CFA_XSP16 add(XSP16, 9)
+        CFI Block cfiCond11 Using cfiCommon0
+        CFI (cfiCond11) NoFunction
+        CFI (cfiCond11) Conditional ??CrossCallReturnLabel_1
+        CFI (cfiCond11) R6 load(1, XDATA, add(CFA_XSP16, literal(-9)))
+        CFI (cfiCond11) VB load(1, XDATA, add(CFA_XSP16, literal(-8)))
+        CFI (cfiCond11) V0 load(1, XDATA, add(CFA_XSP16, literal(-7)))
+        CFI (cfiCond11) R7 load(1, XDATA, add(CFA_XSP16, literal(-6)))
+        CFI (cfiCond11) ?RET_LOW load(1, XDATA, add(CFA_XSP16, literal(-5)))
+        CFI (cfiCond11) ?RET_HIGH load(1, XDATA, add(CFA_XSP16, literal(-4)))
+        CFI (cfiCond11) ?BRET_EXT load(1, XDATA, add(CFA_XSP16, literal(-3)))
+        CFI (cfiCond11) DPL0 load(1, XDATA, add(CFA_XSP16, literal(-2)))
+        CFI (cfiCond11) DPH0 load(1, XDATA, add(CFA_XSP16, literal(-1)))
+        CFI (cfiCond11) CFA_SP SP+0
+        CFI (cfiCond11) CFA_XSP16 add(XSP16, 9)
+        CFI Block cfiPicker12 Using cfiCommon1
+        CFI (cfiPicker12) NoFunction
+        CFI (cfiPicker12) Picker
+        MOVX    A,@DPTR
+        MOV     R0,A
+        MOV     DPTR,#0xa
+        MOVX    A,@DPTR
+        MOV     R6,A
+        MOV     A,R0
+        CLR     C
+        SUBB    A,R6
+        MOV     R0,A
+        CLR     A
+        SUBB    A,#0x0
+        MOV     R1,A
+        RET
+        CFI EndBlock cfiCond10
+        CFI EndBlock cfiCond11
+        CFI EndBlock cfiPicker12
+
+        RSEG BANK_RELAYS:CODE:REORDER:NOROOT(0)
+??HalUARTInit?relay:
+        LCALL   ?BDISPATCH
+        DATA
+        DC24    HalUARTInit
+
+        RSEG BANK_RELAYS:CODE:REORDER:NOROOT(0)
+??HalUARTOpen?relay:
+        LCALL   ?BDISPATCH
+        DATA
+        DC24    HalUARTOpen
+
+        RSEG BANK_RELAYS:CODE:REORDER:NOROOT(0)
+??HalUARTClose?relay:
+        LCALL   ?BDISPATCH
+        DATA
+        DC24    HalUARTClose
+
+        RSEG BANK_RELAYS:CODE:REORDER:NOROOT(0)
+??HalUARTPoll?relay:
+        LCALL   ?BDISPATCH
+        DATA
+        DC24    HalUARTPoll
+
+        RSEG BANK_RELAYS:CODE:REORDER:NOROOT(0)
+??Hal_UART_RxBufLen?relay:
+        LCALL   ?BDISPATCH
+        DATA
+        DC24    Hal_UART_RxBufLen
+
+        RSEG BANK_RELAYS:CODE:REORDER:NOROOT(0)
+??HalUARTRead?relay:
+        LCALL   ?BDISPATCH
+        DATA
+        DC24    HalUARTRead
+
+        RSEG BANK_RELAYS:CODE:REORDER:NOROOT(0)
+??HalUARTWrite?relay:
+        LCALL   ?BDISPATCH
+        DATA
+        DC24    HalUARTWrite
+
+        END
+// 1088 
+// 1089 #if HAL_UART_ISR
+// 1090 /***************************************************************************************************
+// 1091  * @fn      halUart0RxIsr
+// 1092  *
+// 1093  * @brief   UART0 Receive Interrupt
+// 1094  *
+// 1095  * @param   None
+// 1096  *
+// 1097  * @return  None
+// 1098  ***************************************************************************************************/
+// 1099 #if HAL_UART_0_ENABLE
+// 1100 HAL_ISR_FUNCTION( halUart0RxIsr, URX0_VECTOR )
+// 1101 {
+// 1102   cfg0->rxBuf[cfg0->rxHead] = U0DBUF;
+// 1103 
+// 1104   if ( cfg0->rxHead == cfg0->rxMax )
+// 1105   {
+// 1106     cfg0->rxHead = 0;
+// 1107   }
+// 1108   else
+// 1109   {
+// 1110     cfg0->rxHead++;
+// 1111   }
+// 1112 }
+// 1113 #endif
+// 1114 
+// 1115 /***************************************************************************************************
+// 1116  * @fn      halUart1RxIsr
+// 1117  *
+// 1118  * @brief   UART1 Receive Interrupt
+// 1119  *
+// 1120  * @param   None
+// 1121  *
+// 1122  * @return  None
+// 1123  ***************************************************************************************************/
+// 1124 #if HAL_UART_1_ENABLE
+// 1125 HAL_ISR_FUNCTION( halUart1RxIsr, URX1_VECTOR )
+// 1126 {
+// 1127   cfg1->rxBuf[cfg1->rxHead] = U1DBUF;
+// 1128 
+// 1129   if ( cfg1->rxHead == cfg1->rxMax )
+// 1130   {
+// 1131     cfg1->rxHead = 0;
+// 1132   }
+// 1133   else
+// 1134   {
+// 1135     cfg1->rxHead++;
+// 1136   }
+// 1137 }
+// 1138 #endif
+// 1139 
+// 1140 /***************************************************************************************************
+// 1141  * @fn      halUart0TxIsr
+// 1142  *
+// 1143  * @brief   UART0 Transmit Interrupt
+// 1144  *
+// 1145  * @param   None
+// 1146  *
+// 1147  * @return  None
+// 1148  ***************************************************************************************************/
+// 1149 #if HAL_UART_0_ENABLE
+// 1150 HAL_ISR_FUNCTION( halUart0TxIsr, UTX0_VECTOR )
+// 1151 {
+// 1152   UTX0IF = 0;
+// 1153 
+// 1154   if ( cfg0->txTail == cfg0->txMax )
+// 1155   {
+// 1156     cfg0->txTail = 0;
+// 1157   }
+// 1158   else
+// 1159   {
+// 1160     cfg0->txTail++;
+// 1161   }
+// 1162 
+// 1163   if ( cfg0->txTail != cfg0->txHead )
+// 1164   {
+// 1165     U0DBUF = cfg0->txBuf[cfg0->txTail];
+// 1166   }
+// 1167 }
+// 1168 #endif
+// 1169 
+// 1170 /***************************************************************************************************
+// 1171  * @fn      halUart1TxIsr
+// 1172  *
+// 1173  * @brief   UART1 Transmit Interrupt
+// 1174  *
+// 1175  * @param   None
+// 1176  *
+// 1177  * @return  None
+// 1178  ***************************************************************************************************/
+// 1179 #if HAL_UART_1_ENABLE
+// 1180 HAL_ISR_FUNCTION( halUart1TxIsr, UTX1_VECTOR )
+// 1181 {
+// 1182   UTX1IF = 0;
+// 1183   U1CSR &= ~CSR_TX_BYTE;  // Rev-D does not require, older does.
+// 1184 
+// 1185   if ( cfg1->txTail == cfg1->txMax )
+// 1186   {
+// 1187     cfg1->txTail = 0;
+// 1188   }
+// 1189   else
+// 1190   {
+// 1191     cfg1->txTail++;
+// 1192   }
+// 1193 
+// 1194   if ( cfg1->txTail != cfg1->txHead )
+// 1195   {
+// 1196     U1DBUF = cfg1->txBuf[cfg1->txTail];
+// 1197   }
+// 1198 }
+// 1199 #endif
+// 1200 #endif
+// 1201 
+// 1202 /******************************************************************************
+// 1203 ******************************************************************************/
+// 
+// 581 bytes in segment BANKED_CODE
+//  42 bytes in segment BANK_RELAYS
+//   1 byte  in segment SFR_AN
+// 
+// 623 bytes of CODE memory
+//   0 bytes of DATA memory (+ 1 byte shared)
+//
+//Errors: none
+//Warnings: none

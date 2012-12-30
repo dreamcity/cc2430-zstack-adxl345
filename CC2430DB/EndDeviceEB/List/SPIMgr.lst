@@ -1,0 +1,1133 @@
+###############################################################################
+#                                                                             #
+# IAR 8051 C/C++ Compiler V7.30B/W32                    28/Dec/2012  19:53:59 #
+# Copyright 2004-2007 IAR Systems. All rights reserved.                       #
+#                                                                             #
+#    Core               =  plain                                              #
+#    Code model         =  banked                                             #
+#    Data model         =  large                                              #
+#    Calling convention =  xdata reentrant                                    #
+#    Constant location  =  data                                               #
+#    Dptr setup         =  1,16                                               #
+#    Source file        =  C:\Texas Instruments\ZStack-1.4.3-1.2.1\Components #
+#                          \mt\SPIMgr.c                                       #
+#    Command line       =  -f "C:\Texas Instruments\ZStack-1.4.3-1.2.1\Projec #
+#                          ts\zstack\Samples\AXDApp\CC2430DB\..\..\..\Tools\C #
+#                          C2430DB\f8wEndev.cfg" (-DCPU32MHZ                  #
+#                          -DFORCE_MAC_NEAR -DROOT=__near_func                #
+#                          -DMAC_OPT_FFD=0 -DBLINK_LEDS "-DCONST=const        #
+#                          __code" -DGENERIC=__generic) -f "C:\Texas          #
+#                          Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\Sam #
+#                          ples\AXDApp\CC2430DB\..\..\..\Tools\CC2430DB\f8wCo #
+#                          nfig.cfg" (-DSECURE=0 -DDEFAULT_CHANLIST=0x0000080 #
+#                          0 -DZDAPP_CONFIG_PAN_ID=0xFFFF                     #
+#                          -DNWK_START_DELAY=100 -DEXTENDED_JOINING_RANDOM_MA #
+#                          SK=0x007F -DBEACON_REQUEST_DELAY=100               #
+#                          -DBEACON_REQ_DELAY_MASK=0x00FF                     #
+#                          -DROUTE_EXPIRY_TIME=30 -DAPSC_ACK_WAIT_DURATION_PO #
+#                          LLED=3000 -DNWK_INDIRECT_MSG_TIMEOUT=7             #
+#                          -DMAX_RREQ_ENTRIES=10 -DAPSC_MAX_FRAME_RETRIES=3   #
+#                          -DNWK_MAX_DATA_RETRIES=2                           #
+#                          -DMAX_POLL_FAILURE_RETRIES=2 -DMAX_BCAST=9         #
+#                          -DAPS_MAX_GROUPS=16 -DMAX_RTG_ENTRIES=20           #
+#                          -DNWK_MAX_BINDING_ENTRIES=10                       #
+#                          -DMAX_BINDING_CLUSTER_IDS=5 "-DDEFAULT_KEY={0x01,  #
+#                          0x03, 0x05, 0x07, 0x09, 0x0B, 0x0D, 0x0F, 0x00,    #
+#                          0x02, 0x04, 0x06, 0x08, 0x0A, 0x0C, 0x0D}"         #
+#                          -DRFD_RCVC_ALWAYS_ON=FALSE -DPOLL_RATE=1000        #
+#                          -DQUEUED_POLL_RATE=100 -DRESPONSE_POLL_RATE=100)   #
+#                          -DREJOIN_POLL_RATE=440 "C:\Texas                   #
+#                          Instruments\ZStack-1.4.3-1.2.1\Components\mt\SPIMg #
+#                          r.c" -D CC2430EB -D AXD_END -D NWK_AUTO_POLL -D    #
+#                          REFLECTOR -D ZTOOL_P1 -D MT_TASK -D xMT_ZDO_FUNC   #
+#                          -D LCD_SUPPORTED=DEBUG -D xPOWER_SAVING -lC        #
+#                          "C:\Texas Instruments\ZStack-1.4.3-1.2.1\Projects\ #
+#                          zstack\Samples\AXDApp\CC2430DB\EndDeviceEB\List\"  #
+#                          -lA "C:\Texas Instruments\ZStack-1.4.3-1.2.1\Proje #
+#                          cts\zstack\Samples\AXDApp\CC2430DB\EndDeviceEB\Lis #
+#                          t\" --diag_suppress Pe001,Pa010 --diag_remark      #
+#                          pe550 -o "C:\Texas Instruments\ZStack-1.4.3-1.2.1\ #
+#                          Projects\zstack\Samples\AXDApp\CC2430DB\EndDeviceE #
+#                          B\Obj\" -e --require_prototypes -z2 --no_cse       #
+#                          --no_unroll --no_inline --no_code_motion           #
+#                          --no_tbaa --debug --core=plain --dptr=16,1         #
+#                          --data_model=large --code_model=banked             #
+#                          --calling_convention=xdata_reentrant               #
+#                          --place_constants=data --nr_virtual_regs 8 -I      #
+#                          "C:\Texas Instruments\ZStack-1.4.3-1.2.1\Projects\ #
+#                          zstack\Samples\AXDApp\CC2430DB\" -I "C:\Texas      #
+#                          Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\Sam #
+#                          ples\AXDApp\CC2430DB\..\SOURCE\" -I "C:\Texas      #
+#                          Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\Sam #
+#                          ples\AXDApp\CC2430DB\..\Drivers\" -I "C:\Texas     #
+#                          Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\Sam #
+#                          ples\AXDApp\CC2430DB\..\..\..\ZMAIN\TI2430DB\" -I  #
+#                          "C:\Texas Instruments\ZStack-1.4.3-1.2.1\Projects\ #
+#                          zstack\Samples\AXDApp\CC2430DB\..\..\..\..\..\COMP #
+#                          ONENTS\MT\" -I "C:\Texas                           #
+#                          Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\Sam #
+#                          ples\AXDApp\CC2430DB\..\..\..\..\..\COMPONENTS\HAL #
+#                          \INCLUDE\" -I "C:\Texas Instruments\ZStack-1.4.3-1 #
+#                          .2.1\Projects\zstack\Samples\AXDApp\CC2430DB\..\.. #
+#                          \..\..\..\COMPONENTS\HAL\TARGET\CC2430EB\" -I      #
+#                          "C:\Texas Instruments\ZStack-1.4.3-1.2.1\Projects\ #
+#                          zstack\Samples\AXDApp\CC2430DB\..\..\..\..\..\COMP #
+#                          ONENTS\OSAL\MCU\CCSOC\" -I "C:\Texas               #
+#                          Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\Sam #
+#                          ples\AXDApp\CC2430DB\..\..\..\..\..\COMPONENTS\OSA #
+#                          L\INCLUDE\" -I "C:\Texas                           #
+#                          Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\Sam #
+#                          ples\AXDApp\CC2430DB\..\..\..\..\..\COMPONENTS\STA #
+#                          CK\AF\" -I "C:\Texas Instruments\ZStack-1.4.3-1.2. #
+#                          1\Projects\zstack\Samples\AXDApp\CC2430DB\..\..\.. #
+#                          \..\..\COMPONENTS\STACK\NWK\" -I "C:\Texas         #
+#                          Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\Sam #
+#                          ples\AXDApp\CC2430DB\..\..\..\..\..\COMPONENTS\STA #
+#                          CK\SEC\" -I "C:\Texas Instruments\ZStack-1.4.3-1.2 #
+#                          .1\Projects\zstack\Samples\AXDApp\CC2430DB\..\..\. #
+#                          .\..\..\COMPONENTS\STACK\SYS\" -I "C:\Texas        #
+#                          Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\Sam #
+#                          ples\AXDApp\CC2430DB\..\..\..\..\..\COMPONENTS\STA #
+#                          CK\ZDO\" -I "C:\Texas Instruments\ZStack-1.4.3-1.2 #
+#                          .1\Projects\zstack\Samples\AXDApp\CC2430DB\..\..\. #
+#                          .\..\..\COMPONENTS\ZMAC\F8W\" -I "C:\Texas         #
+#                          Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\Sam #
+#                          ples\AXDApp\CC2430DB\..\..\..\..\..\COMPONENTS\ZMA #
+#                          C\" -I "C:\Texas Instruments\ZStack-1.4.3-1.2.1\Pr #
+#                          ojects\zstack\Samples\AXDApp\CC2430DB\..\..\..\..\ #
+#                          ..\COMPONENTS\SERVICES\SADDR\" -I "C:\Texas        #
+#                          Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\Sam #
+#                          ples\AXDApp\CC2430DB\..\..\..\..\..\COMPONENTS\SER #
+#                          VICES\SDATA\" -I "C:\Texas                         #
+#                          Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\Sam #
+#                          ples\AXDApp\CC2430DB\..\..\..\..\..\COMPONENTS\MAC #
+#                          \INCLUDE\" -I "C:\Texas Instruments\ZStack-1.4.3-1 #
+#                          .2.1\Projects\zstack\Samples\AXDApp\CC2430DB\..\.. #
+#                          \..\..\..\COMPONENTS\MAC\HIGH_LEVEL\" -I           #
+#                          "C:\Texas Instruments\ZStack-1.4.3-1.2.1\Projects\ #
+#                          zstack\Samples\AXDApp\CC2430DB\..\..\..\..\..\COMP #
+#                          ONENTS\MAC\LOW_LEVEL\SRF03\" -I "C:\Texas          #
+#                          Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\Sam #
+#                          ples\AXDApp\CC2430DB\..\..\..\..\..\COMPONENTS\MAC #
+#                          \LOW_LEVEL\SRF03\SINGLE_CHIP\" -I "C:\Program      #
+#                          Files\IAR Systems\Embedded Workbench 4.0           #
+#                          Evaluation version\8051\INC\" -I "C:\Program       #
+#                          Files\IAR Systems\Embedded Workbench 4.0           #
+#                          Evaluation version\8051\INC\CLIB\"                 #
+#    List file          =  C:\Texas Instruments\ZStack-1.4.3-1.2.1\Projects\z #
+#                          stack\Samples\AXDApp\CC2430DB\EndDeviceEB\List\SPI #
+#                          Mgr.lst                                            #
+#    Object file        =  C:\Texas Instruments\ZStack-1.4.3-1.2.1\Projects\z #
+#                          stack\Samples\AXDApp\CC2430DB\EndDeviceEB\Obj\SPIM #
+#                          gr.r51                                             #
+#                                                                             #
+#                                                                             #
+###############################################################################
+
+C:\Texas Instruments\ZStack-1.4.3-1.2.1\Components\mt\SPIMgr.c
+      1          /**************************************************************************************************
+      2            Filename:       SPIMgr.c
+      3            Revised:        $Date: 2007-10-28 18:43:04 -0700 (Sun, 28 Oct 2007) $
+      4            Revision:       $Revision: 15800 $
+      5          
+      6            Description:    This module handles anything dealing with the serial port.
+      7          
+      8          
+      9            Copyright 2005-2007 Texas Instruments Incorporated. All rights reserved.
+     10          
+     11            IMPORTANT: Your use of this Software is limited to those specific rights
+     12            granted under the terms of a software license agreement between the user
+     13            who downloaded the software, his/her employer (which must be your employer)
+     14            and Texas Instruments Incorporated (the "License").  You may not use this
+     15            Software unless you agree to abide by the terms of the License. The License
+     16            limits your use, and you acknowledge, that the Software may not be modified,
+     17            copied or distributed unless embedded on a Texas Instruments microcontroller
+     18            or used solely and exclusively in conjunction with a Texas Instruments radio
+     19            frequency transceiver, which is integrated into your product.  Other than for
+     20            the foregoing purpose, you may not use, reproduce, copy, prepare derivative
+     21            works of, modify, distribute, perform, display or sell this Software and/or
+     22            its documentation for any purpose.
+     23          
+     24            YOU FURTHER ACKNOWLEDGE AND AGREE THAT THE SOFTWARE AND DOCUMENTATION ARE
+     25            PROVIDED “AS IS” WITHOUT WARRANTY OF ANY KIND, EITHER EXPRESS OR IMPLIED, 
+     26            INCLUDING WITHOUT LIMITATION, ANY WARRANTY OF MERCHANTABILITY, TITLE, 
+     27            NON-INFRINGEMENT AND FITNESS FOR A PARTICULAR PURPOSE. IN NO EVENT SHALL
+     28            TEXAS INSTRUMENTS OR ITS LICENSORS BE LIABLE OR OBLIGATED UNDER CONTRACT,
+     29            NEGLIGENCE, STRICT LIABILITY, CONTRIBUTION, BREACH OF WARRANTY, OR OTHER
+     30            LEGAL EQUITABLE THEORY ANY DIRECT OR INDIRECT DAMAGES OR EXPENSES
+     31            INCLUDING BUT NOT LIMITED TO ANY INCIDENTAL, SPECIAL, INDIRECT, PUNITIVE
+     32            OR CONSEQUENTIAL DAMAGES, LOST PROFITS OR LOST DATA, COST OF PROCUREMENT
+     33            OF SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
+     34            (INCLUDING BUT NOT LIMITED TO ANY DEFENSE THEREOF), OR OTHER SIMILAR COSTS.
+     35          
+     36            Should you have any questions regarding your right to use this Software,
+     37            contact Texas Instruments Incorporated at www.TI.com. 
+     38          **************************************************************************************************/
+     39          
+     40          /***************************************************************************************************
+     41           *                                           INCLUDES
+     42           ***************************************************************************************************/
+     43          #include "ZComDef.h"
+     44          #include "OSAL.h"
+     45          #include "hal_uart.h"
+     46          #include "MTEL.h"
+     47          #include "SPIMgr.h"
+     48          #include "OSAL_Memory.h"
+     49          
+     50          /***************************************************************************************************
+     51           *                                            MACROS
+     52           ***************************************************************************************************/
+     53          
+     54          /***************************************************************************************************
+     55           *                                           CONSTANTS
+     56           ***************************************************************************************************/
+     57          
+     58          /* State values for ZTool protocal */
+     59          #define SOP_STATE      0x00
+     60          #define CMD_STATE1     0x01
+     61          #define CMD_STATE2     0x02
+     62          #define LEN_STATE      0x03
+     63          #define DATA_STATE     0x04
+     64          #define FCS_STATE      0x05
+     65          
+     66          /***************************************************************************************************
+     67           *                                            TYPEDEFS
+     68           ***************************************************************************************************/
+     69          
+     70          /***************************************************************************************************
+     71           *                                         GLOBAL VARIABLES
+     72           ***************************************************************************************************/
+
+   \                                 In  segment XDATA_Z, align 1, keep-with-next
+     73          byte App_TaskID;
+   \                     App_TaskID:
+   \   000000                DS 1
+   \   000001                REQUIRE __INIT_XDATA_Z
+     74          
+     75          /* ZTool protocal parameters */
+     76          
+     77          #if defined (ZTOOL_P1) || defined (ZTOOL_P2)
+
+   \                                 In  segment XDATA_Z, align 1, keep-with-next
+     78          uint8 state;
+   \                     state:
+   \   000000                DS 1
+   \   000001                REQUIRE __INIT_XDATA_Z
+
+   \                                 In  segment XDATA_Z, align 1, keep-with-next
+     79          uint8  CMD_Token[2];
+   \                     CMD_Token:
+   \   000000                DS 2
+   \   000002                REQUIRE __INIT_XDATA_Z
+
+   \                                 In  segment XDATA_Z, align 1, keep-with-next
+     80          uint8  LEN_Token;
+   \                     LEN_Token:
+   \   000000                DS 1
+   \   000001                REQUIRE __INIT_XDATA_Z
+
+   \                                 In  segment XDATA_Z, align 1, keep-with-next
+     81          uint8  FSC_Token;
+   \                     FSC_Token:
+   \   000000                DS 1
+   \   000001                REQUIRE __INIT_XDATA_Z
+
+   \                                 In  segment XDATA_Z, align 1, keep-with-next
+     82          mtOSALSerialData_t  *SPI_Msg;
+   \                     SPI_Msg:
+   \   000000                DS 2
+   \   000002                REQUIRE __INIT_XDATA_Z
+
+   \                                 In  segment XDATA_Z, align 1, keep-with-next
+     83          uint8  tempDataLen;
+   \                     tempDataLen:
+   \   000000                DS 1
+   \   000001                REQUIRE __INIT_XDATA_Z
+     84          #endif //ZTOOL
+     85          
+     86          #if defined (ZAPP_P1) || defined (ZAPP_P2)
+     87          uint16  SPIMgr_MaxZAppBufLen;
+     88          bool    SPIMgr_ZAppRxStatus;
+     89          #endif
+     90          
+     91          
+     92          /***************************************************************************************************
+     93           *                                          LOCAL FUNCTIONS
+     94           ***************************************************************************************************/
+     95          
+     96          /***************************************************************************************************
+     97           * @fn      SPIMgr_Init
+     98           *
+     99           * @brief
+    100           *
+    101           * @param   None
+    102           *
+    103           * @return  None
+    104          ***************************************************************************************************/
+
+   \                                 In  segment BANKED_CODE, align 1, keep-with-next
+    105          void SPIMgr_Init ()
+   \                     SPIMgr_Init:
+    106          {
+   \   000000   C082         PUSH    DPL
+   \   000002   C083         PUSH    DPH
+   \   000004                ; Saved register size: 2
+   \   000004                ; Auto size: 29
+   \   000004   74E3         MOV     A,#-0x1d
+   \   000006   12....       LCALL   ?ALLOC_XSTACK8
+    107            halUARTCfg_t uartConfig;
+    108          
+    109            /* Initialize APP ID */
+    110            App_TaskID = 0;
+   \   000009   7400         MOV     A,#0x0
+   \   00000B   90....       MOV     DPTR,#App_TaskID
+   \   00000E   F0           MOVX    @DPTR,A
+    111          
+    112            /* UART Configuration */
+    113            uartConfig.configured           = TRUE;
+   \   00000F   7401         MOV     A,#0x1
+   \   000011   85..82       MOV     DPL,?XSP + 0
+   \   000014   85..83       MOV     DPH,?XSP + 1
+   \   000017   F0           MOVX    @DPTR,A
+    114            uartConfig.baudRate             = SPI_MGR_DEFAULT_BAUDRATE;
+   \   000018   7406         MOV     A,#0x6
+   \   00001A   C0E0         PUSH    A
+   \   00001C   7401         MOV     A,#0x1
+   \   00001E   12....       LCALL   ?XSTACK_DISP0_8
+   \   000021   D0E0         POP     A
+   \   000023   F0           MOVX    @DPTR,A
+    115            uartConfig.flowControl          = SPI_MGR_DEFAULT_OVERFLOW;
+   \   000024   7400         MOV     A,#0x0
+   \   000026   C0E0         PUSH    A
+   \   000028   7402         MOV     A,#0x2
+   \   00002A   12....       LCALL   ?XSTACK_DISP0_8
+   \   00002D   D0E0         POP     A
+   \   00002F   F0           MOVX    @DPTR,A
+    116            uartConfig.flowControlThreshold = SPI_MGR_DEFAULT_THRESHOLD;
+   \   000030   7403         MOV     A,#0x3
+   \   000032   12....       LCALL   ?XSTACK_DISP0_8
+   \   000035   7430         MOV     A,#0x30
+   \   000037   F0           MOVX    @DPTR,A
+   \   000038   A3           INC     DPTR
+   \   000039   7400         MOV     A,#0x0
+   \   00003B   F0           MOVX    @DPTR,A
+    117            uartConfig.rx.maxBufSize        = SPI_MGR_DEFAULT_MAX_RX_BUFF;
+   \   00003C   740A         MOV     A,#0xa
+   \   00003E   12....       LCALL   ?XSTACK_DISP0_8
+   \   000041   7480         MOV     A,#-0x80
+   \   000043   F0           MOVX    @DPTR,A
+   \   000044   A3           INC     DPTR
+   \   000045   7400         MOV     A,#0x0
+   \   000047   F0           MOVX    @DPTR,A
+    118            uartConfig.tx.maxBufSize        = SPI_MGR_DEFAULT_MAX_TX_BUFF;
+   \   000048   7412         MOV     A,#0x12
+   \   00004A   12....       LCALL   ?XSTACK_DISP0_8
+   \   00004D   7480         MOV     A,#-0x80
+   \   00004F   F0           MOVX    @DPTR,A
+   \   000050   A3           INC     DPTR
+   \   000051   7400         MOV     A,#0x0
+   \   000053   F0           MOVX    @DPTR,A
+    119            uartConfig.idleTimeout          = SPI_MGR_DEFAULT_IDLE_TIMEOUT;
+   \   000054   7406         MOV     A,#0x6
+   \   000056   C0E0         PUSH    A
+   \   000058   7405         MOV     A,#0x5
+   \   00005A   12....       LCALL   ?XSTACK_DISP0_8
+   \   00005D   D0E0         POP     A
+   \   00005F   F0           MOVX    @DPTR,A
+    120            uartConfig.intEnable            = TRUE;
+   \   000060   7401         MOV     A,#0x1
+   \   000062   C0E0         PUSH    A
+   \   000064   7416         MOV     A,#0x16
+   \   000066   12....       LCALL   ?XSTACK_DISP0_8
+   \   000069   D0E0         POP     A
+   \   00006B   F0           MOVX    @DPTR,A
+    121          #if defined (ZTOOL_P1) || defined (ZTOOL_P2)
+    122            uartConfig.callBackFunc         = SPIMgr_ProcessZToolData;
+   \   00006C   741B         MOV     A,#0x1b
+   \   00006E   12....       LCALL   ?XSTACK_DISP0_8
+   \   000071   74..         MOV     A,#(??SPIMgr_ProcessZToolData?relay & 0xff)
+   \   000073   F0           MOVX    @DPTR,A
+   \   000074   A3           INC     DPTR
+   \   000075   74..         MOV     A,#((??SPIMgr_ProcessZToolData?relay >> 8) & 0xff)
+   \   000077   F0           MOVX    @DPTR,A
+    123          #elif defined (ZAPP_P1) || defined (ZAPP_P2)
+    124            uartConfig.callBackFunc         = SPIMgr_ProcessZAppData;
+    125          #else
+    126            uartConfig.callBackFunc         = NULL;
+    127          #endif
+    128          
+    129            /* Start UART */
+    130          #if defined (SPI_MGR_DEFAULT_PORT)
+    131            HalUARTOpen (SPI_MGR_DEFAULT_PORT, &uartConfig);
+   \   000078                ; Setup parameters for call to function HalUARTOpen
+   \   000078   85..82       MOV     DPL,?XSP + 0
+   \   00007B   85..83       MOV     DPH,?XSP + 1
+   \   00007E   AA82         MOV     R2,DPL
+   \   000080   AB83         MOV     R3,DPH
+   \   000082   7900         MOV     R1,#0x0
+   \   000084   12....       LCALL   ??HalUARTOpen?relay
+    132          #else
+    133            /* Silence IAR compiler warning */
+    134            (void)uartConfig;
+    135          #endif
+    136          
+    137            /* Initialize for ZApp */
+    138          #if defined (ZAPP_P1) || defined (ZAPP_P2)
+    139            /* Default max bytes that ZAPP can take */
+    140            SPIMgr_MaxZAppBufLen  = 1;
+    141            SPIMgr_ZAppRxStatus   = SPI_MGR_ZAPP_RX_READY;
+    142          #endif
+    143          
+    144          
+    145          }
+   \   000087   741D         MOV     A,#0x1d
+   \   000089   12....       LCALL   ?DEALLOC_XSTACK8
+   \   00008C   D083         POP     DPH
+   \   00008E   D082         POP     DPL
+   \   000090   02....       LJMP    ?BRET
+    146          
+    147          /***************************************************************************************************
+    148           * @fn      MT_SerialRegisterTaskID
+    149           *
+    150           * @brief
+    151           *
+    152           *   This function registers the taskID of the application so it knows
+    153           *   where to send the messages whent they come in.
+    154           *
+    155           * @param   void
+    156           *
+    157           * @return  void
+    158           ***************************************************************************************************/
+
+   \                                 In  segment BANKED_CODE, align 1, keep-with-next
+    159          void SPIMgr_RegisterTaskID( byte taskID )
+   \                     SPIMgr_RegisterTaskID:
+    160          {
+   \   000000   C082         PUSH    DPL
+   \   000002   C083         PUSH    DPH
+   \   000004                ; Saved register size: 2
+   \   000004                ; Auto size: 0
+    161            App_TaskID = taskID;
+   \   000004   E9           MOV     A,R1
+   \   000005   90....       MOV     DPTR,#App_TaskID
+   \   000008   F0           MOVX    @DPTR,A
+    162          }
+   \   000009   D083         POP     DPH
+   \   00000B   D082         POP     DPL
+   \   00000D   02....       LJMP    ?BRET
+    163          
+    164          /***************************************************************************************************
+    165           * @fn      SPIMgr_CalcFCS
+    166           *
+    167           * @brief
+    168           *
+    169           *   Calculate the FCS of a message buffer by XOR'ing each byte.
+    170           *   Remember to NOT include SOP and FCS fields, so start at the CMD
+    171           *   field.
+    172           *
+    173           * @param   byte *msg_ptr - message pointer
+    174           * @param   byte len - length (in bytes) of message
+    175           *
+    176           * @return  result byte
+    177           ***************************************************************************************************/
+
+   \                                 In  segment BANKED_CODE, align 1, keep-with-next
+    178          byte SPIMgr_CalcFCS( uint8 *msg_ptr, uint8 len )
+   \                     SPIMgr_CalcFCS:
+    179          {
+   \   000000   74F7         MOV     A,#-0x9
+   \   000002   12....       LCALL   ?BANKED_ENTER_XDATA
+   \   000005                ; Saved register size: 9
+   \   000005                ; Auto size: 0
+   \   000005   E9           MOV     A,R1
+   \   000006   FD           MOV     R5,A
+    180            byte x;
+    181            byte xorResult;
+    182          
+    183            xorResult = 0;
+   \   000007   7900         MOV     R1,#0x0
+    184          
+    185            for ( x = 0; x < len; x++, msg_ptr++ )
+   \   000009   7C00         MOV     R4,#0x0
+   \                     ??SPIMgr_CalcFCS_0:
+   \   00000B   EC           MOV     A,R4
+   \   00000C   C3           CLR     C
+   \   00000D   9D           SUBB    A,R5
+   \   00000E   5014         JNC     ??SPIMgr_CalcFCS_1
+    186              xorResult = xorResult ^ *msg_ptr;
+   \   000010   8A82         MOV     DPL,R2
+   \   000012   8B83         MOV     DPH,R3
+   \   000014   E0           MOVX    A,@DPTR
+   \   000015   C9           XCH     A,R1
+   \   000016   69           XRL     A,R1
+   \   000017   F9           MOV     R1,A
+   \   000018   0C           INC     R4
+   \   000019   8A82         MOV     DPL,R2
+   \   00001B   8B83         MOV     DPH,R3
+   \   00001D   A3           INC     DPTR
+   \   00001E   AA82         MOV     R2,DPL
+   \   000020   AB83         MOV     R3,DPH
+   \   000022   80E7         SJMP    ??SPIMgr_CalcFCS_0
+    187          
+    188            return ( xorResult );
+   \                     ??SPIMgr_CalcFCS_1:
+   \   000024   7F01         MOV     R7,#0x1
+   \   000026   02....       LJMP    ?BANKED_LEAVE_XDATA
+    189          }
+    190          
+    191          
+    192          #if defined (ZTOOL_P1) || defined (ZTOOL_P2)
+    193          /***************************************************************************************************
+    194           * @fn      SPIMgr_ProcessZToolRxData
+    195           *
+    196           * @brief   | SOP | CMD  |   Data Length   | FSC  |
+    197           *          |  1  |  2   |       1         |  1   |
+    198           *
+    199           *          Parses the data and determine either is SPI or just simply serial data
+    200           *          then send the data to correct place (MT or APP)
+    201           *
+    202           * @param   pBuffer  - pointer to the buffer that contains the data
+    203           *          length   - length of the buffer
+    204           *
+    205           *
+    206           * @return  None
+    207           ***************************************************************************************************/
+
+   \                                 In  segment BANKED_CODE, align 1, keep-with-next
+    208          void SPIMgr_ProcessZToolData ( uint8 port, uint8 event )
+   \                     SPIMgr_ProcessZToolData:
+    209          {
+   \   000000   74F6         MOV     A,#-0xa
+   \   000002   12....       LCALL   ?BANKED_ENTER_XDATA
+   \   000005                ; Saved register size: 10
+   \   000005                ; Auto size: 1
+   \   000005   74FF         MOV     A,#-0x1
+   \   000007   12....       LCALL   ?ALLOC_XSTACK8
+   \   00000A   EA           MOV     A,R2
+   \   00000B   FE           MOV     R6,A
+    210            uint8  ch;
+    211          
+    212            /* Verify events */
+    213            if (event == HAL_UART_TX_FULL)
+   \   00000C   7408         MOV     A,#0x8
+   \   00000E   6E           XRL     A,R6
+   \   00000F   7003         JNZ     $+5
+   \   000011   02....       LJMP    ??SPIMgr_ProcessZToolData_0 & 0xFFFF
+    214            {
+    215              // Do something when TX if full
+    216              return;
+    217            }
+    218          
+    219            if (event & (HAL_UART_RX_FULL | HAL_UART_RX_ABOUT_FULL | HAL_UART_RX_TIMEOUT))
+   \   000014   7407         MOV     A,#0x7
+   \   000016   5E           ANL     A,R6
+   \   000017   7003         JNZ     $+5
+   \   000019   02....       LJMP    ??SPIMgr_ProcessZToolData_0 & 0xFFFF
+    220            {
+    221              while (Hal_UART_RxBufLen(SPI_MGR_DEFAULT_PORT))
+   \                     ??SPIMgr_ProcessZToolData_1:
+   \   00001C                ; Setup parameters for call to function Hal_UART_RxBufLen
+   \   00001C   7900         MOV     R1,#0x0
+   \   00001E   12....       LCALL   ??Hal_UART_RxBufLen?relay
+   \   000021   8A..         MOV     ?V0 + 0,R2
+   \   000023   8B..         MOV     ?V0 + 1,R3
+   \   000025   7400         MOV     A,#0x0
+   \   000027   65..         XRL     A,?V0 + 0
+   \   000029   7004         JNZ     ??SPIMgr_ProcessZToolData_2
+   \   00002B   7400         MOV     A,#0x0
+   \   00002D   65..         XRL     A,?V0 + 1
+   \                     ??SPIMgr_ProcessZToolData_2:
+   \   00002F   7003         JNZ     $+5
+   \   000031   02....       LJMP    ??SPIMgr_ProcessZToolData_0 & 0xFFFF
+    222              {
+    223                HalUARTRead (SPI_MGR_DEFAULT_PORT, &ch, 1);
+   \   000034                ; Setup parameters for call to function HalUARTRead
+   \   000034   7C01         MOV     R4,#0x1
+   \   000036   7D00         MOV     R5,#0x0
+   \   000038   85..82       MOV     DPL,?XSP + 0
+   \   00003B   85..83       MOV     DPH,?XSP + 1
+   \   00003E   AA82         MOV     R2,DPL
+   \   000040   AB83         MOV     R3,DPH
+   \   000042   7900         MOV     R1,#0x0
+   \   000044   12....       LCALL   ??HalUARTRead?relay
+    224          
+    225                switch (state)
+   \   000047   90....       MOV     DPTR,#state
+   \   00004A   E0           MOVX    A,@DPTR
+   \   00004B   12....       LCALL   ?UC_SWITCH_DENSE
+   \                     `?<Jumptable for SPIMgr_ProcessZToolData>_0`:
+   \   00004E   00           DB        0
+   \   00004F   05           DB        5
+   \   000050   ....         DW        ??SPIMgr_ProcessZToolData_1
+   \   000052   ....         DW        ??SPIMgr_ProcessZToolData_3
+   \   000054   ....         DW        ??SPIMgr_ProcessZToolData_4
+   \   000056   ....         DW        ??SPIMgr_ProcessZToolData_5
+   \   000058   ....         DW        ??SPIMgr_ProcessZToolData_6
+   \   00005A   ....         DW        ??SPIMgr_ProcessZToolData_7
+   \   00005C   ....         DW        ??SPIMgr_ProcessZToolData_8
+    226                {
+    227                  case SOP_STATE:
+    228                    if (ch == SOP_VALUE)
+   \                     ??SPIMgr_ProcessZToolData_3:
+   \   00005E   85..82       MOV     DPL,?XSP + 0
+   \   000061   85..83       MOV     DPH,?XSP + 1
+   \   000064   E0           MOVX    A,@DPTR
+   \   000065   6402         XRL     A,#0x2
+   \   000067   70B3         JNZ     ??SPIMgr_ProcessZToolData_1
+    229                      state = CMD_STATE1;
+   \   000069   7401         MOV     A,#0x1
+   \   00006B   90....       MOV     DPTR,#state
+   \   00006E   F0           MOVX    @DPTR,A
+   \   00006F   80AB         SJMP    ??SPIMgr_ProcessZToolData_1
+    230                    break;
+    231          
+    232                  case CMD_STATE1:
+    233                    CMD_Token[0] = ch;
+   \                     ??SPIMgr_ProcessZToolData_4:
+   \   000071   85..82       MOV     DPL,?XSP + 0
+   \   000074   85..83       MOV     DPH,?XSP + 1
+   \   000077   E0           MOVX    A,@DPTR
+   \   000078   90....       MOV     DPTR,#CMD_Token
+   \   00007B   F0           MOVX    @DPTR,A
+    234                    state = CMD_STATE2;
+   \   00007C   7402         MOV     A,#0x2
+   \   00007E   90....       MOV     DPTR,#state
+   \   000081   F0           MOVX    @DPTR,A
+   \   000082   8098         SJMP    ??SPIMgr_ProcessZToolData_1
+    235                    break;
+    236          
+    237                  case CMD_STATE2:
+    238                    CMD_Token[1] = ch;
+   \                     ??SPIMgr_ProcessZToolData_5:
+   \   000084   85..82       MOV     DPL,?XSP + 0
+   \   000087   85..83       MOV     DPH,?XSP + 1
+   \   00008A   E0           MOVX    A,@DPTR
+   \   00008B   90....       MOV     DPTR,#(CMD_Token + 1)
+   \   00008E   F0           MOVX    @DPTR,A
+    239                    state = LEN_STATE;
+   \   00008F   7403         MOV     A,#0x3
+   \   000091   90....       MOV     DPTR,#state
+   \   000094   F0           MOVX    @DPTR,A
+   \   000095   8085         SJMP    ??SPIMgr_ProcessZToolData_1
+    240                    break;
+    241          
+    242                  case LEN_STATE:
+    243                    LEN_Token = ch;
+   \                     ??SPIMgr_ProcessZToolData_6:
+   \   000097   85..82       MOV     DPL,?XSP + 0
+   \   00009A   85..83       MOV     DPH,?XSP + 1
+   \   00009D   E0           MOVX    A,@DPTR
+   \   00009E   90....       MOV     DPTR,#LEN_Token
+   \   0000A1   F0           MOVX    @DPTR,A
+    244                    if (ch == 0)
+   \   0000A2   85..82       MOV     DPL,?XSP + 0
+   \   0000A5   85..83       MOV     DPH,?XSP + 1
+   \   0000A8   E0           MOVX    A,@DPTR
+   \   0000A9   7008         JNZ     ??SPIMgr_ProcessZToolData_9
+    245                      state = FCS_STATE;
+   \   0000AB   7405         MOV     A,#0x5
+   \   0000AD   90....       MOV     DPTR,#state
+   \   0000B0   F0           MOVX    @DPTR,A
+   \   0000B1   8006         SJMP    ??SPIMgr_ProcessZToolData_10
+    246                    else
+    247                      state = DATA_STATE;
+   \                     ??SPIMgr_ProcessZToolData_9:
+   \   0000B3   7404         MOV     A,#0x4
+   \   0000B5   90....       MOV     DPTR,#state
+   \   0000B8   F0           MOVX    @DPTR,A
+    248          
+    249                    tempDataLen = 0;
+   \                     ??SPIMgr_ProcessZToolData_10:
+   \   0000B9   7400         MOV     A,#0x0
+   \   0000BB   90....       MOV     DPTR,#tempDataLen
+   \   0000BE   F0           MOVX    @DPTR,A
+    250          
+    251                    /* Allocate memory for the data */
+    252                    SPI_Msg = (mtOSALSerialData_t *)osal_msg_allocate( sizeof ( mtOSALSerialData_t ) + 2+1+LEN_Token );
+   \   0000BF                ; Setup parameters for call to function osal_msg_allocate
+   \   0000BF   90....       MOV     DPTR,#LEN_Token
+   \   0000C2   E0           MOVX    A,@DPTR
+   \   0000C3   F8           MOV     R0,A
+   \   0000C4   7900         MOV     R1,#0x0
+   \   0000C6   7407         MOV     A,#0x7
+   \   0000C8   28           ADD     A,R0
+   \   0000C9   FA           MOV     R2,A
+   \   0000CA   7400         MOV     A,#0x0
+   \   0000CC   39           ADDC    A,R1
+   \   0000CD   FB           MOV     R3,A
+   \   0000CE   12....       LCALL   ??osal_msg_allocate?relay
+   \   0000D1   90....       MOV     DPTR,#SPI_Msg
+   \   0000D4   EA           MOV     A,R2
+   \   0000D5   F0           MOVX    @DPTR,A
+   \   0000D6   A3           INC     DPTR
+   \   0000D7   EB           MOV     A,R3
+   \   0000D8   F0           MOVX    @DPTR,A
+    253          
+    254                    if (SPI_Msg)
+   \   0000D9   90....       MOV     DPTR,#SPI_Msg
+   \   0000DC   E0           MOVX    A,@DPTR
+   \   0000DD   6400         XRL     A,#0x0
+   \   0000DF   7004         JNZ     ??SPIMgr_ProcessZToolData_11
+   \   0000E1   A3           INC     DPTR
+   \   0000E2   E0           MOVX    A,@DPTR
+   \   0000E3   6400         XRL     A,#0x0
+   \                     ??SPIMgr_ProcessZToolData_11:
+   \   0000E5   7003         JNZ     $+5
+   \   0000E7   02....       LJMP    ??SPIMgr_ProcessZToolData_12 & 0xFFFF
+    255                    {
+    256                      /* Fill up what we can */
+    257                      SPI_Msg->hdr.event = CMD_SERIAL_MSG;
+   \   0000EA   7401         MOV     A,#0x1
+   \   0000EC   C0E0         PUSH    A
+   \   0000EE   90....       MOV     DPTR,#SPI_Msg
+   \   0000F1   E0           MOVX    A,@DPTR
+   \   0000F2   F8           MOV     R0,A
+   \   0000F3   A3           INC     DPTR
+   \   0000F4   E0           MOVX    A,@DPTR
+   \   0000F5   F583         MOV     DPH,A
+   \   0000F7   8882         MOV     DPL,R0
+   \   0000F9   D0E0         POP     A
+   \   0000FB   F0           MOVX    @DPTR,A
+    258                      SPI_Msg->msg = (uint8*)(SPI_Msg+1);
+   \   0000FC   90....       MOV     DPTR,#SPI_Msg
+   \   0000FF   E0           MOVX    A,@DPTR
+   \   000100   2404         ADD     A,#0x4
+   \   000102   F8           MOV     R0,A
+   \   000103   A3           INC     DPTR
+   \   000104   E0           MOVX    A,@DPTR
+   \   000105   3400         ADDC    A,#0x0
+   \   000107   F9           MOV     R1,A
+   \   000108   90....       MOV     DPTR,#SPI_Msg
+   \   00010B   E0           MOVX    A,@DPTR
+   \   00010C   FA           MOV     R2,A
+   \   00010D   A3           INC     DPTR
+   \   00010E   E0           MOVX    A,@DPTR
+   \   00010F   F583         MOV     DPH,A
+   \   000111   8A82         MOV     DPL,R2
+   \   000113   A3           INC     DPTR
+   \   000114   A3           INC     DPTR
+   \   000115   E8           MOV     A,R0
+   \   000116   F0           MOVX    @DPTR,A
+   \   000117   A3           INC     DPTR
+   \   000118   E9           MOV     A,R1
+   \   000119   F0           MOVX    @DPTR,A
+    259                      SPI_Msg->msg[0] = CMD_Token[0];
+   \   00011A   90....       MOV     DPTR,#CMD_Token
+   \   00011D   E0           MOVX    A,@DPTR
+   \   00011E   C0E0         PUSH    A
+   \   000120   90....       MOV     DPTR,#SPI_Msg
+   \   000123   E0           MOVX    A,@DPTR
+   \   000124   F8           MOV     R0,A
+   \   000125   A3           INC     DPTR
+   \   000126   E0           MOVX    A,@DPTR
+   \   000127   F583         MOV     DPH,A
+   \   000129   8882         MOV     DPL,R0
+   \   00012B   A3           INC     DPTR
+   \   00012C   A3           INC     DPTR
+   \   00012D   E0           MOVX    A,@DPTR
+   \   00012E   F8           MOV     R0,A
+   \   00012F   A3           INC     DPTR
+   \   000130   E0           MOVX    A,@DPTR
+   \   000131   F583         MOV     DPH,A
+   \   000133   8882         MOV     DPL,R0
+   \   000135   D0E0         POP     A
+   \   000137   F0           MOVX    @DPTR,A
+    260                      SPI_Msg->msg[1] = CMD_Token[1];
+   \   000138   90....       MOV     DPTR,#(CMD_Token + 1)
+   \   00013B   E0           MOVX    A,@DPTR
+   \   00013C   C0E0         PUSH    A
+   \   00013E   90....       MOV     DPTR,#SPI_Msg
+   \   000141   E0           MOVX    A,@DPTR
+   \   000142   F8           MOV     R0,A
+   \   000143   A3           INC     DPTR
+   \   000144   E0           MOVX    A,@DPTR
+   \   000145   F583         MOV     DPH,A
+   \   000147   8882         MOV     DPL,R0
+   \   000149   A3           INC     DPTR
+   \   00014A   A3           INC     DPTR
+   \   00014B   E0           MOVX    A,@DPTR
+   \   00014C   F8           MOV     R0,A
+   \   00014D   A3           INC     DPTR
+   \   00014E   E0           MOVX    A,@DPTR
+   \   00014F   F583         MOV     DPH,A
+   \   000151   8882         MOV     DPL,R0
+   \   000153   A3           INC     DPTR
+   \   000154   D0E0         POP     A
+   \   000156   F0           MOVX    @DPTR,A
+    261                      SPI_Msg->msg[2] = LEN_Token;
+   \   000157   90....       MOV     DPTR,#LEN_Token
+   \   00015A   E0           MOVX    A,@DPTR
+   \   00015B   C0E0         PUSH    A
+   \   00015D   90....       MOV     DPTR,#SPI_Msg
+   \   000160   E0           MOVX    A,@DPTR
+   \   000161   F8           MOV     R0,A
+   \   000162   A3           INC     DPTR
+   \   000163   E0           MOVX    A,@DPTR
+   \   000164   F583         MOV     DPH,A
+   \   000166   8882         MOV     DPL,R0
+   \   000168   A3           INC     DPTR
+   \   000169   A3           INC     DPTR
+   \   00016A   E0           MOVX    A,@DPTR
+   \   00016B   F8           MOV     R0,A
+   \   00016C   A3           INC     DPTR
+   \   00016D   E0           MOVX    A,@DPTR
+   \   00016E   F583         MOV     DPH,A
+   \   000170   8882         MOV     DPL,R0
+   \   000172   A3           INC     DPTR
+   \   000173   A3           INC     DPTR
+   \   000174   D0E0         POP     A
+   \   000176   F0           MOVX    @DPTR,A
+   \   000177   02....       LJMP    ??SPIMgr_ProcessZToolData_1 & 0xFFFF
+    262                    }
+    263                    else
+    264                    {
+    265                      state = SOP_STATE;
+   \                     ??SPIMgr_ProcessZToolData_12:
+   \   00017A   7400         MOV     A,#0x0
+   \   00017C   90....       MOV     DPTR,#state
+   \   00017F   F0           MOVX    @DPTR,A
+    266                      return;
+   \   000180   02....       LJMP    ??SPIMgr_ProcessZToolData_0 & 0xFFFF
+    267                    }
+    268          
+    269                    break;
+    270          
+    271                  case DATA_STATE:
+    272                      SPI_Msg->msg[3 + tempDataLen++] = ch;
+   \                     ??SPIMgr_ProcessZToolData_7:
+   \   000183   85..82       MOV     DPL,?XSP + 0
+   \   000186   85..83       MOV     DPH,?XSP + 1
+   \   000189   E0           MOVX    A,@DPTR
+   \   00018A   C0E0         PUSH    A
+   \   00018C   90....       MOV     DPTR,#tempDataLen
+   \   00018F   E0           MOVX    A,@DPTR
+   \   000190   F8           MOV     R0,A
+   \   000191   7900         MOV     R1,#0x0
+   \   000193   90....       MOV     DPTR,#SPI_Msg
+   \   000196   E0           MOVX    A,@DPTR
+   \   000197   FA           MOV     R2,A
+   \   000198   A3           INC     DPTR
+   \   000199   E0           MOVX    A,@DPTR
+   \   00019A   F583         MOV     DPH,A
+   \   00019C   8A82         MOV     DPL,R2
+   \   00019E   A3           INC     DPTR
+   \   00019F   A3           INC     DPTR
+   \   0001A0   E0           MOVX    A,@DPTR
+   \   0001A1   28           ADD     A,R0
+   \   0001A2   FA           MOV     R2,A
+   \   0001A3   A3           INC     DPTR
+   \   0001A4   E0           MOVX    A,@DPTR
+   \   0001A5   39           ADDC    A,R1
+   \   0001A6   8A82         MOV     DPL,R2
+   \   0001A8   F583         MOV     DPH,A
+   \   0001AA   A3           INC     DPTR
+   \   0001AB   A3           INC     DPTR
+   \   0001AC   A3           INC     DPTR
+   \   0001AD   D0E0         POP     A
+   \   0001AF   F0           MOVX    @DPTR,A
+   \   0001B0   90....       MOV     DPTR,#tempDataLen
+   \   0001B3   E0           MOVX    A,@DPTR
+   \   0001B4   2401         ADD     A,#0x1
+   \   0001B6   F0           MOVX    @DPTR,A
+    273                      if ( tempDataLen == LEN_Token )
+   \   0001B7   90....       MOV     DPTR,#tempDataLen
+   \   0001BA   E0           MOVX    A,@DPTR
+   \   0001BB   FA           MOV     R2,A
+   \   0001BC   90....       MOV     DPTR,#LEN_Token
+   \   0001BF   E0           MOVX    A,@DPTR
+   \   0001C0   6A           XRL     A,R2
+   \   0001C1   6003         JZ      $+5
+   \   0001C3   02....       LJMP    ??SPIMgr_ProcessZToolData_1 & 0xFFFF
+    274                        state = FCS_STATE;
+   \   0001C6   7405         MOV     A,#0x5
+   \   0001C8   90....       MOV     DPTR,#state
+   \   0001CB   F0           MOVX    @DPTR,A
+   \   0001CC   02....       LJMP    ??SPIMgr_ProcessZToolData_1 & 0xFFFF
+    275                    break;
+    276          
+    277                  case FCS_STATE:
+    278          
+    279                    FSC_Token = ch;
+   \                     ??SPIMgr_ProcessZToolData_8:
+   \   0001CF   85..82       MOV     DPL,?XSP + 0
+   \   0001D2   85..83       MOV     DPH,?XSP + 1
+   \   0001D5   E0           MOVX    A,@DPTR
+   \   0001D6   90....       MOV     DPTR,#FSC_Token
+   \   0001D9   F0           MOVX    @DPTR,A
+    280          
+    281                    /* Make sure it's correct */
+    282                    if ((SPIMgr_CalcFCS ((uint8*)&SPI_Msg->msg[0], 2 + 1 + LEN_Token) == FSC_Token))
+   \   0001DA                ; Setup parameters for call to function SPIMgr_CalcFCS
+   \   0001DA   90....       MOV     DPTR,#LEN_Token
+   \   0001DD   E0           MOVX    A,@DPTR
+   \   0001DE   2403         ADD     A,#0x3
+   \   0001E0   F9           MOV     R1,A
+   \   0001E1   90....       MOV     DPTR,#SPI_Msg
+   \   0001E4   E0           MOVX    A,@DPTR
+   \   0001E5   F8           MOV     R0,A
+   \   0001E6   A3           INC     DPTR
+   \   0001E7   E0           MOVX    A,@DPTR
+   \   0001E8   F583         MOV     DPH,A
+   \   0001EA   8882         MOV     DPL,R0
+   \   0001EC   A3           INC     DPTR
+   \   0001ED   A3           INC     DPTR
+   \   0001EE   E0           MOVX    A,@DPTR
+   \   0001EF   FA           MOV     R2,A
+   \   0001F0   A3           INC     DPTR
+   \   0001F1   E0           MOVX    A,@DPTR
+   \   0001F2   FB           MOV     R3,A
+   \   0001F3   12....       LCALL   ??SPIMgr_CalcFCS?relay
+   \   0001F6   E9           MOV     A,R1
+   \   0001F7   FA           MOV     R2,A
+   \   0001F8   90....       MOV     DPTR,#FSC_Token
+   \   0001FB   E0           MOVX    A,@DPTR
+   \   0001FC   6A           XRL     A,R2
+   \   0001FD   7012         JNZ     ??SPIMgr_ProcessZToolData_13
+    283                    {
+    284                      osal_msg_send( MT_TaskID, (byte *)SPI_Msg );
+   \   0001FF                ; Setup parameters for call to function osal_msg_send
+   \   0001FF   90....       MOV     DPTR,#SPI_Msg
+   \   000202   E0           MOVX    A,@DPTR
+   \   000203   FA           MOV     R2,A
+   \   000204   A3           INC     DPTR
+   \   000205   E0           MOVX    A,@DPTR
+   \   000206   FB           MOV     R3,A
+   \   000207   90....       MOV     DPTR,#MT_TaskID
+   \   00020A   E0           MOVX    A,@DPTR
+   \   00020B   F9           MOV     R1,A
+   \   00020C   12....       LCALL   ??osal_msg_send?relay
+   \   00020F   800B         SJMP    ??SPIMgr_ProcessZToolData_14
+    285                    }
+    286                    else
+    287                    {
+    288                      /* deallocate the msg */
+    289                      osal_msg_deallocate ( (uint8 *)SPI_Msg);
+   \                     ??SPIMgr_ProcessZToolData_13:
+   \   000211                ; Setup parameters for call to function osal_msg_deallocate
+   \   000211   90....       MOV     DPTR,#SPI_Msg
+   \   000214   E0           MOVX    A,@DPTR
+   \   000215   FA           MOV     R2,A
+   \   000216   A3           INC     DPTR
+   \   000217   E0           MOVX    A,@DPTR
+   \   000218   FB           MOV     R3,A
+   \   000219   12....       LCALL   ??osal_msg_deallocate?relay
+    290                    }
+    291          
+    292                    /* Reset the state, send or discard the buffers at this point */
+    293                    state = SOP_STATE;
+   \                     ??SPIMgr_ProcessZToolData_14:
+   \   00021C   7400         MOV     A,#0x0
+   \   00021E   90....       MOV     DPTR,#state
+   \   000221   F0           MOVX    @DPTR,A
+   \   000222   02....       LJMP    ??SPIMgr_ProcessZToolData_1 & 0xFFFF
+    294          
+    295                    break;
+    296          
+    297                  default:
+    298                   break;
+    299                }
+    300          
+    301          
+    302              }
+    303            }
+   \                     ??SPIMgr_ProcessZToolData_0:
+   \   000225   7401         MOV     A,#0x1
+   \   000227   12....       LCALL   ?DEALLOC_XSTACK8
+   \   00022A   7F02         MOV     R7,#0x2
+   \   00022C   02....       LJMP    ?BANKED_LEAVE_XDATA
+    304          }
+
+   \                                 In  segment BANK_RELAYS, align 1
+   \                     ??SPIMgr_Init?relay:
+   \   000000   12....       LCALL   ?BDISPATCH
+   \   000003   ......       DC24    SPIMgr_Init
+
+   \                                 In  segment BANK_RELAYS, align 1
+   \                     ??SPIMgr_RegisterTaskID?relay:
+   \   000000   12....       LCALL   ?BDISPATCH
+   \   000003   ......       DC24    SPIMgr_RegisterTaskID
+
+   \                                 In  segment BANK_RELAYS, align 1
+   \                     ??SPIMgr_CalcFCS?relay:
+   \   000000   12....       LCALL   ?BDISPATCH
+   \   000003   ......       DC24    SPIMgr_CalcFCS
+
+   \                                 In  segment BANK_RELAYS, align 1
+   \                     ??SPIMgr_ProcessZToolData?relay:
+   \   000000   12....       LCALL   ?BDISPATCH
+   \   000003   ......       DC24    SPIMgr_ProcessZToolData
+    305          #endif //ZTOOL
+    306          
+    307          #if defined (ZAPP_P1) || defined (ZAPP_P2)
+    308          /***************************************************************************************************
+    309           * @fn      SPIMgr_ProcessZAppRxData
+    310           *
+    311           * @brief   | SOP | CMD  |   Data Length   | FSC  |
+    312           *          |  1  |  2   |       1         |  1   |
+    313           *
+    314           *          Parses the data and determine either is SPI or just simply serial data
+    315           *          then send the data to correct place (MT or APP)
+    316           *
+    317           * @param   pBuffer  - pointer to the buffer that contains the data
+    318           *          length   - length of the buffer
+    319           *
+    320           *
+    321           * @return  None
+    322           ***************************************************************************************************/
+    323          void SPIMgr_ProcessZAppData ( uint8 port, uint8 event )
+    324          {
+    325          
+    326            osal_event_hdr_t  *msg_ptr;
+    327            uint16 length = 0;
+    328            uint16 rxBufLen  = Hal_UART_RxBufLen(SPI_MGR_DEFAULT_PORT);
+    329          
+    330            /*
+    331               If maxZAppBufferLength is 0 or larger than current length
+    332               the entire length of the current buffer is returned.
+    333            */
+    334            if ((SPIMgr_MaxZAppBufLen != 0) && (SPIMgr_MaxZAppBufLen <= rxBufLen))
+    335            {
+    336              length = SPIMgr_MaxZAppBufLen;
+    337            }
+    338            else
+    339            {
+    340              length = rxBufLen;
+    341            }
+    342          
+    343            /* Verify events */
+    344            if (event == HAL_UART_TX_FULL)
+    345            {
+    346              // Do something when TX if full
+    347              return;
+    348            }
+    349          
+    350            if (event & ( HAL_UART_RX_FULL | HAL_UART_RX_ABOUT_FULL | HAL_UART_RX_TIMEOUT))
+    351            {
+    352              if ( App_TaskID )
+    353              {
+    354                /*
+    355                   If Application is ready to receive and there is something
+    356                   in the Rx buffer then send it up
+    357                */
+    358                if ((SPIMgr_ZAppRxStatus == SPI_MGR_ZAPP_RX_READY ) && (length != 0))
+    359                {
+    360                  /* Disable App flow control until it processes the current data */
+    361                   SPIMgr_AppFlowControl ( SPI_MGR_ZAPP_RX_NOT_READY );
+    362          
+    363                  /* 2 more bytes are added, 1 for CMD type, other for length */
+    364                  msg_ptr = (osal_event_hdr_t *)osal_msg_allocate( length + sizeof(osal_event_hdr_t) );
+    365                  if ( msg_ptr )
+    366                  {
+    367                    msg_ptr->event = SPI_INCOMING_ZAPP_DATA;
+    368                    msg_ptr->status = length;
+    369          
+    370                    /* Read the data of Rx buffer */
+    371                    HalUARTRead( SPI_MGR_DEFAULT_PORT, (uint8 *)(msg_ptr + 1), length );
+    372          
+    373                    /* Send the raw data to application...or where ever */
+    374                    osal_msg_send( App_TaskID, (uint8 *)msg_ptr );
+    375                  }
+    376                }
+    377              }
+    378            }
+    379          }
+    380          
+    381          /***************************************************************************************************
+    382           * @fn      SPIMgr_ZAppBufferLengthRegister
+    383           *
+    384           * @brief
+    385           *
+    386           * @param   maxLen - Max Length that the application wants at a time
+    387           *
+    388           * @return  None
+    389           *
+    390           ***************************************************************************************************/
+    391          void SPIMgr_ZAppBufferLengthRegister ( uint16 maxLen )
+    392          {
+    393            /* If the maxLen is larger than the RX buff, something is not right */
+    394            if (maxLen <= SPI_MGR_DEFAULT_MAX_RX_BUFF)
+    395              SPIMgr_MaxZAppBufLen = maxLen;
+    396            else
+    397              SPIMgr_MaxZAppBufLen = 1; /* default is 1 byte */
+    398          }
+    399          
+    400          /***************************************************************************************************
+    401           * @fn      SPIMgr_AppFlowControl
+    402           *
+    403           * @brief
+    404           *
+    405           * @param   status - ready to send or not
+    406           *
+    407           * @return  None
+    408           *
+    409           ***************************************************************************************************/
+    410          void SPIMgr_AppFlowControl ( bool status )
+    411          {
+    412          
+    413            /* Make sure only update if needed */
+    414            if (status != SPIMgr_ZAppRxStatus )
+    415            {
+    416              SPIMgr_ZAppRxStatus = status;
+    417            }
+    418          
+    419            /* App is ready to read again, ProcessZAppData have to be triggered too */
+    420            if (status == SPI_MGR_ZAPP_RX_READY)
+    421            {
+    422              SPIMgr_ProcessZAppData ( SPI_MGR_DEFAULT_PORT, HAL_UART_RX_TIMEOUT );
+    423            }
+    424          
+    425          }
+    426          
+    427          #endif //ZAPP
+    428          
+    429          /***************************************************************************************************
+    430          ***************************************************************************************************/
+
+   Maximum stack usage in bytes:
+
+     Function                 ISTACK PSTACK XSTACK
+     --------                 ------ ------ ------
+     SPIMgr_CalcFCS               0      0     20
+     SPIMgr_Init                  3      0     29
+       -> HalUARTOpen             4      0     58
+     SPIMgr_ProcessZToolData      1      0     11
+       -> Hal_UART_RxBufLen       0      0     22
+       -> HalUARTRead             0      0     22
+       -> osal_msg_allocate       0      0     22
+       -> SPIMgr_CalcFCS          0      0     22
+       -> osal_msg_send           0      0     22
+       -> osal_msg_deallocate     0      0     22
+     SPIMgr_RegisterTaskID        2      0      0
+
+
+   Segment part sizes:
+
+     Function/Label                 Bytes
+     --------------                 -----
+     App_TaskID                        1
+     state                             1
+     CMD_Token                         2
+     LEN_Token                         1
+     FSC_Token                         1
+     SPI_Msg                           2
+     tempDataLen                       1
+     SPIMgr_Init                     147
+     SPIMgr_RegisterTaskID            16
+     SPIMgr_CalcFCS                   41
+     SPIMgr_ProcessZToolData         559
+     ??SPIMgr_Init?relay               6
+     ??SPIMgr_RegisterTaskID?relay     6
+     ??SPIMgr_CalcFCS?relay            6
+     ??SPIMgr_ProcessZToolData?relay
+                                       6
+
+ 
+ 763 bytes in segment BANKED_CODE
+  24 bytes in segment BANK_RELAYS
+   9 bytes in segment XDATA_Z
+ 
+ 787 bytes of CODE  memory
+   9 bytes of XDATA memory
+
+Errors: none
+Warnings: none

@@ -1,0 +1,1512 @@
+###############################################################################
+#                                                                             #
+# IAR 8051 C/C++ Compiler V7.30B/W32                    28/Dec/2012  21:17:10 #
+# Copyright 2004-2007 IAR Systems. All rights reserved.                       #
+#                                                                             #
+#    Core               =  plain                                              #
+#    Code model         =  banked                                             #
+#    Data model         =  large                                              #
+#    Calling convention =  xdata reentrant                                    #
+#    Constant location  =  data                                               #
+#    Dptr setup         =  1,16                                               #
+#    Source file        =  C:\Texas Instruments\ZStack-1.4.3-1.2.1\Components #
+#                          \mt\MT_ZDO.c                                       #
+#    Command line       =  -f "C:\Texas Instruments\ZStack-1.4.3-1.2.1\Projec #
+#                          ts\zstack\Samples\AXDApp\CC2430DB\..\..\..\Tools\C #
+#                          C2430DB\f8wCoord.cfg" (-DCPU32MHZ                  #
+#                          -DFORCE_MAC_NEAR -DROOT=__near_func                #
+#                          -DMAC_CFG_APP_PENDING_QUEUE=TRUE                   #
+#                          -DZDO_COORDINATOR -DRTR_NWK -DBLINK_LEDS           #
+#                          "-DCONST=const __code" -DGENERIC=__generic) -f     #
+#                          "C:\Texas Instruments\ZStack-1.4.3-1.2.1\Projects\ #
+#                          zstack\Samples\AXDApp\CC2430DB\..\..\..\Tools\CC24 #
+#                          30DB\f8wConfig.cfg" (-DSECURE=0                    #
+#                          -DDEFAULT_CHANLIST=0x00000800                      #
+#                          -DZDAPP_CONFIG_PAN_ID=0xFFFF                       #
+#                          -DNWK_START_DELAY=100 -DEXTENDED_JOINING_RANDOM_MA #
+#                          SK=0x007F -DBEACON_REQUEST_DELAY=100               #
+#                          -DBEACON_REQ_DELAY_MASK=0x00FF                     #
+#                          -DROUTE_EXPIRY_TIME=30 -DAPSC_ACK_WAIT_DURATION_PO #
+#                          LLED=3000 -DNWK_INDIRECT_MSG_TIMEOUT=7             #
+#                          -DMAX_RREQ_ENTRIES=10 -DAPSC_MAX_FRAME_RETRIES=3   #
+#                          -DNWK_MAX_DATA_RETRIES=2                           #
+#                          -DMAX_POLL_FAILURE_RETRIES=2 -DMAX_BCAST=9         #
+#                          -DAPS_MAX_GROUPS=16 -DMAX_RTG_ENTRIES=20           #
+#                          -DNWK_MAX_BINDING_ENTRIES=10                       #
+#                          -DMAX_BINDING_CLUSTER_IDS=5 "-DDEFAULT_KEY={0x01,  #
+#                          0x03, 0x05, 0x07, 0x09, 0x0B, 0x0D, 0x0F, 0x00,    #
+#                          0x02, 0x04, 0x06, 0x08, 0x0A, 0x0C, 0x0D}"         #
+#                          -DRFD_RCVC_ALWAYS_ON=FALSE -DPOLL_RATE=1000        #
+#                          -DQUEUED_POLL_RATE=100 -DRESPONSE_POLL_RATE=100)   #
+#                          -DREJOIN_POLL_RATE=440 "C:\Texas                   #
+#                          Instruments\ZStack-1.4.3-1.2.1\Components\mt\MT_ZD #
+#                          O.c" -D CC2430DB -D REFLECTOR -D xZTOOL_P2 -D      #
+#                          xMT_TASK -D xMT_ZDO_FUNC -D xLCD_SUPPORTED=DEBUG   #
+#                          -lC "C:\Texas Instruments\ZStack-1.4.3-1.2.1\Proje #
+#                          cts\zstack\Samples\AXDApp\CC2430DB\CoordinatorDB\L #
+#                          ist\" -lA "C:\Texas Instruments\ZStack-1.4.3-1.2.1 #
+#                          \Projects\zstack\Samples\AXDApp\CC2430DB\Coordinat #
+#                          orDB\List\" --diag_suppress Pe001,Pa010            #
+#                          --diag_remark pe550 -o "C:\Texas                   #
+#                          Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\Sam #
+#                          ples\AXDApp\CC2430DB\CoordinatorDB\Obj\" -e        #
+#                          --require_prototypes -z9 --no_code_motion --debug  #
+#                          --core=plain --dptr=16,1 --data_model=large        #
+#                          --code_model=banked --calling_convention=xdata_ree #
+#                          ntrant --place_constants=data --nr_virtual_regs 8  #
+#                          -I "C:\Texas Instruments\ZStack-1.4.3-1.2.1\Projec #
+#                          ts\zstack\Samples\AXDApp\CC2430DB\" -I "C:\Texas   #
+#                          Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\Sam #
+#                          ples\AXDApp\CC2430DB\..\SOURCE\" -I "C:\Texas      #
+#                          Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\Sam #
+#                          ples\AXDApp\CC2430DB\..\..\..\ZMAIN\TI2430DB\" -I  #
+#                          "C:\Texas Instruments\ZStack-1.4.3-1.2.1\Projects\ #
+#                          zstack\Samples\AXDApp\CC2430DB\..\..\..\..\..\COMP #
+#                          ONENTS\MT\" -I "C:\Texas                           #
+#                          Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\Sam #
+#                          ples\AXDApp\CC2430DB\..\..\..\..\..\COMPONENTS\HAL #
+#                          \INCLUDE\" -I "C:\Texas Instruments\ZStack-1.4.3-1 #
+#                          .2.1\Projects\zstack\Samples\AXDApp\CC2430DB\..\.. #
+#                          \..\..\..\COMPONENTS\HAL\TARGET\CC2430DB\" -I      #
+#                          "C:\Texas Instruments\ZStack-1.4.3-1.2.1\Projects\ #
+#                          zstack\Samples\AXDApp\CC2430DB\..\..\..\..\..\COMP #
+#                          ONENTS\OSAL\MCU\CCSOC\" -I "C:\Texas               #
+#                          Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\Sam #
+#                          ples\AXDApp\CC2430DB\..\..\..\..\..\COMPONENTS\OSA #
+#                          L\INCLUDE\" -I "C:\Texas                           #
+#                          Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\Sam #
+#                          ples\AXDApp\CC2430DB\..\..\..\..\..\COMPONENTS\STA #
+#                          CK\AF\" -I "C:\Texas Instruments\ZStack-1.4.3-1.2. #
+#                          1\Projects\zstack\Samples\AXDApp\CC2430DB\..\..\.. #
+#                          \..\..\COMPONENTS\STACK\NWK\" -I "C:\Texas         #
+#                          Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\Sam #
+#                          ples\AXDApp\CC2430DB\..\..\..\..\..\COMPONENTS\STA #
+#                          CK\SEC\" -I "C:\Texas Instruments\ZStack-1.4.3-1.2 #
+#                          .1\Projects\zstack\Samples\AXDApp\CC2430DB\..\..\. #
+#                          .\..\..\COMPONENTS\STACK\SYS\" -I "C:\Texas        #
+#                          Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\Sam #
+#                          ples\AXDApp\CC2430DB\..\..\..\..\..\COMPONENTS\STA #
+#                          CK\ZDO\" -I "C:\Texas Instruments\ZStack-1.4.3-1.2 #
+#                          .1\Projects\zstack\Samples\AXDApp\CC2430DB\..\..\. #
+#                          .\..\..\COMPONENTS\ZMAC\F8W\" -I "C:\Texas         #
+#                          Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\Sam #
+#                          ples\AXDApp\CC2430DB\..\..\..\..\..\COMPONENTS\ZMA #
+#                          C\" -I "C:\Texas Instruments\ZStack-1.4.3-1.2.1\Pr #
+#                          ojects\zstack\Samples\AXDApp\CC2430DB\..\..\..\..\ #
+#                          ..\COMPONENTS\SERVICES\SADDR\" -I "C:\Texas        #
+#                          Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\Sam #
+#                          ples\AXDApp\CC2430DB\..\..\..\..\..\COMPONENTS\SER #
+#                          VICES\SDATA\" -I "C:\Texas                         #
+#                          Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\Sam #
+#                          ples\AXDApp\CC2430DB\..\..\..\..\..\COMPONENTS\MAC #
+#                          \INCLUDE\" -I "C:\Texas Instruments\ZStack-1.4.3-1 #
+#                          .2.1\Projects\zstack\Samples\AXDApp\CC2430DB\..\.. #
+#                          \..\..\..\COMPONENTS\MAC\HIGH_LEVEL\" -I           #
+#                          "C:\Texas Instruments\ZStack-1.4.3-1.2.1\Projects\ #
+#                          zstack\Samples\AXDApp\CC2430DB\..\..\..\..\..\COMP #
+#                          ONENTS\MAC\LOW_LEVEL\SRF03\" -I "C:\Texas          #
+#                          Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\Sam #
+#                          ples\AXDApp\CC2430DB\..\..\..\..\..\COMPONENTS\MAC #
+#                          \LOW_LEVEL\SRF03\SINGLE_CHIP\" -I "C:\Program      #
+#                          Files\IAR Systems\Embedded Workbench 4.0           #
+#                          Evaluation version\8051\INC\" -I "C:\Program       #
+#                          Files\IAR Systems\Embedded Workbench 4.0           #
+#                          Evaluation version\8051\INC\CLIB\"                 #
+#    List file          =  C:\Texas Instruments\ZStack-1.4.3-1.2.1\Projects\z #
+#                          stack\Samples\AXDApp\CC2430DB\CoordinatorDB\List\M #
+#                          T_ZDO.lst                                          #
+#    Object file        =  C:\Texas Instruments\ZStack-1.4.3-1.2.1\Projects\z #
+#                          stack\Samples\AXDApp\CC2430DB\CoordinatorDB\Obj\MT #
+#                          _ZDO.r51                                           #
+#                                                                             #
+#                                                                             #
+###############################################################################
+
+C:\Texas Instruments\ZStack-1.4.3-1.2.1\Components\mt\MT_ZDO.c
+      1          /**************************************************************************************************
+      2            Filename:       MT_ZDO.c
+      3            Revised:        $Date: 2007-11-06 14:02:09 -0800 (Tue, 06 Nov 2007) $
+      4            Revision:       $Revision: 15877 $
+      5          
+      6            Description:    MonitorTest functions for the ZDO layer.
+      7          
+      8          
+      9            Copyright 2004-2007 Texas Instruments Incorporated. All rights reserved.
+     10          
+     11            IMPORTANT: Your use of this Software is limited to those specific rights
+     12            granted under the terms of a software license agreement between the user
+     13            who downloaded the software, his/her employer (which must be your employer)
+     14            and Texas Instruments Incorporated (the "License").  You may not use this
+     15            Software unless you agree to abide by the terms of the License. The License
+     16            limits your use, and you acknowledge, that the Software may not be modified,
+     17            copied or distributed unless embedded on a Texas Instruments microcontroller
+     18            or used solely and exclusively in conjunction with a Texas Instruments radio
+     19            frequency transceiver, which is integrated into your product.  Other than for
+     20            the foregoing purpose, you may not use, reproduce, copy, prepare derivative
+     21            works of, modify, distribute, perform, display or sell this Software and/or
+     22            its documentation for any purpose.
+     23          
+     24            YOU FURTHER ACKNOWLEDGE AND AGREE THAT THE SOFTWARE AND DOCUMENTATION ARE
+     25            PROVIDED “AS IS” WITHOUT WARRANTY OF ANY KIND, EITHER EXPRESS OR IMPLIED, 
+     26            INCLUDING WITHOUT LIMITATION, ANY WARRANTY OF MERCHANTABILITY, TITLE, 
+     27            NON-INFRINGEMENT AND FITNESS FOR A PARTICULAR PURPOSE. IN NO EVENT SHALL
+     28            TEXAS INSTRUMENTS OR ITS LICENSORS BE LIABLE OR OBLIGATED UNDER CONTRACT,
+     29            NEGLIGENCE, STRICT LIABILITY, CONTRIBUTION, BREACH OF WARRANTY, OR OTHER
+     30            LEGAL EQUITABLE THEORY ANY DIRECT OR INDIRECT DAMAGES OR EXPENSES
+     31            INCLUDING BUT NOT LIMITED TO ANY INCIDENTAL, SPECIAL, INDIRECT, PUNITIVE
+     32            OR CONSEQUENTIAL DAMAGES, LOST PROFITS OR LOST DATA, COST OF PROCUREMENT
+     33            OF SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
+     34            (INCLUDING BUT NOT LIMITED TO ANY DEFENSE THEREOF), OR OTHER SIMILAR COSTS.
+     35          
+     36            Should you have any questions regarding your right to use this Software,
+     37            contact Texas Instruments Incorporated at www.TI.com. 
+     38          **************************************************************************************************/
+     39          
+     40          #ifdef MT_ZDO_FUNC
+     41          
+     42          /*********************************************************************
+     43           * INCLUDES
+     44           */
+     45          #include "ZComDef.h"
+     46          #include "OSAL.h"
+     47          #include "MTEL.h"
+     48          #include "MT_ZDO.h"
+     49          #include "APSMEDE.h"
+     50          #include "ZDConfig.h"
+     51          #include "ZDProfile.h"
+     52          #include "ZDObject.h"
+     53          #include "ZDApp.h"
+     54          
+     55          #if !defined( WIN32 )
+     56            #include "OnBoard.h"
+     57          #endif
+     58          
+     59          #include "nwk_util.h"
+     60          
+     61          /*********************************************************************
+     62           * MACROS
+     63           */
+     64          
+     65          /*********************************************************************
+     66           * CONSTANTS
+     67           */
+     68          
+     69          /*********************************************************************
+     70           * TYPEDEFS
+     71           */
+     72          
+     73          /*********************************************************************
+     74           * GLOBAL VARIABLES
+     75           */
+     76          uint32 _zdoCallbackSub;
+     77          
+     78          /*********************************************************************
+     79           * EXTERNAL VARIABLES
+     80           */
+     81          
+     82          /*********************************************************************
+     83           * EXTERNAL FUNCTIONS
+     84           */
+     85          
+     86          /*********************************************************************
+     87           * LOCAL VARIABLES
+     88           */
+     89          uint8 mtzdoResponseBuffer[100];
+     90          
+     91          /*********************************************************************
+     92           * LOCAL FUNCTIONS
+     93           */
+     94          byte *zdo_MT_MakeExtAddr( zAddrType_t *devAddr, byte *pData );
+     95          byte *zdo_MT_CopyRevExtAddr( byte *dstMsg, byte *addr );
+     96          
+     97          uint8 zdo_MTCB_NwkIEEEAddrRspCB( zdoIncomingMsg_t *inMsg, uint8 *msg );
+     98          uint8 zdo_MTCB_NodeDescRspCB( zdoIncomingMsg_t *inMsg, uint8 *msg );
+     99          uint8 zdo_MTCB_PowerDescRspCB( zdoIncomingMsg_t *inMsg, uint8 *msg );
+    100          uint8 zdo_MTCB_SimpleDescRspCB( zdoIncomingMsg_t *inMsg, uint8 *msg );
+    101          uint8 zdo_MTCB_MatchActiveEPRspCB( zdoIncomingMsg_t *inMsg, uint8 *msg );
+    102          uint8 zdo_MTCB_BindRspCB( zdoIncomingMsg_t *inMsg, uint8 *msg );
+    103          uint8 zdo_MTCB_MgmtNwkDiscRspCB( zdoIncomingMsg_t *inMsg, uint8 *msg );
+    104          uint8 zdo_MTCB_MgmtLqiRspCB( zdoIncomingMsg_t *inMsg, uint8 *msg );
+    105          uint8 zdo_MTCB_MgmtRtgRspCB( zdoIncomingMsg_t *inMsg, uint8 *msg );
+    106          uint8 zdo_MTCB_MgmtBindRspCB( zdoIncomingMsg_t *inMsg, uint8 *msg );
+    107          uint8 zdo_MTCB_MgmtDirectJoinRspCB( zdoIncomingMsg_t *inMsg, uint8 *msg );
+    108          uint8 zdo_MTCB_MgmtLeaveRspCB( zdoIncomingMsg_t *inMsg, uint8 *msg );
+    109          uint8 zdo_MTCB_MgmtPermitJoinRspCB( zdoIncomingMsg_t *inMsg, uint8 *msg );
+    110          uint8 zdo_MTCB_UserDescRspCB( zdoIncomingMsg_t *inMsg, uint8 *msg );
+    111          uint8 zdo_MTCB_UserDescConfCB( zdoIncomingMsg_t *inMsg, uint8 *msg );
+    112          uint8 zdo_MTCB_ServerDiscRspCB( zdoIncomingMsg_t *inMsg, uint8 *msg );
+    113          
+    114          /*********************************************************************
+    115           * Callback Table
+    116           */
+    117          typedef uint8 (*pfnMtZdoRspProc)( zdoIncomingMsg_t *inMsg, uint8 *buf );
+    118          
+    119          typedef struct
+    120          {
+    121            uint16            clusterID;
+    122            uint32            subCBID;    // Subscription bit
+    123            uint16            mtID;       // SPI message ID
+    124            pfnMtZdoRspProc   pFn;
+    125          } MTZDO_ConversionItem_t;
+    126          
+    127          CONST MTZDO_ConversionItem_t mtzdoConvTable[] = 
+    128          {
+    129          #if defined ( ZDO_NWKADDR_REQUEST )
+    130            {NWK_addr_rsp, CB_ID_ZDO_NWK_ADDR_RSP, SPI_CB_ZDO_NWK_ADDR_RSP, zdo_MTCB_NwkIEEEAddrRspCB},
+    131          #endif  
+    132          #if defined ( ZDO_IEEEADDR_REQUEST )
+    133            {IEEE_addr_rsp, CB_ID_ZDO_IEEE_ADDR_RSP, SPI_CB_ZDO_IEEE_ADDR_RSP, zdo_MTCB_NwkIEEEAddrRspCB},
+    134          #endif  
+    135          #if defined ( ZDO_NODEDESC_REQUEST )
+    136            {Node_Desc_rsp, CB_ID_ZDO_NODE_DESC_RSP, SPI_CB_ZDO_NODE_DESC_RSP, zdo_MTCB_NodeDescRspCB},
+    137          #endif
+    138          #if defined ( ZDO_POWERDESC_REQUEST )
+    139            {Power_Desc_rsp, CB_ID_ZDO_POWER_DESC_RSP, SPI_CB_ZDO_POWER_DESC_RSP, zdo_MTCB_PowerDescRspCB},
+    140          #endif
+    141          #if defined ( ZDO_SIMPLEDESC_REQUEST )
+    142            {Simple_Desc_rsp, CB_ID_ZDO_SIMPLE_DESC_RSP, SPI_CB_ZDO_SIMPLE_DESC_RSP, zdo_MTCB_SimpleDescRspCB},
+    143          #endif
+    144          #if defined ( ZDO_ACTIVEEP_REQUEST )
+    145            {Active_EP_rsp, CB_ID_ZDO_ACTIVE_EPINT_RSP, SPI_CB_ZDO_ACTIVE_EPINT_RSP, zdo_MTCB_MatchActiveEPRspCB},
+    146          #endif
+    147          #if defined ( ZDO_MATCH_REQUEST )
+    148            {Match_Desc_rsp, CB_ID_ZDO_MATCH_DESC_RSP, SPI_CB_ZDO_MATCH_DESC_RSP, zdo_MTCB_MatchActiveEPRspCB},
+    149          #endif
+    150          #if defined ( ZDO_BIND_UNBIND_REQUEST )
+    151            {Bind_rsp, CB_ID_ZDO_BIND_RSP, SPI_CB_ZDO_BIND_RSP, zdo_MTCB_BindRspCB},
+    152            {Unbind_rsp, CB_ID_ZDO_UNBIND_RSP, SPI_CB_ZDO_UNBIND_RSP, zdo_MTCB_BindRspCB},
+    153          #endif
+    154          #if defined ( ZDO_ENDDEVICEBIND_REQUEST )
+    155            {End_Device_Bind_rsp, CB_ID_ZDO_END_DEVICE_BIND_RSP, SPI_CB_ZDO_END_DEVICE_BIND_RSP, zdo_MTCB_BindRspCB},
+    156          #endif  
+    157          #if defined ( ZDO_USERDESC_REQUEST )
+    158            {User_Desc_rsp, CB_ID_ZDO_USER_DESC_RSP, SPI_CB_ZDO_USER_DESC_RSP, zdo_MTCB_UserDescRspCB},
+    159          #endif
+    160          #if defined ( ZDO_USERDESCSET_REQUEST )
+    161            {User_Desc_conf, CB_ID_ZDO_USER_DESC_CONF, SPI_CB_ZDO_USER_DESC_CNF, zdo_MTCB_UserDescConfCB},
+    162          #endif
+    163          #if defined ( ZDO_SERVERDISC_REQUEST )
+    164            {Server_Discovery_rsp, CB_ID_ZDO_SERVERDISC_RSP, SPI_CB_ZDO_SERVERDISC_RSP, zdo_MTCB_ServerDiscRspCB},
+    165          #endif
+    166          #if defined ( ZDO_MGMT_NWKDISC_REQUEST )
+    167            {Mgmt_NWK_Disc_rsp, CB_ID_ZDO_MGMT_NWKDISC_RSP, SPI_CB_ZDO_MGMT_NWKDISC_RSP, zdo_MTCB_MgmtNwkDiscRspCB},
+    168          #endif
+    169          #if defined ( ZDO_MGMT_LQI_REQUEST )
+    170            {Mgmt_Lqi_rsp, CB_ID_ZDO_MGMT_LQI_RSP, SPI_CB_ZDO_MGMT_LQI_RSP, zdo_MTCB_MgmtLqiRspCB},
+    171          #endif
+    172          #if defined ( ZDO_MGMT_RTG_REQUEST )
+    173            {Mgmt_Rtg_rsp, CB_ID_ZDO_MGMT_RTG_RSP, SPI_CB_ZDO_MGMT_RTG_RSP, zdo_MTCB_MgmtRtgRspCB},
+    174          #endif
+    175          #if defined ( ZDO_MGMT_BIND_REQUEST )
+    176            {Mgmt_Bind_rsp, CB_ID_ZDO_MGMT_BIND_RSP, SPI_CB_ZDO_MGMT_BIND_RSP, zdo_MTCB_MgmtBindRspCB},
+    177          #endif
+    178          #if defined ( ZDO_MGMT_LEAVE_REQUEST )
+    179            {Mgmt_Leave_rsp, CB_ID_ZDO_MGMT_LEAVE_RSP, SPI_CB_ZDO_MGMT_LEAVE_RSP, zdo_MTCB_MgmtLeaveRspCB},
+    180          #endif
+    181          #if defined ( ZDO_MGMT_JOINDIRECT_REQUEST )
+    182            {Mgmt_Direct_Join_rsp, CB_ID_ZDO_MGMT_DIRECT_JOIN_RSP, SPI_CB_ZDO_MGMT_DIRECT_JOIN_RSP, zdo_MTCB_MgmtDirectJoinRspCB},
+    183          #endif
+    184          #if defined ( ZDO_MGMT_PERMIT_JOIN_REQUEST )
+    185            {Mgmt_Permit_Join_rsp, CB_ID_ZDO_MGMT_PERMIT_JOIN_RSP, SPI_CB_ZDO_MGMT_PERMIT_JOIN_RSP, zdo_MTCB_MgmtPermitJoinRspCB},
+    186          #endif
+    187            {0, 0, 0, NULL}
+    188          };
+    189          
+    190          /*********************************************************************
+    191           * @fn      MT_ZdoCommandProcessing
+    192           *
+    193           * @brief
+    194           *
+    195           *   Process all the ZDO commands that are issued by test tool
+    196           *
+    197           * @param   cmd_id - Command ID
+    198           * @param   len    - Length of received SPI data message
+    199           * @param   pData  - pointer to received SPI data message
+    200           *
+    201           * @return  void
+    202           */
+    203          void MT_ZdoCommandProcessing( uint16 cmd_id , byte len , byte *pData )
+    204          {
+    205            byte i;
+    206            byte x;
+    207            byte ret;
+    208            byte attr;
+    209            byte attr1;
+    210            uint16 cID;
+    211            uint16 shortAddr;
+    212            uint16 uAttr;
+    213            byte *ptr;
+    214            byte *ptr1;
+    215            zAddrType_t devAddr;
+    216            zAddrType_t dstAddr;
+    217            byte respLen;
+    218          #if defined ( ZDO_MGMT_NWKDISC_REQUEST )
+    219            uint32 scanChans;
+    220          #endif
+    221          #if defined ( ZDO_USERDESCSET_REQUEST )
+    222            UserDescriptorFormat_t userDesc;
+    223          #endif
+    224          
+    225            ret = UNSUPPORTED_COMMAND;
+    226            len = SPI_0DATA_MSG_LEN + SPI_RESP_LEN_ZDO_DEFAULT;
+    227            respLen = SPI_RESP_LEN_ZDO_DEFAULT;
+    228          
+    229            switch (cmd_id)
+    230            {
+    231              case SPI_CMD_ZDO_AUTO_FIND_DESTINATION_REQ:
+    232              case SPI_CMD_ZDO_AUTO_ENDDEVICEBIND_REQ:
+    233                //Not supported anymore
+    234                ret = ZFailure;
+    235                break;
+    236          
+    237          #if defined ( ZDO_NWKADDR_REQUEST )
+    238              case SPI_CMD_ZDO_NWK_ADDR_REQ:
+    239                // Copy and flip incoming 64-bit address
+    240                pData = zdo_MT_MakeExtAddr( &devAddr, pData );
+    241          
+    242                ptr = (byte*)&devAddr.addr.extAddr;
+    243          
+    244                attr = *pData++;   // RequestType
+    245                attr1 = *pData++;  // StartIndex
+    246                x = *pData;
+    247                ret = (byte)ZDP_NwkAddrReq( ptr, attr, attr1, x );
+    248                break;
+    249          #endif
+    250          
+    251          #if defined ( ZDO_IEEEADDR_REQUEST )
+    252              case SPI_CMD_ZDO_IEEE_ADDR_REQ:
+    253                shortAddr = BUILD_UINT16( pData[1], pData[0] );
+    254                pData += sizeof( shortAddr );
+    255                attr = *pData++;   // RequestType
+    256                attr1 = *pData++;  // StartIndex
+    257                x = *pData;        // SecuritySuite
+    258                ret = (byte)ZDP_IEEEAddrReq( shortAddr, attr, attr1, x );
+    259                break;
+    260          #endif
+    261          
+    262          #if defined ( ZDO_NODEDESC_REQUEST )
+    263              case SPI_CMD_ZDO_NODE_DESC_REQ:
+    264                // destination address
+    265                devAddr.addrMode = Addr16Bit;
+    266                devAddr.addr.shortAddr = BUILD_UINT16( pData[1], pData[0] );
+    267                pData += 2;
+    268          
+    269                // Network address of interest
+    270                shortAddr = BUILD_UINT16( pData[1], pData[0] );
+    271                pData += 2;
+    272          
+    273                attr = *pData;
+    274                ret = (byte)ZDP_NodeDescReq( &devAddr, shortAddr, attr );
+    275                break;
+    276          #endif
+    277          
+    278          #if defined ( ZDO_POWERDESC_REQUEST )
+    279              case SPI_CMD_ZDO_POWER_DESC_REQ:
+    280                // destination address
+    281                devAddr.addrMode = Addr16Bit;
+    282                devAddr.addr.shortAddr = BUILD_UINT16( pData[1], pData[0] );
+    283                pData += 2;
+    284          
+    285                // Network address of interest
+    286                shortAddr = BUILD_UINT16( pData[1], pData[0] );
+    287                pData += 2;
+    288          
+    289                attr = *pData;
+    290                ret = (byte)ZDP_PowerDescReq( &devAddr, shortAddr, attr );
+    291                break;
+    292          #endif
+    293          
+    294          #if defined ( ZDO_SIMPLEDESC_REQUEST )
+    295              case SPI_CMD_ZDO_SIMPLE_DESC_REQ:
+    296                // destination address
+    297                devAddr.addrMode = Addr16Bit;
+    298                devAddr.addr.shortAddr = BUILD_UINT16( pData[1], pData[0] );
+    299                pData += 2;
+    300          
+    301                // Network address of interest
+    302                shortAddr = BUILD_UINT16( pData[1], pData[0] );
+    303                pData += 2;
+    304          
+    305                attr = *pData++;  // endpoint/interface
+    306                attr1 = *pData;   // SecuritySuite
+    307                ret = (byte)ZDP_SimpleDescReq( &devAddr, shortAddr, attr, attr1 );
+    308                break;
+    309          #endif
+    310          
+    311          #if defined ( ZDO_ACTIVEEP_REQUEST )
+    312              case SPI_CMD_ZDO_ACTIVE_EPINT_REQ:
+    313                // destination address
+    314                devAddr.addrMode = Addr16Bit;
+    315                devAddr.addr.shortAddr = BUILD_UINT16( pData[1], pData[0] );
+    316                pData += 2;
+    317          
+    318                // Network address of interest
+    319                shortAddr = BUILD_UINT16( pData[1], pData[0] );
+    320                pData += 2;
+    321          
+    322                attr = *pData;  // SecuritySuite
+    323                ret = (byte)ZDP_ActiveEPReq( &devAddr, shortAddr, attr );
+    324                break;
+    325          #endif
+    326          
+    327          #if defined ( ZDO_MATCH_REQUEST )
+    328              case SPI_CMD_ZDO_MATCH_DESC_REQ:
+    329                {
+    330                  uint16 inC[16], outC[16];
+    331          
+    332                  // destination address
+    333                  devAddr.addrMode = Addr16Bit;
+    334                  devAddr.addr.shortAddr = BUILD_UINT16( pData[1], pData[0] );
+    335                  pData += 2;
+    336          
+    337                  // Network address of interest
+    338                  shortAddr = BUILD_UINT16( pData[1], pData[0] );
+    339                  pData += 2;
+    340          
+    341                  uAttr = BUILD_UINT16( pData[1], pData[0] );   // Profile ID
+    342                  pData += 2;
+    343          
+    344                  attr = *pData++;   // NumInClusters
+    345                  for (i=0; i<16; ++i)  {
+    346                    inC[i] = BUILD_UINT16(pData[1], pData[0]);
+    347                    pData += 2;
+    348                  }
+    349          
+    350                  attr1 = *pData++;  // NumOutClusters
+    351                  for (i=0; i<16; ++i)  {
+    352                    outC[i] = BUILD_UINT16(pData[1], pData[0]);
+    353                    pData += 2;
+    354                  }
+    355          
+    356                  i = *pData;        // SecuritySuite
+    357          
+    358                  ret = (byte)ZDP_MatchDescReq( &devAddr, shortAddr, uAttr,
+    359                                            attr, inC, attr1, outC, i );
+    360                }
+    361                break;
+    362          #endif
+    363          
+    364          #if defined ( ZDO_COMPLEXDESC_REQUEST )
+    365              case SPI_CMD_ZDO_COMPLEX_DESC_REQ:
+    366                // destination address
+    367                devAddr.addrMode = Addr16Bit;
+    368                devAddr.addr.shortAddr = BUILD_UINT16( pData[1], pData[0] );
+    369                pData += 2;
+    370          
+    371                // Network address of interest
+    372                shortAddr = BUILD_UINT16( pData[1], pData[0] );
+    373                pData += 2;
+    374          
+    375                attr = *pData;  // SecuritySuite
+    376                ret = (byte)ZDP_ComplexDescReq( &devAddr, shortAddr, attr );
+    377                break;
+    378          #endif
+    379          
+    380          #if defined ( ZDO_USERDESC_REQUEST )
+    381              case SPI_CMD_ZDO_USER_DESC_REQ:
+    382                // destination address
+    383                devAddr.addrMode = Addr16Bit;
+    384                devAddr.addr.shortAddr = BUILD_UINT16( pData[1], pData[0] );
+    385                pData += 2;
+    386          
+    387                // Network address of interest
+    388                shortAddr = BUILD_UINT16( pData[1], pData[0] );
+    389                pData += 2;
+    390          
+    391                attr = *pData;  // SecuritySuite
+    392                ret = (byte)ZDP_UserDescReq( &devAddr, shortAddr, attr );
+    393                break;
+    394          #endif
+    395          
+    396          #if defined ( ZDO_ENDDEVICEBIND_REQUEST )
+    397              case SPI_CMD_ZDO_END_DEV_BIND_REQ:
+    398                //TODO: When ZTool supports 16 bits the code below will need to take it into account
+    399                {
+    400                  uint16 inC[15], outC[15];
+    401          
+    402                  // destination address
+    403                  devAddr.addrMode = Addr16Bit;
+    404                  devAddr.addr.shortAddr = BUILD_UINT16( pData[1], pData[0] );
+    405                  pData += 2;
+    406          
+    407                  // Local coordinator of the binding 
+    408                  shortAddr = BUILD_UINT16( pData[1], pData[0] );
+    409                  pData += 2;
+    410          
+    411                  x = *pData++;      // EPInt
+    412          
+    413                  uAttr = BUILD_UINT16( pData[1], pData[0] );   // Profile ID
+    414                  pData += 2;
+    415          
+    416                  attr = *pData++;   // NumInClusters
+    417                  for (i=0; i<15; ++i)  {
+    418                    inC[i] = BUILD_UINT16(pData[1], pData[0]);
+    419                    pData += 2;
+    420                  }
+    421          
+    422                  attr1 = *pData++;  // NumOutClusters
+    423                  for (i=0; i<15; ++i)  {
+    424                    outC[i] = BUILD_UINT16(pData[1], pData[0]);
+    425                    pData += 2;
+    426                  }
+    427          
+    428                  i = *pData;        // SecuritySuite
+    429          
+    430                  ret = (byte)ZDP_EndDeviceBindReq( &devAddr, shortAddr, x, uAttr,
+    431                                          attr, inC, attr1, outC, i );
+    432                }
+    433                break;
+    434          #endif
+    435          
+    436          #if defined ( ZDO_BIND_UNBIND_REQUEST )
+    437              case SPI_CMD_ZDO_BIND_REQ:
+    438                // destination address
+    439                devAddr.addrMode = Addr16Bit;
+    440                devAddr.addr.shortAddr = BUILD_UINT16( pData[1], pData[0] );
+    441                pData += 2;
+    442          
+    443                MT_ReverseBytes( pData, Z_EXTADDR_LEN );
+    444                ptr = pData;       // SrcAddress
+    445                pData += Z_EXTADDR_LEN;
+    446          
+    447                attr = *pData++;   // SrcEPInt
+    448          
+    449                cID = BUILD_UINT16( pData[1], pData[0]);      // ClusterID
+    450                pData += 2;
+    451                
+    452                dstAddr.addrMode = *pData++;
+    453                
+    454                MT_ReverseBytes( pData, Z_EXTADDR_LEN );
+    455                if ( dstAddr.addrMode == Addr64Bit )
+    456                {
+    457                  ptr1 = pData;      // DstAddress
+    458                  osal_cpyExtAddr( dstAddr.addr.extAddr, ptr1 );
+    459                }
+    460                else
+    461                {
+    462                  dstAddr.addr.shortAddr = BUILD_UINT16( pData[0], pData[1] ); 
+    463                }
+    464                
+    465                // The short address occupies lsb two bytes
+    466                pData += Z_EXTADDR_LEN;
+    467          
+    468                
+    469                attr1 = *pData++;  // DstEPInt
+    470          
+    471                x = *pData;        // SecuritySuite
+    472               
+    473                ret = (byte)ZDP_BindReq( &devAddr, ptr, attr, cID, &dstAddr, attr1, x );
+    474                break;
+    475          #endif
+    476          
+    477          #if defined ( ZDO_BIND_UNBIND_REQUEST )
+    478              case SPI_CMD_ZDO_UNBIND_REQ:
+    479                // destination address
+    480                devAddr.addrMode = Addr16Bit;
+    481                devAddr.addr.shortAddr = BUILD_UINT16( pData[1], pData[0] );
+    482                pData += 2;
+    483          
+    484                MT_ReverseBytes( pData, Z_EXTADDR_LEN );
+    485                ptr = pData;       // SrcAddress
+    486                pData += Z_EXTADDR_LEN;
+    487          
+    488                attr = *pData++;   // SrcEPInt
+    489          
+    490                cID = BUILD_UINT16( pData[1], pData[0]);      // ClusterID
+    491                pData += 2;
+    492          
+    493                dstAddr.addrMode = *pData++;
+    494                
+    495                MT_ReverseBytes( pData, Z_EXTADDR_LEN );
+    496                if ( dstAddr.addrMode == Addr64Bit )
+    497                {
+    498                  ptr1 = pData;      // DstAddress
+    499                  osal_cpyExtAddr( dstAddr.addr.extAddr, ptr1 );
+    500                }
+    501                else
+    502                {
+    503                  dstAddr.addr.shortAddr = BUILD_UINT16( pData[0], pData[1] ); 
+    504                }      
+    505                pData += Z_EXTADDR_LEN;
+    506          
+    507                attr1 = *pData++;  // DstEPInt
+    508          
+    509                x = *pData;        // SecuritySuite
+    510          
+    511                ret = (byte)ZDP_UnbindReq( &devAddr, ptr, attr, cID, &dstAddr, attr1, x );
+    512                break;
+    513          #endif
+    514          
+    515          #if defined ( ZDO_MGMT_NWKDISC_REQUEST )
+    516              case SPI_CMD_ZDO_MGMT_NWKDISC_REQ:
+    517                devAddr.addrMode = Addr16Bit;
+    518                devAddr.addr.shortAddr = BUILD_UINT16( pData[1], pData[0] );
+    519                pData += 2;
+    520                scanChans = BUILD_UINT32( pData[3], pData[2], pData[1], pData[0] );
+    521                ret = (byte)ZDP_MgmtNwkDiscReq( &devAddr, scanChans, pData[4], pData[5], false );
+    522                break;
+    523          #endif
+    524          
+    525          #if defined ( ZDO_MGMT_LQI_REQUEST )
+    526              case SPI_CMD_ZDO_MGMT_LQI_REQ:
+    527                devAddr.addrMode = Addr16Bit;
+    528                devAddr.addr.shortAddr = BUILD_UINT16( pData[1], pData[0] );
+    529                ret = (byte)ZDP_MgmtLqiReq( &devAddr, pData[2], false );
+    530                break;
+    531          #endif
+    532          
+    533          #if defined ( ZDO_MGMT_RTG_REQUEST )
+    534              case SPI_CMD_ZDO_MGMT_RTG_REQ:
+    535                devAddr.addrMode = Addr16Bit;
+    536                devAddr.addr.shortAddr = BUILD_UINT16( pData[1], pData[0] );
+    537                ret = (byte)ZDP_MgmtRtgReq( &devAddr, pData[2], false );
+    538                break;
+    539          #endif
+    540          
+    541          #if defined ( ZDO_MGMT_BIND_REQUEST )
+    542              case SPI_CMD_ZDO_MGMT_BIND_REQ:
+    543                devAddr.addrMode = Addr16Bit;
+    544                devAddr.addr.shortAddr = BUILD_UINT16( pData[1], pData[0] );
+    545                ret = (byte)ZDP_MgmtBindReq( &devAddr, pData[2], false );
+    546                break;
+    547          #endif
+    548          
+    549          #if defined ( ZDO_MGMT_JOINDIRECT_REQUEST )
+    550              case SPI_CMD_ZDO_MGMT_DIRECT_JOIN_REQ:
+    551                devAddr.addrMode = Addr16Bit;
+    552                devAddr.addr.shortAddr = BUILD_UINT16( pData[1], pData[0] );
+    553                MT_ReverseBytes( &pData[2], Z_EXTADDR_LEN );
+    554                ret = (byte)ZDP_MgmtDirectJoinReq( &devAddr,
+    555                                         &pData[2],
+    556                                         pData[2 + Z_EXTADDR_LEN],
+    557                                         false );
+    558                break;
+    559          #endif
+    560          
+    561          #if defined ( ZDO_MGMT_LEAVE_REQUEST )
+    562              case SPI_CMD_ZDO_MGMT_LEAVE_REQ:
+    563                devAddr.addrMode = Addr16Bit;
+    564                devAddr.addr.shortAddr = BUILD_UINT16( pData[1], pData[0] );
+    565                MT_ReverseBytes( &pData[2], Z_EXTADDR_LEN );
+    566                ret = (byte)ZDP_MgmtLeaveReq( &devAddr, &pData[2], false );
+    567                break;
+    568          #endif
+    569          
+    570          #if defined ( ZDO_MGMT_PERMIT_JOIN_REQUEST )
+    571              case SPI_CMD_ZDO_MGMT_PERMIT_JOIN_REQ:
+    572                devAddr.addrMode = Addr16Bit;
+    573                devAddr.addr.shortAddr = BUILD_UINT16( pData[1], pData[0] );
+    574                ret = (byte)ZDP_MgmtPermitJoinReq( &devAddr, pData[2], pData[3], false );
+    575                break;
+    576          #endif
+    577          
+    578          
+    579          #if defined ( ZDO_USERDESCSET_REQUEST )
+    580              case SPI_CMD_ZDO_USER_DESC_SET:
+    581                // destination address
+    582                devAddr.addrMode = Addr16Bit;
+    583                devAddr.addr.shortAddr = BUILD_UINT16( pData[1], pData[0] );
+    584                pData += 2;
+    585          
+    586                // Network address of interest
+    587                shortAddr = BUILD_UINT16( pData[1], pData[0] );
+    588                pData += 2;
+    589          
+    590                // User descriptor
+    591                userDesc.len = *pData++;
+    592                osal_memcpy( userDesc.desc, pData, userDesc.len );
+    593                pData += 16;  // len of user desc
+    594          
+    595                ret =(byte)ZDP_UserDescSet( &devAddr, shortAddr, &userDesc, pData[0] );
+    596                break;
+    597          #endif
+    598          
+    599          #if defined ( ZDO_ENDDEVICE_ANNCE_REQUEST )
+    600              case SPI_CMD_ZDO_END_DEV_ANNCE:
+    601                // network address
+    602                shortAddr = BUILD_UINT16( pData[1], pData[0] );
+    603                pData += 2;
+    604          
+    605                // extended address
+    606                ptr = pData;
+    607                MT_ReverseBytes( ptr, Z_EXTADDR_LEN );
+    608                pData += Z_EXTADDR_LEN;
+    609          
+    610                // security
+    611                attr = *pData++;
+    612          
+    613                ret = (byte)ZDP_EndDeviceAnnce( shortAddr, ptr, *pData, attr );
+    614                break;
+    615          #endif
+    616          
+    617          #if defined (ZDO_SERVERDISC_REQUEST )
+    618              case SPI_CMD_ZDO_SERVERDISC_REQ:
+    619                
+    620                // Service Mask
+    621                uAttr = BUILD_UINT16( pData[1], pData[0] );
+    622                pData += 2;
+    623                attr = *pData++; // Security suite
+    624                
+    625                ret = (byte) ZDP_ServerDiscReq( uAttr, attr );
+    626                break;
+    627          #endif
+    628                
+    629          #if defined (ZDO_NETWORKSTART_REQUEST )
+    630              case SPI_CMD_ZDO_NETWORK_START_REQ:
+    631          //      NOT SUPPORTED ANYMORE
+    632          //      ret = ZDApp_StartUpFromApp( ZDAPP_STARTUP_AUTO );
+    633                // Replaced with 
+    634                ret = ZDOInitDevice( 100 );
+    635                break;
+    636              
+    637          #endif
+    638              
+    639              default:
+    640                break;
+    641            }
+    642          
+    643            MT_SendSPIRespMsg( ret, cmd_id, len, respLen );
+    644          }
+    645          
+    646          /*********************************************************************
+    647           * Utility FUNCTIONS
+    648           */
+    649          
+    650          /*********************************************************************
+    651           * @fn      zdo_MT_CopyRevExtAddr
+    652           *
+    653           */
+    654          byte *zdo_MT_CopyRevExtAddr( byte *dstMsg, byte *addr )
+    655          {
+    656            // Copy the 64-bit address
+    657            osal_cpyExtAddr( dstMsg, addr );
+    658            // Reverse byte order
+    659            MT_ReverseBytes( dstMsg, Z_EXTADDR_LEN );
+    660            // Return ptr to next destination location
+    661            return ( dstMsg + Z_EXTADDR_LEN );
+    662          }
+    663          
+    664          /*********************************************************************
+    665           * @fn      zdo_MT_MakeExtAddr
+    666           *
+    667           */
+    668          byte *zdo_MT_MakeExtAddr( zAddrType_t *devAddr, byte *pData )
+    669          {
+    670            // Define a 64-bit address
+    671            devAddr->addrMode = Addr64Bit;
+    672            // Copy and reverse the 64-bit address
+    673            zdo_MT_CopyRevExtAddr( devAddr->addr.extAddr, pData );
+    674            // Return ptr to next destination location
+    675            return ( pData + Z_EXTADDR_LEN );
+    676          }
+    677          
+    678          /*********************************************************************
+    679           * CALLBACK FUNCTIONS
+    680           */
+    681          
+    682          /*********************************************************************
+    683           * @fn      zdo_MTCB_NwkIEEEAddrRspCB
+    684           *
+    685           * @brief
+    686           *
+    687           *   Called by ZDO when a NWK_addr_rsp message is received.
+    688           *
+    689           * @param  SrcAddr  - Source address
+    690           * @param  Status - response status
+    691           * @param  IEEEAddr - 64 bit IEEE address of device
+    692           * @param  nwkAddr - 16 bit network address of device
+    693           * @param  NumAssocDev - number of associated devices to reporting device
+    694           * @param  AssocDevList - array short addresses of associated devices
+    695           *
+    696           * @return  none
+    697           */
+    698          uint8 zdo_MTCB_NwkIEEEAddrRspCB( zdoIncomingMsg_t *inMsg, uint8 *msg )
+    699          {
+    700            uint8 len = 0;
+    701            uint8 x;
+    702            ZDO_NwkIEEEAddrResp_t * pRsp;
+    703            
+    704            pRsp = ZDO_ParseAddrRsp( inMsg );
+    705            if ( pRsp )
+    706            {
+    707              //First fill in details
+    708              if ( inMsg->srcAddr.addrMode == Addr16Bit )
+    709              {
+    710                *msg++ = Addr16Bit;
+    711                for ( x = 0; x < (Z_EXTADDR_LEN - 2); x++ )
+    712                  *msg++ = 0;
+    713                *msg++ = HI_UINT16( inMsg->srcAddr.addr.shortAddr );
+    714                *msg++ = LO_UINT16( inMsg->srcAddr.addr.shortAddr );
+    715              }
+    716              else
+    717              {
+    718                *msg++ = Addr64Bit;
+    719                msg = zdo_MT_CopyRevExtAddr( msg, inMsg->srcAddr.addr.extAddr );
+    720              }
+    721              len = Z_EXTADDR_LEN + 1;
+    722            
+    723              *msg++ = pRsp->status;
+    724              msg = zdo_MT_CopyRevExtAddr( msg, pRsp->extAddr );
+    725              len += Z_EXTADDR_LEN + 1;
+    726            
+    727              if ( inMsg->clusterID == NWK_addr_rsp )
+    728              {
+    729                *msg++ = HI_UINT16( pRsp->nwkAddr );
+    730                *msg++ = LO_UINT16( pRsp->nwkAddr );
+    731                len += 2;
+    732              }
+    733            
+    734              *msg++ = pRsp->startIndex;
+    735              *msg++ = pRsp->numAssocDevs;
+    736              len += 2;
+    737          
+    738              uint8 cnt = pRsp->numAssocDevs - pRsp->startIndex;
+    739            
+    740              for ( x = 0; x < cnt; x++ )
+    741              {
+    742                *msg++ = HI_UINT16( pRsp->devList[x] );
+    743                *msg++ = LO_UINT16( pRsp->devList[x] );
+    744                len += 2;
+    745              }
+    746              osal_mem_free ( pRsp );
+    747            }
+    748            return ( len );
+    749          }
+    750          
+    751          /*********************************************************************
+    752           * @fn      zdo_MTCB_NodeDescRspCB()
+    753           *
+    754           * @brief
+    755           *
+    756           *   Called by ZDO when a Node_Desc_rsp message is received.
+    757           *
+    758           * @param  SrcAddr  - Source address
+    759           * @param  Status - response status
+    760           * @param  nwkAddr - 16 bit network address of device
+    761           * @param  pNodeDesc - pointer to the devices Node Descriptor
+    762           *                     NULL if Status != ZDP_SUCCESS
+    763           *
+    764           * @return  none
+    765           */
+    766          uint8 zdo_MTCB_NodeDescRspCB( zdoIncomingMsg_t *inMsg, uint8 *msg )
+    767          {
+    768            ZDO_NodeDescRsp_t NDRsp;
+    769            
+    770            ZDO_ParseNodeDescRsp( inMsg, &NDRsp );
+    771            
+    772            //Fill up the data bytes
+    773            *msg++ = NDRsp.status;
+    774            *msg++ = HI_UINT16( inMsg->srcAddr.addr.shortAddr );
+    775            *msg++ = LO_UINT16( inMsg->srcAddr.addr.shortAddr );
+    776          
+    777            *msg++ = HI_UINT16( NDRsp.nwkAddr );
+    778            *msg++ = LO_UINT16( NDRsp.nwkAddr );
+    779          
+    780            *msg++ = (byte)(NDRsp.nodeDesc.LogicalType);
+    781          
+    782            // Since Z-Tool can't treat V1.0 and V1.1 differently,
+    783            // we just output these two byte in both cases, although
+    784            // in V1.0, they are always zeros.
+    785            *msg++ = (byte) NDRsp.nodeDesc.ComplexDescAvail;
+    786            *msg++ = (byte) NDRsp.nodeDesc.UserDescAvail;
+    787          
+    788            *msg++ = NDRsp.nodeDesc.APSFlags;
+    789            *msg++ = NDRsp.nodeDesc.FrequencyBand;
+    790            *msg++ = NDRsp.nodeDesc.CapabilityFlags;
+    791            *msg++ = NDRsp.nodeDesc.ManufacturerCode[1];
+    792            *msg++ = NDRsp.nodeDesc.ManufacturerCode[0];
+    793            *msg++ = NDRsp.nodeDesc.MaxBufferSize;
+    794            *msg++ = NDRsp.nodeDesc.MaxTransferSize[1];
+    795            *msg++ = NDRsp.nodeDesc.MaxTransferSize[0];
+    796            *msg++ = HI_UINT16( NDRsp.nodeDesc.ServerMask);
+    797            *msg++ = LO_UINT16(NDRsp.nodeDesc.ServerMask);
+    798            
+    799            return ( 18 );
+    800          }
+    801          
+    802          /*********************************************************************
+    803           * @fn      zdo_MTCB_PowerDescRspCB()
+    804           *
+    805           * @brief
+    806           *
+    807           *   Called by ZDO when a Power_Desc_rsp message is received.
+    808           *
+    809           * @param  SrcAddr  - Source address
+    810           * @param  Status - response status
+    811           * @param  nwkAddr - 16 bit network address of device
+    812           * @param  pPwrDesc - pointer to the devices Power Descriptor
+    813           *                     NULL if Status != ZDP_SUCCESS
+    814           *
+    815           * @return  none
+    816           */
+    817          uint8 zdo_MTCB_PowerDescRspCB( zdoIncomingMsg_t *inMsg, uint8 *msg )
+    818          {
+    819            ZDO_PowerRsp_t NPRsp;
+    820            
+    821            ZDO_ParsePowerDescRsp( inMsg, &NPRsp );
+    822            
+    823            //Fill up the data bytes
+    824            *msg++ = NPRsp.status;
+    825            *msg++ = HI_UINT16( inMsg->srcAddr.addr.shortAddr );
+    826            *msg++ = LO_UINT16( inMsg->srcAddr.addr.shortAddr );
+    827            *msg++ = HI_UINT16( NPRsp.nwkAddr );
+    828            *msg++ = LO_UINT16( NPRsp.nwkAddr );
+    829          
+    830            *msg++ = NPRsp.pwrDesc.PowerMode;
+    831            *msg++ = NPRsp.pwrDesc.AvailablePowerSources;
+    832            *msg++ = NPRsp.pwrDesc.CurrentPowerSource;
+    833            *msg   = NPRsp.pwrDesc.CurrentPowerSourceLevel;
+    834            
+    835            return ( 9 );
+    836          }
+    837          
+    838          #define ZDO_SIMPLE_DESC_CB_LEN  78
+    839          /*********************************************************************
+    840           * @fn      zdo_MTCB_SimpleDescRspCB()
+    841           *
+    842           * @brief
+    843           *
+    844           *   Called by ZDO when a Simple_Desc_rsp message is received.
+    845           *
+    846           * @param  SrcAddr  - Source address
+    847           * @param  Status - response status
+    848           * @param  nwkAddr - 16 bit network address of device
+    849           * @param  EPIntf - Endpoint/Interface for description
+    850           * @param  pSimpleDesc - pointer to the devices Simple Descriptor
+    851           *                     NULL if Status != ZDP_SUCCESS
+    852           *
+    853           * @return  none
+    854           */
+    855          uint8 zdo_MTCB_SimpleDescRspCB( zdoIncomingMsg_t *inMsg, uint8 *msg  )
+    856          {
+    857            byte len = 0;
+    858            byte x;
+    859            ZDO_SimpleDescRsp_t SimpleDescRsp;
+    860          
+    861            ZDO_ParseSimpleDescRsp( inMsg, &SimpleDescRsp );
+    862            
+    863            //Fill up the data bytes
+    864            *msg++ = SimpleDescRsp.status;
+    865            *msg++ = HI_UINT16( inMsg->srcAddr.addr.shortAddr );
+    866            *msg++ = LO_UINT16( inMsg->srcAddr.addr.shortAddr );
+    867            *msg++ = HI_UINT16( SimpleDescRsp.nwkAddr );
+    868            *msg++ = LO_UINT16( SimpleDescRsp.nwkAddr );
+    869            *msg++ = SimpleDescRsp.simpleDesc.EndPoint;
+    870            *msg++ = HI_UINT16( SimpleDescRsp.simpleDesc.AppProfId );
+    871            *msg++ = LO_UINT16( SimpleDescRsp.simpleDesc.AppProfId );
+    872            *msg++ = HI_UINT16( SimpleDescRsp.simpleDesc.AppDeviceId );
+    873            *msg++ = LO_UINT16( SimpleDescRsp.simpleDesc.AppDeviceId );
+    874            *msg++ = SimpleDescRsp.simpleDesc.AppDevVer;
+    875            *msg++ = SimpleDescRsp.simpleDesc.Reserved;
+    876            len = 12;
+    877            
+    878            *msg++ = SimpleDescRsp.simpleDesc.AppNumInClusters;
+    879            len++;
+    880            
+    881            // ZTool supports 16 bits the code has taken it into account      
+    882            for ( x = 0; x < SimpleDescRsp.simpleDesc.AppNumInClusters; x++ )
+    883            {
+    884              *msg++ = HI_UINT16( SimpleDescRsp.simpleDesc.pAppInClusterList[x]);
+    885              *msg++ = LO_UINT16( SimpleDescRsp.simpleDesc.pAppInClusterList[x]);
+    886              len += 2;
+    887            }
+    888            
+    889            *msg++ = SimpleDescRsp.simpleDesc.AppNumOutClusters;
+    890            len++;
+    891          
+    892            for ( x = 0; x < SimpleDescRsp.simpleDesc.AppNumOutClusters; x++ )
+    893            {
+    894              *msg++ = HI_UINT16( SimpleDescRsp.simpleDesc.pAppOutClusterList[x]);
+    895              *msg++ = LO_UINT16( SimpleDescRsp.simpleDesc.pAppOutClusterList[x]);
+    896              len += 2;
+    897            }
+    898            
+    899            if ( SimpleDescRsp.simpleDesc.pAppInClusterList )
+    900              osal_mem_free( SimpleDescRsp.simpleDesc.pAppInClusterList );
+    901            if ( SimpleDescRsp.simpleDesc.pAppOutClusterList )
+    902              osal_mem_free( SimpleDescRsp.simpleDesc.pAppOutClusterList );
+    903            
+    904            return ( len );
+    905          }
+    906          
+    907          /*********************************************************************
+    908           * @fn      zdo_MTCB_ActiveEPRspCB()
+    909           *
+    910           * @brief
+    911           *
+    912           *   Called by ZDO when a Active_EP_rsp or Match_Desc_rsp message is received.
+    913           *
+    914           * @param  SrcAddr  - Source address
+    915           * @param  Status - response status
+    916           * @param  nwkAddr - Device's short address that this response describes
+    917           * @param  epIntfCnt - number of epIntfList items
+    918           * @param  epIntfList - array of active endpoint/interfaces.
+    919           *
+    920           * @return  none
+    921           */
+    922          uint8 zdo_MTCB_MatchActiveEPRspCB( zdoIncomingMsg_t *inMsg, uint8 *msg )
+    923          {
+    924            uint8 len = 0;
+    925            ZDO_ActiveEndpointRsp_t *pRsp = ZDO_ParseEPListRsp( inMsg );
+    926          
+    927            if ( pRsp )
+    928            {
+    929              //Fill up the data bytes
+    930              *msg++ = pRsp->status;
+    931              if ( pRsp->status != ZDP_SUCCESS )
+    932                pRsp->cnt = 0;
+    933              
+    934              *msg++ = HI_UINT16( inMsg->srcAddr.addr.shortAddr );
+    935              *msg++ = LO_UINT16( inMsg->srcAddr.addr.shortAddr );
+    936              *msg++ = HI_UINT16( pRsp->nwkAddr );
+    937              *msg++ = LO_UINT16( pRsp->nwkAddr );
+    938              *msg++ = pRsp->cnt;
+    939            
+    940              if ( pRsp->cnt )
+    941              {
+    942                osal_memcpy( msg, pRsp->epList, pRsp->cnt );
+    943              }
+    944              
+    945              len = 6 + pRsp->cnt;
+    946              
+    947              osal_mem_free( pRsp );
+    948            }
+    949            return ( len );
+    950          }
+    951          
+    952          /*********************************************************************
+    953           * @fn      zdo_MTCB_BindRspCB()
+    954           *
+    955           * @brief
+    956           *
+    957           *   Called to send MT callback response for binding responses
+    958           *
+    959           * @param  type - binding type (end device, bind, unbind)
+    960           * @param  SrcAddr  - Source address
+    961           * @param  Status - response status
+    962           *
+    963           * @return  none
+    964           */
+    965          uint8 zdo_MTCB_BindRspCB( zdoIncomingMsg_t *inMsg, uint8 *msg )
+    966          {
+    967            msg[0] = ZDO_ParseBindRsp( inMsg );
+    968            msg[1] = HI_UINT16( inMsg->srcAddr.addr.shortAddr );
+    969            msg[2] = LO_UINT16( inMsg->srcAddr.addr.shortAddr );
+    970            
+    971            return ( 3 );
+    972          }
+    973          
+    974          /*********************************************************************
+    975           * @fn      zdo_MTCB_MgmtLqiRspCB()
+    976           *
+    977           * @brief
+    978           *
+    979           *   Called to send MT callback response for Management LQI response
+    980           *
+    981           * @param  type - binding type (end device, bind, unbind)
+    982           * @param  SrcAddr  - Source address
+    983           * @param  Status - response status
+    984           *
+    985           * @return  none
+    986           */
+    987          uint8 zdo_MTCB_MgmtLqiRspCB( zdoIncomingMsg_t *inMsg, uint8 *msg )
+    988          {
+    989            byte len = 0;
+    990            byte x;
+    991            ZDO_MgmtLqiRsp_t *pRsp = ZDO_ParseMgmtLqiRsp( inMsg );
+    992          
+    993            if ( pRsp )
+    994            {
+    995              if ( pRsp->neighborLqiCount > ZDO_MAX_LQI_ITEMS )
+    996                pRsp->neighborLqiCount = ZDO_MAX_LQI_ITEMS;
+    997              
+    998              *msg++ = HI_UINT16( inMsg->srcAddr.addr.shortAddr );
+    999              *msg++ = LO_UINT16( inMsg->srcAddr.addr.shortAddr );    
+   1000              *msg++ = pRsp->status;
+   1001              *msg++ = pRsp->neighborLqiEntries;
+   1002              *msg++ = pRsp->startIndex;
+   1003              *msg++ = pRsp->neighborLqiCount;
+   1004              len = 2 + 1 + 1 + 1 + 1;
+   1005          
+   1006              for ( x = 0; x < pRsp->neighborLqiCount; x++ )
+   1007              {
+   1008                osal_cpyExtAddr(msg, pRsp->list[x].extPANId);
+   1009                msg += Z_EXTADDR_LEN;
+   1010                *msg++ = HI_UINT16( pRsp->list[x].nwkAddr );
+   1011                *msg++ = LO_UINT16( pRsp->list[x].nwkAddr );
+   1012                *msg++ = pRsp->list[x].rxLqi;
+   1013                *msg++ = pRsp->list[x].txQuality;
+   1014                len += Z_EXTADDR_LEN + 4;
+   1015              }
+   1016          
+   1017              osal_mem_free( pRsp );
+   1018            }
+   1019            
+   1020            return ( len );
+   1021          }
+   1022          
+   1023          /*********************************************************************
+   1024           * @fn      zdo_MTCB_MgmtNwkDiscRspCB()
+   1025           *
+   1026           * @brief
+   1027           *
+   1028           *   Called to send MT callback response for Management Network
+   1029           *   Discover response
+   1030           *
+   1031           * @param  SrcAddr  - Source address
+   1032           * @param  Status - response status
+   1033           *
+   1034           * @return  none
+   1035           */
+   1036          uint8 zdo_MTCB_MgmtNwkDiscRspCB( zdoIncomingMsg_t *inMsg, uint8 *msg )
+   1037          {
+   1038            uint8 x;
+   1039            uint8 len = 0;
+   1040            ZDO_MgmNwkDiscRsp_t *pRsp = ZDO_ParseMgmNwkDiscRsp( inMsg );
+   1041          
+   1042            if ( pRsp )
+   1043            {
+   1044              if ( pRsp->networkListCount > ZDO_MAX_NWKDISC_ITEMS )
+   1045                pRsp->networkListCount = ZDO_MAX_NWKDISC_ITEMS;
+   1046              
+   1047              //Fill up the data bytes
+   1048              *msg++ = HI_UINT16( inMsg->srcAddr.addr.shortAddr );
+   1049              *msg++ = LO_UINT16( inMsg->srcAddr.addr.shortAddr );
+   1050              *msg++ = pRsp->status;
+   1051              *msg++ = pRsp->networkCount;
+   1052              *msg++ = pRsp->startIndex;
+   1053              *msg++ = pRsp->networkListCount;
+   1054              len = 2 + 1 + 1 + 1 + 1; 
+   1055            
+   1056              for ( x = 0; x < pRsp->networkListCount; x++ )
+   1057              {
+   1058                osal_cpyExtAddr( msg, pRsp->list[x].extendedPANID );
+   1059                msg += Z_EXTADDR_LEN;
+   1060                *msg++ = pRsp->list[x].logicalChannel;
+   1061                *msg++ = pRsp->list[x].stackProfile;
+   1062                *msg++ = pRsp->list[x].version;
+   1063                *msg++ = pRsp->list[x].beaconOrder;
+   1064                *msg++ = pRsp->list[x].superFrameOrder;
+   1065                *msg++ = pRsp->list[x].permitJoining;
+   1066                len += Z_EXTADDR_LEN + 6;
+   1067              }
+   1068              
+   1069              osal_mem_free( pRsp );
+   1070            }
+   1071          
+   1072            return ( len );
+   1073          }
+   1074          
+   1075          /*********************************************************************
+   1076           * @fn      zdo_MTCB_MgmtRtgRspCB()
+   1077           *
+   1078           * @brief
+   1079           *
+   1080           *   Called to send MT callback response for Management Network
+   1081           *   Discover response
+   1082           *
+   1083           * @param  SrcAddr  - Source address
+   1084           * @param  Status - response status
+   1085           *
+   1086           * @return  none
+   1087           */
+   1088          uint8 zdo_MTCB_MgmtRtgRspCB( zdoIncomingMsg_t *inMsg, uint8 *msg  )
+   1089          {
+   1090            uint8 len = 0;
+   1091            uint8 x;
+   1092            ZDO_MgmtRtgRsp_t *pRsp = ZDO_ParseMgmtRtgRsp( inMsg );
+   1093            
+   1094            if ( pRsp )
+   1095            {
+   1096              if ( pRsp->rtgListCount > ZDO_MAX_RTG_ITEMS )
+   1097                pRsp->rtgListCount = ZDO_MAX_RTG_ITEMS;
+   1098              
+   1099              //Fill up the data bytes
+   1100              *msg++ = HI_UINT16( inMsg->srcAddr.addr.shortAddr );
+   1101              *msg++ = LO_UINT16( inMsg->srcAddr.addr.shortAddr );
+   1102              *msg++ = pRsp->status;
+   1103              *msg++ = pRsp->rtgCount;
+   1104              *msg++ = pRsp->startIndex;
+   1105              *msg++ = pRsp->rtgListCount;
+   1106              len = 2 + 1 + 1 + 1 + 1; //  SrcAddr + Status + RtgCount + StartIndex + RtgListCount
+   1107          
+   1108              for ( x = 0; x < pRsp->rtgListCount; x++ )
+   1109              {
+   1110                *msg++ = HI_UINT16( pRsp->list[x].dstAddress );
+   1111                *msg++ = LO_UINT16( pRsp->list[x].dstAddress );
+   1112                *msg++ = HI_UINT16( pRsp->list[x].nextHopAddress );
+   1113                *msg++ = LO_UINT16( pRsp->list[x].nextHopAddress );
+   1114                *msg++ = pRsp->list[x].status;
+   1115                len += 5;
+   1116              }
+   1117          
+   1118              osal_mem_free( pRsp );
+   1119            }
+   1120            return ( len );
+   1121          }
+   1122          
+   1123          /*********************************************************************
+   1124           * @fn      zdo_MTCB_MgmtBindRspCB()
+   1125           *
+   1126           * @brief
+   1127           *
+   1128           *   Called to send MT callback response for Management Network
+   1129           *   Discover response
+   1130           *
+   1131           * @param  SrcAddr  - Source address
+   1132           * @param  Status - response status
+   1133           *
+   1134           * @return  none
+   1135           */
+   1136          uint8 zdo_MTCB_MgmtBindRspCB( zdoIncomingMsg_t *inMsg, uint8 *msg )
+   1137          {
+   1138            uint8 len = 0;       
+   1139            uint8 x, y;
+   1140            ZDO_MgmtBindRsp_t *pRsp = ZDO_ParseMgmtBindRsp( inMsg );
+   1141            
+   1142            if ( pRsp )
+   1143            {
+   1144              if ( pRsp->bindingListCount > ZDO_MAX_BIND_ITEMS )
+   1145                pRsp->bindingListCount = ZDO_MAX_BIND_ITEMS;
+   1146              
+   1147              //Fill up the data bytes
+   1148              *msg++ = HI_UINT16( inMsg->srcAddr.addr.shortAddr );
+   1149              *msg++ = LO_UINT16( inMsg->srcAddr.addr.shortAddr );
+   1150              *msg++ = pRsp->status;
+   1151              *msg++ = pRsp->bindingCount;
+   1152              *msg++ = pRsp->startIndex;
+   1153              *msg++ = pRsp->bindingListCount;
+   1154              len = (2 + 1 + 1 + 1 + 1);    //  SrcAddr + Status + BindCount + StartIndex + BindListCount
+   1155                
+   1156              for ( x = 0; x < pRsp->bindingListCount; x++ )
+   1157              {
+   1158                msg = zdo_MT_CopyRevExtAddr( msg, pRsp->list[x].srcAddr );
+   1159                *msg++ = pRsp->list[x].srcEP;
+   1160                *msg++ = HI_UINT16( pRsp->list[x].clusterID);
+   1161                *msg++ = LO_UINT16( pRsp->list[x].clusterID);
+   1162                *msg++ = pRsp->list[x].dstAddr.addrMode;
+   1163              
+   1164                if ( pRsp->list[x].dstAddr.addrMode == Addr64Bit )
+   1165                {         
+   1166                  msg = zdo_MT_CopyRevExtAddr( msg, pRsp->list[x].dstAddr.addr.extAddr );
+   1167                }
+   1168                else
+   1169                {
+   1170                  for ( y = 0; y < (Z_EXTADDR_LEN - 2); y++ )
+   1171                    *msg++ = 0;
+   1172                  *msg++ = HI_UINT16( pRsp->list[x].dstAddr.addr.shortAddr );
+   1173                  *msg++ = LO_UINT16( pRsp->list[x].dstAddr.addr.shortAddr );
+   1174                }
+   1175                *msg++ = pRsp->list[x].dstEP;           
+   1176                len += (Z_EXTADDR_LEN + 1 + 2 + 1) + (Z_EXTADDR_LEN + 1);
+   1177              }
+   1178              osal_mem_free( pRsp );
+   1179            }
+   1180            return ( len );
+   1181          }
+   1182          
+   1183          /*********************************************************************
+   1184           * @fn      zdo_MTCB_MgmtDirectJoinRspCB()
+   1185           *
+   1186           * @brief
+   1187           *
+   1188           *   Called to send MT callback response for Management Direct Join
+   1189           *   responses
+   1190           *
+   1191           * @param  SrcAddr  - Source address
+   1192           * @param  Status - response status
+   1193           *
+   1194           * @return  none
+   1195           */
+   1196          uint8 zdo_MTCB_MgmtDirectJoinRspCB( zdoIncomingMsg_t *inMsg, uint8 *msg )
+   1197          {
+   1198            msg[0] = HI_UINT16( inMsg->srcAddr.addr.shortAddr );
+   1199            msg[1] = LO_UINT16( inMsg->srcAddr.addr.shortAddr );
+   1200            msg[2] = ZDO_ParseMgmtDirectJoinRsp( inMsg );
+   1201          
+   1202            return ( 3 );
+   1203          }
+   1204          
+   1205          /*********************************************************************
+   1206           * @fn      zdo_MTCB_MgmtLeaveRspCB()
+   1207           *
+   1208           * @brief
+   1209           *
+   1210           *   Called to send MT callback response for Management Leave
+   1211           *   responses
+   1212           *
+   1213           * @param  SrcAddr  - Source address
+   1214           * @param  Status - response status
+   1215           *
+   1216           * @return  none
+   1217           */
+   1218          uint8 zdo_MTCB_MgmtLeaveRspCB( zdoIncomingMsg_t *inMsg, uint8 *msg )
+   1219          {
+   1220            msg[0] = ZDO_ParseMgmtLeaveRsp( inMsg );
+   1221            msg[1] = HI_UINT16( inMsg->srcAddr.addr.shortAddr );
+   1222            msg[2] = LO_UINT16( inMsg->srcAddr.addr.shortAddr );
+   1223          
+   1224            return ( 3 );
+   1225          }
+   1226          
+   1227          /*********************************************************************
+   1228           * @fn      zdo_MTCB_MgmtPermitJoinRspCB()
+   1229           *
+   1230           * @brief
+   1231           *
+   1232           *   Called to send MT callback response for Management Permit Join
+   1233           *   responses
+   1234           *
+   1235           * @param  SrcAddr  - Source address
+   1236           * @param  Status - response status
+   1237           *
+   1238           * @return  none
+   1239           */
+   1240          uint8 zdo_MTCB_MgmtPermitJoinRspCB( zdoIncomingMsg_t *inMsg, uint8 *msg )
+   1241          {
+   1242          
+   1243            msg[0] = ZDO_ParseMgmtPermitJoinRsp( inMsg );
+   1244            msg[1] = HI_UINT16( inMsg->srcAddr.addr.shortAddr );
+   1245            msg[2] = LO_UINT16( inMsg->srcAddr.addr.shortAddr );
+   1246          
+   1247            return ( 3 );
+   1248          }
+   1249          
+   1250          #define USER_DESC_CB_LEN  22
+   1251          /*********************************************************************
+   1252           * @fn      zdo_MTCB_UserDescRspCB()
+   1253           *
+   1254           * @brief
+   1255           *
+   1256           *   Called to send MT callback response for User Descriptor
+   1257           *   responses
+   1258           *
+   1259           * @param  SrcAddr  - Source address
+   1260           * @param  Status - response status
+   1261           * @param  nwkAddrOfInterest -
+   1262           * @param  userDescLen -
+   1263           * @param  userDesc -
+   1264           * @param  SecurityUse -
+   1265           *
+   1266           * @return  none
+   1267           */
+   1268          uint8 zdo_MTCB_UserDescRspCB( zdoIncomingMsg_t *inMsg, uint8 *msg )
+   1269          {
+   1270            uint8 len = 0;
+   1271            ZDO_UserDescRsp_t *pRsp = ZDO_ParseUserDescRsp( inMsg );
+   1272            
+   1273            if ( pRsp )
+   1274            {
+   1275              len = USER_DESC_CB_LEN;
+   1276              osal_memset( msg, 0, USER_DESC_CB_LEN );
+   1277            
+   1278              *msg++ = pRsp->status;
+   1279              *msg++ = HI_UINT16( inMsg->srcAddr.addr.shortAddr );
+   1280              *msg++ = LO_UINT16( inMsg->srcAddr.addr.shortAddr );
+   1281              *msg++ = HI_UINT16( pRsp->nwkAddr );
+   1282              *msg++ = LO_UINT16( pRsp->nwkAddr );
+   1283              *msg++ = pRsp->length;
+   1284              osal_memcpy( msg, pRsp->desc, pRsp->length ); 
+   1285            
+   1286              osal_mem_free( pRsp );
+   1287            }
+   1288            return ( len );
+   1289          }
+   1290          
+   1291          /*********************************************************************
+   1292           * @fn      zdo_MTCB_UserDescConfCB()
+   1293           *
+   1294           * @brief
+   1295           *
+   1296           *   Called to send MT callback response for User Descriptor
+   1297           *   confirm
+   1298           *
+   1299           * @param  SrcAddr  - Source address
+   1300           * @param  Status - response status
+   1301           * @param  SecurityUse -
+   1302           *
+   1303           * @return  none
+   1304           */
+   1305          uint8 zdo_MTCB_UserDescConfCB( zdoIncomingMsg_t *inMsg, uint8 *msg )
+   1306          {
+   1307            msg[0] = ZDO_ParseUserDescConf( inMsg );
+   1308            msg[1] = HI_UINT16( inMsg->srcAddr.addr.shortAddr );
+   1309            msg[2] = LO_UINT16( inMsg->srcAddr.addr.shortAddr );
+   1310          
+   1311            return ( 3 );
+   1312          }
+   1313          
+   1314          /*********************************************************************
+   1315           * @fn     zdo_MTCB_ServerDiscRspCB()
+   1316           *
+   1317           * @brief  Called to send MT callback response for Server_Discovery_rsp responses.
+   1318           *
+   1319           * @param  srcAddr - Source address.
+   1320           * @param  status - Response status.
+   1321           * @param  aoi - Network Address of Interest.
+   1322           * @param  serverMask - Bit mask of services that match request.
+   1323           * @param  SecurityUse -
+   1324           *
+   1325           * @return  none
+   1326           */
+   1327          uint8 zdo_MTCB_ServerDiscRspCB( zdoIncomingMsg_t *inMsg, uint8 *msg )
+   1328          {
+   1329            ZDO_ServerDiscRsp_t Rsp;
+   1330            ZDO_ParseServerDiscRsp( inMsg, &Rsp );
+   1331          
+   1332            *msg++ = Rsp.status;
+   1333            *msg++ = HI_UINT16( inMsg->srcAddr.addr.shortAddr );
+   1334            *msg++ = LO_UINT16( inMsg->srcAddr.addr.shortAddr );
+   1335            *msg++ = HI_UINT16( Rsp.serverMask );
+   1336            *msg++ = LO_UINT16( Rsp.serverMask );
+   1337          
+   1338            return ( 5 );
+   1339          }
+   1340          
+   1341          /*********************************************************************
+   1342           * @fn     MT_ZdoRsp()
+   1343           *
+   1344           * @brief  Called to process incoming response messages.
+   1345           *
+   1346           * @param  inMsg - incoming message
+   1347           *
+   1348           * @return  none
+   1349           */
+   1350          void MT_ZdoRsp( zdoIncomingMsg_t *inMsg )
+   1351          {
+   1352            uint8 x = 0;
+   1353            
+   1354            // Look through the table
+   1355            while ( mtzdoConvTable[x].clusterID )
+   1356            {
+   1357              // Cluster ID Match?
+   1358              if ( mtzdoConvTable[x].clusterID == inMsg->clusterID )
+   1359              {
+   1360                // Registered for this callback?
+   1361                if ( _zdoCallbackSub & mtzdoConvTable[x].subCBID )
+   1362                {
+   1363                  uint8 len = mtzdoConvTable[x].pFn( inMsg, mtzdoResponseBuffer );
+   1364                  if ( len )
+   1365                  {
+   1366                    // Send the response message
+   1367                    MT_BuildAndSendZToolCB( mtzdoConvTable[x].mtID, len, mtzdoResponseBuffer );
+   1368                  }
+   1369                }
+   1370                break;    // get out of the loop
+   1371              }
+   1372              x++;
+   1373            }
+   1374          }
+   1375          
+   1376          /*********************************************************************
+   1377          *********************************************************************/
+   1378          
+   1379          #endif   /*ZDO Command Processing in MT*/
+
+
+ 
+ 
+ 0 bytes of memory
+
+Errors: none
+Warnings: none
