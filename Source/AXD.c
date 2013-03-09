@@ -65,6 +65,7 @@
 #include "ZDApp.h"
 #include "ZDObject.h"
 #include "ZDProfile.h"
+#include "aps_groups.h"
 
 #include "AXD.h"
 #include "DebugTrace.h"
@@ -86,11 +87,88 @@
 /*********************************************************************
  * MACROS
  */
+#define FREE_OTABUF() { \
+  if ( otaBuf ) \
+  { \
+    osal_mem_free( otaBuf ); \
+  } \
+  if ( otaBuf2 ) \
+  { \
+    SerialApp_SendData( otaBuf2, otaLen2 ); \
+    otaBuf2 = NULL; \
+  } \
+  else \
+  { \
+    otaBuf = NULL; \
+  } \
+}
+
+
 
 /*********************************************************************
  * CONSTANTS
  */
 #define ZB_USER_EVENTS                    0x00FF
+#if !defined( SERIAL_APP_PORT )
+  #define SERIAL_APP_PORT  0
+#endif
+
+#if !defined( SERIAL_APP_BAUD )
+  // CC2430 only allows 38.4k or 115.2k.
+  //#define SERIAL_APP_BAUD  HAL_UART_BR_38400
+  #define SERIAL_APP_BAUD  HAL_UART_BR_115200
+#endif
+
+// When the Rx buf space is less than this threshold, invoke the Rx callback.
+#if !defined( SERIAL_APP_THRESH )
+  #define SERIAL_APP_THRESH  48
+#endif
+
+#if !defined( SERIAL_APP_RX_MAX )
+  #if (defined( HAL_UART_DMA )) && HAL_UART_DMA
+    #define SERIAL_APP_RX_MAX  128
+  #else
+    /* The generic safe Rx minimum is 48, but if you know your PC App will not
+     * continue to send more than a byte after receiving the ~CTS, lower max
+     * here and safe min in _hal_uart.c to just 8.
+     */
+    #define SERIAL_APP_RX_MAX  64
+  #endif
+#endif
+
+#if !defined( SERIAL_APP_TX_MAX )
+  #if (defined( HAL_UART_DMA )) && HAL_UART_DMA
+  #define SERIAL_APP_TX_MAX  128
+  #else
+    #define SERIAL_APP_TX_MAX  64
+  #endif
+#endif
+
+// Millisecs of idle time after a byte is received before invoking Rx callback.
+#if !defined( SERIAL_APP_IDLE )
+  #define SERIAL_APP_IDLE  6
+#endif
+
+// This is the desired byte count per OTA message.
+#if !defined( SERIAL_APP_RX_CNT )
+  #if (defined( HAL_UART_DMA )) && HAL_UART_DMA
+    #define SERIAL_APP_RX_CNT  80
+  #else
+    #define SERIAL_APP_RX_CNT  6
+  #endif
+#endif
+
+// Loopback Rx bytes to Tx for thruput testing.
+#if !defined( SERIAL_APP_LOOPBACK )
+  #define SERIAL_APP_LOOPBACK  TRUE
+#endif
+
+#if SERIAL_APP_LOOPBACK
+  #define SERIALAPP_TX_RTRY_EVT      0x0010
+  #define SERIALAPP_TX_RTRY_TIMEOUT  250
+#endif
+
+#define SERIAL_APP_RSP_CNT  4
 
 /*********************************************************************
  * TYPEDEFS
@@ -99,11 +177,13 @@
 /*********************************************************************
  * GLOBAL VARIABLES
  */
+aps_Group_t AXD_Group;
 
 // This list should be filled with Application specific Cluster IDs.
 const cId_t AXD_ClusterList[AXD_MAX_CLUSTERS] =
 {
-  AXD_CLUSTERID
+  AXD_CLUSTERID,
+  AXD_TEST_CLUSTERID
 };
 
 const SimpleDescriptionFormat_t AXD_SimpleDesc =
@@ -128,7 +208,8 @@ endPointDesc_t AXD_epDesc;
 /*********************************************************************
  * EXTERNAL VARIABLES
  */
-//char TEMP[8] = {0,0,0,0,0,0,0,0};
+uint16 test2 = 0;
+
 /*********************************************************************
  * EXTERNAL FUNCTIONS
  */
@@ -143,8 +224,13 @@ devStates_t AXD_NwkState;
 
 
 byte AXD_TransID;  // This is the unique message ID (counter)
+//byte AXD_TransID2;
 
 afAddrType_t AXD_DstAddr;
+#if SERIAL_APP_LOOPBACK
+static uint8 rxLen;
+static uint8 rxBuf[SERIAL_APP_RX_CNT];
+#endif
 
 /*********************************************************************
  * LOCAL FUNCTIONS
@@ -153,6 +239,12 @@ void AXD_ProcessZDOMsgs( zdoIncomingMsg_t *inMsg );
 void AXD_HandleKeys( byte shift, byte keys );
 void AXD_MessageMSGCB( afIncomingMSGPacket_t *pckt );
 void AXD_SendTheMessage( void );
+
+#if SERIAL_APP_LOOPBACK
+static void rxCB_Loopback( uint8 port, uint8 event );
+#else
+static void rxCB( uint8 port, uint8 event );
+#endif
 
 /*********************************************************************
  * NETWORK LAYER CALLBACKS
@@ -178,9 +270,11 @@ void AXD_SendTheMessage( void );
  */
 void AXD_Init( byte task_id )
 {
+  halUARTCfg_t uartConfig;
   AXD_TaskID = task_id;
   AXD_NwkState = DEV_INIT;
   AXD_TransID = 0;
+//  AXD_TransID2 = 1;
 
   // Device hardware initialization can be added here or in main() (Zmain.c).
   // If the hardware is application specific - add it here.
@@ -202,6 +296,20 @@ void AXD_Init( byte task_id )
 
   // Register for all key events - This app will handle all key events
   RegisterForKeys( AXD_TaskID );
+  uartConfig.configured           = TRUE;              // 2430 don't care.
+  uartConfig.baudRate             = SERIAL_APP_BAUD;
+  uartConfig.flowControl          = TRUE;
+  uartConfig.flowControlThreshold = SERIAL_APP_THRESH;
+  uartConfig.rx.maxBufSize        = SERIAL_APP_RX_MAX;
+  uartConfig.tx.maxBufSize        = SERIAL_APP_TX_MAX;
+  uartConfig.idleTimeout          = SERIAL_APP_IDLE;   // 2430 don't care.
+  uartConfig.intEnable            = TRUE;              // 2430 don't care.
+#if SERIAL_APP_LOOPBACK
+  uartConfig.callBackFunc         = rxCB_Loopback;
+#else
+  uartConfig.callBackFunc         = rxCB;
+#endif
+  HalUARTOpen (SERIAL_APP_PORT, &uartConfig);
 
   // Update the display
 #if defined ( LCD_SUPPORTED )
@@ -211,10 +319,12 @@ void AXD_Init( byte task_id )
   ZDO_RegisterForZDOMsg( AXD_TaskID, End_Device_Bind_rsp );
   ZDO_RegisterForZDOMsg( AXD_TaskID, Match_Desc_rsp );
   
+  AXD_Group.ID = AXD_GROUP;
+  aps_AddGroup(AXD_ENDPOINT,&AXD_Group);
   //下面是用户自定义的初始化
-
+#ifdef AXD_END
   Init_ADXL345();
-  
+#endif
 }
 
 /*********************************************************************
@@ -232,6 +342,7 @@ void AXD_Init( byte task_id )
  */
 UINT16 AXD_ProcessEvent( byte task_id, UINT16 events )
 {
+  
   afIncomingMSGPacket_t *MSGpkt;
 //  osal_event_hdr_t *pMsg;
   afDataConfirm_t *afDataConfirm;
@@ -277,9 +388,9 @@ UINT16 AXD_ProcessEvent( byte task_id, UINT16 events )
         case AF_INCOMING_MSG_CMD:
     //      MSGpkt = (afIncomingMSGPacket_t *) pMsg;
 #ifdef AXD_COR
-          AXD_ReceiveDataIndication( MSGpkt->srcAddr.addr.shortAddr, MSGpkt->clusterId,
-                                    MSGpkt->cmd.DataLength, MSGpkt->cmd.Data);
-          //AXD_MessageMSGCB( MSGpkt );
+          //AXD_ReceiveDataIndication( MSGpkt->srcAddr.addr.shortAddr, MSGpkt->clusterId,
+          //                          MSGpkt->cmd.DataLength, MSGpkt->cmd.Data);
+          AXD_MessageMSGCB( MSGpkt );
 #endif
           break;
 
@@ -315,12 +426,15 @@ UINT16 AXD_ProcessEvent( byte task_id, UINT16 events )
   //  (setup in AXD_Init()).
   if ( events & AXD_SEND_MSG_EVT )
   {
-    // Send "the" message
-  //  HalLcdWriteString( "SampleApp", HAL_LCD_LINE_1 );
-    zb_HandleOsalEvent(events);
+    //zb_HandleOsalEvent(events);
     AXD_SendTheMessage();
-
     // Setup to send message again
+#ifdef AXD_ROUTER
+    test2++;
+#endif
+#ifdef AXD_END2
+    test2--;
+#endif
     osal_start_timerEx( AXD_TaskID,
                         AXD_SEND_MSG_EVT,
                         (AXD_SEND_MSG_TIMEOUT/5) );
@@ -457,6 +571,7 @@ void AXD_HandleKeys( byte shift, byte keys )
       HalLedSet ( HAL_LED_4, HAL_LED_MODE_OFF );
 
       // Initiate a Match Description Request (Service Discovery)
+#ifdef AXD_COR
       dstAddr.addrMode = AddrBroadcast;
       dstAddr.addr.shortAddr = NWK_BROADCAST_SHORTADDR;
       ZDP_MatchDescReq( &dstAddr, NWK_BROADCAST_SHORTADDR,
@@ -464,6 +579,15 @@ void AXD_HandleKeys( byte shift, byte keys )
                         AXD_MAX_CLUSTERS, (cId_t *)AXD_ClusterList,
                         AXD_MAX_CLUSTERS, (cId_t *)AXD_ClusterList,
                         FALSE );
+#else
+      dstAddr.addrMode = Addr16Bit;
+      dstAddr.addr.shortAddr = 0x0000;
+      ZDP_MatchDescReq( &dstAddr, NWK_BROADCAST_SHORTADDR,
+                        AXD_PROFID,
+                        AXD_MAX_CLUSTERS, (cId_t *)AXD_ClusterList,
+                        AXD_MAX_CLUSTERS, (cId_t *)AXD_ClusterList,
+                        FALSE );
+#endif
     }
   }
 }
@@ -485,17 +609,23 @@ void AXD_HandleKeys( byte shift, byte keys )
  */
 void AXD_MessageMSGCB( afIncomingMSGPacket_t *pkt )
 {
+  
   switch ( pkt->clusterId )
   {
-    case AXD_CLUSTERID:
-      // "the" message
-#if defined( LCD_SUPPORTED )
-      HalLcdWriteScreen( (char*)pkt->cmd.Data, "rcvd" );
-#elif defined( WIN32 )
-      WPRINTSTR( pkt->cmd.Data );
-#endif
-      break;
-  }
+    case AXD_CMD_ID:
+      displayXYZ(pkt->cmd.Data);
+      //HalLcdWriteStringValue("R: ",source,10,3);
+      HalUARTWrite( SERIAL_APP_PORT, pkt->cmd.Data,pkt->cmd.DataLength);
+    break;
+  case AXD_TEST_CMD_ID:
+    HalLcdWriteStringValue("R: ",*(pkt->cmd.Data),10,4);
+    break;
+  case AXD_TEST2_CMD_ID:
+    HalLcdWriteStringValue("Q: ",*(pkt->cmd.Data),10,3);
+    break;
+  default: break;
+  } 
+  
 }
 
 /*********************************************************************
@@ -509,31 +639,61 @@ void AXD_MessageMSGCB( afIncomingMSGPacket_t *pkt )
  */
 void AXD_SendTheMessage( void )
 {
-//  char theMessageData[] = "Hello World";
+  //zAddrType_t dstAddr;
 #ifdef AXD_END
-//  int i;
-
-//  for(i=0;i<8;i++)
-//  {
-//    TEMP[i]++;
-//  }
 
   Multiple_Read_ADXL345();
- // displayXYZ(BUFFER);
-
+  displayXYZ((uint8 *)BUFFER);
+  
   if ( AF_DataRequest( &AXD_DstAddr, &AXD_epDesc,
-                       AXD_CLUSTERID,
+                       AXD_CMD_ID,
                        (byte)(sizeof(BUFFER)),
                        (byte *)(BUFFER),
                        &AXD_TransID,
                        AF_DISCV_ROUTE, AF_DEFAULT_RADIUS ) == afStatus_SUCCESS )
   {
+    aps_RemoveGroup(AXD_ENDPOINT,AXD_GROUP);
     // Successfully requested to be sent.
+    
   }
   else
   {
     // Error occurred in request to send.
   }
+#endif
+#ifdef AXD_ROUTER
+  if ( AF_DataRequest( &AXD_DstAddr, &AXD_epDesc,
+                       AXD_TEST_CMD_ID,
+                       (byte)(sizeof(test2)),
+                       (byte *)(&test2),
+                       &AXD_TransID,
+                       AF_SKIP_ROUTING, AF_DEFAULT_RADIUS ) == afStatus_SUCCESS )
+  {
+    // Successfully requested to be sent.
+
+  }
+  else
+  {
+    // Error occurred in request to send.
+  }
+  
+#endif
+#ifdef AXD_END2
+  if ( AF_DataRequest( &AXD_DstAddr, &AXD_epDesc,
+                       AXD_TEST2_CMD_ID,
+                       (byte)(sizeof(test2)),
+                       (byte *)(&test2),
+                       &AXD_TransID,
+                       AF_SKIP_ROUTING, AF_DEFAULT_RADIUS ) == afStatus_SUCCESS )
+  {
+    // Successfully requested to be sent.
+
+  }
+  else
+  {
+    // Error occurred in request to send.
+  }
+  
 #endif
 }
 
@@ -555,10 +715,122 @@ void AXD_ReceiveDataIndication( uint16 source, uint16 command, uint16 len, uint8
   }
 }
 
-void zb_ReceiveDataIndication( uint16 source, uint16 command, uint16 len, uint8 *pData  )
+#if SERIAL_APP_LOOPBACK
+/*********************************************************************
+ * @fn      rxCB_Loopback
+ *
+ * @brief   Process UART Rx event handling.
+ *          May be triggered by an Rx timer expiration - less than max
+ *          Rx bytes have arrived within the Rx max age time.
+ *          May be set by failure to alloc max Rx byte-buffer for the DMA Rx -
+ *          system resources are too low, so set flow control?
+ *
+ * @param   none
+ *
+ * @return  none
+ */
+static void rxCB_Loopback( uint8 port, uint8 event )
 {
-//  uint8 buf[8];
-  displayXYZ(pData);
 
-    
+  if ( rxLen )
+  {
+    if ( !HalUARTWrite( SERIAL_APP_PORT, rxBuf, rxLen ) )
+    {
+      osal_start_timerEx( AXD_TaskID, SERIALAPP_TX_RTRY_EVT,
+                                            SERIALAPP_TX_RTRY_TIMEOUT );
+      return;
+    }
+    else
+    {
+      osal_stop_timerEx( AXD_TaskID, SERIALAPP_TX_RTRY_EVT );
+    }
+  }
+
+  // HAL UART Manager will turn flow control back on if it can after read.
+  if ( !(rxLen = HalUARTRead( port, rxBuf, SERIAL_APP_RX_CNT )) )
+  {
+    return;
+  }
+
+  if ( HalUARTWrite( SERIAL_APP_PORT, rxBuf, rxLen ) )
+  {
+    rxLen = 0;
+  }
+  else
+  {
+    osal_start_timerEx( AXD_TaskID, SERIALAPP_TX_RTRY_EVT,
+                                          SERIALAPP_TX_RTRY_TIMEOUT );
+  }
 }
+
+#else
+
+/*********************************************************************
+ * @fn      rxCB
+ *
+ * @brief   Process UART Rx event handling.
+ *          May be triggered by an Rx timer expiration - less than max
+ *          Rx bytes have arrived within the Rx max age time.
+ *          May be set by failure to alloc max Rx byte-buffer for the DMA Rx -
+ *          system resources are too low, so set flow control?
+ *
+ * @param   none
+ *
+ * @return  none
+ */
+static void rxCB( uint8 port, uint8 event )
+{
+  uint8 *buf, len;
+
+  /* While awaiting retries/response, only buffer 1 next buffer: otaBuf2.
+   * If allow the DMA Rx to continue to run, allocating Rx buffers, the heap
+   * will become so depleted that an incoming OTA response cannot be received.
+   * When the Rx data available is not read, the DMA Rx Machine automatically
+   * sets flow control off - it is automatically re-enabled upon Rx data read.
+   * When the back-logged otaBuf2 is sent OTA, an Rx data read is scheduled.
+   */
+  if ( otaBuf2 )
+  {
+    return;
+  }
+
+  if ( !(buf = osal_mem_alloc( SERIAL_APP_RX_CNT )) )
+  {
+    return;
+  }
+
+  /* HAL UART Manager will turn flow control back on if it can after read.
+   * Reserve 1 byte for the 'sequence number'.
+   */
+  len = HalUARTRead( port, buf+1, SERIAL_APP_RX_CNT-1 );
+
+  if ( !len )  // Length is not expected to ever be zero.
+  {
+    osal_mem_free( buf );
+    return;
+  }
+
+  /* If the local global otaBuf is in use, then either the response handshake
+   * is being awaited or retries are being attempted. When the wait/retries
+   * process has been exhausted, the next OTA msg will be attempted from
+   * otaBuf2, if it is not NULL.
+   */
+  if ( otaBuf )
+  {
+    otaBuf2 = buf;
+    otaLen2 = len;
+  }
+  else
+  {
+    otaBuf = buf;
+    otaLen = len;
+    /* Don't call SerialApp_SendData() from here in the callback function.
+     * Set the event so SerialApp_SendData() runs during this task's time slot.
+     */
+    osal_set_event( SerialApp_TaskID, SERIALAPP_MSG_SEND_EVT );
+  }
+}
+#endif
+
+/*********************************************************************
+*********************************************************************/

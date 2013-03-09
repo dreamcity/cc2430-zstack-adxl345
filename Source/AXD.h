@@ -57,14 +57,21 @@ extern "C"
 // These constants are only for example and should be changed to the
 // device's needs
 #define AXD_ENDPOINT           10
+#define AXD_GROUP              1
 
 #define AXD_PROFID             0x0F04
 #define AXD_DEVICEID           0x0001
 #define AXD_DEVICE_VERSION     0
 #define AXD_FLAGS              0
 
-#define AXD_MAX_CLUSTERS       1
+#define AXD_MAX_CLUSTERS       3
 #define AXD_CLUSTERID          1
+#define AXD_TEST_CLUSTERID     2
+#define AXD_TEST2_CLUSTERID    3
+
+#define AXD_CMD_ID             1
+#define AXD_TEST_CMD_ID        2
+#define AXD_TEST2_CMD_ID       3
 
 // Send Message Timeout
 #define AXD_SEND_MSG_TIMEOUT   5000     // Every 5 seconds
@@ -76,6 +83,7 @@ extern "C"
 /*********************************************************************
  * MACROS
  */
+extern uint16 test2;
 
 /*********************************************************************
  * FUNCTIONS
