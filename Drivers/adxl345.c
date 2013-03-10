@@ -249,10 +249,10 @@ void Multiple_Read_ADXL345(void)
        } 
    } 
     I2C_Stop_1();                          //Í£Ö¹ÐÅºÅ 
-    Delay(500);
-    Delay(500);
-    Delay(500);
-    Delay(500);
+//   Delay(500);
+//    Delay(500);
+//    Delay(500);
+//    Delay(500);
 } 
 
 void displayXYZ(char *pData){
