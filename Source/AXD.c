@@ -110,6 +110,9 @@
 #define HAL_ADC_CHN_VDD3    0x0f    /* Input channel: VDD/3 */
 #define HAL_ADC_CHN_TEMP    0x0e    /* Temperature sensor */
 
+#define DEVICE_A 0x01;
+#define DEVICE_B 0x02;
+#define DEVICE_C 0x03;
 /*********************************************************************
  * CONSTANTS
  */
@@ -356,6 +359,10 @@ UINT16 AXD_ProcessEvent( byte task_id, UINT16 events )
   byte sentEP;
   ZStatus_t sentStatus;
   byte sentTransID;       // This should match the value sent
+#ifdef AXD_END
+  BUFFER[0] = 0;
+  BUFFER[1] = DEVICE_A;
+#endif
 
   if ( events & SYS_EVENT_MSG )
   {
@@ -442,7 +449,7 @@ UINT16 AXD_ProcessEvent( byte task_id, UINT16 events )
 #endif
     osal_start_timerEx( AXD_TaskID,
                         AXD_SEND_MSG_EVT,
-                        (AXD_SEND_MSG_TIMEOUT/5) );
+                        (AXD_SEND_MSG_TIMEOUT/50) );
 
     // return unprocessed events
     return (events ^ AXD_SEND_MSG_EVT);
@@ -648,9 +655,14 @@ void AXD_SendTheMessage( void )
 #ifdef AXD_END
 
   Multiple_Read_ADXL345();
+  conversion();
   displayXYZ((uint8 *)BUFFER);
-  BUFFER[6] = myApp_ReadTemperature();
-  BUFFER[7] = myApp_ReadTemperature();
+  BUFFER[3] = myApp_ReadTemperature();
+  BUFFER[2] = BUFFER[3] % 10 + '0';
+  BUFFER[3] = BUFFER[3] / 10 + '0';
+  BUFFER[5] = myApp_ReadTemperature();
+  BUFFER[4] = BUFFER[5] % 10 + '0';
+  BUFFER[5] = BUFFER[5] / 10 + '0';
   
   if ( AF_DataRequest( &AXD_DstAddr, &AXD_epDesc,
                        AXD_CMD_ID,

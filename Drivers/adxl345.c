@@ -14,14 +14,14 @@
 #define FALSE 0
 #define	SlaveAddress 0xA6 //定义器件在IIC总线中的从地址,根据ALT  ADDRESS地址引脚不同修改
 
-INT8U BUFFER[8];
+signed char BUFFER[13];
 int  dis_data;
 
 char wan,qian,bai,shi,ge;
 
 void initUARTtest(void);
 void UartTX_Send_String(char *Data,int len);
-void conversion(INT16U temp_data);
+void conversion(void);
 
 void Sendack(unsigned char h);
 unsigned char I2C_Check_ack();
@@ -69,17 +69,34 @@ void Delay_1u(unsigned int microSecs) {
   }
 }
 
-void conversion(INT16U temp_data)   
-{   
-    wan=temp_data/10000; 
-    temp_data=temp_data%10000;   //取余运算 
-	qian=temp_data/1000; 
-    temp_data=temp_data%1000;    //取余运算 
-    bai=temp_data/100; 
-    temp_data=temp_data%100;     //取余运算 
-    shi=temp_data/10; 
-    temp_data=temp_data%10;      //取余运算 
-    ge=temp_data; 	
+void conversion(void)   
+{  
+  BUFFER[12] = 0xff;
+  float temp_data;
+  if (BUFFER[7] < 0)
+  {
+    BUFFER[12] &= ~0x01;    
+  }
+  temp_data = ((BUFFER[7] & 0x0f) << 8) + BUFFER[6];    
+  temp_data = (temp_data / 8192) * 100;
+  BUFFER[6] = ((INT8U)temp_data) % 10 + '0';
+  BUFFER[7] = ((INT8U)temp_data) / 10 + '0';
+    if (BUFFER[9] < 0)
+  {
+    BUFFER[12] &= ~0x02;    
+  }
+  temp_data = ((BUFFER[9] & 0x0f) << 8) + BUFFER[8];    
+  temp_data = (temp_data / 8192) * 100;
+  BUFFER[8] = ((INT8U)temp_data) % 10 + '0';
+  BUFFER[9] = ((INT8U)temp_data) / 10 + '0';
+    if (BUFFER[11] < 0)
+  {
+    BUFFER[12] &= ~0x04;    
+  }
+  temp_data = ((BUFFER[11] & 0x0f) << 8) + BUFFER[10];    
+  temp_data = (temp_data / 8192) * 100;
+  BUFFER[10] = ((INT8U)temp_data) % 10 + '0';
+  BUFFER[11] = ((INT8U)temp_data) / 10 + '0';
 } 
 
 void I2C_Start_1(void)
@@ -238,7 +255,7 @@ void Multiple_Read_ADXL345(void)
     WriteI2CByte_1(SlaveAddress+1);         //发送设备地址+读信号 
  for (f=0; f<6; f++)                      //连续读取6个地址数据，存储中BUF 
     { 
-        BUFFER[f] = ReadI2CByte_1();          //BUF[0]存储0x32地址中的数据 
+        BUFFER[6+f] = ReadI2CByte_1();          //BUF[0]存储0x32地址中的数据 
       if (f == 5) 
         { 
           Sendack(1);                //最后一个数据需要回NOACK 
@@ -258,7 +275,7 @@ void Multiple_Read_ADXL345(void)
 void displayXYZ(INT8U *pData){
   int  dis_data;
   uint16 temp;
-  dis_data=(pData[1]<<8)+pData[0];
+  dis_data=(pData[7]<<8)+pData[6];
     temp=(uint16)((float)dis_data*3.9);  //计算数据和显示,查考ADXL345快速入门第4页
 	if(dis_data<0){
 	dis_data=-dis_data;
@@ -268,7 +285,7 @@ void displayXYZ(INT8U *pData){
     {
         HalLcdWriteStringValue("X:  ",temp,10,0);
     }
-    dis_data=(pData[3]<<8)+pData[2];  //合成数据   
+    dis_data=(pData[9]<<8)+pData[8];  //合成数据   
 	    temp=(uint16)((float)dis_data*3.9);  //计算数据和显示,查考ADXL345快速入门第4页
 	if(dis_data<0){
 	dis_data=-dis_data;
@@ -278,7 +295,7 @@ void displayXYZ(INT8U *pData){
     {
         HalLcdWriteStringValue("Y:  ",temp,10,1);
     }
-    dis_data=(pData[5]<<8)+pData[4];    //合成数据  
+    dis_data=(pData[11]<<8)+pData[10];    //合成数据  
     temp=(uint16)((float)dis_data*3.9);  //计算数据和显示,查考ADXL345快速入门第4页
 	if(dis_data<0){
 	dis_data=-dis_data;
