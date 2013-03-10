@@ -437,7 +437,7 @@ UINT16 AXD_ProcessEvent( byte task_id, UINT16 events )
 #endif
     osal_start_timerEx( AXD_TaskID,
                         AXD_SEND_MSG_EVT,
-                        (AXD_SEND_MSG_TIMEOUT/5) );
+                        (AXD_SEND_MSG_TIMEOUT/5));
 
     // return unprocessed events
     return (events ^ AXD_SEND_MSG_EVT);
