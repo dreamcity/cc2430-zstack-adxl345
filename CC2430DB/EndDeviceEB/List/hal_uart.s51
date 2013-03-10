@@ -1,6 +1,6 @@
 ///////////////////////////////////////////////////////////////////////////////
 //                                                                            /
-// IAR 8051 C/C++ Compiler V7.30B/W32                   28/Dec/2012  19:54:03 /
+// IAR 8051 C/C++ Compiler V7.30B/W32                   03/Jan/2013  20:31:38 /
 // Copyright 2004-2007 IAR Systems. All rights reserved.                      /
 //                                                                            /
 //    Core               =  plain                                             /
@@ -41,8 +41,8 @@
 //                          "C:\Texas Instruments\ZStack-1.4.3-1.2.1\Componen /
 //                          ts\hal\target\CC2430EB\hal_uart.c" -D CC2430EB    /
 //                          -D AXD_END -D NWK_AUTO_POLL -D REFLECTOR -D       /
-//                          ZTOOL_P1 -D MT_TASK -D xMT_ZDO_FUNC -D            /
-//                          LCD_SUPPORTED=DEBUG -D xPOWER_SAVING -lC          /
+//                          xZTOOL_P1 -D xMT_TASK -D xMT_ZDO_FUNC -D          /
+//                          xLCD_SUPPORTED=DEBUG -D xPOWER_SAVING -lC         /
 //                          "C:\Texas Instruments\ZStack-1.4.3-1.2.1\Projects /
 //                          \zstack\Samples\AXDApp\CC2430DB\EndDeviceEB\List\ /
 //                          " -lA "C:\Texas Instruments\ZStack-1.4.3-1.2.1\Pr /
@@ -145,17 +145,11 @@
         RSEG PSTACK:XDATA:NOROOT(0)
         RSEG XSTACK:XDATA:NOROOT(0)
 
-        EXTERN ??pollDMA?relay
-        EXTERN ?ALLOC_XSTACK8
         EXTERN ?BANKED_ENTER_XDATA
         EXTERN ?BANKED_LEAVE_XDATA
         EXTERN ?BDISPATCH
         EXTERN ?BRET
-        EXTERN ?CALL_IND
-        EXTERN ?DEALLOC_XSTACK8
         EXTERN ?V0
-        EXTERN ?XSP
-        EXTERN __INIT_XDATA_Z
 
         PUBLIC ??HalUARTClose?relay
         FUNCTION ??HalUARTClose?relay,0203H
@@ -171,33 +165,25 @@
         FUNCTION ??HalUARTWrite?relay,0203H
         PUBLIC ??Hal_UART_RxBufLen?relay
         FUNCTION ??Hal_UART_RxBufLen?relay,0203H
-        FUNCTION ??pollDMA?relay,0203H
-        PUBWEAK ADCCFG
-        PUBWEAK DMAARM
-        PUBWEAK DMAIRQ
-        PUBWEAK DMAREQ
         PUBLIC HalUARTClose
         FUNCTION HalUARTClose,0203H
         ARGFRAME XSTACK, 0, STACK
         PUBLIC HalUARTInit
         FUNCTION HalUARTInit,0203H
         ARGFRAME XSTACK, 0, STACK
-        LOCFRAME ISTACK, 3, STACK
         PUBLIC HalUARTOpen
         FUNCTION HalUARTOpen,021203H
         ARGFRAME XSTACK, 0, STACK
         LOCFRAME ISTACK, 1, STACK
-        LOCFRAME XSTACK, 15, STACK
+        LOCFRAME XSTACK, 13, STACK
         PUBLIC HalUARTPoll
-        FUNCTION HalUARTPoll,021203H
+        FUNCTION HalUARTPoll,0203H
         ARGFRAME XSTACK, 0, STACK
-        LOCFRAME ISTACK, 1, STACK
-        LOCFRAME XSTACK, 10, STACK
         PUBLIC HalUARTRead
         FUNCTION HalUARTRead,0203H
         ARGFRAME XSTACK, 0, STACK
         LOCFRAME ISTACK, 1, STACK
-        LOCFRAME XSTACK, 12, STACK
+        LOCFRAME XSTACK, 13, STACK
         PUBLIC HalUARTWrite
         FUNCTION HalUARTWrite,0203H
         ARGFRAME XSTACK, 0, STACK
@@ -207,24 +193,7 @@
         FUNCTION Hal_UART_RxBufLen,0203H
         ARGFRAME XSTACK, 0, STACK
         LOCFRAME ISTACK, 3, STACK
-        PUBWEAK P0DIR
-        PUBWEAK P0SEL
         PUBWEAK P2DIR
-        PUBWEAK PERCFG
-        PUBWEAK ST0
-        PUBWEAK U0BAUD
-        PUBWEAK U0CSR
-        PUBWEAK U0DBUF
-        PUBWEAK U0GCR
-        PUBWEAK U0UCR
-        PUBWEAK _A_P0
-        PUBWEAK _A_P1
-        FUNCTION pollDMA,021203H
-        ARGFRAME XSTACK, 10, STACK
-        ARGFRAME IOVERLAY, 0, STATIC
-        ARGFRAME DOVERLAY, 0, STATIC
-        LOCFRAME ISTACK, 1, STACK
-        LOCFRAME XSTACK, 12, STACK
         
         CFI Names cfiNames0
         CFI StackFrame CFA_SP SP DATA
@@ -305,10 +274,8 @@
         CFI ?RET_LOW Frame(CFA_SP, 1)
         CFI EndCommon cfiCommon0
         
-osal_memset         SYMBOL "osal_memset"
 osal_mem_alloc      SYMBOL "osal_mem_alloc"
 ??osal_mem_alloc?relay SYMBOL "?relay", osal_mem_alloc
-??osal_memset?relay SYMBOL "?relay", osal_memset
 HalUARTClose        SYMBOL "HalUARTClose"
 ??HalUARTClose?relay SYMBOL "?relay", HalUARTClose
 HalUARTInit         SYMBOL "HalUARTInit"
@@ -324,25 +291,15 @@ HalUARTWrite        SYMBOL "HalUARTWrite"
 Hal_UART_RxBufLen   SYMBOL "Hal_UART_RxBufLen"
 ??Hal_UART_RxBufLen?relay SYMBOL "?relay", Hal_UART_RxBufLen
 
-        EXTERN osal_memset
-        FUNCTION osal_memset,0202H
-        ARGFRAME ISTACK, 0, STACK
-        ARGFRAME PSTACK, 0, STACK
-        ARGFRAME XSTACK, 15, STACK
-        ARGFRAME IOVERLAY, 0, STATIC
-        ARGFRAME DOVERLAY, 0, STATIC
         EXTERN osal_mem_alloc
         FUNCTION osal_mem_alloc,0202H
         ARGFRAME ISTACK, 0, STACK
         ARGFRAME PSTACK, 0, STACK
-        ARGFRAME XSTACK, 15, STACK
+        ARGFRAME XSTACK, 13, STACK
         ARGFRAME IOVERLAY, 0, STATIC
         ARGFRAME DOVERLAY, 0, STATIC
         EXTERN ??osal_mem_alloc?relay
         FUNCTION ??osal_mem_alloc?relay,00H
-        EXTERN ??osal_memset?relay
-        FUNCTION ??osal_memset?relay,00H
-        EXTERN dmaCh1234
 
 // C:\Texas Instruments\ZStack-1.4.3-1.2.1\Components\hal\target\CC2430EB\hal_uart.c
 //    1 /**************************************************************************************************
@@ -391,81 +348,6 @@ Hal_UART_RxBufLen   SYMBOL "Hal_UART_RxBufLen"
 //   44 #include "hal_types.h"
 //   45 #include "hal_assert.h"
 //   46 #include "hal_board.h"
-
-        ASEGN SFR_AN:DATA:NOROOT,080H
-// union <unnamed> volatile __sfr _A_P0
-_A_P0:
-        DS 1
-
-        ASEGN SFR_AN:DATA:NOROOT,086H
-// unsigned char volatile __sfr U0CSR
-U0CSR:
-        DS 1
-
-        ASEGN SFR_AN:DATA:NOROOT,090H
-// union <unnamed> volatile __sfr _A_P1
-_A_P1:
-        DS 1
-
-        ASEGN SFR_AN:DATA:NOROOT,095H
-// unsigned char volatile __sfr ST0
-ST0:
-        DS 1
-
-        ASEGN SFR_AN:DATA:NOROOT,0c1H
-// unsigned char volatile __sfr U0DBUF
-U0DBUF:
-        DS 1
-
-        ASEGN SFR_AN:DATA:NOROOT,0c2H
-// unsigned char volatile __sfr U0BAUD
-U0BAUD:
-        DS 1
-
-        ASEGN SFR_AN:DATA:NOROOT,0c4H
-// unsigned char volatile __sfr U0UCR
-U0UCR:
-        DS 1
-
-        ASEGN SFR_AN:DATA:NOROOT,0c5H
-// unsigned char volatile __sfr U0GCR
-U0GCR:
-        DS 1
-
-        ASEGN SFR_AN:DATA:NOROOT,0d1H
-// unsigned char volatile __sfr DMAIRQ
-DMAIRQ:
-        DS 1
-
-        ASEGN SFR_AN:DATA:NOROOT,0d6H
-// unsigned char volatile __sfr DMAARM
-DMAARM:
-        DS 1
-
-        ASEGN SFR_AN:DATA:NOROOT,0d7H
-// unsigned char volatile __sfr DMAREQ
-DMAREQ:
-        DS 1
-
-        ASEGN SFR_AN:DATA:NOROOT,0f1H
-// unsigned char volatile __sfr PERCFG
-PERCFG:
-        DS 1
-
-        ASEGN SFR_AN:DATA:NOROOT,0f2H
-// unsigned char volatile __sfr ADCCFG
-ADCCFG:
-        DS 1
-
-        ASEGN SFR_AN:DATA:NOROOT,0f3H
-// unsigned char volatile __sfr P0SEL
-P0SEL:
-        DS 1
-
-        ASEGN SFR_AN:DATA:NOROOT,0fdH
-// unsigned char volatile __sfr P0DIR
-P0DIR:
-        DS 1
 
         ASEGN SFR_AN:DATA:NOROOT,0ffH
 // unsigned char volatile __sfr P2DIR
@@ -722,12 +604,7 @@ P2DIR:
 //  295  */
 //  296 
 //  297 #if HAL_UART_0_ENABLE
-
-        RSEG XDATA_Z:XDATA:NOROOT(0)
 //  298 static uartCfg_t *cfg0;
-cfg0:
-        DS 2
-        REQUIRE __INIT_XDATA_Z
 //  299 #endif
 //  300 #if HAL_UART_1_ENABLE
 //  301 static uartCfg_t *cfg1;
@@ -754,174 +631,19 @@ cfg0:
 //  322  *
 //  323  * @return  none
 //  324  *****************************************************************************/
-
-        RSEG BANKED_CODE:CODE:NOROOT(0)
 //  325 static void pollDMA( uartCfg_t *cfg )
-pollDMA:
-        CFI Block cfiBlock0 Using cfiCommon0
-        CFI Function pollDMA
 //  326 {
-        FUNCALL pollDMA, osal_memset
-        LOCFRAME ISTACK, 0, STACK
-        LOCFRAME PSTACK, 0, STACK
-        LOCFRAME XSTACK, 12, STACK
-        LOCFRAME IOVERLAY, 0, STATIC
-        LOCFRAME DOVERLAY, 0, STATIC
-        ARGFRAME ISTACK, 0, STACK
-        ARGFRAME PSTACK, 0, STACK
-        ARGFRAME XSTACK, 12, STACK
-        ARGFRAME IOVERLAY, 0, STATIC
-        ARGFRAME DOVERLAY, 0, STATIC
-        MOV     A,#-0xb
-        LCALL   ?BANKED_ENTER_XDATA
-        CFI DPH0 load(1, XDATA, add(CFA_XSP16, literal(-1)))
-        CFI DPL0 load(1, XDATA, add(CFA_XSP16, literal(-2)))
-        CFI ?BRET_EXT load(1, XDATA, add(CFA_XSP16, literal(-3)))
-        CFI ?RET_HIGH load(1, XDATA, add(CFA_XSP16, literal(-4)))
-        CFI ?RET_LOW load(1, XDATA, add(CFA_XSP16, literal(-5)))
-        CFI R7 load(1, XDATA, add(CFA_XSP16, literal(-6)))
-        CFI V2 load(1, XDATA, add(CFA_XSP16, literal(-7)))
-        CFI V1 load(1, XDATA, add(CFA_XSP16, literal(-8)))
-        CFI V0 load(1, XDATA, add(CFA_XSP16, literal(-9)))
-        CFI VB load(1, XDATA, add(CFA_XSP16, literal(-10)))
-        CFI R6 load(1, XDATA, add(CFA_XSP16, literal(-11)))
-        CFI CFA_SP SP+0
-        CFI CFA_XSP16 add(XSP16, 11)
-        ; Saved register size: 11
-        ; Auto size: 1
-        MOV     A,#-0x1
-        LCALL   ?ALLOC_XSTACK8
-        CFI CFA_XSP16 add(XSP16, 12)
-        MOV     A,R2
-        MOV     R6,A
-        MOV     A,R3
-        MOV     R7,A
 //  327   const uint8 cnt = cfg->rxHead;
-        MOV     DPL,R6
-        MOV     DPH,R7
-        INC     DPTR
-        INC     DPTR
-        MOVX    A,@DPTR
-        MOV     ?V0 + 2,A
 //  328   uint8 *pad = cfg->rxBuf+(cfg->rxHead*2);
-        MOV     DPL,R6
-        MOV     DPH,R7
-        INC     DPTR
-        INC     DPTR
-        MOVX    A,@DPTR
-        MOV     R0,A
-        MOV     R1,#0x0
-        MOV     A,R0
-        MOV     B,#0x2
-        MUL     AB
-        XCH     A,R0
-        MOV     R2,B
-        MOV     B,#0x0
-        MUL     AB
-        ADD     A,R2
-        MOV     R2,A
-        MOV     B,#0x2
-        MOV     A,R1
-        MUL     AB
-        ADD     A,R2
-        MOV     R1,A
-        MOV     DPL,R6
-        MOV     DPH,R7
-        MOVX    A,@DPTR
-        ADD     A,R0
-        MOV     R0,A
-        INC     DPTR
-        MOVX    A,@DPTR
-        ADDC    A,R1
-        MOV     R1,A
-        MOV     ?V0 + 0,R0
-        MOV     ?V0 + 1,R1
 //  329 
 //  330   // Pack the received bytes to the front of the queue.
 //  331   while ( (*pad == DMA_PAD) && (cfg->rxHead < cfg->rxMax) )
-??pollDMA_0:
-        MOV     DPL,?V0 + 0
-        MOV     DPH,?V0 + 1
-        MOVX    A,@DPTR
-        XRL     A,0xc2
-        JNZ     ??pollDMA_1
-        MOV     DPL,R6
-        MOV     DPH,R7
-        INC     DPTR
-        INC     DPTR
-        MOVX    A,@DPTR
-        PUSH    A
-        CFI CFA_SP SP+-1
-        MOV     DPL,R6
-        MOV     DPH,R7
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        MOVX    A,@DPTR
-        MOV     R2,A
-        POP     A
-        CFI CFA_SP SP+0
-        CLR     C
-        SUBB    A,R2
-        JNC     ??pollDMA_1
 //  332   {
 //  333     cfg->rxBuf[cfg->rxHead++] = *(pad+1);
-        MOV     DPL,?V0 + 0
-        MOV     DPH,?V0 + 1
-        INC     DPTR
-        MOVX    A,@DPTR
-        PUSH    A
-        CFI CFA_SP SP+-1
-        MOV     DPL,R6
-        MOV     DPH,R7
-        INC     DPTR
-        INC     DPTR
-        MOVX    A,@DPTR
-        MOV     R0,A
-        MOV     R1,#0x0
-        MOV     DPL,R6
-        MOV     DPH,R7
-        MOVX    A,@DPTR
-        ADD     A,R0
-        MOV     R2,A
-        INC     DPTR
-        MOVX    A,@DPTR
-        ADDC    A,R1
-        MOV     DPL,R2
-        MOV     DPH,A
-        POP     A
-        CFI CFA_SP SP+0
-        MOVX    @DPTR,A
-        MOV     DPL,R6
-        MOV     DPH,R7
-        INC     DPTR
-        INC     DPTR
-        MOVX    A,@DPTR
-        ADD     A,#0x1
-        MOVX    @DPTR,A
 //  334     pad += 2;
-        MOV     A,?V0 + 0
-        ADD     A,#0x2
-        MOV     ?V0 + 0,A
-        MOV     A,?V0 + 1
-        ADDC    A,#0x0
-        MOV     ?V0 + 1,A
-        SJMP    ??pollDMA_0
 //  335   }
 //  336 
 //  337   if ( !(cfg->flag & UART_CFG_RXF) )
-??pollDMA_1:
-        MOV     A,R6
-        ADD     A,#0xf
-        MOV     DPL,A
-        MOV     A,R7
-        ADDC    A,#0x0
-        MOV     DPH,A
-        MOVX    A,@DPTR
-        MOV     C,0xE0 /* A   */.1
-        JNC     $+5
-        LJMP    ??pollDMA_2 & 0xFFFF
 //  338   {
 //  339     /* It is necessary to stop Rx flow and wait for H/W-enqueued bytes still
 //  340      * incoming to stop before resetting the DMA Rx engine. If DMA Rx is
@@ -929,677 +651,57 @@ pollDMA:
 //  342      * during the 2-step transfer process of read/write.
 //  343      */
 //  344     if ( cfg->rxHead >= (cfg->rxMax - SAFE_RX_MIN) )
-        MOV     DPL,R6
-        MOV     DPH,R7
-        INC     DPTR
-        INC     DPTR
-        MOVX    A,@DPTR
-        MOV     R2,A
-        MOV     R3,#0x0
-        MOV     DPL,R6
-        MOV     DPH,R7
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        MOVX    A,@DPTR
-        MOV     R0,A
-        MOV     R1,#0x0
-        MOV     A,#-0x30
-        ADD     A,R0
-        MOV     R0,A
-        MOV     A,#-0x1
-        ADDC    A,R1
-        MOV     R1,A
-        CLR     C
-        MOV     A,R2
-        SUBB    A,R0
-        MOV     A,R3
-        SUBB    A,R1
-        MOV     C,0xD0 /* PSW */.2
-        XRL     A,PSW
-        RLC     A
-        JC      ??pollDMA_3
 //  345     {
 //  346       RX_STOP_FLOW( cfg );
-        MOV     A,R6
-        ADD     A,#0xf
-        MOV     DPL,A
-        MOV     A,R7
-        ADDC    A,#0x0
-        MOV     DPH,A
-        MOVX    A,@DPTR
-        MOV     C,0xE0 /* A   */.7
-        JC      ??pollDMA_4
-        SETB    0x80.5
-        SJMP    ??pollDMA_5
-??pollDMA_4:
-        SETB    0x90.5
-??pollDMA_5:
-        MOV     A,R6
-        ADD     A,#0xf
-        MOV     DPL,A
-        MOV     A,R7
-        ADDC    A,#0x0
-        MOV     DPH,A
-        MOVX    A,@DPTR
-        MOV     C,0xE0 /* A   */.6
-        JNC     ??pollDMA_6
-        MOV     A,#-0x74
-        MOV     DPL,R6
-        MOV     DPH,R7
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        MOVX    @DPTR,A
-??pollDMA_6:
-        MOV     A,R6
-        ADD     A,#0xf
-        MOV     DPL,A
-        MOV     A,R7
-        ADDC    A,#0x0
-        MOV     DPH,A
-        MOVX    A,@DPTR
-        SETB    0xE0 /* A   */.1
-        MOVX    @DPTR,A
-        LJMP    ??pollDMA_7 & 0xFFFF
 //  347     }
 //  348     // If anything received, reset the Rx idle timer.
 //  349     else if ( cfg->rxHead != cnt )
-??pollDMA_3:
-        MOV     DPL,R6
-        MOV     DPH,R7
-        INC     DPTR
-        INC     DPTR
-        MOVX    A,@DPTR
-        XRL     A,?V0 + 2
-        JNZ     $+5
-        LJMP    ??pollDMA_7 & 0xFFFF
 //  350     {
 //  351       cfg->rxTick = HAL_UART_RX_IDLE;
-        MOV     A,#-0x3a
-        MOV     DPL,R6
-        MOV     DPH,R7
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        MOVX    @DPTR,A
-        LJMP    ??pollDMA_7 & 0xFFFF
 //  352     }
 //  353   }
 //  354   else if ( !cfg->rxTick && (cfg->rxHead == cfg->rxTail) )
-??pollDMA_2:
-        MOV     DPL,R6
-        MOV     DPH,R7
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        MOVX    A,@DPTR
-        JZ      $+5
-        LJMP    ??pollDMA_7 & 0xFFFF
-        MOV     DPL,R6
-        MOV     DPH,R7
-        INC     DPTR
-        INC     DPTR
-        MOVX    A,@DPTR
-        MOV     R2,A
-        MOV     DPL,R6
-        MOV     DPH,R7
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        MOVX    A,@DPTR
-        XRL     A,R2
-        JZ      $+5
-        LJMP    ??pollDMA_7 & 0xFFFF
 //  355   {
 //  356     HAL_DMA_ABORT_CH( HAL_DMA_CH_RX );
-        MOV     0xd6,#-0x70
 //  357     cfg->rxHead = cfg->rxTail = 0;
-        MOV     R2,#0x0
-        MOV     A,R2
-        MOV     DPL,R6
-        MOV     DPH,R7
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        MOVX    @DPTR,A
-        MOV     A,R2
-        MOV     DPL,R6
-        MOV     DPH,R7
-        INC     DPTR
-        INC     DPTR
-        MOVX    @DPTR,A
 //  358     osal_memset( cfg->rxBuf, ~DMA_PAD, cfg->rxMax*2 );
-        ; Setup parameters for call to function osal_memset
-        MOV     DPL,R6
-        MOV     DPH,R7
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        MOVX    A,@DPTR
-        MOV     R4,A
-        MOV     R5,#0x0
-        MOV     A,R4
-        MOV     B,#0x2
-        MUL     AB
-        XCH     A,R4
-        MOV     R2,B
-        MOV     B,#0x0
-        MUL     AB
-        ADD     A,R2
-        MOV     R2,A
-        MOV     B,#0x2
-        MOV     A,R5
-        MUL     AB
-        ADD     A,R2
-        MOV     R5,A
-        MOV     A,0xc2
-        CPL     A
-        MOV     R1,A
-        MOV     DPL,R6
-        MOV     DPH,R7
-        MOVX    A,@DPTR
-        MOV     R2,A
-        INC     DPTR
-        MOVX    A,@DPTR
-        MOV     R3,A
-        LCALL   ??osal_memset?relay
 //  359     DMA_RX( cfg );
-        MOV     A,0xc1
-        MOV     DPL,?XSP + 0
-        MOV     DPH,?XSP + 1
-        MOVX    @DPTR,A
-        MOV     R2,#((dmaCh1234 + 24) & 0xff)
-        MOV     R3,#(((dmaCh1234 + 24) >> 8) & 0xff)
-        MOV     DPL,R6
-        MOV     DPH,R7
-        INC     DPTR
-        MOVX    A,@DPTR
-        MOV     R1,A
-        MOV     A,R1
-        MOV     DPL,R2
-        MOV     DPH,R3
-        INC     DPTR
-        INC     DPTR
-        MOVX    @DPTR,A
-        MOV     DPL,R6
-        MOV     DPH,R7
-        MOVX    A,@DPTR
-        MOV     DPL,R2
-        MOV     DPH,R3
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        MOVX    @DPTR,A
-        MOV     DPL,R6
-        MOV     DPH,R7
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        MOVX    A,@DPTR
-        MOV     DPL,R2
-        MOV     DPH,R3
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        MOVX    @DPTR,A
-        MOV     DPL,R2
-        MOV     DPH,R3
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        MOVX    A,@DPTR
-        ANL     A,#0xe0
-        MOVX    @DPTR,A
-        MOV     DPL,R2
-        MOV     DPH,R3
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        MOVX    A,@DPTR
-        MOV     DPL,R2
-        MOV     DPH,R3
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        MOVX    @DPTR,A
-        ANL     0xd1,#0xef
-        MOV     0xd6,#0x10
 //  360     RX_STRT_FLOW( cfg );
-        MOV     A,R6
-        ADD     A,#0xf
-        MOV     DPL,A
-        MOV     A,R7
-        ADDC    A,#0x0
-        MOV     DPH,A
-        MOVX    A,@DPTR
-        MOV     C,0xE0 /* A   */.7
-        JC      ??pollDMA_8
-        CLR     0x80.5
-        SJMP    ??pollDMA_9
-??pollDMA_8:
-        CLR     0x90.5
-??pollDMA_9:
-        MOV     A,R6
-        ADD     A,#0xf
-        MOV     DPL,A
-        MOV     A,R7
-        ADDC    A,#0x0
-        MOV     DPH,A
-        MOVX    A,@DPTR
-        CLR     0xE0 /* A   */.1
-        MOVX    @DPTR,A
 //  361   }
 //  362 
 //  363   if ( HAL_DMA_CHECK_IRQ( HAL_DMA_CH_TX ) )
-??pollDMA_7:
-        MOV     A,0xd1
-        MOV     C,0xE0 /* A   */.3
-        JC      $+5
-        LJMP    ??pollDMA_10 & 0xFFFF
 //  364   {
 //  365     HAL_DMA_CLEAR_IRQ( HAL_DMA_CH_TX );
-        ANL     0xd1,#0xf7
 //  366     cfg->flag &= ~UART_CFG_TXF;
-        MOV     A,R6
-        ADD     A,#0xf
-        MOV     DPL,A
-        MOV     A,R7
-        ADDC    A,#0x0
-        MOV     DPH,A
-        MOVX    A,@DPTR
-        CLR     0xE0 /* A   */.0
-        MOVX    @DPTR,A
 //  367     cfg->txTick = DMA_TX_DLY;
-        MOV     A,#0x14
-        PUSH    A
-        CFI CFA_SP SP+-1
-        MOV     A,R6
-        ADD     A,#0xe
-        MOV     DPL,A
-        MOV     A,R7
-        ADDC    A,#0x0
-        MOV     DPH,A
-        POP     A
-        CFI CFA_SP SP+0
-        MOVX    @DPTR,A
 //  368 
 //  369     if ( (cfg->txMax - cfg->txCnt) < cfg->txTail )
-        MOV     A,R6
-        ADD     A,#0xc
-        MOV     DPL,A
-        MOV     A,R7
-        ADDC    A,#0x0
-        MOV     DPH,A
-        MOVX    A,@DPTR
-        MOV     R0,A
-        MOV     R1,#0x0
-        MOV     A,R6
-        ADD     A,#0xd
-        MOV     DPL,A
-        MOV     A,R7
-        ADDC    A,#0x0
-        MOV     DPH,A
-        MOVX    A,@DPTR
-        MOV     R2,A
-        MOV     R3,#0x0
-        MOV     A,R0
-        CLR     C
-        SUBB    A,R2
-        MOV     R0,A
-        MOV     A,R1
-        SUBB    A,R3
-        MOV     R1,A
-        MOV     A,R6
-        ADD     A,#0xb
-        MOV     DPL,A
-        MOV     A,R7
-        ADDC    A,#0x0
-        MOV     DPH,A
-        MOVX    A,@DPTR
-        MOV     R2,A
-        MOV     R3,#0x0
-        CLR     C
-        MOV     A,R0
-        SUBB    A,R2
-        MOV     A,R1
-        SUBB    A,R3
-        MOV     C,0xD0 /* PSW */.2
-        XRL     A,PSW
-        RLC     A
-        JNC     ??pollDMA_11
 //  370     {
 //  371       cfg->txTail = 0;  // DMA can only run to the end of the Tx buffer.
-        MOV     A,#0x0
-        PUSH    A
-        CFI CFA_SP SP+-1
-        MOV     A,R6
-        ADD     A,#0xb
-        MOV     DPL,A
-        MOV     A,R7
-        ADDC    A,#0x0
-        MOV     DPH,A
-        POP     A
-        CFI CFA_SP SP+0
-        MOVX    @DPTR,A
-        LJMP    ??pollDMA_12 & 0xFFFF
 //  372     }
 //  373     else
 //  374     {
 //  375       cfg->txTail += cfg->txCnt;
-??pollDMA_11:
-        MOV     A,R6
-        ADD     A,#0xd
-        MOV     DPL,A
-        MOV     A,R7
-        ADDC    A,#0x0
-        MOV     DPH,A
-        MOVX    A,@DPTR
-        MOV     R2,A
-        MOV     A,R6
-        ADD     A,#0xb
-        MOV     DPL,A
-        MOV     A,R7
-        ADDC    A,#0x0
-        MOV     DPH,A
-        MOVX    A,@DPTR
-        ADD     A,R2
-        MOVX    @DPTR,A
-        LJMP    ??pollDMA_12 & 0xFFFF
 //  376     }
 //  377   }
 //  378   else if ( !(cfg->flag & UART_CFG_TXF) && !cfg->txTick )
-??pollDMA_10:
-        MOV     A,R6
-        ADD     A,#0xf
-        MOV     DPL,A
-        MOV     A,R7
-        ADDC    A,#0x0
-        MOV     DPH,A
-        MOVX    A,@DPTR
-        MOV     C,0xE0 /* A   */.0
-        JNC     $+5
-        LJMP    ??pollDMA_12 & 0xFFFF
-        MOV     A,R6
-        ADD     A,#0xe
-        MOV     DPL,A
-        MOV     A,R7
-        ADDC    A,#0x0
-        MOV     DPH,A
-        MOVX    A,@DPTR
-        JZ      $+5
-        LJMP    ??pollDMA_12 & 0xFFFF
 //  379   {
 //  380     if ( cfg->txTail != cfg->txHead )
-        MOV     A,R6
-        ADD     A,#0xb
-        MOV     DPL,A
-        MOV     A,R7
-        ADDC    A,#0x0
-        MOV     DPH,A
-        MOVX    A,@DPTR
-        MOV     R2,A
-        MOV     DPL,R6
-        MOV     DPH,R7
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        MOVX    A,@DPTR
-        XRL     A,R2
-        JNZ     $+5
-        LJMP    ??pollDMA_12 & 0xFFFF
 //  381     {
 //  382       if ( cfg->txTail < cfg->txHead )
-        MOV     A,R6
-        ADD     A,#0xb
-        MOV     DPL,A
-        MOV     A,R7
-        ADDC    A,#0x0
-        MOV     DPH,A
-        MOVX    A,@DPTR
-        PUSH    A
-        CFI CFA_SP SP+-1
-        MOV     DPL,R6
-        MOV     DPH,R7
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        MOVX    A,@DPTR
-        MOV     R2,A
-        POP     A
-        CFI CFA_SP SP+0
-        CLR     C
-        SUBB    A,R2
-        JNC     ??pollDMA_13
 //  383       {
 //  384         cfg->txCnt = cfg->txHead - cfg->txTail;
-        MOV     A,R6
-        ADD     A,#0xb
-        MOV     DPL,A
-        MOV     A,R7
-        ADDC    A,#0x0
-        MOV     DPH,A
-        MOVX    A,@DPTR
-        MOV     R2,A
-        MOV     DPL,R6
-        MOV     DPH,R7
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        MOVX    A,@DPTR
-        CLR     C
-        SUBB    A,R2
-        PUSH    A
-        CFI CFA_SP SP+-1
-        MOV     A,R6
-        ADD     A,#0xd
-        MOV     DPL,A
-        MOV     A,R7
-        ADDC    A,#0x0
-        MOV     DPH,A
-        POP     A
-        CFI CFA_SP SP+0
-        MOVX    @DPTR,A
-        SJMP    ??pollDMA_14
 //  385       }
 //  386       else  // Can only run DMA engine up to max, then restart at zero.
 //  387       {
 //  388         cfg->txCnt = cfg->txMax - cfg->txTail + 1;
-??pollDMA_13:
-        MOV     A,R6
-        ADD     A,#0xb
-        MOV     DPL,A
-        MOV     A,R7
-        ADDC    A,#0x0
-        MOV     DPH,A
-        MOVX    A,@DPTR
-        MOV     R2,A
-        MOV     A,R6
-        ADD     A,#0xc
-        MOV     DPL,A
-        MOV     A,R7
-        ADDC    A,#0x0
-        MOV     DPH,A
-        MOVX    A,@DPTR
-        CLR     C
-        SUBB    A,R2
-        ADD     A,#0x1
-        PUSH    A
-        CFI CFA_SP SP+-1
-        MOV     A,R6
-        ADD     A,#0xd
-        MOV     DPL,A
-        MOV     A,R7
-        ADDC    A,#0x0
-        MOV     DPH,A
-        POP     A
-        CFI CFA_SP SP+0
-        MOVX    @DPTR,A
 //  389       }
 //  390 
 //  391       cfg->flag |= UART_CFG_TXF;
-??pollDMA_14:
-        MOV     A,R6
-        ADD     A,#0xf
-        MOV     DPL,A
-        MOV     A,R7
-        ADDC    A,#0x0
-        MOV     DPH,A
-        MOVX    A,@DPTR
-        SETB    0xE0 /* A   */.0
-        MOVX    @DPTR,A
 //  392       DMA_TX( cfg );
-        MOV     R2,#((dmaCh1234 + 16) & 0xff)
-        MOV     R3,#(((dmaCh1234 + 16) >> 8) & 0xff)
-        MOV     A,R6
-        ADD     A,#0xb
-        MOV     DPL,A
-        MOV     A,R7
-        ADDC    A,#0x0
-        MOV     DPH,A
-        MOVX    A,@DPTR
-        MOV     R0,A
-        MOV     R1,#0x0
-        MOV     DPL,R6
-        MOV     DPH,R7
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        MOVX    A,@DPTR
-        ADD     A,R0
-        INC     DPTR
-        MOVX    A,@DPTR
-        ADDC    A,R1
-        MOV     R1,A
-        MOV     A,R1
-        MOV     DPL,R2
-        MOV     DPH,R3
-        MOVX    @DPTR,A
-        MOV     A,R6
-        ADD     A,#0xb
-        MOV     DPL,A
-        MOV     A,R7
-        ADDC    A,#0x0
-        MOV     DPH,A
-        MOVX    A,@DPTR
-        MOV     R0,A
-        MOV     DPL,R6
-        MOV     DPH,R7
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        MOVX    A,@DPTR
-        ADD     A,R0
-        MOV     DPL,R2
-        MOV     DPH,R3
-        INC     DPTR
-        MOVX    @DPTR,A
-        MOV     A,R6
-        ADD     A,#0xd
-        MOV     DPL,A
-        MOV     A,R7
-        ADDC    A,#0x0
-        MOV     DPH,A
-        MOVX    A,@DPTR
-        MOV     DPL,R2
-        MOV     DPH,R3
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        MOVX    @DPTR,A
-        MOV     DPL,R2
-        MOV     DPH,R3
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        MOVX    A,@DPTR
-        ANL     A,#0xe0
-        MOVX    @DPTR,A
-        MOV     DPL,R2
-        MOV     DPH,R3
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        MOVX    A,@DPTR
-        MOV     DPL,R2
-        MOV     DPH,R3
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        MOVX    @DPTR,A
-        ANL     0xd1,#0xf7
-        MOV     0xd6,#0x8
-        MOV     0xd7,#0x8
 //  393     }
 //  394   }
 //  395 }
-??pollDMA_12:
-        MOV     A,#0x1
-        LCALL   ?DEALLOC_XSTACK8
-        CFI CFA_XSP16 add(XSP16, 11)
-        MOV     R7,#0x3
-        LJMP    ?BANKED_LEAVE_XDATA
-        CFI EndBlock cfiBlock0
-        REQUIRE _A_P0
-        REQUIRE _A_P1
-        REQUIRE U0DBUF
-        REQUIRE U0BAUD
-        REQUIRE DMAIRQ
-        REQUIRE DMAARM
-        REQUIRE DMAREQ
 //  396 #endif
 //  397 
 //  398 #if HAL_UART_ISR
@@ -1649,16 +751,10 @@ pollDMA:
         RSEG BANKED_CODE:CODE:NOROOT(0)
 //  441 void HalUARTInit( void )
 HalUARTInit:
-        CFI Block cfiBlock1 Using cfiCommon0
+        CFI Block cfiBlock0 Using cfiCommon0
         CFI Function HalUARTInit
 //  442 {
-        PUSH    DPL
-        CFI DPL0 Frame(CFA_SP, 4)
-        CFI CFA_SP SP+-4
-        PUSH    DPH
-        CFI DPH0 Frame(CFA_SP, 5)
-        CFI CFA_SP SP+-5
-        ; Saved register size: 2
+        ; Saved register size: 0
         ; Auto size: 0
 //  443 #if HAL_UART_DMA
 //  444   halDMADesc_t *ch;
@@ -1669,30 +765,23 @@ HalUARTInit:
         ANL     0xff,#0x3f
         MOV     A,0xff
 //  449   P2DIR |= HAL_UART_PRIPO;
-        MOV     0xff,0xff
+        ORL     0xff,#0x40
 //  450 
 //  451 #if HAL_UART_0_ENABLE
 //  452   // Set UART0 I/O location to P0.
 //  453   PERCFG &= ~HAL_UART_0_PERCFG_BIT;
-        ANL     0xf1,#0xfe
 //  454 
 //  455   /* Enable Tx and Rx on P0 */
 //  456   P0SEL |= HAL_UART_0_P0_RX_TX;
-        ORL     0xf3,#0xc
-        MOV     A,0xf3
 //  457 
 //  458   /* Make sure ADC doesnt use this */
 //  459   ADCCFG &= ~HAL_UART_0_P0_RX_TX;
-        ANL     0xf2,#0xf3
-        MOV     A,0xf2
 //  460 
 //  461   /* Mode is UART Mode */
 //  462   U0CSR = CSR_MODE;
-        MOV     0x86,#-0x80
 //  463 
 //  464   /* Flush it */
 //  465   U0UCR = UCR_FLUSH;
-        MOV     0xc4,#-0x80
 //  466 #endif
 //  467 
 //  468 #if HAL_UART_1_ENABLE
@@ -1715,339 +804,43 @@ HalUARTInit:
 //  485 #if HAL_UART_DMA
 //  486   // Setup Tx by DMA.
 //  487   ch = HAL_DMA_GET_DESC1234( HAL_DMA_CH_TX );
-        MOV     R0,#((dmaCh1234 + 16) & 0xff)
-        MOV     R1,#(((dmaCh1234 + 16) >> 8) & 0xff)
 //  488 
 //  489   // The start address of the destination.
 //  490   HAL_DMA_SET_DEST( ch, DMA_UDBUF );
-        MOV     A,#-0x21
-        MOV     DPL,R0
-        MOV     DPH,R1
-        INC     DPTR
-        INC     DPTR
-        MOVX    @DPTR,A
-        MOV     A,#-0x3f
-        MOV     DPL,R0
-        MOV     DPH,R1
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        MOVX    @DPTR,A
 //  491 
 //  492   // Using the length field to determine how many bytes to transfer.
 //  493   HAL_DMA_SET_VLEN( ch, HAL_DMA_VLEN_USE_LEN );
-        MOV     DPL,R0
-        MOV     DPH,R1
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        MOVX    A,@DPTR
-        ANL     A,#0x1f
-        MOVX    @DPTR,A
-        MOV     DPL,R0
-        MOV     DPH,R1
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        MOVX    A,@DPTR
-        MOV     DPL,R0
-        MOV     DPH,R1
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        MOVX    @DPTR,A
 //  494 
 //  495   // One byte is transferred each time.
 //  496   HAL_DMA_SET_WORD_SIZE( ch, HAL_DMA_WORDSIZE_BYTE );
-        MOV     DPL,R0
-        MOV     DPH,R1
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        MOVX    A,@DPTR
-        CLR     0xE0 /* A   */.7
-        MOVX    @DPTR,A
-        MOV     DPL,R0
-        MOV     DPH,R1
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        MOVX    A,@DPTR
-        MOV     DPL,R0
-        MOV     DPH,R1
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        MOVX    @DPTR,A
 //  497 
 //  498   // The bytes are transferred 1-by-1 on Tx Complete trigger.
 //  499   HAL_DMA_SET_TRIG_MODE( ch, HAL_DMA_TMODE_SINGLE );
-        MOV     DPL,R0
-        MOV     DPH,R1
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        MOVX    A,@DPTR
-        ANL     A,#0x9f
-        MOVX    @DPTR,A
-        MOV     DPL,R0
-        MOV     DPH,R1
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        MOVX    A,@DPTR
-        MOV     DPL,R0
-        MOV     DPH,R1
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        MOVX    @DPTR,A
 //  500   HAL_DMA_SET_TRIG_SRC( ch, DMATRIG_TX );
-        MOV     DPL,R0
-        MOV     DPH,R1
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        MOVX    A,@DPTR
-        ANL     A,#0xe0
-        MOVX    @DPTR,A
-        MOV     DPL,R0
-        MOV     DPH,R1
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        MOVX    A,@DPTR
-        ORL     A,#0xf
-        MOVX    @DPTR,A
 //  501 
 //  502   // The source address is decremented by 1 byte after each transfer.
 //  503   HAL_DMA_SET_SRC_INC( ch, HAL_DMA_SRCINC_1 );
-        MOV     DPL,R0
-        MOV     DPH,R1
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        MOVX    A,@DPTR
-        ANL     A,#0x3f
-        MOVX    @DPTR,A
-        MOV     DPL,R0
-        MOV     DPH,R1
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        MOVX    A,@DPTR
-        SETB    0xE0 /* A   */.6
-        MOVX    @DPTR,A
 //  504 
 //  505   // The destination address is constant - the Tx Data Buffer.
 //  506   HAL_DMA_SET_DST_INC( ch, HAL_DMA_DSTINC_0 );
-        MOV     DPL,R0
-        MOV     DPH,R1
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        MOVX    A,@DPTR
-        ANL     A,#0xcf
-        MOVX    @DPTR,A
-        MOV     DPL,R0
-        MOV     DPH,R1
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        MOVX    A,@DPTR
-        MOV     DPL,R0
-        MOV     DPH,R1
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        MOVX    @DPTR,A
 //  507 
 //  508   // The DMA is to be polled and shall not issue an IRQ upon completion.
 //  509   HAL_DMA_SET_IRQ( ch, HAL_DMA_IRQMASK_DISABLE );
-        MOV     DPL,R0
-        MOV     DPH,R1
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        MOVX    A,@DPTR
-        CLR     0xE0 /* A   */.3
-        MOVX    @DPTR,A
-        MOV     DPL,R0
-        MOV     DPH,R1
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        MOVX    A,@DPTR
-        MOV     DPL,R0
-        MOV     DPH,R1
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        MOVX    @DPTR,A
 //  510 
 //  511   // Xfer all 8 bits of a byte xfer.
 //  512   HAL_DMA_SET_M8( ch, HAL_DMA_M8_USE_8_BITS );
-        MOV     DPL,R0
-        MOV     DPH,R1
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        MOVX    A,@DPTR
-        CLR     0xE0 /* A   */.2
-        MOVX    @DPTR,A
-        MOV     DPL,R0
-        MOV     DPH,R1
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        MOVX    A,@DPTR
-        MOV     DPL,R0
-        MOV     DPH,R1
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        MOVX    @DPTR,A
 //  513 
 //  514   // DMA Tx has shared priority for memory access - every other one.
 //  515   HAL_DMA_SET_PRIORITY( ch, HAL_DMA_PRI_HIGH );
-        MOV     DPL,R0
-        MOV     DPH,R1
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        MOVX    A,@DPTR
-        ANL     A,#0xfc
-        MOVX    @DPTR,A
-        MOV     DPL,R0
-        MOV     DPH,R1
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        MOVX    A,@DPTR
-        SETB    0xE0 /* A   */.1
-        MOVX    @DPTR,A
 //  516 
 //  517   // Setup Rx by DMA.
 //  518   ch = HAL_DMA_GET_DESC1234( HAL_DMA_CH_RX );
-        MOV     R0,#((dmaCh1234 + 24) & 0xff)
-        MOV     R1,#(((dmaCh1234 + 24) >> 8) & 0xff)
 //  519 
 //  520   // The start address of the source.
 //  521   HAL_DMA_SET_SOURCE( ch, DMA_UDBUF );
-        MOV     A,#-0x21
-        MOV     DPL,R0
-        MOV     DPH,R1
-        MOVX    @DPTR,A
-        MOV     A,#-0x3f
-        MOV     DPL,R0
-        MOV     DPH,R1
-        INC     DPTR
-        MOVX    @DPTR,A
 //  522 
 //  523   // Using the length field to determine how many bytes to transfer.
 //  524   HAL_DMA_SET_VLEN( ch, HAL_DMA_VLEN_USE_LEN );
-        MOV     DPL,R0
-        MOV     DPH,R1
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        MOVX    A,@DPTR
-        ANL     A,#0x1f
-        MOVX    @DPTR,A
-        MOV     DPL,R0
-        MOV     DPH,R1
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        MOVX    A,@DPTR
-        MOV     DPL,R0
-        MOV     DPH,R1
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        MOVX    @DPTR,A
 //  525 
 //  526   /* The trick is to cfg DMA to xfer 2 bytes for every 1 byte of Rx.
 //  527    * The byte after the Rx Data Buffer is the Baud Cfg Register,
@@ -2057,257 +850,29 @@ HalUARTInit:
 //  531    * Baud Cfg Register value.
 //  532    */
 //  533   HAL_DMA_SET_WORD_SIZE( ch, HAL_DMA_WORDSIZE_WORD );
-        MOV     DPL,R0
-        MOV     DPH,R1
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        MOVX    A,@DPTR
-        CLR     0xE0 /* A   */.7
-        MOVX    @DPTR,A
-        MOV     DPL,R0
-        MOV     DPH,R1
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        MOVX    A,@DPTR
-        SETB    0xE0 /* A   */.7
-        MOVX    @DPTR,A
 //  534 
 //  535   // The bytes are transferred 1-by-1 on Rx Complete trigger.
 //  536   HAL_DMA_SET_TRIG_MODE( ch, HAL_DMA_TMODE_SINGLE );
-        MOV     DPL,R0
-        MOV     DPH,R1
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        MOVX    A,@DPTR
-        ANL     A,#0x9f
-        MOVX    @DPTR,A
-        MOV     DPL,R0
-        MOV     DPH,R1
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        MOVX    A,@DPTR
-        MOV     DPL,R0
-        MOV     DPH,R1
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        MOVX    @DPTR,A
 //  537   HAL_DMA_SET_TRIG_SRC( ch, DMATRIG_RX );
-        MOV     DPL,R0
-        MOV     DPH,R1
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        MOVX    A,@DPTR
-        ANL     A,#0xe0
-        MOVX    @DPTR,A
-        MOV     DPL,R0
-        MOV     DPH,R1
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        MOVX    A,@DPTR
-        ORL     A,#0xe
-        MOVX    @DPTR,A
 //  538 
 //  539   // The source address is constant - the Rx Data Buffer.
 //  540   HAL_DMA_SET_SRC_INC( ch, HAL_DMA_SRCINC_0 );
-        MOV     DPL,R0
-        MOV     DPH,R1
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        MOVX    A,@DPTR
-        ANL     A,#0x3f
-        MOVX    @DPTR,A
-        MOV     DPL,R0
-        MOV     DPH,R1
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        MOVX    A,@DPTR
-        MOV     DPL,R0
-        MOV     DPH,R1
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        MOVX    @DPTR,A
 //  541 
 //  542   // The destination address is incremented by 1 word after each transfer.
 //  543   HAL_DMA_SET_DST_INC( ch, HAL_DMA_DSTINC_1 );
-        MOV     DPL,R0
-        MOV     DPH,R1
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        MOVX    A,@DPTR
-        ANL     A,#0xcf
-        MOVX    @DPTR,A
-        MOV     DPL,R0
-        MOV     DPH,R1
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        MOVX    A,@DPTR
-        SETB    0xE0 /* A   */.4
-        MOVX    @DPTR,A
 //  544 
 //  545   // The DMA is to be polled and shall not issue an IRQ upon completion.
 //  546   HAL_DMA_SET_IRQ( ch, HAL_DMA_IRQMASK_DISABLE );
-        MOV     DPL,R0
-        MOV     DPH,R1
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        MOVX    A,@DPTR
-        CLR     0xE0 /* A   */.3
-        MOVX    @DPTR,A
-        MOV     DPL,R0
-        MOV     DPH,R1
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        MOVX    A,@DPTR
-        MOV     DPL,R0
-        MOV     DPH,R1
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        MOVX    @DPTR,A
 //  547 
 //  548   // Xfer all 8 bits of a byte xfer.
 //  549   HAL_DMA_SET_M8( ch, HAL_DMA_M8_USE_8_BITS );
-        MOV     DPL,R0
-        MOV     DPH,R1
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        MOVX    A,@DPTR
-        CLR     0xE0 /* A   */.2
-        MOVX    @DPTR,A
-        MOV     DPL,R0
-        MOV     DPH,R1
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        MOVX    A,@DPTR
-        MOV     DPL,R0
-        MOV     DPH,R1
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        MOVX    @DPTR,A
 //  550 
 //  551   // DMA has highest priority for memory access.
 //  552   HAL_DMA_SET_PRIORITY( ch, HAL_DMA_PRI_HIGH );
-        MOV     DPL,R0
-        MOV     DPH,R1
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        MOVX    A,@DPTR
-        ANL     A,#0xfc
-        MOVX    @DPTR,A
-        MOV     DPL,R0
-        MOV     DPH,R1
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        MOVX    A,@DPTR
-        SETB    0xE0 /* A   */.1
-        MOVX    @DPTR,A
 //  553 #endif
 //  554 }
-        POP     DPH
-        CFI DPH0 SameValue
-        CFI CFA_SP SP+-4
-        POP     DPL
-        CFI DPL0 SameValue
-        CFI CFA_SP SP+-3
         LJMP    ?BRET
-        CFI EndBlock cfiBlock1
-        REQUIRE U0CSR
-        REQUIRE U0UCR
-        REQUIRE PERCFG
-        REQUIRE ADCCFG
-        REQUIRE P0SEL
+        CFI EndBlock cfiBlock0
         REQUIRE P2DIR
 //  555 
 //  556 /******************************************************************************
@@ -2324,54 +889,32 @@ HalUARTInit:
         RSEG BANKED_CODE:CODE:NOROOT(0)
 //  566 uint8 HalUARTOpen( uint8 port, halUARTCfg_t *config )
 HalUARTOpen:
-        CFI Block cfiBlock2 Using cfiCommon0
+        CFI Block cfiBlock1 Using cfiCommon0
         CFI Function HalUARTOpen
 //  567 {
         FUNCALL HalUARTOpen, osal_mem_alloc
         LOCFRAME ISTACK, 0, STACK
         LOCFRAME PSTACK, 0, STACK
-        LOCFRAME XSTACK, 15, STACK
+        LOCFRAME XSTACK, 13, STACK
         LOCFRAME IOVERLAY, 0, STATIC
         LOCFRAME DOVERLAY, 0, STATIC
         ARGFRAME ISTACK, 0, STACK
         ARGFRAME PSTACK, 0, STACK
-        ARGFRAME XSTACK, 15, STACK
+        ARGFRAME XSTACK, 13, STACK
         ARGFRAME IOVERLAY, 0, STATIC
         ARGFRAME DOVERLAY, 0, STATIC
         FUNCALL HalUARTOpen, osal_mem_alloc
         LOCFRAME ISTACK, 0, STACK
         LOCFRAME PSTACK, 0, STACK
-        LOCFRAME XSTACK, 15, STACK
+        LOCFRAME XSTACK, 13, STACK
         LOCFRAME IOVERLAY, 0, STATIC
         LOCFRAME DOVERLAY, 0, STATIC
         ARGFRAME ISTACK, 0, STACK
         ARGFRAME PSTACK, 0, STACK
-        ARGFRAME XSTACK, 15, STACK
+        ARGFRAME XSTACK, 13, STACK
         ARGFRAME IOVERLAY, 0, STATIC
         ARGFRAME DOVERLAY, 0, STATIC
-        FUNCALL HalUARTOpen, osal_mem_alloc
-        LOCFRAME ISTACK, 0, STACK
-        LOCFRAME PSTACK, 0, STACK
-        LOCFRAME XSTACK, 15, STACK
-        LOCFRAME IOVERLAY, 0, STATIC
-        LOCFRAME DOVERLAY, 0, STATIC
-        ARGFRAME ISTACK, 0, STACK
-        ARGFRAME PSTACK, 0, STACK
-        ARGFRAME XSTACK, 15, STACK
-        ARGFRAME IOVERLAY, 0, STATIC
-        ARGFRAME DOVERLAY, 0, STATIC
-        FUNCALL HalUARTOpen, osal_memset
-        LOCFRAME ISTACK, 0, STACK
-        LOCFRAME PSTACK, 0, STACK
-        LOCFRAME XSTACK, 15, STACK
-        LOCFRAME IOVERLAY, 0, STATIC
-        LOCFRAME DOVERLAY, 0, STATIC
-        ARGFRAME ISTACK, 0, STACK
-        ARGFRAME PSTACK, 0, STACK
-        ARGFRAME XSTACK, 15, STACK
-        ARGFRAME IOVERLAY, 0, STATIC
-        ARGFRAME DOVERLAY, 0, STATIC
-        MOV     A,#-0xe
+        MOV     A,#-0xd
         LCALL   ?BANKED_ENTER_XDATA
         CFI DPH0 load(1, XDATA, add(CFA_XSP16, literal(-1)))
         CFI DPL0 load(1, XDATA, add(CFA_XSP16, literal(-2)))
@@ -2379,37 +922,28 @@ HalUARTOpen:
         CFI ?RET_HIGH load(1, XDATA, add(CFA_XSP16, literal(-4)))
         CFI ?RET_LOW load(1, XDATA, add(CFA_XSP16, literal(-5)))
         CFI R7 load(1, XDATA, add(CFA_XSP16, literal(-6)))
-        CFI V5 load(1, XDATA, add(CFA_XSP16, literal(-7)))
-        CFI V4 load(1, XDATA, add(CFA_XSP16, literal(-8)))
-        CFI V3 load(1, XDATA, add(CFA_XSP16, literal(-9)))
-        CFI V2 load(1, XDATA, add(CFA_XSP16, literal(-10)))
-        CFI V1 load(1, XDATA, add(CFA_XSP16, literal(-11)))
-        CFI V0 load(1, XDATA, add(CFA_XSP16, literal(-12)))
-        CFI VB load(1, XDATA, add(CFA_XSP16, literal(-13)))
-        CFI R6 load(1, XDATA, add(CFA_XSP16, literal(-14)))
+        CFI V4 load(1, XDATA, add(CFA_XSP16, literal(-7)))
+        CFI V3 load(1, XDATA, add(CFA_XSP16, literal(-8)))
+        CFI V2 load(1, XDATA, add(CFA_XSP16, literal(-9)))
+        CFI V1 load(1, XDATA, add(CFA_XSP16, literal(-10)))
+        CFI V0 load(1, XDATA, add(CFA_XSP16, literal(-11)))
+        CFI VB load(1, XDATA, add(CFA_XSP16, literal(-12)))
+        CFI R6 load(1, XDATA, add(CFA_XSP16, literal(-13)))
         CFI CFA_SP SP+0
-        CFI CFA_XSP16 add(XSP16, 14)
-        ; Saved register size: 14
-        ; Auto size: 1
-        MOV     A,#-0x1
-        LCALL   ?ALLOC_XSTACK8
-        CFI CFA_XSP16 add(XSP16, 15)
-        MOV     ?V0 + 2,R1
+        CFI CFA_XSP16 add(XSP16, 13)
+        ; Saved register size: 13
+        ; Auto size: 0
         MOV     ?V0 + 0,R2
         MOV     ?V0 + 1,R3
 //  568   uartCfg_t **cfgPP = NULL;
-        MOV     ?V0 + 4,#0x0
-        MOV     ?V0 + 5,#0x0
+        MOV     ?V0 + 2,#0x0
+        MOV     ?V0 + 3,#0x0
 //  569   uartCfg_t *cfg;
 //  570 
 //  571 #if HAL_UART_0_ENABLE
 //  572   if ( port == HAL_UART_PORT_0 )
-        MOV     A,?V0 + 2
-        JNZ     ??HalUARTOpen_0
 //  573   {
 //  574     cfgPP = &cfg0;
-        MOV     ?V0 + 4,#(cfg0 & 0xff)
-        MOV     ?V0 + 5,#((cfg0 >> 8) & 0xff)
 //  575   }
 //  576 #endif
 //  577 
@@ -2436,21 +970,20 @@ HalUARTOpen:
 //  598    * initialization must succeed, so no check for alloc fail.
 //  599    */
 //  600   *cfgPP = (uartCfg_t *)osal_mem_alloc( sizeof( uartCfg_t ) );
-??HalUARTOpen_0:
         ; Setup parameters for call to function osal_mem_alloc
         MOV     R2,#0x12
         MOV     R3,#0x0
         LCALL   ??osal_mem_alloc?relay
-        MOV     DPL,?V0 + 4
-        MOV     DPH,?V0 + 5
+        MOV     DPL,?V0 + 2
+        MOV     DPH,?V0 + 3
         MOV     A,R2
         MOVX    @DPTR,A
         INC     DPTR
         MOV     A,R3
         MOVX    @DPTR,A
 //  601   cfg = *cfgPP;
-        MOV     DPL,?V0 + 4
-        MOV     DPH,?V0 + 5
+        MOV     DPL,?V0 + 2
+        MOV     DPH,?V0 + 3
         MOVX    A,@DPTR
         MOV     R0,A
         INC     DPTR
@@ -2642,193 +1175,20 @@ HalUARTOpen:
 //  616 
 //  617 #if HAL_UART_0_ENABLE
 //  618   if ( port == HAL_UART_PORT_0 )
-        MOV     A,?V0 + 2
-        JZ      $+5
-        LJMP    ??HalUARTOpen_1 & 0xFFFF
 //  619   {
 //  620     // Only supporting 38400 or 115200 for code size - other is possible.
 //  621     U0BAUD = (config->baudRate == HAL_UART_BR_38400) ? 59 : 216;
-        MOV     DPL,?V0 + 0
-        MOV     DPH,?V0 + 1
-        INC     DPTR
-        MOVX    A,@DPTR
-        XRL     A,#0x6
-        JNZ     ??HalUARTOpen_2
-        MOV     R2,#0x3b
-        SJMP    ??HalUARTOpen_3
-??HalUARTOpen_2:
-        MOV     R2,#-0x28
-??HalUARTOpen_3:
-        MOV     0xc2,R2
 //  622     U0GCR = (config->baudRate == HAL_UART_BR_38400) ? 10 : 11;
-        MOV     DPL,?V0 + 0
-        MOV     DPH,?V0 + 1
-        INC     DPTR
-        MOVX    A,@DPTR
-        XRL     A,#0x6
-        JNZ     ??HalUARTOpen_4
-        MOV     R2,#0xa
-        SJMP    ??HalUARTOpen_5
-??HalUARTOpen_4:
-        MOV     R2,#0xb
-??HalUARTOpen_5:
-        MOV     0xc5,R2
 //  623 
 //  624     U0CSR |= CSR_RE;
-        ORL     0x86,#0x40
 //  625 
 //  626 #if HAL_UART_DMA == 1
 //  627     cfg->flag = UART_CFG_DMA;
-        MOV     A,#0x40
-        PUSH    A
-        CFI CFA_SP SP+-1
-        MOV     A,R6
-        ADD     A,#0xf
-        MOV     DPL,A
-        MOV     A,R7
-        ADDC    A,#0x0
-        MOV     DPH,A
-        POP     A
-        CFI CFA_SP SP+0
-        MOVX    @DPTR,A
 //  628     HAL_UART_ASSERT( (config->rx.maxBufSize <= 128) );
 //  629     HAL_UART_ASSERT( (config->rx.maxBufSize > SAFE_RX_MIN) );
 //  630     cfg->rxBuf = osal_mem_alloc( cfg->rxMax*2 );
-        ; Setup parameters for call to function osal_mem_alloc
-        MOV     DPL,R6
-        MOV     DPH,R7
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        MOVX    A,@DPTR
-        MOV     R2,A
-        MOV     R3,#0x0
-        MOV     A,R2
-        MOV     B,#0x2
-        MUL     AB
-        XCH     A,R2
-        MOV     R4,B
-        MOV     B,#0x0
-        MUL     AB
-        ADD     A,R4
-        MOV     R4,A
-        MOV     B,#0x2
-        MOV     A,R3
-        MUL     AB
-        ADD     A,R4
-        MOV     R3,A
-        LCALL   ??osal_mem_alloc?relay
-        MOV     DPL,R6
-        MOV     DPH,R7
-        MOV     A,R2
-        MOVX    @DPTR,A
-        INC     DPTR
-        MOV     A,R3
-        MOVX    @DPTR,A
 //  631     osal_memset( cfg->rxBuf, ~DMA_PAD, cfg->rxMax*2 );
-        ; Setup parameters for call to function osal_memset
-        MOV     DPL,R6
-        MOV     DPH,R7
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        MOVX    A,@DPTR
-        MOV     R4,A
-        MOV     R5,#0x0
-        MOV     A,R4
-        MOV     B,#0x2
-        MUL     AB
-        XCH     A,R4
-        MOV     R2,B
-        MOV     B,#0x0
-        MUL     AB
-        ADD     A,R2
-        MOV     R2,A
-        MOV     B,#0x2
-        MOV     A,R5
-        MUL     AB
-        ADD     A,R2
-        MOV     R5,A
-        MOV     A,0xc2
-        CPL     A
-        MOV     R1,A
-        MOV     DPL,R6
-        MOV     DPH,R7
-        MOVX    A,@DPTR
-        MOV     R2,A
-        INC     DPTR
-        MOVX    A,@DPTR
-        MOV     R3,A
-        LCALL   ??osal_memset?relay
 //  632     DMA_RX( cfg );
-        MOV     A,0xc1
-        MOV     DPL,?XSP + 0
-        MOV     DPH,?XSP + 1
-        MOVX    @DPTR,A
-        MOV     R2,#((dmaCh1234 + 24) & 0xff)
-        MOV     R3,#(((dmaCh1234 + 24) >> 8) & 0xff)
-        MOV     DPL,R6
-        MOV     DPH,R7
-        INC     DPTR
-        MOVX    A,@DPTR
-        MOV     R1,A
-        MOV     A,R1
-        MOV     DPL,R2
-        MOV     DPH,R3
-        INC     DPTR
-        INC     DPTR
-        MOVX    @DPTR,A
-        MOV     DPL,R6
-        MOV     DPH,R7
-        MOVX    A,@DPTR
-        MOV     DPL,R2
-        MOV     DPH,R3
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        MOVX    @DPTR,A
-        MOV     DPL,R6
-        MOV     DPH,R7
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        MOVX    A,@DPTR
-        MOV     DPL,R2
-        MOV     DPH,R3
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        MOVX    @DPTR,A
-        MOV     DPL,R2
-        MOV     DPH,R3
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        MOVX    A,@DPTR
-        ANL     A,#0xe0
-        MOVX    @DPTR,A
-        MOV     DPL,R2
-        MOV     DPH,R3
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        MOVX    A,@DPTR
-        MOV     DPL,R2
-        MOV     DPH,R3
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        MOVX    @DPTR,A
-        ANL     0xd1,#0xef
-        MOV     0xd6,#0x10
 //  633 #else
 //  634     cfg->flag = 0;
 //  635     HAL_UART_ASSERT( (config->rx.maxBufSize < 256) );
@@ -2839,40 +1199,18 @@ HalUARTOpen:
 //  640 
 //  641     // 8 bits/char; no parity; 1 stop bit; stop bit hi.
 //  642     if ( config->flowControl )
-        MOV     DPL,?V0 + 0
-        MOV     DPH,?V0 + 1
-        INC     DPTR
-        INC     DPTR
-        MOVX    A,@DPTR
-        JZ      ??HalUARTOpen_6
 //  643     {
 //  644       cfg->flag |= UART_CFG_FLW;
-        MOV     A,R6
-        ADD     A,#0xf
-        MOV     DPL,A
-        MOV     A,R7
-        ADDC    A,#0x0
-        MOV     DPH,A
-        MOVX    A,@DPTR
-        SETB    0xE0 /* A   */.5
-        MOVX    @DPTR,A
 //  645       U0UCR = UCR_FLOW | UCR_STOP;
-        MOV     0xc4,#0x42
 //  646       // Must rely on H/W for RTS (i.e. Tx stops when receiver negates CTS.)
 //  647       P0SEL |= HAL_UART_0_P0_RTS;
-        ORL     0xf3,#0x10
 //  648       // Cannot use H/W for CTS as DMA does not clear the Rx bytes properly.
 //  649       P0DIR |= HAL_UART_0_P0_CTS;
-        ORL     0xfd,#0x20
 //  650       RX0_FLOW_ON;
-        CLR     0x80.5
-        SJMP    ??HalUARTOpen_1
 //  651     }
 //  652     else
 //  653     {
 //  654       U0UCR = UCR_STOP;
-??HalUARTOpen_6:
-        MOV     0xc4,#0x2
 //  655     }
 //  656     }
 //  657 #endif
@@ -2920,24 +1258,10 @@ HalUARTOpen:
 //  699 #endif
 //  700 
 //  701   return HAL_UART_SUCCESS;
-??HalUARTOpen_1:
         MOV     R1,#0x0
-        MOV     A,#0x1
-        LCALL   ?DEALLOC_XSTACK8
-        CFI CFA_XSP16 add(XSP16, 14)
-        MOV     R7,#0x6
+        MOV     R7,#0x5
         LJMP    ?BANKED_LEAVE_XDATA
-        CFI EndBlock cfiBlock2
-        REQUIRE _A_P0
-        REQUIRE U0CSR
-        REQUIRE U0DBUF
-        REQUIRE U0BAUD
-        REQUIRE U0UCR
-        REQUIRE U0GCR
-        REQUIRE DMAIRQ
-        REQUIRE DMAARM
-        REQUIRE P0SEL
-        REQUIRE P0DIR
+        CFI EndBlock cfiBlock1
 //  702 }
 //  703 
 //  704 /******************************************************************************
@@ -2953,7 +1277,7 @@ HalUARTOpen:
         RSEG BANKED_CODE:CODE:NOROOT(0)
 //  713 void HalUARTClose( uint8 port )
 HalUARTClose:
-        CFI Block cfiBlock3 Using cfiCommon0
+        CFI Block cfiBlock2 Using cfiCommon0
         CFI Function HalUARTClose
 //  714 {
         ; Saved register size: 0
@@ -3005,7 +1329,7 @@ HalUARTClose:
 //  759 #endif
 //  760 }
         LJMP    ?BRET
-        CFI EndBlock cfiBlock3
+        CFI EndBlock cfiBlock2
 //  761 
 //  762 /******************************************************************************
 //  763  * @fn      HalUARTPoll
@@ -3020,35 +1344,10 @@ HalUARTClose:
         RSEG BANKED_CODE:CODE:NOROOT(0)
 //  771 void HalUARTPoll( void )
 HalUARTPoll:
-        CFI Block cfiBlock4 Using cfiCommon0
+        CFI Block cfiBlock3 Using cfiCommon0
         CFI Function HalUARTPoll
 //  772 {
-        FUNCALL HalUARTPoll, pollDMA
-        LOCFRAME ISTACK, 0, STACK
-        LOCFRAME PSTACK, 0, STACK
-        LOCFRAME XSTACK, 10, STACK
-        LOCFRAME IOVERLAY, 0, STATIC
-        LOCFRAME DOVERLAY, 0, STATIC
-        ARGFRAME ISTACK, 0, STACK
-        ARGFRAME PSTACK, 0, STACK
-        ARGFRAME XSTACK, 10, STACK
-        ARGFRAME IOVERLAY, 0, STATIC
-        ARGFRAME DOVERLAY, 0, STATIC
-        MOV     A,#-0xa
-        LCALL   ?BANKED_ENTER_XDATA
-        CFI DPH0 load(1, XDATA, add(CFA_XSP16, literal(-1)))
-        CFI DPL0 load(1, XDATA, add(CFA_XSP16, literal(-2)))
-        CFI ?BRET_EXT load(1, XDATA, add(CFA_XSP16, literal(-3)))
-        CFI ?RET_HIGH load(1, XDATA, add(CFA_XSP16, literal(-4)))
-        CFI ?RET_LOW load(1, XDATA, add(CFA_XSP16, literal(-5)))
-        CFI R7 load(1, XDATA, add(CFA_XSP16, literal(-6)))
-        CFI V1 load(1, XDATA, add(CFA_XSP16, literal(-7)))
-        CFI V0 load(1, XDATA, add(CFA_XSP16, literal(-8)))
-        CFI VB load(1, XDATA, add(CFA_XSP16, literal(-9)))
-        CFI R6 load(1, XDATA, add(CFA_XSP16, literal(-10)))
-        CFI CFA_SP SP+0
-        CFI CFA_XSP16 add(XSP16, 10)
-        ; Saved register size: 10
+        ; Saved register size: 0
         ; Auto size: 0
 //  773 #if ( HAL_UART_0_ENABLE | HAL_UART_1_ENABLE )
 //  774   static uint8 tickShdw;
@@ -3057,27 +1356,8 @@ HalUARTPoll:
 //  777 
 //  778 #if HAL_UART_0_ENABLE
 //  779   if ( cfg0 )
-        MOV     DPTR,#cfg0
-        MOVX    A,@DPTR
-        XRL     A,#0x0
-        JNZ     ??HalUARTPoll_0
-        INC     DPTR
-        MOVX    A,@DPTR
-        XRL     A,#0x0
-??HalUARTPoll_0:
-        JZ      ??HalUARTPoll_1
 //  780   {
 //  781     cfg = cfg0;
-        MOV     DPTR,#cfg0
-        MOVX    A,@DPTR
-        MOV     R0,A
-        INC     DPTR
-        MOVX    A,@DPTR
-        MOV     R1,A
-        MOV     A,R0
-        MOV     R6,A
-        MOV     A,R1
-        MOV     R7,A
 //  782   }
 //  783 #endif
 //  784 #if HAL_UART_1_ENABLE
@@ -3089,112 +1369,26 @@ HalUARTPoll:
 //  790 
 //  791   // Use the LSB of the sleep timer (ST0 must be read first anyway).
 //  792   tick = ST0 - tickShdw;
-??HalUARTPoll_1:
-        MOV     DPTR,#??tickShdw
-        MOVX    A,@DPTR
-        MOV     R2,A
-        MOV     A,0x95
-        CLR     C
-        SUBB    A,R2
-        MOV     ?V0 + 0,A
 //  793   tickShdw = ST0;
-        MOV     A,0x95
-        MOV     DPTR,#??tickShdw
-        MOVX    @DPTR,A
 //  794 
 //  795   do
 //  796   {
 //  797     if ( cfg->txTick > tick )
-        MOV     A,R6
-        ADD     A,#0xe
-        MOV     DPL,A
-        MOV     A,R7
-        ADDC    A,#0x0
-        MOV     DPH,A
-        MOVX    A,@DPTR
-        MOV     R2,A
-        MOV     A,?V0 + 0
-        CLR     C
-        SUBB    A,R2
-        JNC     ??HalUARTPoll_2
 //  798     {
 //  799       cfg->txTick -= tick;
-        MOV     A,R6
-        ADD     A,#0xe
-        MOV     DPL,A
-        MOV     A,R7
-        ADDC    A,#0x0
-        MOV     DPH,A
-        MOVX    A,@DPTR
-        CLR     C
-        SUBB    A,?V0 + 0
-        MOVX    @DPTR,A
-        SJMP    ??HalUARTPoll_3
 //  800     }
 //  801     else
 //  802     {
 //  803       cfg->txTick = 0;
-??HalUARTPoll_2:
-        MOV     A,#0x0
-        PUSH    A
-        CFI CFA_SP SP+-1
-        MOV     A,R6
-        ADD     A,#0xe
-        MOV     DPL,A
-        MOV     A,R7
-        ADDC    A,#0x0
-        MOV     DPH,A
-        POP     A
-        CFI CFA_SP SP+0
-        MOVX    @DPTR,A
 //  804     }
 //  805 
 //  806     if ( cfg->rxTick > tick )
-??HalUARTPoll_3:
-        MOV     DPL,R6
-        MOV     DPH,R7
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        MOVX    A,@DPTR
-        MOV     R2,A
-        MOV     A,?V0 + 0
-        CLR     C
-        SUBB    A,R2
-        JNC     ??HalUARTPoll_4
 //  807     {
 //  808       cfg->rxTick -= tick;
-        MOV     DPL,R6
-        MOV     DPH,R7
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        MOVX    A,@DPTR
-        CLR     C
-        SUBB    A,?V0 + 0
-        MOVX    @DPTR,A
-        SJMP    ??HalUARTPoll_5
 //  809     }
 //  810     else
 //  811     {
 //  812       cfg->rxTick = 0;
-??HalUARTPoll_4:
-        MOV     A,#0x0
-        MOV     DPL,R6
-        MOV     DPH,R7
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        MOVX    @DPTR,A
 //  813     }
 //  814 
 //  815 #if HAL_UART_ISR
@@ -3210,13 +1404,6 @@ HalUARTPoll:
 //  825       }
 //  826 #elif HAL_UART_DMA
 //  827     pollDMA( cfg );
-??HalUARTPoll_5:
-        ; Setup parameters for call to function pollDMA
-        MOV     A,R6
-        MOV     R2,A
-        MOV     A,R7
-        MOV     R3,A
-        LCALL   ??pollDMA?relay
 //  828 #endif
 //  829 
 //  830     /* The following logic makes continuous callbacks on any eligible flag
@@ -3224,179 +1411,29 @@ HalUARTPoll:
 //  832      * So even if new data is not received, continuous callbacks are made.
 //  833      */
 //  834       if ( cfg->rxHead != cfg->rxTail )
-        MOV     DPL,R6
-        MOV     DPH,R7
-        INC     DPTR
-        INC     DPTR
-        MOVX    A,@DPTR
-        MOV     R2,A
-        MOV     DPL,R6
-        MOV     DPH,R7
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        MOVX    A,@DPTR
-        XRL     A,R2
-        JNZ     $+5
-        LJMP    ??HalUARTPoll_6 & 0xFFFF
 //  835       {
 //  836       uint8 evt;
 //  837 
 //  838       if ( cfg->rxHead >= (cfg->rxMax - SAFE_RX_MIN) )
-        MOV     DPL,R6
-        MOV     DPH,R7
-        INC     DPTR
-        INC     DPTR
-        MOVX    A,@DPTR
-        MOV     R2,A
-        MOV     R3,#0x0
-        MOV     DPL,R6
-        MOV     DPH,R7
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        MOVX    A,@DPTR
-        MOV     R0,A
-        MOV     R1,#0x0
-        MOV     A,#-0x30
-        ADD     A,R0
-        MOV     R0,A
-        MOV     A,#-0x1
-        ADDC    A,R1
-        MOV     R1,A
-        CLR     C
-        MOV     A,R2
-        SUBB    A,R0
-        MOV     A,R3
-        SUBB    A,R1
-        MOV     C,0xD0 /* PSW */.2
-        XRL     A,PSW
-        RLC     A
-        JC      ??HalUARTPoll_7
 //  839       {
 //  840         evt = HAL_UART_RX_FULL;
-        MOV     ?V0 + 1,#0x1
-        SJMP    ??HalUARTPoll_8
 //  841       }
 //  842       else if ( cfg->rxHigh && (cfg->rxHead >= cfg->rxHigh) )
-??HalUARTPoll_7:
-        MOV     DPL,R6
-        MOV     DPH,R7
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        MOVX    A,@DPTR
-        JZ      ??HalUARTPoll_9
-        MOV     DPL,R6
-        MOV     DPH,R7
-        INC     DPTR
-        INC     DPTR
-        MOVX    A,@DPTR
-        PUSH    A
-        CFI CFA_SP SP+-1
-        MOV     DPL,R6
-        MOV     DPH,R7
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        MOVX    A,@DPTR
-        MOV     R2,A
-        POP     A
-        CFI CFA_SP SP+0
-        CLR     C
-        SUBB    A,R2
-        JC      ??HalUARTPoll_9
 //  843       {
 //  844         evt = HAL_UART_RX_ABOUT_FULL;
-        MOV     ?V0 + 1,#0x2
-        SJMP    ??HalUARTPoll_8
 //  845     }
 //  846       else if ( cfg->rxTick == 0 )
-??HalUARTPoll_9:
-        MOV     DPL,R6
-        MOV     DPH,R7
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        MOVX    A,@DPTR
-        JNZ     ??HalUARTPoll_10
 //  847     {
 //  848         evt = HAL_UART_RX_TIMEOUT;
-        MOV     ?V0 + 1,#0x4
-        SJMP    ??HalUARTPoll_8
 //  849     }
 //  850     else
 //  851     {
 //  852         evt = 0;
-??HalUARTPoll_10:
-        MOV     ?V0 + 1,#0x0
 //  853     }
 //  854 
 //  855     if ( evt && cfg->rxCB )
-??HalUARTPoll_8:
-        MOV     A,?V0 + 1
-        JZ      ??HalUARTPoll_6
-        MOV     A,R6
-        ADD     A,#0x10
-        MOV     DPL,A
-        MOV     A,R7
-        ADDC    A,#0x0
-        MOV     DPH,A
-        MOVX    A,@DPTR
-        XRL     A,#0x0
-        JNZ     ??HalUARTPoll_11
-        INC     DPTR
-        MOVX    A,@DPTR
-        XRL     A,#0x0
-??HalUARTPoll_11:
-        JZ      ??HalUARTPoll_6
 //  856     {
 //  857         cfg->rxCB( ((cfg->flag & UART_CFG_U1F)!=0), evt );
-        MOV     A,R6
-        ADD     A,#0xf
-        MOV     DPL,A
-        MOV     A,R7
-        ADDC    A,#0x0
-        MOV     DPH,A
-        MOVX    A,@DPTR
-        MOV     C,0xE0 /* A   */.7
-        JNC     ??HalUARTPoll_12
-        SETB    B.0
-        SJMP    ??HalUARTPoll_13
-??HalUARTPoll_12:
-        CLR     B.0
-??HalUARTPoll_13:
-        ; Setup parameters for indirect call
-        MOV     R2,?V0 + 1
-        MOV     C,B.0
-        CLR     A
-        MOV     0xE0 /* A   */.0,C
-        MOV     R1,A
-        MOV     A,R6
-        ADD     A,#0x10
-        MOV     DPL,A
-        MOV     A,R7
-        ADDC    A,#0x0
-        MOV     DPH,A
-        MOVX    A,@DPTR
-        MOV     R0,A
-        INC     DPTR
-        MOVX    A,@DPTR
-        MOV     DPH,A
-        MOV     DPL,R0
-        LCALL   ?CALL_IND
 //  858     }
 //  859     }
 //  860 
@@ -3419,18 +1456,10 @@ HalUARTPoll:
 //  877   } while ( TRUE );
 //  878 #else
 //  879   return;
+        LJMP    ?BRET
+        CFI EndBlock cfiBlock3
 //  880 #endif
 //  881 }
-??HalUARTPoll_6:
-        MOV     R7,#0x2
-        LJMP    ?BANKED_LEAVE_XDATA
-        CFI EndBlock cfiBlock4
-        REQUIRE ST0
-
-        RSEG XDATA_Z:XDATA:NOROOT(0)
-??tickShdw:
-        DS 1
-        REQUIRE __INIT_XDATA_Z
 //  882 
 //  883 /**************************************************************************************************
 //  884  * @fn      Hal_UART_RxBufLen()
@@ -3445,7 +1474,7 @@ HalUARTPoll:
         RSEG BANKED_CODE:CODE:NOROOT(0)
 //  892 uint16 Hal_UART_RxBufLen( uint8 port )
 Hal_UART_RxBufLen:
-        CFI Block cfiBlock5 Using cfiCommon0
+        CFI Block cfiBlock4 Using cfiCommon0
         CFI Function Hal_UART_RxBufLen
 //  893 {
         PUSH    DPL
@@ -3456,26 +1485,14 @@ Hal_UART_RxBufLen:
         CFI CFA_SP SP+-5
         ; Saved register size: 2
         ; Auto size: 0
-        MOV     A,R1
 //  894   uartCfg_t *cfg = NULL;
         MOV     R4,#0x0
         MOV     R5,#0x0
 //  895 
 //  896 #if HAL_UART_0_ENABLE
 //  897   if ( port == HAL_UART_PORT_0 )
-        JNZ     ??Hal_UART_RxBufLen_0
 //  898   {
 //  899     cfg = cfg0;
-        MOV     DPTR,#cfg0
-        MOVX    A,@DPTR
-        MOV     R0,A
-        INC     DPTR
-        MOVX    A,@DPTR
-        MOV     R1,A
-        MOV     A,R0
-        MOV     R4,A
-        MOV     A,R1
-        MOV     R5,A
 //  900   }
 //  901 #endif
 //  902 #if HAL_UART_1_ENABLE
@@ -3488,7 +1505,6 @@ Hal_UART_RxBufLen:
 //  909   HAL_UART_ASSERT( cfg );
 //  910 
 //  911   return UART_RX_AVAIL( cfg );
-??Hal_UART_RxBufLen_0:
         MOV     DPL,R4
         MOV     DPH,R5
         INC     DPTR
@@ -3502,12 +1518,12 @@ Hal_UART_RxBufLen:
         INC     DPTR
         INC     DPTR
         MOVX    A,@DPTR
-        MOV     R3,A
+        MOV     R2,A
         POP     A
         CFI CFA_SP SP+-5
         CLR     C
-        SUBB    A,R3
-        JC      ??Hal_UART_RxBufLen_1
+        SUBB    A,R2
+        JC      ??Hal_UART_RxBufLen_0
         MOV     DPL,R4
         MOV     DPH,R5
         INC     DPTR
@@ -3530,8 +1546,8 @@ Hal_UART_RxBufLen:
         MOV     A,R1
         SUBB    A,R3
         MOV     R3,A
-        SJMP    ??Hal_UART_RxBufLen_2
-??Hal_UART_RxBufLen_1:
+        SJMP    ??Hal_UART_RxBufLen_1
+??Hal_UART_RxBufLen_0:
         MOV     DPL,R4
         MOV     DPH,R5
         INC     DPTR
@@ -3573,7 +1589,7 @@ Hal_UART_RxBufLen:
         MOV     A,#0x0
         ADDC    A,R1
         MOV     R3,A
-??Hal_UART_RxBufLen_2:
+??Hal_UART_RxBufLen_1:
         POP     DPH
         CFI DPH0 SameValue
         CFI CFA_SP SP+-4
@@ -3581,7 +1597,7 @@ Hal_UART_RxBufLen:
         CFI DPL0 SameValue
         CFI CFA_SP SP+-3
         LJMP    ?BRET
-        CFI EndBlock cfiBlock5
+        CFI EndBlock cfiBlock4
 //  912 }
 //  913 
 //  914 /*****************************************************************************
@@ -3599,10 +1615,10 @@ Hal_UART_RxBufLen:
         RSEG BANKED_CODE:CODE:NOROOT(0)
 //  925 uint16 HalUARTRead( uint8 port, uint8 *buf, uint16 len )
 HalUARTRead:
-        CFI Block cfiBlock6 Using cfiCommon0
+        CFI Block cfiBlock5 Using cfiCommon0
         CFI Function HalUARTRead
 //  926 {
-        MOV     A,#-0xc
+        MOV     A,#-0xd
         LCALL   ?BANKED_ENTER_XDATA
         CFI DPH0 load(1, XDATA, add(CFA_XSP16, literal(-1)))
         CFI DPL0 load(1, XDATA, add(CFA_XSP16, literal(-2)))
@@ -3610,43 +1626,31 @@ HalUARTRead:
         CFI ?RET_HIGH load(1, XDATA, add(CFA_XSP16, literal(-4)))
         CFI ?RET_LOW load(1, XDATA, add(CFA_XSP16, literal(-5)))
         CFI R7 load(1, XDATA, add(CFA_XSP16, literal(-6)))
-        CFI V3 load(1, XDATA, add(CFA_XSP16, literal(-7)))
-        CFI V2 load(1, XDATA, add(CFA_XSP16, literal(-8)))
-        CFI V1 load(1, XDATA, add(CFA_XSP16, literal(-9)))
-        CFI V0 load(1, XDATA, add(CFA_XSP16, literal(-10)))
-        CFI VB load(1, XDATA, add(CFA_XSP16, literal(-11)))
-        CFI R6 load(1, XDATA, add(CFA_XSP16, literal(-12)))
+        CFI V4 load(1, XDATA, add(CFA_XSP16, literal(-7)))
+        CFI V3 load(1, XDATA, add(CFA_XSP16, literal(-8)))
+        CFI V2 load(1, XDATA, add(CFA_XSP16, literal(-9)))
+        CFI V1 load(1, XDATA, add(CFA_XSP16, literal(-10)))
+        CFI V0 load(1, XDATA, add(CFA_XSP16, literal(-11)))
+        CFI VB load(1, XDATA, add(CFA_XSP16, literal(-12)))
+        CFI R6 load(1, XDATA, add(CFA_XSP16, literal(-13)))
         CFI CFA_SP SP+0
-        CFI CFA_XSP16 add(XSP16, 12)
-        ; Saved register size: 12
+        CFI CFA_XSP16 add(XSP16, 13)
+        ; Saved register size: 13
         ; Auto size: 0
-        MOV     ?V0 + 2,R1
         MOV     A,R2
         MOV     R0,A
         MOV     A,R3
         MOV     R1,A
 //  927   uartCfg_t *cfg = NULL;
-        MOV     R6,#0x0
-        MOV     R7,#0x0
-//  928   uint8 cnt = 0;
+        MOV     ?V0 + 2,#0x0
         MOV     ?V0 + 3,#0x0
+//  928   uint8 cnt = 0;
+        MOV     ?V0 + 4,#0x0
 //  929 
 //  930 #if HAL_UART_0_ENABLE
 //  931   if ( port == HAL_UART_PORT_0 )
-        MOV     A,?V0 + 2
-        JNZ     ??HalUARTRead_0
 //  932   {
 //  933     cfg = cfg0;
-        MOV     DPTR,#cfg0
-        MOVX    A,@DPTR
-        MOV     R2,A
-        INC     DPTR
-        MOVX    A,@DPTR
-        MOV     R3,A
-        MOV     A,R2
-        MOV     R6,A
-        MOV     A,R3
-        MOV     R7,A
 //  934   }
 //  935 #endif
 //  936 #if HAL_UART_1_ENABLE
@@ -3660,21 +1664,21 @@ HalUARTRead:
 //  944 
 //  945   while ( (cfg->rxTail != cfg->rxHead) && (cnt < len) )
 ??HalUARTRead_0:
-        MOV     DPL,R6
-        MOV     DPH,R7
+        MOV     DPL,?V0 + 2
+        MOV     DPH,?V0 + 3
         INC     DPTR
         INC     DPTR
         INC     DPTR
         MOVX    A,@DPTR
         MOV     R2,A
-        MOV     DPL,R6
-        MOV     DPH,R7
+        MOV     DPL,?V0 + 2
+        MOV     DPH,?V0 + 3
         INC     DPTR
         INC     DPTR
         MOVX    A,@DPTR
         XRL     A,R2
         JZ      ??HalUARTRead_1
-        MOV     ?V0 + 0,?V0 + 3
+        MOV     ?V0 + 0,?V0 + 4
         MOV     ?V0 + 1,#0x0
         CLR     C
         MOV     A,?V0 + 0
@@ -3684,23 +1688,23 @@ HalUARTRead:
         JNC     ??HalUARTRead_1
 //  946   {
 //  947     *buf++ = cfg->rxBuf[cfg->rxTail];
-        MOV     DPL,R6
-        MOV     DPH,R7
+        MOV     DPL,?V0 + 2
+        MOV     DPH,?V0 + 3
         INC     DPTR
         INC     DPTR
         INC     DPTR
         MOVX    A,@DPTR
         MOV     R2,A
         MOV     R3,#0x0
-        MOV     DPL,R6
-        MOV     DPH,R7
+        MOV     DPL,?V0 + 2
+        MOV     DPH,?V0 + 3
         MOVX    A,@DPTR
         ADD     A,R2
-        MOV     ?V0 + 0,A
+        MOV     R7,A
         INC     DPTR
         MOVX    A,@DPTR
         ADDC    A,R3
-        MOV     DPL,?V0 + 0
+        MOV     DPL,R7
         MOV     DPH,A
         MOVX    A,@DPTR
         MOV     DPL,R0
@@ -3712,15 +1716,15 @@ HalUARTRead:
         MOV     R0,DPL
         MOV     R1,DPH
 //  948     if ( cfg->rxTail == cfg->rxMax )
-        MOV     DPL,R6
-        MOV     DPH,R7
+        MOV     DPL,?V0 + 2
+        MOV     DPH,?V0 + 3
         INC     DPTR
         INC     DPTR
         INC     DPTR
         MOVX    A,@DPTR
         MOV     R2,A
-        MOV     DPL,R6
-        MOV     DPH,R7
+        MOV     DPL,?V0 + 2
+        MOV     DPH,?V0 + 3
         INC     DPTR
         INC     DPTR
         INC     DPTR
@@ -3731,8 +1735,8 @@ HalUARTRead:
 //  949     {
 //  950       cfg->rxTail = 0;
         MOV     A,#0x0
-        MOV     DPL,R6
-        MOV     DPH,R7
+        MOV     DPL,?V0 + 2
+        MOV     DPH,?V0 + 3
         INC     DPTR
         INC     DPTR
         INC     DPTR
@@ -3743,8 +1747,8 @@ HalUARTRead:
 //  953     {
 //  954       cfg->rxTail++;
 ??HalUARTRead_2:
-        MOV     DPL,R6
-        MOV     DPH,R7
+        MOV     DPL,?V0 + 2
+        MOV     DPH,?V0 + 3
         INC     DPTR
         INC     DPTR
         INC     DPTR
@@ -3754,8 +1758,8 @@ HalUARTRead:
 //  955     }
 //  956     cnt++;
 ??HalUARTRead_3:
-        INC     ?V0 + 3
-        SJMP    ??HalUARTRead_0
+        INC     ?V0 + 4
+        LJMP    ??HalUARTRead_0 & 0xFFFF
 //  957   }
 //  958 
 //  959 #if HAL_UART_DMA
@@ -3771,28 +1775,9 @@ HalUARTRead:
 //  969      * the end portion of the incoming packet that does not fit would be lost.
 //  970      */
 //  971     if ( !(cfg->flag & UART_CFG_FLW) )
-??HalUARTRead_1:
-        MOV     A,R6
-        ADD     A,#0xf
-        MOV     DPL,A
-        MOV     A,R7
-        ADDC    A,#0x0
-        MOV     DPH,A
-        MOVX    A,@DPTR
-        MOV     C,0xE0 /* A   */.5
-        JC      ??HalUARTRead_4
 //  972     {
 //  973       // This is a trick to trigger the DMA abort and restart logic in pollDMA.
 //  974       cfg->flag |= UART_CFG_RXF;
-        MOV     A,R6
-        ADD     A,#0xf
-        MOV     DPL,A
-        MOV     A,R7
-        ADDC    A,#0x0
-        MOV     DPH,A
-        MOVX    A,@DPTR
-        SETB    0xE0 /* A   */.1
-        MOVX    @DPTR,A
 //  975     }
 //  976   }
 //  977 #endif
@@ -3815,14 +1800,14 @@ HalUARTRead:
 //  994 #endif
 //  995 
 //  996   return cnt;
-??HalUARTRead_4:
-        MOV     A,?V0 + 3
+??HalUARTRead_1:
+        MOV     A,?V0 + 4
         MOV     ?V0 + 0,A
         MOV     R2,?V0 + 0
         MOV     R3,#0x0
-        MOV     R7,#0x4
+        MOV     R7,#0x5
         LJMP    ?BANKED_LEAVE_XDATA
-        CFI EndBlock cfiBlock6
+        CFI EndBlock cfiBlock5
 //  997 }
 //  998 
 //  999 /******************************************************************************
@@ -3840,7 +1825,7 @@ HalUARTRead:
         RSEG BANKED_CODE:CODE:NOROOT(0)
 // 1010 uint16 HalUARTWrite( uint8 port, uint8 *buf, uint16 len )
 HalUARTWrite:
-        CFI Block cfiBlock7 Using cfiCommon0
+        CFI Block cfiBlock6 Using cfiCommon0
         CFI Function HalUARTWrite
 // 1011 {
         MOV     A,#-0xc
@@ -3861,32 +1846,19 @@ HalUARTWrite:
         CFI CFA_XSP16 add(XSP16, 12)
         ; Saved register size: 12
         ; Auto size: 0
-        MOV     ?V0 + 2,R1
-        MOV     A,R2
-        MOV     R6,A
-        MOV     A,R3
-        MOV     R7,A
-// 1012   uartCfg_t *cfg = NULL;
-        MOV     R0,#0x0
-        MOV     R1,#0x0
-// 1013   uint8 cnt;
-// 1014 
-// 1015 #if HAL_UART_0_ENABLE
-// 1016   if ( port == HAL_UART_PORT_0 )
-        MOV     A,?V0 + 2
-        JNZ     ??HalUARTWrite_0
-// 1017   {
-// 1018     cfg = cfg0;
-        MOV     DPTR,#cfg0
-        MOVX    A,@DPTR
-        MOV     R2,A
-        INC     DPTR
-        MOVX    A,@DPTR
-        MOV     R3,A
         MOV     A,R2
         MOV     R0,A
         MOV     A,R3
         MOV     R1,A
+// 1012   uartCfg_t *cfg = NULL;
+        MOV     R6,#0x0
+        MOV     R7,#0x0
+// 1013   uint8 cnt;
+// 1014 
+// 1015 #if HAL_UART_0_ENABLE
+// 1016   if ( port == HAL_UART_PORT_0 )
+// 1017   {
+// 1018     cfg = cfg0;
 // 1019   }
 // 1020 #endif
 // 1021 #if HAL_UART_1_ENABLE
@@ -3899,61 +1871,10 @@ HalUARTWrite:
 // 1028   HAL_UART_ASSERT( cfg );
 // 1029 
 // 1030   if ( cfg->txHead == cfg->txTail )
-??HalUARTWrite_0:
-        MOV     DPL,R0
-        MOV     DPH,R1
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        MOVX    A,@DPTR
-        MOV     R2,A
-        MOV     A,R0
-        ADD     A,#0xb
-        MOV     DPL,A
-        MOV     A,R1
-        ADDC    A,#0x0
-        MOV     DPH,A
-        MOVX    A,@DPTR
-        XRL     A,R2
-        JNZ     ??HalUARTWrite_1
 // 1031   {
 // 1032 #if HAL_UART_DMA
 // 1033     // When pointers are equal, reset to zero to get max len w/out wrapping.
 // 1034     cfg->txHead = cfg->txTail = 0;
-        MOV     R2,#0x0
-        MOV     A,R2
-        PUSH    A
-        CFI CFA_SP SP+-1
-        MOV     A,R0
-        ADD     A,#0xb
-        MOV     DPL,A
-        MOV     A,R1
-        ADDC    A,#0x0
-        MOV     DPH,A
-        POP     A
-        CFI CFA_SP SP+0
-        MOVX    @DPTR,A
-        MOV     A,R2
-        MOV     DPL,R0
-        MOV     DPH,R1
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        MOVX    @DPTR,A
 // 1035 #endif
 // 1036 #if HAL_UART_ISR
 // 1037 #if HAL_UART_DMA
@@ -3967,17 +1888,16 @@ HalUARTWrite:
 // 1045 
 // 1046   // Accept "all-or-none" on write request.
 // 1047   if ( TX_AVAIL( cfg ) < len )
-??HalUARTWrite_1:
-        MOV     A,R0
+        MOV     A,R6
         ADD     A,#0xb
         MOV     DPL,A
-        MOV     A,R1
+        MOV     A,R7
         ADDC    A,#0x0
         MOV     DPH,A
         MOVX    A,@DPTR
         MOV     R2,A
-        MOV     DPL,R0
-        MOV     DPH,R1
+        MOV     DPL,R6
+        MOV     DPH,R7
         INC     DPTR
         INC     DPTR
         INC     DPTR
@@ -3990,11 +1910,11 @@ HalUARTWrite:
         INC     DPTR
         MOVX    A,@DPTR
         XRL     A,R2
-        JNZ     ??HalUARTWrite_2
-        MOV     A,R0
+        JNZ     ??HalUARTWrite_0
+        MOV     A,R6
         ADD     A,#0xc
         MOV     DPL,A
-        MOV     A,R1
+        MOV     A,R7
         ADDC    A,#0x0
         MOV     DPH,A
         MOVX    A,@DPTR
@@ -4006,10 +1926,10 @@ HalUARTWrite:
         MOV     A,#-0x1
         ADDC    A,R3
         MOV     ?V0 + 1,A
-        LJMP    ??HalUARTWrite_3 & 0xFFFF
-??HalUARTWrite_2:
-        MOV     DPL,R0
-        MOV     DPH,R1
+        LJMP    ??HalUARTWrite_1 & 0xFFFF
+??HalUARTWrite_0:
+        MOV     DPL,R6
+        MOV     DPH,R7
         INC     DPTR
         INC     DPTR
         INC     DPTR
@@ -4023,10 +1943,10 @@ HalUARTWrite:
         MOVX    A,@DPTR
         PUSH    A
         CFI CFA_SP SP+-1
-        MOV     A,R0
+        MOV     A,R6
         ADD     A,#0xb
         MOV     DPL,A
-        MOV     A,R1
+        MOV     A,R7
         ADDC    A,#0x0
         MOV     DPH,A
         MOVX    A,@DPTR
@@ -4035,18 +1955,18 @@ HalUARTWrite:
         CFI CFA_SP SP+0
         CLR     C
         SUBB    A,R2
-        JNC     ??HalUARTWrite_4
-        MOV     A,R0
+        JNC     ??HalUARTWrite_2
+        MOV     A,R6
         ADD     A,#0xb
         MOV     DPL,A
-        MOV     A,R1
+        MOV     A,R7
         ADDC    A,#0x0
         MOV     DPH,A
         MOVX    A,@DPTR
         MOV     R2,A
         MOV     R3,#0x0
-        MOV     DPL,R0
-        MOV     DPH,R1
+        MOV     DPL,R6
+        MOV     DPH,R7
         INC     DPTR
         INC     DPTR
         INC     DPTR
@@ -4073,19 +1993,19 @@ HalUARTWrite:
         MOV     A,#-0x1
         ADDC    A,R3
         MOV     R3,A
-        SJMP    ??HalUARTWrite_5
-??HalUARTWrite_4:
-        MOV     A,R0
+        SJMP    ??HalUARTWrite_3
+??HalUARTWrite_2:
+        MOV     A,R6
         ADD     A,#0xc
         MOV     DPL,A
-        MOV     A,R1
+        MOV     A,R7
         ADDC    A,#0x0
         MOV     DPH,A
         MOVX    A,@DPTR
         MOV     R2,A
         MOV     R3,#0x0
-        MOV     DPL,R0
-        MOV     DPH,R1
+        MOV     DPL,R6
+        MOV     DPH,R7
         INC     DPTR
         INC     DPTR
         INC     DPTR
@@ -4106,10 +2026,10 @@ HalUARTWrite:
         MOV     A,R3
         SUBB    A,?V0 + 1
         MOV     R3,A
-        MOV     A,R0
+        MOV     A,R6
         ADD     A,#0xb
         MOV     DPL,A
-        MOV     A,R1
+        MOV     A,R7
         ADDC    A,#0x0
         MOV     DPH,A
         MOVX    A,@DPTR
@@ -4121,40 +2041,40 @@ HalUARTWrite:
         MOV     A,?V0 + 1
         ADDC    A,R3
         MOV     R3,A
-??HalUARTWrite_5:
+??HalUARTWrite_3:
         MOV     ?V0 + 0,R2
         MOV     ?V0 + 1,R3
-??HalUARTWrite_3:
+??HalUARTWrite_1:
         CLR     C
         MOV     A,?V0 + 0
         SUBB    A,R4
         MOV     A,?V0 + 1
         SUBB    A,R5
-        JNC     ??HalUARTWrite_6
+        JNC     ??HalUARTWrite_4
 // 1048   {
 // 1049     return 0;
         MOV     R2,#0x0
         MOV     R3,#0x0
-        LJMP    ??HalUARTWrite_7 & 0xFFFF
+        LJMP    ??HalUARTWrite_5 & 0xFFFF
 // 1050   }
 // 1051 
 // 1052   for ( cnt = len; cnt; cnt-- )
-??HalUARTWrite_6:
+??HalUARTWrite_4:
         MOV     A,R4
         MOV     ?V0 + 3,A
-??HalUARTWrite_8:
+??HalUARTWrite_6:
         MOV     A,?V0 + 3
         JNZ     $+5
-        LJMP    ??HalUARTWrite_9 & 0xFFFF
+        LJMP    ??HalUARTWrite_7 & 0xFFFF
 // 1053   {
 // 1054     cfg->txBuf[ cfg->txHead ] = *buf++;
-        MOV     DPL,R6
-        MOV     DPH,R7
+        MOV     DPL,R0
+        MOV     DPH,R1
         MOVX    A,@DPTR
         PUSH    A
         CFI CFA_SP SP+-1
-        MOV     DPL,R0
-        MOV     DPH,R1
+        MOV     DPL,R6
+        MOV     DPH,R7
         INC     DPTR
         INC     DPTR
         INC     DPTR
@@ -4168,8 +2088,8 @@ HalUARTWrite:
         MOVX    A,@DPTR
         MOV     R2,A
         MOV     R3,#0x0
-        MOV     DPL,R0
-        MOV     DPH,R1
+        MOV     DPL,R6
+        MOV     DPH,R7
         INC     DPTR
         INC     DPTR
         INC     DPTR
@@ -4189,15 +2109,15 @@ HalUARTWrite:
         POP     A
         CFI CFA_SP SP+0
         MOVX    @DPTR,A
-        MOV     DPL,R6
-        MOV     DPH,R7
-        INC     DPTR
-        MOV     R6,DPL
-        MOV     R7,DPH
-// 1055 
-// 1056     if ( cfg->txHead == cfg->txMax )
         MOV     DPL,R0
         MOV     DPH,R1
+        INC     DPTR
+        MOV     R0,DPL
+        MOV     R1,DPH
+// 1055 
+// 1056     if ( cfg->txHead == cfg->txMax )
+        MOV     DPL,R6
+        MOV     DPH,R7
         INC     DPTR
         INC     DPTR
         INC     DPTR
@@ -4210,20 +2130,20 @@ HalUARTWrite:
         INC     DPTR
         MOVX    A,@DPTR
         MOV     R2,A
-        MOV     A,R0
+        MOV     A,R6
         ADD     A,#0xc
         MOV     DPL,A
-        MOV     A,R1
+        MOV     A,R7
         ADDC    A,#0x0
         MOV     DPH,A
         MOVX    A,@DPTR
         XRL     A,R2
-        JNZ     ??HalUARTWrite_10
+        JNZ     ??HalUARTWrite_8
 // 1057     {
 // 1058       cfg->txHead = 0;
         MOV     A,#0x0
-        MOV     DPL,R0
-        MOV     DPH,R1
+        MOV     DPL,R6
+        MOV     DPH,R7
         INC     DPTR
         INC     DPTR
         INC     DPTR
@@ -4235,14 +2155,14 @@ HalUARTWrite:
         INC     DPTR
         INC     DPTR
         MOVX    @DPTR,A
-        SJMP    ??HalUARTWrite_11
+        SJMP    ??HalUARTWrite_9
 // 1059     }
 // 1060     else
 // 1061     {
 // 1062       cfg->txHead++;
-??HalUARTWrite_10:
-        MOV     DPL,R0
-        MOV     DPH,R1
+??HalUARTWrite_8:
+        MOV     DPL,R6
+        MOV     DPH,R7
         INC     DPTR
         INC     DPTR
         INC     DPTR
@@ -4258,9 +2178,9 @@ HalUARTWrite:
         MOVX    @DPTR,A
 // 1063     }
 // 1064   }
-??HalUARTWrite_11:
+??HalUARTWrite_9:
         DEC     ?V0 + 3
-        LJMP    ??HalUARTWrite_8 & 0xFFFF
+        LJMP    ??HalUARTWrite_6 & 0xFFFF
 // 1065 
 // 1066 #if HAL_UART_ISR
 // 1067 #if HAL_UART_DMA
@@ -4283,22 +2203,16 @@ HalUARTWrite:
 // 1084 #endif
 // 1085 
 // 1086   return len;
-??HalUARTWrite_9:
+??HalUARTWrite_7:
         MOV     A,R4
         MOV     R2,A
         MOV     A,R5
         MOV     R3,A
-??HalUARTWrite_7:
+??HalUARTWrite_5:
         MOV     R7,#0x4
         LJMP    ?BANKED_LEAVE_XDATA
-        CFI EndBlock cfiBlock7
+        CFI EndBlock cfiBlock6
 // 1087 }
-
-        RSEG BANK_RELAYS:CODE:REORDER:NOROOT(0)
-??pollDMA?relay:
-        LCALL   ?BDISPATCH
-        DATA
-        DC24    pollDMA
 
         RSEG BANK_RELAYS:CODE:REORDER:NOROOT(0)
 ??HalUARTInit?relay:
@@ -4460,14 +2374,12 @@ HalUARTWrite:
 // 1202 /******************************************************************************
 // 1203 ******************************************************************************/
 // 
-// 3 536 bytes in segment BANKED_CODE
-//    48 bytes in segment BANK_RELAYS
-//    16 bytes in segment SFR_AN
-//     3 bytes in segment XDATA_Z
+// 983 bytes in segment BANKED_CODE
+//  42 bytes in segment BANK_RELAYS
+//   1 byte  in segment SFR_AN
 // 
-// 3 584 bytes of CODE  memory
-//     0 bytes of DATA  memory (+ 16 bytes shared)
-//     3 bytes of XDATA memory
+// 1 025 bytes of CODE memory
+//     0 bytes of DATA memory (+ 1 byte shared)
 //
 //Errors: none
 //Warnings: none

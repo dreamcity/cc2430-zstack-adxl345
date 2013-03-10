@@ -1,6 +1,6 @@
 ///////////////////////////////////////////////////////////////////////////////
 //                                                                            /
-// IAR 8051 C/C++ Compiler V7.30B/W32                   28/Dec/2012  19:53:59 /
+// IAR 8051 C/C++ Compiler V7.30B/W32                   03/Jan/2013  20:31:32 /
 // Copyright 2004-2007 IAR Systems. All rights reserved.                      /
 //                                                                            /
 //    Core               =  plain                                             /
@@ -40,8 +40,8 @@
 //                          -DRESPONSE_POLL_RATE=100) -DREJOIN_POLL_RATE=440  /
 //                          "C:\Texas Instruments\ZStack-1.4.3-1.2.1\Componen /
 //                          ts\mt\SPIMgr.c" -D CC2430EB -D AXD_END -D         /
-//                          NWK_AUTO_POLL -D REFLECTOR -D ZTOOL_P1 -D         /
-//                          MT_TASK -D xMT_ZDO_FUNC -D LCD_SUPPORTED=DEBUG    /
+//                          NWK_AUTO_POLL -D REFLECTOR -D xZTOOL_P1 -D        /
+//                          xMT_TASK -D xMT_ZDO_FUNC -D xLCD_SUPPORTED=DEBUG  /
 //                          -D xPOWER_SAVING -lC "C:\Texas                    /
 //                          Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\Sa /
 //                          mples\AXDApp\CC2430DB\EndDeviceEB\List\" -lA      /
@@ -145,16 +145,12 @@
         RSEG PSTACK:XDATA:NOROOT(0)
         RSEG XSTACK:XDATA:NOROOT(0)
 
-        EXTERN ??SPIMgr_CalcFCS?relay
-        EXTERN ??SPIMgr_ProcessZToolData?relay
         EXTERN ?ALLOC_XSTACK8
         EXTERN ?BANKED_ENTER_XDATA
         EXTERN ?BANKED_LEAVE_XDATA
         EXTERN ?BDISPATCH
         EXTERN ?BRET
         EXTERN ?DEALLOC_XSTACK8
-        EXTERN ?UC_SWITCH_DENSE
-        EXTERN ?V0
         EXTERN ?XSP
         EXTERN ?XSTACK_DISP0_8
         EXTERN __INIT_XDATA_Z
@@ -163,37 +159,22 @@
         FUNCTION ??SPIMgr_CalcFCS?relay,0203H
         PUBLIC ??SPIMgr_Init?relay
         FUNCTION ??SPIMgr_Init?relay,0203H
-        PUBLIC ??SPIMgr_ProcessZToolData?relay
-        FUNCTION ??SPIMgr_ProcessZToolData?relay,0203H
         PUBLIC ??SPIMgr_RegisterTaskID?relay
         FUNCTION ??SPIMgr_RegisterTaskID?relay,0203H
         PUBLIC App_TaskID
-        PUBLIC CMD_Token
-        PUBLIC FSC_Token
-        PUBLIC LEN_Token
         PUBLIC SPIMgr_CalcFCS
         FUNCTION SPIMgr_CalcFCS,0203H
-        ARGFRAME XSTACK, 11, STACK
-        ARGFRAME IOVERLAY, 0, STATIC
-        ARGFRAME DOVERLAY, 0, STATIC
+        ARGFRAME XSTACK, 0, STACK
         LOCFRAME XSTACK, 9, STACK
         PUBLIC SPIMgr_Init
-        FUNCTION SPIMgr_Init,021203H
+        FUNCTION SPIMgr_Init,0203H
         ARGFRAME XSTACK, 0, STACK
         LOCFRAME ISTACK, 3, STACK
         LOCFRAME XSTACK, 29, STACK
-        PUBLIC SPIMgr_ProcessZToolData
-        FUNCTION SPIMgr_ProcessZToolData,0a1603H
-        ARGFRAME XSTACK, 0, STACK
-        LOCFRAME ISTACK, 1, STACK
-        LOCFRAME XSTACK, 11, STACK
         PUBLIC SPIMgr_RegisterTaskID
         FUNCTION SPIMgr_RegisterTaskID,0203H
         ARGFRAME XSTACK, 0, STACK
         LOCFRAME ISTACK, 2, STACK
-        PUBLIC SPI_Msg
-        PUBLIC state
-        PUBLIC tempDataLen
         
         CFI Names cfiNames0
         CFI StackFrame CFA_SP SP DATA
@@ -274,82 +255,12 @@
         CFI ?RET_LOW Frame(CFA_SP, 1)
         CFI EndCommon cfiCommon0
         
-HalUARTOpen         SYMBOL "HalUARTOpen"
-Hal_UART_RxBufLen   SYMBOL "Hal_UART_RxBufLen"
-HalUARTRead         SYMBOL "HalUARTRead"
-osal_msg_allocate   SYMBOL "osal_msg_allocate"
-osal_msg_send       SYMBOL "osal_msg_send"
-osal_msg_deallocate SYMBOL "osal_msg_deallocate"
-??HalUARTOpen?relay SYMBOL "?relay", HalUARTOpen
-??HalUARTRead?relay SYMBOL "?relay", HalUARTRead
-??Hal_UART_RxBufLen?relay SYMBOL "?relay", Hal_UART_RxBufLen
-??osal_msg_allocate?relay SYMBOL "?relay", osal_msg_allocate
-??osal_msg_deallocate?relay SYMBOL "?relay", osal_msg_deallocate
-??osal_msg_send?relay SYMBOL "?relay", osal_msg_send
 SPIMgr_CalcFCS      SYMBOL "SPIMgr_CalcFCS"
 ??SPIMgr_CalcFCS?relay SYMBOL "?relay", SPIMgr_CalcFCS
 SPIMgr_Init         SYMBOL "SPIMgr_Init"
 ??SPIMgr_Init?relay SYMBOL "?relay", SPIMgr_Init
-SPIMgr_ProcessZToolData SYMBOL "SPIMgr_ProcessZToolData"
-??SPIMgr_ProcessZToolData?relay SYMBOL "?relay", SPIMgr_ProcessZToolData
 SPIMgr_RegisterTaskID SYMBOL "SPIMgr_RegisterTaskID"
 ??SPIMgr_RegisterTaskID?relay SYMBOL "?relay", SPIMgr_RegisterTaskID
-
-        EXTERN HalUARTOpen
-        FUNCTION HalUARTOpen,0202H
-        ARGFRAME ISTACK, 2, STACK
-        ARGFRAME PSTACK, 0, STACK
-        ARGFRAME XSTACK, 29, STACK
-        ARGFRAME IOVERLAY, 0, STATIC
-        ARGFRAME DOVERLAY, 0, STATIC
-        EXTERN Hal_UART_RxBufLen
-        FUNCTION Hal_UART_RxBufLen,0202H
-        ARGFRAME ISTACK, 0, STACK
-        ARGFRAME PSTACK, 0, STACK
-        ARGFRAME XSTACK, 11, STACK
-        ARGFRAME IOVERLAY, 0, STATIC
-        ARGFRAME DOVERLAY, 0, STATIC
-        EXTERN HalUARTRead
-        FUNCTION HalUARTRead,0202H
-        ARGFRAME ISTACK, 0, STACK
-        ARGFRAME PSTACK, 0, STACK
-        ARGFRAME XSTACK, 11, STACK
-        ARGFRAME IOVERLAY, 0, STATIC
-        ARGFRAME DOVERLAY, 0, STATIC
-        EXTERN osal_msg_allocate
-        FUNCTION osal_msg_allocate,0202H
-        ARGFRAME ISTACK, 0, STACK
-        ARGFRAME PSTACK, 0, STACK
-        ARGFRAME XSTACK, 11, STACK
-        ARGFRAME IOVERLAY, 0, STATIC
-        ARGFRAME DOVERLAY, 0, STATIC
-        EXTERN osal_msg_send
-        FUNCTION osal_msg_send,0202H
-        ARGFRAME ISTACK, 0, STACK
-        ARGFRAME PSTACK, 0, STACK
-        ARGFRAME XSTACK, 11, STACK
-        ARGFRAME IOVERLAY, 0, STATIC
-        ARGFRAME DOVERLAY, 0, STATIC
-        EXTERN osal_msg_deallocate
-        FUNCTION osal_msg_deallocate,0202H
-        ARGFRAME ISTACK, 0, STACK
-        ARGFRAME PSTACK, 0, STACK
-        ARGFRAME XSTACK, 11, STACK
-        ARGFRAME IOVERLAY, 0, STATIC
-        ARGFRAME DOVERLAY, 0, STATIC
-        EXTERN ??HalUARTOpen?relay
-        FUNCTION ??HalUARTOpen?relay,00H
-        EXTERN ??HalUARTRead?relay
-        FUNCTION ??HalUARTRead?relay,00H
-        EXTERN ??Hal_UART_RxBufLen?relay
-        FUNCTION ??Hal_UART_RxBufLen?relay,00H
-        EXTERN ??osal_msg_allocate?relay
-        FUNCTION ??osal_msg_allocate?relay,00H
-        EXTERN ??osal_msg_deallocate?relay
-        FUNCTION ??osal_msg_deallocate?relay,00H
-        EXTERN ??osal_msg_send?relay
-        FUNCTION ??osal_msg_send?relay,00H
-        EXTERN MT_TaskID
 
 // C:\Texas Instruments\ZStack-1.4.3-1.2.1\Components\mt\SPIMgr.c
 //    1 /**************************************************************************************************
@@ -434,42 +345,12 @@ App_TaskID:
 //   75 /* ZTool protocal parameters */
 //   76 
 //   77 #if defined (ZTOOL_P1) || defined (ZTOOL_P2)
-
-        RSEG XDATA_Z:XDATA:NOROOT(0)
 //   78 uint8 state;
-state:
-        DS 1
-        REQUIRE __INIT_XDATA_Z
-
-        RSEG XDATA_Z:XDATA:NOROOT(0)
 //   79 uint8  CMD_Token[2];
-CMD_Token:
-        DS 2
-        REQUIRE __INIT_XDATA_Z
-
-        RSEG XDATA_Z:XDATA:NOROOT(0)
 //   80 uint8  LEN_Token;
-LEN_Token:
-        DS 1
-        REQUIRE __INIT_XDATA_Z
-
-        RSEG XDATA_Z:XDATA:NOROOT(0)
 //   81 uint8  FSC_Token;
-FSC_Token:
-        DS 1
-        REQUIRE __INIT_XDATA_Z
-
-        RSEG XDATA_Z:XDATA:NOROOT(0)
 //   82 mtOSALSerialData_t  *SPI_Msg;
-SPI_Msg:
-        DS 2
-        REQUIRE __INIT_XDATA_Z
-
-        RSEG XDATA_Z:XDATA:NOROOT(0)
 //   83 uint8  tempDataLen;
-tempDataLen:
-        DS 1
-        REQUIRE __INIT_XDATA_Z
 //   84 #endif //ZTOOL
 //   85 
 //   86 #if defined (ZAPP_P1) || defined (ZAPP_P2)
@@ -498,17 +379,6 @@ SPIMgr_Init:
         CFI Block cfiBlock0 Using cfiCommon0
         CFI Function SPIMgr_Init
 //  106 {
-        FUNCALL SPIMgr_Init, HalUARTOpen
-        LOCFRAME ISTACK, 2, STACK
-        LOCFRAME PSTACK, 0, STACK
-        LOCFRAME XSTACK, 29, STACK
-        LOCFRAME IOVERLAY, 0, STATIC
-        LOCFRAME DOVERLAY, 0, STATIC
-        ARGFRAME ISTACK, 2, STACK
-        ARGFRAME PSTACK, 0, STACK
-        ARGFRAME XSTACK, 29, STACK
-        ARGFRAME IOVERLAY, 0, STATIC
-        ARGFRAME DOVERLAY, 0, STATIC
         PUSH    DPL
         CFI DPL0 Frame(CFA_SP, 4)
         CFI CFA_SP SP+-4
@@ -596,29 +466,22 @@ SPIMgr_Init:
         MOVX    @DPTR,A
 //  121 #if defined (ZTOOL_P1) || defined (ZTOOL_P2)
 //  122   uartConfig.callBackFunc         = SPIMgr_ProcessZToolData;
-        MOV     A,#0x1b
-        LCALL   ?XSTACK_DISP0_8
-        MOV     A,#(??SPIMgr_ProcessZToolData?relay & 0xff)
-        MOVX    @DPTR,A
-        INC     DPTR
-        MOV     A,#((??SPIMgr_ProcessZToolData?relay >> 8) & 0xff)
-        MOVX    @DPTR,A
 //  123 #elif defined (ZAPP_P1) || defined (ZAPP_P2)
 //  124   uartConfig.callBackFunc         = SPIMgr_ProcessZAppData;
 //  125 #else
 //  126   uartConfig.callBackFunc         = NULL;
+        MOV     A,#0x1b
+        LCALL   ?XSTACK_DISP0_8
+        MOV     A,#0x0
+        MOVX    @DPTR,A
+        INC     DPTR
+        MOV     A,#0x0
+        MOVX    @DPTR,A
 //  127 #endif
 //  128 
 //  129   /* Start UART */
 //  130 #if defined (SPI_MGR_DEFAULT_PORT)
 //  131   HalUARTOpen (SPI_MGR_DEFAULT_PORT, &uartConfig);
-        ; Setup parameters for call to function HalUARTOpen
-        MOV     DPL,?XSP + 0
-        MOV     DPH,?XSP + 1
-        MOV     R2,DPL
-        MOV     R3,DPH
-        MOV     R1,#0x0
-        LCALL   ??HalUARTOpen?relay
 //  132 #else
 //  133   /* Silence IAR compiler warning */
 //  134   (void)uartConfig;
@@ -758,563 +621,6 @@ SPIMgr_CalcFCS:
         LJMP    ?BANKED_LEAVE_XDATA
         CFI EndBlock cfiBlock2
 //  189 }
-//  190 
-//  191 
-//  192 #if defined (ZTOOL_P1) || defined (ZTOOL_P2)
-//  193 /***************************************************************************************************
-//  194  * @fn      SPIMgr_ProcessZToolRxData
-//  195  *
-//  196  * @brief   | SOP | CMD  |   Data Length   | FSC  |
-//  197  *          |  1  |  2   |       1         |  1   |
-//  198  *
-//  199  *          Parses the data and determine either is SPI or just simply serial data
-//  200  *          then send the data to correct place (MT or APP)
-//  201  *
-//  202  * @param   pBuffer  - pointer to the buffer that contains the data
-//  203  *          length   - length of the buffer
-//  204  *
-//  205  *
-//  206  * @return  None
-//  207  ***************************************************************************************************/
-
-        RSEG BANKED_CODE:CODE:NOROOT(0)
-//  208 void SPIMgr_ProcessZToolData ( uint8 port, uint8 event )
-SPIMgr_ProcessZToolData:
-        CFI Block cfiBlock3 Using cfiCommon0
-        CFI Function SPIMgr_ProcessZToolData
-//  209 {
-        FUNCALL SPIMgr_ProcessZToolData, Hal_UART_RxBufLen
-        LOCFRAME ISTACK, 0, STACK
-        LOCFRAME PSTACK, 0, STACK
-        LOCFRAME XSTACK, 11, STACK
-        LOCFRAME IOVERLAY, 0, STATIC
-        LOCFRAME DOVERLAY, 0, STATIC
-        ARGFRAME ISTACK, 0, STACK
-        ARGFRAME PSTACK, 0, STACK
-        ARGFRAME XSTACK, 11, STACK
-        ARGFRAME IOVERLAY, 0, STATIC
-        ARGFRAME DOVERLAY, 0, STATIC
-        FUNCALL SPIMgr_ProcessZToolData, HalUARTRead
-        LOCFRAME ISTACK, 0, STACK
-        LOCFRAME PSTACK, 0, STACK
-        LOCFRAME XSTACK, 11, STACK
-        LOCFRAME IOVERLAY, 0, STATIC
-        LOCFRAME DOVERLAY, 0, STATIC
-        ARGFRAME ISTACK, 0, STACK
-        ARGFRAME PSTACK, 0, STACK
-        ARGFRAME XSTACK, 11, STACK
-        ARGFRAME IOVERLAY, 0, STATIC
-        ARGFRAME DOVERLAY, 0, STATIC
-        FUNCALL SPIMgr_ProcessZToolData, osal_msg_allocate
-        LOCFRAME ISTACK, 0, STACK
-        LOCFRAME PSTACK, 0, STACK
-        LOCFRAME XSTACK, 11, STACK
-        LOCFRAME IOVERLAY, 0, STATIC
-        LOCFRAME DOVERLAY, 0, STATIC
-        ARGFRAME ISTACK, 0, STACK
-        ARGFRAME PSTACK, 0, STACK
-        ARGFRAME XSTACK, 11, STACK
-        ARGFRAME IOVERLAY, 0, STATIC
-        ARGFRAME DOVERLAY, 0, STATIC
-        FUNCALL SPIMgr_ProcessZToolData, SPIMgr_CalcFCS
-        LOCFRAME ISTACK, 0, STACK
-        LOCFRAME PSTACK, 0, STACK
-        LOCFRAME XSTACK, 11, STACK
-        LOCFRAME IOVERLAY, 0, STATIC
-        LOCFRAME DOVERLAY, 0, STATIC
-        ARGFRAME ISTACK, 0, STACK
-        ARGFRAME PSTACK, 0, STACK
-        ARGFRAME XSTACK, 11, STACK
-        ARGFRAME IOVERLAY, 0, STATIC
-        ARGFRAME DOVERLAY, 0, STATIC
-        FUNCALL SPIMgr_ProcessZToolData, osal_msg_send
-        LOCFRAME ISTACK, 0, STACK
-        LOCFRAME PSTACK, 0, STACK
-        LOCFRAME XSTACK, 11, STACK
-        LOCFRAME IOVERLAY, 0, STATIC
-        LOCFRAME DOVERLAY, 0, STATIC
-        ARGFRAME ISTACK, 0, STACK
-        ARGFRAME PSTACK, 0, STACK
-        ARGFRAME XSTACK, 11, STACK
-        ARGFRAME IOVERLAY, 0, STATIC
-        ARGFRAME DOVERLAY, 0, STATIC
-        FUNCALL SPIMgr_ProcessZToolData, osal_msg_deallocate
-        LOCFRAME ISTACK, 0, STACK
-        LOCFRAME PSTACK, 0, STACK
-        LOCFRAME XSTACK, 11, STACK
-        LOCFRAME IOVERLAY, 0, STATIC
-        LOCFRAME DOVERLAY, 0, STATIC
-        ARGFRAME ISTACK, 0, STACK
-        ARGFRAME PSTACK, 0, STACK
-        ARGFRAME XSTACK, 11, STACK
-        ARGFRAME IOVERLAY, 0, STATIC
-        ARGFRAME DOVERLAY, 0, STATIC
-        MOV     A,#-0xa
-        LCALL   ?BANKED_ENTER_XDATA
-        CFI DPH0 load(1, XDATA, add(CFA_XSP16, literal(-1)))
-        CFI DPL0 load(1, XDATA, add(CFA_XSP16, literal(-2)))
-        CFI ?BRET_EXT load(1, XDATA, add(CFA_XSP16, literal(-3)))
-        CFI ?RET_HIGH load(1, XDATA, add(CFA_XSP16, literal(-4)))
-        CFI ?RET_LOW load(1, XDATA, add(CFA_XSP16, literal(-5)))
-        CFI R7 load(1, XDATA, add(CFA_XSP16, literal(-6)))
-        CFI V1 load(1, XDATA, add(CFA_XSP16, literal(-7)))
-        CFI V0 load(1, XDATA, add(CFA_XSP16, literal(-8)))
-        CFI VB load(1, XDATA, add(CFA_XSP16, literal(-9)))
-        CFI R6 load(1, XDATA, add(CFA_XSP16, literal(-10)))
-        CFI CFA_SP SP+0
-        CFI CFA_XSP16 add(XSP16, 10)
-        ; Saved register size: 10
-        ; Auto size: 1
-        MOV     A,#-0x1
-        LCALL   ?ALLOC_XSTACK8
-        CFI CFA_XSP16 add(XSP16, 11)
-        MOV     A,R2
-        MOV     R6,A
-//  210   uint8  ch;
-//  211 
-//  212   /* Verify events */
-//  213   if (event == HAL_UART_TX_FULL)
-        MOV     A,#0x8
-        XRL     A,R6
-        JNZ     $+5
-        LJMP    ??SPIMgr_ProcessZToolData_0 & 0xFFFF
-//  214   {
-//  215     // Do something when TX if full
-//  216     return;
-//  217   }
-//  218 
-//  219   if (event & (HAL_UART_RX_FULL | HAL_UART_RX_ABOUT_FULL | HAL_UART_RX_TIMEOUT))
-        MOV     A,#0x7
-        ANL     A,R6
-        JNZ     $+5
-        LJMP    ??SPIMgr_ProcessZToolData_0 & 0xFFFF
-//  220   {
-//  221     while (Hal_UART_RxBufLen(SPI_MGR_DEFAULT_PORT))
-??SPIMgr_ProcessZToolData_1:
-        ; Setup parameters for call to function Hal_UART_RxBufLen
-        MOV     R1,#0x0
-        LCALL   ??Hal_UART_RxBufLen?relay
-        MOV     ?V0 + 0,R2
-        MOV     ?V0 + 1,R3
-        MOV     A,#0x0
-        XRL     A,?V0 + 0
-        JNZ     ??SPIMgr_ProcessZToolData_2
-        MOV     A,#0x0
-        XRL     A,?V0 + 1
-??SPIMgr_ProcessZToolData_2:
-        JNZ     $+5
-        LJMP    ??SPIMgr_ProcessZToolData_0 & 0xFFFF
-//  222     {
-//  223       HalUARTRead (SPI_MGR_DEFAULT_PORT, &ch, 1);
-        ; Setup parameters for call to function HalUARTRead
-        MOV     R4,#0x1
-        MOV     R5,#0x0
-        MOV     DPL,?XSP + 0
-        MOV     DPH,?XSP + 1
-        MOV     R2,DPL
-        MOV     R3,DPH
-        MOV     R1,#0x0
-        LCALL   ??HalUARTRead?relay
-//  224 
-//  225       switch (state)
-        MOV     DPTR,#state
-        MOVX    A,@DPTR
-        LCALL   ?UC_SWITCH_DENSE
-`?<Jumptable for SPIMgr_ProcessZToolData>_0`:
-        DATA
-        DB        0
-        DB        5
-        DW        ??SPIMgr_ProcessZToolData_1
-        DW        ??SPIMgr_ProcessZToolData_3
-        DW        ??SPIMgr_ProcessZToolData_4
-        DW        ??SPIMgr_ProcessZToolData_5
-        DW        ??SPIMgr_ProcessZToolData_6
-        DW        ??SPIMgr_ProcessZToolData_7
-        DW        ??SPIMgr_ProcessZToolData_8
-        CODE
-//  226       {
-//  227         case SOP_STATE:
-//  228           if (ch == SOP_VALUE)
-??SPIMgr_ProcessZToolData_3:
-        MOV     DPL,?XSP + 0
-        MOV     DPH,?XSP + 1
-        MOVX    A,@DPTR
-        XRL     A,#0x2
-        JNZ     ??SPIMgr_ProcessZToolData_1
-//  229             state = CMD_STATE1;
-        MOV     A,#0x1
-        MOV     DPTR,#state
-        MOVX    @DPTR,A
-        SJMP    ??SPIMgr_ProcessZToolData_1
-//  230           break;
-//  231 
-//  232         case CMD_STATE1:
-//  233           CMD_Token[0] = ch;
-??SPIMgr_ProcessZToolData_4:
-        MOV     DPL,?XSP + 0
-        MOV     DPH,?XSP + 1
-        MOVX    A,@DPTR
-        MOV     DPTR,#CMD_Token
-        MOVX    @DPTR,A
-//  234           state = CMD_STATE2;
-        MOV     A,#0x2
-        MOV     DPTR,#state
-        MOVX    @DPTR,A
-        SJMP    ??SPIMgr_ProcessZToolData_1
-//  235           break;
-//  236 
-//  237         case CMD_STATE2:
-//  238           CMD_Token[1] = ch;
-??SPIMgr_ProcessZToolData_5:
-        MOV     DPL,?XSP + 0
-        MOV     DPH,?XSP + 1
-        MOVX    A,@DPTR
-        MOV     DPTR,#(CMD_Token + 1)
-        MOVX    @DPTR,A
-//  239           state = LEN_STATE;
-        MOV     A,#0x3
-        MOV     DPTR,#state
-        MOVX    @DPTR,A
-        SJMP    ??SPIMgr_ProcessZToolData_1
-//  240           break;
-//  241 
-//  242         case LEN_STATE:
-//  243           LEN_Token = ch;
-??SPIMgr_ProcessZToolData_6:
-        MOV     DPL,?XSP + 0
-        MOV     DPH,?XSP + 1
-        MOVX    A,@DPTR
-        MOV     DPTR,#LEN_Token
-        MOVX    @DPTR,A
-//  244           if (ch == 0)
-        MOV     DPL,?XSP + 0
-        MOV     DPH,?XSP + 1
-        MOVX    A,@DPTR
-        JNZ     ??SPIMgr_ProcessZToolData_9
-//  245             state = FCS_STATE;
-        MOV     A,#0x5
-        MOV     DPTR,#state
-        MOVX    @DPTR,A
-        SJMP    ??SPIMgr_ProcessZToolData_10
-//  246           else
-//  247             state = DATA_STATE;
-??SPIMgr_ProcessZToolData_9:
-        MOV     A,#0x4
-        MOV     DPTR,#state
-        MOVX    @DPTR,A
-//  248 
-//  249           tempDataLen = 0;
-??SPIMgr_ProcessZToolData_10:
-        MOV     A,#0x0
-        MOV     DPTR,#tempDataLen
-        MOVX    @DPTR,A
-//  250 
-//  251           /* Allocate memory for the data */
-//  252           SPI_Msg = (mtOSALSerialData_t *)osal_msg_allocate( sizeof ( mtOSALSerialData_t ) + 2+1+LEN_Token );
-        ; Setup parameters for call to function osal_msg_allocate
-        MOV     DPTR,#LEN_Token
-        MOVX    A,@DPTR
-        MOV     R0,A
-        MOV     R1,#0x0
-        MOV     A,#0x7
-        ADD     A,R0
-        MOV     R2,A
-        MOV     A,#0x0
-        ADDC    A,R1
-        MOV     R3,A
-        LCALL   ??osal_msg_allocate?relay
-        MOV     DPTR,#SPI_Msg
-        MOV     A,R2
-        MOVX    @DPTR,A
-        INC     DPTR
-        MOV     A,R3
-        MOVX    @DPTR,A
-//  253 
-//  254           if (SPI_Msg)
-        MOV     DPTR,#SPI_Msg
-        MOVX    A,@DPTR
-        XRL     A,#0x0
-        JNZ     ??SPIMgr_ProcessZToolData_11
-        INC     DPTR
-        MOVX    A,@DPTR
-        XRL     A,#0x0
-??SPIMgr_ProcessZToolData_11:
-        JNZ     $+5
-        LJMP    ??SPIMgr_ProcessZToolData_12 & 0xFFFF
-//  255           {
-//  256             /* Fill up what we can */
-//  257             SPI_Msg->hdr.event = CMD_SERIAL_MSG;
-        MOV     A,#0x1
-        PUSH    A
-        CFI CFA_SP SP+-1
-        MOV     DPTR,#SPI_Msg
-        MOVX    A,@DPTR
-        MOV     R0,A
-        INC     DPTR
-        MOVX    A,@DPTR
-        MOV     DPH,A
-        MOV     DPL,R0
-        POP     A
-        CFI CFA_SP SP+0
-        MOVX    @DPTR,A
-//  258             SPI_Msg->msg = (uint8*)(SPI_Msg+1);
-        MOV     DPTR,#SPI_Msg
-        MOVX    A,@DPTR
-        ADD     A,#0x4
-        MOV     R0,A
-        INC     DPTR
-        MOVX    A,@DPTR
-        ADDC    A,#0x0
-        MOV     R1,A
-        MOV     DPTR,#SPI_Msg
-        MOVX    A,@DPTR
-        MOV     R2,A
-        INC     DPTR
-        MOVX    A,@DPTR
-        MOV     DPH,A
-        MOV     DPL,R2
-        INC     DPTR
-        INC     DPTR
-        MOV     A,R0
-        MOVX    @DPTR,A
-        INC     DPTR
-        MOV     A,R1
-        MOVX    @DPTR,A
-//  259             SPI_Msg->msg[0] = CMD_Token[0];
-        MOV     DPTR,#CMD_Token
-        MOVX    A,@DPTR
-        PUSH    A
-        CFI CFA_SP SP+-1
-        MOV     DPTR,#SPI_Msg
-        MOVX    A,@DPTR
-        MOV     R0,A
-        INC     DPTR
-        MOVX    A,@DPTR
-        MOV     DPH,A
-        MOV     DPL,R0
-        INC     DPTR
-        INC     DPTR
-        MOVX    A,@DPTR
-        MOV     R0,A
-        INC     DPTR
-        MOVX    A,@DPTR
-        MOV     DPH,A
-        MOV     DPL,R0
-        POP     A
-        CFI CFA_SP SP+0
-        MOVX    @DPTR,A
-//  260             SPI_Msg->msg[1] = CMD_Token[1];
-        MOV     DPTR,#(CMD_Token + 1)
-        MOVX    A,@DPTR
-        PUSH    A
-        CFI CFA_SP SP+-1
-        MOV     DPTR,#SPI_Msg
-        MOVX    A,@DPTR
-        MOV     R0,A
-        INC     DPTR
-        MOVX    A,@DPTR
-        MOV     DPH,A
-        MOV     DPL,R0
-        INC     DPTR
-        INC     DPTR
-        MOVX    A,@DPTR
-        MOV     R0,A
-        INC     DPTR
-        MOVX    A,@DPTR
-        MOV     DPH,A
-        MOV     DPL,R0
-        INC     DPTR
-        POP     A
-        CFI CFA_SP SP+0
-        MOVX    @DPTR,A
-//  261             SPI_Msg->msg[2] = LEN_Token;
-        MOV     DPTR,#LEN_Token
-        MOVX    A,@DPTR
-        PUSH    A
-        CFI CFA_SP SP+-1
-        MOV     DPTR,#SPI_Msg
-        MOVX    A,@DPTR
-        MOV     R0,A
-        INC     DPTR
-        MOVX    A,@DPTR
-        MOV     DPH,A
-        MOV     DPL,R0
-        INC     DPTR
-        INC     DPTR
-        MOVX    A,@DPTR
-        MOV     R0,A
-        INC     DPTR
-        MOVX    A,@DPTR
-        MOV     DPH,A
-        MOV     DPL,R0
-        INC     DPTR
-        INC     DPTR
-        POP     A
-        CFI CFA_SP SP+0
-        MOVX    @DPTR,A
-        LJMP    ??SPIMgr_ProcessZToolData_1 & 0xFFFF
-//  262           }
-//  263           else
-//  264           {
-//  265             state = SOP_STATE;
-??SPIMgr_ProcessZToolData_12:
-        MOV     A,#0x0
-        MOV     DPTR,#state
-        MOVX    @DPTR,A
-//  266             return;
-        LJMP    ??SPIMgr_ProcessZToolData_0 & 0xFFFF
-//  267           }
-//  268 
-//  269           break;
-//  270 
-//  271         case DATA_STATE:
-//  272             SPI_Msg->msg[3 + tempDataLen++] = ch;
-??SPIMgr_ProcessZToolData_7:
-        MOV     DPL,?XSP + 0
-        MOV     DPH,?XSP + 1
-        MOVX    A,@DPTR
-        PUSH    A
-        CFI CFA_SP SP+-1
-        MOV     DPTR,#tempDataLen
-        MOVX    A,@DPTR
-        MOV     R0,A
-        MOV     R1,#0x0
-        MOV     DPTR,#SPI_Msg
-        MOVX    A,@DPTR
-        MOV     R2,A
-        INC     DPTR
-        MOVX    A,@DPTR
-        MOV     DPH,A
-        MOV     DPL,R2
-        INC     DPTR
-        INC     DPTR
-        MOVX    A,@DPTR
-        ADD     A,R0
-        MOV     R2,A
-        INC     DPTR
-        MOVX    A,@DPTR
-        ADDC    A,R1
-        MOV     DPL,R2
-        MOV     DPH,A
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        POP     A
-        CFI CFA_SP SP+0
-        MOVX    @DPTR,A
-        MOV     DPTR,#tempDataLen
-        MOVX    A,@DPTR
-        ADD     A,#0x1
-        MOVX    @DPTR,A
-//  273             if ( tempDataLen == LEN_Token )
-        MOV     DPTR,#tempDataLen
-        MOVX    A,@DPTR
-        MOV     R2,A
-        MOV     DPTR,#LEN_Token
-        MOVX    A,@DPTR
-        XRL     A,R2
-        JZ      $+5
-        LJMP    ??SPIMgr_ProcessZToolData_1 & 0xFFFF
-//  274               state = FCS_STATE;
-        MOV     A,#0x5
-        MOV     DPTR,#state
-        MOVX    @DPTR,A
-        LJMP    ??SPIMgr_ProcessZToolData_1 & 0xFFFF
-//  275           break;
-//  276 
-//  277         case FCS_STATE:
-//  278 
-//  279           FSC_Token = ch;
-??SPIMgr_ProcessZToolData_8:
-        MOV     DPL,?XSP + 0
-        MOV     DPH,?XSP + 1
-        MOVX    A,@DPTR
-        MOV     DPTR,#FSC_Token
-        MOVX    @DPTR,A
-//  280 
-//  281           /* Make sure it's correct */
-//  282           if ((SPIMgr_CalcFCS ((uint8*)&SPI_Msg->msg[0], 2 + 1 + LEN_Token) == FSC_Token))
-        ; Setup parameters for call to function SPIMgr_CalcFCS
-        MOV     DPTR,#LEN_Token
-        MOVX    A,@DPTR
-        ADD     A,#0x3
-        MOV     R1,A
-        MOV     DPTR,#SPI_Msg
-        MOVX    A,@DPTR
-        MOV     R0,A
-        INC     DPTR
-        MOVX    A,@DPTR
-        MOV     DPH,A
-        MOV     DPL,R0
-        INC     DPTR
-        INC     DPTR
-        MOVX    A,@DPTR
-        MOV     R2,A
-        INC     DPTR
-        MOVX    A,@DPTR
-        MOV     R3,A
-        LCALL   ??SPIMgr_CalcFCS?relay
-        MOV     A,R1
-        MOV     R2,A
-        MOV     DPTR,#FSC_Token
-        MOVX    A,@DPTR
-        XRL     A,R2
-        JNZ     ??SPIMgr_ProcessZToolData_13
-//  283           {
-//  284             osal_msg_send( MT_TaskID, (byte *)SPI_Msg );
-        ; Setup parameters for call to function osal_msg_send
-        MOV     DPTR,#SPI_Msg
-        MOVX    A,@DPTR
-        MOV     R2,A
-        INC     DPTR
-        MOVX    A,@DPTR
-        MOV     R3,A
-        MOV     DPTR,#MT_TaskID
-        MOVX    A,@DPTR
-        MOV     R1,A
-        LCALL   ??osal_msg_send?relay
-        SJMP    ??SPIMgr_ProcessZToolData_14
-//  285           }
-//  286           else
-//  287           {
-//  288             /* deallocate the msg */
-//  289             osal_msg_deallocate ( (uint8 *)SPI_Msg);
-??SPIMgr_ProcessZToolData_13:
-        ; Setup parameters for call to function osal_msg_deallocate
-        MOV     DPTR,#SPI_Msg
-        MOVX    A,@DPTR
-        MOV     R2,A
-        INC     DPTR
-        MOVX    A,@DPTR
-        MOV     R3,A
-        LCALL   ??osal_msg_deallocate?relay
-//  290           }
-//  291 
-//  292           /* Reset the state, send or discard the buffers at this point */
-//  293           state = SOP_STATE;
-??SPIMgr_ProcessZToolData_14:
-        MOV     A,#0x0
-        MOV     DPTR,#state
-        MOVX    @DPTR,A
-        LJMP    ??SPIMgr_ProcessZToolData_1 & 0xFFFF
-//  294 
-//  295           break;
-//  296 
-//  297         default:
-//  298          break;
-//  299       }
-//  300 
-//  301 
-//  302     }
-//  303   }
-??SPIMgr_ProcessZToolData_0:
-        MOV     A,#0x1
-        LCALL   ?DEALLOC_XSTACK8
-        CFI CFA_XSP16 add(XSP16, 10)
-        MOV     R7,#0x2
-        LJMP    ?BANKED_LEAVE_XDATA
-        CFI EndBlock cfiBlock3
-//  304 }
 
         RSEG BANK_RELAYS:CODE:REORDER:NOROOT(0)
 ??SPIMgr_Init?relay:
@@ -1334,13 +640,122 @@ SPIMgr_ProcessZToolData:
         DATA
         DC24    SPIMgr_CalcFCS
 
-        RSEG BANK_RELAYS:CODE:REORDER:NOROOT(0)
-??SPIMgr_ProcessZToolData?relay:
-        LCALL   ?BDISPATCH
-        DATA
-        DC24    SPIMgr_ProcessZToolData
-
         END
+//  190 
+//  191 
+//  192 #if defined (ZTOOL_P1) || defined (ZTOOL_P2)
+//  193 /***************************************************************************************************
+//  194  * @fn      SPIMgr_ProcessZToolRxData
+//  195  *
+//  196  * @brief   | SOP | CMD  |   Data Length   | FSC  |
+//  197  *          |  1  |  2   |       1         |  1   |
+//  198  *
+//  199  *          Parses the data and determine either is SPI or just simply serial data
+//  200  *          then send the data to correct place (MT or APP)
+//  201  *
+//  202  * @param   pBuffer  - pointer to the buffer that contains the data
+//  203  *          length   - length of the buffer
+//  204  *
+//  205  *
+//  206  * @return  None
+//  207  ***************************************************************************************************/
+//  208 void SPIMgr_ProcessZToolData ( uint8 port, uint8 event )
+//  209 {
+//  210   uint8  ch;
+//  211 
+//  212   /* Verify events */
+//  213   if (event == HAL_UART_TX_FULL)
+//  214   {
+//  215     // Do something when TX if full
+//  216     return;
+//  217   }
+//  218 
+//  219   if (event & (HAL_UART_RX_FULL | HAL_UART_RX_ABOUT_FULL | HAL_UART_RX_TIMEOUT))
+//  220   {
+//  221     while (Hal_UART_RxBufLen(SPI_MGR_DEFAULT_PORT))
+//  222     {
+//  223       HalUARTRead (SPI_MGR_DEFAULT_PORT, &ch, 1);
+//  224 
+//  225       switch (state)
+//  226       {
+//  227         case SOP_STATE:
+//  228           if (ch == SOP_VALUE)
+//  229             state = CMD_STATE1;
+//  230           break;
+//  231 
+//  232         case CMD_STATE1:
+//  233           CMD_Token[0] = ch;
+//  234           state = CMD_STATE2;
+//  235           break;
+//  236 
+//  237         case CMD_STATE2:
+//  238           CMD_Token[1] = ch;
+//  239           state = LEN_STATE;
+//  240           break;
+//  241 
+//  242         case LEN_STATE:
+//  243           LEN_Token = ch;
+//  244           if (ch == 0)
+//  245             state = FCS_STATE;
+//  246           else
+//  247             state = DATA_STATE;
+//  248 
+//  249           tempDataLen = 0;
+//  250 
+//  251           /* Allocate memory for the data */
+//  252           SPI_Msg = (mtOSALSerialData_t *)osal_msg_allocate( sizeof ( mtOSALSerialData_t ) + 2+1+LEN_Token );
+//  253 
+//  254           if (SPI_Msg)
+//  255           {
+//  256             /* Fill up what we can */
+//  257             SPI_Msg->hdr.event = CMD_SERIAL_MSG;
+//  258             SPI_Msg->msg = (uint8*)(SPI_Msg+1);
+//  259             SPI_Msg->msg[0] = CMD_Token[0];
+//  260             SPI_Msg->msg[1] = CMD_Token[1];
+//  261             SPI_Msg->msg[2] = LEN_Token;
+//  262           }
+//  263           else
+//  264           {
+//  265             state = SOP_STATE;
+//  266             return;
+//  267           }
+//  268 
+//  269           break;
+//  270 
+//  271         case DATA_STATE:
+//  272             SPI_Msg->msg[3 + tempDataLen++] = ch;
+//  273             if ( tempDataLen == LEN_Token )
+//  274               state = FCS_STATE;
+//  275           break;
+//  276 
+//  277         case FCS_STATE:
+//  278 
+//  279           FSC_Token = ch;
+//  280 
+//  281           /* Make sure it's correct */
+//  282           if ((SPIMgr_CalcFCS ((uint8*)&SPI_Msg->msg[0], 2 + 1 + LEN_Token) == FSC_Token))
+//  283           {
+//  284             osal_msg_send( MT_TaskID, (byte *)SPI_Msg );
+//  285           }
+//  286           else
+//  287           {
+//  288             /* deallocate the msg */
+//  289             osal_msg_deallocate ( (uint8 *)SPI_Msg);
+//  290           }
+//  291 
+//  292           /* Reset the state, send or discard the buffers at this point */
+//  293           state = SOP_STATE;
+//  294 
+//  295           break;
+//  296 
+//  297         default:
+//  298          break;
+//  299       }
+//  300 
+//  301 
+//  302     }
+//  303   }
+//  304 }
 //  305 #endif //ZTOOL
 //  306 
 //  307 #if defined (ZAPP_P1) || defined (ZAPP_P2)
@@ -1468,12 +883,12 @@ SPIMgr_ProcessZToolData:
 //  429 /***************************************************************************************************
 //  430 ***************************************************************************************************/
 // 
-// 763 bytes in segment BANKED_CODE
-//  24 bytes in segment BANK_RELAYS
-//   9 bytes in segment XDATA_Z
+// 189 bytes in segment BANKED_CODE
+//  18 bytes in segment BANK_RELAYS
+//   1 byte  in segment XDATA_Z
 // 
-// 787 bytes of CODE  memory
-//   9 bytes of XDATA memory
+// 207 bytes of CODE  memory
+//   1 byte  of XDATA memory
 //
 //Errors: none
 //Warnings: none

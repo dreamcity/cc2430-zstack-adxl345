@@ -1,6 +1,6 @@
 ###############################################################################
 #                                                                             #
-# IAR 8051 C/C++ Compiler V7.30B/W32                    28/Dec/2012  19:53:59 #
+# IAR 8051 C/C++ Compiler V7.30B/W32                    03/Jan/2013  20:31:32 #
 # Copyright 2004-2007 IAR Systems. All rights reserved.                       #
 #                                                                             #
 #    Core               =  plain                                              #
@@ -39,9 +39,9 @@
 #                          -DREJOIN_POLL_RATE=440 "C:\Texas                   #
 #                          Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\ZMa #
 #                          in\TI2430DB\OnBoard.c" -D CC2430EB -D AXD_END -D   #
-#                          NWK_AUTO_POLL -D REFLECTOR -D ZTOOL_P1 -D MT_TASK  #
-#                          -D xMT_ZDO_FUNC -D LCD_SUPPORTED=DEBUG -D          #
-#                          xPOWER_SAVING -lC "C:\Texas                        #
+#                          NWK_AUTO_POLL -D REFLECTOR -D xZTOOL_P1 -D         #
+#                          xMT_TASK -D xMT_ZDO_FUNC -D xLCD_SUPPORTED=DEBUG   #
+#                          -D xPOWER_SAVING -lC "C:\Texas                     #
 #                          Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\Sam #
 #                          ples\AXDApp\CC2430DB\EndDeviceEB\List\" -lA        #
 #                          "C:\Texas Instruments\ZStack-1.4.3-1.2.1\Projects\ #
@@ -331,36 +331,34 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\ZMain\TI2430DB\OnBoard.c
    \   000035   12....       LCALL   ??HalTimerConfig?relay
    \   000038   7402         MOV     A,#0x2
    \   00003A   12....       LCALL   ?DEALLOC_XSTACK8
-   \   00003D   8015         SJMP    ??InitBoard_1
+   \   00003D   8012         SJMP    ??InitBoard_1
     139          
     140            }
     141            else  // !OB_COLD
     142            {
     143          #ifdef ZTOOL_PORT
     144              MT_IndReset();
-   \                     ??InitBoard_0:
-   \   00003F                ; Setup parameters for call to function MT_IndReset
-   \   00003F   12....       LCALL   ??MT_IndReset?relay
     145          #endif
     146          
     147               /* Initialize Key stuff */
     148              OnboardKeyIntEnable = HAL_KEY_INTERRUPT_DISABLE;
-   \   000042   7400         MOV     A,#0x0
-   \   000044   90....       MOV     DPTR,#OnboardKeyIntEnable
-   \   000047   F0           MOVX    @DPTR,A
+   \                     ??InitBoard_0:
+   \   00003F   7400         MOV     A,#0x0
+   \   000041   90....       MOV     DPTR,#OnboardKeyIntEnable
+   \   000044   F0           MOVX    @DPTR,A
     149              HalKeyConfig( OnboardKeyIntEnable, OnBoard_KeyCallback);
-   \   000048                ; Setup parameters for call to function HalKeyConfig
-   \   000048   7A..         MOV     R2,#(??OnBoard_KeyCallback?relay & 0xff)
-   \   00004A   7B..         MOV     R3,#((??OnBoard_KeyCallback?relay >> 8) & 0xff)
-   \   00004C   90....       MOV     DPTR,#OnboardKeyIntEnable
-   \   00004F   E0           MOVX    A,@DPTR
-   \   000050   F9           MOV     R1,A
-   \   000051   12....       LCALL   ??HalKeyConfig?relay
+   \   000045                ; Setup parameters for call to function HalKeyConfig
+   \   000045   7A..         MOV     R2,#(??OnBoard_KeyCallback?relay & 0xff)
+   \   000047   7B..         MOV     R3,#((??OnBoard_KeyCallback?relay >> 8) & 0xff)
+   \   000049   90....       MOV     DPTR,#OnboardKeyIntEnable
+   \   00004C   E0           MOVX    A,@DPTR
+   \   00004D   F9           MOV     R1,A
+   \   00004E   12....       LCALL   ??HalKeyConfig?relay
     150            }
     151          }
    \                     ??InitBoard_1:
-   \   000054   7F02         MOV     R7,#0x2
-   \   000056   02....       LJMP    ?BANKED_LEAVE_XDATA
+   \   000051   7F02         MOV     R7,#0x2
+   \   000053   02....       LJMP    ?BANKED_LEAVE_XDATA
     152          
     153          /*********************************************************************
     154           * @fn      ChkReset()
@@ -1294,7 +1292,6 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\ZMain\TI2430DB\OnBoard.c
        -> HalLedSet              0      0     20
        -> ChkReset               0      0     20
        -> HalTimerConfig         0      0     24
-       -> MT_IndReset            0      0     20
        -> HalKeyConfig           0      0     20
      OnBoard_KeyCallback         0      0      9
        -> OnBoard_SendKeys       0      0     18
@@ -1322,7 +1319,7 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\ZMain\TI2430DB\OnBoard.c
      OnboardTimerIntEnable             1
      aExtendedAddress                  8
      registeredKeysTaskID              1
-     InitBoard                        89
+     InitBoard                        86
      ChkReset                         87
      RegisterForKeys                  32
      OnBoard_SendKeys                 91
@@ -1356,14 +1353,14 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\ZMain\TI2430DB\OnBoard.c
      ??GetUserDipSw?relay              6
 
  
- 774 bytes in segment BANKED_CODE
+ 771 bytes in segment BANKED_CODE
   90 bytes in segment BANK_RELAYS
    2 bytes in segment SFR_AN
    1 byte  in segment XDATA_I
    1 byte  in segment XDATA_ID
   10 bytes in segment XDATA_Z
  
- 865 bytes of CODE  memory
+ 862 bytes of CODE  memory
    0 bytes of DATA  memory (+ 2 bytes shared)
   11 bytes of XDATA memory
 

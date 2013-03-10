@@ -1,6 +1,6 @@
 ###############################################################################
 #                                                                             #
-# IAR 8051 C/C++ Compiler V7.30B/W32                    19/Dec/2012  20:32:01 #
+# IAR 8051 C/C++ Compiler V7.30B/W32                    06/Jan/2013  20:02:36 #
 # Copyright 2004-2007 IAR Systems. All rights reserved.                       #
 #                                                                             #
 #    Core               =  plain                                              #
@@ -40,13 +40,13 @@
 #                          -DREJOIN_POLL_RATE=440 "C:\Texas                   #
 #                          Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\Sam #
 #                          ples\AXDApp\Source\ReadAXD.c" -D CC2430EB -D       #
-#                          REFLECTOR -D ZTOOL_P1 -D MT_TASK -D MT_ZDO_FUNC    #
-#                          -D LCD_SUPPORTED=DEBUG -lC "C:\Texas               #
-#                          Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\Sam #
-#                          ples\AXDApp\CC2430DB\RouterEB\List\" -lA           #
+#                          AXD_ROUTER -D REFLECTOR -D ZTOOL_P1 -D MT_TASK -D  #
+#                          xMT_ZDO_FUNC -D xLCD_SUPPORTED=DEBUG -lC           #
 #                          "C:\Texas Instruments\ZStack-1.4.3-1.2.1\Projects\ #
 #                          zstack\Samples\AXDApp\CC2430DB\RouterEB\List\"     #
-#                          --diag_suppress Pe001,Pa010 --diag_remark pe550    #
+#                          -lA "C:\Texas Instruments\ZStack-1.4.3-1.2.1\Proje #
+#                          cts\zstack\Samples\AXDApp\CC2430DB\RouterEB\List\" #
+#                           --diag_suppress Pe001,Pa010 --diag_remark pe550   #
 #                          -o "C:\Texas Instruments\ZStack-1.4.3-1.2.1\Projec #
 #                          ts\zstack\Samples\AXDApp\CC2430DB\RouterEB\Obj\"   #
 #                          -e --require_prototypes -z9 --no_code_motion       #
@@ -136,85 +136,59 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\Samples\AXDApp\Source\Re
       9          //#include "SimpleApp.h"
      10          
      11          #include "readaxd.h"
-     12          
-     13          /*********************************************************************
-     14           * CONSTANTS
-     15           */
-     16          
-     17          // Application States
-     18          #define APP_INIT                           0    // Initial state
-     19          #define APP_START                          1    // Sensor has joined network
-     20          #define APP_BOUND                          2    // Sensor is bound to collector
-     21          
-     22          // Application osal event identifiers
-     23          // Bit mask of events ( from 0x0000 to 0x00FF )
-     24          #define MY_START_EVT                0x0001
-     25          #define MY_REPORT_TEMP_EVT          0x0002
-     26          #define MY_REPORT_BATT_EVT          0x0004
-     27          #define MY_FIND_COLLECTOR_EVT       0x0008
+     12          #include "adxl345.h"
+     13          #include "AXD.h"
+     14          
+     15          /*********************************************************************
+     16           * CONSTANTS
+     17           */
+     18          
+     19          // Application States
+     20          #define APP_INIT                           0    // Initial state
+     21          #define APP_START                          1    // Sensor has joined network
+     22          #define APP_BOUND                          2    // Sensor is bound to collector
+     23          
+     24          // Application osal event identifiers
+     25          // Bit mask of events ( from 0x0000 to 0x00FF )
+     26          #define MY_START_EVT                0x0001
+     27          #define MY_REPORT_TEMP_EVT          0x0002
+     28          #define MY_REPORT_BATT_EVT          0x0004
+     29          #define MY_FIND_COLLECTOR_EVT       0x0008
 
    \                                 In  segment BANKED_CODE, align 1, keep-with-next
-     28          void zb_HandleOsalEvent( uint16 event )
+     30          void zb_HandleOsalEvent( uint16 event )
    \                     zb_HandleOsalEvent:
-     29          {
-   \   000000   C082         PUSH    DPL
-   \   000002   C083         PUSH    DPH
-   \   000004                ; Saved register size: 2
-   \   000004                ; Auto size: 0
-     30            HalLcdWriteString( "SampleApp", HAL_LCD_LINE_1 );
-   \   000004                ; Setup parameters for call to function HalLcdWriteString
-   \   000004   7900         MOV     R1,#0x0
-   \   000006   7A..         MOV     R2,#(`?<Constant "SampleApp">` & 0xff)
-   \   000008   7B..         MOV     R3,#((`?<Constant "SampleApp">` >> 8) & 0xff)
-   \   00000A   12....       LCALL   ??HalLcdWriteString?relay
-     31          }
-   \   00000D   D083         POP     DPH
-   \   00000F   D082         POP     DPL
-   \   000011   02....       LJMP    ?BRET
-
-   \                                 In  segment XDATA_ID, align 1, keep-with-next
-   \                     `?<Initializer for <Constant "SampleApp">>`:
-   \   000000   53616D70     DB "SampleApp"
-   \            6C654170
-   \            7000    
+     31          {
+   \   000000                ; Saved register size: 0
+   \   000000                ; Auto size: 0
+     32            
+     33          }
+   \   000000   02....       LJMP    ?BRET
 
    \                                 In  segment BANK_RELAYS, align 1
    \                     ??zb_HandleOsalEvent?relay:
    \   000000   12....       LCALL   ?BDISPATCH
    \   000003   ......       DC24    zb_HandleOsalEvent
 
-   \                                 In  segment XDATA_I, align 1, keep-with-next
-   \                     `?<Constant "SampleApp">`:
-   \   000000                DS 10
-   \   00000A                REQUIRE `?<Initializer for <Constant "SampleApp">>`
-   \   00000A                REQUIRE __INIT_XDATA_I
-
    Maximum stack usage in bytes:
 
-     Function               ISTACK PSTACK XSTACK
-     --------               ------ ------ ------
-     zb_HandleOsalEvent         2      0      0
-       -> HalLcdWriteString     4      0      0
+     Function           ISTACK PSTACK XSTACK
+     --------           ------ ------ ------
+     zb_HandleOsalEvent     0      0      0
 
 
    Segment part sizes:
 
-     Function/Label                 Bytes
-     --------------                 -----
-     zb_HandleOsalEvent               20
-     ?<Initializer for <Constant "SampleApp">>
-                                      10
-     ??zb_HandleOsalEvent?relay        6
-     ?<Constant "SampleApp">          10
+     Function/Label             Bytes
+     --------------             -----
+     zb_HandleOsalEvent            3
+     ??zb_HandleOsalEvent?relay    6
 
  
- 20 bytes in segment BANKED_CODE
-  6 bytes in segment BANK_RELAYS
- 10 bytes in segment XDATA_I
- 10 bytes in segment XDATA_ID
+ 3 bytes in segment BANKED_CODE
+ 6 bytes in segment BANK_RELAYS
  
- 36 bytes of CODE  memory
- 10 bytes of XDATA memory
+ 9 bytes of CODE memory
 
 Errors: none
 Warnings: none

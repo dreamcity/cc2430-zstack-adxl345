@@ -1,6 +1,6 @@
 ###############################################################################
 #                                                                             #
-# IAR 8051 C/C++ Compiler V7.30B/W32                    10/Mar/2013  13:00:18 #
+# IAR 8051 C/C++ Compiler V7.30B/W32                    10/Mar/2013  13:26:56 #
 # Copyright 2004-2007 IAR Systems. All rights reserved.                       #
 #                                                                             #
 #    Core               =  plain                                              #
@@ -40,9 +40,9 @@
 #                          -DREJOIN_POLL_RATE=440 "C:\Texas                   #
 #                          Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\ZMa #
 #                          in\TI2430DB\ZMain.c" -D CC2430EB -D AXD_END -D     #
-#                          NWK_AUTO_POLL -D REFLECTOR -D ZTOOL_P1 -D MT_TASK  #
-#                          -D xMT_ZDO_FUNC -D LCD_SUPPORTED=DEBUG -D          #
-#                          xPOWER_SAVING -lC "C:\Texas                        #
+#                          NWK_AUTO_POLL -D REFLECTOR -D xZTOOL_P1 -D         #
+#                          xMT_TASK -D xMT_ZDO_FUNC -D xLCD_SUPPORTED=DEBUG   #
+#                          -D xPOWER_SAVING -lC "C:\Texas                     #
 #                          Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\Sam #
 #                          ples\cc2430-zstack-adxl345\CC2430DB\EndDeviceEB\Li #
 #                          st\" -lA "C:\Texas Instruments\ZStack-1.4.3-1.2.1\ #
@@ -446,22 +446,20 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\ZMain\TI2430DB\ZMain.c
     201            /* Display the device info on the LCD */
     202          #ifdef LCD_SUPPORTED
     203            zmain_lcd_init();
-   \   000071                ; Setup parameters for call to function zmain_lcd_init
-   \   000071   12....       LCALL   zmain_lcd_init
     204          #endif
     205          
     206            osal_start_system(); // No Return from here
-   \   000074                ; Setup parameters for call to function osal_start_system
-   \   000074   12....       LCALL   ??osal_start_system?relay
+   \   000071                ; Setup parameters for call to function osal_start_system
+   \   000071   12....       LCALL   ??osal_start_system?relay
     207          } // main()
-   \   000077   7A00         MOV     R2,#0x0
-   \   000079   7B00         MOV     R3,#0x0
-   \   00007B   22           RET
-   \   00007C                REQUIRE P0INP
-   \   00007C                REQUIRE SLEEP
-   \   00007C                REQUIRE CLKCON
-   \   00007C                REQUIRE P1DIR
-   \   00007C                REQUIRE P2DIR
+   \   000074   7A00         MOV     R2,#0x0
+   \   000076   7B00         MOV     R3,#0x0
+   \   000078   22           RET
+   \   000079                REQUIRE P0INP
+   \   000079                REQUIRE SLEEP
+   \   000079                REQUIRE CLKCON
+   \   000079                REQUIRE P1DIR
+   \   000079                REQUIRE P2DIR
     208          
     209          /*********************************************************************
     210           * @fn      zmain_vdd_check
@@ -762,11 +760,27 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\ZMain\TI2430DB\ZMain.c
     299            // If no support for Z-Tool serial I/O,
     300            // Write temporary 64-bit address to NV
     301            osal_nv_write( ZCD_NV_EXTADDR, 0, Z_EXTADDR_LEN, &aExtendedAddress );
+   \   0000F2                ; Setup parameters for call to function osal_nv_write
+   \   0000F2   75....       MOV     ?V0 + 4,#(aExtendedAddress & 0xff)
+   \   0000F5   75....       MOV     ?V0 + 5,#((aExtendedAddress >> 8) & 0xff)
+   \   0000F8   78..         MOV     R0,#?V0 + 4
+   \   0000FA   12....       LCALL   ?PUSH_XSTACK_I_TWO
+   \   0000FD   75..08       MOV     ?V0 + 4,#0x8
+   \   000100   75..00       MOV     ?V0 + 5,#0x0
+   \   000103   78..         MOV     R0,#?V0 + 4
+   \   000105   12....       LCALL   ?PUSH_XSTACK_I_TWO
+   \   000108   7C00         MOV     R4,#0x0
+   \   00010A   7D00         MOV     R5,#0x0
+   \   00010C   7A01         MOV     R2,#0x1
+   \   00010E   7B00         MOV     R3,#0x0
+   \   000110   12....       LCALL   ??osal_nv_write?relay
+   \   000113   7404         MOV     A,#0x4
+   \   000115   12....       LCALL   ?DEALLOC_XSTACK8
     302          #endif
     303          }
    \                     ??zmain_ext_addr_2:
-   \   0000F2   7F07         MOV     R7,#0x7
-   \   0000F4   02....       LJMP    ?FUNC_LEAVE_XDATA
+   \   000118   7F07         MOV     R7,#0x7
+   \   00011A   02....       LJMP    ?FUNC_LEAVE_XDATA
     304          
     305          /*********************************************************************
     306           * @fn      zmain_dev_info
@@ -778,12 +792,8 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\ZMain\TI2430DB\ZMain.c
     310          static ZSEG void zmain_dev_info ( void )
    \                     zmain_dev_info:
     311          {
-   \   000000   74F5         MOV     A,#-0xb
-   \   000002   12....       LCALL   ?FUNC_ENTER_XDATA
-   \   000005                ; Saved register size: 11
-   \   000005                ; Auto size: 18
-   \   000005   74EE         MOV     A,#-0x12
-   \   000007   12....       LCALL   ?ALLOC_XSTACK8
+   \   000000                ; Saved register size: 0
+   \   000000                ; Auto size: 0
     312          #ifdef LCD_SUPPORTED
     313            uint8 i;
     314            uint8 ch;
@@ -792,121 +802,18 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\ZMain\TI2430DB\ZMain.c
     317          
     318            // Display the extended address
     319            xad = (uint8*)&aExtendedAddress + Z_EXTADDR_LEN - 1;
-   \   00000A   7E..         MOV     R6,#((aExtendedAddress + 7) & 0xff)
-   \   00000C   7F..         MOV     R7,#(((aExtendedAddress + 7) >> 8) & 0xff)
     320            for ( i = 0; i < Z_EXTADDR_LEN*2; xad-- ) {
-   \   00000E   75..00       MOV     ?V0 + 1,#0x0
-   \                     ??zmain_dev_info_0:
-   \   000011   E5..         MOV     A,?V0 + 1
-   \   000013   C3           CLR     C
-   \   000014   9410         SUBB    A,#0x10
-   \   000016   4003         JC      $+5
-   \   000018   02....       LJMP    ??zmain_dev_info_1
     321              ch = (*xad >> 4) & 0x0F;
-   \   00001B   8E82         MOV     DPL,R6
-   \   00001D   8F83         MOV     DPH,R7
-   \   00001F   E0           MOVX    A,@DPTR
-   \   000020   C4           SWAP    A
-   \   000021   540F         ANL     A,#0xf
-   \   000023   F5..         MOV     ?V0 + 0,A
     322              lcd_buf[i++] = ch + (( ch < 10 ) ? '0' : '7');
-   \   000025   85....       MOV     ?V0 + 2,?V0 + 1
-   \   000028   7401         MOV     A,#0x1
-   \   00002A   25..         ADD     A,?V0 + 2
-   \   00002C   F5..         MOV     ?V0 + 1,A
-   \   00002E   E5..         MOV     A,?V0 + 0
-   \   000030   C3           CLR     C
-   \   000031   940A         SUBB    A,#0xa
-   \   000033   5004         JNC     ??zmain_dev_info_2
-   \   000035   7830         MOV     R0,#0x30
-   \   000037   8002         SJMP    ??zmain_dev_info_3
-   \                     ??zmain_dev_info_2:
-   \   000039   7837         MOV     R0,#0x37
-   \                     ??zmain_dev_info_3:
-   \   00003B   E8           MOV     A,R0
-   \   00003C   25..         ADD     A,?V0 + 0
-   \   00003E   C0E0         PUSH    A
-   \   000040   75..00       MOV     ?V0 + 3,#0x0
-   \   000043   85..82       MOV     DPL,?XSP + 0
-   \   000046   85..83       MOV     DPH,?XSP + 1
-   \   000049   E582         MOV     A,DPL
-   \   00004B   25..         ADD     A,?V0 + 2
-   \   00004D   F582         MOV     DPL,A
-   \   00004F   E583         MOV     A,DPH
-   \   000051   35..         ADDC    A,?V0 + 3
-   \   000053   F583         MOV     DPH,A
-   \   000055   D0E0         POP     A
-   \   000057   F0           MOVX    @DPTR,A
     323              ch = *xad & 0x0F;
-   \   000058   8E82         MOV     DPL,R6
-   \   00005A   8F83         MOV     DPH,R7
-   \   00005C   E0           MOVX    A,@DPTR
-   \   00005D   540F         ANL     A,#0xf
-   \   00005F   F5..         MOV     ?V0 + 0,A
     324              lcd_buf[i++] = ch + (( ch < 10 ) ? '0' : '7');
-   \   000061   85....       MOV     ?V0 + 2,?V0 + 1
-   \   000064   7401         MOV     A,#0x1
-   \   000066   25..         ADD     A,?V0 + 2
-   \   000068   F5..         MOV     ?V0 + 1,A
-   \   00006A   E5..         MOV     A,?V0 + 0
-   \   00006C   C3           CLR     C
-   \   00006D   940A         SUBB    A,#0xa
-   \   00006F   5004         JNC     ??zmain_dev_info_4
-   \   000071   7830         MOV     R0,#0x30
-   \   000073   8002         SJMP    ??zmain_dev_info_5
-   \                     ??zmain_dev_info_4:
-   \   000075   7837         MOV     R0,#0x37
-   \                     ??zmain_dev_info_5:
-   \   000077   E8           MOV     A,R0
-   \   000078   25..         ADD     A,?V0 + 0
-   \   00007A   C0E0         PUSH    A
-   \   00007C   75..00       MOV     ?V0 + 3,#0x0
-   \   00007F   85..82       MOV     DPL,?XSP + 0
-   \   000082   85..83       MOV     DPH,?XSP + 1
-   \   000085   E582         MOV     A,DPL
-   \   000087   25..         ADD     A,?V0 + 2
-   \   000089   F582         MOV     DPL,A
-   \   00008B   E583         MOV     A,DPH
-   \   00008D   35..         ADDC    A,?V0 + 3
-   \   00008F   F583         MOV     DPH,A
-   \   000091   D0E0         POP     A
-   \   000093   F0           MOVX    @DPTR,A
     325            }
-   \   000094   EE           MOV     A,R6
-   \   000095   24FF         ADD     A,#-0x1
-   \   000097   FE           MOV     R6,A
-   \   000098   EF           MOV     A,R7
-   \   000099   34FF         ADDC    A,#-0x1
-   \   00009B   FF           MOV     R7,A
-   \   00009C   02....       LJMP    ??zmain_dev_info_0
     326            lcd_buf[Z_EXTADDR_LEN*2] = '\0';
-   \                     ??zmain_dev_info_1:
-   \   00009F   7400         MOV     A,#0x0
-   \   0000A1   C0E0         PUSH    A
-   \   0000A3   7410         MOV     A,#0x10
-   \   0000A5   12....       LCALL   ?XSTACK_DISP0_8
-   \   0000A8   D0E0         POP     A
-   \   0000AA   F0           MOVX    @DPTR,A
     327            HalLcdWriteString( "IEEE Address:", HAL_LCD_LINE_1 );
-   \   0000AB                ; Setup parameters for call to function HalLcdWriteString
-   \   0000AB   7900         MOV     R1,#0x0
-   \   0000AD   7A..         MOV     R2,#(`?<Constant "IEEE Address:">` & 0xff)
-   \   0000AF   7B..         MOV     R3,#((`?<Constant "IEEE Address:">` >> 8) & 0xff)
-   \   0000B1   12....       LCALL   ??HalLcdWriteString?relay
     328            HalLcdWriteString( (char*)lcd_buf, HAL_LCD_LINE_2 );
-   \   0000B4                ; Setup parameters for call to function HalLcdWriteString
-   \   0000B4   7902         MOV     R1,#0x2
-   \   0000B6   85..82       MOV     DPL,?XSP + 0
-   \   0000B9   85..83       MOV     DPH,?XSP + 1
-   \   0000BC   AA82         MOV     R2,DPL
-   \   0000BE   AB83         MOV     R3,DPH
-   \   0000C0   12....       LCALL   ??HalLcdWriteString?relay
     329          #endif // LCD
     330          }
-   \   0000C3   7412         MOV     A,#0x12
-   \   0000C5   12....       LCALL   ?DEALLOC_XSTACK8
-   \   0000C8   7F04         MOV     R7,#0x4
-   \   0000CA   02....       LJMP    ?FUNC_LEAVE_XDATA
+   \   000000   22           RET
     331          
     332          /*********************************************************************
     333           * @fn      zmain_ram_init
@@ -990,6 +897,8 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\ZMain\TI2430DB\ZMain.c
    \   00005A   7F02         MOV     R7,#0x2
    \   00005C   02....       LJMP    ?FUNC_LEAVE_XDATA
    \   00005F                REQUIRE `SP`
+
+   \                                 In  segment XSP, align 1
     353          
     354          #ifdef LCD_SUPPORTED
     355          /*********************************************************************
@@ -997,24 +906,12 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\ZMain\TI2430DB\ZMain.c
     357           * @brief   Initialize LCD at start up.
     358           * @return  none
     359           *********************************************************************/
-
-   \                                 In  segment NEAR_CODE, align 1, keep-with-next
     360          static ZSEG void zmain_lcd_init ( void )
-   \                     zmain_lcd_init:
     361          {
-   \   000000   C082         PUSH    DPL
-   \   000002   C083         PUSH    DPH
-   \   000004                ; Saved register size: 2
-   \   000004                ; Auto size: 0
     362          #ifdef LCD_SD
     363           // if ( LcdLine1 == NULL )
     364            {
     365              HalLcdWriteString( "Figure8 Wireless", HAL_LCD_LINE_1 );
-   \   000004                ; Setup parameters for call to function HalLcdWriteString
-   \   000004   7900         MOV     R1,#0x0
-   \   000006   7A..         MOV     R2,#(`?<Constant "Figure8 Wireless">` & 0xff)
-   \   000008   7B..         MOV     R3,#((`?<Constant "Figure8 Wireless">` >> 8) & 0xff)
-   \   00000A   12....       LCALL   ??HalLcdWriteString?relay
     366          
     367          #if defined( MT_MAC_FUNC )
     368          #if defined( ZDO_COORDINATOR )
@@ -1032,38 +929,6 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\ZMain\TI2430DB\ZMain.c
     380            }
     381          #endif // LCD_SD
     382          }
-   \   00000D   D083         POP     DPH
-   \   00000F   D082         POP     DPL
-   \   000011   22           RET
-
-   \                                 In  segment XDATA_ID, align 1, keep-with-next
-   \                     `?<Initializer for <Constant "IEEE Address:">>`:
-   \   000000   49454545     DB "IEEE Address:"
-   \            20416464
-   \            72657373
-   \            3A00    
-
-   \                                 In  segment XDATA_ID, align 1, keep-with-next
-   \                     `?<Initializer for <Constant "Figure8 Wireless"`:
-   \   000000   46696775     DB "Figure8 Wireless"
-   \            72653820
-   \            57697265
-   \            6C657373
-   \            00      
-
-   \                                 In  segment XSP, align 1
-
-   \                                 In  segment XDATA_I, align 1, keep-with-next
-   \                     `?<Constant "IEEE Address:">`:
-   \   000000                DS 14
-   \   00000E                REQUIRE `?<Initializer for <Constant "IEEE Address:">>`
-   \   00000E                REQUIRE __INIT_XDATA_I
-
-   \                                 In  segment XDATA_I, align 1, keep-with-next
-   \                     `?<Constant "Figure8 Wireless">`:
-   \   000000                DS 17
-   \   000011                REQUIRE `?<Initializer for <Constant "Figure8 Wireless"`
-   \   000011                REQUIRE __INIT_XDATA_I
     383          #endif
     384          
     385          /*********************************************************************
@@ -1088,11 +953,8 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\ZMain\TI2430DB\ZMain.c
        -> osal_int_enable       0      0      0
        -> InitBoard             0      0      0
        -> zmain_dev_info        0      0      0
-       -> zmain_lcd_init        0      0      0
        -> osal_start_system     0      0      0
-     zmain_dev_info             1      0     29
-       -> HalLcdWriteString     0      0     58
-       -> HalLcdWriteString     0      0     58
+     zmain_dev_info             0      0      0
      zmain_ext_addr             1      0     18
        -> osal_nv_item_init     0      0     32
        -> osal_nv_read          0      0     36
@@ -1102,8 +964,7 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\ZMain\TI2430DB\ZMain.c
        -> Onboard_wait          0      0     28
        -> HalLedSet             0      0     28
        -> HalAdcRead            0      0     28
-     zmain_lcd_init             2      0      0
-       -> HalLcdWriteString     4      0      0
+       -> osal_nv_write         0      0     36
      zmain_ram_init             1      0      9
      zmain_vdd_check            0      0      8
        -> HalAdcCheckVdd        0      0     16
@@ -1114,37 +975,27 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\ZMain\TI2430DB\ZMain.c
 
    Segment part sizes:
 
-     Function/Label                 Bytes
-     --------------                 -----
-     SP                                1
-     P0INP                             1
-     _A_P1                             1
-     SLEEP                             1
-     CLKCON                            1
-     P1DIR                             1
-     P2DIR                             1
-     main                            124
-     zmain_vdd_check                 101
-     zmain_ext_addr                  247
-     zmain_dev_info                  205
-     zmain_ram_init                   95
-     zmain_lcd_init                   18
-     ?<Initializer for <Constant "IEEE Address:">>
-                                      14
-     ?<Initializer for <Constant "Figure8 Wireless"
-                                      17
-     ?<Constant "IEEE Address:">      14
-     ?<Constant "Figure8 Wireless">   17
+     Function/Label  Bytes
+     --------------  -----
+     SP                 1
+     P0INP              1
+     _A_P1              1
+     SLEEP              1
+     CLKCON             1
+     P1DIR              1
+     P2DIR              1
+     main             121
+     zmain_vdd_check  101
+     zmain_ext_addr   285
+     zmain_dev_info     1
+     zmain_ram_init    95
 
  
- 790 bytes in segment NEAR_CODE
+ 603 bytes in segment NEAR_CODE
    7 bytes in segment SFR_AN
-  31 bytes in segment XDATA_I
-  31 bytes in segment XDATA_ID
  
- 821 bytes of CODE  memory
-   0 bytes of DATA  memory (+ 7 bytes shared)
-  31 bytes of XDATA memory
+ 603 bytes of CODE memory
+   0 bytes of DATA memory (+ 7 bytes shared)
 
 Errors: none
 Warnings: none

@@ -1,6 +1,6 @@
 ###############################################################################
 #                                                                             #
-# IAR 8051 C/C++ Compiler V7.30B/W32                    28/Dec/2012  19:54:02 #
+# IAR 8051 C/C++ Compiler V7.30B/W32                    03/Jan/2013  20:31:36 #
 # Copyright 2004-2007 IAR Systems. All rights reserved.                       #
 #                                                                             #
 #    Core               =  plain                                              #
@@ -39,9 +39,9 @@
 #                          -DREJOIN_POLL_RATE=440 "C:\Texas                   #
 #                          Instruments\ZStack-1.4.3-1.2.1\Components\hal\comm #
 #                          on\hal_drivers.c" -D CC2430EB -D AXD_END -D        #
-#                          NWK_AUTO_POLL -D REFLECTOR -D ZTOOL_P1 -D MT_TASK  #
-#                          -D xMT_ZDO_FUNC -D LCD_SUPPORTED=DEBUG -D          #
-#                          xPOWER_SAVING -lC "C:\Texas                        #
+#                          NWK_AUTO_POLL -D REFLECTOR -D xZTOOL_P1 -D         #
+#                          xMT_TASK -D xMT_ZDO_FUNC -D xLCD_SUPPORTED=DEBUG   #
+#                          -D xPOWER_SAVING -lC "C:\Texas                     #
 #                          Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\Sam #
 #                          ples\AXDApp\CC2430DB\EndDeviceEB\List\" -lA        #
 #                          "C:\Texas Instruments\ZStack-1.4.3-1.2.1\Projects\ #
@@ -309,20 +309,18 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Components\hal\common\hal_drivers.c
     144            /* UART */
     145          #if (defined HAL_UART) && (HAL_UART == TRUE)
     146            HalUARTInit();
-   \   000016                ; Setup parameters for call to function HalUARTInit
-   \   000016   12....       LCALL   ??HalUARTInit?relay
     147          #endif
     148          
     149            /* KEY */
     150          #if (defined HAL_KEY) && (HAL_KEY == TRUE)
     151            HalKeyInit();
-   \   000019                ; Setup parameters for call to function HalKeyInit
-   \   000019   12....       LCALL   ??HalKeyInit?relay
+   \   000016                ; Setup parameters for call to function HalKeyInit
+   \   000016   12....       LCALL   ??HalKeyInit?relay
     152          #endif
     153          }
-   \   00001C   D083         POP     DPH
-   \   00001E   D082         POP     DPL
-   \   000020   02....       LJMP    ?BRET
+   \   000019   D083         POP     DPH
+   \   00001B   D082         POP     DPL
+   \   00001D   02....       LJMP    ?BRET
     154          
     155          
     156          /**************************************************************************************************
@@ -528,14 +526,12 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Components\hal\common\hal_drivers.c
     239            /* UART Poll */
     240          #if (defined HAL_UART) && (HAL_UART == TRUE)
     241            HalUARTPoll();
-   \   000007                ; Setup parameters for call to function HalUARTPoll
-   \   000007   12....       LCALL   ??HalUARTPoll?relay
     242          #endif
     243          
     244          }
-   \   00000A   D083         POP     DPH
-   \   00000C   D082         POP     DPL
-   \   00000E   02....       LJMP    ?BRET
+   \   000007   D083         POP     DPH
+   \   000009   D082         POP     DPL
+   \   00000B   02....       LJMP    ?BRET
 
    \                                 In  segment BANK_RELAYS, align 1
    \                     ??Hal_Init?relay:
@@ -573,7 +569,6 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Components\hal\common\hal_drivers.c
        -> HalAesInit              4      0      0
        -> HalLcdInit              4      0      0
        -> HalLedInit              4      0      0
-       -> HalUARTInit             4      0      0
        -> HalKeyInit              4      0      0
      Hal_Init                     2      0      0
      Hal_ProcessEvent             0      0     14
@@ -585,7 +580,6 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Components\hal\common\hal_drivers.c
        -> osal_start_timerEx      0      0     28
      Hal_ProcessPoll              2      0      0
        -> HalTimerTick            4      0      0
-       -> HalUARTPoll             4      0      0
 
 
    Segment part sizes:
@@ -594,20 +588,20 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Components\hal\common\hal_drivers.c
      --------------           -----
      Hal_TaskID                  1
      Hal_Init                   16
-     HalDriverInit              35
+     HalDriverInit              32
      Hal_ProcessEvent          161
-     Hal_ProcessPoll            17
+     Hal_ProcessPoll            14
      ??Hal_Init?relay            6
      ??HalDriverInit?relay       6
      ??Hal_ProcessEvent?relay    6
      ??Hal_ProcessPoll?relay     6
 
  
- 229 bytes in segment BANKED_CODE
+ 223 bytes in segment BANKED_CODE
   24 bytes in segment BANK_RELAYS
    1 byte  in segment XDATA_Z
  
- 253 bytes of CODE  memory
+ 247 bytes of CODE  memory
    1 byte  of XDATA memory
 
 Errors: none

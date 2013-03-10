@@ -1,6 +1,6 @@
 ///////////////////////////////////////////////////////////////////////////////
 //                                                                            /
-// IAR 8051 C/C++ Compiler V7.30B/W32                   10/Mar/2013  13:00:18 /
+// IAR 8051 C/C++ Compiler V7.30B/W32                   10/Mar/2013  13:26:56 /
 // Copyright 2004-2007 IAR Systems. All rights reserved.                      /
 //                                                                            /
 //    Core               =  plain                                             /
@@ -41,27 +41,28 @@
 //                          "C:\Texas Instruments\ZStack-1.4.3-1.2.1\Projects /
 //                          \zstack\Samples\cc2430-zstack-adxl345\Source\AXD. /
 //                          c" -D CC2430EB -D AXD_END -D NWK_AUTO_POLL -D     /
-//                          REFLECTOR -D ZTOOL_P1 -D MT_TASK -D xMT_ZDO_FUNC  /
-//                          -D LCD_SUPPORTED=DEBUG -D xPOWER_SAVING -lC       /
-//                          "C:\Texas Instruments\ZStack-1.4.3-1.2.1\Projects /
-//                          \zstack\Samples\cc2430-zstack-adxl345\CC2430DB\En /
-//                          dDeviceEB\List\" -lA "C:\Texas                    /
+//                          REFLECTOR -D xZTOOL_P1 -D xMT_TASK -D             /
+//                          xMT_ZDO_FUNC -D xLCD_SUPPORTED=DEBUG -D           /
+//                          xPOWER_SAVING -lC "C:\Texas                       /
 //                          Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\Sa /
 //                          mples\cc2430-zstack-adxl345\CC2430DB\EndDeviceEB\ /
-//                          List\" --diag_suppress Pe001,Pa010 --diag_remark  /
-//                          pe550 -o "C:\Texas Instruments\ZStack-1.4.3-1.2.1 /
-//                          \Projects\zstack\Samples\cc2430-zstack-adxl345\CC /
-//                          2430DB\EndDeviceEB\Obj\" -e --require_prototypes  /
-//                          -z2 --no_cse --no_unroll --no_inline              /
-//                          --no_code_motion --no_tbaa --debug --core=plain   /
-//                          --dptr=16,1 --data_model=large                    /
-//                          --code_model=banked --calling_convention=xdata_re /
-//                          entrant --place_constants=data --nr_virtual_regs  /
-//                          8 -I "C:\Texas Instruments\ZStack-1.4.3-1.2.1\Pro /
-//                          jects\zstack\Samples\cc2430-zstack-adxl345\CC2430 /
-//                          DB\" -I "C:\Texas Instruments\ZStack-1.4.3-1.2.1\ /
-//                          Projects\zstack\Samples\cc2430-zstack-adxl345\CC2 /
-//                          430DB\..\SOURCE\" -I "C:\Texas                    /
+//                          List\" -lA "C:\Texas Instruments\ZStack-1.4.3-1.2 /
+//                          .1\Projects\zstack\Samples\cc2430-zstack-adxl345\ /
+//                          CC2430DB\EndDeviceEB\List\" --diag_suppress       /
+//                          Pe001,Pa010 --diag_remark pe550 -o "C:\Texas      /
+//                          Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\Sa /
+//                          mples\cc2430-zstack-adxl345\CC2430DB\EndDeviceEB\ /
+//                          Obj\" -e --require_prototypes -z2 --no_cse        /
+//                          --no_unroll --no_inline --no_code_motion          /
+//                          --no_tbaa --debug --core=plain --dptr=16,1        /
+//                          --data_model=large --code_model=banked            /
+//                          --calling_convention=xdata_reentrant              /
+//                          --place_constants=data --nr_virtual_regs 8 -I     /
+//                          "C:\Texas Instruments\ZStack-1.4.3-1.2.1\Projects /
+//                          \zstack\Samples\cc2430-zstack-adxl345\CC2430DB\"  /
+//                          -I "C:\Texas Instruments\ZStack-1.4.3-1.2.1\Proje /
+//                          cts\zstack\Samples\cc2430-zstack-adxl345\CC2430DB /
+//                          \..\SOURCE\" -I "C:\Texas                         /
 //                          Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\Sa /
 //                          mples\cc2430-zstack-adxl345\CC2430DB\..\Drivers\" /
 //                           -I "C:\Texas Instruments\ZStack-1.4.3-1.2.1\Proj /
@@ -317,7 +318,6 @@
 afRegister          SYMBOL "afRegister"
 RegisterForKeys     SYMBOL "RegisterForKeys"
 HalUARTOpen         SYMBOL "HalUARTOpen"
-HalLcdWriteString   SYMBOL "HalLcdWriteString"
 ZDO_RegisterForZDOMsg SYMBOL "ZDO_RegisterForZDOMsg"
 aps_AddGroup        SYMBOL "aps_AddGroup"
 Init_ADXL345        SYMBOL "Init_ADXL345"
@@ -341,7 +341,6 @@ zb_ReceiveDataIndication SYMBOL "zb_ReceiveDataIndication"
 osal_stop_timerEx   SYMBOL "osal_stop_timerEx"
 HalUARTRead         SYMBOL "HalUARTRead"
 ??AF_DataRequest?relay SYMBOL "?relay", AF_DataRequest
-??HalLcdWriteString?relay SYMBOL "?relay", HalLcdWriteString
 ??HalLcdWriteStringValue?relay SYMBOL "?relay", HalLcdWriteStringValue
 ??HalLedSet?relay   SYMBOL "?relay", HalLedSet
 ??HalUARTOpen?relay SYMBOL "?relay", HalUARTOpen
@@ -397,13 +396,6 @@ AXD_SendTheMessage  SYMBOL "AXD_SendTheMessage"
         ARGFRAME DOVERLAY, 0, STATIC
         EXTERN HalUARTOpen
         FUNCTION HalUARTOpen,0202H
-        ARGFRAME ISTACK, 0, STACK
-        ARGFRAME PSTACK, 0, STACK
-        ARGFRAME XSTACK, 38, STACK
-        ARGFRAME IOVERLAY, 0, STATIC
-        ARGFRAME DOVERLAY, 0, STATIC
-        EXTERN HalLcdWriteString
-        FUNCTION HalLcdWriteString,0202H
         ARGFRAME ISTACK, 0, STACK
         ARGFRAME PSTACK, 0, STACK
         ARGFRAME XSTACK, 38, STACK
@@ -565,8 +557,6 @@ AXD_SendTheMessage  SYMBOL "AXD_SendTheMessage"
         ARGFRAME DOVERLAY, 0, STATIC
         EXTERN ??AF_DataRequest?relay
         FUNCTION ??AF_DataRequest?relay,00H
-        EXTERN ??HalLcdWriteString?relay
-        FUNCTION ??HalLcdWriteString?relay,00H
         EXTERN ??HalLcdWriteStringValue?relay
         FUNCTION ??HalLcdWriteStringValue?relay,00H
         EXTERN ??HalLedSet?relay
@@ -806,13 +796,6 @@ AXD_Group:
 
         RSEG XDATA_I:XDATA:NOROOT(0)
         DATA
-`?<Constant "AXD">`:
-        DS 4
-        REQUIRE `?<Initializer for <Constant "AXD">>`
-        REQUIRE __INIT_XDATA_I
-
-        RSEG XDATA_I:XDATA:NOROOT(0)
-        DATA
 `?<Constant "R: ">`:
         DS 4
         REQUIRE `?<Initializer for <Constant "R: ">>`
@@ -928,7 +911,7 @@ rxLen:
         RSEG XDATA_Z:XDATA:NOROOT(0)
 //  232 static uint8 rxBuf[SERIAL_APP_RX_CNT];
 rxBuf:
-        DS 80
+        DS 6
         REQUIRE __INIT_XDATA_Z
 //  233 #endif
 //  234 
@@ -998,17 +981,6 @@ AXD_Init:
         ARGFRAME IOVERLAY, 0, STATIC
         ARGFRAME DOVERLAY, 0, STATIC
         FUNCALL AXD_Init, HalUARTOpen
-        LOCFRAME ISTACK, 0, STACK
-        LOCFRAME PSTACK, 0, STACK
-        LOCFRAME XSTACK, 38, STACK
-        LOCFRAME IOVERLAY, 0, STATIC
-        LOCFRAME DOVERLAY, 0, STATIC
-        ARGFRAME ISTACK, 0, STACK
-        ARGFRAME PSTACK, 0, STACK
-        ARGFRAME XSTACK, 38, STACK
-        ARGFRAME IOVERLAY, 0, STATIC
-        ARGFRAME DOVERLAY, 0, STATIC
-        FUNCALL AXD_Init, HalLcdWriteString
         LOCFRAME ISTACK, 0, STACK
         LOCFRAME PSTACK, 0, STACK
         LOCFRAME XSTACK, 38, STACK
@@ -1189,7 +1161,7 @@ AXD_Init:
 //  303   uartConfig.rx.maxBufSize        = SERIAL_APP_RX_MAX;
         MOV     A,#0xa
         LCALL   ?XSTACK_DISP0_8
-        MOV     A,#-0x80
+        MOV     A,#0x40
         MOVX    @DPTR,A
         INC     DPTR
         MOV     A,#0x0
@@ -1197,7 +1169,7 @@ AXD_Init:
 //  304   uartConfig.tx.maxBufSize        = SERIAL_APP_TX_MAX;
         MOV     A,#0x12
         LCALL   ?XSTACK_DISP0_8
-        MOV     A,#-0x80
+        MOV     A,#0x40
         MOVX    @DPTR,A
         INC     DPTR
         MOV     A,#0x0
@@ -1244,11 +1216,6 @@ AXD_Init:
 //  314   // Update the display
 //  315 #if defined ( LCD_SUPPORTED )
 //  316     HalLcdWriteString( "AXD", HAL_LCD_LINE_1 );
-        ; Setup parameters for call to function HalLcdWriteString
-        MOV     R1,#0x0
-        MOV     R2,#(`?<Constant "AXD">` & 0xff)
-        MOV     R3,#((`?<Constant "AXD">` >> 8) & 0xff)
-        LCALL   ??HalLcdWriteString?relay
 //  317 #endif
 //  318 
 //  319   ZDO_RegisterForZDOMsg( AXD_TaskID, End_Device_Bind_rsp );
@@ -2968,7 +2935,7 @@ rxCB_Loopback:
 //  750   if ( !(rxLen = HalUARTRead( port, rxBuf, SERIAL_APP_RX_CNT )) )
 ??rxCB_Loopback_0:
         ; Setup parameters for call to function HalUARTRead
-        MOV     R4,#0x50
+        MOV     R4,#0x6
         MOV     R5,#0x0
         MOV     R2,#(rxBuf & 0xff)
         MOV     R3,#((rxBuf >> 8) & 0xff)
@@ -3033,11 +3000,6 @@ rxCB_Loopback:
         CFI EndBlock cfiBlock7
 //  763   }
 //  764 }
-
-        RSEG XDATA_ID:CODE:NOROOT(0)
-        DATA
-`?<Initializer for <Constant "AXD">>`:
-        DB "AXD"
 
         RSEG XDATA_ID:CODE:NOROOT(0)
         DATA
@@ -3187,14 +3149,14 @@ rxCB_Loopback:
 //  835 /*********************************************************************
 //  836 *********************************************************************/
 // 
-// 1 578 bytes in segment BANKED_CODE
+// 1 569 bytes in segment BANKED_CODE
 //    48 bytes in segment BANK_RELAYS
-//    30 bytes in segment XDATA_I
-//    30 bytes in segment XDATA_ID
-//   114 bytes in segment XDATA_Z
+//    26 bytes in segment XDATA_I
+//    26 bytes in segment XDATA_ID
+//    40 bytes in segment XDATA_Z
 // 
-// 1 656 bytes of CODE  memory
-//   144 bytes of XDATA memory
+// 1 643 bytes of CODE  memory
+//    66 bytes of XDATA memory
 //
 //Errors: none
-//Warnings: 2
+//Warnings: none
