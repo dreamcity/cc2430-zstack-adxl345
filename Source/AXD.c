@@ -103,7 +103,12 @@
   } \
 }
 
-
+#define HAL_ADC_REF_125V    0x00    /* Internal 1.25V Reference */
+#define HAL_ADC_DEC_064     0x00    /* Decimate by 64 : 8-bit resolution */
+#define HAL_ADC_DEC_128     0x10    /* Decimate by 128 : 10-bit resolution */
+#define HAL_ADC_DEC_512     0x30    /* Decimate by 512 : 14-bit resolution */
+#define HAL_ADC_CHN_VDD3    0x0f    /* Input channel: VDD/3 */
+#define HAL_ADC_CHN_TEMP    0x0e    /* Temperature sensor */
 
 /*********************************************************************
  * CONSTANTS
@@ -437,7 +442,7 @@ UINT16 AXD_ProcessEvent( byte task_id, UINT16 events )
 #endif
     osal_start_timerEx( AXD_TaskID,
                         AXD_SEND_MSG_EVT,
-                        (AXD_SEND_MSG_TIMEOUT/5));
+                        (AXD_SEND_MSG_TIMEOUT/5) );
 
     // return unprocessed events
     return (events ^ AXD_SEND_MSG_EVT);
@@ -644,6 +649,8 @@ void AXD_SendTheMessage( void )
 
   Multiple_Read_ADXL345();
   displayXYZ((uint8 *)BUFFER);
+  BUFFER[6] = myApp_ReadTemperature();
+  BUFFER[7] = myApp_ReadTemperature();
   
   if ( AF_DataRequest( &AXD_DstAddr, &AXD_epDesc,
                        AXD_CMD_ID,
@@ -834,3 +841,43 @@ static void rxCB( uint8 port, uint8 event )
 
 /*********************************************************************
 *********************************************************************/
+uint8 myApp_ReadTemperature( void )
+{
+
+  uint16 value;
+
+  /* Clear ADC interrupt flag */
+  ADCIF = 0;
+
+  ADCCON3 = (HAL_ADC_REF_125V | HAL_ADC_DEC_512 | HAL_ADC_CHN_TEMP);
+
+  /* Wait for the conversion to finish */
+  while ( !ADCIF );
+
+  /* Get the result */
+  value = ADCL;
+  value |= ((uint16) ADCH) << 8;
+
+  /*
+   * value ranges from 0 to 0x8000 indicating 0V and 1.25V
+   * VOLTAGE_AT_TEMP_ZERO = 0.743 V = 19477
+   * TEMP_COEFFICIENT = 0.0024 V/C = 62.9 /C
+   * These parameters are typical values and need to be calibrated
+   * See the datasheet for the appropriate chip for more details
+   * also, the math below may not be very accurate
+   */
+#define VOLTAGE_AT_TEMP_ZERO      19477   // 0.743 V
+#define TEMP_COEFFICIENT          62.9    // 0.0024 V/C
+
+  // limit min temp to 0 C
+  if ( value < VOLTAGE_AT_TEMP_ZERO )
+    value = VOLTAGE_AT_TEMP_ZERO;
+
+  value = value - VOLTAGE_AT_TEMP_ZERO;
+
+  // limit max temp to 99 C
+  if ( value > TEMP_COEFFICIENT * 99 )
+    value = TEMP_COEFFICIENT * 99;
+
+  return ( (uint8)(value/TEMP_COEFFICIENT) );
+}

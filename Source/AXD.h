@@ -101,6 +101,7 @@ extern UINT16 AXD_ProcessEvent( byte task_id, UINT16 events );
 
 extern void AXD_ReceiveDataIndication( uint16 source, uint16 command, uint16 len, uint8 *pData  );
 extern void zb_ReceiveDataIndication( uint16 source, uint16 command, uint16 len, uint8 *pData  );
+uint8 myApp_ReadTemperature( void );
 
 /*********************************************************************
 *********************************************************************/
