@@ -1,6 +1,6 @@
 ###############################################################################
 #                                                                             #
-# IAR 8051 C/C++ Compiler V7.30B/W32                    19/Dec/2012  20:17:04 #
+# IAR 8051 C/C++ Compiler V7.30B/W32                    03/Jan/2013  17:10:47 #
 # Copyright 2004-2007 IAR Systems. All rights reserved.                       #
 #                                                                             #
 #    Core               =  plain                                              #
@@ -39,14 +39,14 @@
 #                          -DQUEUED_POLL_RATE=100 -DRESPONSE_POLL_RATE=100)   #
 #                          -DREJOIN_POLL_RATE=440 "C:\Texas                   #
 #                          Instruments\ZStack-1.4.3-1.2.1\Components\hal\targ #
-#                          et\CC2430EB\hal_lcd.c" -D CC2430EB -D REFLECTOR    #
-#                          -D ZTOOL_P1 -D MT_TASK -D MT_ZDO_FUNC -D           #
-#                          LCD_SUPPORTED=DEBUG -lC "C:\Texas                  #
-#                          Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\Sam #
-#                          ples\AXDApp\CC2430DB\RouterEB\List\" -lA           #
+#                          et\CC2430EB\hal_lcd.c" -D CC2430EB -D AXD_ROUTER   #
+#                          -D REFLECTOR -D ZTOOL_P1 -D MT_TASK -D             #
+#                          xMT_ZDO_FUNC -D xLCD_SUPPORTED=DEBUG -lC           #
 #                          "C:\Texas Instruments\ZStack-1.4.3-1.2.1\Projects\ #
 #                          zstack\Samples\AXDApp\CC2430DB\RouterEB\List\"     #
-#                          --diag_suppress Pe001,Pa010 --diag_remark pe550    #
+#                          -lA "C:\Texas Instruments\ZStack-1.4.3-1.2.1\Proje #
+#                          cts\zstack\Samples\AXDApp\CC2430DB\RouterEB\List\" #
+#                           --diag_suppress Pe001,Pa010 --diag_remark pe550   #
 #                          -o "C:\Texas Instruments\ZStack-1.4.3-1.2.1\Projec #
 #                          ts\zstack\Samples\AXDApp\CC2430DB\RouterEB\Obj\"   #
 #                          -e --require_prototypes -z9 --no_code_motion       #
@@ -169,21 +169,6 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Components\hal\target\CC2430EB\hal_lcd.c
      42           **************************************************************************************************/
      43          #include "hal_types.h"
      44          #include "hal_lcd.h"
-
-   \                                 In  segment SFR_AN, at 0x90
-   \   union <unnamed> volatile __sfr _A_P1
-   \                     _A_P1:
-   \   000000                DS 1
-
-   \                                 In  segment SFR_AN, at 0xf4
-   \   unsigned char volatile __sfr P1SEL
-   \                     P1SEL:
-   \   000000                DS 1
-
-   \                                 In  segment SFR_AN, at 0xfe
-   \   unsigned char volatile __sfr P1DIR
-   \                     P1DIR:
-   \   000000                DS 1
      45          #include "OSAL.h"
      46          #include "OnBoard.h"
      47          
@@ -472,12 +457,7 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Components\hal\target\CC2430EB\hal_lcd.c
     169           *                                       GLOBAL VARIABLES
     170           **************************************************************************************************/
     171          #ifdef LCD_HW
-
-   \                                 In  segment XDATA_Z, align 1, keep-with-next
     172          static uint8 *Lcd_Line1;
-   \                     Lcd_Line1:
-   \   000000                DS 2
-   \   000002                REQUIRE __INIT_XDATA_Z
     173          #endif
     174          
     175          /**************************************************************************************************
@@ -486,44 +466,16 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Components\hal\target\CC2430EB\hal_lcd.c
     178          #if (defined LCD_HW) && (HAL_LCD == TRUE)
     179          
     180          /************ 延时函数 ******************************/
-
-   \                                 In  segment BANKED_CODE, align 1, keep-with-next
     181          static void Delay_nms(unsigned int Time) // 延时单位:ms
-   \                     Delay_nms:
     182          {
-   \   000000                ; Saved register size: 0
-   \   000000                ; Auto size: 0
     183            unsigned int i;
     184            unsigned char j;
     185          
     186            for(i=0;i<Time;i++)
-   \   000000   7800         MOV     R0,#0x0
-   \   000002   7900         MOV     R1,#0x0
-   \   000004   800E         SJMP    ??Delay_nms_0
     187            {
     188              for(j=0;j<123;j++){}
-   \                     ??Delay_nms_1:
-   \   000006   7C7B         MOV     R4,#0x7b
-   \                     ??Delay_nms_2:
-   \   000008   1C           DEC     R4
-   \   000009   EC           MOV     A,R4
-   \   00000A   70FC         JNZ     ??Delay_nms_2
     189            }
-   \   00000C   E8           MOV     A,R0
-   \   00000D   2401         ADD     A,#0x1
-   \   00000F   08           INC     R0
-   \   000010   E9           MOV     A,R1
-   \   000011   3400         ADDC    A,#0x0
-   \   000013   F9           MOV     R1,A
-   \                     ??Delay_nms_0:
-   \   000014   C3           CLR     C
-   \   000015   E8           MOV     A,R0
-   \   000016   9A           SUBB    A,R2
-   \   000017   E9           MOV     A,R1
-   \   000018   9B           SUBB    A,R3
-   \   000019   40EB         JC      ??Delay_nms_1
     190          }
-   \   00001B   02....       LJMP    ?BRET
     191          
     192          /******** 发送一个字节的数据到液晶控制器*************************/
     193          static void SendByte(unsigned char Data)
@@ -553,57 +505,18 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Components\hal\target\CC2430EB\hal_lcd.c
     217          编写日期          ：2004-8-10
     218          最后修改日期      ：2004-8-13
     219          -----------------------------------------------------------------------*/
-
-   \                                 In  segment BANKED_CODE, align 1, keep-with-next
     220          static void LCD_write_byte(unsigned char data, unsigned char command)
-   \                     LCD_write_byte:
     221          {
-   \   000000                ; Saved register size: 0
-   \   000000                ; Auto size: 0
     222            LCD_CE = 1 ;		 // 使能LCD
-   \   000000   D294         SETB    0x90.4
     223          
     224            if (command == 0)
-   \   000002   EA           MOV     A,R2
-   \   000003   7004         JNZ     ??LCD_write_byte_0
     225              LCD_DC = 0;	        // 传送命令
-   \   000005   C297         CLR     0x90.7
-   \   000007   8002         SJMP    ??LCD_write_byte_1
     226            else
     227              LCD_DC = 1;		// 传送数据
-   \                     ??LCD_write_byte_0:
-   \   000009   D297         SETB    0x90.7
     228            SendByte(data);
-   \                     ??LCD_write_byte_1:
-   \   00000B   E9           MOV     A,R1
-   \   00000C   FB           MOV     R3,A
-   \   00000D   C294         CLR     0x90.4
-   \   00000F   7A08         MOV     R2,#0x8
-   \                     ??LCD_write_byte_2:
-   \   000011   C295         CLR     0x90.5
-   \   000013   EB           MOV     A,R3
-   \   000014   A2E7         MOV     C,0xE0 /* A   */.7
-   \   000016   5004         JNC     ??LCD_write_byte_3
-   \   000018   D296         SETB    0x90.6
-   \   00001A   8002         SJMP    ??LCD_write_byte_4
-   \                     ??LCD_write_byte_3:
-   \   00001C   C296         CLR     0x90.6
-   \                     ??LCD_write_byte_4:
-   \   00001E   D295         SETB    0x90.5
-   \   000020   C3           CLR     C
-   \   000021   33           RLC     A
-   \   000022   FB           MOV     R3,A
-   \   000023   1A           DEC     R2
-   \   000024   EA           MOV     A,R2
-   \   000025   70EA         JNZ     ??LCD_write_byte_2
-   \   000027   D294         SETB    0x90.4
     229            LCD_CE = 0;	        // 关闭LCD
-   \   000029   C294         CLR     0x90.4
     230            LCD_DC = 1;	
-   \   00002B   D297         SETB    0x90.7
     231          }
-   \   00002D   02....       LJMP    ?BRET
-   \   000030                REQUIRE _A_P1
     232          
     233          /*-----------------------------------------------------------------------
     234          LCD_clear         : LCD清屏函数
@@ -660,114 +573,28 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Components\hal\target\CC2430EB\hal_lcd.c
     285          编写日期          ：2004-8-10
     286          最后修改日期      ：2004-8-10
     287          -----------------------------------------------------------------------*/
-
-   \                                 In  segment BANKED_CODE, align 1, keep-with-next
     288          static void initLcd(void)
-   \                     initLcd:
     289          {
-   \   000000   74F7         MOV     A,#-0x9
-   \   000002   12....       LCALL   ?BANKED_ENTER_XDATA
-   \   000005                ; Saved register size: 9
-   \   000005                ; Auto size: 0
     290            // CC2430 中，I/O 口做普通 I/O 使用时和每个 I/O 端口相关的寄存器有 3 个，分别是 //PxSEL
     291            //功能选择寄存器，PxDIR 方向寄存器，PxINP 输入模式寄存器，其中 x 为 0，1，2 。
     292          
     293            P1SEL &= 0x0F; //P1高4位 为普通 I/O 口
-   \   000005   53F40F       ANL     0xf4,#0xf
-   \   000008   E5F4         MOV     A,0xf4
     294            P1DIR |= 0xF0; //P1高4位 设置为输出
-   \   00000A   43FEF0       ORL     0xfe,#0xf0
-   \   00000D   E5FE         MOV     A,0xfe
     295          
     296            LCD_CE = 0;    // 关闭LCD
-   \   00000F   C294         CLR     0x90.4
     297            Delay_nms(1);
-   \   000011                ; Setup parameters for call to function Delay_nms
-   \   000011   7A01         MOV     R2,#0x1
-   \   000013   7B00         MOV     R3,#0x0
-   \   000015   12....       LCALL   ??Delay_nms?relay
     298            LCD_CE = 1;    // 使能LCD
-   \   000018   D294         SETB    0x90.4
     299            Delay_nms(1);
-   \   00001A                ; Setup parameters for call to function Delay_nms
-   \   00001A   7A01         MOV     R2,#0x1
-   \   00001C   7B00         MOV     R3,#0x0
-   \   00001E   12....       LCALL   ??Delay_nms?relay
     300          
     301            LCD_write_byte(0x21, 0);	// 使用扩展命令设置LCD模式
-   \   000021                ; Setup parameters for call to function LCD_write_byte
-   \   000021   7A00         MOV     R2,#0x0
-   \   000023   7921         MOV     R1,#0x21
-   \   000025   12....       LCALL   ?Subroutine3 & 0xFFFF
     302            LCD_write_byte(0xc8, 0);	// 设置偏置电压
-   \                     ??CrossCallReturnLabel_8:
-   \   000028   79C8         MOV     R1,#-0x38
-   \   00002A   12....       LCALL   ?Subroutine3 & 0xFFFF
     303            LCD_write_byte(0x06, 0);	// 温度校正
-   \                     ??CrossCallReturnLabel_9:
-   \   00002D   7906         MOV     R1,#0x6
-   \   00002F   12....       LCALL   ?Subroutine3 & 0xFFFF
     304            LCD_write_byte(0x13, 0);	// 1:48
-   \                     ??CrossCallReturnLabel_10:
-   \   000032   7913         MOV     R1,#0x13
-   \   000034   12....       LCALL   ?Subroutine3 & 0xFFFF
     305            LCD_write_byte(0x20, 0);	// 使用基本命令
-   \                     ??CrossCallReturnLabel_11:
-   \   000037   7920         MOV     R1,#0x20
-   \   000039   12....       LCALL   ?Subroutine3 & 0xFFFF
-   \                     ??CrossCallReturnLabel_12:
-   \   00003C   790C         MOV     R1,#0xc
-   \   00003E   12....       LCALL   ?Subroutine2 & 0xFFFF
-   \                     ??CrossCallReturnLabel_6:
-   \   000041   7EF8         MOV     R6,#-0x8
-   \   000043   7F01         MOV     R7,#0x1
-   \                     ??initLcd_0:
-   \   000045                ; Setup parameters for call to function LCD_write_byte
-   \   000045   7A01         MOV     R2,#0x1
-   \   000047   7900         MOV     R1,#0x0
-   \   000049   12....       LCALL   ??LCD_write_byte?relay
-   \   00004C   EE           MOV     A,R6
-   \   00004D   24FF         ADD     A,#-0x1
-   \   00004F   1E           DEC     R6
-   \   000050   EF           MOV     A,R7
-   \   000051   34FF         ADDC    A,#-0x1
-   \   000053   FF           MOV     R7,A
-   \   000054   EE           MOV     A,R6
-   \   000055   7001         JNZ     ??initLcd_1
-   \   000057   EF           MOV     A,R7
-   \                     ??initLcd_1:
-   \   000058   70EB         JNZ     ??initLcd_0
     306            LCD_clear();	                // 清屏
     307            LCD_write_byte(0x0c, 0);	// 设定显示模式，正常显示
-   \   00005A                ; Setup parameters for call to function LCD_write_byte
-   \   00005A   7A00         MOV     R2,#0x0
-   \   00005C   790C         MOV     R1,#0xc
-   \   00005E   12....       LCALL   ??LCD_write_byte?relay
     308            LCD_CE=0 ;                    // 关闭LCD
-   \   000061   C294         CLR     0x90.4
     309          }
-   \   000063                REQUIRE ?Subroutine8
-   \   000063                REQUIRE _A_P1
-   \   000063                REQUIRE P1SEL
-   \   000063                REQUIRE P1DIR
-   \   000063                ; // Fall through to label ?Subroutine8
-
-   \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine8:
-   \   000000   7F01         MOV     R7,#0x1
-   \   000002   02....       LJMP    ?BANKED_LEAVE_XDATA
-
-   \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine3:
-   \   000000   12....       LCALL   ??LCD_write_byte?relay
-   \   000003                ; Setup parameters for call to function LCD_write_byte
-   \   000003                ; Setup parameters for call to function LCD_write_byte
-   \   000003                ; Setup parameters for call to function LCD_write_byte
-   \   000003                ; Setup parameters for call to function LCD_write_byte
-   \   000003                ; Setup parameters for call to function LCD_write_byte
-   \   000003                ; Setup parameters for call to function LCD_write_byte
-   \   000003   7A00         MOV     R2,#0x0
-   \   000005   22           RET
     310          
     311          
     312          /*-----------------------------------------------------------------------
@@ -779,111 +606,22 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Components\hal\target\CC2430EB\hal_lcd.c
     318          编写日期          ：2004-8-10
     319          最后修改日期      ：2004-8-10 		
     320          -----------------------------------------------------------------------*/
-
-   \                                 In  segment BANKED_CODE, align 1, keep-with-next
     321          static void LCD_write_english_string(unsigned char X,unsigned char Y,uint8 *s)
-   \                     LCD_write_english_string:
     322          {
-   \   000000   74F3         MOV     A,#-0xd
-   \   000002   12....       LCALL   ?BANKED_ENTER_XDATA
-   \   000005                ; Saved register size: 13
-   \   000005                ; Auto size: 0
-   \   000005   89..         MOV     ?V0 + 1,R1
-   \   000007   8A..         MOV     ?V0 + 2,R2
-   \   000009   EC           MOV     A,R4
-   \   00000A   FE           MOV     R6,A
-   \   00000B   ED           MOV     A,R5
-   \   00000C   FF           MOV     R7,A
     323            unsigned char i=0;
     324            LCD_set_XY(0,Y);//把第Y行清零
-   \   00000D                ; Setup parameters for call to function LCD_write_byte
-   \   00000D   7A00         MOV     R2,#0x0
-   \   00000F   7440         MOV     A,#0x40
-   \   000011   45..         ORL     A,?V0 + 2
-   \   000013   F9           MOV     R1,A
-   \   000014   12....       LCALL   ?Subroutine2 & 0xFFFF
     325            for(i=0;i<HAL_LCD_MAX_CHARS*6;i++)
-   \                     ??CrossCallReturnLabel_7:
-   \   000017   75..60       MOV     ?V0 + 0,#0x60
     326            {
     327              LCD_write_byte(0,1);
-   \                     ??LCD_write_english_string_0:
-   \   00001A                ; Setup parameters for call to function LCD_write_byte
-   \   00001A   7A01         MOV     R2,#0x1
-   \   00001C   7900         MOV     R1,#0x0
-   \   00001E   12....       LCALL   ??LCD_write_byte?relay
     328            }
-   \   000021   15..         DEC     ?V0 + 0
-   \   000023   E5..         MOV     A,?V0 + 0
-   \   000025   70F3         JNZ     ??LCD_write_english_string_0
     329            LCD_set_XY(X,Y);
-   \   000027                ; Setup parameters for call to function LCD_write_byte
-   \   000027   7A00         MOV     R2,#0x0
-   \   000029   7440         MOV     A,#0x40
-   \   00002B   45..         ORL     A,?V0 + 2
-   \   00002D   F9           MOV     R1,A
-   \   00002E   12....       LCALL   ?Subroutine3 & 0xFFFF
-   \                     ??CrossCallReturnLabel_13:
-   \   000031   7480         MOV     A,#-0x80
-   \   000033   45..         ORL     A,?V0 + 1
-   \   000035   F9           MOV     R1,A
-   \   000036   12....       LCALL   ??LCD_write_byte?relay
     330            i=0;
-   \   000039   75..00       MOV     ?V0 + 0,#0x0
     331            while (*s)
-   \                     ??LCD_write_english_string_1:
-   \   00003C   8E82         MOV     DPL,R6
-   \   00003E   8F83         MOV     DPH,R7
-   \   000040   E0           MOVX    A,@DPTR
-   \   000041   6044         JZ      ??LCD_write_english_string_2
     332            {
     333              LCD_write_char(*s);
-   \   000043   24E0         ADD     A,#-0x20
-   \   000045   F5..         MOV     ?V0 + 4,A
-   \   000047   75..00       MOV     ?V0 + 1,#0x0
-   \                     ??LCD_write_english_string_3:
-   \   00004A                ; Setup parameters for call to function LCD_write_byte
-   \   00004A   7A01         MOV     R2,#0x1
-   \   00004C   85....       MOV     ?V0 + 2,?V0 + 1
-   \   00004F   E5..         MOV     A,?V0 + 4
-   \   000051   75F006       MOV     B,#0x6
-   \   000054   A4           MUL     AB
-   \   000055   24..         ADD     A,#(font6x8 & 0xff)
-   \   000057   F8           MOV     R0,A
-   \   000058   E5F0         MOV     A,B
-   \   00005A   34..         ADDC    A,#((font6x8 >> 8) & 0xff)
-   \   00005C   F9           MOV     R1,A
-   \   00005D   E5..         MOV     A,?V0 + 2
-   \   00005F   28           ADD     A,R0
-   \   000060   F582         MOV     DPL,A
-   \   000062   E4           CLR     A
-   \   000063   39           ADDC    A,R1
-   \   000064   F583         MOV     DPH,A
-   \   000066   E4           CLR     A
-   \   000067   93           MOVC    A,@A+DPTR
-   \   000068   F9           MOV     R1,A
-   \   000069   12....       LCALL   ??LCD_write_byte?relay
-   \   00006C   05..         INC     ?V0 + 1
-   \   00006E   E5..         MOV     A,?V0 + 1
-   \   000070   C3           CLR     C
-   \   000071   9406         SUBB    A,#0x6
-   \   000073   40D5         JC      ??LCD_write_english_string_3
     334              s++;
-   \   000075   8E82         MOV     DPL,R6
-   \   000077   8F83         MOV     DPH,R7
-   \   000079   A3           INC     DPTR
-   \   00007A   AE82         MOV     R6,DPL
-   \   00007C   AF83         MOV     R7,DPH
     335              i++;
-   \   00007E   05..         INC     ?V0 + 0
     336              if(i>=HAL_LCD_MAX_CHARS)return;
-   \   000080   E5..         MOV     A,?V0 + 0
-   \   000082   C3           CLR     C
-   \   000083   9410         SUBB    A,#0x10
-   \   000085   40B5         JC      ??LCD_write_english_string_1
-   \                     ??LCD_write_english_string_2:
-   \   000087   7F05         MOV     R7,#0x5
-   \   000089   02....       LJMP    ?BANKED_LEAVE_XDATA
     337            }
     338          }
     339          
@@ -910,30 +648,19 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Components\hal\target\CC2430EB\hal_lcd.c
     358          void HalLcdInit(void)
    \                     HalLcdInit:
     359          {
-   \   000000   C082         PUSH    DPL
-   \   000002   C083         PUSH    DPH
-   \   000004                ; Saved register size: 2
-   \   000004                ; Auto size: 0
+   \   000000                ; Saved register size: 0
+   \   000000                ; Auto size: 0
     360          #if (HAL_LCD == TRUE)
     361          
     362          #ifdef LCD_HW
     363            Lcd_Line1 = NULL;
-   \   000004   90....       MOV     DPTR,#Lcd_Line1
-   \   000007   E4           CLR     A
-   \   000008   F0           MOVX    @DPTR,A
-   \   000009   A3           INC     DPTR
-   \   00000A   F0           MOVX    @DPTR,A
     364            initLcd();
-   \   00000B                ; Setup parameters for call to function initLcd
-   \   00000B   12....       LCALL   ??initLcd?relay
     365          #endif
     366          
     367          #endif /* HAL_LCD */
     368          
     369          }
-   \   00000E   D083         POP     DPH
-   \   000010   D082         POP     DPL
-   \   000012   02....       LJMP    ?BRET
+   \   000000   02....       LJMP    ?BRET
     370          
     371          /*************************************************************************************************
     372           *                    LCD EMULATION FUNCTIONS
@@ -968,20 +695,8 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Components\hal\target\CC2430EB\hal_lcd.c
     399          void HalLcdWriteString ( char *str, uint8 option)
    \                     HalLcdWriteString:
     400          {
-   \   000000   74F1         MOV     A,#-0xf
-   \   000002   12....       LCALL   ?BANKED_ENTER_XDATA
-   \   000005                ; Saved register size: 15
-   \   000005                ; Auto size: 2
-   \   000005   74FE         MOV     A,#-0x2
-   \   000007   12....       LCALL   ?ALLOC_XSTACK8
-   \   00000A   85..82       MOV     DPL,?XSP + 0
-   \   00000D   85..83       MOV     DPH,?XSP + 1
-   \   000010   EA           MOV     A,R2
-   \   000011   F0           MOVX    @DPTR,A
-   \   000012   A3           INC     DPTR
-   \   000013   EB           MOV     A,R3
-   \   000014   F0           MOVX    @DPTR,A
-   \   000015   89..         MOV     ?V0 + 1,R1
+   \   000000                ; Saved register size: 0
+   \   000000                ; Auto size: 0
     401          #if (HAL_LCD == TRUE)
     402          
     403          #ifdef LCD_SD
@@ -991,266 +706,51 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Components\hal\target\CC2430EB\hal_lcd.c
     407            char *buf;
     408          
     409            if ( Lcd_Line1 == NULL )
-   \   000017   90....       MOV     DPTR,#Lcd_Line1
-   \   00001A   E0           MOVX    A,@DPTR
-   \   00001B   7002         JNZ     ??HalLcdWriteString_0
-   \   00001D   A3           INC     DPTR
-   \   00001E   E0           MOVX    A,@DPTR
-   \                     ??HalLcdWriteString_0:
-   \   00001F   7018         JNZ     ??HalLcdWriteString_1
     410            {
     411              // Set up system start-up message
     412              Lcd_Line1 = osal_mem_alloc( MAX_LCD_CHARS+1 );
-   \   000021                ; Setup parameters for call to function osal_mem_alloc
-   \   000021   7A11         MOV     R2,#0x11
-   \   000023   7B00         MOV     R3,#0x0
-   \   000025   12....       LCALL   ??osal_mem_alloc?relay
-   \   000028   90....       MOV     DPTR,#Lcd_Line1
-   \   00002B   EA           MOV     A,R2
-   \   00002C   F0           MOVX    @DPTR,A
-   \   00002D   A3           INC     DPTR
-   \   00002E   EB           MOV     A,R3
-   \   00002F   F0           MOVX    @DPTR,A
     413              HalLcdWriteString( "Figure8 Wireless", HAL_LCD_LINE_1 );
-   \   000030                ; Setup parameters for call to function HalLcdWriteString
-   \   000030   7900         MOV     R1,#0x0
-   \   000032   7A..         MOV     R2,#(`?<Constant "Figure8 Wireless">` & 0xff)
-   \   000034   7B..         MOV     R3,#((`?<Constant "Figure8 Wireless">` >> 8) & 0xff)
-   \   000036   12....       LCALL   ??HalLcdWriteString?relay
     414            }
     415          
     416            sln = (byte)osal_strlen( str );
-   \                     ??HalLcdWriteString_1:
-   \   000039                ; Setup parameters for call to function osal_strlen
-   \   000039   85..82       MOV     DPL,?XSP + 0
-   \   00003C   85..83       MOV     DPH,?XSP + 1
-   \   00003F   12....       LCALL   ?Subroutine4 & 0xFFFF
-   \                     ??CrossCallReturnLabel_14:
-   \   000042   F5..         MOV     ?V0 + 2,A
     417          
     418            // Check boundries
     419            if ( sln > MAX_LCD_CHARS )
-   \   000044   C3           CLR     C
-   \   000045   9411         SUBB    A,#0x11
-   \   000047   4003         JC      ??HalLcdWriteString_2
     420              sln = MAX_LCD_CHARS;
-   \   000049   75..10       MOV     ?V0 + 2,#0x10
     421          
     422            if ( option == HAL_LCD_LINE_1 ) {
-   \                     ??HalLcdWriteString_2:
-   \   00004C   E5..         MOV     A,?V0 + 1
-   \   00004E   7033         JNZ     ??HalLcdWriteString_3
     423              // Line 1 gets saved for later
     424              osal_memcpy( Lcd_Line1, str, sln );
-   \   000050                ; Setup parameters for call to function osal_memcpy
-   \   000050   85..82       MOV     DPL,?XSP + 0
-   \   000053   85..83       MOV     DPH,?XSP + 1
-   \   000056   12....       LCALL   ?Subroutine1 & 0xFFFF
-   \                     ??CrossCallReturnLabel_4:
-   \   000059   12....       LCALL   ?PUSH_XSTACK_I_THREE
-   \   00005C   AC..         MOV     R4,?V0 + 2
-   \   00005E   7D00         MOV     R5,#0x0
-   \   000060   90....       MOV     DPTR,#Lcd_Line1
-   \   000063   E0           MOVX    A,@DPTR
-   \   000064   FA           MOV     R2,A
-   \   000065   A3           INC     DPTR
-   \   000066   E0           MOVX    A,@DPTR
-   \   000067   FB           MOV     R3,A
-   \   000068   12....       LCALL   ??Subroutine5_0 & 0xFFFF
-   \                     ??CrossCallReturnLabel_19:
-   \   00006B   12....       LCALL   ?DEALLOC_XSTACK8
     425              Lcd_Line1[sln] = '\0';
-   \   00006E   A8..         MOV     R0,?V0 + 2
-   \   000070   90....       MOV     DPTR,#Lcd_Line1
-   \   000073   E0           MOVX    A,@DPTR
-   \   000074   28           ADD     A,R0
-   \   000075   FA           MOV     R2,A
-   \   000076   A3           INC     DPTR
-   \   000077   E0           MOVX    A,@DPTR
-   \   000078   3400         ADDC    A,#0x0
-   \   00007A   8A82         MOV     DPL,R2
-   \   00007C   F583         MOV     DPH,A
-   \   00007E   E4           CLR     A
-   \   00007F   F0           MOVX    @DPTR,A
-   \   000080   02....       LJMP    ??HalLcdWriteString_4 & 0xFFFF
     426            }
     427            else {
     428              // Line 2 triggers action
     429              x = (byte)osal_strlen( (char*)Lcd_Line1 );
-   \                     ??HalLcdWriteString_3:
-   \   000083                ; Setup parameters for call to function osal_strlen
-   \   000083   90....       MOV     DPTR,#Lcd_Line1
-   \   000086   12....       LCALL   ?Subroutine4 & 0xFFFF
-   \                     ??CrossCallReturnLabel_15:
-   \   000089   F5..         MOV     ?V0 + 0,A
     430              bln = x + 1 + sln + 1;
     431              buf = osal_mem_alloc( bln );
-   \   00008B                ; Setup parameters for call to function osal_mem_alloc
-   \   00008B   E5..         MOV     A,?V0 + 2
-   \   00008D   25..         ADD     A,?V0 + 0
-   \   00008F   2402         ADD     A,#0x2
-   \   000091   FA           MOV     R2,A
-   \   000092   7B00         MOV     R3,#0x0
-   \   000094   12....       LCALL   ??osal_mem_alloc?relay
-   \   000097   8A..         MOV     ?V0 + 4,R2
-   \   000099   8B..         MOV     ?V0 + 5,R3
-   \   00009B   AE..         MOV     R6,?V0 + 4
-   \   00009D   AF..         MOV     R7,?V0 + 5
     432              if ( buf != NULL ) {
-   \   00009F   EE           MOV     A,R6
-   \   0000A0   7001         JNZ     ??HalLcdWriteString_5
-   \   0000A2   EF           MOV     A,R7
-   \                     ??HalLcdWriteString_5:
-   \   0000A3   6069         JZ      ??HalLcdWriteString_4
     433                // Concatenate strings
     434                osal_memcpy( buf, Lcd_Line1, x );
-   \   0000A5                ; Setup parameters for call to function osal_memcpy
-   \   0000A5   90....       MOV     DPTR,#Lcd_Line1
-   \   0000A8   12....       LCALL   ?Subroutine1 & 0xFFFF
-   \                     ??CrossCallReturnLabel_5:
-   \   0000AB   12....       LCALL   ?PUSH_XSTACK_I_THREE
-   \   0000AE   AC..         MOV     R4,?V0 + 0
-   \   0000B0   7D00         MOV     R5,#0x0
-   \   0000B2   12....       LCALL   ??Subroutine5_0 & 0xFFFF
-   \                     ??CrossCallReturnLabel_20:
-   \   0000B5   12....       LCALL   ?DEALLOC_XSTACK8
     435                buf[x++] = ' ';
-   \   0000B8   85....       MOV     ?V0 + 4,?V0 + 0
-   \   0000BB   EE           MOV     A,R6
-   \   0000BC   25..         ADD     A,?V0 + 4
-   \   0000BE   F582         MOV     DPL,A
-   \   0000C0   EF           MOV     A,R7
-   \   0000C1   12....       LCALL   ??Subroutine0_0 & 0xFFFF
-   \                     ??CrossCallReturnLabel_0:
-   \   0000C4   05..         INC     ?V0 + 0
-   \   0000C6                ; Setup parameters for call to function osal_memcpy
-   \   0000C6   85..82       MOV     DPL,?XSP + 0
-   \   0000C9   85..83       MOV     DPH,?XSP + 1
-   \   0000CC   E0           MOVX    A,@DPTR
-   \   0000CD   F5..         MOV     ?V0 + 4,A
-   \   0000CF   A3           INC     DPTR
-   \   0000D0   E0           MOVX    A,@DPTR
-   \   0000D1   F5..         MOV     ?V0 + 5,A
-   \   0000D3   78..         MOV     R0,#?V0 + 4
-   \   0000D5   12....       LCALL   ?PUSH_XSTACK_I_THREE
-   \   0000D8   AC..         MOV     R4,?V0 + 2
-   \   0000DA   7D00         MOV     R5,#0x0
-   \   0000DC   85....       MOV     ?V0 + 4,?V0 + 0
-   \   0000DF   EE           MOV     A,R6
-   \   0000E0   25..         ADD     A,?V0 + 4
-   \   0000E2   FA           MOV     R2,A
-   \   0000E3   EF           MOV     A,R7
-   \   0000E4   3400         ADDC    A,#0x0
-   \   0000E6   FB           MOV     R3,A
-   \   0000E7   12....       LCALL   ??Subroutine5_0 & 0xFFFF
-   \                     ??CrossCallReturnLabel_21:
-   \   0000EA   12....       LCALL   ?DEALLOC_XSTACK8
     436                osal_memcpy( &buf[x], str, sln );
     437                buf[x+sln] = '\0';
-   \   0000ED   E5..         MOV     A,?V0 + 2
-   \   0000EF   25..         ADD     A,?V0 + 4
-   \   0000F1   F8           MOV     R0,A
-   \   0000F2   E4           CLR     A
-   \   0000F3   3400         ADDC    A,#0x0
-   \   0000F5   F9           MOV     R1,A
-   \   0000F6   EE           MOV     A,R6
-   \   0000F7   28           ADD     A,R0
-   \   0000F8   F582         MOV     DPL,A
-   \   0000FA   EF           MOV     A,R7
-   \   0000FB   39           ADDC    A,R1
-   \   0000FC   F583         MOV     DPH,A
-   \   0000FE   E4           CLR     A
-   \   0000FF   F0           MOVX    @DPTR,A
     438                // Send it out
     439          #ifdef ZTOOL_PORT
     440                debug_str( (byte*)buf );
-   \   000100                ; Setup parameters for call to function debug_str
-   \   000100   EE           MOV     A,R6
-   \   000101   FA           MOV     R2,A
-   \   000102   EF           MOV     A,R7
-   \   000103   FB           MOV     R3,A
-   \   000104   12....       LCALL   ??debug_str?relay
     441          #endif
     442                osal_mem_free( buf );
-   \   000107                ; Setup parameters for call to function osal_mem_free
-   \   000107   EE           MOV     A,R6
-   \   000108   FA           MOV     R2,A
-   \   000109   EF           MOV     A,R7
-   \   00010A   FB           MOV     R3,A
-   \   00010B   12....       LCALL   ??osal_mem_free?relay
     443              }
     444            }
     445          #endif // LCD_SD
     446          
     447          #ifdef LCD_HW
     448            lcdUpdateLine( option, (byte*)str );
-   \                     ??HalLcdWriteString_4:
-   \   00010E                ; Setup parameters for call to function LCD_write_english_string
-   \   00010E   85..82       MOV     DPL,?XSP + 0
-   \   000111   85..83       MOV     DPH,?XSP + 1
-   \   000114   E0           MOVX    A,@DPTR
-   \   000115   FC           MOV     R4,A
-   \   000116   A3           INC     DPTR
-   \   000117   E0           MOVX    A,@DPTR
-   \   000118   FD           MOV     R5,A
-   \   000119   AA..         MOV     R2,?V0 + 1
-   \   00011B   7900         MOV     R1,#0x0
-   \   00011D   12....       LCALL   ??LCD_write_english_string?relay
     449          #endif
     450          
     451          #endif /* HAL_LCD */
     452          
     453          }
-   \   000120   7402         MOV     A,#0x2
-   \   000122   12....       LCALL   ?DEALLOC_XSTACK8
-   \   000125   7F07         MOV     R7,#0x7
-   \   000127   02....       LJMP    ?BANKED_LEAVE_XDATA
-
-   \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine4:
-   \   000000   E0           MOVX    A,@DPTR
-   \   000001   FA           MOV     R2,A
-   \   000002   A3           INC     DPTR
-   \   000003   E0           MOVX    A,@DPTR
-   \   000004   FB           MOV     R3,A
-   \   000005   12....       LCALL   ??osal_strlen?relay
-   \   000008   EA           MOV     A,R2
-   \   000009   22           RET
-
-   \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine1:
-   \   000000   E0           MOVX    A,@DPTR
-   \   000001   F5..         MOV     ?V0 + 4,A
-   \   000003   A3           INC     DPTR
-   \   000004   E0           MOVX    A,@DPTR
-   \   000005   F5..         MOV     ?V0 + 5,A
-   \   000007   75..00       MOV     ?V0 + 6,#0x0
-   \   00000A   78..         MOV     R0,#?V0 + 4
-   \   00000C   22           RET
-
-   \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine0:
-   \   000000   85..82       MOV     DPL,?XSP + 0
-   \   000003   85..83       MOV     DPH,?XSP + 1
-   \   000006   E582         MOV     A,DPL
-   \   000008   25..         ADD     A,?V0 + 0
-   \   00000A   F582         MOV     DPL,A
-   \   00000C   E583         MOV     A,DPH
-   \                     ??Subroutine0_0:
-   \   00000E   3400         ADDC    A,#0x0
-   \   000010   F583         MOV     DPH,A
-   \   000012   7420         MOV     A,#0x20
-   \   000014   F0           MOVX    @DPTR,A
-   \   000015   22           RET
-
-   \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine5:
-   \   000000   AA82         MOV     R2,DPL
-   \   000002   AB83         MOV     R3,DPH
-   \                     ??Subroutine5_0:
-   \   000004   12....       LCALL   ??osal_memcpy?relay
-   \   000007   7403         MOV     A,#0x3
-   \   000009   22           RET
+   \   000000   02....       LJMP    ?BRET
     454          
     455          /**************************************************************************************************
     456           * @fn      HalLcdWriteValue
@@ -1274,56 +774,44 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Components\hal\target\CC2430EB\hal_lcd.c
    \   000005                ; Auto size: 25
    \   000005   74E7         MOV     A,#-0x19
    \   000007   12....       LCALL   ?ALLOC_XSTACK8
-   \   00000A   7427         MOV     A,#0x27
-   \   00000C   12....       LCALL   ?XSTACK_DISP0_8
-   \   00000F   E0           MOVX    A,@DPTR
-   \   000010   FE           MOV     R6,A
     468          #if (HAL_LCD == TRUE)
     469            uint8 buf[LCD_MAX_BUF];
     470          
     471            _ltoa( value, &buf[0], radix );
-   \   000011                ; Setup parameters for call to function _ltoa
-   \   000011   85..82       MOV     DPL,?XSP + 0
-   \   000014   85..83       MOV     DPH,?XSP + 1
-   \   000017   8582..       MOV     ?V0 + 4,DPL
-   \   00001A   8583..       MOV     ?V0 + 5,DPH
-   \   00001D   78..         MOV     R0,#?V0 + 4
-   \   00001F   12....       LCALL   ?PUSH_XSTACK_I_TWO
-   \   000022   12....       LCALL   ??Subroutine6_1 & 0xFFFF
-   \                     ??CrossCallReturnLabel_26:
-   \   000025   12....       LCALL   ?DEALLOC_XSTACK8
+   \   00000A                ; Setup parameters for call to function _ltoa
+   \   00000A   85..82       MOV     DPL,?XSP + 0
+   \   00000D   85..83       MOV     DPH,?XSP + 1
+   \   000010   8582..       MOV     ?V0 + 4,DPL
+   \   000013   8583..       MOV     ?V0 + 5,DPH
+   \   000016   78..         MOV     R0,#?V0 + 4
+   \   000018   12....       LCALL   ?PUSH_XSTACK_I_TWO
+   \   00001B   12....       LCALL   ??Subroutine1_1 & 0xFFFF
+   \                     ??CrossCallReturnLabel_6:
+   \   00001E                REQUIRE ?Subroutine5
+   \   00001E                ; // Fall through to label ?Subroutine5
     472            HalLcdWriteString( (char*)buf, option );
-   \   000028                ; Setup parameters for call to function HalLcdWriteString
-   \   000028   EE           MOV     A,R6
-   \   000029   F9           MOV     R1,A
-   \   00002A                REQUIRE ?Subroutine9
-   \   00002A                ; // Fall through to label ?Subroutine9
     473          #endif /* HAL_LCD */
     474          }
 
    \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine9:
-   \   000000   85..82       MOV     DPL,?XSP + 0
-   \   000003   85..83       MOV     DPH,?XSP + 1
-   \   000006   AA82         MOV     R2,DPL
-   \   000008   AB83         MOV     R3,DPH
-   \   00000A   12....       LCALL   ??HalLcdWriteString?relay
-   \   00000D   7419         MOV     A,#0x19
-   \   00000F   12....       LCALL   ?DEALLOC_XSTACK8
-   \   000012   7F06         MOV     R7,#0x6
-   \   000014   02....       LJMP    ?BANKED_LEAVE_XDATA
+   \                     ?Subroutine5:
+   \   000000   12....       LCALL   ?DEALLOC_XSTACK8
+   \   000003   7419         MOV     A,#0x19
+   \   000005   12....       LCALL   ?DEALLOC_XSTACK8
+   \   000008   7F06         MOV     R7,#0x6
+   \   00000A   02....       LJMP    ?BANKED_LEAVE_XDATA
 
    \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine6:
+   \                     ?Subroutine1:
    \   000000   A9..         MOV     R1,?V0 + 3
    \   000002   8E..         MOV     ?V0 + 0,R6
    \   000004   8F..         MOV     ?V0 + 1,R7
    \   000006   AA..         MOV     R2,?V0 + 0
    \   000008   AB..         MOV     R3,?V0 + 1
-   \                     ??Subroutine6_0:
+   \                     ??Subroutine1_0:
    \   00000A   7C00         MOV     R4,#0x0
    \   00000C   7D00         MOV     R5,#0x0
-   \                     ??Subroutine6_1:
+   \                     ??Subroutine1_1:
    \   00000E   12....       LCALL   ??_ltoa?relay
    \   000011   7402         MOV     A,#0x2
    \   000013   22           RET
@@ -1343,30 +831,14 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Components\hal\target\CC2430EB\hal_lcd.c
     486          void HalLcdWriteScreen( char *line1, char *line2 )
    \                     HalLcdWriteScreen:
     487          {
-   \   000000   74F7         MOV     A,#-0x9
-   \   000002   12....       LCALL   ?BANKED_ENTER_XDATA
-   \   000005                ; Saved register size: 9
-   \   000005                ; Auto size: 0
-   \   000005   EC           MOV     A,R4
-   \   000006   FE           MOV     R6,A
-   \   000007   ED           MOV     A,R5
-   \   000008   FF           MOV     R7,A
+   \   000000                ; Saved register size: 0
+   \   000000                ; Auto size: 0
     488          #if (HAL_LCD == TRUE)
     489            HalLcdWriteString( line1, HAL_LCD_LINE_1 );
-   \   000009                ; Setup parameters for call to function HalLcdWriteString
-   \   000009   7900         MOV     R1,#0x0
-   \   00000B   12....       LCALL   ??HalLcdWriteString?relay
     490            HalLcdWriteString( line2, HAL_LCD_LINE_2 );
-   \   00000E                ; Setup parameters for call to function HalLcdWriteString
-   \   00000E   7902         MOV     R1,#0x2
-   \   000010   EE           MOV     A,R6
-   \   000011   FA           MOV     R2,A
-   \   000012   EF           MOV     A,R7
-   \   000013   FB           MOV     R3,A
-   \   000014   12....       LCALL   ??HalLcdWriteString?relay
     491          #endif /* HAL_LCD */
     492          }
-   \   000017   02....       LJMP    ?Subroutine8 & 0xFFFF
+   \   000000   02....       LJMP    ?BRET
     493          
     494          /**************************************************************************************************
     495           * @fn      HalLcdWriteStringValue
@@ -1398,52 +870,62 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Components\hal\target\CC2430EB\hal_lcd.c
    \   000010   ED           MOV     A,R5
    \   000011   FF           MOV     R7,A
    \   000012   89..         MOV     ?V0 + 3,R1
-   \   000014   7427         MOV     A,#0x27
-   \   000016   12....       LCALL   ?XSTACK_DISP0_8
-   \   000019   E0           MOVX    A,@DPTR
-   \   00001A   F5..         MOV     ?V0 + 5,A
     508          #if (HAL_LCD == TRUE)
     509            uint8 tmpLen;
     510            uint8 buf[LCD_MAX_BUF];
     511            uint32 err;
     512          
     513            tmpLen = (uint8)osal_strlen( (char*)title );
-   \   00001C                ; Setup parameters for call to function osal_strlen
-   \   00001C   12....       LCALL   ??osal_strlen?relay
+   \   000014                ; Setup parameters for call to function osal_strlen
+   \   000014   12....       LCALL   ?Subroutine3 & 0xFFFF
     514            osal_memcpy( buf, title, tmpLen );
-   \   00001F                ; Setup parameters for call to function osal_memcpy
-   \   00001F   75..00       MOV     ?V0 + 2,#0x0
-   \   000022   78..         MOV     R0,#?V0 + 0
-   \   000024   12....       LCALL   ?PUSH_XSTACK_I_THREE
-   \   000027   EA           MOV     A,R2
-   \   000028   F5..         MOV     ?V0 + 0,A
-   \   00002A   FC           MOV     R4,A
-   \   00002B   7D00         MOV     R5,#0x0
-   \   00002D   7403         MOV     A,#0x3
-   \   00002F   12....       LCALL   ?XSTACK_DISP0_8
-   \   000032   12....       LCALL   ?Subroutine5 & 0xFFFF
-   \                     ??CrossCallReturnLabel_16:
-   \   000035   12....       LCALL   ?DEALLOC_XSTACK8
+   \                     ??CrossCallReturnLabel_9:
+   \   000017                ; Setup parameters for call to function osal_memcpy
+   \   000017   75..00       MOV     ?V0 + 2,#0x0
+   \   00001A   78..         MOV     R0,#?V0 + 0
+   \   00001C   12....       LCALL   ?PUSH_XSTACK_I_THREE
+   \   00001F   EA           MOV     A,R2
+   \   000020   FC           MOV     R4,A
+   \   000021   7D00         MOV     R5,#0x0
+   \   000023   7403         MOV     A,#0x3
+   \   000025   12....       LCALL   ?XSTACK_DISP0_8
+   \   000028   AA82         MOV     R2,DPL
+   \   00002A   AB83         MOV     R3,DPH
+   \   00002C   12....       LCALL   ??osal_memcpy?relay
+   \   00002F   7403         MOV     A,#0x3
+   \   000031   12....       LCALL   ?DEALLOC_XSTACK8
     515            buf[tmpLen] = ' ';
-   \   000038   12....       LCALL   ?Subroutine0 & 0xFFFF
+   \   000034   85..82       MOV     DPL,?XSP + 0
+   \   000037   85..83       MOV     DPH,?XSP + 1
+   \   00003A   E582         MOV     A,DPL
+   \   00003C   25..         ADD     A,?V0 + 4
+   \   00003E   F582         MOV     DPL,A
+   \   000040   E583         MOV     A,DPH
+   \   000042   3400         ADDC    A,#0x0
+   \   000044   F583         MOV     DPH,A
+   \   000046   7420         MOV     A,#0x20
+   \   000048   F0           MOVX    @DPTR,A
     516            err = (uint32)(value);
     517            _ltoa( err, &buf[tmpLen+1], format );
-   \                     ??CrossCallReturnLabel_1:
-   \   00003B                ; Setup parameters for call to function _ltoa
-   \   00003B   A3           INC     DPTR
-   \   00003C   8582..       MOV     ?V0 + 0,DPL
-   \   00003F   8583..       MOV     ?V0 + 1,DPH
-   \   000042   78..         MOV     R0,#?V0 + 0
-   \   000044   12....       LCALL   ?PUSH_XSTACK_I_TWO
-   \   000047   12....       LCALL   ?Subroutine6 & 0xFFFF
-   \                     ??CrossCallReturnLabel_22:
-   \   00004A   12....       LCALL   ?DEALLOC_XSTACK8
+   \   000049                ; Setup parameters for call to function _ltoa
+   \   000049   A3           INC     DPTR
+   \   00004A   8582..       MOV     ?V0 + 0,DPL
+   \   00004D   8583..       MOV     ?V0 + 1,DPH
+   \   000050   78..         MOV     R0,#?V0 + 0
+   \   000052   12....       LCALL   ?PUSH_XSTACK_I_TWO
+   \   000055   12....       LCALL   ?Subroutine1 & 0xFFFF
+   \                     ??CrossCallReturnLabel_2:
+   \   000058   80..         SJMP    ?Subroutine5
     518            HalLcdWriteString( (char*)buf, line );		
-   \   00004D                ; Setup parameters for call to function HalLcdWriteString
-   \   00004D   A9..         MOV     R1,?V0 + 5
-   \   00004F   02....       LJMP    ?Subroutine9 & 0xFFFF
     519          #endif /* HAL_LCD */
     520          }
+
+   \                                 In  segment BANKED_CODE, align 1, keep-with-next
+   \                     ?Subroutine3:
+   \   000000   12....       LCALL   ??osal_strlen?relay
+   \   000003   EA           MOV     A,R2
+   \   000004   F5..         MOV     ?V0 + 4,A
+   \   000006   22           RET
     521          
     522          /**************************************************************************************************
     523           * @fn      HalLcdWriteStringValue
@@ -1492,63 +974,63 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Components\hal\target\CC2430EB\hal_lcd.c
     543          
     544            tmpLen = (uint8)osal_strlen( (char*)title );
    \   000020                ; Setup parameters for call to function osal_strlen
-   \   000020   12....       LCALL   ??osal_strlen?relay
-   \   000023   EA           MOV     A,R2
-   \   000024   F5..         MOV     ?V0 + 4,A
+   \   000020   12....       LCALL   ?Subroutine3 & 0xFFFF
     545            if ( tmpLen )
-   \   000026   601E         JZ      ??HalLcdWriteStringValueValue_0
+   \                     ??CrossCallReturnLabel_10:
+   \   000023   6024         JZ      ??HalLcdWriteStringValueValue_0
     546            {
     547              osal_memcpy( buf, title, tmpLen );
-   \   000028                ; Setup parameters for call to function osal_memcpy
-   \   000028   75..00       MOV     ?V0 + 2,#0x0
-   \   00002B   78..         MOV     R0,#?V0 + 0
-   \   00002D   12....       LCALL   ?PUSH_XSTACK_I_THREE
-   \   000030   EA           MOV     A,R2
-   \   000031   F5..         MOV     ?V0 + 0,A
-   \   000033   FC           MOV     R4,A
-   \   000034   7D00         MOV     R5,#0x0
-   \   000036   7403         MOV     A,#0x3
-   \   000038   12....       LCALL   ?XSTACK_DISP0_8
-   \   00003B   12....       LCALL   ?Subroutine5 & 0xFFFF
-   \                     ??CrossCallReturnLabel_17:
-   \   00003E   12....       LCALL   ?DEALLOC_XSTACK8
+   \   000025                ; Setup parameters for call to function osal_memcpy
+   \   000025   75..00       MOV     ?V0 + 2,#0x0
+   \   000028   78..         MOV     R0,#?V0 + 0
+   \   00002A   12....       LCALL   ?PUSH_XSTACK_I_THREE
+   \   00002D   EA           MOV     A,R2
+   \   00002E   F5..         MOV     ?V0 + 0,A
+   \   000030   FC           MOV     R4,A
+   \   000031   7D00         MOV     R5,#0x0
+   \   000033   7403         MOV     A,#0x3
+   \   000035   12....       LCALL   ?XSTACK_DISP0_8
+   \   000038   AA82         MOV     R2,DPL
+   \   00003A   AB83         MOV     R3,DPH
+   \   00003C   12....       LCALL   ??osal_memcpy?relay
+   \   00003F   7403         MOV     A,#0x3
+   \   000041   12....       LCALL   ?DEALLOC_XSTACK8
     548              buf[tmpLen++] = ' ';
-   \   000041   12....       LCALL   ?Subroutine0 & 0xFFFF
-   \                     ??CrossCallReturnLabel_2:
-   \   000044   05..         INC     ?V0 + 4
+   \   000044   12....       LCALL   ?Subroutine0 & 0xFFFF
+   \                     ??CrossCallReturnLabel_0:
+   \   000047   05..         INC     ?V0 + 4
     549            }
     550          
     551            err = (uint32)(value1);
     552            _ltoa( err, &buf[tmpLen], format1 );
    \                     ??HalLcdWriteStringValueValue_0:
-   \   000046                ; Setup parameters for call to function _ltoa
-   \   000046   85..82       MOV     DPL,?XSP + 0
-   \   000049   85..83       MOV     DPH,?XSP + 1
-   \   00004C   E582         MOV     A,DPL
-   \   00004E   25..         ADD     A,?V0 + 4
-   \   000050   F5..         MOV     ?V0 + 0,A
-   \   000052   E583         MOV     A,DPH
-   \   000054   3400         ADDC    A,#0x0
-   \   000056   F5..         MOV     ?V0 + 1,A
-   \   000058   78..         MOV     R0,#?V0 + 0
-   \   00005A   12....       LCALL   ?PUSH_XSTACK_I_TWO
-   \   00005D   12....       LCALL   ?Subroutine6 & 0xFFFF
-   \                     ??CrossCallReturnLabel_23:
-   \   000060   12....       LCALL   ?DEALLOC_XSTACK8
+   \   000049                ; Setup parameters for call to function _ltoa
+   \   000049   85..82       MOV     DPL,?XSP + 0
+   \   00004C   85..83       MOV     DPH,?XSP + 1
+   \   00004F   E582         MOV     A,DPL
+   \   000051   25..         ADD     A,?V0 + 4
+   \   000053   F5..         MOV     ?V0 + 0,A
+   \   000055   E583         MOV     A,DPH
+   \   000057   3400         ADDC    A,#0x0
+   \   000059   F5..         MOV     ?V0 + 1,A
+   \   00005B   78..         MOV     R0,#?V0 + 0
+   \   00005D   12....       LCALL   ?PUSH_XSTACK_I_TWO
+   \   000060   12....       LCALL   ?Subroutine1 & 0xFFFF
+   \                     ??CrossCallReturnLabel_3:
+   \   000063   12....       LCALL   ?DEALLOC_XSTACK8
     553            tmpLen = (uint8)osal_strlen( (char*)buf );
-   \   000063                ; Setup parameters for call to function osal_strlen
-   \   000063   85..82       MOV     DPL,?XSP + 0
-   \   000066   85..83       MOV     DPH,?XSP + 1
-   \   000069   AA82         MOV     R2,DPL
-   \   00006B   AB83         MOV     R3,DPH
-   \   00006D   12....       LCALL   ??osal_strlen?relay
-   \   000070   EA           MOV     A,R2
-   \   000071   F5..         MOV     ?V0 + 4,A
+   \   000066                ; Setup parameters for call to function osal_strlen
+   \   000066   85..82       MOV     DPL,?XSP + 0
+   \   000069   85..83       MOV     DPH,?XSP + 1
+   \   00006C   AA82         MOV     R2,DPL
+   \   00006E   AB83         MOV     R3,DPH
+   \   000070   12....       LCALL   ?Subroutine3 & 0xFFFF
     554          
     555            buf[tmpLen++] = ',';
+   \                     ??CrossCallReturnLabel_11:
    \   000073   F5..         MOV     ?V0 + 0,A
-   \   000075   12....       LCALL   ?Subroutine7 & 0xFFFF
-   \                     ??CrossCallReturnLabel_27:
+   \   000075   12....       LCALL   ?Subroutine2 & 0xFFFF
+   \                     ??CrossCallReturnLabel_7:
    \   000078   742C         MOV     A,#0x2c
    \   00007A   F0           MOVX    @DPTR,A
    \   00007B   05..         INC     ?V0 + 4
@@ -1557,7 +1039,7 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Components\hal\target\CC2430EB\hal_lcd.c
    \   000080   12....       LCALL   ?Subroutine0 & 0xFFFF
     557            err = (uint32)(value2);
     558            _ltoa( err, &buf[tmpLen], format2 );
-   \                     ??CrossCallReturnLabel_3:
+   \                     ??CrossCallReturnLabel_1:
    \   000083                ; Setup parameters for call to function _ltoa
    \   000083   7401         MOV     A,#0x1
    \   000085   25..         ADD     A,?V0 + 4
@@ -1578,30 +1060,34 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Components\hal\target\CC2430EB\hal_lcd.c
    \   0000A4   F9           MOV     R1,A
    \   0000A5   AA..         MOV     R2,?V0 + 6
    \   0000A7   AB..         MOV     R3,?V0 + 7
-   \   0000A9   12....       LCALL   ??Subroutine6_0 & 0xFFFF
-   \                     ??CrossCallReturnLabel_24:
+   \   0000A9   12....       LCALL   ??Subroutine1_0 & 0xFFFF
+   \                     ??CrossCallReturnLabel_4:
    \   0000AC   12....       LCALL   ?DEALLOC_XSTACK8
     559          
     560            HalLcdWriteString( (char *)buf, line );		
-   \   0000AF                ; Setup parameters for call to function HalLcdWriteString
-   \   0000AF   742C         MOV     A,#0x2c
-   \   0000B1   12....       LCALL   ?XSTACK_DISP0_8
-   \   0000B4   E0           MOVX    A,@DPTR
-   \   0000B5   F9           MOV     R1,A
-   \   0000B6   85..82       MOV     DPL,?XSP + 0
-   \   0000B9   85..83       MOV     DPH,?XSP + 1
-   \   0000BC   AA82         MOV     R2,DPL
-   \   0000BE   AB83         MOV     R3,DPH
-   \   0000C0   12....       LCALL   ??HalLcdWriteString?relay
     561          #endif /* HAL_LCD */
     562          }
-   \   0000C3   7419         MOV     A,#0x19
-   \   0000C5   12....       LCALL   ?DEALLOC_XSTACK8
-   \   0000C8   7F08         MOV     R7,#0x8
-   \   0000CA   02....       LJMP    ?BANKED_LEAVE_XDATA
+   \   0000AF   7419         MOV     A,#0x19
+   \   0000B1   12....       LCALL   ?DEALLOC_XSTACK8
+   \   0000B4   7F08         MOV     R7,#0x8
+   \   0000B6   02....       LJMP    ?BANKED_LEAVE_XDATA
 
    \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine7:
+   \                     ?Subroutine0:
+   \   000000   12....       LCALL   ?Subroutine4 & 0xFFFF
+   \                     ??CrossCallReturnLabel_12:
+   \   000003   7420         MOV     A,#0x20
+   \   000005   F0           MOVX    @DPTR,A
+   \   000006   22           RET
+
+   \                                 In  segment BANKED_CODE, align 1, keep-with-next
+   \                     ?Subroutine2:
+   \   000000   12....       LCALL   ?Subroutine4 & 0xFFFF
+   \                     ??CrossCallReturnLabel_13:
+   \   000003   22           RET
+
+   \                                 In  segment BANKED_CODE, align 1, keep-with-next
+   \                     ?Subroutine4:
    \   000000   85..82       MOV     DPL,?XSP + 0
    \   000003   85..83       MOV     DPH,?XSP + 1
    \   000006   E582         MOV     A,DPL
@@ -1644,45 +1130,43 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Components\hal\target\CC2430EB\hal_lcd.c
     582          
     583            /* Write the title: */
     584            HalLcdWriteString( title, HAL_LCD_LINE_1 );
-   \   00000C                ; Setup parameters for call to function HalLcdWriteString
-   \   00000C   7900         MOV     R1,#0x0
-   \   00000E   12....       LCALL   ??HalLcdWriteString?relay
     585          
     586            if ( value > 100 )
-   \   000011   EE           MOV     A,R6
-   \   000012   C3           CLR     C
-   \   000013   9465         SUBB    A,#0x65
-   \   000015   4002         JC      ??HalLcdDisplayPercentBar_0
+   \   00000C   C3           CLR     C
+   \   00000D   9465         SUBB    A,#0x65
+   \   00000F   4002         JC      ??HalLcdDisplayPercentBar_0
     587              value = 100;
-   \   000017   7E64         MOV     R6,#0x64
+   \   000011   7E64         MOV     R6,#0x64
     588          
     589            /* convert to blocks */
     590            percent = (byte)(value / 10);
    \                     ??HalLcdDisplayPercentBar_0:
-   \   000019   75F00A       MOV     B,#0xa
-   \   00001C   EE           MOV     A,R6
-   \   00001D   84           DIV     AB
-   \   00001E   F5..         MOV     ?V0 + 3,A
+   \   000013   75F00A       MOV     B,#0xa
+   \   000016   EE           MOV     A,R6
+   \   000017   84           DIV     AB
+   \   000018   F5..         MOV     ?V0 + 3,A
     591            leftOver = (byte)(value % 10);
-   \   000020   EE           MOV     A,R6
-   \   000021   75F00A       MOV     B,#0xa
-   \   000024   84           DIV     AB
-   \   000025   AFF0         MOV     R7,B
+   \   00001A   EE           MOV     A,R6
+   \   00001B   75F00A       MOV     B,#0xa
+   \   00001E   84           DIV     AB
+   \   00001F   AFF0         MOV     R7,B
     592          
     593            /* Make window */
     594            osal_memcpy( buf, "[          ]  ", 15 );
-   \   000027                ; Setup parameters for call to function osal_memcpy
-   \   000027   75....       MOV     ?V0 + 0,#(`?<Constant "[          ]  ">` & 0xff)
-   \   00002A   75....       MOV     ?V0 + 1,#((`?<Constant "[          ]  ">` >> 8) & 0xff)
-   \   00002D   75..00       MOV     ?V0 + 2,#0x0
-   \   000030   78..         MOV     R0,#?V0 + 0
-   \   000032   12....       LCALL   ?PUSH_XSTACK_I_THREE
-   \   000035   7C0F         MOV     R4,#0xf
-   \   000037   7D00         MOV     R5,#0x0
-   \   000039   7403         MOV     A,#0x3
-   \   00003B   12....       LCALL   ?XSTACK_DISP0_8
-   \   00003E   12....       LCALL   ?Subroutine5 & 0xFFFF
-   \                     ??CrossCallReturnLabel_18:
+   \   000021                ; Setup parameters for call to function osal_memcpy
+   \   000021   75....       MOV     ?V0 + 0,#(`?<Constant "[          ]  ">` & 0xff)
+   \   000024   75....       MOV     ?V0 + 1,#((`?<Constant "[          ]  ">` >> 8) & 0xff)
+   \   000027   75..00       MOV     ?V0 + 2,#0x0
+   \   00002A   78..         MOV     R0,#?V0 + 0
+   \   00002C   12....       LCALL   ?PUSH_XSTACK_I_THREE
+   \   00002F   7C0F         MOV     R4,#0xf
+   \   000031   7D00         MOV     R5,#0x0
+   \   000033   7403         MOV     A,#0x3
+   \   000035   12....       LCALL   ?XSTACK_DISP0_8
+   \   000038   AA82         MOV     R2,DPL
+   \   00003A   AB83         MOV     R3,DPH
+   \   00003C   12....       LCALL   ??osal_memcpy?relay
+   \   00003F   7403         MOV     A,#0x3
    \   000041   12....       LCALL   ?DEALLOC_XSTACK8
     595          
     596            for ( x = 0; x < percent; x ++ )
@@ -1691,8 +1175,8 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Components\hal\target\CC2430EB\hal_lcd.c
     598              buf[1+x] = '>';
    \                     ??HalLcdDisplayPercentBar_2:
    \   000046   85....       MOV     ?V0 + 0,?V0 + 2
-   \   000049   12....       LCALL   ?Subroutine7 & 0xFFFF
-   \                     ??CrossCallReturnLabel_28:
+   \   000049   12....       LCALL   ?Subroutine2 & 0xFFFF
+   \                     ??CrossCallReturnLabel_8:
    \   00004C   A3           INC     DPTR
    \   00004D   743E         MOV     A,#0x3e
    \   00004F   F0           MOVX    @DPTR,A
@@ -1736,42 +1220,17 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Components\hal\target\CC2430EB\hal_lcd.c
    \   000087   EE           MOV     A,R6
    \   000088   FA           MOV     R2,A
    \   000089   7B00         MOV     R3,#0x0
-   \   00008B   12....       LCALL   ??Subroutine6_0 & 0xFFFF
-   \                     ??CrossCallReturnLabel_25:
+   \   00008B   12....       LCALL   ??Subroutine1_0 & 0xFFFF
+   \                     ??CrossCallReturnLabel_5:
    \   00008E   12....       LCALL   ?DEALLOC_XSTACK8
     606          
     607            HalLcdWriteString( (char*)buf, HAL_LCD_LINE_2 );
-   \   000091                ; Setup parameters for call to function HalLcdWriteString
-   \   000091   7902         MOV     R1,#0x2
-   \   000093   85..82       MOV     DPL,?XSP + 0
-   \   000096   85..83       MOV     DPH,?XSP + 1
-   \   000099   AA82         MOV     R2,DPL
-   \   00009B   AB83         MOV     R3,DPH
-   \   00009D   12....       LCALL   ??HalLcdWriteString?relay
     608          #endif /* HAL_LCD */
     609          }
-   \   0000A0   7411         MOV     A,#0x11
-   \   0000A2   12....       LCALL   ?DEALLOC_XSTACK8
-   \   0000A5   7F04         MOV     R7,#0x4
-   \   0000A7   02....       LJMP    ?BANKED_LEAVE_XDATA
-
-   \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine2:
-   \   000000   12....       LCALL   ??LCD_write_byte?relay
-   \   000003                ; Setup parameters for call to function LCD_write_byte
-   \   000003                ; Setup parameters for call to function LCD_write_byte
-   \   000003   7A00         MOV     R2,#0x0
-   \   000005   7980         MOV     R1,#-0x80
-   \   000007   12....       LCALL   ??LCD_write_byte?relay
-   \   00000A   22           RET
-
-   \                                 In  segment XDATA_ID, align 1, keep-with-next
-   \                     `?<Initializer for <Constant "Figure8 Wireless"`:
-   \   000000   46696775     DB "Figure8 Wireless"
-   \            72653820
-   \            57697265
-   \            6C657373
-   \            00      
+   \   000091   7411         MOV     A,#0x11
+   \   000093   12....       LCALL   ?DEALLOC_XSTACK8
+   \   000096   7F04         MOV     R7,#0x4
+   \   000098   02....       LJMP    ?BANKED_LEAVE_XDATA
 
    \                                 In  segment XDATA_ID, align 1, keep-with-next
    \                     `?<Initializer for <Constant "[          ]  ">>`:
@@ -1779,26 +1238,6 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Components\hal\target\CC2430EB\hal_lcd.c
    \            20202020
    \            2020205D
    \            202000  
-
-   \                                 In  segment BANK_RELAYS, align 1
-   \                     ??Delay_nms?relay:
-   \   000000   12....       LCALL   ?BDISPATCH
-   \   000003   ......       DC24    Delay_nms
-
-   \                                 In  segment BANK_RELAYS, align 1
-   \                     ??LCD_write_byte?relay:
-   \   000000   12....       LCALL   ?BDISPATCH
-   \   000003   ......       DC24    LCD_write_byte
-
-   \                                 In  segment BANK_RELAYS, align 1
-   \                     ??initLcd?relay:
-   \   000000   12....       LCALL   ?BDISPATCH
-   \   000003   ......       DC24    initLcd
-
-   \                                 In  segment BANK_RELAYS, align 1
-   \                     ??LCD_write_english_string?relay:
-   \   000000   12....       LCALL   ?BDISPATCH
-   \   000003   ......       DC24    LCD_write_english_string
 
    \                                 In  segment BANK_RELAYS, align 1
    \                     ??HalLcdInit?relay:
@@ -1836,12 +1275,6 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Components\hal\target\CC2430EB\hal_lcd.c
    \   000003   ......       DC24    HalLcdDisplayPercentBar
 
    \                                 In  segment XDATA_I, align 1, keep-with-next
-   \                     `?<Constant "Figure8 Wireless">`:
-   \   000000                DS 17
-   \   000011                REQUIRE `?<Initializer for <Constant "Figure8 Wireless"`
-   \   000011                REQUIRE __INIT_XDATA_I
-
-   \                                 In  segment XDATA_I, align 1, keep-with-next
    \                     `?<Constant "[          ]  ">`:
    \   000000                DS 15
    \   00000F                REQUIRE `?<Initializer for <Constant "[          ]  ">>`
@@ -1854,107 +1287,48 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Components\hal\target\CC2430EB\hal_lcd.c
 
    Maximum stack usage in bytes:
 
-     Function                      ISTACK PSTACK XSTACK
-     --------                      ------ ------ ------
-     Delay_nms                         0      0      9
-     HalLcdDisplayPercentBar           1      0     32
-       -> HalLcdWriteString            0      0     58
-       -> osal_memcpy                  0      0     64
-       -> _ltoa                        0      0     62
-       -> HalLcdWriteString            0      0     58
-     HalLcdInit                        2      0      0
-       -> initLcd                      4      0      0
-     HalLcdWriteScreen                 0      0      9
-       -> HalLcdWriteString            0      0     18
-       -> HalLcdWriteString            0      0     18
-     HalLcdWriteString                 1      0     61
-       -> osal_mem_alloc               0      0     34
-       -> HalLcdWriteString            0      0     34
-       -> osal_strlen                  0      0     34
-       -> osal_memcpy                  0      0     40
-       -> osal_strlen                  0      0     34
-       -> osal_mem_alloc               0      0     34
-       -> osal_memcpy                  0      0     40
-       -> osal_memcpy                  0      0     40
-       -> debug_str                    0      0     34
-       -> osal_mem_free                0      0     34
-       -> LCD_write_english_string     0      0     34
-     HalLcdWriteStringValue            1      0     43
-       -> osal_strlen                  0      0     78
-       -> osal_memcpy                  0      0     84
-       -> _ltoa                        0      0     82
-       -> HalLcdWriteString            0      0     78
-     HalLcdWriteStringValueValue       1      0     48
-       -> osal_strlen                  0      0     82
-       -> osal_memcpy                  0      0     88
-       -> _ltoa                        0      0     86
-       -> osal_strlen                  0      0     82
-       -> _ltoa                        0      0     86
-       -> HalLcdWriteString            0      0     82
-     HalLcdWriteValue                  0      0     42
-       -> _ltoa                        0      0     82
-       -> HalLcdWriteString            0      0     78
-     LCD_write_byte                    0      0     13
-     LCD_write_english_string          0      0     30
-       -> LCD_write_byte               0      0     26
-       -> LCD_write_byte               0      0     26
-       -> LCD_write_byte               0      0     26
-       -> LCD_write_byte               0      0     26
-       -> LCD_write_byte               0      0     26
-       -> LCD_write_byte               0      0     26
-     initLcd                           0      0      9
-       -> Delay_nms                    0      0     18
-       -> Delay_nms                    0      0     18
-       -> LCD_write_byte               0      0     18
-       -> LCD_write_byte               0      0     18
-       -> LCD_write_byte               0      0     18
-       -> LCD_write_byte               0      0     18
-       -> LCD_write_byte               0      0     18
-       -> LCD_write_byte               0      0     18
-       -> LCD_write_byte               0      0     18
-       -> LCD_write_byte               0      0     18
-       -> LCD_write_byte               0      0     18
+     Function                    ISTACK PSTACK XSTACK
+     --------                    ------ ------ ------
+     HalLcdDisplayPercentBar         1      0     32
+       -> osal_memcpy                0      0     64
+       -> _ltoa                      0      0     62
+     HalLcdInit                      0      0      0
+     HalLcdWriteScreen               0      0      0
+     HalLcdWriteString               0      0      0
+     HalLcdWriteStringValue          1      0     43
+       -> osal_strlen                0      0     78
+       -> osal_memcpy                0      0     84
+       -> _ltoa                      0      0     82
+     HalLcdWriteStringValueValue     1      0     48
+       -> osal_strlen                0      0     82
+       -> osal_memcpy                0      0     88
+       -> _ltoa                      0      0     86
+       -> osal_strlen                0      0     82
+       -> _ltoa                      0      0     86
+     HalLcdWriteValue                0      0     42
+       -> _ltoa                      0      0     82
 
 
    Segment part sizes:
 
      Function/Label                 Bytes
      --------------                 -----
-     _A_P1                             1
-     P1SEL                             1
-     P1DIR                             1
      font6x8                         576
-     Lcd_Line1                         2
-     Delay_nms                        30
-     LCD_write_byte                   48
-     initLcd                          99
-     ?Subroutine8                      5
-     ?Subroutine3                      6
-     LCD_write_english_string        140
-     HalLcdInit                       21
-     HalLcdWriteString               298
-     ?Subroutine4                     10
-     ?Subroutine1                     13
-     ?Subroutine0                     22
-     ?Subroutine5                     10
-     HalLcdWriteValue                 42
-     ?Subroutine9                     23
-     ?Subroutine6                     20
-     HalLcdWriteScreen                26
-     HalLcdWriteStringValue           82
-     HalLcdWriteStringValueValue     205
-     ?Subroutine7                     19
-     HalLcdDisplayPercentBar         170
-     ?Subroutine2                     11
-     ?<Initializer for <Constant "Figure8 Wireless"
-                                      17
+     HalLcdInit                        3
+     HalLcdWriteString                 3
+     HalLcdWriteValue                 30
+     ?Subroutine5                     13
+     ?Subroutine1                     20
+     HalLcdWriteScreen                 3
+     HalLcdWriteStringValue           90
+     ?Subroutine3                      7
+     HalLcdWriteStringValueValue     185
+     ?Subroutine0                      7
+     ?Subroutine2                      4
+     ?Subroutine4                     19
+     HalLcdDisplayPercentBar         155
      ?<Initializer for <Constant "[          ]  ">>
                                       15
-     ??Delay_nms?relay                 6
-     ??LCD_write_byte?relay            6
-     ??initLcd?relay                   6
-     ??LCD_write_english_string?relay
-                                       6
      ??HalLcdInit?relay                6
      ??HalLcdWriteString?relay         6
      ??HalLcdWriteValue?relay          6
@@ -1964,21 +1338,17 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Components\hal\target\CC2430EB\hal_lcd.c
                                        6
      ??HalLcdDisplayPercentBar?relay
                                        6
-     ?<Constant "Figure8 Wireless">   17
      ?<Constant "[          ]  ">     15
 
  
- 1 300 bytes in segment BANKED_CODE
-    66 bytes in segment BANK_RELAYS
-   576 bytes in segment CODE_C
-     3 bytes in segment SFR_AN
-    32 bytes in segment XDATA_I
-    32 bytes in segment XDATA_ID
-     2 bytes in segment XDATA_Z
+ 539 bytes in segment BANKED_CODE
+  42 bytes in segment BANK_RELAYS
+ 576 bytes in segment CODE_C
+  15 bytes in segment XDATA_I
+  15 bytes in segment XDATA_ID
  
- 1 974 bytes of CODE  memory
-     0 bytes of DATA  memory (+ 3 bytes shared)
-    34 bytes of XDATA memory
+ 1 172 bytes of CODE  memory
+    15 bytes of XDATA memory
 
 Errors: none
 Warnings: none

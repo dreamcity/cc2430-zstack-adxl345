@@ -255,37 +255,37 @@ void Multiple_Read_ADXL345(void)
     Delay(500);
 } 
 
-void displayXYZ(char *pData){
+void displayXYZ(INT8U *pData){
   int  dis_data;
   uint16 temp;
   dis_data=(pData[1]<<8)+pData[0];
     temp=(uint16)((float)dis_data*3.9);  //计算数据和显示,查考ADXL345快速入门第4页
 	if(dis_data<0){
 	dis_data=-dis_data;
-        HalLcdWriteStringValue("X: -",temp,10,1);
+        HalLcdWriteStringValue("X: -",temp,10,0);
 	}
 	else
     {
-        HalLcdWriteStringValue("X:  ",temp,10,1);
+        HalLcdWriteStringValue("X:  ",temp,10,0);
     }
     dis_data=(pData[3]<<8)+pData[2];  //合成数据   
 	    temp=(uint16)((float)dis_data*3.9);  //计算数据和显示,查考ADXL345快速入门第4页
 	if(dis_data<0){
 	dis_data=-dis_data;
-        HalLcdWriteStringValue("Y: -",temp,10,2);
+        HalLcdWriteStringValue("Y: -",temp,10,1);
 	}
 	else
     {
-        HalLcdWriteStringValue("Y:  ",temp,10,2);
+        HalLcdWriteStringValue("Y:  ",temp,10,1);
     }
     dis_data=(pData[5]<<8)+pData[4];    //合成数据  
     temp=(uint16)((float)dis_data*3.9);  //计算数据和显示,查考ADXL345快速入门第4页
 	if(dis_data<0){
 	dis_data=-dis_data;
-        HalLcdWriteStringValue("Z: -",temp,10,3);
+        HalLcdWriteStringValue("Z: -",temp,10,2);
 	}
 	else
     {
-        HalLcdWriteStringValue("Z:  ",temp,10,3);
+        HalLcdWriteStringValue("Z:  ",temp,10,2);
     }
 }

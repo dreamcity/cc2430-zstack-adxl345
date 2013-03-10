@@ -1,6 +1,6 @@
 ###############################################################################
 #                                                                             #
-# IAR 8051 C/C++ Compiler V7.30B/W32                    19/Dec/2012  20:17:03 #
+# IAR 8051 C/C++ Compiler V7.30B/W32                    03/Jan/2013  17:10:51 #
 # Copyright 2004-2007 IAR Systems. All rights reserved.                       #
 #                                                                             #
 #    Core               =  plain                                              #
@@ -39,13 +39,14 @@
 #                          -DQUEUED_POLL_RATE=100 -DRESPONSE_POLL_RATE=100)   #
 #                          -DREJOIN_POLL_RATE=440 "C:\Texas                   #
 #                          Instruments\ZStack-1.4.3-1.2.1\Components\stack\zd #
-#                          o\ZDApp.c" -D CC2430EB -D REFLECTOR -D ZTOOL_P1    #
-#                          -D MT_TASK -D MT_ZDO_FUNC -D LCD_SUPPORTED=DEBUG   #
-#                          -lC "C:\Texas Instruments\ZStack-1.4.3-1.2.1\Proje #
-#                          cts\zstack\Samples\AXDApp\CC2430DB\RouterEB\List\" #
-#                           -lA "C:\Texas Instruments\ZStack-1.4.3-1.2.1\Proj #
-#                          ects\zstack\Samples\AXDApp\CC2430DB\RouterEB\List\ #
-#                          " --diag_suppress Pe001,Pa010 --diag_remark pe550  #
+#                          o\ZDApp.c" -D CC2430EB -D AXD_ROUTER -D REFLECTOR  #
+#                          -D ZTOOL_P1 -D MT_TASK -D xMT_ZDO_FUNC -D          #
+#                          xLCD_SUPPORTED=DEBUG -lC "C:\Texas                 #
+#                          Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\Sam #
+#                          ples\AXDApp\CC2430DB\RouterEB\List\" -lA           #
+#                          "C:\Texas Instruments\ZStack-1.4.3-1.2.1\Projects\ #
+#                          zstack\Samples\AXDApp\CC2430DB\RouterEB\List\"     #
+#                          --diag_suppress Pe001,Pa010 --diag_remark pe550    #
 #                          -o "C:\Texas Instruments\ZStack-1.4.3-1.2.1\Projec #
 #                          ts\zstack\Samples\AXDApp\CC2430DB\RouterEB\Obj\"   #
 #                          -e --require_prototypes -z9 --no_code_motion       #
@@ -277,12 +278,7 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Components\stack\zdo\ZDApp.c
     141           */
     142          
     143          #if defined( LCD_SUPPORTED )
-
-   \                                 In  segment XDATA_Z, align 1, keep-with-next
     144            byte MatchRsps = 0;
-   \                     MatchRsps:
-   \   000000                DS 1
-   \   000001                REQUIRE __INIT_XDATA_Z
     145          #endif
     146          
 
@@ -520,64 +516,62 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Components\stack\zdo\ZDApp.c
     284          
     285          #if defined( ZDO_USERDESC_RESPONSE )
     286            ZDApp_InitUserDesc();
-   \   00002E                ; Setup parameters for call to function ZDApp_InitUserDesc
-   \   00002E   12....       LCALL   ??ZDApp_InitUserDesc?relay
     287          #endif // ZDO_USERDESC_RESPONSE
     288          
     289            // set broadcast address mask to support broadcast filtering
     290            NLME_GetRequest(nwkCapabilityInfo, 0, &capabilities);
-   \   000031                ; Setup parameters for call to function NLME_GetRequest
-   \   000031   85..82       MOV     DPL,?XSP + 0
-   \   000034   85..83       MOV     DPH,?XSP + 1
-   \   000037   AC82         MOV     R4,DPL
-   \   000039   AD83         MOV     R5,DPH
-   \   00003B   7A00         MOV     R2,#0x0
-   \   00003D   7B00         MOV     R3,#0x0
-   \   00003F   798F         MOV     R1,#-0x71
-   \   000041   12....       LCALL   ??NLME_GetRequest?relay
+   \   00002E                ; Setup parameters for call to function NLME_GetRequest
+   \   00002E   85..82       MOV     DPL,?XSP + 0
+   \   000031   85..83       MOV     DPH,?XSP + 1
+   \   000034   AC82         MOV     R4,DPL
+   \   000036   AD83         MOV     R5,DPH
+   \   000038   7A00         MOV     R2,#0x0
+   \   00003A   7B00         MOV     R3,#0x0
+   \   00003C   798F         MOV     R1,#-0x71
+   \   00003E   12....       LCALL   ??NLME_GetRequest?relay
     291            NLME_SetBroadcastFilter( capabilities );
-   \   000044                ; Setup parameters for call to function NLME_SetBroadcastFilter
-   \   000044   85..82       MOV     DPL,?XSP + 0
-   \   000047   85..83       MOV     DPH,?XSP + 1
-   \   00004A   E0           MOVX    A,@DPTR
-   \   00004B   F9           MOV     R1,A
-   \   00004C   12....       LCALL   ??NLME_SetBroadcastFilter?relay
+   \   000041                ; Setup parameters for call to function NLME_SetBroadcastFilter
+   \   000041   85..82       MOV     DPL,?XSP + 0
+   \   000044   85..83       MOV     DPH,?XSP + 1
+   \   000047   E0           MOVX    A,@DPTR
+   \   000048   F9           MOV     R1,A
+   \   000049   12....       LCALL   ??NLME_SetBroadcastFilter?relay
     292          
     293            // Start the device?
     294            if ( devState != DEV_HOLD )
-   \   00004F   90....       MOV     DPTR,#devState
-   \   000052   E0           MOVX    A,@DPTR
-   \   000053   6009         JZ      ??ZDApp_Init_0
+   \   00004C   90....       MOV     DPTR,#devState
+   \   00004F   E0           MOVX    A,@DPTR
+   \   000050   6009         JZ      ??ZDApp_Init_0
     295            {
     296              ZDOInitDevice( 0 );
-   \   000055                ; Setup parameters for call to function ZDOInitDevice
-   \   000055   7A00         MOV     R2,#0x0
-   \   000057   7B00         MOV     R3,#0x0
-   \   000059   12....       LCALL   ??ZDOInitDevice?relay
-   \   00005C   800D         SJMP    ??ZDApp_Init_1
+   \   000052                ; Setup parameters for call to function ZDOInitDevice
+   \   000052   7A00         MOV     R2,#0x0
+   \   000054   7B00         MOV     R3,#0x0
+   \   000056   12....       LCALL   ??ZDOInitDevice?relay
+   \   000059   800D         SJMP    ??ZDApp_Init_1
     297            }
     298            else
     299            {
     300              // Blink LED to indicate HOLD_START
     301              HalLedBlink ( HAL_LED_4, 0, 50, 500 );
    \                     ??ZDApp_Init_0:
-   \   00005E                ; Setup parameters for call to function HalLedBlink
-   \   00005E   7CF4         MOV     R4,#-0xc
-   \   000060   7D01         MOV     R5,#0x1
-   \   000062   7B32         MOV     R3,#0x32
-   \   000064   7A00         MOV     R2,#0x0
-   \   000066   7908         MOV     R1,#0x8
-   \   000068   12....       LCALL   ??HalLedBlink?relay
+   \   00005B                ; Setup parameters for call to function HalLedBlink
+   \   00005B   7CF4         MOV     R4,#-0xc
+   \   00005D   7D01         MOV     R5,#0x1
+   \   00005F   7B32         MOV     R3,#0x32
+   \   000061   7A00         MOV     R2,#0x0
+   \   000063   7908         MOV     R1,#0x8
+   \   000065   12....       LCALL   ??HalLedBlink?relay
     302            }
     303            
     304            ZDApp_RegisterCBs();
    \                     ??ZDApp_Init_1:
-   \   00006B                ; Setup parameters for call to function ZDApp_RegisterCBs
-   \   00006B   12....       LCALL   ??ZDApp_RegisterCBs?relay
+   \   000068                ; Setup parameters for call to function ZDApp_RegisterCBs
+   \   000068   12....       LCALL   ??ZDApp_RegisterCBs?relay
     305          } /* ZDO_Init() */
-   \   00006E   7401         MOV     A,#0x1
-   \   000070   12....       LCALL   ?DEALLOC_XSTACK8
-   \   000073   02....       LJMP    ??Subroutine16_0 & 0xFFFF
+   \   00006B   7401         MOV     A,#0x1
+   \   00006D   12....       LCALL   ?DEALLOC_XSTACK8
+   \   000070   02....       LJMP    ??Subroutine16_0 & 0xFFFF
 
    \                                 In  segment BANKED_CODE, align 1, keep-with-next
    \                     ?Subroutine16:
@@ -5146,13 +5140,12 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Components\stack\zdo\ZDApp.c
        -> ZDAppCheckForHoldKey          4      0      2
        -> ZDO_Init                      4      0      2
        -> afRegister                    4      0      2
-       -> ZDApp_InitUserDesc            4      0      2
        -> NLME_GetRequest               4      0      2
        -> NLME_SetBroadcastFilter       4      0      2
        -> ZDOInitDevice                 4      0      2
        -> HalLedBlink                   4      0      2
        -> ZDApp_RegisterCBs             4      0      2
-     ZDApp_InitUserDesc                 0      0     32
+     ZDApp_InitUserDesc                 0      0     31
        -> osal_memset                   0      0     54
        -> osal_nv_item_init             0      0     58
        -> osal_nv_read                  0      0     62
@@ -5303,7 +5296,6 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Components\stack\zdo\ZDApp.c
      --------------                 -----
      _A_IEN0                           1
      WDCTL                             1
-     MatchRsps                         1
      zdoDiscCounter                    1
      ZDAppNwkAddr                      9
      continueJoining                   1
@@ -5316,7 +5308,7 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Components\stack\zdo\ZDApp.c
      devStartMode                      1
      retryCnt                          1
      ZDApp_epDesc                      6
-     ZDApp_Init                      118
+     ZDApp_Init                      115
      ?Subroutine16                    10
      ZDApp_SecInit                    10
      ZDApp_event_loop                202
@@ -5450,16 +5442,16 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Components\stack\zdo\ZDApp.c
      ??ZDApp_NVUpdate?relay            6
 
  
- 3 109 bytes in segment BANKED_CODE
+ 3 106 bytes in segment BANKED_CODE
    270 bytes in segment BANK_RELAYS
      2 bytes in segment SFR_AN
      9 bytes in segment XDATA_I
      9 bytes in segment XDATA_ID
-    18 bytes in segment XDATA_Z
+    17 bytes in segment XDATA_Z
  
- 3 388 bytes of CODE  memory
+ 3 385 bytes of CODE  memory
      0 bytes of DATA  memory (+ 2 bytes shared)
-    27 bytes of XDATA memory
+    26 bytes of XDATA memory
 
 Errors: none
 Warnings: none

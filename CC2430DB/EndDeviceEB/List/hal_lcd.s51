@@ -1,6 +1,10 @@
 ///////////////////////////////////////////////////////////////////////////////
 //                                                                            /
+<<<<<<< HEAD
 // IAR 8051 C/C++ Compiler V7.30B/W32                   10/Mar/2013  13:20:02 /
+=======
+// IAR 8051 C/C++ Compiler V7.30B/W32                   03/Jan/2013  20:31:37 /
+>>>>>>> develop
 // Copyright 2004-2007 IAR Systems. All rights reserved.                      /
 //                                                                            /
 //    Core               =  plain                                             /
@@ -41,8 +45,8 @@
 //                          "C:\Texas Instruments\ZStack-1.4.3-1.2.1\Componen /
 //                          ts\hal\target\CC2430EB\hal_lcd.c" -D CC2430EB -D  /
 //                          AXD_END -D NWK_AUTO_POLL -D REFLECTOR -D          /
-//                          ZTOOL_P1 -D MT_TASK -D xMT_ZDO_FUNC -D            /
-//                          LCD_SUPPORTED=DEBUG -D xPOWER_SAVING -lC          /
+//                          xZTOOL_P1 -D xMT_TASK -D xMT_ZDO_FUNC -D          /
+//                          xLCD_SUPPORTED=DEBUG -D xPOWER_SAVING -lC         /
 //                          "C:\Texas Instruments\ZStack-1.4.3-1.2.1\Projects /
 //                          \zstack\Samples\cc2430-zstack-adxl345\CC2430DB\En /
 //                          dDeviceEB\List\" -lA "C:\Texas                    /
@@ -150,16 +154,7 @@
         RSEG PSTACK:XDATA:NOROOT(0)
         RSEG XSTACK:XDATA:NOROOT(0)
 
-        EXTERN ??Delay_nms?relay
         EXTERN ??HalLcdWriteString?relay
-        EXTERN ??LCD_clear?relay
-        EXTERN ??LCD_set_XY?relay
-        EXTERN ??LCD_write_byte?relay
-        EXTERN ??LCD_write_char?relay
-        EXTERN ??LCD_write_english_string?relay
-        EXTERN ??SendByte?relay
-        EXTERN ??initLcd?relay
-        EXTERN ??lcdUpdateLine?relay
         EXTERN ?ALLOC_XSTACK8
         EXTERN ?BANKED_ENTER_XDATA
         EXTERN ?BANKED_LEAVE_XDATA
@@ -172,9 +167,7 @@
         EXTERN ?XSP
         EXTERN ?XSTACK_DISP0_8
         EXTERN __INIT_XDATA_I
-        EXTERN __INIT_XDATA_Z
 
-        FUNCTION ??Delay_nms?relay,0203H
         PUBLIC ??HalLcdDisplayPercentBar?relay
         FUNCTION ??HalLcdDisplayPercentBar?relay,0203H
         PUBLIC ??HalLcdInit?relay
@@ -189,38 +182,23 @@
         FUNCTION ??HalLcdWriteStringValueValue?relay,0203H
         PUBLIC ??HalLcdWriteValue?relay
         FUNCTION ??HalLcdWriteValue?relay,0203H
-        FUNCTION ??LCD_clear?relay,0203H
-        FUNCTION ??LCD_set_XY?relay,0203H
-        FUNCTION ??LCD_write_byte?relay,0203H
-        FUNCTION ??LCD_write_char?relay,0203H
-        FUNCTION ??LCD_write_english_string?relay,0203H
-        FUNCTION ??SendByte?relay,0203H
-        FUNCTION ??initLcd?relay,0203H
-        FUNCTION ??lcdUpdateLine?relay,0203H
-        FUNCTION Delay_nms,0203H
-        ARGFRAME XSTACK, 0, STACK
-        ARGFRAME IOVERLAY, 0, STATIC
-        ARGFRAME DOVERLAY, 0, STATIC
         PUBLIC HalLcdDisplayPercentBar
         FUNCTION HalLcdDisplayPercentBar,021203H
         ARGFRAME XSTACK, 0, STACK
         LOCFRAME ISTACK, 1, STACK
         LOCFRAME XSTACK, 39, STACK
         PUBLIC HalLcdInit
-        FUNCTION HalLcdInit,021203H
+        FUNCTION HalLcdInit,0203H
         ARGFRAME XSTACK, 0, STACK
-        LOCFRAME ISTACK, 2, STACK
         PUBLIC HalLcdWriteScreen
         FUNCTION HalLcdWriteScreen,021203H
         ARGFRAME XSTACK, 0, STACK
         LOCFRAME XSTACK, 10, STACK
         PUBLIC HalLcdWriteString
-        FUNCTION HalLcdWriteString,021203H
+        FUNCTION HalLcdWriteString,0203H
         ARGFRAME XSTACK, 45, STACK
         ARGFRAME IOVERLAY, 0, STATIC
         ARGFRAME DOVERLAY, 0, STATIC
-        LOCFRAME ISTACK, 1, STACK
-        LOCFRAME XSTACK, 21, STACK
         PUBLIC HalLcdWriteStringValue
         FUNCTION HalLcdWriteStringValue,021203H
         ARGFRAME XSTACK, 1, STACK
@@ -235,49 +213,7 @@
         FUNCTION HalLcdWriteValue,021203H
         ARGFRAME XSTACK, 1, STACK
         LOCFRAME XSTACK, 41, STACK
-        FUNCTION LCD_clear,021203H
-        ARGFRAME XSTACK, 0, STACK
-        ARGFRAME IOVERLAY, 0, STATIC
-        ARGFRAME DOVERLAY, 0, STATIC
-        LOCFRAME XSTACK, 9, STACK
-        FUNCTION LCD_set_XY,021203H
-        ARGFRAME XSTACK, 11, STACK
-        ARGFRAME IOVERLAY, 0, STATIC
-        ARGFRAME DOVERLAY, 0, STATIC
-        LOCFRAME XSTACK, 9, STACK
-        FUNCTION LCD_write_byte,021203H
-        ARGFRAME XSTACK, 11, STACK
-        ARGFRAME IOVERLAY, 0, STATIC
-        ARGFRAME DOVERLAY, 0, STATIC
-        LOCFRAME XSTACK, 9, STACK
-        FUNCTION LCD_write_char,021203H
-        ARGFRAME XSTACK, 11, STACK
-        ARGFRAME IOVERLAY, 0, STATIC
-        ARGFRAME DOVERLAY, 0, STATIC
-        LOCFRAME XSTACK, 10, STACK
-        FUNCTION LCD_write_english_string,021203H
-        ARGFRAME XSTACK, 9, STACK
-        ARGFRAME IOVERLAY, 0, STATIC
-        ARGFRAME DOVERLAY, 0, STATIC
-        LOCFRAME XSTACK, 11, STACK
-        PUBWEAK P1DIR
-        PUBWEAK P1SEL
-        FUNCTION SendByte,0203H
-        ARGFRAME XSTACK, 9, STACK
-        ARGFRAME IOVERLAY, 0, STATIC
-        ARGFRAME DOVERLAY, 0, STATIC
-        PUBWEAK _A_P1
         PUBLIC font6x8
-        FUNCTION initLcd,021203H
-        ARGFRAME XSTACK, 0, STACK
-        ARGFRAME IOVERLAY, 0, STATIC
-        ARGFRAME DOVERLAY, 0, STATIC
-        LOCFRAME ISTACK, 2, STACK
-        FUNCTION lcdUpdateLine,021203H
-        ARGFRAME XSTACK, 18, STACK
-        ARGFRAME IOVERLAY, 0, STATIC
-        ARGFRAME DOVERLAY, 0, STATIC
-        LOCFRAME XSTACK, 9, STACK
         
         CFI Names cfiNames0
         CFI StackFrame CFA_SP SP DATA
@@ -358,16 +294,10 @@
         CFI ?RET_LOW Frame(CFA_SP, 1)
         CFI EndCommon cfiCommon0
         
-osal_mem_alloc      SYMBOL "osal_mem_alloc"
+_ltoa               SYMBOL "_ltoa"
 osal_strlen         SYMBOL "osal_strlen"
 osal_memcpy         SYMBOL "osal_memcpy"
-debug_str           SYMBOL "debug_str"
-osal_mem_free       SYMBOL "osal_mem_free"
-_ltoa               SYMBOL "_ltoa"
 ??_ltoa?relay       SYMBOL "?relay", _ltoa
-??debug_str?relay   SYMBOL "?relay", debug_str
-??osal_mem_alloc?relay SYMBOL "?relay", osal_mem_alloc
-??osal_mem_free?relay SYMBOL "?relay", osal_mem_free
 ??osal_memcpy?relay SYMBOL "?relay", osal_memcpy
 ??osal_strlen?relay SYMBOL "?relay", osal_strlen
 HalLcdDisplayPercentBar SYMBOL "HalLcdDisplayPercentBar"
@@ -385,11 +315,11 @@ HalLcdWriteStringValueValue SYMBOL "HalLcdWriteStringValueValue"
 HalLcdWriteValue    SYMBOL "HalLcdWriteValue"
 ??HalLcdWriteValue?relay SYMBOL "?relay", HalLcdWriteValue
 
-        EXTERN osal_mem_alloc
-        FUNCTION osal_mem_alloc,0202H
+        EXTERN _ltoa
+        FUNCTION _ltoa,0202H
         ARGFRAME ISTACK, 0, STACK
         ARGFRAME PSTACK, 0, STACK
-        ARGFRAME XSTACK, 18, STACK
+        ARGFRAME XSTACK, 47, STACK
         ARGFRAME IOVERLAY, 0, STATIC
         ARGFRAME DOVERLAY, 0, STATIC
         EXTERN osal_strlen
@@ -406,35 +336,8 @@ HalLcdWriteValue    SYMBOL "HalLcdWriteValue"
         ARGFRAME XSTACK, 48, STACK
         ARGFRAME IOVERLAY, 0, STATIC
         ARGFRAME DOVERLAY, 0, STATIC
-        EXTERN debug_str
-        FUNCTION debug_str,0202H
-        ARGFRAME ISTACK, 0, STACK
-        ARGFRAME PSTACK, 0, STACK
-        ARGFRAME XSTACK, 18, STACK
-        ARGFRAME IOVERLAY, 0, STATIC
-        ARGFRAME DOVERLAY, 0, STATIC
-        EXTERN osal_mem_free
-        FUNCTION osal_mem_free,0202H
-        ARGFRAME ISTACK, 0, STACK
-        ARGFRAME PSTACK, 0, STACK
-        ARGFRAME XSTACK, 18, STACK
-        ARGFRAME IOVERLAY, 0, STATIC
-        ARGFRAME DOVERLAY, 0, STATIC
-        EXTERN _ltoa
-        FUNCTION _ltoa,0202H
-        ARGFRAME ISTACK, 0, STACK
-        ARGFRAME PSTACK, 0, STACK
-        ARGFRAME XSTACK, 47, STACK
-        ARGFRAME IOVERLAY, 0, STATIC
-        ARGFRAME DOVERLAY, 0, STATIC
         EXTERN ??_ltoa?relay
         FUNCTION ??_ltoa?relay,00H
-        EXTERN ??debug_str?relay
-        FUNCTION ??debug_str?relay,00H
-        EXTERN ??osal_mem_alloc?relay
-        FUNCTION ??osal_mem_alloc?relay,00H
-        EXTERN ??osal_mem_free?relay
-        FUNCTION ??osal_mem_free?relay,00H
         EXTERN ??osal_memcpy?relay
         FUNCTION ??osal_memcpy?relay,00H
         EXTERN ??osal_strlen?relay
@@ -485,21 +388,6 @@ HalLcdWriteValue    SYMBOL "HalLcdWriteValue"
 //   42  **************************************************************************************************/
 //   43 #include "hal_types.h"
 //   44 #include "hal_lcd.h"
-
-        ASEGN SFR_AN:DATA:NOROOT,090H
-// union <unnamed> volatile __sfr _A_P1
-_A_P1:
-        DS 1
-
-        ASEGN SFR_AN:DATA:NOROOT,0f4H
-// unsigned char volatile __sfr P1SEL
-P1SEL:
-        DS 1
-
-        ASEGN SFR_AN:DATA:NOROOT,0feH
-// unsigned char volatile __sfr P1DIR
-P1DIR:
-        DS 1
 //   45 #include "OSAL.h"
 //   46 #include "OnBoard.h"
 //   47 
@@ -663,12 +551,7 @@ font6x8:
 //  169  *                                       GLOBAL VARIABLES
 //  170  **************************************************************************************************/
 //  171 #ifdef LCD_HW
-
-        RSEG XDATA_Z:XDATA:NOROOT(0)
 //  172 static uint8 *Lcd_Line1;
-Lcd_Line1:
-        DS 2
-        REQUIRE __INIT_XDATA_Z
 //  173 #endif
 //  174 
 //  175 /**************************************************************************************************
@@ -677,105 +560,35 @@ Lcd_Line1:
 //  178 #if (defined LCD_HW) && (HAL_LCD == TRUE)
 //  179 
 //  180 /************ 延时函数 ******************************/
-
-        RSEG BANKED_CODE:CODE:NOROOT(0)
 //  181 static void Delay_nms(unsigned int Time) // 延时单位:ms
-Delay_nms:
-        CFI Block cfiBlock0 Using cfiCommon0
-        CFI Function Delay_nms
 //  182 {
-        ; Saved register size: 0
-        ; Auto size: 0
 //  183   unsigned int i;
 //  184   unsigned char j;
 //  185 
 //  186   for(i=0;i<Time;i++)
-        MOV     R0,#0x0
-        MOV     R1,#0x0
-??Delay_nms_0:
-        CLR     C
-        MOV     A,R0
-        SUBB    A,R2
-        MOV     A,R1
-        SUBB    A,R3
-        JNC     ??Delay_nms_1
 //  187   {
 //  188     for(j=0;j<123;j++){}
-        MOV     R4,#0x0
-??Delay_nms_2:
-        MOV     A,R4
-        CLR     C
-        SUBB    A,#0x7b
-        JNC     ??Delay_nms_3
-        INC     R4
-        SJMP    ??Delay_nms_2
 //  189   }
-??Delay_nms_3:
-        MOV     A,R0
-        ADD     A,#0x1
-        MOV     R0,A
-        MOV     A,R1
-        ADDC    A,#0x0
-        MOV     R1,A
-        SJMP    ??Delay_nms_0
 //  190 }
-??Delay_nms_1:
-        LJMP    ?BRET
-        CFI EndBlock cfiBlock0
 //  191 
 //  192 /******** 发送一个字节的数据到液晶控制器*************************/
-
-        RSEG BANKED_CODE:CODE:NOROOT(0)
 //  193 static void SendByte(unsigned char Data)
-SendByte:
-        CFI Block cfiBlock1 Using cfiCommon0
-        CFI Function SendByte
 //  194 {
-        ; Saved register size: 0
-        ; Auto size: 0
 //  195   unsigned char i;
 //  196   LCD_CE=0;
-        CLR     0x90.4
 //  197   for(i=0;i<8;i++)
-        MOV     R2,#0x0
-??SendByte_0:
-        MOV     A,R2
-        CLR     C
-        SUBB    A,#0x8
-        JNC     ??SendByte_1
 //  198   {
 //  199     LCD_SCL = 0;
-        CLR     0x90.5
 //  200     if(Data & 0x80)
-        MOV     A,R1
-        MOV     C,0xE0 /* A   */.7
-        JNC     ??SendByte_2
 //  201     {
 //  202       LCD_SDA = 1;
-        SETB    0x90.6
-        SJMP    ??SendByte_3
 //  203     }
 //  204     else LCD_SDA = 0;
-??SendByte_2:
-        CLR     0x90.6
 //  205     LCD_SCL = 1;
-??SendByte_3:
-        SETB    0x90.5
 //  206     Data<<=1;
-        MOV     A,R1
-        CLR     C
-        RLC     A
-        MOV     R1,A
 //  207   }
-        INC     R2
-        SJMP    ??SendByte_0
 //  208   LCD_CE=1;
-??SendByte_1:
-        SETB    0x90.4
 //  209 }
-        LJMP    ?BRET
-        CFI EndBlock cfiBlock1
-        REQUIRE _A_P1
 //  210 
 //  211 /*-----------------------------------------------------------------------
 //  212 LCD_write_byte    : 使用SPI接口写数据到LCD
@@ -786,69 +599,18 @@ SendByte:
 //  217 编写日期          ：2004-8-10
 //  218 最后修改日期      ：2004-8-13
 //  219 -----------------------------------------------------------------------*/
-
-        RSEG BANKED_CODE:CODE:NOROOT(0)
 //  220 static void LCD_write_byte(unsigned char data, unsigned char command)
-LCD_write_byte:
-        CFI Block cfiBlock2 Using cfiCommon0
-        CFI Function LCD_write_byte
 //  221 {
-        FUNCALL LCD_write_byte, SendByte
-        LOCFRAME ISTACK, 0, STACK
-        LOCFRAME PSTACK, 0, STACK
-        LOCFRAME XSTACK, 9, STACK
-        LOCFRAME IOVERLAY, 0, STATIC
-        LOCFRAME DOVERLAY, 0, STATIC
-        ARGFRAME ISTACK, 0, STACK
-        ARGFRAME PSTACK, 0, STACK
-        ARGFRAME XSTACK, 9, STACK
-        ARGFRAME IOVERLAY, 0, STATIC
-        ARGFRAME DOVERLAY, 0, STATIC
-        MOV     A,#-0x9
-        LCALL   ?BANKED_ENTER_XDATA
-        CFI DPH0 load(1, XDATA, add(CFA_XSP16, literal(-1)))
-        CFI DPL0 load(1, XDATA, add(CFA_XSP16, literal(-2)))
-        CFI ?BRET_EXT load(1, XDATA, add(CFA_XSP16, literal(-3)))
-        CFI ?RET_HIGH load(1, XDATA, add(CFA_XSP16, literal(-4)))
-        CFI ?RET_LOW load(1, XDATA, add(CFA_XSP16, literal(-5)))
-        CFI R7 load(1, XDATA, add(CFA_XSP16, literal(-6)))
-        CFI V0 load(1, XDATA, add(CFA_XSP16, literal(-7)))
-        CFI VB load(1, XDATA, add(CFA_XSP16, literal(-8)))
-        CFI R6 load(1, XDATA, add(CFA_XSP16, literal(-9)))
-        CFI CFA_SP SP+0
-        CFI CFA_XSP16 add(XSP16, 9)
-        ; Saved register size: 9
-        ; Auto size: 0
-        MOV     A,R1
-        MOV     R6,A
-        MOV     A,R2
 //  222   LCD_CE = 1 ;		 // 使能LCD
-        SETB    0x90.4
 //  223 
 //  224   if (command == 0)
-        JNZ     ??LCD_write_byte_0
 //  225     LCD_DC = 0;	        // 传送命令
-        CLR     0x90.7
-        SJMP    ??LCD_write_byte_1
 //  226   else
 //  227     LCD_DC = 1;		// 传送数据
-??LCD_write_byte_0:
-        SETB    0x90.7
 //  228   SendByte(data);
-??LCD_write_byte_1:
-        ; Setup parameters for call to function SendByte
-        MOV     A,R6
-        MOV     R1,A
-        LCALL   ??SendByte?relay
 //  229   LCD_CE = 0;	        // 关闭LCD
-        CLR     0x90.4
 //  230   LCD_DC = 1;	
-        SETB    0x90.7
 //  231 }
-        MOV     R7,#0x1
-        LJMP    ?BANKED_LEAVE_XDATA
-        CFI EndBlock cfiBlock2
-        REQUIRE _A_P1
 //  232 
 //  233 /*-----------------------------------------------------------------------
 //  234 LCD_clear         : LCD清屏函数
@@ -856,101 +618,16 @@ LCD_write_byte:
 //  236 编写日期          ：2004-8-10
 //  237 最后修改日期      ：2004-8-10
 //  238 -----------------------------------------------------------------------*/
-
-        RSEG BANKED_CODE:CODE:NOROOT(0)
 //  239 static void LCD_clear(void)
-LCD_clear:
-        CFI Block cfiBlock3 Using cfiCommon0
-        CFI Function LCD_clear
 //  240 {
-        FUNCALL LCD_clear, LCD_write_byte
-        LOCFRAME ISTACK, 0, STACK
-        LOCFRAME PSTACK, 0, STACK
-        LOCFRAME XSTACK, 9, STACK
-        LOCFRAME IOVERLAY, 0, STATIC
-        LOCFRAME DOVERLAY, 0, STATIC
-        ARGFRAME ISTACK, 0, STACK
-        ARGFRAME PSTACK, 0, STACK
-        ARGFRAME XSTACK, 9, STACK
-        ARGFRAME IOVERLAY, 0, STATIC
-        ARGFRAME DOVERLAY, 0, STATIC
-        FUNCALL LCD_clear, LCD_write_byte
-        LOCFRAME ISTACK, 0, STACK
-        LOCFRAME PSTACK, 0, STACK
-        LOCFRAME XSTACK, 9, STACK
-        LOCFRAME IOVERLAY, 0, STATIC
-        LOCFRAME DOVERLAY, 0, STATIC
-        ARGFRAME ISTACK, 0, STACK
-        ARGFRAME PSTACK, 0, STACK
-        ARGFRAME XSTACK, 9, STACK
-        ARGFRAME IOVERLAY, 0, STATIC
-        ARGFRAME DOVERLAY, 0, STATIC
-        FUNCALL LCD_clear, LCD_write_byte
-        LOCFRAME ISTACK, 0, STACK
-        LOCFRAME PSTACK, 0, STACK
-        LOCFRAME XSTACK, 9, STACK
-        LOCFRAME IOVERLAY, 0, STATIC
-        LOCFRAME DOVERLAY, 0, STATIC
-        ARGFRAME ISTACK, 0, STACK
-        ARGFRAME PSTACK, 0, STACK
-        ARGFRAME XSTACK, 9, STACK
-        ARGFRAME IOVERLAY, 0, STATIC
-        ARGFRAME DOVERLAY, 0, STATIC
-        MOV     A,#-0x9
-        LCALL   ?BANKED_ENTER_XDATA
-        CFI DPH0 load(1, XDATA, add(CFA_XSP16, literal(-1)))
-        CFI DPL0 load(1, XDATA, add(CFA_XSP16, literal(-2)))
-        CFI ?BRET_EXT load(1, XDATA, add(CFA_XSP16, literal(-3)))
-        CFI ?RET_HIGH load(1, XDATA, add(CFA_XSP16, literal(-4)))
-        CFI ?RET_LOW load(1, XDATA, add(CFA_XSP16, literal(-5)))
-        CFI R7 load(1, XDATA, add(CFA_XSP16, literal(-6)))
-        CFI V0 load(1, XDATA, add(CFA_XSP16, literal(-7)))
-        CFI VB load(1, XDATA, add(CFA_XSP16, literal(-8)))
-        CFI R6 load(1, XDATA, add(CFA_XSP16, literal(-9)))
-        CFI CFA_SP SP+0
-        CFI CFA_XSP16 add(XSP16, 9)
-        ; Saved register size: 9
-        ; Auto size: 0
 //  241   unsigned int i;
 //  242 
 //  243   LCD_write_byte(0x0c, 0);
-        ; Setup parameters for call to function LCD_write_byte
-        MOV     R2,#0x0
-        MOV     R1,#0xc
-        LCALL   ??LCD_write_byte?relay
 //  244   LCD_write_byte(0x80, 0);
-        ; Setup parameters for call to function LCD_write_byte
-        MOV     R2,#0x0
-        MOV     R1,#-0x80
-        LCALL   ??LCD_write_byte?relay
 //  245 
 //  246   for (i=0; i<504; i++)
-        MOV     R6,#0x0
-        MOV     R7,#0x0
-??LCD_clear_0:
-        CLR     C
-        MOV     A,R6
-        SUBB    A,#-0x8
-        MOV     A,R7
-        SUBB    A,#0x1
-        JNC     ??LCD_clear_1
 //  247     LCD_write_byte(0, 1);
-        ; Setup parameters for call to function LCD_write_byte
-        MOV     R2,#0x1
-        MOV     R1,#0x0
-        LCALL   ??LCD_write_byte?relay
-        MOV     A,R6
-        ADD     A,#0x1
-        MOV     R6,A
-        MOV     A,R7
-        ADDC    A,#0x0
-        MOV     R7,A
-        SJMP    ??LCD_clear_0
 //  248 }
-??LCD_clear_1:
-        MOV     R7,#0x1
-        LJMP    ?BANKED_LEAVE_XDATA
-        CFI EndBlock cfiBlock3
 //  249 
 //  250 /*-----------------------------------------------------------------------
 //  251 LCD_set_XY        : 设置LCD坐标函数
@@ -961,72 +638,11 @@ LCD_clear:
 //  256 编写日期          ：2004-8-10
 //  257 最后修改日期      ：2004-8-10
 //  258 -----------------------------------------------------------------------*/
-
-        RSEG BANKED_CODE:CODE:NOROOT(0)
 //  259 static void LCD_set_XY(unsigned char X, unsigned char Y)
-LCD_set_XY:
-        CFI Block cfiBlock4 Using cfiCommon0
-        CFI Function LCD_set_XY
 //  260 {
-        FUNCALL LCD_set_XY, LCD_write_byte
-        LOCFRAME ISTACK, 0, STACK
-        LOCFRAME PSTACK, 0, STACK
-        LOCFRAME XSTACK, 9, STACK
-        LOCFRAME IOVERLAY, 0, STATIC
-        LOCFRAME DOVERLAY, 0, STATIC
-        ARGFRAME ISTACK, 0, STACK
-        ARGFRAME PSTACK, 0, STACK
-        ARGFRAME XSTACK, 9, STACK
-        ARGFRAME IOVERLAY, 0, STATIC
-        ARGFRAME DOVERLAY, 0, STATIC
-        FUNCALL LCD_set_XY, LCD_write_byte
-        LOCFRAME ISTACK, 0, STACK
-        LOCFRAME PSTACK, 0, STACK
-        LOCFRAME XSTACK, 9, STACK
-        LOCFRAME IOVERLAY, 0, STATIC
-        LOCFRAME DOVERLAY, 0, STATIC
-        ARGFRAME ISTACK, 0, STACK
-        ARGFRAME PSTACK, 0, STACK
-        ARGFRAME XSTACK, 9, STACK
-        ARGFRAME IOVERLAY, 0, STATIC
-        ARGFRAME DOVERLAY, 0, STATIC
-        MOV     A,#-0x9
-        LCALL   ?BANKED_ENTER_XDATA
-        CFI DPH0 load(1, XDATA, add(CFA_XSP16, literal(-1)))
-        CFI DPL0 load(1, XDATA, add(CFA_XSP16, literal(-2)))
-        CFI ?BRET_EXT load(1, XDATA, add(CFA_XSP16, literal(-3)))
-        CFI ?RET_HIGH load(1, XDATA, add(CFA_XSP16, literal(-4)))
-        CFI ?RET_LOW load(1, XDATA, add(CFA_XSP16, literal(-5)))
-        CFI R7 load(1, XDATA, add(CFA_XSP16, literal(-6)))
-        CFI V0 load(1, XDATA, add(CFA_XSP16, literal(-7)))
-        CFI VB load(1, XDATA, add(CFA_XSP16, literal(-8)))
-        CFI R6 load(1, XDATA, add(CFA_XSP16, literal(-9)))
-        CFI CFA_SP SP+0
-        CFI CFA_XSP16 add(XSP16, 9)
-        ; Saved register size: 9
-        ; Auto size: 0
-        MOV     A,R1
-        MOV     R6,A
-        MOV     A,R2
-        MOV     R7,A
 //  261   LCD_write_byte(0x40 | Y, 0);	// column
-        ; Setup parameters for call to function LCD_write_byte
-        MOV     R2,#0x0
-        MOV     A,#0x40
-        ORL     A,R7
-        MOV     R1,A
-        LCALL   ??LCD_write_byte?relay
 //  262   LCD_write_byte(0x80 | X, 0);  // row
-        ; Setup parameters for call to function LCD_write_byte
-        MOV     R2,#0x0
-        MOV     A,#-0x80
-        ORL     A,R6
-        MOV     R1,A
-        LCALL   ??LCD_write_byte?relay
 //  263 }
-        MOV     R7,#0x1
-        LJMP    ?BANKED_LEAVE_XDATA
-        CFI EndBlock cfiBlock4
 //  264 
 //  265 /*-----------------------------------------------------------------------
 //  266 LCD_write_char    : 显示英文字符
@@ -1036,100 +652,14 @@ LCD_set_XY:
 //  270 编写日期          ：2004-8-10
 //  271 最后修改日期      ：2004-8-10
 //  272 -----------------------------------------------------------------------*/
-
-        RSEG BANKED_CODE:CODE:NOROOT(0)
 //  273 static void LCD_write_char(unsigned char c)
-LCD_write_char:
-        CFI Block cfiBlock5 Using cfiCommon0
-        CFI Function LCD_write_char
 //  274 {
-        FUNCALL LCD_write_char, LCD_write_byte
-        LOCFRAME ISTACK, 0, STACK
-        LOCFRAME PSTACK, 0, STACK
-        LOCFRAME XSTACK, 10, STACK
-        LOCFRAME IOVERLAY, 0, STATIC
-        LOCFRAME DOVERLAY, 0, STATIC
-        ARGFRAME ISTACK, 0, STACK
-        ARGFRAME PSTACK, 0, STACK
-        ARGFRAME XSTACK, 10, STACK
-        ARGFRAME IOVERLAY, 0, STATIC
-        ARGFRAME DOVERLAY, 0, STATIC
-        MOV     A,#-0xa
-        LCALL   ?BANKED_ENTER_XDATA
-        CFI DPH0 load(1, XDATA, add(CFA_XSP16, literal(-1)))
-        CFI DPL0 load(1, XDATA, add(CFA_XSP16, literal(-2)))
-        CFI ?BRET_EXT load(1, XDATA, add(CFA_XSP16, literal(-3)))
-        CFI ?RET_HIGH load(1, XDATA, add(CFA_XSP16, literal(-4)))
-        CFI ?RET_LOW load(1, XDATA, add(CFA_XSP16, literal(-5)))
-        CFI R7 load(1, XDATA, add(CFA_XSP16, literal(-6)))
-        CFI V1 load(1, XDATA, add(CFA_XSP16, literal(-7)))
-        CFI V0 load(1, XDATA, add(CFA_XSP16, literal(-8)))
-        CFI VB load(1, XDATA, add(CFA_XSP16, literal(-9)))
-        CFI R6 load(1, XDATA, add(CFA_XSP16, literal(-10)))
-        CFI CFA_SP SP+0
-        CFI CFA_XSP16 add(XSP16, 10)
-        ; Saved register size: 10
-        ; Auto size: 0
-        MOV     A,R1
-        MOV     R6,A
 //  275   unsigned char line;
 //  276 
 //  277   c -= 32;
-        MOV     A,#-0x20
-        ADD     A,R6
-        MOV     R6,A
 //  278   for (line=0; line<6; line++)
-        MOV     R7,#0x0
-??LCD_write_char_0:
-        MOV     A,R7
-        CLR     C
-        SUBB    A,#0x6
-        JNC     ??LCD_write_char_1
 //  279     LCD_write_byte(font6x8[c][line], 1);
-        ; Setup parameters for call to function LCD_write_byte
-        MOV     R2,#0x1
-        MOV     ?V0 + 0,R7
-        MOV     ?V0 + 1,#0x0
-        MOV     A,R6
-        MOV     R0,A
-        MOV     R1,#0x0
-        MOV     A,R0
-        MOV     B,#0x6
-        MUL     AB
-        XCH     A,R0
-        MOV     R3,B
-        MOV     B,#0x0
-        MUL     AB
-        ADD     A,R3
-        MOV     R3,A
-        MOV     B,#0x6
-        MOV     A,R1
-        MUL     AB
-        ADD     A,R3
-        MOV     R1,A
-        MOV     A,R0
-        ADD     A,#(font6x8 & 0xff)
-        MOV     R0,A
-        MOV     A,R1
-        ADDC    A,#((font6x8 >> 8) & 0xff)
-        MOV     R1,A
-        MOV     A,?V0 + 0
-        ADD     A,R0
-        MOV     DPL,A
-        MOV     A,?V0 + 1
-        ADDC    A,R1
-        MOV     DPH,A
-        CLR     A
-        MOVC    A,@A+DPTR
-        MOV     R1,A
-        LCALL   ??LCD_write_byte?relay
-        INC     R7
-        SJMP    ??LCD_write_char_0
 //  280 }
-??LCD_write_char_1:
-        MOV     R7,#0x2
-        LJMP    ?BANKED_LEAVE_XDATA
-        CFI EndBlock cfiBlock5
 //  281 
 //  282 /*-----------------------------------------------------------------------
 //  283 LCD_init          : 3310LCD初始化
@@ -1137,192 +667,28 @@ LCD_write_char:
 //  285 编写日期          ：2004-8-10
 //  286 最后修改日期      ：2004-8-10
 //  287 -----------------------------------------------------------------------*/
-
-        RSEG BANKED_CODE:CODE:NOROOT(0)
 //  288 static void initLcd(void)
-initLcd:
-        CFI Block cfiBlock6 Using cfiCommon0
-        CFI Function initLcd
 //  289 {
-        FUNCALL initLcd, Delay_nms
-        LOCFRAME ISTACK, 2, STACK
-        LOCFRAME PSTACK, 0, STACK
-        LOCFRAME XSTACK, 0, STACK
-        LOCFRAME IOVERLAY, 0, STATIC
-        LOCFRAME DOVERLAY, 0, STATIC
-        ARGFRAME ISTACK, 2, STACK
-        ARGFRAME PSTACK, 0, STACK
-        ARGFRAME XSTACK, 0, STACK
-        ARGFRAME IOVERLAY, 0, STATIC
-        ARGFRAME DOVERLAY, 0, STATIC
-        FUNCALL initLcd, Delay_nms
-        LOCFRAME ISTACK, 2, STACK
-        LOCFRAME PSTACK, 0, STACK
-        LOCFRAME XSTACK, 0, STACK
-        LOCFRAME IOVERLAY, 0, STATIC
-        LOCFRAME DOVERLAY, 0, STATIC
-        ARGFRAME ISTACK, 2, STACK
-        ARGFRAME PSTACK, 0, STACK
-        ARGFRAME XSTACK, 0, STACK
-        ARGFRAME IOVERLAY, 0, STATIC
-        ARGFRAME DOVERLAY, 0, STATIC
-        FUNCALL initLcd, LCD_write_byte
-        LOCFRAME ISTACK, 2, STACK
-        LOCFRAME PSTACK, 0, STACK
-        LOCFRAME XSTACK, 0, STACK
-        LOCFRAME IOVERLAY, 0, STATIC
-        LOCFRAME DOVERLAY, 0, STATIC
-        ARGFRAME ISTACK, 2, STACK
-        ARGFRAME PSTACK, 0, STACK
-        ARGFRAME XSTACK, 0, STACK
-        ARGFRAME IOVERLAY, 0, STATIC
-        ARGFRAME DOVERLAY, 0, STATIC
-        FUNCALL initLcd, LCD_write_byte
-        LOCFRAME ISTACK, 2, STACK
-        LOCFRAME PSTACK, 0, STACK
-        LOCFRAME XSTACK, 0, STACK
-        LOCFRAME IOVERLAY, 0, STATIC
-        LOCFRAME DOVERLAY, 0, STATIC
-        ARGFRAME ISTACK, 2, STACK
-        ARGFRAME PSTACK, 0, STACK
-        ARGFRAME XSTACK, 0, STACK
-        ARGFRAME IOVERLAY, 0, STATIC
-        ARGFRAME DOVERLAY, 0, STATIC
-        FUNCALL initLcd, LCD_write_byte
-        LOCFRAME ISTACK, 2, STACK
-        LOCFRAME PSTACK, 0, STACK
-        LOCFRAME XSTACK, 0, STACK
-        LOCFRAME IOVERLAY, 0, STATIC
-        LOCFRAME DOVERLAY, 0, STATIC
-        ARGFRAME ISTACK, 2, STACK
-        ARGFRAME PSTACK, 0, STACK
-        ARGFRAME XSTACK, 0, STACK
-        ARGFRAME IOVERLAY, 0, STATIC
-        ARGFRAME DOVERLAY, 0, STATIC
-        FUNCALL initLcd, LCD_write_byte
-        LOCFRAME ISTACK, 2, STACK
-        LOCFRAME PSTACK, 0, STACK
-        LOCFRAME XSTACK, 0, STACK
-        LOCFRAME IOVERLAY, 0, STATIC
-        LOCFRAME DOVERLAY, 0, STATIC
-        ARGFRAME ISTACK, 2, STACK
-        ARGFRAME PSTACK, 0, STACK
-        ARGFRAME XSTACK, 0, STACK
-        ARGFRAME IOVERLAY, 0, STATIC
-        ARGFRAME DOVERLAY, 0, STATIC
-        FUNCALL initLcd, LCD_write_byte
-        LOCFRAME ISTACK, 2, STACK
-        LOCFRAME PSTACK, 0, STACK
-        LOCFRAME XSTACK, 0, STACK
-        LOCFRAME IOVERLAY, 0, STATIC
-        LOCFRAME DOVERLAY, 0, STATIC
-        ARGFRAME ISTACK, 2, STACK
-        ARGFRAME PSTACK, 0, STACK
-        ARGFRAME XSTACK, 0, STACK
-        ARGFRAME IOVERLAY, 0, STATIC
-        ARGFRAME DOVERLAY, 0, STATIC
-        FUNCALL initLcd, LCD_clear
-        LOCFRAME ISTACK, 2, STACK
-        LOCFRAME PSTACK, 0, STACK
-        LOCFRAME XSTACK, 0, STACK
-        LOCFRAME IOVERLAY, 0, STATIC
-        LOCFRAME DOVERLAY, 0, STATIC
-        ARGFRAME ISTACK, 2, STACK
-        ARGFRAME PSTACK, 0, STACK
-        ARGFRAME XSTACK, 0, STACK
-        ARGFRAME IOVERLAY, 0, STATIC
-        ARGFRAME DOVERLAY, 0, STATIC
-        FUNCALL initLcd, LCD_write_byte
-        LOCFRAME ISTACK, 2, STACK
-        LOCFRAME PSTACK, 0, STACK
-        LOCFRAME XSTACK, 0, STACK
-        LOCFRAME IOVERLAY, 0, STATIC
-        LOCFRAME DOVERLAY, 0, STATIC
-        ARGFRAME ISTACK, 2, STACK
-        ARGFRAME PSTACK, 0, STACK
-        ARGFRAME XSTACK, 0, STACK
-        ARGFRAME IOVERLAY, 0, STATIC
-        ARGFRAME DOVERLAY, 0, STATIC
-        PUSH    DPL
-        CFI DPL0 Frame(CFA_SP, 4)
-        CFI CFA_SP SP+-4
-        PUSH    DPH
-        CFI DPH0 Frame(CFA_SP, 5)
-        CFI CFA_SP SP+-5
-        ; Saved register size: 2
-        ; Auto size: 0
 //  290   // CC2430 中，I/O 口做普通 I/O 使用时和每个 I/O 端口相关的寄存器有 3 个，分别是 //PxSEL
 //  291   //功能选择寄存器，PxDIR 方向寄存器，PxINP 输入模式寄存器，其中 x 为 0，1，2 。
 //  292 
 //  293   P1SEL &= 0x0F; //P1高4位 为普通 I/O 口
-        ANL     0xf4,#0xf
-        MOV     A,0xf4
 //  294   P1DIR |= 0xF0; //P1高4位 设置为输出
-        ORL     0xfe,#0xf0
-        MOV     A,0xfe
 //  295 
 //  296   LCD_CE = 0;    // 关闭LCD
-        CLR     0x90.4
 //  297   Delay_nms(1);
-        ; Setup parameters for call to function Delay_nms
-        MOV     R2,#0x1
-        MOV     R3,#0x0
-        LCALL   ??Delay_nms?relay
 //  298   LCD_CE = 1;    // 使能LCD
-        SETB    0x90.4
 //  299   Delay_nms(1);
-        ; Setup parameters for call to function Delay_nms
-        MOV     R2,#0x1
-        MOV     R3,#0x0
-        LCALL   ??Delay_nms?relay
 //  300 
 //  301   LCD_write_byte(0x21, 0);	// 使用扩展命令设置LCD模式
-        ; Setup parameters for call to function LCD_write_byte
-        MOV     R2,#0x0
-        MOV     R1,#0x21
-        LCALL   ??LCD_write_byte?relay
 //  302   LCD_write_byte(0xc8, 0);	// 设置偏置电压
-        ; Setup parameters for call to function LCD_write_byte
-        MOV     R2,#0x0
-        MOV     R1,#-0x38
-        LCALL   ??LCD_write_byte?relay
 //  303   LCD_write_byte(0x06, 0);	// 温度校正
-        ; Setup parameters for call to function LCD_write_byte
-        MOV     R2,#0x0
-        MOV     R1,#0x6
-        LCALL   ??LCD_write_byte?relay
 //  304   LCD_write_byte(0x13, 0);	// 1:48
-        ; Setup parameters for call to function LCD_write_byte
-        MOV     R2,#0x0
-        MOV     R1,#0x13
-        LCALL   ??LCD_write_byte?relay
 //  305   LCD_write_byte(0x20, 0);	// 使用基本命令
-        ; Setup parameters for call to function LCD_write_byte
-        MOV     R2,#0x0
-        MOV     R1,#0x20
-        LCALL   ??LCD_write_byte?relay
 //  306   LCD_clear();	                // 清屏
-        ; Setup parameters for call to function LCD_clear
-        LCALL   ??LCD_clear?relay
 //  307   LCD_write_byte(0x0c, 0);	// 设定显示模式，正常显示
-        ; Setup parameters for call to function LCD_write_byte
-        MOV     R2,#0x0
-        MOV     R1,#0xc
-        LCALL   ??LCD_write_byte?relay
 //  308   LCD_CE=0 ;                    // 关闭LCD
-        CLR     0x90.4
 //  309 }
-        POP     DPH
-        CFI DPH0 SameValue
-        CFI CFA_SP SP+-4
-        POP     DPL
-        CFI DPL0 SameValue
-        CFI CFA_SP SP+-3
-        LJMP    ?BRET
-        CFI EndBlock cfiBlock6
-        REQUIRE _A_P1
-        REQUIRE P1SEL
-        REQUIRE P1DIR
 //  310 
 //  311 
 //  312 /*-----------------------------------------------------------------------
@@ -1334,197 +700,31 @@ initLcd:
 //  318 编写日期          ：2004-8-10
 //  319 最后修改日期      ：2004-8-10 		
 //  320 -----------------------------------------------------------------------*/
-
-        RSEG BANKED_CODE:CODE:NOROOT(0)
 //  321 static void LCD_write_english_string(unsigned char X,unsigned char Y,uint8 *s)
-LCD_write_english_string:
-        CFI Block cfiBlock7 Using cfiCommon0
-        CFI Function LCD_write_english_string
 //  322 {
-        FUNCALL LCD_write_english_string, LCD_set_XY
-        LOCFRAME ISTACK, 0, STACK
-        LOCFRAME PSTACK, 0, STACK
-        LOCFRAME XSTACK, 11, STACK
-        LOCFRAME IOVERLAY, 0, STATIC
-        LOCFRAME DOVERLAY, 0, STATIC
-        ARGFRAME ISTACK, 0, STACK
-        ARGFRAME PSTACK, 0, STACK
-        ARGFRAME XSTACK, 11, STACK
-        ARGFRAME IOVERLAY, 0, STATIC
-        ARGFRAME DOVERLAY, 0, STATIC
-        FUNCALL LCD_write_english_string, LCD_write_byte
-        LOCFRAME ISTACK, 0, STACK
-        LOCFRAME PSTACK, 0, STACK
-        LOCFRAME XSTACK, 11, STACK
-        LOCFRAME IOVERLAY, 0, STATIC
-        LOCFRAME DOVERLAY, 0, STATIC
-        ARGFRAME ISTACK, 0, STACK
-        ARGFRAME PSTACK, 0, STACK
-        ARGFRAME XSTACK, 11, STACK
-        ARGFRAME IOVERLAY, 0, STATIC
-        ARGFRAME DOVERLAY, 0, STATIC
-        FUNCALL LCD_write_english_string, LCD_set_XY
-        LOCFRAME ISTACK, 0, STACK
-        LOCFRAME PSTACK, 0, STACK
-        LOCFRAME XSTACK, 11, STACK
-        LOCFRAME IOVERLAY, 0, STATIC
-        LOCFRAME DOVERLAY, 0, STATIC
-        ARGFRAME ISTACK, 0, STACK
-        ARGFRAME PSTACK, 0, STACK
-        ARGFRAME XSTACK, 11, STACK
-        ARGFRAME IOVERLAY, 0, STATIC
-        ARGFRAME DOVERLAY, 0, STATIC
-        FUNCALL LCD_write_english_string, LCD_write_char
-        LOCFRAME ISTACK, 0, STACK
-        LOCFRAME PSTACK, 0, STACK
-        LOCFRAME XSTACK, 11, STACK
-        LOCFRAME IOVERLAY, 0, STATIC
-        LOCFRAME DOVERLAY, 0, STATIC
-        ARGFRAME ISTACK, 0, STACK
-        ARGFRAME PSTACK, 0, STACK
-        ARGFRAME XSTACK, 11, STACK
-        ARGFRAME IOVERLAY, 0, STATIC
-        ARGFRAME DOVERLAY, 0, STATIC
-        MOV     A,#-0xb
-        LCALL   ?BANKED_ENTER_XDATA
-        CFI DPH0 load(1, XDATA, add(CFA_XSP16, literal(-1)))
-        CFI DPL0 load(1, XDATA, add(CFA_XSP16, literal(-2)))
-        CFI ?BRET_EXT load(1, XDATA, add(CFA_XSP16, literal(-3)))
-        CFI ?RET_HIGH load(1, XDATA, add(CFA_XSP16, literal(-4)))
-        CFI ?RET_LOW load(1, XDATA, add(CFA_XSP16, literal(-5)))
-        CFI R7 load(1, XDATA, add(CFA_XSP16, literal(-6)))
-        CFI V2 load(1, XDATA, add(CFA_XSP16, literal(-7)))
-        CFI V1 load(1, XDATA, add(CFA_XSP16, literal(-8)))
-        CFI V0 load(1, XDATA, add(CFA_XSP16, literal(-9)))
-        CFI VB load(1, XDATA, add(CFA_XSP16, literal(-10)))
-        CFI R6 load(1, XDATA, add(CFA_XSP16, literal(-11)))
-        CFI CFA_SP SP+0
-        CFI CFA_XSP16 add(XSP16, 11)
-        ; Saved register size: 11
-        ; Auto size: 0
-        MOV     ?V0 + 1,R1
-        MOV     ?V0 + 2,R2
-        MOV     A,R4
-        MOV     R6,A
-        MOV     A,R5
-        MOV     R7,A
 //  323   unsigned char i=0;
 //  324   LCD_set_XY(0,Y);//把第Y行清零
-        ; Setup parameters for call to function LCD_set_XY
-        MOV     R2,?V0 + 2
-        MOV     R1,#0x0
-        LCALL   ??LCD_set_XY?relay
 //  325   for(i=0;i<HAL_LCD_MAX_CHARS*6;i++)
-        MOV     ?V0 + 0,#0x0
-??LCD_write_english_string_0:
-        MOV     A,?V0 + 0
-        CLR     C
-        SUBB    A,#0x60
-        JNC     ??LCD_write_english_string_1
 //  326   {
 //  327     LCD_write_byte(0,1);
-        ; Setup parameters for call to function LCD_write_byte
-        MOV     R2,#0x1
-        MOV     R1,#0x0
-        LCALL   ??LCD_write_byte?relay
 //  328   }
-        INC     ?V0 + 0
-        SJMP    ??LCD_write_english_string_0
 //  329   LCD_set_XY(X,Y);
-??LCD_write_english_string_1:
-        ; Setup parameters for call to function LCD_set_XY
-        MOV     R2,?V0 + 2
-        MOV     R1,?V0 + 1
-        LCALL   ??LCD_set_XY?relay
 //  330   i=0;
-        MOV     ?V0 + 0,#0x0
 //  331   while (*s)
-??LCD_write_english_string_2:
-        MOV     DPL,R6
-        MOV     DPH,R7
-        MOVX    A,@DPTR
-        JZ      ??LCD_write_english_string_3
 //  332   {
 //  333     LCD_write_char(*s);
-        ; Setup parameters for call to function LCD_write_char
-        MOV     DPL,R6
-        MOV     DPH,R7
-        MOVX    A,@DPTR
-        MOV     R1,A
-        LCALL   ??LCD_write_char?relay
 //  334     s++;
-        MOV     DPL,R6
-        MOV     DPH,R7
-        INC     DPTR
-        MOV     R6,DPL
-        MOV     R7,DPH
 //  335     i++;
-        INC     ?V0 + 0
 //  336     if(i>=HAL_LCD_MAX_CHARS)return;
-        MOV     A,?V0 + 0
-        CLR     C
-        SUBB    A,#0x10
-        JC      ??LCD_write_english_string_2
-??LCD_write_english_string_3:
-        MOV     R7,#0x3
-        LJMP    ?BANKED_LEAVE_XDATA
-        CFI EndBlock cfiBlock7
 //  337   }
 //  338 }
 //  339 
 //  340 /******************************************************************************
 //  341 * See lcd.h for a description of this function.
 //  342 ******************************************************************************/
-
-        RSEG BANKED_CODE:CODE:NOROOT(0)
 //  343 static void lcdUpdateLine(uint8 line, uint8 *pLine) {
-lcdUpdateLine:
-        CFI Block cfiBlock8 Using cfiCommon0
-        CFI Function lcdUpdateLine
-        FUNCALL lcdUpdateLine, LCD_write_english_string
-        LOCFRAME ISTACK, 0, STACK
-        LOCFRAME PSTACK, 0, STACK
-        LOCFRAME XSTACK, 9, STACK
-        LOCFRAME IOVERLAY, 0, STATIC
-        LOCFRAME DOVERLAY, 0, STATIC
-        ARGFRAME ISTACK, 0, STACK
-        ARGFRAME PSTACK, 0, STACK
-        ARGFRAME XSTACK, 9, STACK
-        ARGFRAME IOVERLAY, 0, STATIC
-        ARGFRAME DOVERLAY, 0, STATIC
-        MOV     A,#-0x9
-        LCALL   ?BANKED_ENTER_XDATA
-        CFI DPH0 load(1, XDATA, add(CFA_XSP16, literal(-1)))
-        CFI DPL0 load(1, XDATA, add(CFA_XSP16, literal(-2)))
-        CFI ?BRET_EXT load(1, XDATA, add(CFA_XSP16, literal(-3)))
-        CFI ?RET_HIGH load(1, XDATA, add(CFA_XSP16, literal(-4)))
-        CFI ?RET_LOW load(1, XDATA, add(CFA_XSP16, literal(-5)))
-        CFI R7 load(1, XDATA, add(CFA_XSP16, literal(-6)))
-        CFI V0 load(1, XDATA, add(CFA_XSP16, literal(-7)))
-        CFI VB load(1, XDATA, add(CFA_XSP16, literal(-8)))
-        CFI R6 load(1, XDATA, add(CFA_XSP16, literal(-9)))
-        CFI CFA_SP SP+0
-        CFI CFA_XSP16 add(XSP16, 9)
-        ; Saved register size: 9
-        ; Auto size: 0
-        MOV     ?V0 + 0,R1
-        MOV     A,R2
-        MOV     R6,A
-        MOV     A,R3
-        MOV     R7,A
 //  344   LCD_write_english_string(0,line,pLine);
-        ; Setup parameters for call to function LCD_write_english_string
-        MOV     A,R6
-        MOV     R4,A
-        MOV     A,R7
-        MOV     R5,A
-        MOV     R2,?V0 + 0
-        MOV     R1,#0x0
-        LCALL   ??LCD_write_english_string?relay
 //  345 }
-        MOV     R7,#0x1
-        LJMP    ?BANKED_LEAVE_XDATA
-        CFI EndBlock cfiBlock8
 //  346 
 //  347 #endif
 //  348 
@@ -1541,54 +741,23 @@ lcdUpdateLine:
         RSEG BANKED_CODE:CODE:NOROOT(0)
 //  358 void HalLcdInit(void)
 HalLcdInit:
-        CFI Block cfiBlock9 Using cfiCommon0
+        CFI Block cfiBlock0 Using cfiCommon0
         CFI Function HalLcdInit
 //  359 {
-        FUNCALL HalLcdInit, initLcd
-        LOCFRAME ISTACK, 2, STACK
-        LOCFRAME PSTACK, 0, STACK
-        LOCFRAME XSTACK, 0, STACK
-        LOCFRAME IOVERLAY, 0, STATIC
-        LOCFRAME DOVERLAY, 0, STATIC
-        ARGFRAME ISTACK, 2, STACK
-        ARGFRAME PSTACK, 0, STACK
-        ARGFRAME XSTACK, 0, STACK
-        ARGFRAME IOVERLAY, 0, STATIC
-        ARGFRAME DOVERLAY, 0, STATIC
-        PUSH    DPL
-        CFI DPL0 Frame(CFA_SP, 4)
-        CFI CFA_SP SP+-4
-        PUSH    DPH
-        CFI DPH0 Frame(CFA_SP, 5)
-        CFI CFA_SP SP+-5
-        ; Saved register size: 2
+        ; Saved register size: 0
         ; Auto size: 0
 //  360 #if (HAL_LCD == TRUE)
 //  361 
 //  362 #ifdef LCD_HW
 //  363   Lcd_Line1 = NULL;
-        MOV     DPTR,#Lcd_Line1
-        MOV     A,#0x0
-        MOVX    @DPTR,A
-        INC     DPTR
-        MOV     A,#0x0
-        MOVX    @DPTR,A
 //  364   initLcd();
-        ; Setup parameters for call to function initLcd
-        LCALL   ??initLcd?relay
 //  365 #endif
 //  366 
 //  367 #endif /* HAL_LCD */
 //  368 
 //  369 }
-        POP     DPH
-        CFI DPH0 SameValue
-        CFI CFA_SP SP+-4
-        POP     DPL
-        CFI DPL0 SameValue
-        CFI CFA_SP SP+-3
         LJMP    ?BRET
-        CFI EndBlock cfiBlock9
+        CFI EndBlock cfiBlock0
 //  370 
 //  371 /*************************************************************************************************
 //  372  *                    LCD EMULATION FUNCTIONS
@@ -1622,163 +791,11 @@ HalLcdInit:
         RSEG BANKED_CODE:CODE:NOROOT(0)
 //  399 void HalLcdWriteString ( char *str, uint8 option)
 HalLcdWriteString:
-        CFI Block cfiBlock10 Using cfiCommon0
+        CFI Block cfiBlock1 Using cfiCommon0
         CFI Function HalLcdWriteString
 //  400 {
-        FUNCALL HalLcdWriteString, osal_mem_alloc
-        LOCFRAME ISTACK, 0, STACK
-        LOCFRAME PSTACK, 0, STACK
-        LOCFRAME XSTACK, 18, STACK
-        LOCFRAME IOVERLAY, 0, STATIC
-        LOCFRAME DOVERLAY, 0, STATIC
-        ARGFRAME ISTACK, 0, STACK
-        ARGFRAME PSTACK, 0, STACK
-        ARGFRAME XSTACK, 18, STACK
-        ARGFRAME IOVERLAY, 0, STATIC
-        ARGFRAME DOVERLAY, 0, STATIC
-        FUNCALL HalLcdWriteString, HalLcdWriteString
-        LOCFRAME ISTACK, 0, STACK
-        LOCFRAME PSTACK, 0, STACK
-        LOCFRAME XSTACK, 18, STACK
-        LOCFRAME IOVERLAY, 0, STATIC
-        LOCFRAME DOVERLAY, 0, STATIC
-        ARGFRAME ISTACK, 0, STACK
-        ARGFRAME PSTACK, 0, STACK
-        ARGFRAME XSTACK, 18, STACK
-        ARGFRAME IOVERLAY, 0, STATIC
-        ARGFRAME DOVERLAY, 0, STATIC
-        FUNCALL HalLcdWriteString, osal_strlen
-        LOCFRAME ISTACK, 0, STACK
-        LOCFRAME PSTACK, 0, STACK
-        LOCFRAME XSTACK, 18, STACK
-        LOCFRAME IOVERLAY, 0, STATIC
-        LOCFRAME DOVERLAY, 0, STATIC
-        ARGFRAME ISTACK, 0, STACK
-        ARGFRAME PSTACK, 0, STACK
-        ARGFRAME XSTACK, 18, STACK
-        ARGFRAME IOVERLAY, 0, STATIC
-        ARGFRAME DOVERLAY, 0, STATIC
-        FUNCALL HalLcdWriteString, osal_memcpy
-        LOCFRAME ISTACK, 0, STACK
-        LOCFRAME PSTACK, 0, STACK
-        LOCFRAME XSTACK, 21, STACK
-        LOCFRAME IOVERLAY, 0, STATIC
-        LOCFRAME DOVERLAY, 0, STATIC
-        ARGFRAME ISTACK, 0, STACK
-        ARGFRAME PSTACK, 0, STACK
-        ARGFRAME XSTACK, 21, STACK
-        ARGFRAME IOVERLAY, 0, STATIC
-        ARGFRAME DOVERLAY, 0, STATIC
-        FUNCALL HalLcdWriteString, osal_strlen
-        LOCFRAME ISTACK, 0, STACK
-        LOCFRAME PSTACK, 0, STACK
-        LOCFRAME XSTACK, 18, STACK
-        LOCFRAME IOVERLAY, 0, STATIC
-        LOCFRAME DOVERLAY, 0, STATIC
-        ARGFRAME ISTACK, 0, STACK
-        ARGFRAME PSTACK, 0, STACK
-        ARGFRAME XSTACK, 18, STACK
-        ARGFRAME IOVERLAY, 0, STATIC
-        ARGFRAME DOVERLAY, 0, STATIC
-        FUNCALL HalLcdWriteString, osal_mem_alloc
-        LOCFRAME ISTACK, 0, STACK
-        LOCFRAME PSTACK, 0, STACK
-        LOCFRAME XSTACK, 18, STACK
-        LOCFRAME IOVERLAY, 0, STATIC
-        LOCFRAME DOVERLAY, 0, STATIC
-        ARGFRAME ISTACK, 0, STACK
-        ARGFRAME PSTACK, 0, STACK
-        ARGFRAME XSTACK, 18, STACK
-        ARGFRAME IOVERLAY, 0, STATIC
-        ARGFRAME DOVERLAY, 0, STATIC
-        FUNCALL HalLcdWriteString, osal_memcpy
-        LOCFRAME ISTACK, 0, STACK
-        LOCFRAME PSTACK, 0, STACK
-        LOCFRAME XSTACK, 21, STACK
-        LOCFRAME IOVERLAY, 0, STATIC
-        LOCFRAME DOVERLAY, 0, STATIC
-        ARGFRAME ISTACK, 0, STACK
-        ARGFRAME PSTACK, 0, STACK
-        ARGFRAME XSTACK, 21, STACK
-        ARGFRAME IOVERLAY, 0, STATIC
-        ARGFRAME DOVERLAY, 0, STATIC
-        FUNCALL HalLcdWriteString, osal_memcpy
-        LOCFRAME ISTACK, 0, STACK
-        LOCFRAME PSTACK, 0, STACK
-        LOCFRAME XSTACK, 21, STACK
-        LOCFRAME IOVERLAY, 0, STATIC
-        LOCFRAME DOVERLAY, 0, STATIC
-        ARGFRAME ISTACK, 0, STACK
-        ARGFRAME PSTACK, 0, STACK
-        ARGFRAME XSTACK, 21, STACK
-        ARGFRAME IOVERLAY, 0, STATIC
-        ARGFRAME DOVERLAY, 0, STATIC
-        FUNCALL HalLcdWriteString, debug_str
-        LOCFRAME ISTACK, 0, STACK
-        LOCFRAME PSTACK, 0, STACK
-        LOCFRAME XSTACK, 18, STACK
-        LOCFRAME IOVERLAY, 0, STATIC
-        LOCFRAME DOVERLAY, 0, STATIC
-        ARGFRAME ISTACK, 0, STACK
-        ARGFRAME PSTACK, 0, STACK
-        ARGFRAME XSTACK, 18, STACK
-        ARGFRAME IOVERLAY, 0, STATIC
-        ARGFRAME DOVERLAY, 0, STATIC
-        FUNCALL HalLcdWriteString, osal_mem_free
-        LOCFRAME ISTACK, 0, STACK
-        LOCFRAME PSTACK, 0, STACK
-        LOCFRAME XSTACK, 18, STACK
-        LOCFRAME IOVERLAY, 0, STATIC
-        LOCFRAME DOVERLAY, 0, STATIC
-        ARGFRAME ISTACK, 0, STACK
-        ARGFRAME PSTACK, 0, STACK
-        ARGFRAME XSTACK, 18, STACK
-        ARGFRAME IOVERLAY, 0, STATIC
-        ARGFRAME DOVERLAY, 0, STATIC
-        FUNCALL HalLcdWriteString, lcdUpdateLine
-        LOCFRAME ISTACK, 0, STACK
-        LOCFRAME PSTACK, 0, STACK
-        LOCFRAME XSTACK, 18, STACK
-        LOCFRAME IOVERLAY, 0, STATIC
-        LOCFRAME DOVERLAY, 0, STATIC
-        ARGFRAME ISTACK, 0, STACK
-        ARGFRAME PSTACK, 0, STACK
-        ARGFRAME XSTACK, 18, STACK
-        ARGFRAME IOVERLAY, 0, STATIC
-        ARGFRAME DOVERLAY, 0, STATIC
-        MOV     A,#-0x10
-        LCALL   ?BANKED_ENTER_XDATA
-        CFI DPH0 load(1, XDATA, add(CFA_XSP16, literal(-1)))
-        CFI DPL0 load(1, XDATA, add(CFA_XSP16, literal(-2)))
-        CFI ?BRET_EXT load(1, XDATA, add(CFA_XSP16, literal(-3)))
-        CFI ?RET_HIGH load(1, XDATA, add(CFA_XSP16, literal(-4)))
-        CFI ?RET_LOW load(1, XDATA, add(CFA_XSP16, literal(-5)))
-        CFI R7 load(1, XDATA, add(CFA_XSP16, literal(-6)))
-        CFI V7 load(1, XDATA, add(CFA_XSP16, literal(-7)))
-        CFI V6 load(1, XDATA, add(CFA_XSP16, literal(-8)))
-        CFI V5 load(1, XDATA, add(CFA_XSP16, literal(-9)))
-        CFI V4 load(1, XDATA, add(CFA_XSP16, literal(-10)))
-        CFI V3 load(1, XDATA, add(CFA_XSP16, literal(-11)))
-        CFI V2 load(1, XDATA, add(CFA_XSP16, literal(-12)))
-        CFI V1 load(1, XDATA, add(CFA_XSP16, literal(-13)))
-        CFI V0 load(1, XDATA, add(CFA_XSP16, literal(-14)))
-        CFI VB load(1, XDATA, add(CFA_XSP16, literal(-15)))
-        CFI R6 load(1, XDATA, add(CFA_XSP16, literal(-16)))
-        CFI CFA_SP SP+0
-        CFI CFA_XSP16 add(XSP16, 16)
-        ; Saved register size: 16
-        ; Auto size: 2
-        MOV     A,#-0x2
-        LCALL   ?ALLOC_XSTACK8
-        CFI CFA_XSP16 add(XSP16, 18)
-        MOV     DPL,?XSP + 0
-        MOV     DPH,?XSP + 1
-        MOV     A,R2
-        MOVX    @DPTR,A
-        INC     DPTR
-        MOV     A,R3
-        MOVX    @DPTR,A
-        MOV     ?V0 + 6,R1
+        ; Saved register size: 0
+        ; Auto size: 0
 //  401 #if (HAL_LCD == TRUE)
 //  402 
 //  403 #ifdef LCD_SD
@@ -1788,283 +805,52 @@ HalLcdWriteString:
 //  407   char *buf;
 //  408 
 //  409   if ( Lcd_Line1 == NULL )
-        MOV     DPTR,#Lcd_Line1
-        MOVX    A,@DPTR
-        XRL     A,#0x0
-        JNZ     ??HalLcdWriteString_0
-        INC     DPTR
-        MOVX    A,@DPTR
-        XRL     A,#0x0
-??HalLcdWriteString_0:
-        JNZ     ??HalLcdWriteString_1
 //  410   {
 //  411     // Set up system start-up message
 //  412     Lcd_Line1 = osal_mem_alloc( MAX_LCD_CHARS+1 );
-        ; Setup parameters for call to function osal_mem_alloc
-        MOV     R2,#0x11
-        MOV     R3,#0x0
-        LCALL   ??osal_mem_alloc?relay
-        MOV     DPTR,#Lcd_Line1
-        MOV     A,R2
-        MOVX    @DPTR,A
-        INC     DPTR
-        MOV     A,R3
-        MOVX    @DPTR,A
 //  413     HalLcdWriteString( "Figure8 Wireless", HAL_LCD_LINE_1 );
-        ; Setup parameters for call to function HalLcdWriteString
-        MOV     R1,#0x0
-        MOV     R2,#(`?<Constant "Figure8 Wireless">` & 0xff)
-        MOV     R3,#((`?<Constant "Figure8 Wireless">` >> 8) & 0xff)
-        LCALL   ??HalLcdWriteString?relay
 //  414   }
 //  415 
 //  416   sln = (byte)osal_strlen( str );
-??HalLcdWriteString_1:
-        ; Setup parameters for call to function osal_strlen
-        MOV     DPL,?XSP + 0
-        MOV     DPH,?XSP + 1
-        MOVX    A,@DPTR
-        MOV     R2,A
-        INC     DPTR
-        MOVX    A,@DPTR
-        MOV     R3,A
-        LCALL   ??osal_strlen?relay
-        MOV     A,R2
-        MOV     R7,A
 //  417 
 //  418   // Check boundries
 //  419   if ( sln > MAX_LCD_CHARS )
-        MOV     A,R7
-        CLR     C
-        SUBB    A,#0x11
-        JC      ??HalLcdWriteString_2
 //  420     sln = MAX_LCD_CHARS;
-        MOV     R7,#0x10
 //  421 
 //  422   if ( option == HAL_LCD_LINE_1 ) {
-??HalLcdWriteString_2:
-        MOV     A,?V0 + 6
-        JNZ     ??HalLcdWriteString_3
 //  423     // Line 1 gets saved for later
 //  424     osal_memcpy( Lcd_Line1, str, sln );
-        ; Setup parameters for call to function osal_memcpy
-        MOV     DPL,?XSP + 0
-        MOV     DPH,?XSP + 1
-        MOVX    A,@DPTR
-        MOV     ?V0 + 0,A
-        INC     DPTR
-        MOVX    A,@DPTR
-        MOV     ?V0 + 1,A
-        MOV     ?V0 + 2,#0x0
-        MOV     R0,#?V0 + 0
-        LCALL   ?PUSH_XSTACK_I_THREE
-        CFI CFA_XSP16 add(XSP16, 21)
-        MOV     A,R7
-        MOV     ?V0 + 0,A
-        MOV     R4,?V0 + 0
-        MOV     R5,#0x0
-        MOV     DPTR,#Lcd_Line1
-        MOVX    A,@DPTR
-        MOV     R2,A
-        INC     DPTR
-        MOVX    A,@DPTR
-        MOV     R3,A
-        LCALL   ??osal_memcpy?relay
-        MOV     A,#0x3
-        LCALL   ?DEALLOC_XSTACK8
-        CFI CFA_XSP16 add(XSP16, 18)
 //  425     Lcd_Line1[sln] = '\0';
-        MOV     A,#0x0
-        PUSH    A
-        CFI CFA_SP SP+-1
-        MOV     A,R7
-        MOV     R0,A
-        MOV     R1,#0x0
-        MOV     DPTR,#Lcd_Line1
-        MOVX    A,@DPTR
-        ADD     A,R0
-        MOV     R2,A
-        INC     DPTR
-        MOVX    A,@DPTR
-        ADDC    A,R1
-        MOV     DPL,R2
-        MOV     DPH,A
-        POP     A
-        CFI CFA_SP SP+0
-        MOVX    @DPTR,A
-        LJMP    ??HalLcdWriteString_4 & 0xFFFF
 //  426   }
 //  427   else {
 //  428     // Line 2 triggers action
 //  429     x = (byte)osal_strlen( (char*)Lcd_Line1 );
-??HalLcdWriteString_3:
-        ; Setup parameters for call to function osal_strlen
-        MOV     DPTR,#Lcd_Line1
-        MOVX    A,@DPTR
-        MOV     R2,A
-        INC     DPTR
-        MOVX    A,@DPTR
-        MOV     R3,A
-        LCALL   ??osal_strlen?relay
-        MOV     A,R2
-        MOV     R6,A
 //  430     bln = x + 1 + sln + 1;
-        MOV     A,R7
-        ADD     A,R6
-        ADD     A,#0x2
-        MOV     ?V0 + 7,A
 //  431     buf = osal_mem_alloc( bln );
-        ; Setup parameters for call to function osal_mem_alloc
-        MOV     A,?V0 + 7
-        MOV     ?V0 + 0,A
-        MOV     R2,?V0 + 0
-        MOV     R3,#0x0
-        LCALL   ??osal_mem_alloc?relay
-        MOV     ?V0 + 0,R2
-        MOV     ?V0 + 1,R3
-        MOV     ?V0 + 4,?V0 + 0
-        MOV     ?V0 + 5,?V0 + 1
 //  432     if ( buf != NULL ) {
-        MOV     A,?V0 + 4
-        XRL     A,#0x0
-        JNZ     ??HalLcdWriteString_5
-        MOV     A,?V0 + 5
-        XRL     A,#0x0
-??HalLcdWriteString_5:
-        JNZ     $+5
-        LJMP    ??HalLcdWriteString_4 & 0xFFFF
 //  433       // Concatenate strings
 //  434       osal_memcpy( buf, Lcd_Line1, x );
-        ; Setup parameters for call to function osal_memcpy
-        MOV     DPTR,#Lcd_Line1
-        MOVX    A,@DPTR
-        MOV     ?V0 + 0,A
-        INC     DPTR
-        MOVX    A,@DPTR
-        MOV     ?V0 + 1,A
-        MOV     ?V0 + 2,#0x0
-        MOV     R0,#?V0 + 0
-        LCALL   ?PUSH_XSTACK_I_THREE
-        CFI CFA_XSP16 add(XSP16, 21)
-        MOV     A,R6
-        MOV     ?V0 + 0,A
-        MOV     R4,?V0 + 0
-        MOV     R5,#0x0
-        MOV     R2,?V0 + 4
-        MOV     R3,?V0 + 5
-        LCALL   ??osal_memcpy?relay
-        MOV     A,#0x3
-        LCALL   ?DEALLOC_XSTACK8
-        CFI CFA_XSP16 add(XSP16, 18)
 //  435       buf[x++] = ' ';
-        MOV     A,#0x20
-        PUSH    A
-        CFI CFA_SP SP+-1
-        MOV     ?V0 + 0,R6
-        MOV     ?V0 + 1,#0x0
-        MOV     A,?V0 + 4
-        ADD     A,?V0 + 0
-        MOV     DPL,A
-        MOV     A,?V0 + 5
-        ADDC    A,?V0 + 1
-        MOV     DPH,A
-        POP     A
-        CFI CFA_SP SP+0
-        MOVX    @DPTR,A
-        INC     R6
 //  436       osal_memcpy( &buf[x], str, sln );
-        ; Setup parameters for call to function osal_memcpy
-        MOV     DPL,?XSP + 0
-        MOV     DPH,?XSP + 1
-        MOVX    A,@DPTR
-        MOV     ?V0 + 0,A
-        INC     DPTR
-        MOVX    A,@DPTR
-        MOV     ?V0 + 1,A
-        MOV     ?V0 + 2,#0x0
-        MOV     R0,#?V0 + 0
-        LCALL   ?PUSH_XSTACK_I_THREE
-        CFI CFA_XSP16 add(XSP16, 21)
-        MOV     A,R7
-        MOV     ?V0 + 0,A
-        MOV     R4,?V0 + 0
-        MOV     R5,#0x0
-        MOV     ?V0 + 0,R6
-        MOV     ?V0 + 1,#0x0
-        MOV     A,?V0 + 4
-        ADD     A,?V0 + 0
-        MOV     R2,A
-        MOV     A,?V0 + 5
-        ADDC    A,?V0 + 1
-        MOV     R3,A
-        LCALL   ??osal_memcpy?relay
-        MOV     A,#0x3
-        LCALL   ?DEALLOC_XSTACK8
-        CFI CFA_XSP16 add(XSP16, 18)
 //  437       buf[x+sln] = '\0';
-        MOV     A,#0x0
-        PUSH    A
-        CFI CFA_SP SP+-1
-        MOV     ?V0 + 2,R6
-        MOV     ?V0 + 3,#0x0
-        MOV     ?V0 + 0,R7
-        MOV     ?V0 + 1,#0x0
-        MOV     A,?V0 + 0
-        ADD     A,?V0 + 2
-        MOV     R0,A
-        MOV     A,?V0 + 1
-        ADDC    A,?V0 + 3
-        MOV     R1,A
-        MOV     A,?V0 + 4
-        ADD     A,R0
-        MOV     DPL,A
-        MOV     A,?V0 + 5
-        ADDC    A,R1
-        MOV     DPH,A
-        POP     A
-        CFI CFA_SP SP+0
-        MOVX    @DPTR,A
 //  438       // Send it out
 //  439 #ifdef ZTOOL_PORT
 //  440       debug_str( (byte*)buf );
-        ; Setup parameters for call to function debug_str
-        MOV     R2,?V0 + 4
-        MOV     R3,?V0 + 5
-        LCALL   ??debug_str?relay
 //  441 #endif
 //  442       osal_mem_free( buf );
-        ; Setup parameters for call to function osal_mem_free
-        MOV     R2,?V0 + 4
-        MOV     R3,?V0 + 5
-        LCALL   ??osal_mem_free?relay
 //  443     }
 //  444   }
 //  445 #endif // LCD_SD
 //  446 
 //  447 #ifdef LCD_HW
 //  448   lcdUpdateLine( option, (byte*)str );
-??HalLcdWriteString_4:
-        ; Setup parameters for call to function lcdUpdateLine
-        MOV     DPL,?XSP + 0
-        MOV     DPH,?XSP + 1
-        MOVX    A,@DPTR
-        MOV     R2,A
-        INC     DPTR
-        MOVX    A,@DPTR
-        MOV     R3,A
-        MOV     R1,?V0 + 6
-        LCALL   ??lcdUpdateLine?relay
 //  449 #endif
 //  450 
 //  451 #endif /* HAL_LCD */
 //  452 
 //  453 }
-        MOV     A,#0x2
-        LCALL   ?DEALLOC_XSTACK8
-        CFI CFA_XSP16 add(XSP16, 16)
-        MOV     R7,#0x8
-        LJMP    ?BANKED_LEAVE_XDATA
-        CFI EndBlock cfiBlock10
+        LJMP    ?BRET
+        CFI EndBlock cfiBlock1
 //  454 
 //  455 /**************************************************************************************************
 //  456  * @fn      HalLcdWriteValue
@@ -2081,7 +867,7 @@ HalLcdWriteString:
         RSEG BANKED_CODE:CODE:NOROOT(0)
 //  466 void HalLcdWriteValue ( uint32 value, const uint8 radix, uint8 option)
 HalLcdWriteValue:
-        CFI Block cfiBlock11 Using cfiCommon0
+        CFI Block cfiBlock2 Using cfiCommon0
         CFI Function HalLcdWriteValue
 //  467 {
         FUNCALL HalLcdWriteValue, _ltoa
@@ -2177,7 +963,7 @@ HalLcdWriteValue:
         CFI CFA_XSP16 add(XSP16, 14)
         MOV     R7,#0x6
         LJMP    ?BANKED_LEAVE_XDATA
-        CFI EndBlock cfiBlock11
+        CFI EndBlock cfiBlock2
 //  475 
 //  476 /**************************************************************************************************
 //  477  * @fn      HalLcdWriteScreen
@@ -2193,7 +979,7 @@ HalLcdWriteValue:
         RSEG BANKED_CODE:CODE:NOROOT(0)
 //  486 void HalLcdWriteScreen( char *line1, char *line2 )
 HalLcdWriteScreen:
-        CFI Block cfiBlock12 Using cfiCommon0
+        CFI Block cfiBlock3 Using cfiCommon0
         CFI Function HalLcdWriteScreen
 //  487 {
         FUNCALL HalLcdWriteScreen, HalLcdWriteString
@@ -2259,7 +1045,7 @@ HalLcdWriteScreen:
 //  492 }
         MOV     R7,#0x2
         LJMP    ?BANKED_LEAVE_XDATA
-        CFI EndBlock cfiBlock12
+        CFI EndBlock cfiBlock3
 //  493 
 //  494 /**************************************************************************************************
 //  495  * @fn      HalLcdWriteStringValue
@@ -2277,7 +1063,7 @@ HalLcdWriteScreen:
         RSEG BANKED_CODE:CODE:NOROOT(0)
 //  506 void HalLcdWriteStringValue( char *title, uint16 value, uint8 format, uint8 line )
 HalLcdWriteStringValue:
-        CFI Block cfiBlock13 Using cfiCommon0
+        CFI Block cfiBlock4 Using cfiCommon0
         CFI Function HalLcdWriteStringValue
 //  507 {
         FUNCALL HalLcdWriteStringValue, osal_strlen
@@ -2483,7 +1269,7 @@ HalLcdWriteStringValue:
         CFI CFA_XSP16 add(XSP16, 16)
         MOV     R7,#0x8
         LJMP    ?BANKED_LEAVE_XDATA
-        CFI EndBlock cfiBlock13
+        CFI EndBlock cfiBlock4
 //  521 
 //  522 /**************************************************************************************************
 //  523  * @fn      HalLcdWriteStringValue
@@ -2503,7 +1289,7 @@ HalLcdWriteStringValue:
         RSEG BANKED_CODE:CODE:NOROOT(0)
 //  536 void HalLcdWriteStringValueValue( char *title, uint16 value1, uint8 format1,
 HalLcdWriteStringValueValue:
-        CFI Block cfiBlock14 Using cfiCommon0
+        CFI Block cfiBlock5 Using cfiCommon0
         CFI Function HalLcdWriteStringValueValue
 //  537                                   uint16 value2, byte format2, uint8 line )
 //  538 {
@@ -2828,7 +1614,7 @@ HalLcdWriteStringValueValue:
         CFI CFA_XSP16 add(XSP16, 16)
         MOV     R7,#0x8
         LJMP    ?BANKED_LEAVE_XDATA
-        CFI EndBlock cfiBlock14
+        CFI EndBlock cfiBlock5
 //  563 
 //  564 /**************************************************************************************************
 //  565  * @fn      HalLcdDisplayPercentBar
@@ -2844,7 +1630,7 @@ HalLcdWriteStringValueValue:
         RSEG BANKED_CODE:CODE:NOROOT(0)
 //  574 void HalLcdDisplayPercentBar( char *title, uint8 value )
 HalLcdDisplayPercentBar:
-        CFI Block cfiBlock15 Using cfiCommon0
+        CFI Block cfiBlock6 Using cfiCommon0
         CFI Function HalLcdDisplayPercentBar
 //  575 {
         FUNCALL HalLcdDisplayPercentBar, HalLcdWriteString
@@ -3098,71 +1884,12 @@ HalLcdDisplayPercentBar:
         CFI CFA_XSP16 add(XSP16, 16)
         MOV     R7,#0x8
         LJMP    ?BANKED_LEAVE_XDATA
-        CFI EndBlock cfiBlock15
-
-        RSEG XDATA_ID:CODE:NOROOT(0)
-        DATA
-`?<Initializer for <Constant "Figure8 Wireless"`:
-        DB "Figure8 Wireless"
+        CFI EndBlock cfiBlock6
 
         RSEG XDATA_ID:CODE:NOROOT(0)
         DATA
 `?<Initializer for <Constant "[          ]  ">>`:
         DB "[          ]  "
-
-        RSEG BANK_RELAYS:CODE:REORDER:NOROOT(0)
-??Delay_nms?relay:
-        LCALL   ?BDISPATCH
-        DATA
-        DC24    Delay_nms
-
-        RSEG BANK_RELAYS:CODE:REORDER:NOROOT(0)
-??SendByte?relay:
-        LCALL   ?BDISPATCH
-        DATA
-        DC24    SendByte
-
-        RSEG BANK_RELAYS:CODE:REORDER:NOROOT(0)
-??LCD_write_byte?relay:
-        LCALL   ?BDISPATCH
-        DATA
-        DC24    LCD_write_byte
-
-        RSEG BANK_RELAYS:CODE:REORDER:NOROOT(0)
-??LCD_clear?relay:
-        LCALL   ?BDISPATCH
-        DATA
-        DC24    LCD_clear
-
-        RSEG BANK_RELAYS:CODE:REORDER:NOROOT(0)
-??LCD_set_XY?relay:
-        LCALL   ?BDISPATCH
-        DATA
-        DC24    LCD_set_XY
-
-        RSEG BANK_RELAYS:CODE:REORDER:NOROOT(0)
-??LCD_write_char?relay:
-        LCALL   ?BDISPATCH
-        DATA
-        DC24    LCD_write_char
-
-        RSEG BANK_RELAYS:CODE:REORDER:NOROOT(0)
-??initLcd?relay:
-        LCALL   ?BDISPATCH
-        DATA
-        DC24    initLcd
-
-        RSEG BANK_RELAYS:CODE:REORDER:NOROOT(0)
-??LCD_write_english_string?relay:
-        LCALL   ?BDISPATCH
-        DATA
-        DC24    LCD_write_english_string
-
-        RSEG BANK_RELAYS:CODE:REORDER:NOROOT(0)
-??lcdUpdateLine?relay:
-        LCALL   ?BDISPATCH
-        DATA
-        DC24    lcdUpdateLine
 
         RSEG BANK_RELAYS:CODE:REORDER:NOROOT(0)
 ??HalLcdInit?relay:
@@ -3208,13 +1935,6 @@ HalLcdDisplayPercentBar:
 
         RSEG XDATA_I:XDATA:NOROOT(0)
         DATA
-`?<Constant "Figure8 Wireless">`:
-        DS 17
-        REQUIRE `?<Initializer for <Constant "Figure8 Wireless"`
-        REQUIRE __INIT_XDATA_I
-
-        RSEG XDATA_I:XDATA:NOROOT(0)
-        DATA
 `?<Constant "[          ]  ">`:
         DS 15
         REQUIRE `?<Initializer for <Constant "[          ]  ">>`
@@ -3227,17 +1947,14 @@ HalLcdDisplayPercentBar:
 //  613 
 //  614 
 // 
-// 1 884 bytes in segment BANKED_CODE
-//    96 bytes in segment BANK_RELAYS
-//   576 bytes in segment CODE_C
-//     3 bytes in segment SFR_AN
-//    32 bytes in segment XDATA_I
-//    32 bytes in segment XDATA_ID
-//     2 bytes in segment XDATA_Z
+// 985 bytes in segment BANKED_CODE
+//  42 bytes in segment BANK_RELAYS
+// 576 bytes in segment CODE_C
+//  15 bytes in segment XDATA_I
+//  15 bytes in segment XDATA_ID
 // 
-// 2 588 bytes of CODE  memory
-//     0 bytes of DATA  memory (+ 3 bytes shared)
-//    34 bytes of XDATA memory
+// 1 618 bytes of CODE  memory
+//    15 bytes of XDATA memory
 //
 //Errors: none
 //Warnings: none

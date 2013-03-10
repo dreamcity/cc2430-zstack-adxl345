@@ -1,6 +1,6 @@
 ###############################################################################
 #                                                                             #
-# IAR 8051 C/C++ Compiler V7.30B/W32                    19/Dec/2012  20:17:05 #
+# IAR 8051 C/C++ Compiler V7.30B/W32                    03/Jan/2013  17:10:54 #
 # Copyright 2004-2007 IAR Systems. All rights reserved.                       #
 #                                                                             #
 #    Core               =  plain                                              #
@@ -39,13 +39,14 @@
 #                          -DQUEUED_POLL_RATE=100 -DRESPONSE_POLL_RATE=100)   #
 #                          -DREJOIN_POLL_RATE=440 "C:\Texas                   #
 #                          Instruments\ZStack-1.4.3-1.2.1\Components\mt\MTEL. #
-#                          c" -D CC2430EB -D REFLECTOR -D ZTOOL_P1 -D         #
-#                          MT_TASK -D MT_ZDO_FUNC -D LCD_SUPPORTED=DEBUG -lC  #
+#                          c" -D CC2430EB -D AXD_ROUTER -D REFLECTOR -D       #
+#                          ZTOOL_P1 -D MT_TASK -D xMT_ZDO_FUNC -D             #
+#                          xLCD_SUPPORTED=DEBUG -lC "C:\Texas                 #
+#                          Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\Sam #
+#                          ples\AXDApp\CC2430DB\RouterEB\List\" -lA           #
 #                          "C:\Texas Instruments\ZStack-1.4.3-1.2.1\Projects\ #
 #                          zstack\Samples\AXDApp\CC2430DB\RouterEB\List\"     #
-#                          -lA "C:\Texas Instruments\ZStack-1.4.3-1.2.1\Proje #
-#                          cts\zstack\Samples\AXDApp\CC2430DB\RouterEB\List\" #
-#                           --diag_suppress Pe001,Pa010 --diag_remark pe550   #
+#                          --diag_suppress Pe001,Pa010 --diag_remark pe550    #
 #                          -o "C:\Texas Instruments\ZStack-1.4.3-1.2.1\Projec #
 #                          ts\zstack\Samples\AXDApp\CC2430DB\RouterEB\Obj\"   #
 #                          -e --require_prototypes -z9 --no_code_motion       #
@@ -421,10 +422,10 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Components\mt\MTEL.c
    \   000012   12....       LCALL   ??SPIMgr_Init?relay
     223          
     224          } /* MT_TaskInit() */
-   \   000015   02....       LJMP    ?Subroutine27 & 0xFFFF
+   \   000015   02....       LJMP    ?Subroutine23 & 0xFFFF
 
    \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine27:
+   \                     ?Subroutine23:
    \   000000   D083         POP     DPH
    \   000002   D082         POP     DPL
    \   000004   02....       LJMP    ?BRET
@@ -464,18 +465,18 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Components\mt\MTEL.c
    \   00000E   12....       LCALL   ?PUSH_XSTACK_I_TWO
    \   000011   7C01         MOV     R4,#0x1
    \   000013   7A05         MOV     R2,#0x5
-   \   000015   02....       LJMP    ?Subroutine28 & 0xFFFF
+   \   000015   02....       LJMP    ?Subroutine24 & 0xFFFF
     246          }
 
    \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine28:
+   \                     ?Subroutine24:
    \   000000   12....       LCALL   ?Subroutine2 & 0xFFFF
-   \                     ??CrossCallReturnLabel_89:
+   \                     ??CrossCallReturnLabel_71:
    \   000003   12....       LCALL   ?DEALLOC_XSTACK8
    \   000006   7401         MOV     A,#0x1
-   \                     ??Subroutine28_0:
+   \                     ??Subroutine24_0:
    \   000008   12....       LCALL   ?DEALLOC_XSTACK8
-   \                     ??Subroutine28_1:
+   \                     ??Subroutine24_1:
    \   00000B   7F02         MOV     R7,#0x2
    \   00000D   02....       LJMP    ?BANKED_LEAVE_XDATA
 
@@ -599,7 +600,7 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Components\mt\MTEL.c
    \   00003D   7A00         MOV     R2,#0x0
    \   00003F   7B00         MOV     R3,#0x0
    \                     ??MT_ProcessEvent_4:
-   \   000041   02....       LJMP    ??Subroutine28_1 & 0xFFFF
+   \   000041   02....       LJMP    ??Subroutine24_1 & 0xFFFF
     292          
     293          } /* MT_ProcessEvent() */
     294          
@@ -725,14 +726,14 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Components\mt\MTEL.c
    \   000076   8F83         MOV     DPH,R7
    \   000078   F0           MOVX    @DPTR,A
     331          }
-   \   000079   02....       LJMP    ??Subroutine29_1 & 0xFFFF
+   \   000079   02....       LJMP    ??Subroutine25_1 & 0xFFFF
 
    \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine29:
+   \                     ?Subroutine25:
    \   000000   7401         MOV     A,#0x1
-   \                     ??Subroutine29_0:
+   \                     ??Subroutine25_0:
    \   000002   12....       LCALL   ?DEALLOC_XSTACK8
-   \                     ??Subroutine29_1:
+   \                     ??Subroutine25_1:
    \   000005   7F06         MOV     R7,#0x6
    \   000007   02....       LJMP    ?BANKED_LEAVE_XDATA
     332          #endif
@@ -788,7 +789,7 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Components\mt\MTEL.c
    \   000029   7001         JNZ     ??MT_BuildAndSendZToolResponse_0
    \   00002B   EF           MOV     A,R7
    \                     ??MT_BuildAndSendZToolResponse_0:
-   \   00002C   601A         JZ      ??CrossCallReturnLabel_57
+   \   00002C   601A         JZ      ??CrossCallReturnLabel_44
     354            {
     355          #ifdef SPI_MGR_DEFAULT_PORT
     356              MT_BuildSPIMsg( cmd, msg_ptr, dataLen, pData );
@@ -802,31 +803,31 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Components\mt\MTEL.c
    \   000038   FD           MOV     R5,A
    \   000039   AA..         MOV     R2,?V0 + 6
    \   00003B   AB..         MOV     R3,?V0 + 7
-   \   00003D   12....       LCALL   ?Subroutine18 & 0xFFFF
-   \                     ??CrossCallReturnLabel_62:
+   \   00003D   12....       LCALL   ?Subroutine16 & 0xFFFF
+   \                     ??CrossCallReturnLabel_49:
    \   000040   12....       LCALL   ?DEALLOC_XSTACK8
     357              HalUARTWrite ( SPI_MGR_DEFAULT_PORT, msg_ptr, msgLen );
    \   000043                ; Setup parameters for call to function HalUARTWrite
    \   000043   AC..         MOV     R4,?V0 + 2
-   \   000045   12....       LCALL   ?Subroutine15 & 0xFFFF
+   \   000045   12....       LCALL   ?Subroutine13 & 0xFFFF
     358          #endif
     359              osal_mem_free( msg_ptr );
     360            }
     361          }
-   \                     ??CrossCallReturnLabel_57:
-   \   000048   80..         SJMP    ??Subroutine30_0
+   \                     ??CrossCallReturnLabel_44:
+   \   000048   80..         SJMP    ??Subroutine26_0
 
    \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine30:
+   \                     ?Subroutine26:
    \   000000   12....       LCALL   ?DEALLOC_XSTACK8
-   \                     ??Subroutine30_0:
+   \                     ??Subroutine26_0:
    \   000003   7F08         MOV     R7,#0x8
    \   000005   02....       LJMP    ?BANKED_LEAVE_XDATA
 
    \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine15:
+   \                     ?Subroutine13:
    \   000000   7D00         MOV     R5,#0x0
-   \                     ??Subroutine15_0:
+   \                     ??Subroutine13_0:
    \   000002   EE           MOV     A,R6
    \   000003   FA           MOV     R2,A
    \   000004   EF           MOV     A,R7
@@ -844,7 +845,7 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Components\mt\MTEL.c
    \   000012   22           RET
 
    \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine18:
+   \                     ?Subroutine16:
    \   000000   12....       LCALL   ??MT_BuildSPIMsg?relay
    \   000003   7402         MOV     A,#0x2
    \   000005   22           RET
@@ -887,9 +888,9 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Components\mt\MTEL.c
     384            msgPtr = (mtOSALSerialData_t *)osal_msg_allocate( msgLen );
    \   00000F                ; Setup parameters for call to function osal_msg_allocate
    \   00000F   7409         MOV     A,#0x9
-   \   000011   12....       LCALL   ?Subroutine16 & 0xFFFF
+   \   000011   12....       LCALL   ?Subroutine14 & 0xFFFF
     385            if ( msgPtr )
-   \                     ??CrossCallReturnLabel_97:
+   \                     ??CrossCallReturnLabel_87:
    \   000014   7001         JNZ     ??MT_BuildAndSendZToolCB_0
    \   000016   EB           MOV     A,R3
    \                     ??MT_BuildAndSendZToolCB_0:
@@ -973,19 +974,19 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Components\mt\MTEL.c
     401            }
     402          }
    \                     ??MT_BuildAndSendZToolCB_1:
-   \   00007B   02....       LJMP    ??Subroutine30_0 & 0xFFFF
+   \   00007B   02....       LJMP    ??Subroutine26_0 & 0xFFFF
 
    \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine16:
+   \                     ?Subroutine14:
    \   000000   25..         ADD     A,?V0 + 0
    \   000002   FA           MOV     R2,A
    \   000003   7B00         MOV     R3,#0x0
    \   000005   12....       LCALL   ??osal_msg_allocate?relay
-   \   000008                REQUIRE ?Subroutine31
-   \   000008                ; // Fall through to label ?Subroutine31
+   \   000008                REQUIRE ?Subroutine28
+   \   000008                ; // Fall through to label ?Subroutine28
 
    \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine31:
+   \                     ?Subroutine28:
    \   000000   8A..         MOV     ?V0 + 2,R2
    \   000002   8B..         MOV     ?V0 + 3,R3
    \   000004   EA           MOV     A,R2
@@ -1064,8 +1065,8 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Components\mt\MTEL.c
    \   000031   8B83         MOV     DPH,R3
    \   000033   A3           INC     DPTR
    \   000034   A3           INC     DPTR
-   \   000035   12....       LCALL   ??Subroutine9_0 & 0xFFFF
-   \                     ??CrossCallReturnLabel_27:
+   \   000035   12....       LCALL   ??Subroutine8_0 & 0xFFFF
+   \                     ??CrossCallReturnLabel_25:
    \   000038   12....       LCALL   ??MT_ProcessSerialCommand?relay
    \   00003B   8063         SJMP    ??MT_ProcessCommand_5
     435                break;
@@ -1189,13 +1190,13 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Components\mt\MTEL.c
    \   0000A4   12....       LCALL   ??osal_msg_deallocate?relay
     480            }
     481          }
-   \   0000A7   02....       LJMP    ??Subroutine29_1 & 0xFFFF
+   \   0000A7   02....       LJMP    ??Subroutine25_1 & 0xFFFF
 
    \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine9:
+   \                     ?Subroutine8:
    \   000000   85..82       MOV     DPL,?XSP + 0
    \   000003   85..83       MOV     DPH,?XSP + 1
-   \                     ??Subroutine9_0:
+   \                     ??Subroutine8_0:
    \   000006   E0           MOVX    A,@DPTR
    \   000007   FA           MOV     R2,A
    \   000008   A3           INC     DPTR
@@ -1253,9 +1254,9 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Components\mt\MTEL.c
     506            msg_ptr = osal_msg_allocate( (byte)(SPI_0DATA_MSG_LEN + dataLen + 1) );
    \   00001D                ; Setup parameters for call to function osal_msg_allocate
    \   00001D   7406         MOV     A,#0x6
-   \   00001F   12....       LCALL   ?Subroutine16 & 0xFFFF
+   \   00001F   12....       LCALL   ?Subroutine14 & 0xFFFF
     507            if ( msg_ptr )
-   \                     ??CrossCallReturnLabel_98:
+   \                     ??CrossCallReturnLabel_88:
    \   000022   7001         JNZ     ??MT_ProcessDebugMsg_0
    \   000024   EB           MOV     A,R3
    \                     ??MT_ProcessDebugMsg_0:
@@ -1390,21 +1391,21 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Components\mt\MTEL.c
    \   0000CB   EE           MOV     A,R6
    \   0000CC   240B         ADD     A,#0xb
    \   0000CE   FA           MOV     R2,A
-   \   0000CF   12....       LCALL   ?Subroutine25 & 0xFFFF
-   \                     ??CrossCallReturnLabel_84:
-   \   0000D2   12....       LCALL   ?Subroutine13 & 0xFFFF
-   \                     ??CrossCallReturnLabel_49:
+   \   0000CF   12....       LCALL   ?Subroutine22 & 0xFFFF
+   \                     ??CrossCallReturnLabel_69:
+   \   0000D2   12....       LCALL   ?Subroutine11 & 0xFFFF
+   \                     ??CrossCallReturnLabel_36:
    \   0000D5   A3           INC     DPTR
    \   0000D6   A882         MOV     R0,DPL
    \   0000D8   A983         MOV     R1,DPH
     534              *pBuf++ = LO_UINT16( msg->timestamp );
    \   0000DA   8A82         MOV     DPL,R2
    \   0000DC   8B83         MOV     DPH,R3
-   \   0000DE   12....       LCALL   ?Subroutine13 & 0xFFFF
+   \   0000DE   12....       LCALL   ?Subroutine11 & 0xFFFF
     535          
     536          #ifdef SPI_MGR_DEFAULT_PORT
     537              MT_BuildSPIMsg( SPI_CMD_DEBUG_MSG, &msg_ptr[1], dataLen, buf );
-   \                     ??CrossCallReturnLabel_50:
+   \                     ??CrossCallReturnLabel_37:
    \   0000E1   85..82       MOV     DPL,?V0 + 2
    \   0000E4   85..83       MOV     DPH,?V0 + 3
    \   0000E7   A3           INC     DPTR
@@ -1424,8 +1425,8 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Components\mt\MTEL.c
    \   000102   FD           MOV     R5,A
    \   000103   7A03         MOV     R2,#0x3
    \   000105   7B40         MOV     R3,#0x40
-   \   000107   12....       LCALL   ?Subroutine18 & 0xFFFF
-   \                     ??CrossCallReturnLabel_63:
+   \   000107   12....       LCALL   ?Subroutine16 & 0xFFFF
+   \                     ??CrossCallReturnLabel_50:
    \   00010A   12....       LCALL   ?DEALLOC_XSTACK8
     538              HalUARTWrite ( SPI_MGR_DEFAULT_PORT, &msg_ptr[1], SPI_0DATA_MSG_LEN + dataLen );
    \   00010D                ; Setup parameters for call to function HalUARTWrite
@@ -1451,28 +1452,28 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Components\mt\MTEL.c
     542          }
    \                     ??MT_ProcessDebugMsg_1:
    \   000126   740B         MOV     A,#0xb
-   \   000128   80..         SJMP    ??Subroutine29_0
+   \   000128   80..         SJMP    ??Subroutine25_0
 
    \                                 In  segment BANKED_CODE, align 1, keep-with-next
    \                     ?Subroutine1:
-   \   000000   12....       LCALL   ?Subroutine25 & 0xFFFF
-   \                     ??CrossCallReturnLabel_85:
-   \   000003   12....       LCALL   ?Subroutine24 & 0xFFFF
-   \                     ??CrossCallReturnLabel_81:
+   \   000000   12....       LCALL   ?Subroutine22 & 0xFFFF
+   \                     ??CrossCallReturnLabel_70:
+   \   000003   12....       LCALL   ?Subroutine21 & 0xFFFF
+   \                     ??CrossCallReturnLabel_66:
    \   000006   A3           INC     DPTR
    \   000007   A882         MOV     R0,DPL
    \   000009   A983         MOV     R1,DPH
    \   00000B   8A82         MOV     DPL,R2
    \   00000D   8B83         MOV     DPH,R3
-   \   00000F   12....       LCALL   ?Subroutine24 & 0xFFFF
-   \                     ??CrossCallReturnLabel_82:
+   \   00000F   12....       LCALL   ?Subroutine21 & 0xFFFF
+   \                     ??CrossCallReturnLabel_67:
    \   000012   A3           INC     DPTR
    \   000013   08           INC     R0
    \   000014   A983         MOV     R1,DPH
    \   000016   22           RET
 
    \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine25:
+   \                     ?Subroutine22:
    \   000000   EF           MOV     A,R7
    \   000001   3400         ADDC    A,#0x0
    \   000003   FB           MOV     R3,A
@@ -1492,13 +1493,13 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Components\mt\MTEL.c
    \   000008   22           RET
 
    \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine13:
-   \   000000   12....       LCALL   ?Subroutine24 & 0xFFFF
-   \                     ??CrossCallReturnLabel_83:
+   \                     ?Subroutine11:
+   \   000000   12....       LCALL   ?Subroutine21 & 0xFFFF
+   \                     ??CrossCallReturnLabel_68:
    \   000003   22           RET
 
    \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine24:
+   \                     ?Subroutine21:
    \   000000   E0           MOVX    A,@DPTR
    \   000001   8882         MOV     DPL,R0
    \   000003   8983         MOV     DPH,R1
@@ -1540,13 +1541,13 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Components\mt\MTEL.c
    \   00000E   A3           INC     DPTR
    \   00000F   E0           MOVX    A,@DPTR
    \   000010   2405         ADD     A,#0x5
-   \   000012   12....       LCALL   ?Subroutine17 & 0xFFFF
+   \   000012   12....       LCALL   ?Subroutine15 & 0xFFFF
     563            if ( msg_ptr )
-   \                     ??CrossCallReturnLabel_60:
+   \                     ??CrossCallReturnLabel_47:
    \   000015   7001         JNZ     ??MT_ProcessDebugStr_0
    \   000017   EF           MOV     A,R7
    \                     ??MT_ProcessDebugStr_0:
-   \   000018   6041         JZ      ??CrossCallReturnLabel_59
+   \   000018   6041         JZ      ??CrossCallReturnLabel_46
     564            {
     565          #ifdef SPI_MGR_DEFAULT_PORT
     566              MT_BuildSPIMsg( SPI_RESPONSE_BIT | SPI_SYS_STRING_MSG, msg_ptr, dstr->sln, dstr->pString );
@@ -1573,8 +1574,8 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Components\mt\MTEL.c
    \   00003D   FD           MOV     R5,A
    \   00003E   7A15         MOV     R2,#0x15
    \   000040   7B10         MOV     R3,#0x10
-   \   000042   12....       LCALL   ?Subroutine18 & 0xFFFF
-   \                     ??CrossCallReturnLabel_64:
+   \   000042   12....       LCALL   ?Subroutine16 & 0xFFFF
+   \                     ??CrossCallReturnLabel_51:
    \   000045   12....       LCALL   ?DEALLOC_XSTACK8
     567              HalUARTWrite ( SPI_MGR_DEFAULT_PORT, msg_ptr, SPI_0DATA_MSG_LEN + dstr->sln );
    \   000048                ; Setup parameters for call to function HalUARTWrite
@@ -1588,22 +1589,22 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Components\mt\MTEL.c
    \   000054   E4           CLR     A
    \   000055   3400         ADDC    A,#0x0
    \   000057   FD           MOV     R5,A
-   \   000058   12....       LCALL   ??Subroutine15_0 & 0xFFFF
+   \   000058   12....       LCALL   ??Subroutine13_0 & 0xFFFF
     568          #endif
     569              osal_mem_free( msg_ptr );
     570            }
     571          }
-   \                     ??CrossCallReturnLabel_59:
-   \   00005B                REQUIRE ?Subroutine32
-   \   00005B                ; // Fall through to label ?Subroutine32
+   \                     ??CrossCallReturnLabel_46:
+   \   00005B                REQUIRE ?Subroutine29
+   \   00005B                ; // Fall through to label ?Subroutine29
 
    \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine32:
+   \                     ?Subroutine29:
    \   000000   7F04         MOV     R7,#0x4
    \   000002   02....       LJMP    ?BANKED_LEAVE_XDATA
 
    \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine17:
+   \                     ?Subroutine15:
    \   000000   FA           MOV     R2,A
    \   000001   7B00         MOV     R3,#0x0
    \   000003   12....       LCALL   ??osal_mem_alloc?relay
@@ -1662,8 +1663,8 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Components\mt\MTEL.c
    \   00001A                ; Setup parameters for call to function osal_nv_item_len
    \   00001A   EE           MOV     A,R6
    \   00001B   FA           MOV     R2,A
-   \   00001C   12....       LCALL   ?Subroutine14 & 0xFFFF
-   \                     ??CrossCallReturnLabel_52:
+   \   00001C   12....       LCALL   ?Subroutine12 & 0xFFFF
+   \                     ??CrossCallReturnLabel_39:
    \   00001F   12....       LCALL   ?PUSH_XSTACK_I_TWO
    \   000022   7C00         MOV     R4,#0x0
    \   000024   7D00         MOV     R5,#0x0
@@ -1672,11 +1673,11 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Components\mt\MTEL.c
    \   000028   7B00         MOV     R3,#0x0
    \   00002A   12....       LCALL   ??osal_nv_write?relay
    \   00002D   7404         MOV     A,#0x4
-   \   00002F   80..         SJMP    ??Subroutine28_0
+   \   00002F   80..         SJMP    ??Subroutine24_0
     598          }
 
    \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine14:
+   \                     ?Subroutine12:
    \   000000   7B00         MOV     R3,#0x0
    \   000002   12....       LCALL   ??osal_nv_item_len?relay
    \   000005   8A..         MOV     ?V0 + 0,R2
@@ -1774,8 +1775,8 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Components\mt\MTEL.c
    \   00004F   7C00         MOV     R4,#0x0
    \   000051   7D00         MOV     R5,#0x0
    \   000053   AA..         MOV     R2,?V0 + 0
-   \   000055   12....       LCALL   ??Subroutine20_0 & 0xFFFF
-   \                     ??CrossCallReturnLabel_68:
+   \   000055   12....       LCALL   ??Subroutine18_0 & 0xFFFF
+   \                     ??CrossCallReturnLabel_55:
    \   000058   12....       LCALL   ?DEALLOC_XSTACK8
    \   00005B   E9           MOV     A,R1
    \   00005C   85..82       MOV     DPL,?V0 + 6
@@ -1806,7 +1807,7 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Components\mt\MTEL.c
    \   00007D   2405         ADD     A,#0x5
    \   00007F   F9           MOV     R1,A
    \   000080   12....       LCALL   ??Subroutine2_0 & 0xFFFF
-   \                     ??CrossCallReturnLabel_90:
+   \                     ??CrossCallReturnLabel_72:
    \   000083   12....       LCALL   ?DEALLOC_XSTACK8
     639              osal_mem_free( buf );
    \   000086                ; Setup parameters for call to function osal_mem_free
@@ -1816,14 +1817,14 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Components\mt\MTEL.c
     640            }
     641          }
    \                     ??MT_ProcessGetNV_1:
-   \   00008D   02....       LJMP    ??Subroutine30_0 & 0xFFFF
+   \   00008D   02....       LJMP    ??Subroutine26_0 & 0xFFFF
 
    \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine20:
+   \                     ?Subroutine18:
    \   000000   7C00         MOV     R4,#0x0
    \   000002   7D00         MOV     R5,#0x0
    \   000004   7A01         MOV     R2,#0x1
-   \                     ??Subroutine20_0:
+   \                     ??Subroutine18_0:
    \   000006   7B00         MOV     R3,#0x0
    \   000008   12....       LCALL   ??osal_nv_read?relay
    \   00000B   7404         MOV     A,#0x4
@@ -1871,9 +1872,9 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Components\mt\MTEL.c
     673            buf = osal_mem_alloc( len );
    \   00000A                ; Setup parameters for call to function osal_mem_alloc
    \   00000A   7A20         MOV     R2,#0x20
-   \   00000C   12....       LCALL   ?Subroutine19 & 0xFFFF
+   \   00000C   12....       LCALL   ?Subroutine17 & 0xFFFF
     674            if ( buf )
-   \                     ??CrossCallReturnLabel_95:
+   \                     ??CrossCallReturnLabel_85:
    \   00000F   7001         JNZ     ??MT_ProcessGetNvInfo_0
    \   000011   EB           MOV     A,R3
    \                     ??MT_ProcessGetNvInfo_0:
@@ -1905,8 +1906,8 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Components\mt\MTEL.c
    \   000035   75..00       MOV     ?V0 + 5,#0x0
    \   000038   78..         MOV     R0,#?V0 + 4
    \   00003A   12....       LCALL   ?PUSH_XSTACK_I_TWO
-   \   00003D   12....       LCALL   ?Subroutine20 & 0xFFFF
-   \                     ??CrossCallReturnLabel_66:
+   \   00003D   12....       LCALL   ?Subroutine18 & 0xFFFF
+   \                     ??CrossCallReturnLabel_53:
    \   000040   12....       LCALL   ?DEALLOC_XSTACK8
    \   000043   E9           MOV     A,R1
    \   000044   FE           MOV     R6,A
@@ -1916,12 +1917,12 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Components\mt\MTEL.c
     685              MT_ReverseBytes( pBuf, Z_EXTADDR_LEN );
    \                     ??MT_ProcessGetNvInfo_2:
    \   000049                ; Setup parameters for call to function MT_ReverseBytes
-   \   000049   12....       LCALL   ?Subroutine21 & 0xFFFF
+   \   000049   12....       LCALL   ?Subroutine19 & 0xFFFF
     686              pBuf += Z_EXTADDR_LEN;
     687          
     688              // Scan channel list (bit mask)
     689              if (  osal_nv_read( ZCD_NV_CHANLIST, 0, sizeof( tmp32 ), &tmp32 ) )
-   \                     ??CrossCallReturnLabel_73:
+   \                     ??CrossCallReturnLabel_60:
    \   00004C                ; Setup parameters for call to function osal_nv_read
    \   00004C   7402         MOV     A,#0x2
    \   00004E   12....       LCALL   ?XSTACK_DISP0_8
@@ -1936,8 +1937,8 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Components\mt\MTEL.c
    \   000067   7C00         MOV     R4,#0x0
    \   000069   7D00         MOV     R5,#0x0
    \   00006B   7A84         MOV     R2,#-0x7c
-   \   00006D   12....       LCALL   ??Subroutine20_0 & 0xFFFF
-   \                     ??CrossCallReturnLabel_69:
+   \   00006D   12....       LCALL   ??Subroutine18_0 & 0xFFFF
+   \                     ??CrossCallReturnLabel_56:
    \   000070   12....       LCALL   ?DEALLOC_XSTACK8
    \   000073   E9           MOV     A,R1
    \   000074   6006         JZ      ??MT_ProcessGetNvInfo_3
@@ -2023,8 +2024,8 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Components\mt\MTEL.c
    \   000104   7C00         MOV     R4,#0x0
    \   000106   7D00         MOV     R5,#0x0
    \   000108   7A83         MOV     R2,#-0x7d
-   \   00010A   12....       LCALL   ??Subroutine20_0 & 0xFFFF
-   \                     ??CrossCallReturnLabel_70:
+   \   00010A   12....       LCALL   ??Subroutine18_0 & 0xFFFF
+   \                     ??CrossCallReturnLabel_57:
    \   00010D   12....       LCALL   ?DEALLOC_XSTACK8
    \   000110   E9           MOV     A,R1
    \   000111   6006         JZ      ??MT_ProcessGetNvInfo_5
@@ -2077,8 +2078,8 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Components\mt\MTEL.c
    \   00015A   7C00         MOV     R4,#0x0
    \   00015C   7D00         MOV     R5,#0x0
    \   00015E   7A61         MOV     R2,#0x61
-   \   000160   12....       LCALL   ??Subroutine20_0 & 0xFFFF
-   \                     ??CrossCallReturnLabel_71:
+   \   000160   12....       LCALL   ??Subroutine18_0 & 0xFFFF
+   \                     ??CrossCallReturnLabel_58:
    \   000163   12....       LCALL   ?DEALLOC_XSTACK8
    \   000166   E9           MOV     A,R1
    \   000167   6004         JZ      ??MT_ProcessGetNvInfo_7
@@ -2100,8 +2101,8 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Components\mt\MTEL.c
    \   00017D   7C00         MOV     R4,#0x0
    \   00017F   7D00         MOV     R5,#0x0
    \   000181   7A62         MOV     R2,#0x62
-   \   000183   12....       LCALL   ??Subroutine20_0 & 0xFFFF
-   \                     ??CrossCallReturnLabel_72:
+   \   000183   12....       LCALL   ??Subroutine18_0 & 0xFFFF
+   \                     ??CrossCallReturnLabel_59:
    \   000186   12....       LCALL   ?DEALLOC_XSTACK8
    \   000189   E9           MOV     A,R1
    \   00018A   6004         JZ      ??MT_ProcessGetNvInfo_8
@@ -2129,7 +2130,7 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Components\mt\MTEL.c
    \   0001A1   7B10         MOV     R3,#0x10
    \   0001A3   7925         MOV     R1,#0x25
    \   0001A5   12....       LCALL   ??Subroutine2_0 & 0xFFFF
-   \                     ??CrossCallReturnLabel_91:
+   \                     ??CrossCallReturnLabel_73:
    \   0001A8   12....       LCALL   ?DEALLOC_XSTACK8
     724          
     725              osal_mem_free( buf );
@@ -2141,10 +2142,10 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Components\mt\MTEL.c
     727          }
    \                     ??MT_ProcessGetNvInfo_1:
    \   0001B2   7406         MOV     A,#0x6
-   \   0001B4   02....       LJMP    ?Subroutine30 & 0xFFFF
+   \   0001B4   02....       LJMP    ?Subroutine26 & 0xFFFF
 
    \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine21:
+   \                     ?Subroutine19:
    \   000000   7908         MOV     R1,#0x8
    \   000002   AA..         MOV     R2,?V0 + 0
    \   000004   AB..         MOV     R3,?V0 + 1
@@ -2158,10 +2159,10 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Components\mt\MTEL.c
    \   000015   22           RET
 
    \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine19:
+   \                     ?Subroutine17:
    \   000000   7B00         MOV     R3,#0x0
    \   000002   12....       LCALL   ??osal_mem_alloc?relay
-   \   000005   02....       LJMP    ?Subroutine31 & 0xFFFF
+   \   000005   02....       LJMP    ?Subroutine28 & 0xFFFF
 
    \                                 In  segment BANKED_CODE, align 1, keep-with-next
    \                     ?Subroutine5:
@@ -2212,9 +2213,9 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Components\mt\MTEL.c
     758            buf = osal_mem_alloc( DEVICE_INFO_RESPONSE_LEN );
    \   00000A                ; Setup parameters for call to function osal_mem_alloc
    \   00000A   7A2E         MOV     R2,#0x2e
-   \   00000C   12....       LCALL   ?Subroutine19 & 0xFFFF
+   \   00000C   12....       LCALL   ?Subroutine17 & 0xFFFF
     759            if ( buf )
-   \                     ??CrossCallReturnLabel_96:
+   \                     ??CrossCallReturnLabel_86:
    \   00000F   7001         JNZ     ??MT_ProcessGetDeviceInfo_0
    \   000011   EB           MOV     A,R3
    \                     ??MT_ProcessGetDeviceInfo_0:
@@ -2238,18 +2239,18 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Components\mt\MTEL.c
    \   000027   75..00       MOV     ?V0 + 5,#0x0
    \   00002A   78..         MOV     R0,#?V0 + 4
    \   00002C   12....       LCALL   ?PUSH_XSTACK_I_TWO
-   \   00002F   12....       LCALL   ?Subroutine20 & 0xFFFF
-   \                     ??CrossCallReturnLabel_67:
+   \   00002F   12....       LCALL   ?Subroutine18 & 0xFFFF
+   \                     ??CrossCallReturnLabel_54:
    \   000032   12....       LCALL   ?DEALLOC_XSTACK8
     766              // Outgoing extended address needs to be reversed
     767              MT_ReverseBytes( pBuf, Z_EXTADDR_LEN );
    \   000035                ; Setup parameters for call to function MT_ReverseBytes
-   \   000035   12....       LCALL   ?Subroutine21 & 0xFFFF
+   \   000035   12....       LCALL   ?Subroutine19 & 0xFFFF
     768              pBuf += Z_EXTADDR_LEN;
     769          
     770          #if !defined( NONWK )
     771              shortAddr = NLME_GetShortAddr();
-   \                     ??CrossCallReturnLabel_74:
+   \                     ??CrossCallReturnLabel_61:
    \   000038                ; Setup parameters for call to function NLME_GetShortAddr
    \   000038   12....       LCALL   ??NLME_GetShortAddr?relay
     772          #else
@@ -2395,7 +2396,7 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Components\mt\MTEL.c
    \   0000C1   7B10         MOV     R3,#0x10
    \   0000C3   7933         MOV     R1,#0x33
    \   0000C5   12....       LCALL   ??Subroutine2_0 & 0xFFFF
-   \                     ??CrossCallReturnLabel_92:
+   \                     ??CrossCallReturnLabel_74:
    \   0000C8   12....       LCALL   ?DEALLOC_XSTACK8
     827          
     828              osal_mem_free( buf );
@@ -2406,7 +2407,7 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Components\mt\MTEL.c
     829            }
     830          }
    \                     ??MT_ProcessGetDeviceInfo_1:
-   \   0000D2   02....       LJMP    ?Subroutine29 & 0xFFFF
+   \   0000D2   02....       LJMP    ?Subroutine25 & 0xFFFF
 
    \                                 In  segment BANKED_CODE, align 1, keep-with-next
    \                     ?Subroutine0:
@@ -2514,58 +2515,42 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Components\mt\MTEL.c
    \   00004D   8E..         MOV     ?V0 + 0,R6
    \   00004F   8F..         MOV     ?V0 + 1,R7
    \   000051   78..         MOV     R0,#?V0 + 0
-   \   000053   12....       LCALL   ?US_SWITCH_SPARSE
+   \   000053   12....       LCALL   ?US_SWITCH_DENSE
    \                     `?<Jumptable for MT_ProcessSerialCommand>_0`:
    \   000056   0100         DW        1
-   \   000058   000A         DW        2560
-   \   00005A   180A         DW        2584
-   \   00005C   ....         DW        ??MT_ProcessSerialCommand_0
-   \   00005E   1600         DW        22
-   \   000060   0100         DW        1
-   \   000062   ....         DW        ??MT_ProcessSerialCommand_1
-   \   000064   0200         DW        2
-   \   000066   ....         DW        ??MT_ProcessSerialCommand_2
-   \   000068   0300         DW        3
-   \   00006A   ....         DW        ??MT_ProcessSerialCommand_3
-   \   00006C   0500         DW        5
-   \   00006E   ....         DW        ??MT_ProcessSerialCommand_4
-   \   000070   0600         DW        6
-   \   000072   ....         DW        ??MT_ProcessSerialCommand_5
-   \   000074   0700         DW        7
-   \   000076   ....         DW        ??MT_ProcessSerialCommand_6
-   \   000078   0800         DW        8
-   \   00007A   ....         DW        ??MT_ProcessSerialCommand_7
-   \   00007C   1000         DW        16
-   \   00007E   ....         DW        ??MT_ProcessSerialCommand_8
-   \   000080   1100         DW        17
-   \   000082   ....         DW        ??MT_ProcessSerialCommand_9
-   \   000084   1200         DW        18
-   \   000086   ....         DW        ??MT_ProcessSerialCommand_10
-   \   000088   1300         DW        19
-   \   00008A   ....         DW        ??MT_ProcessSerialCommand_11
-   \   00008C   1400         DW        20
-   \   00008E   ....         DW        ??MT_ProcessSerialCommand_12
-   \   000090   1600         DW        22
-   \   000092   ....         DW        ??MT_ProcessSerialCommand_13
-   \   000094   1700         DW        23
-   \   000096   ....         DW        ??MT_ProcessSerialCommand_14
-   \   000098   1800         DW        24
-   \   00009A   ....         DW        ??MT_ProcessSerialCommand_15
-   \   00009C   1900         DW        25
-   \   00009E   ....         DW        ??MT_ProcessSerialCommand_16
-   \   0000A0   1A00         DW        26
-   \   0000A2   ....         DW        ??MT_ProcessSerialCommand_17
-   \   0000A4   1B00         DW        27
-   \   0000A6   ....         DW        ??MT_ProcessSerialCommand_18
-   \   0000A8   1C00         DW        28
-   \   0000AA   ....         DW        ??MT_ProcessSerialCommand_19
-   \   0000AC   1D00         DW        29
-   \   0000AE   ....         DW        ??MT_ProcessSerialCommand_20
-   \   0000B0   1E00         DW        30
-   \   0000B2   ....         DW        ??MT_ProcessSerialCommand_21
-   \   0000B4   1F00         DW        31
-   \   0000B6   ....         DW        ??MT_ProcessSerialCommand_22
-   \   0000B8   ....         DW        ??MT_ProcessSerialCommand_23
+   \   000058   1E           DB        30
+   \   000059   ....         DW        ??MT_ProcessSerialCommand_0
+   \   00005B   ....         DW        ??MT_ProcessSerialCommand_1
+   \   00005D   ....         DW        ??MT_ProcessSerialCommand_2
+   \   00005F   ....         DW        ??MT_ProcessSerialCommand_3
+   \   000061   ....         DW        ??MT_ProcessSerialCommand_0
+   \   000063   ....         DW        ??MT_ProcessSerialCommand_4
+   \   000065   ....         DW        ??MT_ProcessSerialCommand_5
+   \   000067   ....         DW        ??MT_ProcessSerialCommand_6
+   \   000069   ....         DW        ??MT_ProcessSerialCommand_7
+   \   00006B   ....         DW        ??MT_ProcessSerialCommand_0
+   \   00006D   ....         DW        ??MT_ProcessSerialCommand_0
+   \   00006F   ....         DW        ??MT_ProcessSerialCommand_0
+   \   000071   ....         DW        ??MT_ProcessSerialCommand_0
+   \   000073   ....         DW        ??MT_ProcessSerialCommand_0
+   \   000075   ....         DW        ??MT_ProcessSerialCommand_0
+   \   000077   ....         DW        ??MT_ProcessSerialCommand_0
+   \   000079   ....         DW        ??MT_ProcessSerialCommand_8
+   \   00007B   ....         DW        ??MT_ProcessSerialCommand_9
+   \   00007D   ....         DW        ??MT_ProcessSerialCommand_10
+   \   00007F   ....         DW        ??MT_ProcessSerialCommand_11
+   \   000081   ....         DW        ??MT_ProcessSerialCommand_12
+   \   000083   ....         DW        ??MT_ProcessSerialCommand_0
+   \   000085   ....         DW        ??MT_ProcessSerialCommand_13
+   \   000087   ....         DW        ??MT_ProcessSerialCommand_14
+   \   000089   ....         DW        ??MT_ProcessSerialCommand_15
+   \   00008B   ....         DW        ??MT_ProcessSerialCommand_16
+   \   00008D   ....         DW        ??MT_ProcessSerialCommand_17
+   \   00008F   ....         DW        ??MT_ProcessSerialCommand_18
+   \   000091   ....         DW        ??MT_ProcessSerialCommand_19
+   \   000093   ....         DW        ??MT_ProcessSerialCommand_20
+   \   000095   ....         DW        ??MT_ProcessSerialCommand_21
+   \   000097   ....         DW        ??MT_ProcessSerialCommand_22
     873              {
     874          #ifdef MACSIM
     875                case SPI_CMD_ZIGNET_DATA:
@@ -2576,80 +2561,76 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Components\mt\MTEL.c
     880                case SPI_CMD_SYS_RAM_READ:
     881                  extAddr[0] = MT_RAMRead( (UINT16)BUILD_UINT16( pData[1], pData[0] ), &extAddr[1] );
    \                     ??MT_ProcessSerialCommand_1:
-   \   0000BA                ; Setup parameters for call to function MT_RAMRead
-   \   0000BA   740C         MOV     A,#0xc
-   \   0000BC   12....       LCALL   ?XSTACK_DISP0_8
-   \   0000BF   AC82         MOV     R4,DPL
-   \   0000C1   AD83         MOV     R5,DPH
-   \   0000C3   12....       LCALL   ?Subroutine7 & 0xFFFF
-   \                     ??CrossCallReturnLabel_16:
-   \   0000C6   FA           MOV     R2,A
-   \   0000C7   85..82       MOV     DPL,?XSP + 0
-   \   0000CA   85..83       MOV     DPH,?XSP + 1
-   \   0000CD   12....       LCALL   ??Subroutine8_1 & 0xFFFF
-   \                     ??CrossCallReturnLabel_20:
-   \   0000D0   FB           MOV     R3,A
-   \   0000D1   12....       LCALL   ??MT_RAMRead?relay
-   \   0000D4   740B         MOV     A,#0xb
-   \   0000D6   12....       LCALL   ?XSTACK_DISP0_8
-   \   0000D9   E9           MOV     A,R1
-   \   0000DA   F0           MOVX    @DPTR,A
+   \   000099                ; Setup parameters for call to function MT_RAMRead
+   \   000099   740C         MOV     A,#0xc
+   \   00009B   12....       LCALL   ?XSTACK_DISP0_8
+   \   00009E   AC82         MOV     R4,DPL
+   \   0000A0   AD83         MOV     R5,DPH
+   \   0000A2   12....       LCALL   ?Subroutine6 & 0xFFFF
+   \                     ??CrossCallReturnLabel_79:
+   \   0000A5   FB           MOV     R3,A
+   \   0000A6   12....       LCALL   ??MT_RAMRead?relay
+   \   0000A9   740B         MOV     A,#0xb
+   \   0000AB   12....       LCALL   ?XSTACK_DISP0_8
+   \   0000AE   E9           MOV     A,R1
+   \   0000AF   F0           MOVX    @DPTR,A
     882                  len = MT_RAM_READ_RESP_LEN;
-   \   0000DB   7C02         MOV     R4,#0x2
+   \   0000B0   7C02         MOV     R4,#0x2
     883                  retValue = extAddr;
+   \                     ??MT_ProcessSerialCommand_23:
+   \   0000B2   A882         MOV     R0,DPL
+   \   0000B4   A983         MOV     R1,DPH
+   \   0000B6   7403         MOV     A,#0x3
+   \   0000B8   12....       LCALL   ?XSTACK_DISP0_8
+   \   0000BB   E8           MOV     A,R0
+   \   0000BC   F0           MOVX    @DPTR,A
+   \   0000BD   A3           INC     DPTR
+   \   0000BE   E9           MOV     A,R1
    \                     ??MT_ProcessSerialCommand_24:
-   \   0000DD   A882         MOV     R0,DPL
-   \   0000DF   A983         MOV     R1,DPH
-   \   0000E1   7403         MOV     A,#0x3
-   \   0000E3   12....       LCALL   ?XSTACK_DISP0_8
-   \   0000E6   E8           MOV     A,R0
-   \   0000E7   F0           MOVX    @DPTR,A
-   \   0000E8   A3           INC     DPTR
-   \   0000E9   E9           MOV     A,R1
-   \                     ??MT_ProcessSerialCommand_25:
-   \   0000EA   F0           MOVX    @DPTR,A
-   \   0000EB   02....       LJMP    ??MT_ProcessSerialCommand_26 & 0xFFFF
+   \   0000BF   F0           MOVX    @DPTR,A
+   \   0000C0   02....       LJMP    ??MT_ProcessSerialCommand_25 & 0xFFFF
     884                  break;
     885          
     886                case SPI_CMD_SYS_RAM_WRITE:
     887                  ret = MT_RAMWrite( (UINT16)BUILD_UINT16( pData[1], pData[0] ), pData[2] );
    \                     ??MT_ProcessSerialCommand_2:
-   \   0000EE                ; Setup parameters for call to function MT_RAMWrite
-   \   0000EE   12....       LCALL   ?Subroutine10 & 0xFFFF
-   \                     ??CrossCallReturnLabel_36:
-   \   0000F1   F9           MOV     R1,A
-   \   0000F2   12....       LCALL   ?Subroutine12 & 0xFFFF
-   \                     ??CrossCallReturnLabel_41:
-   \   0000F5   FC           MOV     R4,A
-   \   0000F6   85..82       MOV     DPL,?XSP + 0
-   \   0000F9   85..83       MOV     DPH,?XSP + 1
-   \   0000FC   12....       LCALL   ??Subroutine8_1 & 0xFFFF
-   \                     ??CrossCallReturnLabel_21:
-   \   0000FF   FB           MOV     R3,A
-   \   000100   EC           MOV     A,R4
-   \   000101   FA           MOV     R2,A
-   \   000102   12....       LCALL   ??MT_RAMWrite?relay
-   \                     ??MT_ProcessSerialCommand_27:
-   \   000105   7402         MOV     A,#0x2
-   \   000107   12....       LCALL   ?XSTACK_DISP0_8
-   \   00010A   E9           MOV     A,R1
-   \   00010B   02....       LJMP    ??MT_ProcessSerialCommand_28 & 0xFFFF
+   \   0000C3                ; Setup parameters for call to function MT_RAMWrite
+   \   0000C3   12....       LCALL   ?Subroutine10 & 0xFFFF
+   \                     ??CrossCallReturnLabel_34:
+   \   0000C6   E0           MOVX    A,@DPTR
+   \   0000C7   F9           MOV     R1,A
+   \   0000C8   12....       LCALL   ?Subroutine7 & 0xFFFF
+   \                     ??CrossCallReturnLabel_14:
+   \   0000CB   FC           MOV     R4,A
+   \   0000CC   85..82       MOV     DPL,?XSP + 0
+   \   0000CF   85..83       MOV     DPH,?XSP + 1
+   \   0000D2   12....       LCALL   ?Subroutine27 & 0xFFFF
+   \                     ??CrossCallReturnLabel_77:
+   \   0000D5   FB           MOV     R3,A
+   \   0000D6   EC           MOV     A,R4
+   \   0000D7   FA           MOV     R2,A
+   \   0000D8   12....       LCALL   ??MT_RAMWrite?relay
+   \                     ??MT_ProcessSerialCommand_26:
+   \   0000DB   7402         MOV     A,#0x2
+   \   0000DD   12....       LCALL   ?XSTACK_DISP0_8
+   \   0000E0   E9           MOV     A,R1
+   \   0000E1   02....       LJMP    ??MT_ProcessSerialCommand_27 & 0xFFFF
     888                  len = MT_RAM_WRITE_RESP_LEN;
     889                  break;
     890          
     891                case SPI_CMD_SYS_SET_DEBUG_THRESHOLD:
     892                  ret = MT_SetDebugThreshold( pData[0], pData[1] );
    \                     ??MT_ProcessSerialCommand_3:
-   \   00010E   12....       LCALL   ?Subroutine8 & 0xFFFF
-   \                     ??CrossCallReturnLabel_22:
-   \   000111   FA           MOV     R2,A
-   \   000112   12....       LCALL   ?Subroutine12 & 0xFFFF
-   \                     ??CrossCallReturnLabel_42:
-   \   000115   90....       MOV     DPTR,#debugThreshold
-   \   000118   F0           MOVX    @DPTR,A
-   \   000119   EA           MOV     A,R2
-   \   00011A   90....       MOV     DPTR,#debugCompId
-   \   00011D   F0           MOVX    @DPTR,A
+   \   0000E4   12....       LCALL   ?Subroutine9 & 0xFFFF
+   \                     ??CrossCallReturnLabel_81:
+   \   0000E7   FA           MOV     R2,A
+   \   0000E8   12....       LCALL   ?Subroutine7 & 0xFFFF
+   \                     ??CrossCallReturnLabel_15:
+   \   0000EB   90....       MOV     DPTR,#debugThreshold
+   \   0000EE   F0           MOVX    @DPTR,A
+   \   0000EF   EA           MOV     A,R2
+   \   0000F0   90....       MOV     DPTR,#debugCompId
+   \   0000F3   F0           MOVX    @DPTR,A
     893                  len = 1;
     894                  break;
     895          
@@ -2916,159 +2897,83 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Components\mt\MTEL.c
    1156                case SPI_CMD_SYS_HEARTBEAT:
    1157                  ret = ZSUCCESS;
    \                     ??MT_ProcessSerialCommand_14:
-   \   00011E   7402         MOV     A,#0x2
-   \   000120   12....       LCALL   ?XSTACK_DISP0_8
-   \   000123   E4           CLR     A
-   \   000124   02....       LJMP    ??MT_ProcessSerialCommand_28 & 0xFFFF
+   \   0000F4   7402         MOV     A,#0x2
+   \   0000F6   12....       LCALL   ?XSTACK_DISP0_8
+   \   0000F9   E4           CLR     A
+   \   0000FA   02....       LJMP    ??MT_ProcessSerialCommand_27 & 0xFFFF
    \                     ??MT_ProcessSerialCommand_4:
-   \   000127                ; Setup parameters for call to function MT_Reset
-   \   000127   12....       LCALL   ?Subroutine8 & 0xFFFF
-   \                     ??CrossCallReturnLabel_23:
-   \   00012A   F9           MOV     R1,A
-   \   00012B   12....       LCALL   ??MT_Reset?relay
-   \   00012E   02....       LJMP    ??MT_ProcessSerialCommand_29 & 0xFFFF
+   \   0000FD                ; Setup parameters for call to function MT_Reset
+   \   0000FD   12....       LCALL   ?Subroutine9 & 0xFFFF
+   \                     ??CrossCallReturnLabel_82:
+   \   000100   F9           MOV     R1,A
+   \   000101   12....       LCALL   ??MT_Reset?relay
+   \   000104   807B         SJMP    ??MT_ProcessSerialCommand_28
    \                     ??MT_ProcessSerialCommand_5:
-   \   000131   12....       LCALL   ?Subroutine6 & 0xFFFF
-   \                     ??CrossCallReturnLabel_14:
-   \   000134   74FF         MOV     A,#-0x1
-   \   000136   68           XRL     A,R0
-   \   000137   7003         JNZ     ??MT_ProcessSerialCommand_30
-   \   000139   74FF         MOV     A,#-0x1
-   \   00013B   69           XRL     A,R1
-   \                     ??MT_ProcessSerialCommand_30:
-   \   00013C   701C         JNZ     ??MT_ProcessSerialCommand_31
-   \   00013E   12....       LCALL   ?Subroutine10 & 0xFFFF
-   \                     ??CrossCallReturnLabel_37:
-   \   000141   6012         JZ      ??MT_ProcessSerialCommand_32
-   \   000143   90....       MOV     DPTR,#__Constant_ffffffff
-   \                     ??MT_ProcessSerialCommand_33:
-   \   000146   78..         MOV     R0,#?V0 + 0
-   \   000148   12....       LCALL   ?L_MOV_X
-   \   00014B   90....       MOV     DPTR,#_zdoCallbackSub
-   \   00014E   78..         MOV     R0,#?V0 + 0
-   \   000150   12....       LCALL   ?L_MOV_TO_X
-   \   000153   805D         SJMP    ??MT_ProcessSerialCommand_34
-   \                     ??MT_ProcessSerialCommand_32:
-   \   000155   90....       MOV     DPTR,#__Constant_0
-   \   000158   80EC         SJMP    ??MT_ProcessSerialCommand_33
-   \                     ??MT_ProcessSerialCommand_31:
-   \   00015A   74F0         MOV     A,#-0x10
-   \   00015C   58           ANL     A,R0
-   \   00015D   FA           MOV     R2,A
-   \   00015E   74FF         MOV     A,#-0x1
-   \   000160   59           ANL     A,R1
-   \   000161   FB           MOV     R3,A
-   \   000162   7480         MOV     A,#-0x80
-   \   000164   6A           XRL     A,R2
-   \   000165   7003         JNZ     ??MT_ProcessSerialCommand_35
-   \   000167   740A         MOV     A,#0xa
-   \   000169   6B           XRL     A,R3
-   \                     ??MT_ProcessSerialCommand_35:
-   \   00016A   600E         JZ      ??MT_ProcessSerialCommand_36
-   \   00016C   74F0         MOV     A,#-0x10
-   \   00016E   58           ANL     A,R0
-   \   00016F   F8           MOV     R0,A
-   \   000170   7490         MOV     A,#-0x70
-   \   000172   68           XRL     A,R0
-   \   000173   7003         JNZ     ??MT_ProcessSerialCommand_37
-   \   000175   740A         MOV     A,#0xa
-   \   000177   69           XRL     A,R1
-   \                     ??MT_ProcessSerialCommand_37:
-   \   000178   7038         JNZ     ??MT_ProcessSerialCommand_34
-   \                     ??MT_ProcessSerialCommand_36:
-   \   00017A   12....       LCALL   ?Subroutine10 & 0xFFFF
-   \                     ??CrossCallReturnLabel_38:
-   \   00017D   75..01       MOV     ?V0 + 0,#0x1
-   \   000180   8C..         MOV     ?V0 + 1,R4
-   \   000182   8C..         MOV     ?V0 + 2,R4
-   \   000184   8C..         MOV     ?V0 + 3,R4
-   \   000186   85..82       MOV     DPL,?XSP + 0
-   \   000189   85..83       MOV     DPH,?XSP + 1
-   \   00018C   A3           INC     DPTR
-   \   00018D   6010         JZ      ??MT_ProcessSerialCommand_38
-   \   00018F   12....       LCALL   ?Subroutine11 & 0xFFFF
-   \                     ??CrossCallReturnLabel_39:
-   \   000192   12....       LCALL   ?L_SHL
-   \   000195   90....       MOV     DPTR,#_zdoCallbackSub
-   \   000198   78..         MOV     R0,#?V0 + 0
-   \   00019A   12....       LCALL   ?L_IOR_TO_X
-   \   00019D   8013         SJMP    ??MT_ProcessSerialCommand_34
-   \                     ??MT_ProcessSerialCommand_38:
-   \   00019F   12....       LCALL   ?Subroutine11 & 0xFFFF
-   \                     ??CrossCallReturnLabel_40:
-   \   0001A2   12....       LCALL   ?L_SHL
-   \   0001A5   78..         MOV     R0,#?V0 + 0
-   \   0001A7   12....       LCALL   ?L_NOT
-   \   0001AA   90....       MOV     DPTR,#_zdoCallbackSub
-   \   0001AD   78..         MOV     R0,#?V0 + 0
-   \   0001AF   12....       LCALL   ?L_AND_TO_X
-   \                     ??MT_ProcessSerialCommand_34:
-   \   0001B2   0C           INC     R4
-   \   0001B3   7402         MOV     A,#0x2
-   \   0001B5   12....       LCALL   ?XSTACK_DISP0_8
-   \   0001B8   E4           CLR     A
-   \   0001B9   02....       LJMP    ??MT_ProcessSerialCommand_25 & 0xFFFF
+   \   000106   0C           INC     R4
+   \   000107   7402         MOV     A,#0x2
+   \   000109   12....       LCALL   ?XSTACK_DISP0_8
+   \   00010C   E4           CLR     A
+   \   00010D   80B0         SJMP    ??MT_ProcessSerialCommand_24
    \                     ??MT_ProcessSerialCommand_6:
-   \   0001BC   7409         MOV     A,#0x9
-   \   0001BE   12....       LCALL   ?XSTACK_DISP0_8
-   \   0001C1   7408         MOV     A,#0x8
-   \   0001C3   F0           MOVX    @DPTR,A
-   \   0001C4   A3           INC     DPTR
-   \   0001C5   E4           CLR     A
-   \   0001C6   F0           MOVX    @DPTR,A
-   \   0001C7   740B         MOV     A,#0xb
-   \   0001C9   12....       LCALL   ?XSTACK_DISP0_8
-   \   0001CC   E4           CLR     A
-   \   0001CD   F0           MOVX    @DPTR,A
-   \   0001CE   740C         MOV     A,#0xc
-   \   0001D0   12....       LCALL   ?XSTACK_DISP0_8
-   \   0001D3   7408         MOV     A,#0x8
-   \   0001D5   F0           MOVX    @DPTR,A
-   \   0001D6   0C           INC     R4
-   \   0001D7   0C           INC     R4
-   \                     ??MT_ProcessSerialCommand_39:
-   \   0001D8   740B         MOV     A,#0xb
-   \   0001DA   12....       LCALL   ?XSTACK_DISP0_8
-   \   0001DD   02....       LJMP    ??MT_ProcessSerialCommand_24 & 0xFFFF
+   \   00010F   7409         MOV     A,#0x9
+   \   000111   12....       LCALL   ?XSTACK_DISP0_8
+   \   000114   E4           CLR     A
+   \   000115   F0           MOVX    @DPTR,A
+   \   000116   A3           INC     DPTR
+   \   000117   F0           MOVX    @DPTR,A
+   \   000118   740B         MOV     A,#0xb
+   \   00011A   12....       LCALL   ?XSTACK_DISP0_8
+   \   00011D   E4           CLR     A
+   \   00011E   F0           MOVX    @DPTR,A
+   \   00011F   740C         MOV     A,#0xc
+   \   000121   12....       LCALL   ?XSTACK_DISP0_8
+   \   000124   E4           CLR     A
+   \   000125   F0           MOVX    @DPTR,A
+   \   000126   0C           INC     R4
+   \   000127   0C           INC     R4
+   \                     ??MT_ProcessSerialCommand_29:
+   \   000128   740B         MOV     A,#0xb
+   \   00012A   12....       LCALL   ?XSTACK_DISP0_8
+   \   00012D   8083         SJMP    ??MT_ProcessSerialCommand_23
    \                     ??MT_ProcessSerialCommand_7:
-   \   0001E0                ; Setup parameters for call to function NLME_GetProtocolVersion
-   \   0001E0   12....       LCALL   ??NLME_GetProtocolVersion?relay
-   \   0001E3   E9           MOV     A,R1
-   \   0001E4   14           DEC     A
-   \   0001E5   C3           CLR     C
-   \   0001E6   33           RLC     A
-   \   0001E7   F8           MOV     R0,A
-   \   0001E8   E4           CLR     A
-   \   0001E9   33           RLC     A
-   \   0001EA   F9           MOV     R1,A
-   \   0001EB   E8           MOV     A,R0
-   \   0001EC   24..         ADD     A,#(MTVersionString & 0xff)
-   \   0001EE   F5..         MOV     ?V0 + 0,A
-   \   0001F0   E9           MOV     A,R1
-   \   0001F1   34..         ADDC    A,#((MTVersionString >> 8) & 0xff)
-   \   0001F3   F5..         MOV     ?V0 + 1,A
-   \   0001F5                ; Setup parameters for call to function osal_strlen
-   \   0001F5   85..82       MOV     DPL,?V0 + 0
-   \   0001F8   F583         MOV     DPH,A
-   \   0001FA   12....       LCALL   ??Subroutine9_0 & 0xFFFF
-   \                     ??CrossCallReturnLabel_28:
-   \   0001FD   12....       LCALL   ??osal_strlen?relay
-   \   000200   EA           MOV     A,R2
-   \   000201   FC           MOV     R4,A
-   \   000202   85..82       MOV     DPL,?V0 + 0
-   \   000205   85..83       MOV     DPH,?V0 + 1
-   \   000208   E0           MOVX    A,@DPTR
-   \   000209   F8           MOV     R0,A
-   \   00020A   A3           INC     DPTR
-   \   00020B   E0           MOVX    A,@DPTR
-   \   00020C   F9           MOV     R1,A
-   \   00020D   7403         MOV     A,#0x3
-   \   00020F   12....       LCALL   ?XSTACK_DISP0_8
-   \   000212   E8           MOV     A,R0
-   \   000213   F0           MOVX    @DPTR,A
-   \   000214   A3           INC     DPTR
-   \   000215   E9           MOV     A,R1
-   \   000216   F0           MOVX    @DPTR,A
+   \   00012F                ; Setup parameters for call to function NLME_GetProtocolVersion
+   \   00012F   12....       LCALL   ??NLME_GetProtocolVersion?relay
+   \   000132   E9           MOV     A,R1
+   \   000133   14           DEC     A
+   \   000134   C3           CLR     C
+   \   000135   33           RLC     A
+   \   000136   F8           MOV     R0,A
+   \   000137   E4           CLR     A
+   \   000138   33           RLC     A
+   \   000139   F9           MOV     R1,A
+   \   00013A   E8           MOV     A,R0
+   \   00013B   24..         ADD     A,#(MTVersionString & 0xff)
+   \   00013D   F5..         MOV     ?V0 + 0,A
+   \   00013F   E9           MOV     A,R1
+   \   000140   34..         ADDC    A,#((MTVersionString >> 8) & 0xff)
+   \   000142   F5..         MOV     ?V0 + 1,A
+   \   000144                ; Setup parameters for call to function osal_strlen
+   \   000144   85..82       MOV     DPL,?V0 + 0
+   \   000147   F583         MOV     DPH,A
+   \   000149   12....       LCALL   ??Subroutine8_0 & 0xFFFF
+   \                     ??CrossCallReturnLabel_26:
+   \   00014C   12....       LCALL   ??osal_strlen?relay
+   \   00014F   EA           MOV     A,R2
+   \   000150   FC           MOV     R4,A
+   \   000151   85..82       MOV     DPL,?V0 + 0
+   \   000154   85..83       MOV     DPH,?V0 + 1
+   \   000157   E0           MOVX    A,@DPTR
+   \   000158   F8           MOV     R0,A
+   \   000159   A3           INC     DPTR
+   \   00015A   E0           MOVX    A,@DPTR
+   \   00015B   F9           MOV     R1,A
+   \   00015C   7403         MOV     A,#0x3
+   \   00015E   12....       LCALL   ?XSTACK_DISP0_8
+   \   000161   E8           MOV     A,R0
+   \   000162   F0           MOVX    @DPTR,A
+   \   000163   A3           INC     DPTR
+   \   000164   E9           MOV     A,R1
+   \   000165   F0           MOVX    @DPTR,A
    1158                  len = 1;
    1159                  break;
    1160          
@@ -3195,478 +3100,438 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Components\mt\MTEL.c
    1281              }
    1282          
    1283              if ( len )
-   \                     ??MT_ProcessSerialCommand_23:
-   \   000217   EC           MOV     A,R4
-   \   000218   6018         JZ      ??MT_ProcessSerialCommand_29
+   \                     ??MT_ProcessSerialCommand_0:
+   \   000166   EC           MOV     A,R4
+   \   000167   6018         JZ      ??MT_ProcessSerialCommand_28
    1284              {
    1285                MT_BuildAndSendZToolResponse( (SPI_0DATA_MSG_LEN + len),
    1286                                              (SPI_RESPONSE_BIT | cmd),
    1287                                              len, retValue );
-   \                     ??MT_ProcessSerialCommand_26:
-   \   00021A                ; Setup parameters for call to function MT_BuildAndSendZToolResponse
-   \   00021A   7403         MOV     A,#0x3
-   \   00021C   12....       LCALL   ?XSTACK_DISP0_8
-   \   00021F   12....       LCALL   ?PUSH_XSTACK8_X_TWO
-   \   000222   EE           MOV     A,R6
-   \   000223   FA           MOV     R2,A
-   \   000224   7410         MOV     A,#0x10
-   \   000226   4F           ORL     A,R7
-   \   000227   FB           MOV     R3,A
-   \   000228   7405         MOV     A,#0x5
-   \   00022A   2C           ADD     A,R4
-   \   00022B   F9           MOV     R1,A
-   \   00022C   12....       LCALL   ??Subroutine2_0 & 0xFFFF
-   \                     ??CrossCallReturnLabel_93:
-   \   00022F   12....       LCALL   ?DEALLOC_XSTACK8
+   \                     ??MT_ProcessSerialCommand_25:
+   \   000169                ; Setup parameters for call to function MT_BuildAndSendZToolResponse
+   \   000169   7403         MOV     A,#0x3
+   \   00016B   12....       LCALL   ?XSTACK_DISP0_8
+   \   00016E   12....       LCALL   ?PUSH_XSTACK8_X_TWO
+   \   000171   EE           MOV     A,R6
+   \   000172   FA           MOV     R2,A
+   \   000173   7410         MOV     A,#0x10
+   \   000175   4F           ORL     A,R7
+   \   000176   FB           MOV     R3,A
+   \   000177   7405         MOV     A,#0x5
+   \   000179   2C           ADD     A,R4
+   \   00017A   F9           MOV     R1,A
+   \   00017B   12....       LCALL   ??Subroutine2_0 & 0xFFFF
+   \                     ??CrossCallReturnLabel_75:
+   \   00017E   12....       LCALL   ?DEALLOC_XSTACK8
    1288              }
    1289            }
-   \                     ??MT_ProcessSerialCommand_29:
-   \   000232   7413         MOV     A,#0x13
-   \   000234   02....       LJMP    ?Subroutine30 & 0xFFFF
-   \                     ??MT_ProcessSerialCommand_8:
-   \   000237                ; Setup parameters for call to function MT_ReverseBytes
-   \   000237   7908         MOV     R1,#0x8
-   \   000239   12....       LCALL   ?Subroutine9 & 0xFFFF
-   \                     ??CrossCallReturnLabel_29:
-   \   00023C   12....       LCALL   ??MT_ReverseBytes?relay
-   \   00023F                ; Setup parameters for call to function ZMacSetReq
-   \   00023F   12....       LCALL   ?Subroutine9 & 0xFFFF
-   \                     ??CrossCallReturnLabel_30:
-   \   000242   79E2         MOV     R1,#-0x1e
-   \   000244   12....       LCALL   ZMacSetReq & 0xFFFF
-   \   000247   E9           MOV     A,R1
-   \   000248   7027         JNZ     ??MT_ProcessSerialCommand_40
-   \   00024A                ; Setup parameters for call to function osal_nv_write
-   \   00024A   85..82       MOV     DPL,?XSP + 0
-   \   00024D   85..83       MOV     DPH,?XSP + 1
-   \   000250   12....       LCALL   ?PUSH_XSTACK8_X_TWO
-   \   000253   75..08       MOV     ?V0 + 0,#0x8
-   \   000256   75..00       MOV     ?V0 + 1,#0x0
-   \   000259   78..         MOV     R0,#?V0 + 0
-   \   00025B   12....       LCALL   ?PUSH_XSTACK_I_TWO
-   \   00025E   7C00         MOV     R4,#0x0
-   \   000260   7D00         MOV     R5,#0x0
-   \   000262   7A01         MOV     R2,#0x1
-   \                     ??MT_ProcessSerialCommand_41:
-   \   000264   7B00         MOV     R3,#0x0
-   \   000266   12....       LCALL   ??osal_nv_write?relay
-   \   000269   7404         MOV     A,#0x4
-   \   00026B   12....       LCALL   ?DEALLOC_XSTACK8
-   \   00026E   02....       LJMP    ??MT_ProcessSerialCommand_27 & 0xFFFF
-   \                     ??MT_ProcessSerialCommand_40:
-   \   000271   7402         MOV     A,#0x2
-   \   000273   12....       LCALL   ?XSTACK_DISP0_8
-   \   000276   7401         MOV     A,#0x1
    \                     ??MT_ProcessSerialCommand_28:
-   \   000278   F0           MOVX    @DPTR,A
-   \   000279   7C01         MOV     R4,#0x1
-   \   00027B   809D         SJMP    ??MT_ProcessSerialCommand_26
+   \   000181   7413         MOV     A,#0x13
+   \   000183   02....       LJMP    ?Subroutine26 & 0xFFFF
+   \                     ??MT_ProcessSerialCommand_8:
+   \   000186                ; Setup parameters for call to function MT_ReverseBytes
+   \   000186   7908         MOV     R1,#0x8
+   \   000188   12....       LCALL   ?Subroutine8 & 0xFFFF
+   \                     ??CrossCallReturnLabel_27:
+   \   00018B   12....       LCALL   ??MT_ReverseBytes?relay
+   \   00018E                ; Setup parameters for call to function ZMacSetReq
+   \   00018E   12....       LCALL   ?Subroutine8 & 0xFFFF
+   \                     ??CrossCallReturnLabel_28:
+   \   000191   79E2         MOV     R1,#-0x1e
+   \   000193   12....       LCALL   ZMacSetReq & 0xFFFF
+   \   000196   E9           MOV     A,R1
+   \   000197   7027         JNZ     ??MT_ProcessSerialCommand_30
+   \   000199                ; Setup parameters for call to function osal_nv_write
+   \   000199   85..82       MOV     DPL,?XSP + 0
+   \   00019C   85..83       MOV     DPH,?XSP + 1
+   \   00019F   12....       LCALL   ?PUSH_XSTACK8_X_TWO
+   \   0001A2   75..08       MOV     ?V0 + 0,#0x8
+   \   0001A5   75..00       MOV     ?V0 + 1,#0x0
+   \   0001A8   78..         MOV     R0,#?V0 + 0
+   \   0001AA   12....       LCALL   ?PUSH_XSTACK_I_TWO
+   \   0001AD   7C00         MOV     R4,#0x0
+   \   0001AF   7D00         MOV     R5,#0x0
+   \   0001B1   7A01         MOV     R2,#0x1
+   \                     ??MT_ProcessSerialCommand_31:
+   \   0001B3   7B00         MOV     R3,#0x0
+   \   0001B5   12....       LCALL   ??osal_nv_write?relay
+   \   0001B8   7404         MOV     A,#0x4
+   \   0001BA   12....       LCALL   ?DEALLOC_XSTACK8
+   \   0001BD   02....       LJMP    ??MT_ProcessSerialCommand_26 & 0xFFFF
+   \                     ??MT_ProcessSerialCommand_30:
+   \   0001C0   7402         MOV     A,#0x2
+   \   0001C2   12....       LCALL   ?XSTACK_DISP0_8
+   \   0001C5   7401         MOV     A,#0x1
+   \                     ??MT_ProcessSerialCommand_27:
+   \   0001C7   F0           MOVX    @DPTR,A
+   \   0001C8   7C01         MOV     R4,#0x1
+   \   0001CA   809D         SJMP    ??MT_ProcessSerialCommand_25
    \                     ??MT_ProcessSerialCommand_9:
-   \   00027D                ; Setup parameters for call to function ZMacGetReq
-   \   00027D   740B         MOV     A,#0xb
-   \   00027F   12....       LCALL   ?XSTACK_DISP0_8
-   \   000282   AA82         MOV     R2,DPL
-   \   000284   AB83         MOV     R3,DPH
-   \   000286   79E2         MOV     R1,#-0x1e
-   \   000288   12....       LCALL   ZMacGetReq & 0xFFFF
-   \   00028B                ; Setup parameters for call to function MT_ReverseBytes
-   \   00028B   7908         MOV     R1,#0x8
-   \   00028D   AA82         MOV     R2,DPL
-   \   00028F   AB83         MOV     R3,DPH
-   \   000291   12....       LCALL   ??MT_ReverseBytes?relay
-   \   000294   7C08         MOV     R4,#0x8
-   \   000296   02....       LJMP    ??MT_ProcessSerialCommand_39 & 0xFFFF
+   \   0001CC                ; Setup parameters for call to function ZMacGetReq
+   \   0001CC   740B         MOV     A,#0xb
+   \   0001CE   12....       LCALL   ?XSTACK_DISP0_8
+   \   0001D1   AA82         MOV     R2,DPL
+   \   0001D3   AB83         MOV     R3,DPH
+   \   0001D5   79E2         MOV     R1,#-0x1e
+   \   0001D7   12....       LCALL   ZMacGetReq & 0xFFFF
+   \   0001DA                ; Setup parameters for call to function MT_ReverseBytes
+   \   0001DA   7908         MOV     R1,#0x8
+   \   0001DC   AA82         MOV     R2,DPL
+   \   0001DE   AB83         MOV     R3,DPH
+   \   0001E0   12....       LCALL   ??MT_ReverseBytes?relay
+   \   0001E3   7C08         MOV     R4,#0x8
+   \   0001E5   02....       LJMP    ??MT_ProcessSerialCommand_29 & 0xFFFF
    \                     ??MT_ProcessSerialCommand_18:
-   \   000299   12....       LCALL   ?Subroutine6 & 0xFFFF
-   \                     ??CrossCallReturnLabel_15:
-   \   00029C   7409         MOV     A,#0x9
-   \   00029E   12....       LCALL   ?XSTACK_DISP0_8
-   \   0002A1   E8           MOV     A,R0
-   \   0002A2   F0           MOVX    @DPTR,A
-   \   0002A3   A3           INC     DPTR
-   \   0002A4   E9           MOV     A,R1
-   \   0002A5   F0           MOVX    @DPTR,A
-   \   0002A6                ; Setup parameters for call to function osal_nv_write
-   \   0002A6   7409         MOV     A,#0x9
-   \   0002A8   12....       LCALL   ?XSTACK_DISP0_8
-   \   0002AB   8582..       MOV     ?V0 + 0,DPL
-   \   0002AE   8583..       MOV     ?V0 + 1,DPH
-   \   0002B1   78..         MOV     R0,#?V0 + 0
-   \   0002B3   12....       LCALL   ?PUSH_XSTACK_I_TWO
-   \   0002B6                ; Setup parameters for call to function osal_nv_item_len
-   \   0002B6   7A83         MOV     R2,#-0x7d
-   \   0002B8   12....       LCALL   ?Subroutine14 & 0xFFFF
-   \                     ??CrossCallReturnLabel_53:
-   \   0002BB   12....       LCALL   ?PUSH_XSTACK_I_TWO
-   \   0002BE   7C00         MOV     R4,#0x0
-   \   0002C0   7D00         MOV     R5,#0x0
-   \   0002C2   7A83         MOV     R2,#-0x7d
-   \   0002C4   809E         SJMP    ??MT_ProcessSerialCommand_41
+   \   0001E8   12....       LCALL   ?Subroutine6 & 0xFFFF
+   \                     ??CrossCallReturnLabel_80:
+   \   0001EB   F9           MOV     R1,A
+   \   0001EC   EA           MOV     A,R2
+   \   0001ED   F8           MOV     R0,A
+   \   0001EE   7409         MOV     A,#0x9
+   \   0001F0   12....       LCALL   ?XSTACK_DISP0_8
+   \   0001F3   E8           MOV     A,R0
+   \   0001F4   F0           MOVX    @DPTR,A
+   \   0001F5   A3           INC     DPTR
+   \   0001F6   E9           MOV     A,R1
+   \   0001F7   F0           MOVX    @DPTR,A
+   \   0001F8                ; Setup parameters for call to function osal_nv_write
+   \   0001F8   7409         MOV     A,#0x9
+   \   0001FA   12....       LCALL   ?XSTACK_DISP0_8
+   \   0001FD   8582..       MOV     ?V0 + 0,DPL
+   \   000200   8583..       MOV     ?V0 + 1,DPH
+   \   000203   78..         MOV     R0,#?V0 + 0
+   \   000205   12....       LCALL   ?PUSH_XSTACK_I_TWO
+   \   000208                ; Setup parameters for call to function osal_nv_item_len
+   \   000208   7A83         MOV     R2,#-0x7d
+   \   00020A   12....       LCALL   ?Subroutine12 & 0xFFFF
+   \                     ??CrossCallReturnLabel_40:
+   \   00020D   12....       LCALL   ?PUSH_XSTACK_I_TWO
+   \   000210   7C00         MOV     R4,#0x0
+   \   000212   7D00         MOV     R5,#0x0
+   \   000214   7A83         MOV     R2,#-0x7d
+   \   000216   809B         SJMP    ??MT_ProcessSerialCommand_31
    \                     ??MT_ProcessSerialCommand_19:
-   \   0002C6   12....       LCALL   ?Subroutine23 & 0xFFFF
-   \                     ??CrossCallReturnLabel_79:
-   \   0002C9   A3           INC     DPTR
-   \   0002CA   E0           MOVX    A,@DPTR
-   \   0002CB   F5..         MOV     ?V0 + 0,A
-   \   0002CD   89..         MOV     ?V0 + 1,R1
-   \   0002CF   89..         MOV     ?V0 + 2,R1
-   \   0002D1   89..         MOV     ?V0 + 3,R1
-   \   0002D3   85..82       MOV     DPL,?XSP + 0
-   \   0002D6   85..83       MOV     DPH,?XSP + 1
-   \   0002D9   12....       LCALL   ?Subroutine26 & 0xFFFF
-   \                     ??CrossCallReturnLabel_86:
-   \   0002DC   A3           INC     DPTR
-   \   0002DD   E0           MOVX    A,@DPTR
-   \   0002DE   F5..         MOV     ?V0 + 4,A
-   \   0002E0   89..         MOV     ?V0 + 5,R1
-   \   0002E2   89..         MOV     ?V0 + 6,R1
-   \   0002E4   89..         MOV     ?V0 + 7,R1
-   \   0002E6   7408         MOV     A,#0x8
-   \   0002E8   78..         MOV     R0,#?V0 + 4
-   \   0002EA   12....       LCALL   ?L_SHL
-   \   0002ED   78..         MOV     R0,#?V0 + 0
-   \   0002EF   79..         MOV     R1,#?V0 + 4
-   \   0002F1   12....       LCALL   ?L_ADD
-   \   0002F4   12....       LCALL   ?Subroutine7 & 0xFFFF
-   \                     ??CrossCallReturnLabel_17:
-   \   0002F7   F5..         MOV     ?V0 + 4,A
-   \   0002F9   8C..         MOV     ?V0 + 5,R4
-   \   0002FB   7410         MOV     A,#0x10
-   \   0002FD   78..         MOV     R0,#?V0 + 4
-   \   0002FF   12....       LCALL   ?L_SHL
-   \   000302   78..         MOV     R0,#?V0 + 0
-   \   000304   79..         MOV     R1,#?V0 + 4
-   \   000306   12....       LCALL   ?L_ADD
-   \   000309   12....       LCALL   ?Subroutine8 & 0xFFFF
-   \                     ??CrossCallReturnLabel_24:
-   \   00030C   F5..         MOV     ?V0 + 4,A
-   \   00030E   8C..         MOV     ?V0 + 6,R4
-   \   000310   7418         MOV     A,#0x18
-   \   000312   78..         MOV     R0,#?V0 + 4
-   \   000314   12....       LCALL   ?L_SHL
-   \   000317   78..         MOV     R0,#?V0 + 0
-   \   000319   79..         MOV     R1,#?V0 + 4
-   \   00031B   12....       LCALL   ?L_ADD
-   \   00031E   7405         MOV     A,#0x5
-   \   000320   12....       LCALL   ?XSTACK_DISP0_8
-   \   000323   78..         MOV     R0,#?V0 + 0
-   \   000325   12....       LCALL   ?L_MOV_TO_X
-   \   000328                ; Setup parameters for call to function osal_nv_write
-   \   000328   7405         MOV     A,#0x5
-   \   00032A   12....       LCALL   ?XSTACK_DISP0_8
-   \   00032D   8582..       MOV     ?V0 + 0,DPL
-   \   000330   8583..       MOV     ?V0 + 1,DPH
-   \   000333   78..         MOV     R0,#?V0 + 0
-   \   000335   12....       LCALL   ?PUSH_XSTACK_I_TWO
-   \   000338                ; Setup parameters for call to function osal_nv_item_len
-   \   000338   7A84         MOV     R2,#-0x7c
-   \   00033A   12....       LCALL   ?Subroutine14 & 0xFFFF
-   \                     ??CrossCallReturnLabel_54:
-   \   00033D   12....       LCALL   ?PUSH_XSTACK_I_TWO
-   \   000340   7C00         MOV     R4,#0x0
-   \   000342   7D00         MOV     R5,#0x0
-   \   000344   7A84         MOV     R2,#-0x7c
-   \                     ??MT_ProcessSerialCommand_42:
-   \   000346   02....       LJMP    ??MT_ProcessSerialCommand_41 & 0xFFFF
+   \   000218   12....       LCALL   ?Subroutine10 & 0xFFFF
+   \                     ??CrossCallReturnLabel_35:
+   \   00021B   A3           INC     DPTR
+   \   00021C   E0           MOVX    A,@DPTR
+   \   00021D   F5..         MOV     ?V0 + 0,A
+   \   00021F   89..         MOV     ?V0 + 1,R1
+   \   000221   89..         MOV     ?V0 + 2,R1
+   \   000223   89..         MOV     ?V0 + 3,R1
+   \   000225   85..82       MOV     DPL,?XSP + 0
+   \   000228   85..83       MOV     DPH,?XSP + 1
+   \   00022B   12....       LCALL   ??Subroutine20_0 & 0xFFFF
+   \                     ??CrossCallReturnLabel_62:
+   \   00022E   A3           INC     DPTR
+   \   00022F   E0           MOVX    A,@DPTR
+   \   000230   F5..         MOV     ?V0 + 4,A
+   \   000232   89..         MOV     ?V0 + 5,R1
+   \   000234   89..         MOV     ?V0 + 6,R1
+   \   000236   89..         MOV     ?V0 + 7,R1
+   \   000238   7408         MOV     A,#0x8
+   \   00023A   78..         MOV     R0,#?V0 + 4
+   \   00023C   12....       LCALL   ?L_SHL
+   \   00023F   78..         MOV     R0,#?V0 + 0
+   \   000241   79..         MOV     R1,#?V0 + 4
+   \   000243   12....       LCALL   ?L_ADD
+   \   000246   85..82       MOV     DPL,?XSP + 0
+   \   000249   85..83       MOV     DPH,?XSP + 1
+   \   00024C   E0           MOVX    A,@DPTR
+   \   00024D   F8           MOV     R0,A
+   \   00024E   12....       LCALL   ??Subroutine7_0 & 0xFFFF
+   \                     ??CrossCallReturnLabel_16:
+   \   000251   F5..         MOV     ?V0 + 4,A
+   \   000253   8C..         MOV     ?V0 + 5,R4
+   \   000255   7410         MOV     A,#0x10
+   \   000257   78..         MOV     R0,#?V0 + 4
+   \   000259   12....       LCALL   ?L_SHL
+   \   00025C   78..         MOV     R0,#?V0 + 0
+   \   00025E   79..         MOV     R1,#?V0 + 4
+   \   000260   12....       LCALL   ?L_ADD
+   \   000263   12....       LCALL   ?Subroutine9 & 0xFFFF
+   \                     ??CrossCallReturnLabel_83:
+   \   000266   F5..         MOV     ?V0 + 4,A
+   \   000268   8C..         MOV     ?V0 + 6,R4
+   \   00026A   7418         MOV     A,#0x18
+   \   00026C   78..         MOV     R0,#?V0 + 4
+   \   00026E   12....       LCALL   ?L_SHL
+   \   000271   78..         MOV     R0,#?V0 + 0
+   \   000273   79..         MOV     R1,#?V0 + 4
+   \   000275   12....       LCALL   ?L_ADD
+   \   000278   7405         MOV     A,#0x5
+   \   00027A   12....       LCALL   ?XSTACK_DISP0_8
+   \   00027D   78..         MOV     R0,#?V0 + 0
+   \   00027F   12....       LCALL   ?L_MOV_TO_X
+   \   000282                ; Setup parameters for call to function osal_nv_write
+   \   000282   7405         MOV     A,#0x5
+   \   000284   12....       LCALL   ?XSTACK_DISP0_8
+   \   000287   8582..       MOV     ?V0 + 0,DPL
+   \   00028A   8583..       MOV     ?V0 + 1,DPH
+   \   00028D   78..         MOV     R0,#?V0 + 0
+   \   00028F   12....       LCALL   ?PUSH_XSTACK_I_TWO
+   \   000292                ; Setup parameters for call to function osal_nv_item_len
+   \   000292   7A84         MOV     R2,#-0x7c
+   \   000294   12....       LCALL   ?Subroutine12 & 0xFFFF
+   \                     ??CrossCallReturnLabel_41:
+   \   000297   12....       LCALL   ?PUSH_XSTACK_I_TWO
+   \   00029A   7C00         MOV     R4,#0x0
+   \   00029C   7D00         MOV     R5,#0x0
+   \   00029E   7A84         MOV     R2,#-0x7c
+   \                     ??MT_ProcessSerialCommand_32:
+   \   0002A0   02....       LJMP    ??MT_ProcessSerialCommand_31 & 0xFFFF
    \                     ??MT_ProcessSerialCommand_20:
-   \   000349                ; Setup parameters for call to function osal_nv_write
-   \   000349   85..82       MOV     DPL,?XSP + 0
-   \   00034C   85..83       MOV     DPH,?XSP + 1
-   \   00034F   12....       LCALL   ?PUSH_XSTACK8_X_TWO
-   \   000352                ; Setup parameters for call to function osal_nv_item_len
-   \   000352   7A61         MOV     R2,#0x61
-   \   000354   12....       LCALL   ?Subroutine14 & 0xFFFF
-   \                     ??CrossCallReturnLabel_55:
-   \   000357   12....       LCALL   ?PUSH_XSTACK_I_TWO
-   \   00035A   7C00         MOV     R4,#0x0
-   \   00035C   7D00         MOV     R5,#0x0
-   \   00035E   7A61         MOV     R2,#0x61
-   \   000360   02....       LJMP    ??MT_ProcessSerialCommand_41 & 0xFFFF
+   \   0002A3                ; Setup parameters for call to function osal_nv_write
+   \   0002A3   85..82       MOV     DPL,?XSP + 0
+   \   0002A6   85..83       MOV     DPH,?XSP + 1
+   \   0002A9   12....       LCALL   ?PUSH_XSTACK8_X_TWO
+   \   0002AC                ; Setup parameters for call to function osal_nv_item_len
+   \   0002AC   7A61         MOV     R2,#0x61
+   \   0002AE   12....       LCALL   ?Subroutine12 & 0xFFFF
+   \                     ??CrossCallReturnLabel_42:
+   \   0002B1   12....       LCALL   ?PUSH_XSTACK_I_TWO
+   \   0002B4   7C00         MOV     R4,#0x0
+   \   0002B6   7D00         MOV     R5,#0x0
+   \   0002B8   7A61         MOV     R2,#0x61
+   \   0002BA   02....       LJMP    ??MT_ProcessSerialCommand_31 & 0xFFFF
    \                     ??MT_ProcessSerialCommand_21:
-   \   000363                ; Setup parameters for call to function osal_nv_write
-   \   000363   85..82       MOV     DPL,?XSP + 0
-   \   000366   85..83       MOV     DPH,?XSP + 1
-   \   000369   12....       LCALL   ?PUSH_XSTACK8_X_TWO
-   \   00036C                ; Setup parameters for call to function osal_nv_item_len
-   \   00036C   7A62         MOV     R2,#0x62
-   \   00036E   12....       LCALL   ?Subroutine14 & 0xFFFF
-   \                     ??CrossCallReturnLabel_56:
-   \   000371   12....       LCALL   ?PUSH_XSTACK_I_TWO
-   \   000374   7C00         MOV     R4,#0x0
-   \   000376   7D00         MOV     R5,#0x0
-   \   000378   7A62         MOV     R2,#0x62
-   \   00037A   80CA         SJMP    ??MT_ProcessSerialCommand_42
-   \                     ??MT_ProcessSerialCommand_22:
-   \   00037C                ; Setup parameters for call to function MT_ProcessGetNvInfo
-   \   00037C   12....       LCALL   ??MT_ProcessGetNvInfo?relay
-   \   00037F   02....       LJMP    ??MT_ProcessSerialCommand_29 & 0xFFFF
-   \                     ??MT_ProcessSerialCommand_12:
-   \   000382                ; Setup parameters for call to function MT_ProcessGetDeviceInfo
-   \   000382   12....       LCALL   ??MT_ProcessGetDeviceInfo?relay
-   \   000385   02....       LJMP    ??MT_ProcessSerialCommand_29 & 0xFFFF
-   \                     ??MT_ProcessSerialCommand_10:
-   \   000388                ; Setup parameters for call to function MT_ProcessSetNV
-   \   000388   12....       LCALL   ?Subroutine9 & 0xFFFF
-   \                     ??CrossCallReturnLabel_31:
-   \   00038B   12....       LCALL   ??MT_ProcessSetNV?relay
-   \   00038E   02....       LJMP    ??MT_ProcessSerialCommand_27 & 0xFFFF
-   \                     ??MT_ProcessSerialCommand_11:
-   \   000391                ; Setup parameters for call to function MT_ProcessGetNV
-   \   000391   12....       LCALL   ?Subroutine9 & 0xFFFF
-   \                     ??CrossCallReturnLabel_32:
-   \   000394   12....       LCALL   ??MT_ProcessGetNV?relay
-   \   000397   02....       LJMP    ??MT_ProcessSerialCommand_29 & 0xFFFF
-   \                     ??MT_ProcessSerialCommand_17:
-   \   00039A                ; Setup parameters for call to function osal_GetSystemClock
-   \   00039A   12....       LCALL   ??osal_GetSystemClock?relay
-   \   00039D   8A..         MOV     ?V0 + 4,R2
-   \   00039F   8B..         MOV     ?V0 + 5,R3
-   \   0003A1   8C..         MOV     ?V0 + 6,R4
-   \   0003A3   8D..         MOV     ?V0 + 7,R5
-   \   0003A5   90....       MOV     DPTR,#__Constant_3e8
-   \   0003A8   78..         MOV     R0,#?V0 + 0
-   \   0003AA   12....       LCALL   ?L_MOV_X
-   \   0003AD   78..         MOV     R0,#?V0 + 4
-   \   0003AF   79..         MOV     R1,#?V0 + 0
-   \   0003B1   12....       LCALL   ?UL_DIV_MOD
-   \   0003B4   7405         MOV     A,#0x5
-   \   0003B6   12....       LCALL   ?XSTACK_DISP0_8
-   \   0003B9   78..         MOV     R0,#?V0 + 4
-   \   0003BB   12....       LCALL   ?L_MOV_TO_X
-   \   0003BE   7405         MOV     A,#0x5
-   \   0003C0   12....       LCALL   ?XSTACK_DISP0_8
-   \   0003C3   78..         MOV     R0,#?V0 + 0
-   \   0003C5   12....       LCALL   ?L_MOV_X
-   \   0003C8   7418         MOV     A,#0x18
-   \   0003CA   78..         MOV     R0,#?V0 + 0
-   \   0003CC   12....       LCALL   ?UL_SHR
-   \   0003CF   740B         MOV     A,#0xb
-   \   0003D1   12....       LCALL   ?XSTACK_DISP0_8
-   \   0003D4   E5..         MOV     A,?V0 + 0
-   \   0003D6   F0           MOVX    @DPTR,A
-   \   0003D7   7405         MOV     A,#0x5
-   \   0003D9   12....       LCALL   ?XSTACK_DISP0_8
-   \   0003DC   78..         MOV     R0,#?V0 + 0
-   \   0003DE   12....       LCALL   ?L_MOV_X
-   \   0003E1   7410         MOV     A,#0x10
-   \   0003E3   78..         MOV     R0,#?V0 + 0
-   \   0003E5   12....       LCALL   ?UL_SHR
-   \   0003E8   740C         MOV     A,#0xc
-   \   0003EA   12....       LCALL   ?XSTACK_DISP0_8
-   \   0003ED   E5..         MOV     A,?V0 + 0
-   \   0003EF   F0           MOVX    @DPTR,A
-   \   0003F0   7405         MOV     A,#0x5
-   \   0003F2   12....       LCALL   ?XSTACK_DISP0_8
-   \   0003F5   78..         MOV     R0,#?V0 + 0
-   \   0003F7   12....       LCALL   ?L_MOV_X
-   \   0003FA   E5..         MOV     A,?V0 + 1
-   \   0003FC   F5..         MOV     ?V0 + 0,A
-   \   0003FE   740D         MOV     A,#0xd
-   \   000400   12....       LCALL   ?XSTACK_DISP0_8
-   \   000403   E5..         MOV     A,?V0 + 0
-   \   000405   F0           MOVX    @DPTR,A
-   \   000406   7405         MOV     A,#0x5
-   \   000408   12....       LCALL   ?XSTACK_DISP0_8
-   \   00040B   78..         MOV     R0,#?V0 + 0
-   \   00040D   12....       LCALL   ?L_MOV_X
-   \   000410   740E         MOV     A,#0xe
-   \   000412   12....       LCALL   ?XSTACK_DISP0_8
-   \   000415   E5..         MOV     A,?V0 + 0
-   \   000417   F0           MOVX    @DPTR,A
-   \   000418   7C04         MOV     R4,#0x4
-   \   00041A   02....       LJMP    ??MT_ProcessSerialCommand_39 & 0xFFFF
-   \                     ??MT_ProcessSerialCommand_13:
-   \   00041D   12....       LCALL   ?Subroutine7 & 0xFFFF
-   \                     ??CrossCallReturnLabel_18:
-   \   000420   A2E0         MOV     C,0xE0 /* A   */.0
-   \   000422   5001         JNC     ??MT_ProcessSerialCommand_43
-   \   000424   09           INC     R1
-   \                     ??MT_ProcessSerialCommand_43:
-   \   000425   12....       LCALL   ?Subroutine12 & 0xFFFF
+   \   0002BD                ; Setup parameters for call to function osal_nv_write
+   \   0002BD   85..82       MOV     DPL,?XSP + 0
+   \   0002C0   85..83       MOV     DPH,?XSP + 1
+   \   0002C3   12....       LCALL   ?PUSH_XSTACK8_X_TWO
+   \   0002C6                ; Setup parameters for call to function osal_nv_item_len
+   \   0002C6   7A62         MOV     R2,#0x62
+   \   0002C8   12....       LCALL   ?Subroutine12 & 0xFFFF
    \                     ??CrossCallReturnLabel_43:
-   \   000428   A2E1         MOV     C,0xE0 /* A   */.1
-   \   00042A   5004         JNC     ??MT_ProcessSerialCommand_44
-   \   00042C   E9           MOV     A,R1
-   \   00042D   D2E1         SETB    0xE0 /* A   */.1
-   \   00042F   F9           MOV     R1,A
-   \                     ??MT_ProcessSerialCommand_44:
-   \   000430   12....       LCALL   ?Subroutine12 & 0xFFFF
-   \                     ??CrossCallReturnLabel_44:
-   \   000433   A2E2         MOV     C,0xE0 /* A   */.2
-   \   000435   5004         JNC     ??MT_ProcessSerialCommand_45
-   \   000437   E9           MOV     A,R1
-   \   000438   D2E4         SETB    0xE0 /* A   */.4
-   \   00043A   F9           MOV     R1,A
-   \                     ??MT_ProcessSerialCommand_45:
-   \   00043B   12....       LCALL   ?Subroutine12 & 0xFFFF
-   \                     ??CrossCallReturnLabel_45:
-   \   00043E   A2E3         MOV     C,0xE0 /* A   */.3
-   \   000440   5004         JNC     ??MT_ProcessSerialCommand_46
-   \   000442   E9           MOV     A,R1
-   \   000443   D2E3         SETB    0xE0 /* A   */.3
-   \   000445   F9           MOV     R1,A
-   \                     ??MT_ProcessSerialCommand_46:
-   \   000446   12....       LCALL   ?Subroutine12 & 0xFFFF
-   \                     ??CrossCallReturnLabel_46:
-   \   000449   A2E4         MOV     C,0xE0 /* A   */.4
-   \   00044B   5004         JNC     ??MT_ProcessSerialCommand_47
-   \   00044D   E9           MOV     A,R1
-   \   00044E   D2E2         SETB    0xE0 /* A   */.2
-   \   000450   F9           MOV     R1,A
-   \                     ??MT_ProcessSerialCommand_47:
-   \   000451   12....       LCALL   ?Subroutine12 & 0xFFFF
-   \                     ??CrossCallReturnLabel_47:
-   \   000454   A2E5         MOV     C,0xE0 /* A   */.5
-   \   000456   5004         JNC     ??MT_ProcessSerialCommand_48
-   \   000458   E9           MOV     A,R1
-   \   000459   D2E5         SETB    0xE0 /* A   */.5
-   \   00045B   F9           MOV     R1,A
-   \                     ??MT_ProcessSerialCommand_48:
-   \   00045C   12....       LCALL   ?Subroutine12 & 0xFFFF
-   \                     ??CrossCallReturnLabel_48:
-   \   00045F   A2E6         MOV     C,0xE0 /* A   */.6
-   \   000461   5004         JNC     ??MT_ProcessSerialCommand_49
-   \   000463   E9           MOV     A,R1
-   \   000464   D2E6         SETB    0xE0 /* A   */.6
-   \   000466   F9           MOV     R1,A
-   \                     ??MT_ProcessSerialCommand_49:
-   \   000467                ; Setup parameters for call to function OnBoard_SendKeys
-   \   000467   85..82       MOV     DPL,?XSP + 0
-   \   00046A   85..83       MOV     DPH,?XSP + 1
-   \   00046D   12....       LCALL   ??Subroutine8_1 & 0xFFFF
-   \                     ??CrossCallReturnLabel_25:
-   \   000470   FA           MOV     R2,A
-   \   000471   12....       LCALL   ??OnBoard_SendKeys?relay
-   \   000474   02....       LJMP    ??MT_ProcessSerialCommand_27 & 0xFFFF
-   \                     ??MT_ProcessSerialCommand_15:
-   \   000477                ; Setup parameters for call to function MTProcessAppMsg
-   \   000477   8A82         MOV     DPL,R2
-   \   000479   8B83         MOV     DPH,R3
-   \   00047B   A3           INC     DPTR
-   \   00047C   A3           INC     DPTR
-   \   00047D   E0           MOVX    A,@DPTR
-   \   00047E   F9           MOV     R1,A
-   \   00047F   12....       LCALL   ?Subroutine9 & 0xFFFF
-   \                     ??CrossCallReturnLabel_33:
-   \   000482   12....       LCALL   ??MTProcessAppMsg?relay
-   \   000485   02....       LJMP    ??MT_ProcessSerialCommand_29 & 0xFFFF
-   \                     ??MT_ProcessSerialCommand_16:
-   \   000488                ; Setup parameters for call to function MTProcessLedControl
-   \   000488   12....       LCALL   ?Subroutine9 & 0xFFFF
-   \                     ??CrossCallReturnLabel_34:
-   \   00048B   12....       LCALL   ??MTProcessLedControl?relay
-   \   00048E   02....       LJMP    ??MT_ProcessSerialCommand_27 & 0xFFFF
-   \                     ??MT_ProcessSerialCommand_0:
-   \   000491                ; Setup parameters for call to function MT_ZdoCommandProcessing
-   \   000491   85..82       MOV     DPL,?XSP + 0
-   \   000494   85..83       MOV     DPH,?XSP + 1
-   \   000497   E0           MOVX    A,@DPTR
-   \   000498   FC           MOV     R4,A
-   \   000499   A3           INC     DPTR
-   \   00049A   E0           MOVX    A,@DPTR
-   \   00049B   FD           MOV     R5,A
-   \   00049C   EE           MOV     A,R6
-   \   00049D   FA           MOV     R2,A
-   \   00049E   EF           MOV     A,R7
-   \   00049F   FB           MOV     R3,A
-   \   0004A0   12....       LCALL   ??MT_ZdoCommandProcessing?relay
-   \   0004A3   02....       LJMP    ??MT_ProcessSerialCommand_29 & 0xFFFF
-
-   \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine26:
-   \   000000   A3           INC     DPTR
-   \                     ??Subroutine26_0:
-   \   000001   E0           MOVX    A,@DPTR
-   \   000002   F583         MOV     DPH,A
-   \   000004   8882         MOV     DPL,R0
-   \   000006   A3           INC     DPTR
-   \   000007   22           RET
-
-   \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine12:
-   \   000000   85..82       MOV     DPL,?XSP + 0
-   \   000003   85..83       MOV     DPH,?XSP + 1
-   \   000006   12....       LCALL   ??Subroutine22_0 & 0xFFFF
+   \   0002CB   12....       LCALL   ?PUSH_XSTACK_I_TWO
+   \   0002CE   7C00         MOV     R4,#0x0
+   \   0002D0   7D00         MOV     R5,#0x0
+   \   0002D2   7A62         MOV     R2,#0x62
+   \   0002D4   80CA         SJMP    ??MT_ProcessSerialCommand_32
+   \                     ??MT_ProcessSerialCommand_22:
+   \   0002D6                ; Setup parameters for call to function MT_ProcessGetNvInfo
+   \   0002D6   12....       LCALL   ??MT_ProcessGetNvInfo?relay
+   \   0002D9   02....       LJMP    ??MT_ProcessSerialCommand_28 & 0xFFFF
+   \                     ??MT_ProcessSerialCommand_12:
+   \   0002DC                ; Setup parameters for call to function MT_ProcessGetDeviceInfo
+   \   0002DC   12....       LCALL   ??MT_ProcessGetDeviceInfo?relay
+   \   0002DF   02....       LJMP    ??MT_ProcessSerialCommand_28 & 0xFFFF
+   \                     ??MT_ProcessSerialCommand_10:
+   \   0002E2                ; Setup parameters for call to function MT_ProcessSetNV
+   \   0002E2   12....       LCALL   ?Subroutine8 & 0xFFFF
+   \                     ??CrossCallReturnLabel_29:
+   \   0002E5   12....       LCALL   ??MT_ProcessSetNV?relay
+   \   0002E8   02....       LJMP    ??MT_ProcessSerialCommand_26 & 0xFFFF
+   \                     ??MT_ProcessSerialCommand_11:
+   \   0002EB                ; Setup parameters for call to function MT_ProcessGetNV
+   \   0002EB   12....       LCALL   ?Subroutine8 & 0xFFFF
+   \                     ??CrossCallReturnLabel_30:
+   \   0002EE   12....       LCALL   ??MT_ProcessGetNV?relay
+   \   0002F1   02....       LJMP    ??MT_ProcessSerialCommand_28 & 0xFFFF
+   \                     ??MT_ProcessSerialCommand_17:
+   \   0002F4                ; Setup parameters for call to function osal_GetSystemClock
+   \   0002F4   12....       LCALL   ??osal_GetSystemClock?relay
+   \   0002F7   8A..         MOV     ?V0 + 4,R2
+   \   0002F9   8B..         MOV     ?V0 + 5,R3
+   \   0002FB   8C..         MOV     ?V0 + 6,R4
+   \   0002FD   8D..         MOV     ?V0 + 7,R5
+   \   0002FF   90....       MOV     DPTR,#__Constant_3e8
+   \   000302   78..         MOV     R0,#?V0 + 0
+   \   000304   12....       LCALL   ?L_MOV_X
+   \   000307   78..         MOV     R0,#?V0 + 4
+   \   000309   79..         MOV     R1,#?V0 + 0
+   \   00030B   12....       LCALL   ?UL_DIV_MOD
+   \   00030E   7405         MOV     A,#0x5
+   \   000310   12....       LCALL   ?XSTACK_DISP0_8
+   \   000313   78..         MOV     R0,#?V0 + 4
+   \   000315   12....       LCALL   ?L_MOV_TO_X
+   \   000318   7405         MOV     A,#0x5
+   \   00031A   12....       LCALL   ?XSTACK_DISP0_8
+   \   00031D   78..         MOV     R0,#?V0 + 0
+   \   00031F   12....       LCALL   ?L_MOV_X
+   \   000322   7418         MOV     A,#0x18
+   \   000324   78..         MOV     R0,#?V0 + 0
+   \   000326   12....       LCALL   ?UL_SHR
+   \   000329   740B         MOV     A,#0xb
+   \   00032B   12....       LCALL   ?XSTACK_DISP0_8
+   \   00032E   E5..         MOV     A,?V0 + 0
+   \   000330   F0           MOVX    @DPTR,A
+   \   000331   7405         MOV     A,#0x5
+   \   000333   12....       LCALL   ?XSTACK_DISP0_8
+   \   000336   78..         MOV     R0,#?V0 + 0
+   \   000338   12....       LCALL   ?L_MOV_X
+   \   00033B   7410         MOV     A,#0x10
+   \   00033D   78..         MOV     R0,#?V0 + 0
+   \   00033F   12....       LCALL   ?UL_SHR
+   \   000342   740C         MOV     A,#0xc
+   \   000344   12....       LCALL   ?XSTACK_DISP0_8
+   \   000347   E5..         MOV     A,?V0 + 0
+   \   000349   F0           MOVX    @DPTR,A
+   \   00034A   7405         MOV     A,#0x5
+   \   00034C   12....       LCALL   ?XSTACK_DISP0_8
+   \   00034F   78..         MOV     R0,#?V0 + 0
+   \   000351   12....       LCALL   ?L_MOV_X
+   \   000354   E5..         MOV     A,?V0 + 1
+   \   000356   F5..         MOV     ?V0 + 0,A
+   \   000358   740D         MOV     A,#0xd
+   \   00035A   12....       LCALL   ?XSTACK_DISP0_8
+   \   00035D   E5..         MOV     A,?V0 + 0
+   \   00035F   F0           MOVX    @DPTR,A
+   \   000360   7405         MOV     A,#0x5
+   \   000362   12....       LCALL   ?XSTACK_DISP0_8
+   \   000365   78..         MOV     R0,#?V0 + 0
+   \   000367   12....       LCALL   ?L_MOV_X
+   \   00036A   740E         MOV     A,#0xe
+   \   00036C   12....       LCALL   ?XSTACK_DISP0_8
+   \   00036F   E5..         MOV     A,?V0 + 0
+   \   000371   F0           MOVX    @DPTR,A
+   \   000372   7C04         MOV     R4,#0x4
+   \   000374   02....       LJMP    ??MT_ProcessSerialCommand_29 & 0xFFFF
+   \                     ??MT_ProcessSerialCommand_13:
+   \   000377   85..82       MOV     DPL,?XSP + 0
+   \   00037A   85..83       MOV     DPH,?XSP + 1
+   \   00037D   E0           MOVX    A,@DPTR
+   \   00037E   F8           MOV     R0,A
+   \   00037F   12....       LCALL   ??Subroutine7_0 & 0xFFFF
+   \                     ??CrossCallReturnLabel_17:
+   \   000382   A2E0         MOV     C,0xE0 /* A   */.0
+   \   000384   5001         JNC     ??MT_ProcessSerialCommand_33
+   \   000386   09           INC     R1
+   \                     ??MT_ProcessSerialCommand_33:
+   \   000387   12....       LCALL   ?Subroutine7 & 0xFFFF
+   \                     ??CrossCallReturnLabel_18:
+   \   00038A   A2E1         MOV     C,0xE0 /* A   */.1
+   \   00038C   5004         JNC     ??MT_ProcessSerialCommand_34
+   \   00038E   E9           MOV     A,R1
+   \   00038F   D2E1         SETB    0xE0 /* A   */.1
+   \   000391   F9           MOV     R1,A
+   \                     ??MT_ProcessSerialCommand_34:
+   \   000392   12....       LCALL   ?Subroutine7 & 0xFFFF
+   \                     ??CrossCallReturnLabel_19:
+   \   000395   A2E2         MOV     C,0xE0 /* A   */.2
+   \   000397   5004         JNC     ??MT_ProcessSerialCommand_35
+   \   000399   E9           MOV     A,R1
+   \   00039A   D2E4         SETB    0xE0 /* A   */.4
+   \   00039C   F9           MOV     R1,A
+   \                     ??MT_ProcessSerialCommand_35:
+   \   00039D   12....       LCALL   ?Subroutine7 & 0xFFFF
+   \                     ??CrossCallReturnLabel_20:
+   \   0003A0   A2E3         MOV     C,0xE0 /* A   */.3
+   \   0003A2   5004         JNC     ??MT_ProcessSerialCommand_36
+   \   0003A4   E9           MOV     A,R1
+   \   0003A5   D2E3         SETB    0xE0 /* A   */.3
+   \   0003A7   F9           MOV     R1,A
+   \                     ??MT_ProcessSerialCommand_36:
+   \   0003A8   12....       LCALL   ?Subroutine7 & 0xFFFF
+   \                     ??CrossCallReturnLabel_21:
+   \   0003AB   A2E4         MOV     C,0xE0 /* A   */.4
+   \   0003AD   5004         JNC     ??MT_ProcessSerialCommand_37
+   \   0003AF   E9           MOV     A,R1
+   \   0003B0   D2E2         SETB    0xE0 /* A   */.2
+   \   0003B2   F9           MOV     R1,A
+   \                     ??MT_ProcessSerialCommand_37:
+   \   0003B3   12....       LCALL   ?Subroutine7 & 0xFFFF
+   \                     ??CrossCallReturnLabel_22:
+   \   0003B6   A2E5         MOV     C,0xE0 /* A   */.5
+   \   0003B8   5004         JNC     ??MT_ProcessSerialCommand_38
+   \   0003BA   E9           MOV     A,R1
+   \   0003BB   D2E5         SETB    0xE0 /* A   */.5
+   \   0003BD   F9           MOV     R1,A
+   \                     ??MT_ProcessSerialCommand_38:
+   \   0003BE   12....       LCALL   ?Subroutine7 & 0xFFFF
+   \                     ??CrossCallReturnLabel_23:
+   \   0003C1   A2E6         MOV     C,0xE0 /* A   */.6
+   \   0003C3   5004         JNC     ??MT_ProcessSerialCommand_39
+   \   0003C5   E9           MOV     A,R1
+   \   0003C6   D2E6         SETB    0xE0 /* A   */.6
+   \   0003C8   F9           MOV     R1,A
+   \                     ??MT_ProcessSerialCommand_39:
+   \   0003C9                ; Setup parameters for call to function OnBoard_SendKeys
+   \   0003C9   85..82       MOV     DPL,?XSP + 0
+   \   0003CC   85..83       MOV     DPH,?XSP + 1
+   \   0003CF   12....       LCALL   ?Subroutine27 & 0xFFFF
    \                     ??CrossCallReturnLabel_78:
-   \   000009   22           RET
-
-   \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine11:
-   \   000000   12....       LCALL   ??Subroutine22_1 & 0xFFFF
-   \                     ??CrossCallReturnLabel_77:
-   \   000003   541F         ANL     A,#0x1f
-   \   000005   78..         MOV     R0,#?V0 + 0
-   \   000007   22           RET
+   \   0003D2   FA           MOV     R2,A
+   \   0003D3   12....       LCALL   ??OnBoard_SendKeys?relay
+   \   0003D6   02....       LJMP    ??MT_ProcessSerialCommand_26 & 0xFFFF
+   \                     ??MT_ProcessSerialCommand_15:
+   \   0003D9                ; Setup parameters for call to function MTProcessAppMsg
+   \   0003D9   8A82         MOV     DPL,R2
+   \   0003DB   8B83         MOV     DPH,R3
+   \   0003DD   A3           INC     DPTR
+   \   0003DE   A3           INC     DPTR
+   \   0003DF   E0           MOVX    A,@DPTR
+   \   0003E0   F9           MOV     R1,A
+   \   0003E1   12....       LCALL   ?Subroutine8 & 0xFFFF
+   \                     ??CrossCallReturnLabel_31:
+   \   0003E4   12....       LCALL   ??MTProcessAppMsg?relay
+   \   0003E7   02....       LJMP    ??MT_ProcessSerialCommand_28 & 0xFFFF
+   \                     ??MT_ProcessSerialCommand_16:
+   \   0003EA                ; Setup parameters for call to function MTProcessLedControl
+   \   0003EA   12....       LCALL   ?Subroutine8 & 0xFFFF
+   \                     ??CrossCallReturnLabel_32:
+   \   0003ED   12....       LCALL   ??MTProcessLedControl?relay
+   \   0003F0   02....       LJMP    ??MT_ProcessSerialCommand_26 & 0xFFFF
 
    \                                 In  segment BANKED_CODE, align 1, keep-with-next
    \                     ?Subroutine10:
-   \   000000   12....       LCALL   ?Subroutine23 & 0xFFFF
-   \                     ??CrossCallReturnLabel_80:
-   \   000003   E0           MOVX    A,@DPTR
+   \   000000   12....       LCALL   ?Subroutine20 & 0xFFFF
+   \                     ??CrossCallReturnLabel_65:
+   \   000003   A3           INC     DPTR
    \   000004   22           RET
 
    \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine23:
+   \                     ?Subroutine20:
    \   000000   85..82       MOV     DPL,?XSP + 0
    \   000003   85..83       MOV     DPH,?XSP + 1
    \   000006   E0           MOVX    A,@DPTR
    \   000007   F8           MOV     R0,A
-   \   000008   12....       LCALL   ?Subroutine26 & 0xFFFF
-   \                     ??CrossCallReturnLabel_88:
-   \   00000B   A3           INC     DPTR
-   \   00000C   22           RET
-
-   \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine6:
-   \   000000   12....       LCALL   ?Subroutine22 & 0xFFFF
-   \                     ??CrossCallReturnLabel_75:
-   \   000003   FA           MOV     R2,A
-   \   000004   85..82       MOV     DPL,?XSP + 0
-   \   000007   85..83       MOV     DPH,?XSP + 1
-   \   00000A   A3           INC     DPTR
-   \   00000B   E0           MOVX    A,@DPTR
-   \   00000C   F583         MOV     DPH,A
-   \   00000E   8882         MOV     DPL,R0
-   \   000010   E0           MOVX    A,@DPTR
-   \   000011   F9           MOV     R1,A
-   \   000012   EA           MOV     A,R2
-   \   000013   F8           MOV     R0,A
-   \   000014   22           RET
-
-   \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine8:
-   \   000000   85..82       MOV     DPL,?XSP + 0
-   \   000003   85..83       MOV     DPH,?XSP + 1
-   \   000006   E0           MOVX    A,@DPTR
-   \                     ??Subroutine8_0:
-   \   000007   F8           MOV     R0,A
-   \                     ??Subroutine8_1:
+   \                     ??Subroutine20_0:
    \   000008   A3           INC     DPTR
    \   000009   E0           MOVX    A,@DPTR
    \   00000A   F583         MOV     DPH,A
    \   00000C   8882         MOV     DPL,R0
-   \   00000E   E0           MOVX    A,@DPTR
+   \   00000E   A3           INC     DPTR
    \   00000F   22           RET
 
    \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine7:
-   \   000000   12....       LCALL   ?Subroutine22 & 0xFFFF
-   \                     ??CrossCallReturnLabel_76:
-   \   000003   22           RET
+   \                     ?Subroutine6:
+   \   000000   12....       LCALL   ?Subroutine20 & 0xFFFF
+   \                     ??CrossCallReturnLabel_63:
+   \   000003   E0           MOVX    A,@DPTR
+   \   000004   FA           MOV     R2,A
+   \   000005   85..82       MOV     DPL,?XSP + 0
+   \   000008   85..83       MOV     DPH,?XSP + 1
+   \   00000B                REQUIRE ?Subroutine27
+   \   00000B                ; // Fall through to label ?Subroutine27
 
    \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine22:
+   \                     ?Subroutine27:
+   \   000000   A3           INC     DPTR
+   \   000001   E0           MOVX    A,@DPTR
+   \   000002   F583         MOV     DPH,A
+   \   000004   8882         MOV     DPL,R0
+   \   000006   E0           MOVX    A,@DPTR
+   \   000007   22           RET
+
+   \                                 In  segment BANKED_CODE, align 1, keep-with-next
+   \                     ?Subroutine9:
    \   000000   85..82       MOV     DPL,?XSP + 0
    \   000003   85..83       MOV     DPH,?XSP + 1
    \   000006   E0           MOVX    A,@DPTR
+   \                     ??Subroutine9_0:
    \   000007   F8           MOV     R0,A
-   \                     ??Subroutine22_0:
-   \   000008   A3           INC     DPTR
-   \                     ??Subroutine22_1:
-   \   000009   12....       LCALL   ??Subroutine26_0 & 0xFFFF
-   \                     ??CrossCallReturnLabel_87:
-   \   00000C   E0           MOVX    A,@DPTR
-   \   00000D   22           RET
+   \   000008   02....       LJMP    ?Subroutine27 & 0xFFFF
+
+   \                                 In  segment BANKED_CODE, align 1, keep-with-next
+   \                     ?Subroutine7:
+   \   000000   85..82       MOV     DPL,?XSP + 0
+   \   000003   85..83       MOV     DPH,?XSP + 1
+   \                     ??Subroutine7_0:
+   \   000006   12....       LCALL   ??Subroutine20_0 & 0xFFFF
+   \                     ??CrossCallReturnLabel_64:
+   \   000009   E0           MOVX    A,@DPTR
+   \   00000A   22           RET
    1290          #endif // ZTOOL
    1291          
    1292          #if (defined HAL_LED) && (HAL_LED == TRUE)
@@ -3807,7 +3672,7 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Components\mt\MTEL.c
    \                     ??MTProcessLedControl_11:
    \   00006F   7901         MOV     R1,#0x1
    \                     ??MTProcessLedControl_12:
-   \   000071   02....       LJMP    ?Subroutine27 & 0xFFFF
+   \   000071   02....       LJMP    ?Subroutine23 & 0xFFFF
    1347          }
    1348          #endif // HAL_LED
    1349          
@@ -3873,7 +3738,7 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Components\mt\MTEL.c
    \   000032   A3           INC     DPTR
    \   000033   E0           MOVX    A,@DPTR
    \                     ??MTProcessAppMsg_0:
-   \   000034   6076         JZ      ??MTProcessAppMsg_1
+   \   000034   607E         JZ      ??MTProcessAppMsg_1
    1378            {
    1379              // Build and send the message to the APP
    1380              msg = (mtSysAppMsg_t *)osal_msg_allocate( sizeof( mtSysAppMsg_t ) + len );
@@ -3895,7 +3760,7 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Components\mt\MTEL.c
    \   00004E   7001         JNZ     ??MTProcessAppMsg_2
    \   000050   EF           MOV     A,R7
    \                     ??MTProcessAppMsg_2:
-   \   000051   6059         JZ      ??MTProcessAppMsg_1
+   \   000051   6061         JZ      ??MTProcessAppMsg_1
    1382              {
    1383                msg->hdr.event = MT_SYS_APP_MSG;
    \   000053   7423         MOV     A,#0x23
@@ -3943,8 +3808,8 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Components\mt\MTEL.c
    \   00008D   7D00         MOV     R5,#0x0
    \   00008F   8A82         MOV     DPL,R2
    \   000091   8B83         MOV     DPH,R3
-   \   000093   12....       LCALL   ??Subroutine9_0 & 0xFFFF
-   \                     ??CrossCallReturnLabel_35:
+   \   000093   12....       LCALL   ??Subroutine8_0 & 0xFFFF
+   \                     ??CrossCallReturnLabel_33:
    \   000096   12....       LCALL   ??osal_memcpy?relay
    \   000099   7403         MOV     A,#0x3
    \   00009B   12....       LCALL   ?DEALLOC_XSTACK8
@@ -3955,12 +3820,16 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Components\mt\MTEL.c
    \   00009F   FA           MOV     R2,A
    \   0000A0   EF           MOV     A,R7
    \   0000A1   FB           MOV     R3,A
-   \   0000A2   12....       LCALL   ?Subroutine7 & 0xFFFF
-   \                     ??CrossCallReturnLabel_19:
-   \   0000A5   12....       LCALL   ??Subroutine8_0 & 0xFFFF
-   \                     ??CrossCallReturnLabel_26:
-   \   0000A8   F9           MOV     R1,A
-   \   0000A9   12....       LCALL   ??osal_msg_send?relay
+   \   0000A2   85..82       MOV     DPL,?XSP + 0
+   \   0000A5   85..83       MOV     DPH,?XSP + 1
+   \   0000A8   E0           MOVX    A,@DPTR
+   \   0000A9   F8           MOV     R0,A
+   \   0000AA   12....       LCALL   ??Subroutine7_0 & 0xFFFF
+   \                     ??CrossCallReturnLabel_24:
+   \   0000AD   12....       LCALL   ??Subroutine9_0 & 0xFFFF
+   \                     ??CrossCallReturnLabel_84:
+   \   0000B0   F9           MOV     R1,A
+   \   0000B1   12....       LCALL   ??osal_msg_send?relay
    1391          
    1392                ret = ZSuccess;
    1393              }
@@ -3968,9 +3837,9 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Components\mt\MTEL.c
    1395          
    1396            return ret;
    \                     ??MTProcessAppMsg_1:
-   \   0000AC   A9..         MOV     R1,?V0 + 2
-   \   0000AE   7402         MOV     A,#0x2
-   \   0000B0   02....       LJMP    ?Subroutine30 & 0xFFFF
+   \   0000B4   A9..         MOV     R1,?V0 + 2
+   \   0000B6   7402         MOV     A,#0x2
+   \   0000B8   02....       LJMP    ?Subroutine26 & 0xFFFF
    1397          }
    1398          #endif // NONWK
    1399          
@@ -4014,8 +3883,8 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Components\mt\MTEL.c
    \   000016   29           ADD     A,R1
    \   000017   F9           MOV     R1,A
    \   000018   12....       LCALL   ??Subroutine2_0 & 0xFFFF
-   \                     ??CrossCallReturnLabel_94:
-   \   00001B   02....       LJMP    ??Subroutine28_0 & 0xFFFF
+   \                     ??CrossCallReturnLabel_76:
+   \   00001B   02....       LJMP    ??Subroutine24_0 & 0xFFFF
    1420          }
    1421          #endif // ZTOOL_PORT
    1422          
@@ -4354,8 +4223,8 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Components\mt\MTEL.c
    1731              return ( (byte)ZFailure );
    \   00001E   7901         MOV     R1,#0x1
    \                     ??MT_RAMRead_1:
-   \   000020                REQUIRE ?Subroutine27
-   \   000020                ; // Fall through to label ?Subroutine27
+   \   000020                REQUIRE ?Subroutine23
+   \   000020                ; // Fall through to label ?Subroutine23
    1732            }
    1733          }
    1734          #endif
@@ -4405,7 +4274,7 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Components\mt\MTEL.c
    \                     ??MT_RAMWrite_0:
    \   000014   7901         MOV     R1,#0x1
    \                     ??MT_RAMWrite_1:
-   \   000016   80..         SJMP    ?Subroutine27
+   \   000016   80..         SJMP    ?Subroutine23
    1761          }
    1762          #endif
    1763          
@@ -4446,7 +4315,7 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Components\mt\MTEL.c
    1785          
    1786            return ( (byte)ZSuccess );
    \   00000E   7900         MOV     R1,#0x0
-   \   000010   80..         SJMP    ?Subroutine27
+   \   000010   80..         SJMP    ?Subroutine23
    1787          }
    1788          #endif
    1789          
@@ -4539,7 +4408,7 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Components\mt\MTEL.c
    \   00000E   12....       LCALL   ?PUSH_XSTACK_I_TWO
    \   000011   7C01         MOV     R4,#0x1
    \   000013   7A02         MOV     R2,#0x2
-   \   000015   02....       LJMP    ?Subroutine28 & 0xFFFF
+   \   000015   02....       LJMP    ?Subroutine24 & 0xFFFF
    1834          }
    1835          #endif
    1836          
@@ -4598,8 +4467,8 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Components\mt\MTEL.c
    \   00002B   FF           MOV     R7,A
    \   00002C   8E82         MOV     DPL,R6
    \   00002E   8F83         MOV     DPH,R7
-   \   000030   12....       LCALL   ?Subroutine13 & 0xFFFF
-   \                     ??CrossCallReturnLabel_51:
+   \   000030   12....       LCALL   ?Subroutine11 & 0xFFFF
+   \                     ??CrossCallReturnLabel_38:
    \   000033   0D           INC     R5
    1857              pData[j--] = temp;
    \   000034   8E82         MOV     DPL,R6
@@ -4616,7 +4485,7 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Components\mt\MTEL.c
    \   000041   9402         SUBB    A,#0x2
    \   000043   50CB         JNC     ??MT_ReverseBytes_1
    1859          }
-   \   000045   02....       LJMP    ?Subroutine32 & 0xFFFF
+   \   000045   02....       LJMP    ?Subroutine29 & 0xFFFF
    1860          
    1861          /***************************************************************************************************
    1862           * @fn      MT_SendSPIRespMsg
@@ -4653,13 +4522,13 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Components\mt\MTEL.c
    1876            msgPtr = osal_mem_alloc( msgLen );
    \   00001A                ; Setup parameters for call to function osal_mem_alloc
    \   00001A   EC           MOV     A,R4
-   \   00001B   12....       LCALL   ?Subroutine17 & 0xFFFF
+   \   00001B   12....       LCALL   ?Subroutine15 & 0xFFFF
    1877            if ( msgPtr )
-   \                     ??CrossCallReturnLabel_61:
+   \                     ??CrossCallReturnLabel_48:
    \   00001E   7001         JNZ     ??MT_SendSPIRespMsg_0
    \   000020   EF           MOV     A,R7
    \                     ??MT_SendSPIRespMsg_0:
-   \   000021   6029         JZ      ??CrossCallReturnLabel_58
+   \   000021   6029         JZ      ??CrossCallReturnLabel_45
    1878            {
    1879          #if defined (ZTOOL_P1) || defined (ZTOOL_P2)
    1880              MT_BuildSPIMsg( (SPI_RESPONSE_BIT | cmd_id), msgPtr, respLen, &ret );
@@ -4679,20 +4548,20 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Components\mt\MTEL.c
    \   00003C   7410         MOV     A,#0x10
    \   00003E   45..         ORL     A,?V0 + 5
    \   000040   FB           MOV     R3,A
-   \   000041   12....       LCALL   ?Subroutine18 & 0xFFFF
-   \                     ??CrossCallReturnLabel_65:
+   \   000041   12....       LCALL   ?Subroutine16 & 0xFFFF
+   \                     ??CrossCallReturnLabel_52:
    \   000044   12....       LCALL   ?DEALLOC_XSTACK8
    1881              HalUARTWrite ( SPI_MGR_DEFAULT_PORT, msgPtr, msgLen );
    \   000047                ; Setup parameters for call to function HalUARTWrite
    \   000047   AC..         MOV     R4,?V0 + 0
-   \   000049   12....       LCALL   ?Subroutine15 & 0xFFFF
+   \   000049   12....       LCALL   ?Subroutine13 & 0xFFFF
    1882          #endif
    1883          
    1884              osal_mem_free( msgPtr );
    1885            }
    1886          }
-   \                     ??CrossCallReturnLabel_58:
-   \   00004C   02....       LJMP    ?Subroutine29 & 0xFFFF
+   \                     ??CrossCallReturnLabel_45:
+   \   00004C   02....       LJMP    ?Subroutine25 & 0xFFFF
 
    \                                 In  segment XDATA_ID, align 1, keep-with-next
    \                     `?<Initializer for <Constant "1.00 (F8W1.4.3)">`:
@@ -4711,14 +4580,6 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Components\mt\MTEL.c
    \                                 In  segment XDATA_ID, align 1, keep-with-next
    \                     `?<Initializer for MTVersionString>`:
    \   000000   ........     DW `?<Constant "1.00 (F8W1.4.3)">`, `?<Constant "1.10 (F8W1.4.3)">`
-
-   \                                 In  segment XDATA_ID, align 1, keep-with-next
-   \                     `?<Initializer for __Constant_ffffffff>`:
-   \   000000   FFFFFFFF     DD 4294967295
-
-   \                                 In  segment XDATA_ID, align 1, keep-with-next
-   \                     `?<Initializer for __Constant_0>`:
-   \   000000   00000000     DD 0
 
    \                                 In  segment XDATA_ID, align 1, keep-with-next
    \                     `?<Initializer for __Constant_3e8>`:
@@ -4861,18 +4722,6 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Components\mt\MTEL.c
    \   000010                REQUIRE __INIT_XDATA_I
 
    \                                 In  segment XDATA_I, align 1, keep-with-next
-   \                     __Constant_ffffffff:
-   \   000000                DS 4
-   \   000004                REQUIRE `?<Initializer for __Constant_ffffffff>`
-   \   000004                REQUIRE __INIT_XDATA_I
-
-   \                                 In  segment XDATA_I, align 1, keep-with-next
-   \                     __Constant_0:
-   \   000000                DS 4
-   \   000004                REQUIRE `?<Initializer for __Constant_0>`
-   \   000004                REQUIRE __INIT_XDATA_I
-
-   \                                 In  segment XDATA_I, align 1, keep-with-next
    \                     __Constant_3e8:
    \   000000                DS 4
    \   000004                REQUIRE `?<Initializer for __Constant_3e8>`
@@ -5000,7 +4849,6 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Components\mt\MTEL.c
        -> OnBoard_SendKeys              0      0     70
        -> MTProcessAppMsg               0      0     70
        -> MTProcessLedControl           0      0     70
-       -> MT_ZdoCommandProcessing       0      0     70
      MT_ProcessSetNV                    0      0     49
        -> osal_nv_item_len              0      0     24
        -> osal_nv_write                 0      0     28
@@ -5037,54 +4885,51 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Components\mt\MTEL.c
      temp_glob_ptr1                    2
      temp_glob_ptr2                    2
      MT_TaskInit                      24
-     ?Subroutine27                     7
+     ?Subroutine23                     7
      MT_IndReset                      24
-     ?Subroutine28                    16
+     ?Subroutine24                    16
      ?Subroutine2                     10
      ?Subroutine3                     16
      MT_ProcessEvent                  68
      MT_BuildSPIMsg                  124
-     ?Subroutine29                    10
+     ?Subroutine25                    10
      MT_BuildAndSendZToolResponse     74
-     ?Subroutine30                     8
-     ?Subroutine15                    19
-     ?Subroutine18                     6
+     ?Subroutine26                     8
+     ?Subroutine13                    19
+     ?Subroutine16                     6
      MT_BuildAndSendZToolCB          126
-     ?Subroutine16                     8
-     ?Subroutine31                     6
+     ?Subroutine14                     8
+     ?Subroutine28                     6
      MT_ProcessCommand               170
-     ?Subroutine9                     12
+     ?Subroutine8                     12
      MT_ProcessDebugMsg              298
      ?Subroutine1                     23
-     ?Subroutine25                    10
+     ?Subroutine22                    10
      ?Subroutine4                      9
-     ?Subroutine13                     4
-     ?Subroutine24                     7
+     ?Subroutine11                     4
+     ?Subroutine21                     7
      MT_ProcessDebugStr               91
-     ?Subroutine32                     5
-     ?Subroutine17                    16
+     ?Subroutine29                     5
+     ?Subroutine15                    16
      MT_ProcessSetNV                  49
-     ?Subroutine14                    12
+     ?Subroutine12                    12
      MT_ProcessGetNV                 144
-     ?Subroutine20                    14
+     ?Subroutine18                    14
      MT_ProcessGetNvInfo             439
-     ?Subroutine21                    22
-     ?Subroutine19                     8
+     ?Subroutine19                    22
+     ?Subroutine17                     8
      ?Subroutine5                      9
      MT_ProcessGetDeviceInfo         213
      ?Subroutine0                     16
-     MT_ProcessSerialCommand        1190
-     ?Subroutine26                     8
-     ?Subroutine12                    10
-     ?Subroutine11                     8
+     MT_ProcessSerialCommand        1011
      ?Subroutine10                     5
-     ?Subroutine23                    13
-     ?Subroutine6                     21
-     ?Subroutine8                     16
-     ?Subroutine7                      4
-     ?Subroutine22                    14
+     ?Subroutine20                    16
+     ?Subroutine6                     11
+     ?Subroutine27                     8
+     ?Subroutine9                     11
+     ?Subroutine7                     11
      MTProcessLedControl             116
-     MTProcessAppMsg                 179
+     MTProcessAppMsg                 187
      MTProcessAppRspMsg               30
      MT_RAMRead                       32
      MT_RAMWrite                      24
@@ -5098,10 +4943,6 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Components\mt\MTEL.c
      ?<Initializer for <Constant "1.10 (F8W1.4.3)">
                                       16
      ?<Initializer for MTVersionString>
-                                       4
-     ?<Initializer for __Constant_ffffffff>
-                                       4
-     ?<Initializer for __Constant_0>
                                        4
      ?<Initializer for __Constant_3e8>
                                        4
@@ -5137,23 +4978,21 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Components\mt\MTEL.c
      ??MT_SendSPIRespMsg?relay         6
      ?<Constant "1.00 (F8W1.4.3)">    16
      ?<Constant "1.10 (F8W1.4.3)">    16
-     __Constant_ffffffff               4
-     __Constant_0                      4
      __Constant_3e8                    4
      __Constant_53544159               4
 
  
- 4 024 bytes in segment BANKED_CODE
+ 3 816 bytes in segment BANKED_CODE
    144 bytes in segment BANK_RELAYS
      2 bytes in segment SFR_AN
      8 bytes in segment XDATA_AN
-    52 bytes in segment XDATA_I
-    52 bytes in segment XDATA_ID
+    44 bytes in segment XDATA_I
+    44 bytes in segment XDATA_ID
     13 bytes in segment XDATA_Z
  
- 4 204 bytes of CODE  memory (+ 16 bytes shared)
+ 3 996 bytes of CODE  memory (+  8 bytes shared)
      0 bytes of DATA  memory (+  2 bytes shared)
-    49 bytes of XDATA memory (+ 24 bytes shared)
+    49 bytes of XDATA memory (+ 16 bytes shared)
 
 Errors: none
 Warnings: none

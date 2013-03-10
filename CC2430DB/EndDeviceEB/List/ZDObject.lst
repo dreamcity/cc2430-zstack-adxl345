@@ -1,6 +1,10 @@
 ###############################################################################
 #                                                                             #
+<<<<<<< HEAD
 # IAR 8051 C/C++ Compiler V7.30B/W32                    10/Mar/2013  13:19:59 #
+=======
+# IAR 8051 C/C++ Compiler V7.30B/W32                    03/Jan/2013  20:31:34 #
+>>>>>>> develop
 # Copyright 2004-2007 IAR Systems. All rights reserved.                       #
 #                                                                             #
 #    Core               =  plain                                              #
@@ -40,9 +44,9 @@
 #                          -DREJOIN_POLL_RATE=440 "C:\Texas                   #
 #                          Instruments\ZStack-1.4.3-1.2.1\Components\stack\zd #
 #                          o\ZDObject.c" -D CC2430EB -D AXD_END -D            #
-#                          NWK_AUTO_POLL -D REFLECTOR -D ZTOOL_P1 -D MT_TASK  #
-#                          -D xMT_ZDO_FUNC -D LCD_SUPPORTED=DEBUG -D          #
-#                          xPOWER_SAVING -lC "C:\Texas                        #
+#                          NWK_AUTO_POLL -D REFLECTOR -D xZTOOL_P1 -D         #
+#                          xMT_TASK -D xMT_ZDO_FUNC -D xLCD_SUPPORTED=DEBUG   #
+#                          -D xPOWER_SAVING -lC "C:\Texas                     #
 #                          Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\Sam #
 #                          ples\cc2430-zstack-adxl345\CC2430DB\EndDeviceEB\Li #
 #                          st\" -lA "C:\Texas Instruments\ZStack-1.4.3-1.2.1\ #
@@ -561,12 +565,12 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Components\stack\zdo\ZDObject.c
    \                     ??ZDO_StartDevice_3:
    \   00004A   7401         MOV     A,#0x1
    \   00004C   6F           XRL     A,R7
-   \   00004D   707F         JNZ     ??ZDO_StartDevice_4
+   \   00004D   707D         JNZ     ??ZDO_StartDevice_1
     335              {
     336                if ( logicalType == NODETYPE_ROUTER )
    \   00004F   7401         MOV     A,#0x1
    \   000051   65..         XRL     A,?V0 + 4
-   \   000053   7057         JNZ     ??ZDO_StartDevice_5
+   \   000053   7057         JNZ     ??ZDO_StartDevice_4
     337                {
     338                  ZMacScanCnf_t scanCnf;
     339                  devState = DEV_NWK_ORPHAN;
@@ -623,12 +627,12 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Components\stack\zdo\ZDObject.c
     347          
     348                  ret = ZSuccess;
    \   0000A8   7E00         MOV     R6,#0x0
-   \   0000AA   802D         SJMP    ??ZDO_StartDevice_1
+   \   0000AA   8020         SJMP    ??ZDO_StartDevice_1
     349                }
     350                else
     351                {
     352                  devState = DEV_NWK_ORPHAN;
-   \                     ??ZDO_StartDevice_5:
+   \                     ??ZDO_StartDevice_4:
    \   0000AC   740A         MOV     A,#0xa
    \   0000AE   90....       MOV     DPTR,#devState
    \   0000B1   F0           MOVX    @DPTR,A
@@ -648,20 +652,12 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Components\stack\zdo\ZDObject.c
    \   0000C7   12....       LCALL   ??NLME_OrphanJoinRequest?relay
    \   0000CA   E9           MOV     A,R1
    \   0000CB   FE           MOV     R6,A
-   \   0000CC   800B         SJMP    ??ZDO_StartDevice_1
     355                }
     356              }
     357              else
     358              {
     359          #if defined( LCD_SUPPORTED )
     360                HalLcdWriteScreen( "StartDevice ERR", "MODE unknown" );
-   \                     ??ZDO_StartDevice_4:
-   \   0000CE                ; Setup parameters for call to function HalLcdWriteScreen
-   \   0000CE   7C..         MOV     R4,#(`?<Constant "MODE unknown">` & 0xff)
-   \   0000D0   7D..         MOV     R5,#((`?<Constant "MODE unknown">` >> 8) & 0xff)
-   \   0000D2   7A..         MOV     R2,#(`?<Constant "StartDevice ERR">` & 0xff)
-   \   0000D4   7B..         MOV     R3,#((`?<Constant "StartDevice ERR">` >> 8) & 0xff)
-   \   0000D6   12....       LCALL   ??HalLcdWriteScreen?relay
     361          #endif
     362              }
     363            }
@@ -669,24 +665,24 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Components\stack\zdo\ZDObject.c
     365          
     366            if ( ret != ZSuccess )
    \                     ??ZDO_StartDevice_1:
-   \   0000D9   EE           MOV     A,R6
-   \   0000DA   6010         JZ      ??ZDO_StartDevice_6
+   \   0000CC   EE           MOV     A,R6
+   \   0000CD   6010         JZ      ??ZDO_StartDevice_5
     367              osal_start_timerEx(ZDAppTaskID, ZDO_NETWORK_INIT, NWK_RETRY_DELAY );
-   \   0000DC                ; Setup parameters for call to function osal_start_timerEx
-   \   0000DC   7CE8         MOV     R4,#-0x18
-   \   0000DE   7D03         MOV     R5,#0x3
-   \   0000E0   7A01         MOV     R2,#0x1
-   \   0000E2   7B00         MOV     R3,#0x0
-   \   0000E4   90....       MOV     DPTR,#ZDAppTaskID
-   \   0000E7   E0           MOVX    A,@DPTR
-   \   0000E8   F9           MOV     R1,A
-   \   0000E9   12....       LCALL   ??osal_start_timerEx?relay
+   \   0000CF                ; Setup parameters for call to function osal_start_timerEx
+   \   0000CF   7CE8         MOV     R4,#-0x18
+   \   0000D1   7D03         MOV     R5,#0x3
+   \   0000D3   7A01         MOV     R2,#0x1
+   \   0000D5   7B00         MOV     R3,#0x0
+   \   0000D7   90....       MOV     DPTR,#ZDAppTaskID
+   \   0000DA   E0           MOVX    A,@DPTR
+   \   0000DB   F9           MOV     R1,A
+   \   0000DC   12....       LCALL   ??osal_start_timerEx?relay
     368          }
-   \                     ??ZDO_StartDevice_6:
-   \   0000EC   740B         MOV     A,#0xb
-   \   0000EE   12....       LCALL   ?DEALLOC_XSTACK8
-   \   0000F1   7F07         MOV     R7,#0x7
-   \   0000F3   02....       LJMP    ?BANKED_LEAVE_XDATA
+   \                     ??ZDO_StartDevice_5:
+   \   0000DF   740B         MOV     A,#0xb
+   \   0000E1   12....       LCALL   ?DEALLOC_XSTACK8
+   \   0000E4   7F07         MOV     R7,#0x7
+   \   0000E6   02....       LJMP    ?BANKED_LEAVE_XDATA
     369          
     370          /*********************************************************************
     371           * @fn      ZDO_UpdateNwkStatus()
@@ -1036,39 +1032,17 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Components\stack\zdo\ZDObject.c
     447          
     448          #if defined( LCD_SUPPORTED )
     449            HalLcdWriteString( "End Device Bind", HAL_LCD_LINE_1 );
-   \   00005E                ; Setup parameters for call to function HalLcdWriteString
-   \   00005E   7900         MOV     R1,#0x0
-   \   000060   7A..         MOV     R2,#(`?<Constant "End Device Bind">` & 0xff)
-   \   000062   7B..         MOV     R3,#((`?<Constant "End Device Bind">` >> 8) & 0xff)
-   \   000064   12....       LCALL   ??HalLcdWriteString?relay
     450            if ( Status == ZDP_SUCCESS )
-   \   000067   85..82       MOV     DPL,?XSP + 0
-   \   00006A   85..83       MOV     DPH,?XSP + 1
-   \   00006D   E0           MOVX    A,@DPTR
-   \   00006E   700B         JNZ     ??ZDO_SendEDBindRsp_0
     451              HalLcdWriteString( "Success Sent", HAL_LCD_LINE_2 );
-   \   000070                ; Setup parameters for call to function HalLcdWriteString
-   \   000070   7902         MOV     R1,#0x2
-   \   000072   7A..         MOV     R2,#(`?<Constant "Success Sent">` & 0xff)
-   \   000074   7B..         MOV     R3,#((`?<Constant "Success Sent">` >> 8) & 0xff)
-   \   000076   12....       LCALL   ??HalLcdWriteString?relay
-   \   000079   8009         SJMP    ??ZDO_SendEDBindRsp_1
     452            else
     453              HalLcdWriteString( "Timeout", HAL_LCD_LINE_2 );
-   \                     ??ZDO_SendEDBindRsp_0:
-   \   00007B                ; Setup parameters for call to function HalLcdWriteString
-   \   00007B   7902         MOV     R1,#0x2
-   \   00007D   7A..         MOV     R2,#(`?<Constant "Timeout">` & 0xff)
-   \   00007F   7B..         MOV     R3,#((`?<Constant "Timeout">` >> 8) & 0xff)
-   \   000081   12....       LCALL   ??HalLcdWriteString?relay
     454          #endif
     455          
     456          }
-   \                     ??ZDO_SendEDBindRsp_1:
-   \   000084   7402         MOV     A,#0x2
-   \   000086   12....       LCALL   ?DEALLOC_XSTACK8
-   \   000089   7F03         MOV     R7,#0x3
-   \   00008B   02....       LJMP    ?BANKED_LEAVE_XDATA
+   \   00005E   7402         MOV     A,#0x2
+   \   000060   12....       LCALL   ?DEALLOC_XSTACK8
+   \   000063   7F03         MOV     R7,#0x3
+   \   000065   02....       LJMP    ?BANKED_LEAVE_XDATA
     457          #endif // REFLECTOR
     458          
     459          #if defined ( ZDO_COORDINATOR )
@@ -3230,7 +3204,7 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Components\stack\zdo\ZDObject.c
    \   00069B   7407         MOV     A,#0x7
    \   00069D   12....       LCALL   ?XSTACK_DISP0_8
    \   0006A0   E0           MOVX    A,@DPTR
-   \   0006A1   607E         JZ      ??ZDO_ProcessMatchDescReq_24
+   \   0006A1   606E         JZ      ??ZDO_ProcessMatchDescReq_24
     830            {
     831              if ( ZSuccess == ZDP_MatchDescRsp( inMsg->TransSeq, &(inMsg->srcAddr), ZDP_SUCCESS,
     832                        ZDAppNwkAddr.addr.shortAddr, epCnt, (uint8 *)ZDOBuildBuf, inMsg->SecurityUse ) )
@@ -3292,18 +3266,9 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Components\stack\zdo\ZDObject.c
    \   000709   12....       LCALL   ??ZDP_EPRsp?relay
    \   00070C   7407         MOV     A,#0x7
    \   00070E   12....       LCALL   ?DEALLOC_XSTACK8
-   \   000711   E9           MOV     A,R1
-   \   000712   7018         JNZ     ??ZDO_ProcessMatchDescReq_25
     833              {
     834          #if defined( LCD_SUPPORTED )
     835                HalLcdWriteScreen( "Match Desc Req", "Rsp Sent" );
-   \   000714                ; Setup parameters for call to function HalLcdWriteScreen
-   \   000714   7C..         MOV     R4,#(`?<Constant "Rsp Sent">` & 0xff)
-   \   000716   7D..         MOV     R5,#((`?<Constant "Rsp Sent">` >> 8) & 0xff)
-   \   000718   7A..         MOV     R2,#(`?<Constant "Match Desc Req">` & 0xff)
-   \   00071A   7B..         MOV     R3,#((`?<Constant "Match Desc Req">` >> 8) & 0xff)
-   \   00071C   12....       LCALL   ??HalLcdWriteScreen?relay
-   \   00071F   800B         SJMP    ??ZDO_ProcessMatchDescReq_25
     836          #endif
     837              }
     838            }
@@ -3311,65 +3276,58 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Components\stack\zdo\ZDObject.c
     840            {
     841          #if defined( LCD_SUPPORTED )
     842              HalLcdWriteScreen( "Match Desc Req", "Non Matched" );
-   \                     ??ZDO_ProcessMatchDescReq_24:
-   \   000721                ; Setup parameters for call to function HalLcdWriteScreen
-   \   000721   7C..         MOV     R4,#(`?<Constant "Non Matched">` & 0xff)
-   \   000723   7D..         MOV     R5,#((`?<Constant "Non Matched">` >> 8) & 0xff)
-   \   000725   7A..         MOV     R2,#(`?<Constant "Match Desc Req">` & 0xff)
-   \   000727   7B..         MOV     R3,#((`?<Constant "Match Desc Req">` >> 8) & 0xff)
-   \   000729   12....       LCALL   ??HalLcdWriteScreen?relay
     843          #endif
     844            }
     845            
     846            if ( inClusters )
+   \                     ??ZDO_ProcessMatchDescReq_24:
+   \   000711   7408         MOV     A,#0x8
+   \   000713   12....       LCALL   ?XSTACK_DISP0_8
+   \   000716   E0           MOVX    A,@DPTR
+   \   000717   6400         XRL     A,#0x0
+   \   000719   7004         JNZ     ??ZDO_ProcessMatchDescReq_25
+   \   00071B   A3           INC     DPTR
+   \   00071C   E0           MOVX    A,@DPTR
+   \   00071D   6400         XRL     A,#0x0
    \                     ??ZDO_ProcessMatchDescReq_25:
-   \   00072C   7408         MOV     A,#0x8
-   \   00072E   12....       LCALL   ?XSTACK_DISP0_8
-   \   000731   E0           MOVX    A,@DPTR
-   \   000732   6400         XRL     A,#0x0
-   \   000734   7004         JNZ     ??ZDO_ProcessMatchDescReq_26
-   \   000736   A3           INC     DPTR
-   \   000737   E0           MOVX    A,@DPTR
-   \   000738   6400         XRL     A,#0x0
-   \                     ??ZDO_ProcessMatchDescReq_26:
-   \   00073A   600D         JZ      ??ZDO_ProcessMatchDescReq_27
+   \   00071F   600D         JZ      ??ZDO_ProcessMatchDescReq_26
     847              osal_mem_free( inClusters );
-   \   00073C                ; Setup parameters for call to function osal_mem_free
-   \   00073C   7408         MOV     A,#0x8
-   \   00073E   12....       LCALL   ?XSTACK_DISP0_8
-   \   000741   E0           MOVX    A,@DPTR
-   \   000742   FA           MOV     R2,A
-   \   000743   A3           INC     DPTR
-   \   000744   E0           MOVX    A,@DPTR
-   \   000745   FB           MOV     R3,A
-   \   000746   12....       LCALL   ??osal_mem_free?relay
+   \   000721                ; Setup parameters for call to function osal_mem_free
+   \   000721   7408         MOV     A,#0x8
+   \   000723   12....       LCALL   ?XSTACK_DISP0_8
+   \   000726   E0           MOVX    A,@DPTR
+   \   000727   FA           MOV     R2,A
+   \   000728   A3           INC     DPTR
+   \   000729   E0           MOVX    A,@DPTR
+   \   00072A   FB           MOV     R3,A
+   \   00072B   12....       LCALL   ??osal_mem_free?relay
     848            if ( outClusters )
+   \                     ??ZDO_ProcessMatchDescReq_26:
+   \   00072E   740A         MOV     A,#0xa
+   \   000730   12....       LCALL   ?XSTACK_DISP0_8
+   \   000733   E0           MOVX    A,@DPTR
+   \   000734   6400         XRL     A,#0x0
+   \   000736   7004         JNZ     ??ZDO_ProcessMatchDescReq_27
+   \   000738   A3           INC     DPTR
+   \   000739   E0           MOVX    A,@DPTR
+   \   00073A   6400         XRL     A,#0x0
    \                     ??ZDO_ProcessMatchDescReq_27:
-   \   000749   740A         MOV     A,#0xa
-   \   00074B   12....       LCALL   ?XSTACK_DISP0_8
-   \   00074E   E0           MOVX    A,@DPTR
-   \   00074F   6400         XRL     A,#0x0
-   \   000751   7004         JNZ     ??ZDO_ProcessMatchDescReq_28
-   \   000753   A3           INC     DPTR
-   \   000754   E0           MOVX    A,@DPTR
-   \   000755   6400         XRL     A,#0x0
-   \                     ??ZDO_ProcessMatchDescReq_28:
-   \   000757   600D         JZ      ??ZDO_ProcessMatchDescReq_1
+   \   00073C   600D         JZ      ??ZDO_ProcessMatchDescReq_1
     849              osal_mem_free( outClusters );
-   \   000759                ; Setup parameters for call to function osal_mem_free
-   \   000759   740A         MOV     A,#0xa
-   \   00075B   12....       LCALL   ?XSTACK_DISP0_8
-   \   00075E   E0           MOVX    A,@DPTR
-   \   00075F   FA           MOV     R2,A
-   \   000760   A3           INC     DPTR
-   \   000761   E0           MOVX    A,@DPTR
-   \   000762   FB           MOV     R3,A
-   \   000763   12....       LCALL   ??osal_mem_free?relay
+   \   00073E                ; Setup parameters for call to function osal_mem_free
+   \   00073E   740A         MOV     A,#0xa
+   \   000740   12....       LCALL   ?XSTACK_DISP0_8
+   \   000743   E0           MOVX    A,@DPTR
+   \   000744   FA           MOV     R2,A
+   \   000745   A3           INC     DPTR
+   \   000746   E0           MOVX    A,@DPTR
+   \   000747   FB           MOV     R3,A
+   \   000748   12....       LCALL   ??osal_mem_free?relay
    \                     ??ZDO_ProcessMatchDescReq_1:
-   \   000766   7414         MOV     A,#0x14
-   \   000768   12....       LCALL   ?DEALLOC_XSTACK8
-   \   00076B   7F06         MOV     R7,#0x6
-   \   00076D   02....       LJMP    ?BANKED_LEAVE_XDATA
+   \   00074B   7414         MOV     A,#0x14
+   \   00074D   12....       LCALL   ?DEALLOC_XSTACK8
+   \   000750   7F06         MOV     R7,#0x6
+   \   000752   02....       LJMP    ?BANKED_LEAVE_XDATA
     850          }
     851          
     852          /*********************************************************************
@@ -9635,57 +9593,11 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Components\stack\zdo\ZDObject.c
    \   00007C   7F04         MOV     R7,#0x4
    \   00007E   02....       LJMP    ?BANKED_LEAVE_XDATA
 
-   \                                 In  segment XDATA_ID, align 1, keep-with-next
-   \                     `?<Initializer for <Constant "StartDevice ERR">`:
-   \   000000   53746172     DB "StartDevice ERR"
-   \            74446576
-   \            69636520
-   \            45525200
-
-   \                                 In  segment XDATA_ID, align 1, keep-with-next
-   \                     `?<Initializer for <Constant "MODE unknown">>`:
-   \   000000   4D4F4445     DB "MODE unknown"
-   \            20756E6B
-   \            6E6F776E
-   \            00      
-
-   \                                 In  segment XDATA_ID, align 1, keep-with-next
-   \                     `?<Initializer for <Constant "End Device Bind">`:
-   \   000000   456E6420     DB "End Device Bind"
-   \            44657669
-   \            63652042
-   \            696E6400
-
-   \                                 In  segment XDATA_ID, align 1, keep-with-next
-   \                     `?<Initializer for <Constant "Success Sent">>`:
-   \   000000   53756363     DB "Success Sent"
-   \            65737320
-   \            53656E74
-   \            00      
-
-   \                                 In  segment XDATA_ID, align 1, keep-with-next
-   \                     `?<Initializer for <Constant "Timeout">>`:
-   \   000000   54696D65     DB "Timeout"
-   \            6F757400
-
-   \                                 In  segment XDATA_ID, align 1, keep-with-next
-   \                     `?<Initializer for <Constant "Match Desc Req">>`:
-   \   000000   4D617463     DB "Match Desc Req"
-   \            68204465
-   \            73632052
-   \            657100  
-
-   \                                 In  segment XDATA_ID, align 1, keep-with-next
-   \                     `?<Initializer for <Constant "Rsp Sent">>`:
-   \   000000   52737020     DB "Rsp Sent"
-   \            53656E74
-   \            00      
-
-   \                                 In  segment XDATA_ID, align 1, keep-with-next
-   \                     `?<Initializer for <Constant "Non Matched">>`:
-   \   000000   4E6F6E20     DB "Non Matched"
-   \            4D617463
-   \            68656400
+   \                                 In  segment XDATA_I, align 1, keep-with-next
+   \                     __Constant_0:
+   \   000000                DS 4
+   \   000004                REQUIRE `?<Initializer for __Constant_0>`
+   \   000004                REQUIRE __INIT_XDATA_I
 
    \                                 In  segment XDATA_ID, align 1, keep-with-next
    \                     `?<Initializer for __Constant_0>`:
@@ -9850,60 +9762,6 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Components\stack\zdo\ZDObject.c
    \                     ??ZDO_ParseDeviceAnnce?relay:
    \   000000   12....       LCALL   ?BDISPATCH
    \   000003   ......       DC24    ZDO_ParseDeviceAnnce
-
-   \                                 In  segment XDATA_I, align 1, keep-with-next
-   \                     `?<Constant "StartDevice ERR">`:
-   \   000000                DS 16
-   \   000010                REQUIRE `?<Initializer for <Constant "StartDevice ERR">`
-   \   000010                REQUIRE __INIT_XDATA_I
-
-   \                                 In  segment XDATA_I, align 1, keep-with-next
-   \                     `?<Constant "MODE unknown">`:
-   \   000000                DS 13
-   \   00000D                REQUIRE `?<Initializer for <Constant "MODE unknown">>`
-   \   00000D                REQUIRE __INIT_XDATA_I
-
-   \                                 In  segment XDATA_I, align 1, keep-with-next
-   \                     `?<Constant "End Device Bind">`:
-   \   000000                DS 16
-   \   000010                REQUIRE `?<Initializer for <Constant "End Device Bind">`
-   \   000010                REQUIRE __INIT_XDATA_I
-
-   \                                 In  segment XDATA_I, align 1, keep-with-next
-   \                     `?<Constant "Success Sent">`:
-   \   000000                DS 13
-   \   00000D                REQUIRE `?<Initializer for <Constant "Success Sent">>`
-   \   00000D                REQUIRE __INIT_XDATA_I
-
-   \                                 In  segment XDATA_I, align 1, keep-with-next
-   \                     `?<Constant "Timeout">`:
-   \   000000                DS 8
-   \   000008                REQUIRE `?<Initializer for <Constant "Timeout">>`
-   \   000008                REQUIRE __INIT_XDATA_I
-
-   \                                 In  segment XDATA_I, align 1, keep-with-next
-   \                     `?<Constant "Match Desc Req">`:
-   \   000000                DS 15
-   \   00000F                REQUIRE `?<Initializer for <Constant "Match Desc Req">>`
-   \   00000F                REQUIRE __INIT_XDATA_I
-
-   \                                 In  segment XDATA_I, align 1, keep-with-next
-   \                     `?<Constant "Rsp Sent">`:
-   \   000000                DS 9
-   \   000009                REQUIRE `?<Initializer for <Constant "Rsp Sent">>`
-   \   000009                REQUIRE __INIT_XDATA_I
-
-   \                                 In  segment XDATA_I, align 1, keep-with-next
-   \                     `?<Constant "Non Matched">`:
-   \   000000                DS 12
-   \   00000C                REQUIRE `?<Initializer for <Constant "Non Matched">>`
-   \   00000C                REQUIRE __INIT_XDATA_I
-
-   \                                 In  segment XDATA_I, align 1, keep-with-next
-   \                     __Constant_0:
-   \   000000                DS 4
-   \   000004                REQUIRE `?<Initializer for __Constant_0>`
-   \   000004                REQUIRE __INIT_XDATA_I
    2790          
    2791          /*********************************************************************
    2792          *********************************************************************/
@@ -9999,8 +9857,6 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Components\stack\zdo\ZDObject.c
        -> osal_msg_send                 0      0     68
        -> osal_mem_free                 0      0     68
        -> ZDP_EPRsp                     0      0     82
-       -> HalLcdWriteScreen             0      0     68
-       -> HalLcdWriteScreen             0      0     68
        -> osal_mem_free                 0      0     68
        -> osal_mem_free                 0      0     68
      ZDO_ProcessNodeDescReq             0      0     18
@@ -10019,15 +9875,11 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Components\stack\zdo\ZDObject.c
        -> osal_mem_free                 4      0      0
      ZDO_SendEDBindRsp                  1      0     27
        -> ZDP_SendData                  0      0     36
-       -> HalLcdWriteString             0      0     26
-       -> HalLcdWriteString             0      0     26
-       -> HalLcdWriteString             0      0     26
      ZDO_StartDevice                    1      0     26
        -> NLME_NetworkDiscoveryRequest
                                         0      0     52
        -> nwk_ScanJoiningOrphan         0      0     52
        -> NLME_OrphanJoinRequest        0      0     52
-       -> HalLcdWriteScreen             0      0     52
        -> osal_start_timerEx            0      0     52
      ZDO_UpdateAddrManager              1      0     23
        -> AddrMgrExtAddrSet             0      0     46
@@ -10047,17 +9899,17 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Components\stack\zdo\ZDObject.c
      ZDO_EDBind                        2
      ZDO_Init                         24
      ZDODeviceSetup                   19
-     ZDO_StartDevice                 246
+     ZDO_StartDevice                 233
      ZDO_UpdateNwkStatus             164
      ZDO_RemoveEndDeviceBind         148
-     ZDO_SendEDBindRsp               142
+     ZDO_SendEDBindRsp               104
      ZDO_AnyClusterMatches           146
      ZDO_ProcessNodeDescReq          189
      ZDO_ProcessPowerDescReq         189
      ZDO_ProcessSimpleDescReq        232
      ZDO_ProcessActiveEPReq          213
      ZDO_ConvertOTAClusters          103
-     ZDO_ProcessMatchDescReq        1904
+     ZDO_ProcessMatchDescReq        1877
      ZDO_ProcessBindUnbindReq        590
      ZDO_UpdateAddrManager            76
      ZDO_EndDeviceTimeoutCB           93
@@ -10077,22 +9929,7 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Components\stack\zdo\ZDObject.c
      ZDO_ParseUserDescRsp            210
      ZDO_ParseSimpleDescBuf          660
      ZDO_ParseDeviceAnnce            129
-     ?<Initializer for <Constant "StartDevice ERR">
-                                      16
-     ?<Initializer for <Constant "MODE unknown">>
-                                      13
-     ?<Initializer for <Constant "End Device Bind">
-                                      16
-     ?<Initializer for <Constant "Success Sent">>
-                                      13
-     ?<Initializer for <Constant "Timeout">>
-                                       8
-     ?<Initializer for <Constant "Match Desc Req">>
-                                      15
-     ?<Initializer for <Constant "Rsp Sent">>
-                                       9
-     ?<Initializer for <Constant "Non Matched">>
-                                      12
+     __Constant_0                      4
      ?<Initializer for __Constant_0>
                                        4
      ??ZDO_Init?relay                  6
@@ -10133,25 +9970,16 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Components\stack\zdo\ZDObject.c
      ??ZDO_ParseUserDescRsp?relay      6
      ??ZDO_ParseSimpleDescBuf?relay    6
      ??ZDO_ParseDeviceAnnce?relay      6
-     ?<Constant "StartDevice ERR">    16
-     ?<Constant "MODE unknown">       13
-     ?<Constant "End Device Bind">    16
-     ?<Constant "Success Sent">       13
-     ?<Constant "Timeout">             8
-     ?<Constant "Match Desc Req">     15
-     ?<Constant "Rsp Sent">            9
-     ?<Constant "Non Matched">        12
-     __Constant_0                      4
 
  
- 10 366 bytes in segment BANKED_CODE
+ 10 288 bytes in segment BANKED_CODE
     192 bytes in segment BANK_RELAYS
-    106 bytes in segment XDATA_I
-    106 bytes in segment XDATA_ID
+      4 bytes in segment XDATA_I
+      4 bytes in segment XDATA_ID
      54 bytes in segment XDATA_Z
  
- 10 660 bytes of CODE  memory (+ 4 bytes shared)
-    156 bytes of XDATA memory (+ 4 bytes shared)
+ 10 480 bytes of CODE  memory (+ 4 bytes shared)
+     54 bytes of XDATA memory (+ 4 bytes shared)
 
 Errors: none
 Warnings: none

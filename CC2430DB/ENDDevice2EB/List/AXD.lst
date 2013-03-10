@@ -1,0 +1,969 @@
+###############################################################################
+#                                                                             #
+# IAR 8051 C/C++ Compiler V7.30B/W32                    08/Jan/2013  19:35:11 #
+# Copyright 2004-2007 IAR Systems. All rights reserved.                       #
+#                                                                             #
+#    Core               =  plain                                              #
+#    Code model         =  banked                                             #
+#    Data model         =  large                                              #
+#    Calling convention =  xdata reentrant                                    #
+#    Constant location  =  data                                               #
+#    Dptr setup         =  1,16                                               #
+#    Source file        =  C:\Texas Instruments\ZStack-1.4.3-1.2.1\Projects\z #
+#                          stack\Samples\AXDApp\Source\AXD.c                  #
+#    Command line       =  -f "C:\Texas Instruments\ZStack-1.4.3-1.2.1\Projec #
+#                          ts\zstack\Samples\AXDApp\CC2430DB\..\..\..\Tools\C #
+#                          C2430DB\f8wEndev.cfg" (-DCPU32MHZ                  #
+#                          -DFORCE_MAC_NEAR -DROOT=__near_func                #
+#                          -DMAC_OPT_FFD=0 -DBLINK_LEDS "-DCONST=const        #
+#                          __code" -DGENERIC=__generic) -f "C:\Texas          #
+#                          Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\Sam #
+#                          ples\AXDApp\CC2430DB\..\..\..\Tools\CC2430DB\f8wCo #
+#                          nfig.cfg" (-DSECURE=0 -DDEFAULT_CHANLIST=0x0000080 #
+#                          0 -DZDAPP_CONFIG_PAN_ID=0xFFFF                     #
+#                          -DNWK_START_DELAY=100 -DEXTENDED_JOINING_RANDOM_MA #
+#                          SK=0x007F -DBEACON_REQUEST_DELAY=100               #
+#                          -DBEACON_REQ_DELAY_MASK=0x00FF                     #
+#                          -DROUTE_EXPIRY_TIME=30 -DAPSC_ACK_WAIT_DURATION_PO #
+#                          LLED=3000 -DNWK_INDIRECT_MSG_TIMEOUT=7             #
+#                          -DMAX_RREQ_ENTRIES=10 -DAPSC_MAX_FRAME_RETRIES=3   #
+#                          -DNWK_MAX_DATA_RETRIES=2                           #
+#                          -DMAX_POLL_FAILURE_RETRIES=2 -DMAX_BCAST=9         #
+#                          -DAPS_MAX_GROUPS=16 -DMAX_RTG_ENTRIES=20           #
+#                          -DNWK_MAX_BINDING_ENTRIES=10                       #
+#                          -DMAX_BINDING_CLUSTER_IDS=5 "-DDEFAULT_KEY={0x01,  #
+#                          0x03, 0x05, 0x07, 0x09, 0x0B, 0x0D, 0x0F, 0x00,    #
+#                          0x02, 0x04, 0x06, 0x08, 0x0A, 0x0C, 0x0D}"         #
+#                          -DRFD_RCVC_ALWAYS_ON=FALSE -DPOLL_RATE=1000        #
+#                          -DQUEUED_POLL_RATE=100 -DRESPONSE_POLL_RATE=100)   #
+#                          -DREJOIN_POLL_RATE=440 "C:\Texas                   #
+#                          Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\Sam #
+#                          ples\AXDApp\Source\AXD.c" -D CC2430EB -D AXD_END2  #
+#                          -D NWK_AUTO_POLL -D REFLECTOR -D xZTOOL_P1 -D      #
+#                          xMT_TASK -D xMT_ZDO_FUNC -D xLCD_SUPPORTED=DEBUG   #
+#                          -D xPOWER_SAVING -lC "C:\Texas                     #
+#                          Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\Sam #
+#                          ples\AXDApp\CC2430DB\ENDDevice2EB\List\" -lA       #
+#                          "C:\Texas Instruments\ZStack-1.4.3-1.2.1\Projects\ #
+#                          zstack\Samples\AXDApp\CC2430DB\ENDDevice2EB\List\" #
+#                           --diag_suppress Pe001,Pa010 --diag_remark pe550   #
+#                          -o "C:\Texas Instruments\ZStack-1.4.3-1.2.1\Projec #
+#                          ts\zstack\Samples\AXDApp\CC2430DB\ENDDevice2EB\Obj #
+#                          \" -e --require_prototypes -z2 --no_cse            #
+#                          --no_unroll --no_inline --no_code_motion           #
+#                          --no_tbaa --debug --core=plain --dptr=16,1         #
+#                          --data_model=large --code_model=banked             #
+#                          --calling_convention=xdata_reentrant               #
+#                          --place_constants=data --nr_virtual_regs 8 -I      #
+#                          "C:\Texas Instruments\ZStack-1.4.3-1.2.1\Projects\ #
+#                          zstack\Samples\AXDApp\CC2430DB\" -I "C:\Texas      #
+#                          Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\Sam #
+#                          ples\AXDApp\CC2430DB\..\SOURCE\" -I "C:\Texas      #
+#                          Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\Sam #
+#                          ples\AXDApp\CC2430DB\..\Drivers\" -I "C:\Texas     #
+#                          Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\Sam #
+#                          ples\AXDApp\CC2430DB\..\..\..\ZMAIN\TI2430DB\" -I  #
+#                          "C:\Texas Instruments\ZStack-1.4.3-1.2.1\Projects\ #
+#                          zstack\Samples\AXDApp\CC2430DB\..\..\..\..\..\COMP #
+#                          ONENTS\MT\" -I "C:\Texas                           #
+#                          Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\Sam #
+#                          ples\AXDApp\CC2430DB\..\..\..\..\..\COMPONENTS\HAL #
+#                          \INCLUDE\" -I "C:\Texas Instruments\ZStack-1.4.3-1 #
+#                          .2.1\Projects\zstack\Samples\AXDApp\CC2430DB\..\.. #
+#                          \..\..\..\COMPONENTS\HAL\TARGET\CC2430EB\" -I      #
+#                          "C:\Texas Instruments\ZStack-1.4.3-1.2.1\Projects\ #
+#                          zstack\Samples\AXDApp\CC2430DB\..\..\..\..\..\COMP #
+#                          ONENTS\OSAL\MCU\CCSOC\" -I "C:\Texas               #
+#                          Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\Sam #
+#                          ples\AXDApp\CC2430DB\..\..\..\..\..\COMPONENTS\OSA #
+#                          L\INCLUDE\" -I "C:\Texas                           #
+#                          Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\Sam #
+#                          ples\AXDApp\CC2430DB\..\..\..\..\..\COMPONENTS\STA #
+#                          CK\AF\" -I "C:\Texas Instruments\ZStack-1.4.3-1.2. #
+#                          1\Projects\zstack\Samples\AXDApp\CC2430DB\..\..\.. #
+#                          \..\..\COMPONENTS\STACK\NWK\" -I "C:\Texas         #
+#                          Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\Sam #
+#                          ples\AXDApp\CC2430DB\..\..\..\..\..\COMPONENTS\STA #
+#                          CK\SEC\" -I "C:\Texas Instruments\ZStack-1.4.3-1.2 #
+#                          .1\Projects\zstack\Samples\AXDApp\CC2430DB\..\..\. #
+#                          .\..\..\COMPONENTS\STACK\SYS\" -I "C:\Texas        #
+#                          Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\Sam #
+#                          ples\AXDApp\CC2430DB\..\..\..\..\..\COMPONENTS\STA #
+#                          CK\ZDO\" -I "C:\Texas Instruments\ZStack-1.4.3-1.2 #
+#                          .1\Projects\zstack\Samples\AXDApp\CC2430DB\..\..\. #
+#                          .\..\..\COMPONENTS\ZMAC\F8W\" -I "C:\Texas         #
+#                          Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\Sam #
+#                          ples\AXDApp\CC2430DB\..\..\..\..\..\COMPONENTS\ZMA #
+#                          C\" -I "C:\Texas Instruments\ZStack-1.4.3-1.2.1\Pr #
+#                          ojects\zstack\Samples\AXDApp\CC2430DB\..\..\..\..\ #
+#                          ..\COMPONENTS\SERVICES\SADDR\" -I "C:\Texas        #
+#                          Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\Sam #
+#                          ples\AXDApp\CC2430DB\..\..\..\..\..\COMPONENTS\SER #
+#                          VICES\SDATA\" -I "C:\Texas                         #
+#                          Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\Sam #
+#                          ples\AXDApp\CC2430DB\..\..\..\..\..\COMPONENTS\MAC #
+#                          \INCLUDE\" -I "C:\Texas Instruments\ZStack-1.4.3-1 #
+#                          .2.1\Projects\zstack\Samples\AXDApp\CC2430DB\..\.. #
+#                          \..\..\..\COMPONENTS\MAC\HIGH_LEVEL\" -I           #
+#                          "C:\Texas Instruments\ZStack-1.4.3-1.2.1\Projects\ #
+#                          zstack\Samples\AXDApp\CC2430DB\..\..\..\..\..\COMP #
+#                          ONENTS\MAC\LOW_LEVEL\SRF03\" -I "C:\Texas          #
+#                          Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\Sam #
+#                          ples\AXDApp\CC2430DB\..\..\..\..\..\COMPONENTS\MAC #
+#                          \LOW_LEVEL\SRF03\SINGLE_CHIP\" -I "C:\Program      #
+#                          Files\IAR Systems\Embedded Workbench 4.0           #
+#                          Evaluation version\8051\INC\" -I "C:\Program       #
+#                          Files\IAR Systems\Embedded Workbench 4.0           #
+#                          Evaluation version\8051\INC\CLIB\"                 #
+#    List file          =  C:\Texas Instruments\ZStack-1.4.3-1.2.1\Projects\z #
+#                          stack\Samples\AXDApp\CC2430DB\ENDDevice2EB\List\AX #
+#                          D.lst                                              #
+#    Object file        =  C:\Texas Instruments\ZStack-1.4.3-1.2.1\Projects\z #
+#                          stack\Samples\AXDApp\CC2430DB\ENDDevice2EB\Obj\AXD #
+#                          .r51                                               #
+#                                                                             #
+#                                                                             #
+###############################################################################
+
+C:\Texas Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\Samples\AXDApp\Source\AXD.c
+      1          /**************************************************************************************************
+      2            Filename:       AXD.c
+      3            Revised:        $Date: 2007-10-27 17:16:54 -0700 (Sat, 27 Oct 2007) $
+      4            Revision:       $Revision: 15793 $
+      5          
+      6            Description:    Generic Application (no Profile).
+      7          
+      8          
+      9            Copyright 2004-2007 Texas Instruments Incorporated. All rights reserved.
+     10          
+     11            IMPORTANT: Your use of this Software is limited to those specific rights
+     12            granted under the terms of a software license agreement between the user
+     13            who downloaded the software, his/her employer (which must be your employer)
+     14            and Texas Instruments Incorporated (the "License").  You may not use this
+     15            Software unless you agree to abide by the terms of the License. The License
+     16            limits your use, and you acknowledge, that the Software may not be modified,
+     17            copied or distributed unless embedded on a Texas Instruments microcontroller
+     18            or used solely and exclusively in conjunction with a Texas Instruments radio
+     19            frequency transceiver, which is integrated into your product.  Other than for
+     20            the foregoing purpose, you may not use, reproduce, copy, prepare derivative
+     21            works of, modify, distribute, perform, display or sell this Software and/or
+     22            its documentation for any purpose.
+     23          
+     24            YOU FURTHER ACKNOWLEDGE AND AGREE THAT THE SOFTWARE AND DOCUMENTATION ARE
+     25            PROVIDED 揂S IS?WITHOUT WARRANTY OF ANY KIND, EITHER EXPRESS OR IMPLIED, 
+     26            INCLUDING WITHOUT LIMITATION, ANY WARRANTY OF MERCHANTABILITY, TITLE, 
+     27            NON-INFRINGEMENT AND FITNESS FOR A PARTICULAR PURPOSE. IN NO EVENT SHALL
+     28            TEXAS INSTRUMENTS OR ITS LICENSORS BE LIABLE OR OBLIGATED UNDER CONTRACT,
+     29            NEGLIGENCE, STRICT LIABILITY, CONTRIBUTION, BREACH OF WARRANTY, OR OTHER
+     30            LEGAL EQUITABLE THEORY ANY DIRECT OR INDIRECT DAMAGES OR EXPENSES
+     31            INCLUDING BUT NOT LIMITED TO ANY INCIDENTAL, SPECIAL, INDIRECT, PUNITIVE
+     32            OR CONSEQUENTIAL DAMAGES, LOST PROFITS OR LOST DATA, COST OF PROCUREMENT
+     33            OF SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
+     34            (INCLUDING BUT NOT LIMITED TO ANY DEFENSE THEREOF), OR OTHER SIMILAR COSTS.
+     35          
+     36            Should you have any questions regarding your right to use this Software,
+     37            contact Texas Instruments Incorporated at www.TI.com. 
+     38          **************************************************************************************************/
+     39          
+     40          /*********************************************************************
+     41            This application isn't intended to do anything useful, it is
+     42            intended to be a simple example of an application's structure.
+     43          
+     44            This application sends "Hello World" to another "Generic"
+     45            application every 15 seconds.  The application will also
+     46            receive "Hello World" packets.
+     47          
+     48            The "Hello World" messages are sent/received as MSG type message.
+     49          
+     50            This applications doesn't have a profile, so it handles everything
+     51            directly - itself.
+     52          
+     53            Key control:
+     54              SW1:
+     55              SW2:  initiates end device binding
+     56              SW3:
+     57              SW4:  initiates a match description request
+     58          *********************************************************************/
+     59          
+     60          /*********************************************************************
+     61           * INCLUDES
+     62           */
+     63          #include "OSAL.h"
+     64          #include "AF.h"
+     65          #include "ZDApp.h"
+     66          #include "ZDObject.h"
+     67          #include "ZDProfile.h"
+     68          #include "aps_groups.h"
+     69          
+     70          #include "AXD.h"
+     71          #include "DebugTrace.h"
+     72          
+     73          #if !defined( WIN32 )
+     74            #include "OnBoard.h"
+     75          #endif
+     76          
+     77          /* HAL */
+     78          #include "hal_lcd.h"
+     79          #include "hal_led.h"
+     80          #include "hal_key.h"
+     81          #include "hal_uart.h"
+     82          
+     83          /*用户自己的头文件*/
+     84          #include "adxl345.h"
+     85          #include "readaxd.h"
+     86          
+     87          /*********************************************************************
+     88           * MACROS
+     89           */
+     90          #define FREE_OTABUF() { \
+     91            if ( otaBuf ) \
+     92            { \
+     93              osal_mem_free( otaBuf ); \
+     94            } \
+     95            if ( otaBuf2 ) \
+     96            { \
+     97              SerialApp_SendData( otaBuf2, otaLen2 ); \
+     98              otaBuf2 = NULL; \
+     99            } \
+    100            else \
+    101            { \
+    102              otaBuf = NULL; \
+    103            } \
+    104          }
+    105          
+    106          
+    107          
+    108          /*********************************************************************
+    109           * CONSTANTS
+    110           */
+    111          #define ZB_USER_EVENTS                    0x00FF
+    112          #if !defined( SERIAL_APP_PORT )
+    113            #define SERIAL_APP_PORT  0
+    114          #endif
+    115          
+    116          #if !defined( SERIAL_APP_BAUD )
+    117            // CC2430 only allows 38.4k or 115.2k.
+    118            #define SERIAL_APP_BAUD  HAL_UART_BR_38400
+    119            //#define SERIAL_APP_BAUD  HAL_UART_BR_115200
+    120          #endif
+    121          
+    122          // When the Rx buf space is less than this threshold, invoke the Rx callback.
+    123          #if !defined( SERIAL_APP_THRESH )
+    124            #define SERIAL_APP_THRESH  48
+    125          #endif
+    126          
+    127          #if !defined( SERIAL_APP_RX_MAX )
+    128            #if (defined( HAL_UART_DMA )) && HAL_UART_DMA
+    129              #define SERIAL_APP_RX_MAX  128
+    130            #else
+    131              /* The generic safe Rx minimum is 48, but if you know your PC App will not
+    132               * continue to send more than a byte after receiving the ~CTS, lower max
+    133               * here and safe min in _hal_uart.c to just 8.
+    134               */
+    135              #define SERIAL_APP_RX_MAX  64
+    136            #endif
+    137          #endif
+    138          
+    139          #if !defined( SERIAL_APP_TX_MAX )
+    140            #if (defined( HAL_UART_DMA )) && HAL_UART_DMA
+    141            #define SERIAL_APP_TX_MAX  128
+    142            #else
+    143              #define SERIAL_APP_TX_MAX  64
+    144            #endif
+    145          #endif
+    146          
+    147          // Millisecs of idle time after a byte is received before invoking Rx callback.
+    148          #if !defined( SERIAL_APP_IDLE )
+    149            #define SERIAL_APP_IDLE  6
+    150          #endif
+    151          
+    152          // This is the desired byte count per OTA message.
+    153          #if !defined( SERIAL_APP_RX_CNT )
+    154            #if (defined( HAL_UART_DMA )) && HAL_UART_DMA
+    155              #define SERIAL_APP_RX_CNT  80
+    156            #else
+    157              #define SERIAL_APP_RX_CNT  6
+    158            #endif
+    159          #endif
+    160          
+    161          // Loopback Rx bytes to Tx for thruput testing.
+    162          #if !defined( SERIAL_APP_LOOPBACK )
+    163            #define SERIAL_APP_LOOPBACK  TRUE
+    164          #endif
+    165          
+    166          #if SERIAL_APP_LOOPBACK
+    167            #define SERIALAPP_TX_RTRY_EVT      0x0010
+    168            #define SERIALAPP_TX_RTRY_TIMEOUT  250
+    169          #endif
+    170          
+    171          #define SERIAL_APP_RSP_CNT  4
+    172          
+    173          /*********************************************************************
+    174           * TYPEDEFS
+    175           */
+    176          
+    177          /*********************************************************************
+    178           * GLOBAL VARIABLES
+    179           */
+    180          aps_Group_t AXD_Group;
+    181          
+    182          // This list should be filled with Application specific Cluster IDs.
+    183          const cId_t AXD_ClusterList[AXD_MAX_CLUSTERS] =
+    184          {
+    185            AXD_CLUSTERID,
+    186            AXD_TEST_CLUSTERID
+    187          };
+    188          
+    189          const SimpleDescriptionFormat_t AXD_SimpleDesc =
+    190          {
+    191            AXD_ENDPOINT,              //  int Endpoint;
+    192            AXD_PROFID,                //  uint16 AppProfId[2];
+    193            AXD_DEVICEID,              //  uint16 AppDeviceId[2];
+    194            AXD_DEVICE_VERSION,        //  int   AppDevVer:4;
+    195            AXD_FLAGS,                 //  int   AppFlags:4;
+    196            AXD_MAX_CLUSTERS,          //  byte  AppNumInClusters;
+    197            (cId_t *)AXD_ClusterList,  //  byte *pAppInClusterList;
+    198            AXD_MAX_CLUSTERS,          //  byte  AppNumInClusters;
+    199            (cId_t *)AXD_ClusterList   //  byte *pAppInClusterList;
+    200          };
+    201          
+    202          // This is the Endpoint/Interface description.  It is defined here, but
+    203          // filled-in in AXD_Init().  Another way to go would be to fill
+    204          // in the structure here and make it a "const" (in code space).  The
+    205          // way it's defined in this sample app it is define in RAM.
+    206          endPointDesc_t AXD_epDesc;
+    207          
+    208          /*********************************************************************
+    209           * EXTERNAL VARIABLES
+    210           */
+    211          uint16 test2 = 0;
+    212          
+    213          /*********************************************************************
+    214           * EXTERNAL FUNCTIONS
+    215           */
+    216          
+    217          /*********************************************************************
+    218           * LOCAL VARIABLES
+    219           */
+    220          byte AXD_TaskID;   // Task ID for internal task/event processing
+    221                                    // This variable will be received when
+    222                                    // AXD_Init() is called.
+    223          devStates_t AXD_NwkState;
+    224          
+    225          
+    226          byte AXD_TransID;  // This is the unique message ID (counter)
+    227          //byte AXD_TransID2;
+    228          
+    229          afAddrType_t AXD_DstAddr;
+    230          #if SERIAL_APP_LOOPBACK
+    231          static uint8 rxLen;
+    232          static uint8 rxBuf[SERIAL_APP_RX_CNT];
+    233          #endif
+    234          
+    235          /*********************************************************************
+    236           * LOCAL FUNCTIONS
+    237           */
+    238          void AXD_ProcessZDOMsgs( zdoIncomingMsg_t *inMsg );
+    239          void AXD_HandleKeys( byte shift, byte keys );
+    240          void AXD_MessageMSGCB( afIncomingMSGPacket_t *pckt );
+    241          void AXD_SendTheMessage( void );
+    242          
+    243          #if SERIAL_APP_LOOPBACK
+    244          static void rxCB_Loopback( uint8 port, uint8 event );
+    245          #else
+    246          static void rxCB( uint8 port, uint8 event );
+    247          #endif
+    248          
+    249          /*********************************************************************
+    250           * NETWORK LAYER CALLBACKS
+    251           */
+    252          
+    253          /*********************************************************************
+    254           * PUBLIC FUNCTIONS
+    255           */
+    256          
+    257          /*********************************************************************
+    258           * @fn      AXD_Init
+    259           *
+    260           * @brief   Initialization function for the Generic App Task.
+    261           *          This is called during initialization and should contain
+    262           *          any application specific initialization (ie. hardware
+    263           *          initialization/setup, table initialization, power up
+    264           *          notificaiton ... ).
+    265           *
+    266           * @param   task_id - the ID assigned by OSAL.  This ID should be
+    267           *                    used to send messages and set timers.
+    268           *
+    269           * @return  none
+    270           */
+    271          void AXD_Init( byte task_id )
+    272          {
+    273            halUARTCfg_t uartConfig;
+    274            AXD_TaskID = task_id;
+    275            AXD_NwkState = DEV_INIT;
+    276            AXD_TransID = 0;
+    277          //  AXD_TransID2 = 1;
+    278          
+    279            // Device hardware initialization can be added here or in main() (Zmain.c).
+    280            // If the hardware is application specific - add it here.
+    281            // If the hardware is other parts of the device add it in main().
+    282          
+    283            AXD_DstAddr.addrMode = (afAddrMode_t)AddrNotPresent;
+    284            AXD_DstAddr.endPoint = 0;
+    285            AXD_DstAddr.addr.shortAddr = 0;
+    286          
+    287            // Fill out the endpoint description.
+    288            AXD_epDesc.endPoint = AXD_ENDPOINT;
+    289            AXD_epDesc.task_id = &AXD_TaskID;
+    290            AXD_epDesc.simpleDesc
+    291                      = (SimpleDescriptionFormat_t *)&AXD_SimpleDesc;
+    292            AXD_epDesc.latencyReq = noLatencyReqs;
+    293          
+    294            // Register the endpoint description with the AF
+    295            afRegister( &AXD_epDesc );
+    296          
+    297            // Register for all key events - This app will handle all key events
+    298            RegisterForKeys( AXD_TaskID );
+    299            uartConfig.configured           = TRUE;              // 2430 don't care.
+    300            uartConfig.baudRate             = SERIAL_APP_BAUD;
+    301            uartConfig.flowControl          = TRUE;
+    302            uartConfig.flowControlThreshold = SERIAL_APP_THRESH;
+    303            uartConfig.rx.maxBufSize        = SERIAL_APP_RX_MAX;
+    304            uartConfig.tx.maxBufSize        = SERIAL_APP_TX_MAX;
+    305            uartConfig.idleTimeout          = SERIAL_APP_IDLE;   // 2430 don't care.
+    306            uartConfig.intEnable            = TRUE;              // 2430 don't care.
+    307          #if SERIAL_APP_LOOPBACK
+    308            uartConfig.callBackFunc         = rxCB_Loopback;
+    309          #else
+    310            uartConfig.callBackFunc         = rxCB;
+    311          #endif
+    312            HalUARTOpen (SERIAL_APP_PORT, &uartConfig);
+    313          
+    314            // Update the display
+    315          #if defined ( LCD_SUPPORTED )
+    316              HalLcdWriteString( "AXD", HAL_LCD_LINE_1 );
+    317          #endif
+    318          
+    319            ZDO_RegisterForZDOMsg( AXD_TaskID, End_Device_Bind_rsp );
+    320            ZDO_RegisterForZDOMsg( AXD_TaskID, Match_Desc_rsp );
+    321            
+    322            AXD_Group.ID = AXD_GROUP;
+    323            aps_AddGroup(AXD_ENDPOINT,&AXD_Group);
+    324            //下面是用户自定义的初始化
+    325          #ifdef AXD_END
+    326            Init_ADXL345();
+    327          #endif
+    328          }
+    329          
+    330          /*********************************************************************
+    331           * @fn      AXD_ProcessEvent
+    332           *
+    333           * @brief   Generic Application Task event processor.  This function
+    334           *          is called to process all events for the task.  Events
+    335           *          include timers, messages and any other user defined events.
+    336           *
+    337           * @param   task_id  - The OSAL assigned task ID.
+    338           * @param   events - events to process.  This is a bit map and can
+    339           *                   contain more than one event.
+    340           *
+    341           * @return  none
+    342           */
+    343          UINT16 AXD_ProcessEvent( byte task_id, UINT16 events )
+    344          {
+    345            
+    346            afIncomingMSGPacket_t *MSGpkt;
+    347          //  osal_event_hdr_t *pMsg;
+    348            afDataConfirm_t *afDataConfirm;
+    349          
+    350            // Data Confirmation message fields
+    351            byte sentEP;
+    352            ZStatus_t sentStatus;
+    353            byte sentTransID;       // This should match the value sent
+    354          
+    355            if ( events & SYS_EVENT_MSG )
+    356            {
+    357              MSGpkt = (afIncomingMSGPacket_t *)osal_msg_receive( AXD_TaskID );
+    358              while ( MSGpkt )
+    359              {
+    360                switch ( MSGpkt->hdr.event )
+    361                {
+    362                  case ZDO_CB_MSG:
+    363                    AXD_ProcessZDOMsgs( (zdoIncomingMsg_t *)MSGpkt );
+    364                    break;
+    365          
+    366                  case KEY_CHANGE:
+    367                    AXD_HandleKeys( ((keyChange_t *)MSGpkt)->state, ((keyChange_t *)MSGpkt)->keys );
+    368                    break;
+    369          
+    370                  case AF_DATA_CONFIRM_CMD:
+    371                    // This message is received as a confirmation of a data packet sent.
+    372                    // The status is of ZStatus_t type [defined in ZComDef.h]
+    373                    // The message fields are defined in AF.h
+    374                    afDataConfirm = (afDataConfirm_t *)MSGpkt;
+    375                    sentEP = afDataConfirm->endpoint;
+    376                    sentStatus = afDataConfirm->hdr.status;
+    377                    sentTransID = afDataConfirm->transID;
+    378                    (void)sentEP;
+    379                    (void)sentTransID;
+    380          
+    381                    // Action taken when confirmation is received.
+    382                    if ( sentStatus != ZSuccess )
+    383                    {
+    384                      // The data wasn't delivered -- Do something
+    385                    }
+    386                    break;
+    387          
+    388                  case AF_INCOMING_MSG_CMD:
+    389              //      MSGpkt = (afIncomingMSGPacket_t *) pMsg;
+    390          #ifdef AXD_COR
+    391                    //AXD_ReceiveDataIndication( MSGpkt->srcAddr.addr.shortAddr, MSGpkt->clusterId,
+    392                    //                          MSGpkt->cmd.DataLength, MSGpkt->cmd.Data);
+    393                    AXD_MessageMSGCB( MSGpkt );
+    394          #endif
+    395                    break;
+    396          
+    397                  case ZDO_STATE_CHANGE:
+    398                    AXD_NwkState = (devStates_t)(MSGpkt->hdr.status);
+    399                    if ( (AXD_NwkState == DEV_ZB_COORD)
+    400                        || (AXD_NwkState == DEV_ROUTER)
+    401                        || (AXD_NwkState == DEV_END_DEVICE) )
+    402                    {
+    403                      // Start sending "the" message in a regular interval.
+    404                      osal_start_timerEx( AXD_TaskID,
+    405                                          AXD_SEND_MSG_EVT,
+    406                                          AXD_SEND_MSG_TIMEOUT );
+    407                    }
+    408                    break;
+    409          
+    410                  default:
+    411                    break;
+    412                }
+    413          
+    414                // Release the memory
+    415                osal_msg_deallocate( (uint8 *)MSGpkt );
+    416          
+    417                // Next
+    418                MSGpkt = (afIncomingMSGPacket_t *)osal_msg_receive( AXD_TaskID );
+    419              }
+    420          
+    421              // return unprocessed events
+    422              return (events ^ SYS_EVENT_MSG);
+    423            }
+    424          
+    425            // Send a message out - This event is generated by a timer
+    426            //  (setup in AXD_Init()).
+    427            if ( events & AXD_SEND_MSG_EVT )
+    428            {
+    429              //zb_HandleOsalEvent(events);
+    430              AXD_SendTheMessage();
+    431              // Setup to send message again
+    432          #ifdef AXD_ROUTER
+    433              test2++;
+    434          #endif
+    435          #ifdef AXD_END2
+    436              test2--;
+    437          #endif
+    438              osal_start_timerEx( AXD_TaskID,
+    439                                  AXD_SEND_MSG_EVT,
+    440                                  (AXD_SEND_MSG_TIMEOUT/5) );
+    441          
+    442              // return unprocessed events
+    443              return (events ^ AXD_SEND_MSG_EVT);
+    444            }
+    445              if ( events & ( ZB_USER_EVENTS ) )
+    446            {
+    447              // User events are passed to the application
+    448              zb_HandleOsalEvent( events );
+    449          
+    450              // Do not return here, return 0 later
+    451            }
+    452          
+    453            // Discard unknown events
+    454            return 0;
+    455          }
+    456          
+    457          /*********************************************************************
+    458           * Event Generation Functions
+    459           */
+    460          /*********************************************************************
+    461           * @fn      AXD_ProcessZDOMsgs()
+    462           *
+    463           * @brief   Process response messages
+    464           *
+    465           * @param   none
+    466           *
+    467           * @return  none
+    468           */
+    469          void AXD_ProcessZDOMsgs( zdoIncomingMsg_t *inMsg )
+    470          {
+    471            switch ( inMsg->clusterID )
+    472            {
+    473              case End_Device_Bind_rsp:
+    474                if ( ZDO_ParseBindRsp( inMsg ) == ZSuccess )
+    475                {
+    476                  // Light LED
+    477                  HalLedSet( HAL_LED_4, HAL_LED_MODE_ON );
+    478                }
+    479          #if defined(BLINK_LEDS)
+    480                else
+    481                {
+    482                  // Flash LED to show failure
+    483                  HalLedSet ( HAL_LED_4, HAL_LED_MODE_FLASH );
+    484                }
+    485          #endif
+    486                break;
+    487          
+    488              case Match_Desc_rsp:
+    489                {
+    490                  ZDO_ActiveEndpointRsp_t *pRsp = ZDO_ParseEPListRsp( inMsg );
+    491                  if ( pRsp )
+    492                  {
+    493                    if ( pRsp->status == ZSuccess && pRsp->cnt )
+    494                    {
+    495                      AXD_DstAddr.addrMode = (afAddrMode_t)Addr16Bit;
+    496                      AXD_DstAddr.addr.shortAddr = pRsp->nwkAddr;
+    497                      // Take the first endpoint, Can be changed to search through endpoints
+    498                      AXD_DstAddr.endPoint = pRsp->epList[0];
+    499          
+    500                      // Light LED
+    501                      HalLedSet( HAL_LED_4, HAL_LED_MODE_ON );
+    502                    }
+    503                    osal_mem_free( pRsp );
+    504                  }
+    505                }
+    506                break;
+    507            }
+    508          }
+    509          
+    510          /*********************************************************************
+    511           * @fn      AXD_HandleKeys
+    512           *
+    513           * @brief   Handles all key events for this device.
+    514           *
+    515           * @param   shift - true if in shift/alt.
+    516           * @param   keys - bit field for key events. Valid entries:
+    517           *                 HAL_KEY_SW_4
+    518           *                 HAL_KEY_SW_3
+    519           *                 HAL_KEY_SW_2
+    520           *                 HAL_KEY_SW_1
+    521           *
+    522           * @return  none
+    523           */
+    524          void AXD_HandleKeys( byte shift, byte keys )
+    525          {
+    526            zAddrType_t dstAddr;
+    527          
+    528            // Shift is used to make each button/switch dual purpose.
+    529            if ( shift )
+    530            {
+    531              if ( keys & HAL_KEY_SW_1 )
+    532              {
+    533              }
+    534              if ( keys & HAL_KEY_SW_2 )
+    535              {
+    536              }
+    537              if ( keys & HAL_KEY_SW_3 )
+    538              {
+    539              }
+    540              if ( keys & HAL_KEY_SW_4 )
+    541              {
+    542              }
+    543            }
+    544            else
+    545            {
+    546              if ( keys & HAL_KEY_SW_1 )
+    547              {
+    548              }
+    549          
+    550              if ( keys & HAL_KEY_SW_2 )
+    551              {
+    552                HalLedSet ( HAL_LED_4, HAL_LED_MODE_OFF );
+    553          
+    554                // Initiate an End Device Bind Request for the mandatory endpoint
+    555                dstAddr.addrMode = Addr16Bit;
+    556                dstAddr.addr.shortAddr = 0x0000; // Coordinator
+    557                ZDP_EndDeviceBindReq( &dstAddr, NLME_GetShortAddr(),
+    558                                      AXD_epDesc.endPoint,
+    559                                      AXD_PROFID,
+    560                                      AXD_MAX_CLUSTERS, (cId_t *)AXD_ClusterList,
+    561                                      AXD_MAX_CLUSTERS, (cId_t *)AXD_ClusterList,
+    562                                      FALSE );
+    563              }
+    564          
+    565              if ( keys & HAL_KEY_SW_3 )
+    566              {
+    567              }
+    568          
+    569              if ( keys & HAL_KEY_SW_4 )
+    570              {
+    571                HalLedSet ( HAL_LED_4, HAL_LED_MODE_OFF );
+    572          
+    573                // Initiate a Match Description Request (Service Discovery)
+    574          #ifdef AXD_COR
+    575                dstAddr.addrMode = AddrBroadcast;
+    576                dstAddr.addr.shortAddr = NWK_BROADCAST_SHORTADDR;
+    577                ZDP_MatchDescReq( &dstAddr, NWK_BROADCAST_SHORTADDR,
+    578                                  AXD_PROFID,
+    579                                  AXD_MAX_CLUSTERS, (cId_t *)AXD_ClusterList,
+    580                                  AXD_MAX_CLUSTERS, (cId_t *)AXD_ClusterList,
+    581                                  FALSE );
+    582          #else
+    583                dstAddr.addrMode = Addr16Bit;
+    584                dstAddr.addr.shortAddr = 0x0000;
+    585                ZDP_MatchDescReq( &dstAddr, NWK_BROADCAST_SHORTADDR,
+    586                                  AXD_PROFID,
+    587                                  AXD_MAX_CLUSTERS, (cId_t *)AXD_ClusterList,
+    588                                  AXD_MAX_CLUSTERS, (cId_t *)AXD_ClusterList,
+    589                                  FALSE );
+    590          #endif
+    591              }
+    592            }
+    593          }
+    594          
+    595          /*********************************************************************
+    596           * LOCAL FUNCTIONS
+    597           */
+    598          
+    599          /*********************************************************************
+    600           * @fn      AXD_MessageMSGCB
+    601           *
+    602           * @brief   Data message processor callback.  This function processes
+    603           *          any incoming data - probably from other devices.  So, based
+    604           *          on cluster ID, perform the intended action.
+    605           *
+    606           * @param   none
+    607           *
+    608           * @return  none
+    609           */
+    610          void AXD_MessageMSGCB( afIncomingMSGPacket_t *pkt )
+    611          {
+    612            
+    613            switch ( pkt->clusterId )
+    614            {
+    615              case AXD_CMD_ID:
+    616                displayXYZ(pkt->cmd.Data);
+    617                //HalLcdWriteStringValue("R: ",source,10,3);
+    618                HalUARTWrite( SERIAL_APP_PORT, pkt->cmd.Data,pkt->cmd.DataLength)
+    619              break;
+                     ^
+Error[Pe065]: expected a ";"
+    620            case AXD_TEST_CMD_ID:
+    621              HalLcdWriteStringValue("R: ",*(pkt->cmd.Data),10,4);
+    622              break;
+    623            case AXD_TEST2_CMD_ID:
+    624              HalLcdWriteStringValue("Q: ",*(pkt->cmd.Data),10,3);
+    625              break;
+    626            default: break;
+    627            } 
+    628            
+    629          }
+    630          
+    631          /*********************************************************************
+    632           * @fn      AXD_SendTheMessage
+    633           *
+    634           * @brief   Send "the" message.
+    635           *
+    636           * @param   none
+    637           *
+    638           * @return  none
+    639           */
+    640          void AXD_SendTheMessage( void )
+    641          {
+    642            //zAddrType_t dstAddr;
+    643          #ifdef AXD_END
+    644          
+    645            Multiple_Read_ADXL345();
+    646            displayXYZ((uint8 *)BUFFER);
+    647            
+    648            if ( AF_DataRequest( &AXD_DstAddr, &AXD_epDesc,
+    649                                 AXD_CMD_ID,
+    650                                 (byte)(sizeof(BUFFER)),
+    651                                 (byte *)(BUFFER),
+    652                                 &AXD_TransID,
+    653                                 AF_DISCV_ROUTE, AF_DEFAULT_RADIUS ) == afStatus_SUCCESS )
+    654            {
+    655              aps_RemoveGroup(AXD_ENDPOINT,AXD_GROUP);
+    656              // Successfully requested to be sent.
+    657              
+    658            }
+    659            else
+    660            {
+    661              // Error occurred in request to send.
+    662            }
+    663          #endif
+    664          #ifdef AXD_ROUTER
+    665            if ( AF_DataRequest( &AXD_DstAddr, &AXD_epDesc,
+    666                                 AXD_TEST_CMD_ID,
+    667                                 (byte)(sizeof(test2)),
+    668                                 (byte *)(&test2),
+    669                                 &AXD_TransID,
+    670                                 AF_SKIP_ROUTING, AF_DEFAULT_RADIUS ) == afStatus_SUCCESS )
+    671            {
+    672              // Successfully requested to be sent.
+    673          
+    674            }
+    675            else
+    676            {
+    677              // Error occurred in request to send.
+    678            }
+    679            
+    680          #endif
+    681          #ifdef AXD_END2
+    682            if ( AF_DataRequest( &AXD_DstAddr, &AXD_epDesc,
+    683                                 AXD_TEST2_CMD_ID,
+    684                                 (byte)(sizeof(test2)),
+    685                                 (byte *)(&test2),
+    686                                 &AXD_TransID,
+    687                                 AF_SKIP_ROUTING, AF_DEFAULT_RADIUS ) == afStatus_SUCCESS )
+    688            {
+    689              // Successfully requested to be sent.
+    690          
+    691            }
+    692            else
+    693            {
+    694              // Error occurred in request to send.
+    695            }
+    696            
+    697          #endif
+    698          }
+    699          
+    700          /*********************************************************************
+    701          *********************************************************************/
+    702          void AXD_ReceiveDataIndication( uint16 source, uint16 command, uint16 len, uint8 *pData  )
+    703          {
+    704          #if defined ( MT_SAPI_CB_FUNC )
+    705            /* First check if MT has subscribed for this callback. If so , pass it as
+    706            a event to MonitorTest and return control to calling function after that */
+    707            if ( SAPICB_CHECK( SPI_CB_SAPI_RCV_DATA_IND ) )
+    708            {
+    709              zb_MTCallbackReceiveDataIndication( source, command, len, pData  );
+    710            }
+    711            else
+    712          #endif  //MT_SAPI_CB_FUNC
+    713            {
+    714              zb_ReceiveDataIndication( source, command, len, pData  );
+    715            }
+    716          }
+    717          
+    718          #if SERIAL_APP_LOOPBACK
+    719          /*********************************************************************
+    720           * @fn      rxCB_Loopback
+    721           *
+    722           * @brief   Process UART Rx event handling.
+    723           *          May be triggered by an Rx timer expiration - less than max
+    724           *          Rx bytes have arrived within the Rx max age time.
+    725           *          May be set by failure to alloc max Rx byte-buffer for the DMA Rx -
+    726           *          system resources are too low, so set flow control?
+    727           *
+    728           * @param   none
+    729           *
+    730           * @return  none
+    731           */
+    732          static void rxCB_Loopback( uint8 port, uint8 event )
+    733          {
+    734          
+    735            if ( rxLen )
+    736            {
+    737              if ( !HalUARTWrite( SERIAL_APP_PORT, rxBuf, rxLen ) )
+    738              {
+    739                osal_start_timerEx( AXD_TaskID, SERIALAPP_TX_RTRY_EVT,
+    740                                                      SERIALAPP_TX_RTRY_TIMEOUT );
+    741                return;
+    742              }
+    743              else
+    744              {
+    745                osal_stop_timerEx( AXD_TaskID, SERIALAPP_TX_RTRY_EVT );
+    746              }
+    747            }
+    748          
+    749            // HAL UART Manager will turn flow control back on if it can after read.
+    750            if ( !(rxLen = HalUARTRead( port, rxBuf, SERIAL_APP_RX_CNT )) )
+    751            {
+    752              return;
+    753            }
+    754          
+    755            if ( HalUARTWrite( SERIAL_APP_PORT, rxBuf, rxLen ) )
+    756            {
+    757              rxLen = 0;
+    758            }
+    759            else
+    760            {
+    761              osal_start_timerEx( AXD_TaskID, SERIALAPP_TX_RTRY_EVT,
+    762                                                    SERIALAPP_TX_RTRY_TIMEOUT );
+    763            }
+    764          }
+    765          
+    766          #else
+    767          
+    768          /*********************************************************************
+    769           * @fn      rxCB
+    770           *
+    771           * @brief   Process UART Rx event handling.
+    772           *          May be triggered by an Rx timer expiration - less than max
+    773           *          Rx bytes have arrived within the Rx max age time.
+    774           *          May be set by failure to alloc max Rx byte-buffer for the DMA Rx -
+    775           *          system resources are too low, so set flow control?
+    776           *
+    777           * @param   none
+    778           *
+    779           * @return  none
+    780           */
+    781          static void rxCB( uint8 port, uint8 event )
+    782          {
+    783            uint8 *buf, len;
+    784          
+    785            /* While awaiting retries/response, only buffer 1 next buffer: otaBuf2.
+    786             * If allow the DMA Rx to continue to run, allocating Rx buffers, the heap
+    787             * will become so depleted that an incoming OTA response cannot be received.
+    788             * When the Rx data available is not read, the DMA Rx Machine automatically
+    789             * sets flow control off - it is automatically re-enabled upon Rx data read.
+    790             * When the back-logged otaBuf2 is sent OTA, an Rx data read is scheduled.
+    791             */
+    792            if ( otaBuf2 )
+    793            {
+    794              return;
+    795            }
+    796          
+    797            if ( !(buf = osal_mem_alloc( SERIAL_APP_RX_CNT )) )
+    798            {
+    799              return;
+    800            }
+    801          
+    802            /* HAL UART Manager will turn flow control back on if it can after read.
+    803             * Reserve 1 byte for the 'sequence number'.
+    804             */
+    805            len = HalUARTRead( port, buf+1, SERIAL_APP_RX_CNT-1 );
+    806          
+    807            if ( !len )  // Length is not expected to ever be zero.
+    808            {
+    809              osal_mem_free( buf );
+    810              return;
+    811            }
+    812          
+    813            /* If the local global otaBuf is in use, then either the response handshake
+    814             * is being awaited or retries are being attempted. When the wait/retries
+    815             * process has been exhausted, the next OTA msg will be attempted from
+    816             * otaBuf2, if it is not NULL.
+    817             */
+    818            if ( otaBuf )
+    819            {
+    820              otaBuf2 = buf;
+    821              otaLen2 = len;
+    822            }
+    823            else
+    824            {
+    825              otaBuf = buf;
+    826              otaLen = len;
+    827              /* Don't call SerialApp_SendData() from here in the callback function.
+    828               * Set the event so SerialApp_SendData() runs during this task's time slot.
+    829               */
+    830              osal_set_event( SerialApp_TaskID, SERIALAPP_MSG_SEND_EVT );
+    831            }
+    832          }
+    833          #endif
+    834          
+    835          /*********************************************************************
+    836          *********************************************************************/
+
+Errors: 1
+Warnings: none

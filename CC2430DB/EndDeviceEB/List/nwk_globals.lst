@@ -1,6 +1,10 @@
 ###############################################################################
 #                                                                             #
+<<<<<<< HEAD
 # IAR 8051 C/C++ Compiler V7.30B/W32                    10/Mar/2013  13:20:07 #
+=======
+# IAR 8051 C/C++ Compiler V7.30B/W32                    03/Jan/2013  20:31:27 #
+>>>>>>> develop
 # Copyright 2004-2007 IAR Systems. All rights reserved.                       #
 #                                                                             #
 #    Core               =  plain                                              #
@@ -40,9 +44,9 @@
 #                          -DREJOIN_POLL_RATE=440 "C:\Texas                   #
 #                          Instruments\ZStack-1.4.3-1.2.1\Components\stack\nw #
 #                          k\nwk_globals.c" -D CC2430EB -D AXD_END -D         #
-#                          NWK_AUTO_POLL -D REFLECTOR -D ZTOOL_P1 -D MT_TASK  #
-#                          -D xMT_ZDO_FUNC -D LCD_SUPPORTED=DEBUG -D          #
-#                          xPOWER_SAVING -lC "C:\Texas                        #
+#                          NWK_AUTO_POLL -D REFLECTOR -D xZTOOL_P1 -D         #
+#                          xMT_TASK -D xMT_ZDO_FUNC -D xLCD_SUPPORTED=DEBUG   #
+#                          -D xPOWER_SAVING -lC "C:\Texas                     #
 #                          Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\Sam #
 #                          ples\cc2430-zstack-adxl345\CC2430DB\EndDeviceEB\Li #
 #                          st\" -lA "C:\Texas Instruments\ZStack-1.4.3-1.2.1\ #
@@ -457,118 +461,22 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Components\stack\nwk\nwk_globals.c
     224           * STATUS STRINGS
     225           */
     226          #if defined ( LCD_SUPPORTED )
-
-   \                                 In  segment XDATA_I, align 1, keep-with-next
     227            const char PingStr[]         = "Ping Rcvd from";
-   \                     PingStr:
-   \   000000                DS 15
-   \   00000F                REQUIRE `?<Initializer for PingStr>`
-   \   00000F                REQUIRE __INIT_XDATA_I
-
-   \                                 In  segment XDATA_I, align 1, keep-with-next
     228            const char AssocCnfStr[]     = "Assoc Cnf";
-   \                     AssocCnfStr:
-   \   000000                DS 10
-   \   00000A                REQUIRE `?<Initializer for AssocCnfStr>`
-   \   00000A                REQUIRE __INIT_XDATA_I
-
-   \                                 In  segment XDATA_I, align 1, keep-with-next
     229            const char SuccessStr[]      = "Success";
-   \                     SuccessStr:
-   \   000000                DS 8
-   \   000008                REQUIRE `?<Initializer for SuccessStr>`
-   \   000008                REQUIRE __INIT_XDATA_I
-
-   \                                 In  segment XDATA_I, align 1, keep-with-next
     230            const char EndDeviceStr[]    = "EndDevice:";
-   \                     EndDeviceStr:
-   \   000000                DS 11
-   \   00000B                REQUIRE `?<Initializer for EndDeviceStr>`
-   \   00000B                REQUIRE __INIT_XDATA_I
-
-   \                                 In  segment XDATA_I, align 1, keep-with-next
     231            const char ParentStr[]       = "Parent:";
-   \                     ParentStr:
-   \   000000                DS 8
-   \   000008                REQUIRE `?<Initializer for ParentStr>`
-   \   000008                REQUIRE __INIT_XDATA_I
-
-   \                                 In  segment XDATA_I, align 1, keep-with-next
     232            const char ZigbeeCoordStr[]  = "ZigBee Coord";
-   \                     ZigbeeCoordStr:
-   \   000000                DS 13
-   \   00000D                REQUIRE `?<Initializer for ZigbeeCoordStr>`
-   \   00000D                REQUIRE __INIT_XDATA_I
-
-   \                                 In  segment XDATA_I, align 1, keep-with-next
     233            const char NetworkIDStr[]    = "Network ID:";
-   \                     NetworkIDStr:
-   \   000000                DS 12
-   \   00000C                REQUIRE `?<Initializer for NetworkIDStr>`
-   \   00000C                REQUIRE __INIT_XDATA_I
-
-   \                                 In  segment XDATA_I, align 1, keep-with-next
     234            const char RouterStr[]       = "Router:";
-   \                     RouterStr:
-   \   000000                DS 8
-   \   000008                REQUIRE `?<Initializer for RouterStr>`
-   \   000008                REQUIRE __INIT_XDATA_I
-
-   \                                 In  segment XDATA_I, align 1, keep-with-next
     235            const char OrphanRspStr[]    = "Orphan Response";
-   \                     OrphanRspStr:
-   \   000000                DS 16
-   \   000010                REQUIRE `?<Initializer for OrphanRspStr>`
-   \   000010                REQUIRE __INIT_XDATA_I
-
-   \                                 In  segment XDATA_I, align 1, keep-with-next
     236            const char SentStr[]         = "Sent";
-   \                     SentStr:
-   \   000000                DS 5
-   \   000005                REQUIRE `?<Initializer for SentStr>`
-   \   000005                REQUIRE __INIT_XDATA_I
-
-   \                                 In  segment XDATA_I, align 1, keep-with-next
     237            const char FailedStr[]       = "Failed";
-   \                     FailedStr:
-   \   000000                DS 7
-   \   000007                REQUIRE `?<Initializer for FailedStr>`
-   \   000007                REQUIRE __INIT_XDATA_I
-
-   \                                 In  segment XDATA_I, align 1, keep-with-next
     238            const char AssocRspFailStr[] = "Assoc Rsp fail";
-   \                     AssocRspFailStr:
-   \   000000                DS 15
-   \   00000F                REQUIRE `?<Initializer for AssocRspFailStr>`
-   \   00000F                REQUIRE __INIT_XDATA_I
-
-   \                                 In  segment XDATA_I, align 1, keep-with-next
     239            const char AssocIndStr[]     = "Assoc Ind";
-   \                     AssocIndStr:
-   \   000000                DS 10
-   \   00000A                REQUIRE `?<Initializer for AssocIndStr>`
-   \   00000A                REQUIRE __INIT_XDATA_I
-
-   \                                 In  segment XDATA_I, align 1, keep-with-next
     240            const char AssocCnfFailStr[] = "Assoc Cnf fail";
-   \                     AssocCnfFailStr:
-   \   000000                DS 15
-   \   00000F                REQUIRE `?<Initializer for AssocCnfFailStr>`
-   \   00000F                REQUIRE __INIT_XDATA_I
-
-   \                                 In  segment XDATA_I, align 1, keep-with-next
     241            const char EnergyLevelStr[]  = "Energy Level";
-   \                     EnergyLevelStr:
-   \   000000                DS 13
-   \   00000D                REQUIRE `?<Initializer for EnergyLevelStr>`
-   \   00000D                REQUIRE __INIT_XDATA_I
-
-   \                                 In  segment XDATA_I, align 1, keep-with-next
     242            const char ScanFailedStr[]   = "Scan Failed";
-   \                     ScanFailedStr:
-   \   000000                DS 12
-   \   00000C                REQUIRE `?<Initializer for ScanFailedStr>`
-   \   00000C                REQUIRE __INIT_XDATA_I
     243          #endif
     244          
     245          /*********************************************************************
@@ -799,32 +707,10 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Components\stack\nwk\nwk_globals.c
     345          void nwk_Status( uint16 statusCode, uint16 statusValue )
    \                     nwk_Status:
     346          {
-   \   000000   74F3         MOV     A,#-0xd
-   \   000002   12....       LCALL   ?BANKED_ENTER_XDATA
-   \   000005                ; Saved register size: 13
-   \   000005                ; Auto size: 0
-   \   000005   8A..         MOV     ?V0 + 0,R2
-   \   000007   8B..         MOV     ?V0 + 1,R3
-   \   000009   8C..         MOV     ?V0 + 2,R4
-   \   00000B   8D..         MOV     ?V0 + 3,R5
+   \   000000                ; Saved register size: 0
+   \   000000                ; Auto size: 0
     347          #if defined ( LCD_SUPPORTED )
     348            switch ( statusCode )
-   \   00000D   78..         MOV     R0,#?V0 + 0
-   \   00000F   12....       LCALL   ?US_SWITCH_SPARSE
-   \                     `?<Jumptable for nwk_Status>_0`:
-   \   000012   0000         DW        0
-   \   000014   0500         DW        5
-   \   000016   0200         DW        2
-   \   000018   ....         DW        ??nwk_Status_0
-   \   00001A   0300         DW        3
-   \   00001C   ....         DW        ??nwk_Status_1
-   \   00001E   0400         DW        4
-   \   000020   ....         DW        ??nwk_Status_2
-   \   000022   0310         DW        4099
-   \   000024   ....         DW        ??nwk_Status_3
-   \   000026   0410         DW        4100
-   \   000028   ....         DW        ??nwk_Status_4
-   \   00002A   ....         DW        ??nwk_Status_5
     349            {
     350          
     351          #if defined( RTR_NWK )
@@ -852,195 +738,33 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Components\stack\nwk\nwk_globals.c
     373          #else
     374              case NWK_STATUS_ED_ADDR:
     375                      HalLcdWriteStringValue( (char*)EndDeviceStr, (uint32)statusValue, 16, HAL_LCD_LINE_1 );
-   \                     ??nwk_Status_1:
-   \   00002C                ; Setup parameters for call to function HalLcdWriteStringValue
-   \   00002C   75..00       MOV     ?V0 + 4,#0x0
-   \   00002F   78..         MOV     R0,#?V0 + 4
-   \   000031   12....       LCALL   ?PUSH_XSTACK_I_ONE
-   \   000034   7910         MOV     R1,#0x10
-   \   000036   AC..         MOV     R4,?V0 + 2
-   \   000038   AD..         MOV     R5,?V0 + 3
-   \   00003A   7A..         MOV     R2,#(EndDeviceStr & 0xff)
-   \   00003C   7B..         MOV     R3,#((EndDeviceStr >> 8) & 0xff)
-   \   00003E   12....       LCALL   ??HalLcdWriteStringValue?relay
-   \   000041   7401         MOV     A,#0x1
-   \   000043   12....       LCALL   ?DEALLOC_XSTACK8
-   \   000046   8058         SJMP    ??nwk_Status_5
     376                break;
     377          #endif
     378          
     379              case NWK_STATUS_PARENT_ADDR:
     380                      HalLcdWriteStringValue( (char*)ParentStr, (uint32)statusValue, 16, HAL_LCD_LINE_2 );
-   \                     ??nwk_Status_2:
-   \   000048                ; Setup parameters for call to function HalLcdWriteStringValue
-   \   000048   75..02       MOV     ?V0 + 4,#0x2
-   \   00004B   78..         MOV     R0,#?V0 + 4
-   \   00004D   12....       LCALL   ?PUSH_XSTACK_I_ONE
-   \   000050   7910         MOV     R1,#0x10
-   \   000052   AC..         MOV     R4,?V0 + 2
-   \   000054   AD..         MOV     R5,?V0 + 3
-   \   000056   7A..         MOV     R2,#(ParentStr & 0xff)
-   \   000058   7B..         MOV     R3,#((ParentStr >> 8) & 0xff)
-   \   00005A   12....       LCALL   ??HalLcdWriteStringValue?relay
-   \   00005D   7401         MOV     A,#0x1
-   \   00005F   12....       LCALL   ?DEALLOC_XSTACK8
-   \   000062   803C         SJMP    ??nwk_Status_5
     381                break;
     382          
     383              case NWK_STATUS_ASSOC_CNF:
     384                HalLcdWriteScreen( (char*)AssocCnfStr, (char*)SuccessStr );
-   \                     ??nwk_Status_0:
-   \   000064                ; Setup parameters for call to function HalLcdWriteScreen
-   \   000064   7C..         MOV     R4,#(SuccessStr & 0xff)
-   \   000066   7D..         MOV     R5,#((SuccessStr >> 8) & 0xff)
-   \   000068   7A..         MOV     R2,#(AssocCnfStr & 0xff)
-   \   00006A   7B..         MOV     R3,#((AssocCnfStr >> 8) & 0xff)
-   \   00006C   12....       LCALL   ??HalLcdWriteScreen?relay
-   \   00006F   802F         SJMP    ??nwk_Status_5
     385                break;
     386          
     387              case NWK_ERROR_ASSOC_CNF_DENIED:
     388                HalLcdWriteString((char*)AssocCnfFailStr, HAL_LCD_LINE_1 );
-   \                     ??nwk_Status_3:
-   \   000071                ; Setup parameters for call to function HalLcdWriteString
-   \   000071   7900         MOV     R1,#0x0
-   \   000073   7A..         MOV     R2,#(AssocCnfFailStr & 0xff)
-   \   000075   7B..         MOV     R3,#((AssocCnfFailStr >> 8) & 0xff)
-   \   000077   12....       LCALL   ??HalLcdWriteString?relay
     389                HalLcdWriteValue( (uint32)(statusValue), 16, HAL_LCD_LINE_2 );
-   \   00007A                ; Setup parameters for call to function HalLcdWriteValue
-   \   00007A   75..02       MOV     ?V0 + 4,#0x2
-   \   00007D   78..         MOV     R0,#?V0 + 4
-   \   00007F   12....       LCALL   ?PUSH_XSTACK_I_ONE
-   \   000082   7910         MOV     R1,#0x10
-   \   000084   AA..         MOV     R2,?V0 + 2
-   \   000086   AB..         MOV     R3,?V0 + 3
-   \   000088   E4           CLR     A
-   \   000089   FC           MOV     R4,A
-   \   00008A   FD           MOV     R5,A
-   \   00008B   12....       LCALL   ??HalLcdWriteValue?relay
-   \   00008E   7401         MOV     A,#0x1
-   \   000090   12....       LCALL   ?DEALLOC_XSTACK8
-   \   000093   800B         SJMP    ??nwk_Status_5
     390                break;
     391          
     392              case NWK_ERROR_ENERGY_SCAN_FAILED:
     393                HalLcdWriteScreen( (char*)EnergyLevelStr, (char*)ScanFailedStr );
-   \                     ??nwk_Status_4:
-   \   000095                ; Setup parameters for call to function HalLcdWriteScreen
-   \   000095   7C..         MOV     R4,#(ScanFailedStr & 0xff)
-   \   000097   7D..         MOV     R5,#((ScanFailedStr >> 8) & 0xff)
-   \   000099   7A..         MOV     R2,#(EnergyLevelStr & 0xff)
-   \   00009B   7B..         MOV     R3,#((EnergyLevelStr >> 8) & 0xff)
-   \   00009D   12....       LCALL   ??HalLcdWriteScreen?relay
     394                break;
     395            }
     396          #endif
     397          }
-   \                     ??nwk_Status_5:
-   \   0000A0   7F05         MOV     R7,#0x5
-   \   0000A2   02....       LJMP    ?BANKED_LEAVE_XDATA
+   \   000000   02....       LJMP    ?BRET
 
    \                                 In  segment XDATA_ID, align 1, keep-with-next
    \                     `?<Initializer for gMIN_TREE_LINK_COST>`:
    \   000000   06           DB 6
-
-   \                                 In  segment XDATA_ID, align 1, keep-with-next
-   \                     `?<Initializer for PingStr>`:
-   \   000000   50696E67     DB "Ping Rcvd from"
-   \            20526376
-   \            64206672
-   \            6F6D00  
-
-   \                                 In  segment XDATA_ID, align 1, keep-with-next
-   \                     `?<Initializer for AssocCnfStr>`:
-   \   000000   4173736F     DB "Assoc Cnf"
-   \            6320436E
-   \            6600    
-
-   \                                 In  segment XDATA_ID, align 1, keep-with-next
-   \                     `?<Initializer for SuccessStr>`:
-   \   000000   53756363     DB "Success"
-   \            65737300
-
-   \                                 In  segment XDATA_ID, align 1, keep-with-next
-   \                     `?<Initializer for EndDeviceStr>`:
-   \   000000   456E6444     DB "EndDevice:"
-   \            65766963
-   \            653A00  
-
-   \                                 In  segment XDATA_ID, align 1, keep-with-next
-   \                     `?<Initializer for ParentStr>`:
-   \   000000   50617265     DB "Parent:"
-   \            6E743A00
-
-   \                                 In  segment XDATA_ID, align 1, keep-with-next
-   \                     `?<Initializer for ZigbeeCoordStr>`:
-   \   000000   5A696742     DB "ZigBee Coord"
-   \            65652043
-   \            6F6F7264
-   \            00      
-
-   \                                 In  segment XDATA_ID, align 1, keep-with-next
-   \                     `?<Initializer for NetworkIDStr>`:
-   \   000000   4E657477     DB "Network ID:"
-   \            6F726B20
-   \            49443A00
-
-   \                                 In  segment XDATA_ID, align 1, keep-with-next
-   \                     `?<Initializer for RouterStr>`:
-   \   000000   526F7574     DB "Router:"
-   \            65723A00
-
-   \                                 In  segment XDATA_ID, align 1, keep-with-next
-   \                     `?<Initializer for OrphanRspStr>`:
-   \   000000   4F727068     DB "Orphan Response"
-   \            616E2052
-   \            6573706F
-   \            6E736500
-
-   \                                 In  segment XDATA_ID, align 1, keep-with-next
-   \                     `?<Initializer for SentStr>`:
-   \   000000   53656E74     DB "Sent"
-   \            00      
-
-   \                                 In  segment XDATA_ID, align 1, keep-with-next
-   \                     `?<Initializer for FailedStr>`:
-   \   000000   4661696C     DB "Failed"
-   \            656400  
-
-   \                                 In  segment XDATA_ID, align 1, keep-with-next
-   \                     `?<Initializer for AssocRspFailStr>`:
-   \   000000   4173736F     DB "Assoc Rsp fail"
-   \            63205273
-   \            70206661
-   \            696C00  
-
-   \                                 In  segment XDATA_ID, align 1, keep-with-next
-   \                     `?<Initializer for AssocIndStr>`:
-   \   000000   4173736F     DB "Assoc Ind"
-   \            6320496E
-   \            6400    
-
-   \                                 In  segment XDATA_ID, align 1, keep-with-next
-   \                     `?<Initializer for AssocCnfFailStr>`:
-   \   000000   4173736F     DB "Assoc Cnf fail"
-   \            6320436E
-   \            66206661
-   \            696C00  
-
-   \                                 In  segment XDATA_ID, align 1, keep-with-next
-   \                     `?<Initializer for EnergyLevelStr>`:
-   \   000000   456E6572     DB "Energy Level"
-   \            6779204C
-   \            6576656C
-   \            00      
-
-   \                                 In  segment XDATA_ID, align 1, keep-with-next
-   \                     `?<Initializer for ScanFailedStr>`:
-   \   000000   5363616E     DB "Scan Failed"
-   \            20466169
-   \            6C656400
 
    \                                 In  segment BANK_RELAYS, align 1
    \                     ??nwk_globals_init?relay:
@@ -1062,20 +786,14 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Components\stack\nwk\nwk_globals.c
 
    Maximum stack usage in bytes:
 
-     Function                    ISTACK PSTACK XSTACK
-     --------                    ------ ------ ------
-     NIB_init                        2      0      0
-       -> osal_memset                4      0      0
-       -> osal_cpyExtAddr            4      0      0
-     nwk_Status                      0      0     14
-       -> HalLcdWriteStringValue     0      0     28
-       -> HalLcdWriteStringValue     0      0     28
-       -> HalLcdWriteScreen          0      0     26
-       -> HalLcdWriteString          0      0     26
-       -> HalLcdWriteValue           0      0     28
-       -> HalLcdWriteScreen          0      0     26
-     nwk_globals_init                2      0      0
-       -> AddrMgrInit                4      0      0
+     Function             ISTACK PSTACK XSTACK
+     --------             ------ ------ ------
+     NIB_init                 2      0      0
+       -> osal_memset         4      0      0
+       -> osal_cpyExtAddr     4      0      0
+     nwk_Status               0      0      0
+     nwk_globals_init         2      0      0
+       -> AddrMgrInit         4      0      0
 
 
    Segment part sizes:
@@ -1104,65 +822,25 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Components\stack\nwk\nwk_globals.c
      apscMaxWindowSize                 1
      gAPS_INTERFRAME_DELAY             2
      defaultKey                       16
-     PingStr                          15
-     AssocCnfStr                      10
-     SuccessStr                        8
-     EndDeviceStr                     11
-     ParentStr                         8
-     ZigbeeCoordStr                   13
-     NetworkIDStr                     12
-     RouterStr                         8
-     OrphanRspStr                     16
-     SentStr                           5
-     FailedStr                         7
-     AssocRspFailStr                  15
-     AssocIndStr                      10
-     AssocCnfFailStr                  15
-     EnergyLevelStr                   13
-     ScanFailedStr                    12
      nwk_globals_init                 18
      NIB_init                        198
-     nwk_Status                      165
+     nwk_Status                        3
      ?<Initializer for gMIN_TREE_LINK_COST>
                                        1
-     ?<Initializer for PingStr>       15
-     ?<Initializer for AssocCnfStr>   10
-     ?<Initializer for SuccessStr>     8
-     ?<Initializer for EndDeviceStr>
-                                      11
-     ?<Initializer for ParentStr>      8
-     ?<Initializer for ZigbeeCoordStr>
-                                      13
-     ?<Initializer for NetworkIDStr>
-                                      12
-     ?<Initializer for RouterStr>      8
-     ?<Initializer for OrphanRspStr>
-                                      16
-     ?<Initializer for SentStr>        5
-     ?<Initializer for FailedStr>      7
-     ?<Initializer for AssocRspFailStr>
-                                      15
-     ?<Initializer for AssocIndStr>   10
-     ?<Initializer for AssocCnfFailStr>
-                                      15
-     ?<Initializer for EnergyLevelStr>
-                                      13
-     ?<Initializer for ScanFailedStr>
-                                      12
      ??nwk_globals_init?relay          6
      ??NIB_init?relay                  6
      ??nwk_Status?relay                6
 
  
- 381 bytes in segment BANKED_CODE
+ 219 bytes in segment BANKED_CODE
   18 bytes in segment BANK_RELAYS
   38 bytes in segment CODE_C
- 179 bytes in segment XDATA_I
- 179 bytes in segment XDATA_ID
+   1 byte  in segment XDATA_I
+   1 byte  in segment XDATA_ID
  204 bytes in segment XDATA_Z
  
- 616 bytes of CODE  memory
- 383 bytes of XDATA memory
+ 276 bytes of CODE  memory
+ 205 bytes of XDATA memory
 
 Errors: none
 Warnings: none

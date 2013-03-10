@@ -1,6 +1,10 @@
 ###############################################################################
 #                                                                             #
+<<<<<<< HEAD
 # IAR 8051 C/C++ Compiler V7.30B/W32                    10/Mar/2013  13:20:04 #
+=======
+# IAR 8051 C/C++ Compiler V7.30B/W32                    03/Jan/2013  20:31:38 #
+>>>>>>> develop
 # Copyright 2004-2007 IAR Systems. All rights reserved.                       #
 #                                                                             #
 #    Core               =  plain                                              #
@@ -40,9 +44,9 @@
 #                          -DREJOIN_POLL_RATE=440 "C:\Texas                   #
 #                          Instruments\ZStack-1.4.3-1.2.1\Components\hal\targ #
 #                          et\CC2430EB\hal_uart.c" -D CC2430EB -D AXD_END -D  #
-#                          NWK_AUTO_POLL -D REFLECTOR -D ZTOOL_P1 -D MT_TASK  #
-#                          -D xMT_ZDO_FUNC -D LCD_SUPPORTED=DEBUG -D          #
-#                          xPOWER_SAVING -lC "C:\Texas                        #
+#                          NWK_AUTO_POLL -D REFLECTOR -D xZTOOL_P1 -D         #
+#                          xMT_TASK -D xMT_ZDO_FUNC -D xLCD_SUPPORTED=DEBUG   #
+#                          -D xPOWER_SAVING -lC "C:\Texas                     #
 #                          Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\Sam #
 #                          ples\cc2430-zstack-adxl345\CC2430DB\EndDeviceEB\Li #
 #                          st\" -lA "C:\Texas Instruments\ZStack-1.4.3-1.2.1\ #
@@ -182,81 +186,6 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Components\hal\target\CC2430EB\hal_uart.
      44          #include "hal_types.h"
      45          #include "hal_assert.h"
      46          #include "hal_board.h"
-
-   \                                 In  segment SFR_AN, at 0x80
-   \   union <unnamed> volatile __sfr _A_P0
-   \                     _A_P0:
-   \   000000                DS 1
-
-   \                                 In  segment SFR_AN, at 0x86
-   \   unsigned char volatile __sfr U0CSR
-   \                     U0CSR:
-   \   000000                DS 1
-
-   \                                 In  segment SFR_AN, at 0x90
-   \   union <unnamed> volatile __sfr _A_P1
-   \                     _A_P1:
-   \   000000                DS 1
-
-   \                                 In  segment SFR_AN, at 0x95
-   \   unsigned char volatile __sfr ST0
-   \                     ST0:
-   \   000000                DS 1
-
-   \                                 In  segment SFR_AN, at 0xc1
-   \   unsigned char volatile __sfr U0DBUF
-   \                     U0DBUF:
-   \   000000                DS 1
-
-   \                                 In  segment SFR_AN, at 0xc2
-   \   unsigned char volatile __sfr U0BAUD
-   \                     U0BAUD:
-   \   000000                DS 1
-
-   \                                 In  segment SFR_AN, at 0xc4
-   \   unsigned char volatile __sfr U0UCR
-   \                     U0UCR:
-   \   000000                DS 1
-
-   \                                 In  segment SFR_AN, at 0xc5
-   \   unsigned char volatile __sfr U0GCR
-   \                     U0GCR:
-   \   000000                DS 1
-
-   \                                 In  segment SFR_AN, at 0xd1
-   \   unsigned char volatile __sfr DMAIRQ
-   \                     DMAIRQ:
-   \   000000                DS 1
-
-   \                                 In  segment SFR_AN, at 0xd6
-   \   unsigned char volatile __sfr DMAARM
-   \                     DMAARM:
-   \   000000                DS 1
-
-   \                                 In  segment SFR_AN, at 0xd7
-   \   unsigned char volatile __sfr DMAREQ
-   \                     DMAREQ:
-   \   000000                DS 1
-
-   \                                 In  segment SFR_AN, at 0xf1
-   \   unsigned char volatile __sfr PERCFG
-   \                     PERCFG:
-   \   000000                DS 1
-
-   \                                 In  segment SFR_AN, at 0xf2
-   \   unsigned char volatile __sfr ADCCFG
-   \                     ADCCFG:
-   \   000000                DS 1
-
-   \                                 In  segment SFR_AN, at 0xf3
-   \   unsigned char volatile __sfr P0SEL
-   \                     P0SEL:
-   \   000000                DS 1
-
-   \                                 In  segment SFR_AN, at 0xfd
-   \   unsigned char volatile __sfr P0DIR
-   \                     P0DIR:
-   \   000000                DS 1
 
    \                                 In  segment SFR_AN, at 0xff
    \   unsigned char volatile __sfr P2DIR
@@ -513,12 +442,7 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Components\hal\target\CC2430EB\hal_uart.
     295           */
     296          
     297          #if HAL_UART_0_ENABLE
-
-   \                                 In  segment XDATA_Z, align 1, keep-with-next
     298          static uartCfg_t *cfg0;
-   \                     cfg0:
-   \   000000                DS 2
-   \   000002                REQUIRE __INIT_XDATA_Z
     299          #endif
     300          #if HAL_UART_1_ENABLE
     301          static uartCfg_t *cfg1;
@@ -545,143 +469,19 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Components\hal\target\CC2430EB\hal_uart.
     322           *
     323           * @return  none
     324           *****************************************************************************/
-
-   \                                 In  segment BANKED_CODE, align 1, keep-with-next
     325          static void pollDMA( uartCfg_t *cfg )
-   \                     pollDMA:
     326          {
-   \   000000   74F5         MOV     A,#-0xb
-   \   000002   12....       LCALL   ?BANKED_ENTER_XDATA
-   \   000005                ; Saved register size: 11
-   \   000005                ; Auto size: 1
-   \   000005   74FF         MOV     A,#-0x1
-   \   000007   12....       LCALL   ?ALLOC_XSTACK8
-   \   00000A   EA           MOV     A,R2
-   \   00000B   FE           MOV     R6,A
-   \   00000C   EB           MOV     A,R3
-   \   00000D   FF           MOV     R7,A
     327            const uint8 cnt = cfg->rxHead;
-   \   00000E   8E82         MOV     DPL,R6
-   \   000010   8F83         MOV     DPH,R7
-   \   000012   A3           INC     DPTR
-   \   000013   A3           INC     DPTR
-   \   000014   E0           MOVX    A,@DPTR
-   \   000015   F5..         MOV     ?V0 + 2,A
     328            uint8 *pad = cfg->rxBuf+(cfg->rxHead*2);
-   \   000017   8E82         MOV     DPL,R6
-   \   000019   8F83         MOV     DPH,R7
-   \   00001B   A3           INC     DPTR
-   \   00001C   A3           INC     DPTR
-   \   00001D   E0           MOVX    A,@DPTR
-   \   00001E   F8           MOV     R0,A
-   \   00001F   7900         MOV     R1,#0x0
-   \   000021   E8           MOV     A,R0
-   \   000022   75F002       MOV     B,#0x2
-   \   000025   A4           MUL     AB
-   \   000026   C8           XCH     A,R0
-   \   000027   AAF0         MOV     R2,B
-   \   000029   75F000       MOV     B,#0x0
-   \   00002C   A4           MUL     AB
-   \   00002D   2A           ADD     A,R2
-   \   00002E   FA           MOV     R2,A
-   \   00002F   75F002       MOV     B,#0x2
-   \   000032   E9           MOV     A,R1
-   \   000033   A4           MUL     AB
-   \   000034   2A           ADD     A,R2
-   \   000035   F9           MOV     R1,A
-   \   000036   8E82         MOV     DPL,R6
-   \   000038   8F83         MOV     DPH,R7
-   \   00003A   E0           MOVX    A,@DPTR
-   \   00003B   28           ADD     A,R0
-   \   00003C   F8           MOV     R0,A
-   \   00003D   A3           INC     DPTR
-   \   00003E   E0           MOVX    A,@DPTR
-   \   00003F   39           ADDC    A,R1
-   \   000040   F9           MOV     R1,A
-   \   000041   88..         MOV     ?V0 + 0,R0
-   \   000043   89..         MOV     ?V0 + 1,R1
     329          
     330            // Pack the received bytes to the front of the queue.
     331            while ( (*pad == DMA_PAD) && (cfg->rxHead < cfg->rxMax) )
-   \                     ??pollDMA_0:
-   \   000045   85..82       MOV     DPL,?V0 + 0
-   \   000048   85..83       MOV     DPH,?V0 + 1
-   \   00004B   E0           MOVX    A,@DPTR
-   \   00004C   65C2         XRL     A,0xc2
-   \   00004E   7056         JNZ     ??pollDMA_1
-   \   000050   8E82         MOV     DPL,R6
-   \   000052   8F83         MOV     DPH,R7
-   \   000054   A3           INC     DPTR
-   \   000055   A3           INC     DPTR
-   \   000056   E0           MOVX    A,@DPTR
-   \   000057   C0E0         PUSH    A
-   \   000059   8E82         MOV     DPL,R6
-   \   00005B   8F83         MOV     DPH,R7
-   \   00005D   A3           INC     DPTR
-   \   00005E   A3           INC     DPTR
-   \   00005F   A3           INC     DPTR
-   \   000060   A3           INC     DPTR
-   \   000061   E0           MOVX    A,@DPTR
-   \   000062   FA           MOV     R2,A
-   \   000063   D0E0         POP     A
-   \   000065   C3           CLR     C
-   \   000066   9A           SUBB    A,R2
-   \   000067   503D         JNC     ??pollDMA_1
     332            {
     333              cfg->rxBuf[cfg->rxHead++] = *(pad+1);
-   \   000069   85..82       MOV     DPL,?V0 + 0
-   \   00006C   85..83       MOV     DPH,?V0 + 1
-   \   00006F   A3           INC     DPTR
-   \   000070   E0           MOVX    A,@DPTR
-   \   000071   C0E0         PUSH    A
-   \   000073   8E82         MOV     DPL,R6
-   \   000075   8F83         MOV     DPH,R7
-   \   000077   A3           INC     DPTR
-   \   000078   A3           INC     DPTR
-   \   000079   E0           MOVX    A,@DPTR
-   \   00007A   F8           MOV     R0,A
-   \   00007B   7900         MOV     R1,#0x0
-   \   00007D   8E82         MOV     DPL,R6
-   \   00007F   8F83         MOV     DPH,R7
-   \   000081   E0           MOVX    A,@DPTR
-   \   000082   28           ADD     A,R0
-   \   000083   FA           MOV     R2,A
-   \   000084   A3           INC     DPTR
-   \   000085   E0           MOVX    A,@DPTR
-   \   000086   39           ADDC    A,R1
-   \   000087   8A82         MOV     DPL,R2
-   \   000089   F583         MOV     DPH,A
-   \   00008B   D0E0         POP     A
-   \   00008D   F0           MOVX    @DPTR,A
-   \   00008E   8E82         MOV     DPL,R6
-   \   000090   8F83         MOV     DPH,R7
-   \   000092   A3           INC     DPTR
-   \   000093   A3           INC     DPTR
-   \   000094   E0           MOVX    A,@DPTR
-   \   000095   2401         ADD     A,#0x1
-   \   000097   F0           MOVX    @DPTR,A
     334              pad += 2;
-   \   000098   E5..         MOV     A,?V0 + 0
-   \   00009A   2402         ADD     A,#0x2
-   \   00009C   F5..         MOV     ?V0 + 0,A
-   \   00009E   E5..         MOV     A,?V0 + 1
-   \   0000A0   3400         ADDC    A,#0x0
-   \   0000A2   F5..         MOV     ?V0 + 1,A
-   \   0000A4   809F         SJMP    ??pollDMA_0
     335            }
     336          
     337            if ( !(cfg->flag & UART_CFG_RXF) )
-   \                     ??pollDMA_1:
-   \   0000A6   EE           MOV     A,R6
-   \   0000A7   240F         ADD     A,#0xf
-   \   0000A9   F582         MOV     DPL,A
-   \   0000AB   EF           MOV     A,R7
-   \   0000AC   3400         ADDC    A,#0x0
-   \   0000AE   F583         MOV     DPH,A
-   \   0000B0   E0           MOVX    A,@DPTR
-   \   0000B1   A2E1         MOV     C,0xE0 /* A   */.1
-   \   0000B3   5003         JNC     $+5
-   \   0000B5   02....       LJMP    ??pollDMA_2 & 0xFFFF
     338            {
     339              /* It is necessary to stop Rx flow and wait for H/W-enqueued bytes still
     340               * incoming to stop before resetting the DMA Rx engine. If DMA Rx is
@@ -689,665 +489,57 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Components\hal\target\CC2430EB\hal_uart.
     342               * during the 2-step transfer process of read/write.
     343               */
     344              if ( cfg->rxHead >= (cfg->rxMax - SAFE_RX_MIN) )
-   \   0000B8   8E82         MOV     DPL,R6
-   \   0000BA   8F83         MOV     DPH,R7
-   \   0000BC   A3           INC     DPTR
-   \   0000BD   A3           INC     DPTR
-   \   0000BE   E0           MOVX    A,@DPTR
-   \   0000BF   FA           MOV     R2,A
-   \   0000C0   7B00         MOV     R3,#0x0
-   \   0000C2   8E82         MOV     DPL,R6
-   \   0000C4   8F83         MOV     DPH,R7
-   \   0000C6   A3           INC     DPTR
-   \   0000C7   A3           INC     DPTR
-   \   0000C8   A3           INC     DPTR
-   \   0000C9   A3           INC     DPTR
-   \   0000CA   E0           MOVX    A,@DPTR
-   \   0000CB   F8           MOV     R0,A
-   \   0000CC   7900         MOV     R1,#0x0
-   \   0000CE   74D0         MOV     A,#-0x30
-   \   0000D0   28           ADD     A,R0
-   \   0000D1   F8           MOV     R0,A
-   \   0000D2   74FF         MOV     A,#-0x1
-   \   0000D4   39           ADDC    A,R1
-   \   0000D5   F9           MOV     R1,A
-   \   0000D6   C3           CLR     C
-   \   0000D7   EA           MOV     A,R2
-   \   0000D8   98           SUBB    A,R0
-   \   0000D9   EB           MOV     A,R3
-   \   0000DA   99           SUBB    A,R1
-   \   0000DB   A2D2         MOV     C,0xD0 /* PSW */.2
-   \   0000DD   65D0         XRL     A,PSW
-   \   0000DF   33           RLC     A
-   \   0000E0   4042         JC      ??pollDMA_3
     345              {
     346                RX_STOP_FLOW( cfg );
-   \   0000E2   EE           MOV     A,R6
-   \   0000E3   240F         ADD     A,#0xf
-   \   0000E5   F582         MOV     DPL,A
-   \   0000E7   EF           MOV     A,R7
-   \   0000E8   3400         ADDC    A,#0x0
-   \   0000EA   F583         MOV     DPH,A
-   \   0000EC   E0           MOVX    A,@DPTR
-   \   0000ED   A2E7         MOV     C,0xE0 /* A   */.7
-   \   0000EF   4004         JC      ??pollDMA_4
-   \   0000F1   D285         SETB    0x80.5
-   \   0000F3   8002         SJMP    ??pollDMA_5
-   \                     ??pollDMA_4:
-   \   0000F5   D295         SETB    0x90.5
-   \                     ??pollDMA_5:
-   \   0000F7   EE           MOV     A,R6
-   \   0000F8   240F         ADD     A,#0xf
-   \   0000FA   F582         MOV     DPL,A
-   \   0000FC   EF           MOV     A,R7
-   \   0000FD   3400         ADDC    A,#0x0
-   \   0000FF   F583         MOV     DPH,A
-   \   000101   E0           MOVX    A,@DPTR
-   \   000102   A2E6         MOV     C,0xE0 /* A   */.6
-   \   000104   500D         JNC     ??pollDMA_6
-   \   000106   748C         MOV     A,#-0x74
-   \   000108   8E82         MOV     DPL,R6
-   \   00010A   8F83         MOV     DPH,R7
-   \   00010C   A3           INC     DPTR
-   \   00010D   A3           INC     DPTR
-   \   00010E   A3           INC     DPTR
-   \   00010F   A3           INC     DPTR
-   \   000110   A3           INC     DPTR
-   \   000111   A3           INC     DPTR
-   \   000112   F0           MOVX    @DPTR,A
-   \                     ??pollDMA_6:
-   \   000113   EE           MOV     A,R6
-   \   000114   240F         ADD     A,#0xf
-   \   000116   F582         MOV     DPL,A
-   \   000118   EF           MOV     A,R7
-   \   000119   3400         ADDC    A,#0x0
-   \   00011B   F583         MOV     DPH,A
-   \   00011D   E0           MOVX    A,@DPTR
-   \   00011E   D2E1         SETB    0xE0 /* A   */.1
-   \   000120   F0           MOVX    @DPTR,A
-   \   000121   02....       LJMP    ??pollDMA_7 & 0xFFFF
     347              }
     348              // If anything received, reset the Rx idle timer.
     349              else if ( cfg->rxHead != cnt )
-   \                     ??pollDMA_3:
-   \   000124   8E82         MOV     DPL,R6
-   \   000126   8F83         MOV     DPH,R7
-   \   000128   A3           INC     DPTR
-   \   000129   A3           INC     DPTR
-   \   00012A   E0           MOVX    A,@DPTR
-   \   00012B   65..         XRL     A,?V0 + 2
-   \   00012D   7003         JNZ     $+5
-   \   00012F   02....       LJMP    ??pollDMA_7 & 0xFFFF
     350              {
     351                cfg->rxTick = HAL_UART_RX_IDLE;
-   \   000132   74C6         MOV     A,#-0x3a
-   \   000134   8E82         MOV     DPL,R6
-   \   000136   8F83         MOV     DPH,R7
-   \   000138   A3           INC     DPTR
-   \   000139   A3           INC     DPTR
-   \   00013A   A3           INC     DPTR
-   \   00013B   A3           INC     DPTR
-   \   00013C   A3           INC     DPTR
-   \   00013D   A3           INC     DPTR
-   \   00013E   F0           MOVX    @DPTR,A
-   \   00013F   02....       LJMP    ??pollDMA_7 & 0xFFFF
     352              }
     353            }
     354            else if ( !cfg->rxTick && (cfg->rxHead == cfg->rxTail) )
-   \                     ??pollDMA_2:
-   \   000142   8E82         MOV     DPL,R6
-   \   000144   8F83         MOV     DPH,R7
-   \   000146   A3           INC     DPTR
-   \   000147   A3           INC     DPTR
-   \   000148   A3           INC     DPTR
-   \   000149   A3           INC     DPTR
-   \   00014A   A3           INC     DPTR
-   \   00014B   A3           INC     DPTR
-   \   00014C   E0           MOVX    A,@DPTR
-   \   00014D   6003         JZ      $+5
-   \   00014F   02....       LJMP    ??pollDMA_7 & 0xFFFF
-   \   000152   8E82         MOV     DPL,R6
-   \   000154   8F83         MOV     DPH,R7
-   \   000156   A3           INC     DPTR
-   \   000157   A3           INC     DPTR
-   \   000158   E0           MOVX    A,@DPTR
-   \   000159   FA           MOV     R2,A
-   \   00015A   8E82         MOV     DPL,R6
-   \   00015C   8F83         MOV     DPH,R7
-   \   00015E   A3           INC     DPTR
-   \   00015F   A3           INC     DPTR
-   \   000160   A3           INC     DPTR
-   \   000161   E0           MOVX    A,@DPTR
-   \   000162   6A           XRL     A,R2
-   \   000163   6003         JZ      $+5
-   \   000165   02....       LJMP    ??pollDMA_7 & 0xFFFF
     355            {
     356              HAL_DMA_ABORT_CH( HAL_DMA_CH_RX );
-   \   000168   75D690       MOV     0xd6,#-0x70
     357              cfg->rxHead = cfg->rxTail = 0;
-   \   00016B   7A00         MOV     R2,#0x0
-   \   00016D   EA           MOV     A,R2
-   \   00016E   8E82         MOV     DPL,R6
-   \   000170   8F83         MOV     DPH,R7
-   \   000172   A3           INC     DPTR
-   \   000173   A3           INC     DPTR
-   \   000174   A3           INC     DPTR
-   \   000175   F0           MOVX    @DPTR,A
-   \   000176   EA           MOV     A,R2
-   \   000177   8E82         MOV     DPL,R6
-   \   000179   8F83         MOV     DPH,R7
-   \   00017B   A3           INC     DPTR
-   \   00017C   A3           INC     DPTR
-   \   00017D   F0           MOVX    @DPTR,A
     358              osal_memset( cfg->rxBuf, ~DMA_PAD, cfg->rxMax*2 );
-   \   00017E                ; Setup parameters for call to function osal_memset
-   \   00017E   8E82         MOV     DPL,R6
-   \   000180   8F83         MOV     DPH,R7
-   \   000182   A3           INC     DPTR
-   \   000183   A3           INC     DPTR
-   \   000184   A3           INC     DPTR
-   \   000185   A3           INC     DPTR
-   \   000186   E0           MOVX    A,@DPTR
-   \   000187   FC           MOV     R4,A
-   \   000188   7D00         MOV     R5,#0x0
-   \   00018A   EC           MOV     A,R4
-   \   00018B   75F002       MOV     B,#0x2
-   \   00018E   A4           MUL     AB
-   \   00018F   CC           XCH     A,R4
-   \   000190   AAF0         MOV     R2,B
-   \   000192   75F000       MOV     B,#0x0
-   \   000195   A4           MUL     AB
-   \   000196   2A           ADD     A,R2
-   \   000197   FA           MOV     R2,A
-   \   000198   75F002       MOV     B,#0x2
-   \   00019B   ED           MOV     A,R5
-   \   00019C   A4           MUL     AB
-   \   00019D   2A           ADD     A,R2
-   \   00019E   FD           MOV     R5,A
-   \   00019F   E5C2         MOV     A,0xc2
-   \   0001A1   F4           CPL     A
-   \   0001A2   F9           MOV     R1,A
-   \   0001A3   8E82         MOV     DPL,R6
-   \   0001A5   8F83         MOV     DPH,R7
-   \   0001A7   E0           MOVX    A,@DPTR
-   \   0001A8   FA           MOV     R2,A
-   \   0001A9   A3           INC     DPTR
-   \   0001AA   E0           MOVX    A,@DPTR
-   \   0001AB   FB           MOV     R3,A
-   \   0001AC   12....       LCALL   ??osal_memset?relay
     359              DMA_RX( cfg );
-   \   0001AF   E5C1         MOV     A,0xc1
-   \   0001B1   85..82       MOV     DPL,?XSP + 0
-   \   0001B4   85..83       MOV     DPH,?XSP + 1
-   \   0001B7   F0           MOVX    @DPTR,A
-   \   0001B8   7A..         MOV     R2,#((dmaCh1234 + 24) & 0xff)
-   \   0001BA   7B..         MOV     R3,#(((dmaCh1234 + 24) >> 8) & 0xff)
-   \   0001BC   8E82         MOV     DPL,R6
-   \   0001BE   8F83         MOV     DPH,R7
-   \   0001C0   A3           INC     DPTR
-   \   0001C1   E0           MOVX    A,@DPTR
-   \   0001C2   F9           MOV     R1,A
-   \   0001C3   E9           MOV     A,R1
-   \   0001C4   8A82         MOV     DPL,R2
-   \   0001C6   8B83         MOV     DPH,R3
-   \   0001C8   A3           INC     DPTR
-   \   0001C9   A3           INC     DPTR
-   \   0001CA   F0           MOVX    @DPTR,A
-   \   0001CB   8E82         MOV     DPL,R6
-   \   0001CD   8F83         MOV     DPH,R7
-   \   0001CF   E0           MOVX    A,@DPTR
-   \   0001D0   8A82         MOV     DPL,R2
-   \   0001D2   8B83         MOV     DPH,R3
-   \   0001D4   A3           INC     DPTR
-   \   0001D5   A3           INC     DPTR
-   \   0001D6   A3           INC     DPTR
-   \   0001D7   F0           MOVX    @DPTR,A
-   \   0001D8   8E82         MOV     DPL,R6
-   \   0001DA   8F83         MOV     DPH,R7
-   \   0001DC   A3           INC     DPTR
-   \   0001DD   A3           INC     DPTR
-   \   0001DE   A3           INC     DPTR
-   \   0001DF   A3           INC     DPTR
-   \   0001E0   E0           MOVX    A,@DPTR
-   \   0001E1   8A82         MOV     DPL,R2
-   \   0001E3   8B83         MOV     DPH,R3
-   \   0001E5   A3           INC     DPTR
-   \   0001E6   A3           INC     DPTR
-   \   0001E7   A3           INC     DPTR
-   \   0001E8   A3           INC     DPTR
-   \   0001E9   A3           INC     DPTR
-   \   0001EA   F0           MOVX    @DPTR,A
-   \   0001EB   8A82         MOV     DPL,R2
-   \   0001ED   8B83         MOV     DPH,R3
-   \   0001EF   A3           INC     DPTR
-   \   0001F0   A3           INC     DPTR
-   \   0001F1   A3           INC     DPTR
-   \   0001F2   A3           INC     DPTR
-   \   0001F3   E0           MOVX    A,@DPTR
-   \   0001F4   54E0         ANL     A,#0xe0
-   \   0001F6   F0           MOVX    @DPTR,A
-   \   0001F7   8A82         MOV     DPL,R2
-   \   0001F9   8B83         MOV     DPH,R3
-   \   0001FB   A3           INC     DPTR
-   \   0001FC   A3           INC     DPTR
-   \   0001FD   A3           INC     DPTR
-   \   0001FE   A3           INC     DPTR
-   \   0001FF   E0           MOVX    A,@DPTR
-   \   000200   8A82         MOV     DPL,R2
-   \   000202   8B83         MOV     DPH,R3
-   \   000204   A3           INC     DPTR
-   \   000205   A3           INC     DPTR
-   \   000206   A3           INC     DPTR
-   \   000207   A3           INC     DPTR
-   \   000208   F0           MOVX    @DPTR,A
-   \   000209   53D1EF       ANL     0xd1,#0xef
-   \   00020C   75D610       MOV     0xd6,#0x10
     360              RX_STRT_FLOW( cfg );
-   \   00020F   EE           MOV     A,R6
-   \   000210   240F         ADD     A,#0xf
-   \   000212   F582         MOV     DPL,A
-   \   000214   EF           MOV     A,R7
-   \   000215   3400         ADDC    A,#0x0
-   \   000217   F583         MOV     DPH,A
-   \   000219   E0           MOVX    A,@DPTR
-   \   00021A   A2E7         MOV     C,0xE0 /* A   */.7
-   \   00021C   4004         JC      ??pollDMA_8
-   \   00021E   C285         CLR     0x80.5
-   \   000220   8002         SJMP    ??pollDMA_9
-   \                     ??pollDMA_8:
-   \   000222   C295         CLR     0x90.5
-   \                     ??pollDMA_9:
-   \   000224   EE           MOV     A,R6
-   \   000225   240F         ADD     A,#0xf
-   \   000227   F582         MOV     DPL,A
-   \   000229   EF           MOV     A,R7
-   \   00022A   3400         ADDC    A,#0x0
-   \   00022C   F583         MOV     DPH,A
-   \   00022E   E0           MOVX    A,@DPTR
-   \   00022F   C2E1         CLR     0xE0 /* A   */.1
-   \   000231   F0           MOVX    @DPTR,A
     361            }
     362          
     363            if ( HAL_DMA_CHECK_IRQ( HAL_DMA_CH_TX ) )
-   \                     ??pollDMA_7:
-   \   000232   E5D1         MOV     A,0xd1
-   \   000234   A2E3         MOV     C,0xE0 /* A   */.3
-   \   000236   4003         JC      $+5
-   \   000238   02....       LJMP    ??pollDMA_10 & 0xFFFF
     364            {
     365              HAL_DMA_CLEAR_IRQ( HAL_DMA_CH_TX );
-   \   00023B   53D1F7       ANL     0xd1,#0xf7
     366              cfg->flag &= ~UART_CFG_TXF;
-   \   00023E   EE           MOV     A,R6
-   \   00023F   240F         ADD     A,#0xf
-   \   000241   F582         MOV     DPL,A
-   \   000243   EF           MOV     A,R7
-   \   000244   3400         ADDC    A,#0x0
-   \   000246   F583         MOV     DPH,A
-   \   000248   E0           MOVX    A,@DPTR
-   \   000249   C2E0         CLR     0xE0 /* A   */.0
-   \   00024B   F0           MOVX    @DPTR,A
     367              cfg->txTick = DMA_TX_DLY;
-   \   00024C   7414         MOV     A,#0x14
-   \   00024E   C0E0         PUSH    A
-   \   000250   EE           MOV     A,R6
-   \   000251   240E         ADD     A,#0xe
-   \   000253   F582         MOV     DPL,A
-   \   000255   EF           MOV     A,R7
-   \   000256   3400         ADDC    A,#0x0
-   \   000258   F583         MOV     DPH,A
-   \   00025A   D0E0         POP     A
-   \   00025C   F0           MOVX    @DPTR,A
     368          
     369              if ( (cfg->txMax - cfg->txCnt) < cfg->txTail )
-   \   00025D   EE           MOV     A,R6
-   \   00025E   240C         ADD     A,#0xc
-   \   000260   F582         MOV     DPL,A
-   \   000262   EF           MOV     A,R7
-   \   000263   3400         ADDC    A,#0x0
-   \   000265   F583         MOV     DPH,A
-   \   000267   E0           MOVX    A,@DPTR
-   \   000268   F8           MOV     R0,A
-   \   000269   7900         MOV     R1,#0x0
-   \   00026B   EE           MOV     A,R6
-   \   00026C   240D         ADD     A,#0xd
-   \   00026E   F582         MOV     DPL,A
-   \   000270   EF           MOV     A,R7
-   \   000271   3400         ADDC    A,#0x0
-   \   000273   F583         MOV     DPH,A
-   \   000275   E0           MOVX    A,@DPTR
-   \   000276   FA           MOV     R2,A
-   \   000277   7B00         MOV     R3,#0x0
-   \   000279   E8           MOV     A,R0
-   \   00027A   C3           CLR     C
-   \   00027B   9A           SUBB    A,R2
-   \   00027C   F8           MOV     R0,A
-   \   00027D   E9           MOV     A,R1
-   \   00027E   9B           SUBB    A,R3
-   \   00027F   F9           MOV     R1,A
-   \   000280   EE           MOV     A,R6
-   \   000281   240B         ADD     A,#0xb
-   \   000283   F582         MOV     DPL,A
-   \   000285   EF           MOV     A,R7
-   \   000286   3400         ADDC    A,#0x0
-   \   000288   F583         MOV     DPH,A
-   \   00028A   E0           MOVX    A,@DPTR
-   \   00028B   FA           MOV     R2,A
-   \   00028C   7B00         MOV     R3,#0x0
-   \   00028E   C3           CLR     C
-   \   00028F   E8           MOV     A,R0
-   \   000290   9A           SUBB    A,R2
-   \   000291   E9           MOV     A,R1
-   \   000292   9B           SUBB    A,R3
-   \   000293   A2D2         MOV     C,0xD0 /* PSW */.2
-   \   000295   65D0         XRL     A,PSW
-   \   000297   33           RLC     A
-   \   000298   5014         JNC     ??pollDMA_11
     370              {
     371                cfg->txTail = 0;  // DMA can only run to the end of the Tx buffer.
-   \   00029A   7400         MOV     A,#0x0
-   \   00029C   C0E0         PUSH    A
-   \   00029E   EE           MOV     A,R6
-   \   00029F   240B         ADD     A,#0xb
-   \   0002A1   F582         MOV     DPL,A
-   \   0002A3   EF           MOV     A,R7
-   \   0002A4   3400         ADDC    A,#0x0
-   \   0002A6   F583         MOV     DPH,A
-   \   0002A8   D0E0         POP     A
-   \   0002AA   F0           MOVX    @DPTR,A
-   \   0002AB   02....       LJMP    ??pollDMA_12 & 0xFFFF
     372              }
     373              else
     374              {
     375                cfg->txTail += cfg->txCnt;
-   \                     ??pollDMA_11:
-   \   0002AE   EE           MOV     A,R6
-   \   0002AF   240D         ADD     A,#0xd
-   \   0002B1   F582         MOV     DPL,A
-   \   0002B3   EF           MOV     A,R7
-   \   0002B4   3400         ADDC    A,#0x0
-   \   0002B6   F583         MOV     DPH,A
-   \   0002B8   E0           MOVX    A,@DPTR
-   \   0002B9   FA           MOV     R2,A
-   \   0002BA   EE           MOV     A,R6
-   \   0002BB   240B         ADD     A,#0xb
-   \   0002BD   F582         MOV     DPL,A
-   \   0002BF   EF           MOV     A,R7
-   \   0002C0   3400         ADDC    A,#0x0
-   \   0002C2   F583         MOV     DPH,A
-   \   0002C4   E0           MOVX    A,@DPTR
-   \   0002C5   2A           ADD     A,R2
-   \   0002C6   F0           MOVX    @DPTR,A
-   \   0002C7   02....       LJMP    ??pollDMA_12 & 0xFFFF
     376              }
     377            }
     378            else if ( !(cfg->flag & UART_CFG_TXF) && !cfg->txTick )
-   \                     ??pollDMA_10:
-   \   0002CA   EE           MOV     A,R6
-   \   0002CB   240F         ADD     A,#0xf
-   \   0002CD   F582         MOV     DPL,A
-   \   0002CF   EF           MOV     A,R7
-   \   0002D0   3400         ADDC    A,#0x0
-   \   0002D2   F583         MOV     DPH,A
-   \   0002D4   E0           MOVX    A,@DPTR
-   \   0002D5   A2E0         MOV     C,0xE0 /* A   */.0
-   \   0002D7   5003         JNC     $+5
-   \   0002D9   02....       LJMP    ??pollDMA_12 & 0xFFFF
-   \   0002DC   EE           MOV     A,R6
-   \   0002DD   240E         ADD     A,#0xe
-   \   0002DF   F582         MOV     DPL,A
-   \   0002E1   EF           MOV     A,R7
-   \   0002E2   3400         ADDC    A,#0x0
-   \   0002E4   F583         MOV     DPH,A
-   \   0002E6   E0           MOVX    A,@DPTR
-   \   0002E7   6003         JZ      $+5
-   \   0002E9   02....       LJMP    ??pollDMA_12 & 0xFFFF
     379            {
     380              if ( cfg->txTail != cfg->txHead )
-   \   0002EC   EE           MOV     A,R6
-   \   0002ED   240B         ADD     A,#0xb
-   \   0002EF   F582         MOV     DPL,A
-   \   0002F1   EF           MOV     A,R7
-   \   0002F2   3400         ADDC    A,#0x0
-   \   0002F4   F583         MOV     DPH,A
-   \   0002F6   E0           MOVX    A,@DPTR
-   \   0002F7   FA           MOV     R2,A
-   \   0002F8   8E82         MOV     DPL,R6
-   \   0002FA   8F83         MOV     DPH,R7
-   \   0002FC   A3           INC     DPTR
-   \   0002FD   A3           INC     DPTR
-   \   0002FE   A3           INC     DPTR
-   \   0002FF   A3           INC     DPTR
-   \   000300   A3           INC     DPTR
-   \   000301   A3           INC     DPTR
-   \   000302   A3           INC     DPTR
-   \   000303   A3           INC     DPTR
-   \   000304   A3           INC     DPTR
-   \   000305   A3           INC     DPTR
-   \   000306   E0           MOVX    A,@DPTR
-   \   000307   6A           XRL     A,R2
-   \   000308   7003         JNZ     $+5
-   \   00030A   02....       LJMP    ??pollDMA_12 & 0xFFFF
     381              {
     382                if ( cfg->txTail < cfg->txHead )
-   \   00030D   EE           MOV     A,R6
-   \   00030E   240B         ADD     A,#0xb
-   \   000310   F582         MOV     DPL,A
-   \   000312   EF           MOV     A,R7
-   \   000313   3400         ADDC    A,#0x0
-   \   000315   F583         MOV     DPH,A
-   \   000317   E0           MOVX    A,@DPTR
-   \   000318   C0E0         PUSH    A
-   \   00031A   8E82         MOV     DPL,R6
-   \   00031C   8F83         MOV     DPH,R7
-   \   00031E   A3           INC     DPTR
-   \   00031F   A3           INC     DPTR
-   \   000320   A3           INC     DPTR
-   \   000321   A3           INC     DPTR
-   \   000322   A3           INC     DPTR
-   \   000323   A3           INC     DPTR
-   \   000324   A3           INC     DPTR
-   \   000325   A3           INC     DPTR
-   \   000326   A3           INC     DPTR
-   \   000327   A3           INC     DPTR
-   \   000328   E0           MOVX    A,@DPTR
-   \   000329   FA           MOV     R2,A
-   \   00032A   D0E0         POP     A
-   \   00032C   C3           CLR     C
-   \   00032D   9A           SUBB    A,R2
-   \   00032E   502E         JNC     ??pollDMA_13
     383                {
     384                  cfg->txCnt = cfg->txHead - cfg->txTail;
-   \   000330   EE           MOV     A,R6
-   \   000331   240B         ADD     A,#0xb
-   \   000333   F582         MOV     DPL,A
-   \   000335   EF           MOV     A,R7
-   \   000336   3400         ADDC    A,#0x0
-   \   000338   F583         MOV     DPH,A
-   \   00033A   E0           MOVX    A,@DPTR
-   \   00033B   FA           MOV     R2,A
-   \   00033C   8E82         MOV     DPL,R6
-   \   00033E   8F83         MOV     DPH,R7
-   \   000340   A3           INC     DPTR
-   \   000341   A3           INC     DPTR
-   \   000342   A3           INC     DPTR
-   \   000343   A3           INC     DPTR
-   \   000344   A3           INC     DPTR
-   \   000345   A3           INC     DPTR
-   \   000346   A3           INC     DPTR
-   \   000347   A3           INC     DPTR
-   \   000348   A3           INC     DPTR
-   \   000349   A3           INC     DPTR
-   \   00034A   E0           MOVX    A,@DPTR
-   \   00034B   C3           CLR     C
-   \   00034C   9A           SUBB    A,R2
-   \   00034D   C0E0         PUSH    A
-   \   00034F   EE           MOV     A,R6
-   \   000350   240D         ADD     A,#0xd
-   \   000352   F582         MOV     DPL,A
-   \   000354   EF           MOV     A,R7
-   \   000355   3400         ADDC    A,#0x0
-   \   000357   F583         MOV     DPH,A
-   \   000359   D0E0         POP     A
-   \   00035B   F0           MOVX    @DPTR,A
-   \   00035C   802A         SJMP    ??pollDMA_14
     385                }
     386                else  // Can only run DMA engine up to max, then restart at zero.
     387                {
     388                  cfg->txCnt = cfg->txMax - cfg->txTail + 1;
-   \                     ??pollDMA_13:
-   \   00035E   EE           MOV     A,R6
-   \   00035F   240B         ADD     A,#0xb
-   \   000361   F582         MOV     DPL,A
-   \   000363   EF           MOV     A,R7
-   \   000364   3400         ADDC    A,#0x0
-   \   000366   F583         MOV     DPH,A
-   \   000368   E0           MOVX    A,@DPTR
-   \   000369   FA           MOV     R2,A
-   \   00036A   EE           MOV     A,R6
-   \   00036B   240C         ADD     A,#0xc
-   \   00036D   F582         MOV     DPL,A
-   \   00036F   EF           MOV     A,R7
-   \   000370   3400         ADDC    A,#0x0
-   \   000372   F583         MOV     DPH,A
-   \   000374   E0           MOVX    A,@DPTR
-   \   000375   C3           CLR     C
-   \   000376   9A           SUBB    A,R2
-   \   000377   2401         ADD     A,#0x1
-   \   000379   C0E0         PUSH    A
-   \   00037B   EE           MOV     A,R6
-   \   00037C   240D         ADD     A,#0xd
-   \   00037E   F582         MOV     DPL,A
-   \   000380   EF           MOV     A,R7
-   \   000381   3400         ADDC    A,#0x0
-   \   000383   F583         MOV     DPH,A
-   \   000385   D0E0         POP     A
-   \   000387   F0           MOVX    @DPTR,A
     389                }
     390          
     391                cfg->flag |= UART_CFG_TXF;
-   \                     ??pollDMA_14:
-   \   000388   EE           MOV     A,R6
-   \   000389   240F         ADD     A,#0xf
-   \   00038B   F582         MOV     DPL,A
-   \   00038D   EF           MOV     A,R7
-   \   00038E   3400         ADDC    A,#0x0
-   \   000390   F583         MOV     DPH,A
-   \   000392   E0           MOVX    A,@DPTR
-   \   000393   D2E0         SETB    0xE0 /* A   */.0
-   \   000395   F0           MOVX    @DPTR,A
     392                DMA_TX( cfg );
-   \   000396   7A..         MOV     R2,#((dmaCh1234 + 16) & 0xff)
-   \   000398   7B..         MOV     R3,#(((dmaCh1234 + 16) >> 8) & 0xff)
-   \   00039A   EE           MOV     A,R6
-   \   00039B   240B         ADD     A,#0xb
-   \   00039D   F582         MOV     DPL,A
-   \   00039F   EF           MOV     A,R7
-   \   0003A0   3400         ADDC    A,#0x0
-   \   0003A2   F583         MOV     DPH,A
-   \   0003A4   E0           MOVX    A,@DPTR
-   \   0003A5   F8           MOV     R0,A
-   \   0003A6   7900         MOV     R1,#0x0
-   \   0003A8   8E82         MOV     DPL,R6
-   \   0003AA   8F83         MOV     DPH,R7
-   \   0003AC   A3           INC     DPTR
-   \   0003AD   A3           INC     DPTR
-   \   0003AE   A3           INC     DPTR
-   \   0003AF   A3           INC     DPTR
-   \   0003B0   A3           INC     DPTR
-   \   0003B1   A3           INC     DPTR
-   \   0003B2   A3           INC     DPTR
-   \   0003B3   A3           INC     DPTR
-   \   0003B4   E0           MOVX    A,@DPTR
-   \   0003B5   28           ADD     A,R0
-   \   0003B6   A3           INC     DPTR
-   \   0003B7   E0           MOVX    A,@DPTR
-   \   0003B8   39           ADDC    A,R1
-   \   0003B9   F9           MOV     R1,A
-   \   0003BA   E9           MOV     A,R1
-   \   0003BB   8A82         MOV     DPL,R2
-   \   0003BD   8B83         MOV     DPH,R3
-   \   0003BF   F0           MOVX    @DPTR,A
-   \   0003C0   EE           MOV     A,R6
-   \   0003C1   240B         ADD     A,#0xb
-   \   0003C3   F582         MOV     DPL,A
-   \   0003C5   EF           MOV     A,R7
-   \   0003C6   3400         ADDC    A,#0x0
-   \   0003C8   F583         MOV     DPH,A
-   \   0003CA   E0           MOVX    A,@DPTR
-   \   0003CB   F8           MOV     R0,A
-   \   0003CC   8E82         MOV     DPL,R6
-   \   0003CE   8F83         MOV     DPH,R7
-   \   0003D0   A3           INC     DPTR
-   \   0003D1   A3           INC     DPTR
-   \   0003D2   A3           INC     DPTR
-   \   0003D3   A3           INC     DPTR
-   \   0003D4   A3           INC     DPTR
-   \   0003D5   A3           INC     DPTR
-   \   0003D6   A3           INC     DPTR
-   \   0003D7   A3           INC     DPTR
-   \   0003D8   E0           MOVX    A,@DPTR
-   \   0003D9   28           ADD     A,R0
-   \   0003DA   8A82         MOV     DPL,R2
-   \   0003DC   8B83         MOV     DPH,R3
-   \   0003DE   A3           INC     DPTR
-   \   0003DF   F0           MOVX    @DPTR,A
-   \   0003E0   EE           MOV     A,R6
-   \   0003E1   240D         ADD     A,#0xd
-   \   0003E3   F582         MOV     DPL,A
-   \   0003E5   EF           MOV     A,R7
-   \   0003E6   3400         ADDC    A,#0x0
-   \   0003E8   F583         MOV     DPH,A
-   \   0003EA   E0           MOVX    A,@DPTR
-   \   0003EB   8A82         MOV     DPL,R2
-   \   0003ED   8B83         MOV     DPH,R3
-   \   0003EF   A3           INC     DPTR
-   \   0003F0   A3           INC     DPTR
-   \   0003F1   A3           INC     DPTR
-   \   0003F2   A3           INC     DPTR
-   \   0003F3   A3           INC     DPTR
-   \   0003F4   F0           MOVX    @DPTR,A
-   \   0003F5   8A82         MOV     DPL,R2
-   \   0003F7   8B83         MOV     DPH,R3
-   \   0003F9   A3           INC     DPTR
-   \   0003FA   A3           INC     DPTR
-   \   0003FB   A3           INC     DPTR
-   \   0003FC   A3           INC     DPTR
-   \   0003FD   E0           MOVX    A,@DPTR
-   \   0003FE   54E0         ANL     A,#0xe0
-   \   000400   F0           MOVX    @DPTR,A
-   \   000401   8A82         MOV     DPL,R2
-   \   000403   8B83         MOV     DPH,R3
-   \   000405   A3           INC     DPTR
-   \   000406   A3           INC     DPTR
-   \   000407   A3           INC     DPTR
-   \   000408   A3           INC     DPTR
-   \   000409   E0           MOVX    A,@DPTR
-   \   00040A   8A82         MOV     DPL,R2
-   \   00040C   8B83         MOV     DPH,R3
-   \   00040E   A3           INC     DPTR
-   \   00040F   A3           INC     DPTR
-   \   000410   A3           INC     DPTR
-   \   000411   A3           INC     DPTR
-   \   000412   F0           MOVX    @DPTR,A
-   \   000413   53D1F7       ANL     0xd1,#0xf7
-   \   000416   75D608       MOV     0xd6,#0x8
-   \   000419   75D708       MOV     0xd7,#0x8
     393              }
     394            }
     395          }
-   \                     ??pollDMA_12:
-   \   00041C   7401         MOV     A,#0x1
-   \   00041E   12....       LCALL   ?DEALLOC_XSTACK8
-   \   000421   7F03         MOV     R7,#0x3
-   \   000423   02....       LJMP    ?BANKED_LEAVE_XDATA
-   \   000426                REQUIRE _A_P0
-   \   000426                REQUIRE _A_P1
-   \   000426                REQUIRE U0DBUF
-   \   000426                REQUIRE U0BAUD
-   \   000426                REQUIRE DMAIRQ
-   \   000426                REQUIRE DMAARM
-   \   000426                REQUIRE DMAREQ
     396          #endif
     397          
     398          #if HAL_UART_ISR
@@ -1398,43 +590,34 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Components\hal\target\CC2430EB\hal_uart.
     441          void HalUARTInit( void )
    \                     HalUARTInit:
     442          {
-   \   000000   C082         PUSH    DPL
-   \   000002   C083         PUSH    DPH
-   \   000004                ; Saved register size: 2
-   \   000004                ; Auto size: 0
+   \   000000                ; Saved register size: 0
+   \   000000                ; Auto size: 0
     443          #if HAL_UART_DMA
     444            halDMADesc_t *ch;
     445          #endif
     446          
     447            // Set P2 priority - USART0 over USART1 if both are defined.
     448            P2DIR &= ~P2DIR_PRIPO;
-   \   000004   53FF3F       ANL     0xff,#0x3f
-   \   000007   E5FF         MOV     A,0xff
+   \   000000   53FF3F       ANL     0xff,#0x3f
+   \   000003   E5FF         MOV     A,0xff
     449            P2DIR |= HAL_UART_PRIPO;
-   \   000009   85FFFF       MOV     0xff,0xff
+   \   000005   43FF40       ORL     0xff,#0x40
     450          
     451          #if HAL_UART_0_ENABLE
     452            // Set UART0 I/O location to P0.
     453            PERCFG &= ~HAL_UART_0_PERCFG_BIT;
-   \   00000C   53F1FE       ANL     0xf1,#0xfe
     454          
     455            /* Enable Tx and Rx on P0 */
     456            P0SEL |= HAL_UART_0_P0_RX_TX;
-   \   00000F   43F30C       ORL     0xf3,#0xc
-   \   000012   E5F3         MOV     A,0xf3
     457          
     458            /* Make sure ADC doesnt use this */
     459            ADCCFG &= ~HAL_UART_0_P0_RX_TX;
-   \   000014   53F2F3       ANL     0xf2,#0xf3
-   \   000017   E5F2         MOV     A,0xf2
     460          
     461            /* Mode is UART Mode */
     462            U0CSR = CSR_MODE;
-   \   000019   758680       MOV     0x86,#-0x80
     463          
     464            /* Flush it */
     465            U0UCR = UCR_FLUSH;
-   \   00001C   75C480       MOV     0xc4,#-0x80
     466          #endif
     467          
     468          #if HAL_UART_1_ENABLE
@@ -1457,339 +640,43 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Components\hal\target\CC2430EB\hal_uart.
     485          #if HAL_UART_DMA
     486            // Setup Tx by DMA.
     487            ch = HAL_DMA_GET_DESC1234( HAL_DMA_CH_TX );
-   \   00001F   78..         MOV     R0,#((dmaCh1234 + 16) & 0xff)
-   \   000021   79..         MOV     R1,#(((dmaCh1234 + 16) >> 8) & 0xff)
     488          
     489            // The start address of the destination.
     490            HAL_DMA_SET_DEST( ch, DMA_UDBUF );
-   \   000023   74DF         MOV     A,#-0x21
-   \   000025   8882         MOV     DPL,R0
-   \   000027   8983         MOV     DPH,R1
-   \   000029   A3           INC     DPTR
-   \   00002A   A3           INC     DPTR
-   \   00002B   F0           MOVX    @DPTR,A
-   \   00002C   74C1         MOV     A,#-0x3f
-   \   00002E   8882         MOV     DPL,R0
-   \   000030   8983         MOV     DPH,R1
-   \   000032   A3           INC     DPTR
-   \   000033   A3           INC     DPTR
-   \   000034   A3           INC     DPTR
-   \   000035   F0           MOVX    @DPTR,A
     491          
     492            // Using the length field to determine how many bytes to transfer.
     493            HAL_DMA_SET_VLEN( ch, HAL_DMA_VLEN_USE_LEN );
-   \   000036   8882         MOV     DPL,R0
-   \   000038   8983         MOV     DPH,R1
-   \   00003A   A3           INC     DPTR
-   \   00003B   A3           INC     DPTR
-   \   00003C   A3           INC     DPTR
-   \   00003D   A3           INC     DPTR
-   \   00003E   E0           MOVX    A,@DPTR
-   \   00003F   541F         ANL     A,#0x1f
-   \   000041   F0           MOVX    @DPTR,A
-   \   000042   8882         MOV     DPL,R0
-   \   000044   8983         MOV     DPH,R1
-   \   000046   A3           INC     DPTR
-   \   000047   A3           INC     DPTR
-   \   000048   A3           INC     DPTR
-   \   000049   A3           INC     DPTR
-   \   00004A   E0           MOVX    A,@DPTR
-   \   00004B   8882         MOV     DPL,R0
-   \   00004D   8983         MOV     DPH,R1
-   \   00004F   A3           INC     DPTR
-   \   000050   A3           INC     DPTR
-   \   000051   A3           INC     DPTR
-   \   000052   A3           INC     DPTR
-   \   000053   F0           MOVX    @DPTR,A
     494          
     495            // One byte is transferred each time.
     496            HAL_DMA_SET_WORD_SIZE( ch, HAL_DMA_WORDSIZE_BYTE );
-   \   000054   8882         MOV     DPL,R0
-   \   000056   8983         MOV     DPH,R1
-   \   000058   A3           INC     DPTR
-   \   000059   A3           INC     DPTR
-   \   00005A   A3           INC     DPTR
-   \   00005B   A3           INC     DPTR
-   \   00005C   A3           INC     DPTR
-   \   00005D   A3           INC     DPTR
-   \   00005E   E0           MOVX    A,@DPTR
-   \   00005F   C2E7         CLR     0xE0 /* A   */.7
-   \   000061   F0           MOVX    @DPTR,A
-   \   000062   8882         MOV     DPL,R0
-   \   000064   8983         MOV     DPH,R1
-   \   000066   A3           INC     DPTR
-   \   000067   A3           INC     DPTR
-   \   000068   A3           INC     DPTR
-   \   000069   A3           INC     DPTR
-   \   00006A   A3           INC     DPTR
-   \   00006B   A3           INC     DPTR
-   \   00006C   E0           MOVX    A,@DPTR
-   \   00006D   8882         MOV     DPL,R0
-   \   00006F   8983         MOV     DPH,R1
-   \   000071   A3           INC     DPTR
-   \   000072   A3           INC     DPTR
-   \   000073   A3           INC     DPTR
-   \   000074   A3           INC     DPTR
-   \   000075   A3           INC     DPTR
-   \   000076   A3           INC     DPTR
-   \   000077   F0           MOVX    @DPTR,A
     497          
     498            // The bytes are transferred 1-by-1 on Tx Complete trigger.
     499            HAL_DMA_SET_TRIG_MODE( ch, HAL_DMA_TMODE_SINGLE );
-   \   000078   8882         MOV     DPL,R0
-   \   00007A   8983         MOV     DPH,R1
-   \   00007C   A3           INC     DPTR
-   \   00007D   A3           INC     DPTR
-   \   00007E   A3           INC     DPTR
-   \   00007F   A3           INC     DPTR
-   \   000080   A3           INC     DPTR
-   \   000081   A3           INC     DPTR
-   \   000082   E0           MOVX    A,@DPTR
-   \   000083   549F         ANL     A,#0x9f
-   \   000085   F0           MOVX    @DPTR,A
-   \   000086   8882         MOV     DPL,R0
-   \   000088   8983         MOV     DPH,R1
-   \   00008A   A3           INC     DPTR
-   \   00008B   A3           INC     DPTR
-   \   00008C   A3           INC     DPTR
-   \   00008D   A3           INC     DPTR
-   \   00008E   A3           INC     DPTR
-   \   00008F   A3           INC     DPTR
-   \   000090   E0           MOVX    A,@DPTR
-   \   000091   8882         MOV     DPL,R0
-   \   000093   8983         MOV     DPH,R1
-   \   000095   A3           INC     DPTR
-   \   000096   A3           INC     DPTR
-   \   000097   A3           INC     DPTR
-   \   000098   A3           INC     DPTR
-   \   000099   A3           INC     DPTR
-   \   00009A   A3           INC     DPTR
-   \   00009B   F0           MOVX    @DPTR,A
     500            HAL_DMA_SET_TRIG_SRC( ch, DMATRIG_TX );
-   \   00009C   8882         MOV     DPL,R0
-   \   00009E   8983         MOV     DPH,R1
-   \   0000A0   A3           INC     DPTR
-   \   0000A1   A3           INC     DPTR
-   \   0000A2   A3           INC     DPTR
-   \   0000A3   A3           INC     DPTR
-   \   0000A4   A3           INC     DPTR
-   \   0000A5   A3           INC     DPTR
-   \   0000A6   E0           MOVX    A,@DPTR
-   \   0000A7   54E0         ANL     A,#0xe0
-   \   0000A9   F0           MOVX    @DPTR,A
-   \   0000AA   8882         MOV     DPL,R0
-   \   0000AC   8983         MOV     DPH,R1
-   \   0000AE   A3           INC     DPTR
-   \   0000AF   A3           INC     DPTR
-   \   0000B0   A3           INC     DPTR
-   \   0000B1   A3           INC     DPTR
-   \   0000B2   A3           INC     DPTR
-   \   0000B3   A3           INC     DPTR
-   \   0000B4   E0           MOVX    A,@DPTR
-   \   0000B5   440F         ORL     A,#0xf
-   \   0000B7   F0           MOVX    @DPTR,A
     501          
     502            // The source address is decremented by 1 byte after each transfer.
     503            HAL_DMA_SET_SRC_INC( ch, HAL_DMA_SRCINC_1 );
-   \   0000B8   8882         MOV     DPL,R0
-   \   0000BA   8983         MOV     DPH,R1
-   \   0000BC   A3           INC     DPTR
-   \   0000BD   A3           INC     DPTR
-   \   0000BE   A3           INC     DPTR
-   \   0000BF   A3           INC     DPTR
-   \   0000C0   A3           INC     DPTR
-   \   0000C1   A3           INC     DPTR
-   \   0000C2   A3           INC     DPTR
-   \   0000C3   E0           MOVX    A,@DPTR
-   \   0000C4   543F         ANL     A,#0x3f
-   \   0000C6   F0           MOVX    @DPTR,A
-   \   0000C7   8882         MOV     DPL,R0
-   \   0000C9   8983         MOV     DPH,R1
-   \   0000CB   A3           INC     DPTR
-   \   0000CC   A3           INC     DPTR
-   \   0000CD   A3           INC     DPTR
-   \   0000CE   A3           INC     DPTR
-   \   0000CF   A3           INC     DPTR
-   \   0000D0   A3           INC     DPTR
-   \   0000D1   A3           INC     DPTR
-   \   0000D2   E0           MOVX    A,@DPTR
-   \   0000D3   D2E6         SETB    0xE0 /* A   */.6
-   \   0000D5   F0           MOVX    @DPTR,A
     504          
     505            // The destination address is constant - the Tx Data Buffer.
     506            HAL_DMA_SET_DST_INC( ch, HAL_DMA_DSTINC_0 );
-   \   0000D6   8882         MOV     DPL,R0
-   \   0000D8   8983         MOV     DPH,R1
-   \   0000DA   A3           INC     DPTR
-   \   0000DB   A3           INC     DPTR
-   \   0000DC   A3           INC     DPTR
-   \   0000DD   A3           INC     DPTR
-   \   0000DE   A3           INC     DPTR
-   \   0000DF   A3           INC     DPTR
-   \   0000E0   A3           INC     DPTR
-   \   0000E1   E0           MOVX    A,@DPTR
-   \   0000E2   54CF         ANL     A,#0xcf
-   \   0000E4   F0           MOVX    @DPTR,A
-   \   0000E5   8882         MOV     DPL,R0
-   \   0000E7   8983         MOV     DPH,R1
-   \   0000E9   A3           INC     DPTR
-   \   0000EA   A3           INC     DPTR
-   \   0000EB   A3           INC     DPTR
-   \   0000EC   A3           INC     DPTR
-   \   0000ED   A3           INC     DPTR
-   \   0000EE   A3           INC     DPTR
-   \   0000EF   A3           INC     DPTR
-   \   0000F0   E0           MOVX    A,@DPTR
-   \   0000F1   8882         MOV     DPL,R0
-   \   0000F3   8983         MOV     DPH,R1
-   \   0000F5   A3           INC     DPTR
-   \   0000F6   A3           INC     DPTR
-   \   0000F7   A3           INC     DPTR
-   \   0000F8   A3           INC     DPTR
-   \   0000F9   A3           INC     DPTR
-   \   0000FA   A3           INC     DPTR
-   \   0000FB   A3           INC     DPTR
-   \   0000FC   F0           MOVX    @DPTR,A
     507          
     508            // The DMA is to be polled and shall not issue an IRQ upon completion.
     509            HAL_DMA_SET_IRQ( ch, HAL_DMA_IRQMASK_DISABLE );
-   \   0000FD   8882         MOV     DPL,R0
-   \   0000FF   8983         MOV     DPH,R1
-   \   000101   A3           INC     DPTR
-   \   000102   A3           INC     DPTR
-   \   000103   A3           INC     DPTR
-   \   000104   A3           INC     DPTR
-   \   000105   A3           INC     DPTR
-   \   000106   A3           INC     DPTR
-   \   000107   A3           INC     DPTR
-   \   000108   E0           MOVX    A,@DPTR
-   \   000109   C2E3         CLR     0xE0 /* A   */.3
-   \   00010B   F0           MOVX    @DPTR,A
-   \   00010C   8882         MOV     DPL,R0
-   \   00010E   8983         MOV     DPH,R1
-   \   000110   A3           INC     DPTR
-   \   000111   A3           INC     DPTR
-   \   000112   A3           INC     DPTR
-   \   000113   A3           INC     DPTR
-   \   000114   A3           INC     DPTR
-   \   000115   A3           INC     DPTR
-   \   000116   A3           INC     DPTR
-   \   000117   E0           MOVX    A,@DPTR
-   \   000118   8882         MOV     DPL,R0
-   \   00011A   8983         MOV     DPH,R1
-   \   00011C   A3           INC     DPTR
-   \   00011D   A3           INC     DPTR
-   \   00011E   A3           INC     DPTR
-   \   00011F   A3           INC     DPTR
-   \   000120   A3           INC     DPTR
-   \   000121   A3           INC     DPTR
-   \   000122   A3           INC     DPTR
-   \   000123   F0           MOVX    @DPTR,A
     510          
     511            // Xfer all 8 bits of a byte xfer.
     512            HAL_DMA_SET_M8( ch, HAL_DMA_M8_USE_8_BITS );
-   \   000124   8882         MOV     DPL,R0
-   \   000126   8983         MOV     DPH,R1
-   \   000128   A3           INC     DPTR
-   \   000129   A3           INC     DPTR
-   \   00012A   A3           INC     DPTR
-   \   00012B   A3           INC     DPTR
-   \   00012C   A3           INC     DPTR
-   \   00012D   A3           INC     DPTR
-   \   00012E   A3           INC     DPTR
-   \   00012F   E0           MOVX    A,@DPTR
-   \   000130   C2E2         CLR     0xE0 /* A   */.2
-   \   000132   F0           MOVX    @DPTR,A
-   \   000133   8882         MOV     DPL,R0
-   \   000135   8983         MOV     DPH,R1
-   \   000137   A3           INC     DPTR
-   \   000138   A3           INC     DPTR
-   \   000139   A3           INC     DPTR
-   \   00013A   A3           INC     DPTR
-   \   00013B   A3           INC     DPTR
-   \   00013C   A3           INC     DPTR
-   \   00013D   A3           INC     DPTR
-   \   00013E   E0           MOVX    A,@DPTR
-   \   00013F   8882         MOV     DPL,R0
-   \   000141   8983         MOV     DPH,R1
-   \   000143   A3           INC     DPTR
-   \   000144   A3           INC     DPTR
-   \   000145   A3           INC     DPTR
-   \   000146   A3           INC     DPTR
-   \   000147   A3           INC     DPTR
-   \   000148   A3           INC     DPTR
-   \   000149   A3           INC     DPTR
-   \   00014A   F0           MOVX    @DPTR,A
     513          
     514            // DMA Tx has shared priority for memory access - every other one.
     515            HAL_DMA_SET_PRIORITY( ch, HAL_DMA_PRI_HIGH );
-   \   00014B   8882         MOV     DPL,R0
-   \   00014D   8983         MOV     DPH,R1
-   \   00014F   A3           INC     DPTR
-   \   000150   A3           INC     DPTR
-   \   000151   A3           INC     DPTR
-   \   000152   A3           INC     DPTR
-   \   000153   A3           INC     DPTR
-   \   000154   A3           INC     DPTR
-   \   000155   A3           INC     DPTR
-   \   000156   E0           MOVX    A,@DPTR
-   \   000157   54FC         ANL     A,#0xfc
-   \   000159   F0           MOVX    @DPTR,A
-   \   00015A   8882         MOV     DPL,R0
-   \   00015C   8983         MOV     DPH,R1
-   \   00015E   A3           INC     DPTR
-   \   00015F   A3           INC     DPTR
-   \   000160   A3           INC     DPTR
-   \   000161   A3           INC     DPTR
-   \   000162   A3           INC     DPTR
-   \   000163   A3           INC     DPTR
-   \   000164   A3           INC     DPTR
-   \   000165   E0           MOVX    A,@DPTR
-   \   000166   D2E1         SETB    0xE0 /* A   */.1
-   \   000168   F0           MOVX    @DPTR,A
     516          
     517            // Setup Rx by DMA.
     518            ch = HAL_DMA_GET_DESC1234( HAL_DMA_CH_RX );
-   \   000169   78..         MOV     R0,#((dmaCh1234 + 24) & 0xff)
-   \   00016B   79..         MOV     R1,#(((dmaCh1234 + 24) >> 8) & 0xff)
     519          
     520            // The start address of the source.
     521            HAL_DMA_SET_SOURCE( ch, DMA_UDBUF );
-   \   00016D   74DF         MOV     A,#-0x21
-   \   00016F   8882         MOV     DPL,R0
-   \   000171   8983         MOV     DPH,R1
-   \   000173   F0           MOVX    @DPTR,A
-   \   000174   74C1         MOV     A,#-0x3f
-   \   000176   8882         MOV     DPL,R0
-   \   000178   8983         MOV     DPH,R1
-   \   00017A   A3           INC     DPTR
-   \   00017B   F0           MOVX    @DPTR,A
     522          
     523            // Using the length field to determine how many bytes to transfer.
     524            HAL_DMA_SET_VLEN( ch, HAL_DMA_VLEN_USE_LEN );
-   \   00017C   8882         MOV     DPL,R0
-   \   00017E   8983         MOV     DPH,R1
-   \   000180   A3           INC     DPTR
-   \   000181   A3           INC     DPTR
-   \   000182   A3           INC     DPTR
-   \   000183   A3           INC     DPTR
-   \   000184   E0           MOVX    A,@DPTR
-   \   000185   541F         ANL     A,#0x1f
-   \   000187   F0           MOVX    @DPTR,A
-   \   000188   8882         MOV     DPL,R0
-   \   00018A   8983         MOV     DPH,R1
-   \   00018C   A3           INC     DPTR
-   \   00018D   A3           INC     DPTR
-   \   00018E   A3           INC     DPTR
-   \   00018F   A3           INC     DPTR
-   \   000190   E0           MOVX    A,@DPTR
-   \   000191   8882         MOV     DPL,R0
-   \   000193   8983         MOV     DPH,R1
-   \   000195   A3           INC     DPTR
-   \   000196   A3           INC     DPTR
-   \   000197   A3           INC     DPTR
-   \   000198   A3           INC     DPTR
-   \   000199   F0           MOVX    @DPTR,A
     525          
     526            /* The trick is to cfg DMA to xfer 2 bytes for every 1 byte of Rx.
     527             * The byte after the Rx Data Buffer is the Baud Cfg Register,
@@ -1799,253 +686,29 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Components\hal\target\CC2430EB\hal_uart.
     531             * Baud Cfg Register value.
     532             */
     533            HAL_DMA_SET_WORD_SIZE( ch, HAL_DMA_WORDSIZE_WORD );
-   \   00019A   8882         MOV     DPL,R0
-   \   00019C   8983         MOV     DPH,R1
-   \   00019E   A3           INC     DPTR
-   \   00019F   A3           INC     DPTR
-   \   0001A0   A3           INC     DPTR
-   \   0001A1   A3           INC     DPTR
-   \   0001A2   A3           INC     DPTR
-   \   0001A3   A3           INC     DPTR
-   \   0001A4   E0           MOVX    A,@DPTR
-   \   0001A5   C2E7         CLR     0xE0 /* A   */.7
-   \   0001A7   F0           MOVX    @DPTR,A
-   \   0001A8   8882         MOV     DPL,R0
-   \   0001AA   8983         MOV     DPH,R1
-   \   0001AC   A3           INC     DPTR
-   \   0001AD   A3           INC     DPTR
-   \   0001AE   A3           INC     DPTR
-   \   0001AF   A3           INC     DPTR
-   \   0001B0   A3           INC     DPTR
-   \   0001B1   A3           INC     DPTR
-   \   0001B2   E0           MOVX    A,@DPTR
-   \   0001B3   D2E7         SETB    0xE0 /* A   */.7
-   \   0001B5   F0           MOVX    @DPTR,A
     534          
     535            // The bytes are transferred 1-by-1 on Rx Complete trigger.
     536            HAL_DMA_SET_TRIG_MODE( ch, HAL_DMA_TMODE_SINGLE );
-   \   0001B6   8882         MOV     DPL,R0
-   \   0001B8   8983         MOV     DPH,R1
-   \   0001BA   A3           INC     DPTR
-   \   0001BB   A3           INC     DPTR
-   \   0001BC   A3           INC     DPTR
-   \   0001BD   A3           INC     DPTR
-   \   0001BE   A3           INC     DPTR
-   \   0001BF   A3           INC     DPTR
-   \   0001C0   E0           MOVX    A,@DPTR
-   \   0001C1   549F         ANL     A,#0x9f
-   \   0001C3   F0           MOVX    @DPTR,A
-   \   0001C4   8882         MOV     DPL,R0
-   \   0001C6   8983         MOV     DPH,R1
-   \   0001C8   A3           INC     DPTR
-   \   0001C9   A3           INC     DPTR
-   \   0001CA   A3           INC     DPTR
-   \   0001CB   A3           INC     DPTR
-   \   0001CC   A3           INC     DPTR
-   \   0001CD   A3           INC     DPTR
-   \   0001CE   E0           MOVX    A,@DPTR
-   \   0001CF   8882         MOV     DPL,R0
-   \   0001D1   8983         MOV     DPH,R1
-   \   0001D3   A3           INC     DPTR
-   \   0001D4   A3           INC     DPTR
-   \   0001D5   A3           INC     DPTR
-   \   0001D6   A3           INC     DPTR
-   \   0001D7   A3           INC     DPTR
-   \   0001D8   A3           INC     DPTR
-   \   0001D9   F0           MOVX    @DPTR,A
     537            HAL_DMA_SET_TRIG_SRC( ch, DMATRIG_RX );
-   \   0001DA   8882         MOV     DPL,R0
-   \   0001DC   8983         MOV     DPH,R1
-   \   0001DE   A3           INC     DPTR
-   \   0001DF   A3           INC     DPTR
-   \   0001E0   A3           INC     DPTR
-   \   0001E1   A3           INC     DPTR
-   \   0001E2   A3           INC     DPTR
-   \   0001E3   A3           INC     DPTR
-   \   0001E4   E0           MOVX    A,@DPTR
-   \   0001E5   54E0         ANL     A,#0xe0
-   \   0001E7   F0           MOVX    @DPTR,A
-   \   0001E8   8882         MOV     DPL,R0
-   \   0001EA   8983         MOV     DPH,R1
-   \   0001EC   A3           INC     DPTR
-   \   0001ED   A3           INC     DPTR
-   \   0001EE   A3           INC     DPTR
-   \   0001EF   A3           INC     DPTR
-   \   0001F0   A3           INC     DPTR
-   \   0001F1   A3           INC     DPTR
-   \   0001F2   E0           MOVX    A,@DPTR
-   \   0001F3   440E         ORL     A,#0xe
-   \   0001F5   F0           MOVX    @DPTR,A
     538          
     539            // The source address is constant - the Rx Data Buffer.
     540            HAL_DMA_SET_SRC_INC( ch, HAL_DMA_SRCINC_0 );
-   \   0001F6   8882         MOV     DPL,R0
-   \   0001F8   8983         MOV     DPH,R1
-   \   0001FA   A3           INC     DPTR
-   \   0001FB   A3           INC     DPTR
-   \   0001FC   A3           INC     DPTR
-   \   0001FD   A3           INC     DPTR
-   \   0001FE   A3           INC     DPTR
-   \   0001FF   A3           INC     DPTR
-   \   000200   A3           INC     DPTR
-   \   000201   E0           MOVX    A,@DPTR
-   \   000202   543F         ANL     A,#0x3f
-   \   000204   F0           MOVX    @DPTR,A
-   \   000205   8882         MOV     DPL,R0
-   \   000207   8983         MOV     DPH,R1
-   \   000209   A3           INC     DPTR
-   \   00020A   A3           INC     DPTR
-   \   00020B   A3           INC     DPTR
-   \   00020C   A3           INC     DPTR
-   \   00020D   A3           INC     DPTR
-   \   00020E   A3           INC     DPTR
-   \   00020F   A3           INC     DPTR
-   \   000210   E0           MOVX    A,@DPTR
-   \   000211   8882         MOV     DPL,R0
-   \   000213   8983         MOV     DPH,R1
-   \   000215   A3           INC     DPTR
-   \   000216   A3           INC     DPTR
-   \   000217   A3           INC     DPTR
-   \   000218   A3           INC     DPTR
-   \   000219   A3           INC     DPTR
-   \   00021A   A3           INC     DPTR
-   \   00021B   A3           INC     DPTR
-   \   00021C   F0           MOVX    @DPTR,A
     541          
     542            // The destination address is incremented by 1 word after each transfer.
     543            HAL_DMA_SET_DST_INC( ch, HAL_DMA_DSTINC_1 );
-   \   00021D   8882         MOV     DPL,R0
-   \   00021F   8983         MOV     DPH,R1
-   \   000221   A3           INC     DPTR
-   \   000222   A3           INC     DPTR
-   \   000223   A3           INC     DPTR
-   \   000224   A3           INC     DPTR
-   \   000225   A3           INC     DPTR
-   \   000226   A3           INC     DPTR
-   \   000227   A3           INC     DPTR
-   \   000228   E0           MOVX    A,@DPTR
-   \   000229   54CF         ANL     A,#0xcf
-   \   00022B   F0           MOVX    @DPTR,A
-   \   00022C   8882         MOV     DPL,R0
-   \   00022E   8983         MOV     DPH,R1
-   \   000230   A3           INC     DPTR
-   \   000231   A3           INC     DPTR
-   \   000232   A3           INC     DPTR
-   \   000233   A3           INC     DPTR
-   \   000234   A3           INC     DPTR
-   \   000235   A3           INC     DPTR
-   \   000236   A3           INC     DPTR
-   \   000237   E0           MOVX    A,@DPTR
-   \   000238   D2E4         SETB    0xE0 /* A   */.4
-   \   00023A   F0           MOVX    @DPTR,A
     544          
     545            // The DMA is to be polled and shall not issue an IRQ upon completion.
     546            HAL_DMA_SET_IRQ( ch, HAL_DMA_IRQMASK_DISABLE );
-   \   00023B   8882         MOV     DPL,R0
-   \   00023D   8983         MOV     DPH,R1
-   \   00023F   A3           INC     DPTR
-   \   000240   A3           INC     DPTR
-   \   000241   A3           INC     DPTR
-   \   000242   A3           INC     DPTR
-   \   000243   A3           INC     DPTR
-   \   000244   A3           INC     DPTR
-   \   000245   A3           INC     DPTR
-   \   000246   E0           MOVX    A,@DPTR
-   \   000247   C2E3         CLR     0xE0 /* A   */.3
-   \   000249   F0           MOVX    @DPTR,A
-   \   00024A   8882         MOV     DPL,R0
-   \   00024C   8983         MOV     DPH,R1
-   \   00024E   A3           INC     DPTR
-   \   00024F   A3           INC     DPTR
-   \   000250   A3           INC     DPTR
-   \   000251   A3           INC     DPTR
-   \   000252   A3           INC     DPTR
-   \   000253   A3           INC     DPTR
-   \   000254   A3           INC     DPTR
-   \   000255   E0           MOVX    A,@DPTR
-   \   000256   8882         MOV     DPL,R0
-   \   000258   8983         MOV     DPH,R1
-   \   00025A   A3           INC     DPTR
-   \   00025B   A3           INC     DPTR
-   \   00025C   A3           INC     DPTR
-   \   00025D   A3           INC     DPTR
-   \   00025E   A3           INC     DPTR
-   \   00025F   A3           INC     DPTR
-   \   000260   A3           INC     DPTR
-   \   000261   F0           MOVX    @DPTR,A
     547          
     548            // Xfer all 8 bits of a byte xfer.
     549            HAL_DMA_SET_M8( ch, HAL_DMA_M8_USE_8_BITS );
-   \   000262   8882         MOV     DPL,R0
-   \   000264   8983         MOV     DPH,R1
-   \   000266   A3           INC     DPTR
-   \   000267   A3           INC     DPTR
-   \   000268   A3           INC     DPTR
-   \   000269   A3           INC     DPTR
-   \   00026A   A3           INC     DPTR
-   \   00026B   A3           INC     DPTR
-   \   00026C   A3           INC     DPTR
-   \   00026D   E0           MOVX    A,@DPTR
-   \   00026E   C2E2         CLR     0xE0 /* A   */.2
-   \   000270   F0           MOVX    @DPTR,A
-   \   000271   8882         MOV     DPL,R0
-   \   000273   8983         MOV     DPH,R1
-   \   000275   A3           INC     DPTR
-   \   000276   A3           INC     DPTR
-   \   000277   A3           INC     DPTR
-   \   000278   A3           INC     DPTR
-   \   000279   A3           INC     DPTR
-   \   00027A   A3           INC     DPTR
-   \   00027B   A3           INC     DPTR
-   \   00027C   E0           MOVX    A,@DPTR
-   \   00027D   8882         MOV     DPL,R0
-   \   00027F   8983         MOV     DPH,R1
-   \   000281   A3           INC     DPTR
-   \   000282   A3           INC     DPTR
-   \   000283   A3           INC     DPTR
-   \   000284   A3           INC     DPTR
-   \   000285   A3           INC     DPTR
-   \   000286   A3           INC     DPTR
-   \   000287   A3           INC     DPTR
-   \   000288   F0           MOVX    @DPTR,A
     550          
     551            // DMA has highest priority for memory access.
     552            HAL_DMA_SET_PRIORITY( ch, HAL_DMA_PRI_HIGH );
-   \   000289   8882         MOV     DPL,R0
-   \   00028B   8983         MOV     DPH,R1
-   \   00028D   A3           INC     DPTR
-   \   00028E   A3           INC     DPTR
-   \   00028F   A3           INC     DPTR
-   \   000290   A3           INC     DPTR
-   \   000291   A3           INC     DPTR
-   \   000292   A3           INC     DPTR
-   \   000293   A3           INC     DPTR
-   \   000294   E0           MOVX    A,@DPTR
-   \   000295   54FC         ANL     A,#0xfc
-   \   000297   F0           MOVX    @DPTR,A
-   \   000298   8882         MOV     DPL,R0
-   \   00029A   8983         MOV     DPH,R1
-   \   00029C   A3           INC     DPTR
-   \   00029D   A3           INC     DPTR
-   \   00029E   A3           INC     DPTR
-   \   00029F   A3           INC     DPTR
-   \   0002A0   A3           INC     DPTR
-   \   0002A1   A3           INC     DPTR
-   \   0002A2   A3           INC     DPTR
-   \   0002A3   E0           MOVX    A,@DPTR
-   \   0002A4   D2E1         SETB    0xE0 /* A   */.1
-   \   0002A6   F0           MOVX    @DPTR,A
     553          #endif
     554          }
-   \   0002A7   D083         POP     DPH
-   \   0002A9   D082         POP     DPL
-   \   0002AB   02....       LJMP    ?BRET
-   \   0002AE                REQUIRE U0CSR
-   \   0002AE                REQUIRE U0UCR
-   \   0002AE                REQUIRE PERCFG
-   \   0002AE                REQUIRE ADCCFG
-   \   0002AE                REQUIRE P0SEL
-   \   0002AE                REQUIRE P2DIR
+   \   000008   02....       LJMP    ?BRET
+   \   00000B                REQUIRE P2DIR
     555          
     556          /******************************************************************************
     557           * @fn      HalUARTOpen
@@ -2062,28 +725,21 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Components\hal\target\CC2430EB\hal_uart.
     566          uint8 HalUARTOpen( uint8 port, halUARTCfg_t *config )
    \                     HalUARTOpen:
     567          {
-   \   000000   74F2         MOV     A,#-0xe
+   \   000000   74F3         MOV     A,#-0xd
    \   000002   12....       LCALL   ?BANKED_ENTER_XDATA
-   \   000005                ; Saved register size: 14
-   \   000005                ; Auto size: 1
-   \   000005   74FF         MOV     A,#-0x1
-   \   000007   12....       LCALL   ?ALLOC_XSTACK8
-   \   00000A   89..         MOV     ?V0 + 2,R1
-   \   00000C   8A..         MOV     ?V0 + 0,R2
-   \   00000E   8B..         MOV     ?V0 + 1,R3
+   \   000005                ; Saved register size: 13
+   \   000005                ; Auto size: 0
+   \   000005   8A..         MOV     ?V0 + 0,R2
+   \   000007   8B..         MOV     ?V0 + 1,R3
     568            uartCfg_t **cfgPP = NULL;
-   \   000010   75..00       MOV     ?V0 + 4,#0x0
-   \   000013   75..00       MOV     ?V0 + 5,#0x0
+   \   000009   75..00       MOV     ?V0 + 2,#0x0
+   \   00000C   75..00       MOV     ?V0 + 3,#0x0
     569            uartCfg_t *cfg;
     570          
     571          #if HAL_UART_0_ENABLE
     572            if ( port == HAL_UART_PORT_0 )
-   \   000016   E5..         MOV     A,?V0 + 2
-   \   000018   7006         JNZ     ??HalUARTOpen_0
     573            {
     574              cfgPP = &cfg0;
-   \   00001A   75....       MOV     ?V0 + 4,#(cfg0 & 0xff)
-   \   00001D   75....       MOV     ?V0 + 5,#((cfg0 >> 8) & 0xff)
     575            }
     576          #endif
     577          
@@ -2110,159 +766,173 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Components\hal\target\CC2430EB\hal_uart.
     598             * initialization must succeed, so no check for alloc fail.
     599             */
     600            *cfgPP = (uartCfg_t *)osal_mem_alloc( sizeof( uartCfg_t ) );
-   \                     ??HalUARTOpen_0:
-   \   000020                ; Setup parameters for call to function osal_mem_alloc
-   \   000020   7A12         MOV     R2,#0x12
-   \   000022   7B00         MOV     R3,#0x0
-   \   000024   12....       LCALL   ??osal_mem_alloc?relay
-   \   000027   85..82       MOV     DPL,?V0 + 4
-   \   00002A   85..83       MOV     DPH,?V0 + 5
-   \   00002D   EA           MOV     A,R2
-   \   00002E   F0           MOVX    @DPTR,A
-   \   00002F   A3           INC     DPTR
-   \   000030   EB           MOV     A,R3
-   \   000031   F0           MOVX    @DPTR,A
+   \   00000F                ; Setup parameters for call to function osal_mem_alloc
+   \   00000F   7A12         MOV     R2,#0x12
+   \   000011   7B00         MOV     R3,#0x0
+   \   000013   12....       LCALL   ??osal_mem_alloc?relay
+   \   000016   85..82       MOV     DPL,?V0 + 2
+   \   000019   85..83       MOV     DPH,?V0 + 3
+   \   00001C   EA           MOV     A,R2
+   \   00001D   F0           MOVX    @DPTR,A
+   \   00001E   A3           INC     DPTR
+   \   00001F   EB           MOV     A,R3
+   \   000020   F0           MOVX    @DPTR,A
     601            cfg = *cfgPP;
-   \   000032   85..82       MOV     DPL,?V0 + 4
-   \   000035   85..83       MOV     DPH,?V0 + 5
-   \   000038   E0           MOVX    A,@DPTR
-   \   000039   F8           MOV     R0,A
-   \   00003A   A3           INC     DPTR
-   \   00003B   E0           MOVX    A,@DPTR
-   \   00003C   F9           MOV     R1,A
-   \   00003D   E8           MOV     A,R0
-   \   00003E   FE           MOV     R6,A
-   \   00003F   E9           MOV     A,R1
-   \   000040   FF           MOV     R7,A
+   \   000021   85..82       MOV     DPL,?V0 + 2
+   \   000024   85..83       MOV     DPH,?V0 + 3
+   \   000027   E0           MOVX    A,@DPTR
+   \   000028   F8           MOV     R0,A
+   \   000029   A3           INC     DPTR
+   \   00002A   E0           MOVX    A,@DPTR
+   \   00002B   F9           MOV     R1,A
+   \   00002C   E8           MOV     A,R0
+   \   00002D   FE           MOV     R6,A
+   \   00002E   E9           MOV     A,R1
+   \   00002F   FF           MOV     R7,A
     602            HAL_UART_ASSERT( cfg );
     603          
     604            cfg->rxMax = config->rx.maxBufSize;
-   \   000041   85..82       MOV     DPL,?V0 + 0
-   \   000044   85..83       MOV     DPH,?V0 + 1
+   \   000030   85..82       MOV     DPL,?V0 + 0
+   \   000033   85..83       MOV     DPH,?V0 + 1
+   \   000036   A3           INC     DPTR
+   \   000037   A3           INC     DPTR
+   \   000038   A3           INC     DPTR
+   \   000039   A3           INC     DPTR
+   \   00003A   A3           INC     DPTR
+   \   00003B   A3           INC     DPTR
+   \   00003C   A3           INC     DPTR
+   \   00003D   A3           INC     DPTR
+   \   00003E   A3           INC     DPTR
+   \   00003F   A3           INC     DPTR
+   \   000040   E0           MOVX    A,@DPTR
+   \   000041   8E82         MOV     DPL,R6
+   \   000043   8F83         MOV     DPH,R7
+   \   000045   A3           INC     DPTR
+   \   000046   A3           INC     DPTR
    \   000047   A3           INC     DPTR
    \   000048   A3           INC     DPTR
-   \   000049   A3           INC     DPTR
-   \   00004A   A3           INC     DPTR
-   \   00004B   A3           INC     DPTR
-   \   00004C   A3           INC     DPTR
-   \   00004D   A3           INC     DPTR
-   \   00004E   A3           INC     DPTR
-   \   00004F   A3           INC     DPTR
-   \   000050   A3           INC     DPTR
-   \   000051   E0           MOVX    A,@DPTR
-   \   000052   8E82         MOV     DPL,R6
-   \   000054   8F83         MOV     DPH,R7
-   \   000056   A3           INC     DPTR
-   \   000057   A3           INC     DPTR
-   \   000058   A3           INC     DPTR
-   \   000059   A3           INC     DPTR
-   \   00005A   F0           MOVX    @DPTR,A
+   \   000049   F0           MOVX    @DPTR,A
     605          
     606          #if !HAL_UART_BIG_TX_BUF
     607            HAL_UART_ASSERT( (config->tx.maxBufSize < 256) );
     608          #endif
     609            cfg->txMax = config->tx.maxBufSize;
-   \   00005B   E5..         MOV     A,?V0 + 0
-   \   00005D   2412         ADD     A,#0x12
-   \   00005F   F582         MOV     DPL,A
-   \   000061   E5..         MOV     A,?V0 + 1
-   \   000063   3400         ADDC    A,#0x0
-   \   000065   F583         MOV     DPH,A
-   \   000067   E0           MOVX    A,@DPTR
-   \   000068   C0E0         PUSH    A
-   \   00006A   EE           MOV     A,R6
-   \   00006B   240C         ADD     A,#0xc
-   \   00006D   F582         MOV     DPL,A
-   \   00006F   EF           MOV     A,R7
-   \   000070   3400         ADDC    A,#0x0
-   \   000072   F583         MOV     DPH,A
-   \   000074   D0E0         POP     A
-   \   000076   F0           MOVX    @DPTR,A
+   \   00004A   E5..         MOV     A,?V0 + 0
+   \   00004C   2412         ADD     A,#0x12
+   \   00004E   F582         MOV     DPL,A
+   \   000050   E5..         MOV     A,?V0 + 1
+   \   000052   3400         ADDC    A,#0x0
+   \   000054   F583         MOV     DPH,A
+   \   000056   E0           MOVX    A,@DPTR
+   \   000057   C0E0         PUSH    A
+   \   000059   EE           MOV     A,R6
+   \   00005A   240C         ADD     A,#0xc
+   \   00005C   F582         MOV     DPL,A
+   \   00005E   EF           MOV     A,R7
+   \   00005F   3400         ADDC    A,#0x0
+   \   000061   F583         MOV     DPH,A
+   \   000063   D0E0         POP     A
+   \   000065   F0           MOVX    @DPTR,A
     610            cfg->txBuf = osal_mem_alloc( cfg->txMax+1 );
-   \   000077                ; Setup parameters for call to function osal_mem_alloc
-   \   000077   EE           MOV     A,R6
-   \   000078   240C         ADD     A,#0xc
-   \   00007A   F582         MOV     DPL,A
-   \   00007C   EF           MOV     A,R7
-   \   00007D   3400         ADDC    A,#0x0
-   \   00007F   F583         MOV     DPH,A
-   \   000081   E0           MOVX    A,@DPTR
-   \   000082   F8           MOV     R0,A
-   \   000083   7900         MOV     R1,#0x0
-   \   000085   7401         MOV     A,#0x1
-   \   000087   28           ADD     A,R0
-   \   000088   FA           MOV     R2,A
-   \   000089   7400         MOV     A,#0x0
-   \   00008B   39           ADDC    A,R1
-   \   00008C   FB           MOV     R3,A
-   \   00008D   12....       LCALL   ??osal_mem_alloc?relay
-   \   000090   8E82         MOV     DPL,R6
-   \   000092   8F83         MOV     DPH,R7
-   \   000094   A3           INC     DPTR
-   \   000095   A3           INC     DPTR
-   \   000096   A3           INC     DPTR
+   \   000066                ; Setup parameters for call to function osal_mem_alloc
+   \   000066   EE           MOV     A,R6
+   \   000067   240C         ADD     A,#0xc
+   \   000069   F582         MOV     DPL,A
+   \   00006B   EF           MOV     A,R7
+   \   00006C   3400         ADDC    A,#0x0
+   \   00006E   F583         MOV     DPH,A
+   \   000070   E0           MOVX    A,@DPTR
+   \   000071   F8           MOV     R0,A
+   \   000072   7900         MOV     R1,#0x0
+   \   000074   7401         MOV     A,#0x1
+   \   000076   28           ADD     A,R0
+   \   000077   FA           MOV     R2,A
+   \   000078   7400         MOV     A,#0x0
+   \   00007A   39           ADDC    A,R1
+   \   00007B   FB           MOV     R3,A
+   \   00007C   12....       LCALL   ??osal_mem_alloc?relay
+   \   00007F   8E82         MOV     DPL,R6
+   \   000081   8F83         MOV     DPH,R7
+   \   000083   A3           INC     DPTR
+   \   000084   A3           INC     DPTR
+   \   000085   A3           INC     DPTR
+   \   000086   A3           INC     DPTR
+   \   000087   A3           INC     DPTR
+   \   000088   A3           INC     DPTR
+   \   000089   A3           INC     DPTR
+   \   00008A   A3           INC     DPTR
+   \   00008B   EA           MOV     A,R2
+   \   00008C   F0           MOVX    @DPTR,A
+   \   00008D   A3           INC     DPTR
+   \   00008E   EB           MOV     A,R3
+   \   00008F   F0           MOVX    @DPTR,A
+    611          
+    612            cfg->rxHead = cfg->rxTail = 0;
+   \   000090   7A00         MOV     R2,#0x0
+   \   000092   EA           MOV     A,R2
+   \   000093   8E82         MOV     DPL,R6
+   \   000095   8F83         MOV     DPH,R7
    \   000097   A3           INC     DPTR
    \   000098   A3           INC     DPTR
    \   000099   A3           INC     DPTR
-   \   00009A   A3           INC     DPTR
-   \   00009B   A3           INC     DPTR
-   \   00009C   EA           MOV     A,R2
-   \   00009D   F0           MOVX    @DPTR,A
-   \   00009E   A3           INC     DPTR
-   \   00009F   EB           MOV     A,R3
-   \   0000A0   F0           MOVX    @DPTR,A
-    611          
-    612            cfg->rxHead = cfg->rxTail = 0;
-   \   0000A1   7A00         MOV     R2,#0x0
-   \   0000A3   EA           MOV     A,R2
-   \   0000A4   8E82         MOV     DPL,R6
-   \   0000A6   8F83         MOV     DPH,R7
-   \   0000A8   A3           INC     DPTR
-   \   0000A9   A3           INC     DPTR
-   \   0000AA   A3           INC     DPTR
-   \   0000AB   F0           MOVX    @DPTR,A
-   \   0000AC   EA           MOV     A,R2
-   \   0000AD   8E82         MOV     DPL,R6
-   \   0000AF   8F83         MOV     DPH,R7
-   \   0000B1   A3           INC     DPTR
-   \   0000B2   A3           INC     DPTR
-   \   0000B3   F0           MOVX    @DPTR,A
+   \   00009A   F0           MOVX    @DPTR,A
+   \   00009B   EA           MOV     A,R2
+   \   00009C   8E82         MOV     DPL,R6
+   \   00009E   8F83         MOV     DPH,R7
+   \   0000A0   A3           INC     DPTR
+   \   0000A1   A3           INC     DPTR
+   \   0000A2   F0           MOVX    @DPTR,A
     613            cfg->txHead = cfg->txTail = 0;
-   \   0000B4   7A00         MOV     R2,#0x0
-   \   0000B6   EA           MOV     A,R2
-   \   0000B7   C0E0         PUSH    A
-   \   0000B9   EE           MOV     A,R6
-   \   0000BA   240B         ADD     A,#0xb
-   \   0000BC   F582         MOV     DPL,A
-   \   0000BE   EF           MOV     A,R7
-   \   0000BF   3400         ADDC    A,#0x0
-   \   0000C1   F583         MOV     DPH,A
-   \   0000C3   D0E0         POP     A
-   \   0000C5   F0           MOVX    @DPTR,A
-   \   0000C6   EA           MOV     A,R2
-   \   0000C7   8E82         MOV     DPL,R6
-   \   0000C9   8F83         MOV     DPH,R7
+   \   0000A3   7A00         MOV     R2,#0x0
+   \   0000A5   EA           MOV     A,R2
+   \   0000A6   C0E0         PUSH    A
+   \   0000A8   EE           MOV     A,R6
+   \   0000A9   240B         ADD     A,#0xb
+   \   0000AB   F582         MOV     DPL,A
+   \   0000AD   EF           MOV     A,R7
+   \   0000AE   3400         ADDC    A,#0x0
+   \   0000B0   F583         MOV     DPH,A
+   \   0000B2   D0E0         POP     A
+   \   0000B4   F0           MOVX    @DPTR,A
+   \   0000B5   EA           MOV     A,R2
+   \   0000B6   8E82         MOV     DPL,R6
+   \   0000B8   8F83         MOV     DPH,R7
+   \   0000BA   A3           INC     DPTR
+   \   0000BB   A3           INC     DPTR
+   \   0000BC   A3           INC     DPTR
+   \   0000BD   A3           INC     DPTR
+   \   0000BE   A3           INC     DPTR
+   \   0000BF   A3           INC     DPTR
+   \   0000C0   A3           INC     DPTR
+   \   0000C1   A3           INC     DPTR
+   \   0000C2   A3           INC     DPTR
+   \   0000C3   A3           INC     DPTR
+   \   0000C4   F0           MOVX    @DPTR,A
+    614            cfg->rxHigh = config->rx.maxBufSize - config->flowControlThreshold;
+   \   0000C5   85..82       MOV     DPL,?V0 + 0
+   \   0000C8   85..83       MOV     DPH,?V0 + 1
    \   0000CB   A3           INC     DPTR
    \   0000CC   A3           INC     DPTR
    \   0000CD   A3           INC     DPTR
-   \   0000CE   A3           INC     DPTR
-   \   0000CF   A3           INC     DPTR
-   \   0000D0   A3           INC     DPTR
-   \   0000D1   A3           INC     DPTR
-   \   0000D2   A3           INC     DPTR
-   \   0000D3   A3           INC     DPTR
-   \   0000D4   A3           INC     DPTR
-   \   0000D5   F0           MOVX    @DPTR,A
-    614            cfg->rxHigh = config->rx.maxBufSize - config->flowControlThreshold;
-   \   0000D6   85..82       MOV     DPL,?V0 + 0
-   \   0000D9   85..83       MOV     DPH,?V0 + 1
+   \   0000CE   E0           MOVX    A,@DPTR
+   \   0000CF   F8           MOV     R0,A
+   \   0000D0   85..82       MOV     DPL,?V0 + 0
+   \   0000D3   85..83       MOV     DPH,?V0 + 1
+   \   0000D6   A3           INC     DPTR
+   \   0000D7   A3           INC     DPTR
+   \   0000D8   A3           INC     DPTR
+   \   0000D9   A3           INC     DPTR
+   \   0000DA   A3           INC     DPTR
+   \   0000DB   A3           INC     DPTR
    \   0000DC   A3           INC     DPTR
    \   0000DD   A3           INC     DPTR
    \   0000DE   A3           INC     DPTR
-   \   0000DF   E0           MOVX    A,@DPTR
-   \   0000E0   F8           MOV     R0,A
-   \   0000E1   85..82       MOV     DPL,?V0 + 0
-   \   0000E4   85..83       MOV     DPH,?V0 + 1
+   \   0000DF   A3           INC     DPTR
+   \   0000E0   E0           MOVX    A,@DPTR
+   \   0000E1   C3           CLR     C
+   \   0000E2   98           SUBB    A,R0
+   \   0000E3   8E82         MOV     DPL,R6
+   \   0000E5   8F83         MOV     DPH,R7
    \   0000E7   A3           INC     DPTR
    \   0000E8   A3           INC     DPTR
    \   0000E9   A3           INC     DPTR
@@ -2270,233 +940,47 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Components\hal\target\CC2430EB\hal_uart.
    \   0000EB   A3           INC     DPTR
    \   0000EC   A3           INC     DPTR
    \   0000ED   A3           INC     DPTR
-   \   0000EE   A3           INC     DPTR
-   \   0000EF   A3           INC     DPTR
-   \   0000F0   A3           INC     DPTR
-   \   0000F1   E0           MOVX    A,@DPTR
-   \   0000F2   C3           CLR     C
-   \   0000F3   98           SUBB    A,R0
-   \   0000F4   8E82         MOV     DPL,R6
-   \   0000F6   8F83         MOV     DPH,R7
-   \   0000F8   A3           INC     DPTR
-   \   0000F9   A3           INC     DPTR
-   \   0000FA   A3           INC     DPTR
-   \   0000FB   A3           INC     DPTR
-   \   0000FC   A3           INC     DPTR
-   \   0000FD   A3           INC     DPTR
-   \   0000FE   A3           INC     DPTR
-   \   0000FF   F0           MOVX    @DPTR,A
+   \   0000EE   F0           MOVX    @DPTR,A
     615            cfg->rxCB = config->callBackFunc;
-   \   000100   E5..         MOV     A,?V0 + 0
-   \   000102   241B         ADD     A,#0x1b
-   \   000104   F582         MOV     DPL,A
-   \   000106   E5..         MOV     A,?V0 + 1
-   \   000108   3400         ADDC    A,#0x0
-   \   00010A   F583         MOV     DPH,A
-   \   00010C   E0           MOVX    A,@DPTR
-   \   00010D   F8           MOV     R0,A
-   \   00010E   A3           INC     DPTR
-   \   00010F   E0           MOVX    A,@DPTR
-   \   000110   F9           MOV     R1,A
-   \   000111   EE           MOV     A,R6
-   \   000112   2410         ADD     A,#0x10
-   \   000114   F582         MOV     DPL,A
-   \   000116   EF           MOV     A,R7
-   \   000117   3400         ADDC    A,#0x0
-   \   000119   F583         MOV     DPH,A
-   \   00011B   E8           MOV     A,R0
-   \   00011C   F0           MOVX    @DPTR,A
-   \   00011D   A3           INC     DPTR
-   \   00011E   E9           MOV     A,R1
-   \   00011F   F0           MOVX    @DPTR,A
+   \   0000EF   E5..         MOV     A,?V0 + 0
+   \   0000F1   241B         ADD     A,#0x1b
+   \   0000F3   F582         MOV     DPL,A
+   \   0000F5   E5..         MOV     A,?V0 + 1
+   \   0000F7   3400         ADDC    A,#0x0
+   \   0000F9   F583         MOV     DPH,A
+   \   0000FB   E0           MOVX    A,@DPTR
+   \   0000FC   F8           MOV     R0,A
+   \   0000FD   A3           INC     DPTR
+   \   0000FE   E0           MOVX    A,@DPTR
+   \   0000FF   F9           MOV     R1,A
+   \   000100   EE           MOV     A,R6
+   \   000101   2410         ADD     A,#0x10
+   \   000103   F582         MOV     DPL,A
+   \   000105   EF           MOV     A,R7
+   \   000106   3400         ADDC    A,#0x0
+   \   000108   F583         MOV     DPH,A
+   \   00010A   E8           MOV     A,R0
+   \   00010B   F0           MOVX    @DPTR,A
+   \   00010C   A3           INC     DPTR
+   \   00010D   E9           MOV     A,R1
+   \   00010E   F0           MOVX    @DPTR,A
     616          
     617          #if HAL_UART_0_ENABLE
     618            if ( port == HAL_UART_PORT_0 )
-   \   000120   E5..         MOV     A,?V0 + 2
-   \   000122   6003         JZ      $+5
-   \   000124   02....       LJMP    ??HalUARTOpen_1 & 0xFFFF
     619            {
     620              // Only supporting 38400 or 115200 for code size - other is possible.
     621              U0BAUD = (config->baudRate == HAL_UART_BR_38400) ? 59 : 216;
-   \   000127   85..82       MOV     DPL,?V0 + 0
-   \   00012A   85..83       MOV     DPH,?V0 + 1
-   \   00012D   A3           INC     DPTR
-   \   00012E   E0           MOVX    A,@DPTR
-   \   00012F   6406         XRL     A,#0x6
-   \   000131   7004         JNZ     ??HalUARTOpen_2
-   \   000133   7A3B         MOV     R2,#0x3b
-   \   000135   8002         SJMP    ??HalUARTOpen_3
-   \                     ??HalUARTOpen_2:
-   \   000137   7AD8         MOV     R2,#-0x28
-   \                     ??HalUARTOpen_3:
-   \   000139   8AC2         MOV     0xc2,R2
     622              U0GCR = (config->baudRate == HAL_UART_BR_38400) ? 10 : 11;
-   \   00013B   85..82       MOV     DPL,?V0 + 0
-   \   00013E   85..83       MOV     DPH,?V0 + 1
-   \   000141   A3           INC     DPTR
-   \   000142   E0           MOVX    A,@DPTR
-   \   000143   6406         XRL     A,#0x6
-   \   000145   7004         JNZ     ??HalUARTOpen_4
-   \   000147   7A0A         MOV     R2,#0xa
-   \   000149   8002         SJMP    ??HalUARTOpen_5
-   \                     ??HalUARTOpen_4:
-   \   00014B   7A0B         MOV     R2,#0xb
-   \                     ??HalUARTOpen_5:
-   \   00014D   8AC5         MOV     0xc5,R2
     623          
     624              U0CSR |= CSR_RE;
-   \   00014F   438640       ORL     0x86,#0x40
     625          
     626          #if HAL_UART_DMA == 1
     627              cfg->flag = UART_CFG_DMA;
-   \   000152   7440         MOV     A,#0x40
-   \   000154   C0E0         PUSH    A
-   \   000156   EE           MOV     A,R6
-   \   000157   240F         ADD     A,#0xf
-   \   000159   F582         MOV     DPL,A
-   \   00015B   EF           MOV     A,R7
-   \   00015C   3400         ADDC    A,#0x0
-   \   00015E   F583         MOV     DPH,A
-   \   000160   D0E0         POP     A
-   \   000162   F0           MOVX    @DPTR,A
     628              HAL_UART_ASSERT( (config->rx.maxBufSize <= 128) );
     629              HAL_UART_ASSERT( (config->rx.maxBufSize > SAFE_RX_MIN) );
     630              cfg->rxBuf = osal_mem_alloc( cfg->rxMax*2 );
-   \   000163                ; Setup parameters for call to function osal_mem_alloc
-   \   000163   8E82         MOV     DPL,R6
-   \   000165   8F83         MOV     DPH,R7
-   \   000167   A3           INC     DPTR
-   \   000168   A3           INC     DPTR
-   \   000169   A3           INC     DPTR
-   \   00016A   A3           INC     DPTR
-   \   00016B   E0           MOVX    A,@DPTR
-   \   00016C   FA           MOV     R2,A
-   \   00016D   7B00         MOV     R3,#0x0
-   \   00016F   EA           MOV     A,R2
-   \   000170   75F002       MOV     B,#0x2
-   \   000173   A4           MUL     AB
-   \   000174   CA           XCH     A,R2
-   \   000175   ACF0         MOV     R4,B
-   \   000177   75F000       MOV     B,#0x0
-   \   00017A   A4           MUL     AB
-   \   00017B   2C           ADD     A,R4
-   \   00017C   FC           MOV     R4,A
-   \   00017D   75F002       MOV     B,#0x2
-   \   000180   EB           MOV     A,R3
-   \   000181   A4           MUL     AB
-   \   000182   2C           ADD     A,R4
-   \   000183   FB           MOV     R3,A
-   \   000184   12....       LCALL   ??osal_mem_alloc?relay
-   \   000187   8E82         MOV     DPL,R6
-   \   000189   8F83         MOV     DPH,R7
-   \   00018B   EA           MOV     A,R2
-   \   00018C   F0           MOVX    @DPTR,A
-   \   00018D   A3           INC     DPTR
-   \   00018E   EB           MOV     A,R3
-   \   00018F   F0           MOVX    @DPTR,A
     631              osal_memset( cfg->rxBuf, ~DMA_PAD, cfg->rxMax*2 );
-   \   000190                ; Setup parameters for call to function osal_memset
-   \   000190   8E82         MOV     DPL,R6
-   \   000192   8F83         MOV     DPH,R7
-   \   000194   A3           INC     DPTR
-   \   000195   A3           INC     DPTR
-   \   000196   A3           INC     DPTR
-   \   000197   A3           INC     DPTR
-   \   000198   E0           MOVX    A,@DPTR
-   \   000199   FC           MOV     R4,A
-   \   00019A   7D00         MOV     R5,#0x0
-   \   00019C   EC           MOV     A,R4
-   \   00019D   75F002       MOV     B,#0x2
-   \   0001A0   A4           MUL     AB
-   \   0001A1   CC           XCH     A,R4
-   \   0001A2   AAF0         MOV     R2,B
-   \   0001A4   75F000       MOV     B,#0x0
-   \   0001A7   A4           MUL     AB
-   \   0001A8   2A           ADD     A,R2
-   \   0001A9   FA           MOV     R2,A
-   \   0001AA   75F002       MOV     B,#0x2
-   \   0001AD   ED           MOV     A,R5
-   \   0001AE   A4           MUL     AB
-   \   0001AF   2A           ADD     A,R2
-   \   0001B0   FD           MOV     R5,A
-   \   0001B1   E5C2         MOV     A,0xc2
-   \   0001B3   F4           CPL     A
-   \   0001B4   F9           MOV     R1,A
-   \   0001B5   8E82         MOV     DPL,R6
-   \   0001B7   8F83         MOV     DPH,R7
-   \   0001B9   E0           MOVX    A,@DPTR
-   \   0001BA   FA           MOV     R2,A
-   \   0001BB   A3           INC     DPTR
-   \   0001BC   E0           MOVX    A,@DPTR
-   \   0001BD   FB           MOV     R3,A
-   \   0001BE   12....       LCALL   ??osal_memset?relay
     632              DMA_RX( cfg );
-   \   0001C1   E5C1         MOV     A,0xc1
-   \   0001C3   85..82       MOV     DPL,?XSP + 0
-   \   0001C6   85..83       MOV     DPH,?XSP + 1
-   \   0001C9   F0           MOVX    @DPTR,A
-   \   0001CA   7A..         MOV     R2,#((dmaCh1234 + 24) & 0xff)
-   \   0001CC   7B..         MOV     R3,#(((dmaCh1234 + 24) >> 8) & 0xff)
-   \   0001CE   8E82         MOV     DPL,R6
-   \   0001D0   8F83         MOV     DPH,R7
-   \   0001D2   A3           INC     DPTR
-   \   0001D3   E0           MOVX    A,@DPTR
-   \   0001D4   F9           MOV     R1,A
-   \   0001D5   E9           MOV     A,R1
-   \   0001D6   8A82         MOV     DPL,R2
-   \   0001D8   8B83         MOV     DPH,R3
-   \   0001DA   A3           INC     DPTR
-   \   0001DB   A3           INC     DPTR
-   \   0001DC   F0           MOVX    @DPTR,A
-   \   0001DD   8E82         MOV     DPL,R6
-   \   0001DF   8F83         MOV     DPH,R7
-   \   0001E1   E0           MOVX    A,@DPTR
-   \   0001E2   8A82         MOV     DPL,R2
-   \   0001E4   8B83         MOV     DPH,R3
-   \   0001E6   A3           INC     DPTR
-   \   0001E7   A3           INC     DPTR
-   \   0001E8   A3           INC     DPTR
-   \   0001E9   F0           MOVX    @DPTR,A
-   \   0001EA   8E82         MOV     DPL,R6
-   \   0001EC   8F83         MOV     DPH,R7
-   \   0001EE   A3           INC     DPTR
-   \   0001EF   A3           INC     DPTR
-   \   0001F0   A3           INC     DPTR
-   \   0001F1   A3           INC     DPTR
-   \   0001F2   E0           MOVX    A,@DPTR
-   \   0001F3   8A82         MOV     DPL,R2
-   \   0001F5   8B83         MOV     DPH,R3
-   \   0001F7   A3           INC     DPTR
-   \   0001F8   A3           INC     DPTR
-   \   0001F9   A3           INC     DPTR
-   \   0001FA   A3           INC     DPTR
-   \   0001FB   A3           INC     DPTR
-   \   0001FC   F0           MOVX    @DPTR,A
-   \   0001FD   8A82         MOV     DPL,R2
-   \   0001FF   8B83         MOV     DPH,R3
-   \   000201   A3           INC     DPTR
-   \   000202   A3           INC     DPTR
-   \   000203   A3           INC     DPTR
-   \   000204   A3           INC     DPTR
-   \   000205   E0           MOVX    A,@DPTR
-   \   000206   54E0         ANL     A,#0xe0
-   \   000208   F0           MOVX    @DPTR,A
-   \   000209   8A82         MOV     DPL,R2
-   \   00020B   8B83         MOV     DPH,R3
-   \   00020D   A3           INC     DPTR
-   \   00020E   A3           INC     DPTR
-   \   00020F   A3           INC     DPTR
-   \   000210   A3           INC     DPTR
-   \   000211   E0           MOVX    A,@DPTR
-   \   000212   8A82         MOV     DPL,R2
-   \   000214   8B83         MOV     DPH,R3
-   \   000216   A3           INC     DPTR
-   \   000217   A3           INC     DPTR
-   \   000218   A3           INC     DPTR
-   \   000219   A3           INC     DPTR
-   \   00021A   F0           MOVX    @DPTR,A
-   \   00021B   53D1EF       ANL     0xd1,#0xef
-   \   00021E   75D610       MOV     0xd6,#0x10
     633          #else
     634              cfg->flag = 0;
     635              HAL_UART_ASSERT( (config->rx.maxBufSize < 256) );
@@ -2507,40 +991,18 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Components\hal\target\CC2430EB\hal_uart.
     640          
     641              // 8 bits/char; no parity; 1 stop bit; stop bit hi.
     642              if ( config->flowControl )
-   \   000221   85..82       MOV     DPL,?V0 + 0
-   \   000224   85..83       MOV     DPH,?V0 + 1
-   \   000227   A3           INC     DPTR
-   \   000228   A3           INC     DPTR
-   \   000229   E0           MOVX    A,@DPTR
-   \   00022A   601B         JZ      ??HalUARTOpen_6
     643              {
     644                cfg->flag |= UART_CFG_FLW;
-   \   00022C   EE           MOV     A,R6
-   \   00022D   240F         ADD     A,#0xf
-   \   00022F   F582         MOV     DPL,A
-   \   000231   EF           MOV     A,R7
-   \   000232   3400         ADDC    A,#0x0
-   \   000234   F583         MOV     DPH,A
-   \   000236   E0           MOVX    A,@DPTR
-   \   000237   D2E5         SETB    0xE0 /* A   */.5
-   \   000239   F0           MOVX    @DPTR,A
     645                U0UCR = UCR_FLOW | UCR_STOP;
-   \   00023A   75C442       MOV     0xc4,#0x42
     646                // Must rely on H/W for RTS (i.e. Tx stops when receiver negates CTS.)
     647                P0SEL |= HAL_UART_0_P0_RTS;
-   \   00023D   43F310       ORL     0xf3,#0x10
     648                // Cannot use H/W for CTS as DMA does not clear the Rx bytes properly.
     649                P0DIR |= HAL_UART_0_P0_CTS;
-   \   000240   43FD20       ORL     0xfd,#0x20
     650                RX0_FLOW_ON;
-   \   000243   C285         CLR     0x80.5
-   \   000245   8003         SJMP    ??HalUARTOpen_1
     651              }
     652              else
     653              {
     654                U0UCR = UCR_STOP;
-   \                     ??HalUARTOpen_6:
-   \   000247   75C402       MOV     0xc4,#0x2
     655              }
     656              }
     657          #endif
@@ -2588,22 +1050,9 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Components\hal\target\CC2430EB\hal_uart.
     699          #endif
     700          
     701            return HAL_UART_SUCCESS;
-   \                     ??HalUARTOpen_1:
-   \   00024A   7900         MOV     R1,#0x0
-   \   00024C   7401         MOV     A,#0x1
-   \   00024E   12....       LCALL   ?DEALLOC_XSTACK8
-   \   000251   7F06         MOV     R7,#0x6
-   \   000253   02....       LJMP    ?BANKED_LEAVE_XDATA
-   \   000256                REQUIRE _A_P0
-   \   000256                REQUIRE U0CSR
-   \   000256                REQUIRE U0DBUF
-   \   000256                REQUIRE U0BAUD
-   \   000256                REQUIRE U0UCR
-   \   000256                REQUIRE U0GCR
-   \   000256                REQUIRE DMAIRQ
-   \   000256                REQUIRE DMAARM
-   \   000256                REQUIRE P0SEL
-   \   000256                REQUIRE P0DIR
+   \   00010F   7900         MOV     R1,#0x0
+   \   000111   7F05         MOV     R7,#0x5
+   \   000113   02....       LJMP    ?BANKED_LEAVE_XDATA
     702          }
     703          
     704          /******************************************************************************
@@ -2684,10 +1133,8 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Components\hal\target\CC2430EB\hal_uart.
     771          void HalUARTPoll( void )
    \                     HalUARTPoll:
     772          {
-   \   000000   74F6         MOV     A,#-0xa
-   \   000002   12....       LCALL   ?BANKED_ENTER_XDATA
-   \   000005                ; Saved register size: 10
-   \   000005                ; Auto size: 0
+   \   000000                ; Saved register size: 0
+   \   000000                ; Auto size: 0
     773          #if ( HAL_UART_0_ENABLE | HAL_UART_1_ENABLE )
     774            static uint8 tickShdw;
     775            uartCfg_t *cfg;
@@ -2695,27 +1142,8 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Components\hal\target\CC2430EB\hal_uart.
     777          
     778          #if HAL_UART_0_ENABLE
     779            if ( cfg0 )
-   \   000005   90....       MOV     DPTR,#cfg0
-   \   000008   E0           MOVX    A,@DPTR
-   \   000009   6400         XRL     A,#0x0
-   \   00000B   7004         JNZ     ??HalUARTPoll_0
-   \   00000D   A3           INC     DPTR
-   \   00000E   E0           MOVX    A,@DPTR
-   \   00000F   6400         XRL     A,#0x0
-   \                     ??HalUARTPoll_0:
-   \   000011   600C         JZ      ??HalUARTPoll_1
     780            {
     781              cfg = cfg0;
-   \   000013   90....       MOV     DPTR,#cfg0
-   \   000016   E0           MOVX    A,@DPTR
-   \   000017   F8           MOV     R0,A
-   \   000018   A3           INC     DPTR
-   \   000019   E0           MOVX    A,@DPTR
-   \   00001A   F9           MOV     R1,A
-   \   00001B   E8           MOV     A,R0
-   \   00001C   FE           MOV     R6,A
-   \   00001D   E9           MOV     A,R1
-   \   00001E   FF           MOV     R7,A
     782            }
     783          #endif
     784          #if HAL_UART_1_ENABLE
@@ -2727,110 +1155,26 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Components\hal\target\CC2430EB\hal_uart.
     790          
     791            // Use the LSB of the sleep timer (ST0 must be read first anyway).
     792            tick = ST0 - tickShdw;
-   \                     ??HalUARTPoll_1:
-   \   00001F   90....       MOV     DPTR,#??tickShdw
-   \   000022   E0           MOVX    A,@DPTR
-   \   000023   FA           MOV     R2,A
-   \   000024   E595         MOV     A,0x95
-   \   000026   C3           CLR     C
-   \   000027   9A           SUBB    A,R2
-   \   000028   F5..         MOV     ?V0 + 0,A
     793            tickShdw = ST0;
-   \   00002A   E595         MOV     A,0x95
-   \   00002C   90....       MOV     DPTR,#??tickShdw
-   \   00002F   F0           MOVX    @DPTR,A
     794          
     795            do
     796            {
     797              if ( cfg->txTick > tick )
-   \   000030   EE           MOV     A,R6
-   \   000031   240E         ADD     A,#0xe
-   \   000033   F582         MOV     DPL,A
-   \   000035   EF           MOV     A,R7
-   \   000036   3400         ADDC    A,#0x0
-   \   000038   F583         MOV     DPH,A
-   \   00003A   E0           MOVX    A,@DPTR
-   \   00003B   FA           MOV     R2,A
-   \   00003C   E5..         MOV     A,?V0 + 0
-   \   00003E   C3           CLR     C
-   \   00003F   9A           SUBB    A,R2
-   \   000040   5011         JNC     ??HalUARTPoll_2
     798              {
     799                cfg->txTick -= tick;
-   \   000042   EE           MOV     A,R6
-   \   000043   240E         ADD     A,#0xe
-   \   000045   F582         MOV     DPL,A
-   \   000047   EF           MOV     A,R7
-   \   000048   3400         ADDC    A,#0x0
-   \   00004A   F583         MOV     DPH,A
-   \   00004C   E0           MOVX    A,@DPTR
-   \   00004D   C3           CLR     C
-   \   00004E   95..         SUBB    A,?V0 + 0
-   \   000050   F0           MOVX    @DPTR,A
-   \   000051   8011         SJMP    ??HalUARTPoll_3
     800              }
     801              else
     802              {
     803                cfg->txTick = 0;
-   \                     ??HalUARTPoll_2:
-   \   000053   7400         MOV     A,#0x0
-   \   000055   C0E0         PUSH    A
-   \   000057   EE           MOV     A,R6
-   \   000058   240E         ADD     A,#0xe
-   \   00005A   F582         MOV     DPL,A
-   \   00005C   EF           MOV     A,R7
-   \   00005D   3400         ADDC    A,#0x0
-   \   00005F   F583         MOV     DPH,A
-   \   000061   D0E0         POP     A
-   \   000063   F0           MOVX    @DPTR,A
     804              }
     805          
     806              if ( cfg->rxTick > tick )
-   \                     ??HalUARTPoll_3:
-   \   000064   8E82         MOV     DPL,R6
-   \   000066   8F83         MOV     DPH,R7
-   \   000068   A3           INC     DPTR
-   \   000069   A3           INC     DPTR
-   \   00006A   A3           INC     DPTR
-   \   00006B   A3           INC     DPTR
-   \   00006C   A3           INC     DPTR
-   \   00006D   A3           INC     DPTR
-   \   00006E   E0           MOVX    A,@DPTR
-   \   00006F   FA           MOV     R2,A
-   \   000070   E5..         MOV     A,?V0 + 0
-   \   000072   C3           CLR     C
-   \   000073   9A           SUBB    A,R2
-   \   000074   5011         JNC     ??HalUARTPoll_4
     807              {
     808                cfg->rxTick -= tick;
-   \   000076   8E82         MOV     DPL,R6
-   \   000078   8F83         MOV     DPH,R7
-   \   00007A   A3           INC     DPTR
-   \   00007B   A3           INC     DPTR
-   \   00007C   A3           INC     DPTR
-   \   00007D   A3           INC     DPTR
-   \   00007E   A3           INC     DPTR
-   \   00007F   A3           INC     DPTR
-   \   000080   E0           MOVX    A,@DPTR
-   \   000081   C3           CLR     C
-   \   000082   95..         SUBB    A,?V0 + 0
-   \   000084   F0           MOVX    @DPTR,A
-   \   000085   800D         SJMP    ??HalUARTPoll_5
     809              }
     810              else
     811              {
     812                cfg->rxTick = 0;
-   \                     ??HalUARTPoll_4:
-   \   000087   7400         MOV     A,#0x0
-   \   000089   8E82         MOV     DPL,R6
-   \   00008B   8F83         MOV     DPH,R7
-   \   00008D   A3           INC     DPTR
-   \   00008E   A3           INC     DPTR
-   \   00008F   A3           INC     DPTR
-   \   000090   A3           INC     DPTR
-   \   000091   A3           INC     DPTR
-   \   000092   A3           INC     DPTR
-   \   000093   F0           MOVX    @DPTR,A
     813              }
     814          
     815          #if HAL_UART_ISR
@@ -2846,13 +1190,6 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Components\hal\target\CC2430EB\hal_uart.
     825                }
     826          #elif HAL_UART_DMA
     827              pollDMA( cfg );
-   \                     ??HalUARTPoll_5:
-   \   000094                ; Setup parameters for call to function pollDMA
-   \   000094   EE           MOV     A,R6
-   \   000095   FA           MOV     R2,A
-   \   000096   EF           MOV     A,R7
-   \   000097   FB           MOV     R3,A
-   \   000098   12....       LCALL   ??pollDMA?relay
     828          #endif
     829          
     830              /* The following logic makes continuous callbacks on any eligible flag
@@ -2860,177 +1197,29 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Components\hal\target\CC2430EB\hal_uart.
     832               * So even if new data is not received, continuous callbacks are made.
     833               */
     834                if ( cfg->rxHead != cfg->rxTail )
-   \   00009B   8E82         MOV     DPL,R6
-   \   00009D   8F83         MOV     DPH,R7
-   \   00009F   A3           INC     DPTR
-   \   0000A0   A3           INC     DPTR
-   \   0000A1   E0           MOVX    A,@DPTR
-   \   0000A2   FA           MOV     R2,A
-   \   0000A3   8E82         MOV     DPL,R6
-   \   0000A5   8F83         MOV     DPH,R7
-   \   0000A7   A3           INC     DPTR
-   \   0000A8   A3           INC     DPTR
-   \   0000A9   A3           INC     DPTR
-   \   0000AA   E0           MOVX    A,@DPTR
-   \   0000AB   6A           XRL     A,R2
-   \   0000AC   7003         JNZ     $+5
-   \   0000AE   02....       LJMP    ??HalUARTPoll_6 & 0xFFFF
     835                {
     836                uint8 evt;
     837          
     838                if ( cfg->rxHead >= (cfg->rxMax - SAFE_RX_MIN) )
-   \   0000B1   8E82         MOV     DPL,R6
-   \   0000B3   8F83         MOV     DPH,R7
-   \   0000B5   A3           INC     DPTR
-   \   0000B6   A3           INC     DPTR
-   \   0000B7   E0           MOVX    A,@DPTR
-   \   0000B8   FA           MOV     R2,A
-   \   0000B9   7B00         MOV     R3,#0x0
-   \   0000BB   8E82         MOV     DPL,R6
-   \   0000BD   8F83         MOV     DPH,R7
-   \   0000BF   A3           INC     DPTR
-   \   0000C0   A3           INC     DPTR
-   \   0000C1   A3           INC     DPTR
-   \   0000C2   A3           INC     DPTR
-   \   0000C3   E0           MOVX    A,@DPTR
-   \   0000C4   F8           MOV     R0,A
-   \   0000C5   7900         MOV     R1,#0x0
-   \   0000C7   74D0         MOV     A,#-0x30
-   \   0000C9   28           ADD     A,R0
-   \   0000CA   F8           MOV     R0,A
-   \   0000CB   74FF         MOV     A,#-0x1
-   \   0000CD   39           ADDC    A,R1
-   \   0000CE   F9           MOV     R1,A
-   \   0000CF   C3           CLR     C
-   \   0000D0   EA           MOV     A,R2
-   \   0000D1   98           SUBB    A,R0
-   \   0000D2   EB           MOV     A,R3
-   \   0000D3   99           SUBB    A,R1
-   \   0000D4   A2D2         MOV     C,0xD0 /* PSW */.2
-   \   0000D6   65D0         XRL     A,PSW
-   \   0000D8   33           RLC     A
-   \   0000D9   4005         JC      ??HalUARTPoll_7
     839                {
     840                  evt = HAL_UART_RX_FULL;
-   \   0000DB   75..01       MOV     ?V0 + 1,#0x1
-   \   0000DE   8044         SJMP    ??HalUARTPoll_8
     841                }
     842                else if ( cfg->rxHigh && (cfg->rxHead >= cfg->rxHigh) )
-   \                     ??HalUARTPoll_7:
-   \   0000E0   8E82         MOV     DPL,R6
-   \   0000E2   8F83         MOV     DPH,R7
-   \   0000E4   A3           INC     DPTR
-   \   0000E5   A3           INC     DPTR
-   \   0000E6   A3           INC     DPTR
-   \   0000E7   A3           INC     DPTR
-   \   0000E8   A3           INC     DPTR
-   \   0000E9   A3           INC     DPTR
-   \   0000EA   A3           INC     DPTR
-   \   0000EB   E0           MOVX    A,@DPTR
-   \   0000EC   6021         JZ      ??HalUARTPoll_9
-   \   0000EE   8E82         MOV     DPL,R6
-   \   0000F0   8F83         MOV     DPH,R7
-   \   0000F2   A3           INC     DPTR
-   \   0000F3   A3           INC     DPTR
-   \   0000F4   E0           MOVX    A,@DPTR
-   \   0000F5   C0E0         PUSH    A
-   \   0000F7   8E82         MOV     DPL,R6
-   \   0000F9   8F83         MOV     DPH,R7
-   \   0000FB   A3           INC     DPTR
-   \   0000FC   A3           INC     DPTR
-   \   0000FD   A3           INC     DPTR
-   \   0000FE   A3           INC     DPTR
-   \   0000FF   A3           INC     DPTR
-   \   000100   A3           INC     DPTR
-   \   000101   A3           INC     DPTR
-   \   000102   E0           MOVX    A,@DPTR
-   \   000103   FA           MOV     R2,A
-   \   000104   D0E0         POP     A
-   \   000106   C3           CLR     C
-   \   000107   9A           SUBB    A,R2
-   \   000108   4005         JC      ??HalUARTPoll_9
     843                {
     844                  evt = HAL_UART_RX_ABOUT_FULL;
-   \   00010A   75..02       MOV     ?V0 + 1,#0x2
-   \   00010D   8015         SJMP    ??HalUARTPoll_8
     845              }
     846                else if ( cfg->rxTick == 0 )
-   \                     ??HalUARTPoll_9:
-   \   00010F   8E82         MOV     DPL,R6
-   \   000111   8F83         MOV     DPH,R7
-   \   000113   A3           INC     DPTR
-   \   000114   A3           INC     DPTR
-   \   000115   A3           INC     DPTR
-   \   000116   A3           INC     DPTR
-   \   000117   A3           INC     DPTR
-   \   000118   A3           INC     DPTR
-   \   000119   E0           MOVX    A,@DPTR
-   \   00011A   7005         JNZ     ??HalUARTPoll_10
     847              {
     848                  evt = HAL_UART_RX_TIMEOUT;
-   \   00011C   75..04       MOV     ?V0 + 1,#0x4
-   \   00011F   8003         SJMP    ??HalUARTPoll_8
     849              }
     850              else
     851              {
     852                  evt = 0;
-   \                     ??HalUARTPoll_10:
-   \   000121   75..00       MOV     ?V0 + 1,#0x0
     853              }
     854          
     855              if ( evt && cfg->rxCB )
-   \                     ??HalUARTPoll_8:
-   \   000124   E5..         MOV     A,?V0 + 1
-   \   000126   6047         JZ      ??HalUARTPoll_6
-   \   000128   EE           MOV     A,R6
-   \   000129   2410         ADD     A,#0x10
-   \   00012B   F582         MOV     DPL,A
-   \   00012D   EF           MOV     A,R7
-   \   00012E   3400         ADDC    A,#0x0
-   \   000130   F583         MOV     DPH,A
-   \   000132   E0           MOVX    A,@DPTR
-   \   000133   6400         XRL     A,#0x0
-   \   000135   7004         JNZ     ??HalUARTPoll_11
-   \   000137   A3           INC     DPTR
-   \   000138   E0           MOVX    A,@DPTR
-   \   000139   6400         XRL     A,#0x0
-   \                     ??HalUARTPoll_11:
-   \   00013B   6032         JZ      ??HalUARTPoll_6
     856              {
     857                  cfg->rxCB( ((cfg->flag & UART_CFG_U1F)!=0), evt );
-   \   00013D   EE           MOV     A,R6
-   \   00013E   240F         ADD     A,#0xf
-   \   000140   F582         MOV     DPL,A
-   \   000142   EF           MOV     A,R7
-   \   000143   3400         ADDC    A,#0x0
-   \   000145   F583         MOV     DPH,A
-   \   000147   E0           MOVX    A,@DPTR
-   \   000148   A2E7         MOV     C,0xE0 /* A   */.7
-   \   00014A   5004         JNC     ??HalUARTPoll_12
-   \   00014C   D2F0         SETB    B.0
-   \   00014E   8002         SJMP    ??HalUARTPoll_13
-   \                     ??HalUARTPoll_12:
-   \   000150   C2F0         CLR     B.0
-   \                     ??HalUARTPoll_13:
-   \   000152                ; Setup parameters for indirect call
-   \   000152   AA..         MOV     R2,?V0 + 1
-   \   000154   A2F0         MOV     C,B.0
-   \   000156   E4           CLR     A
-   \   000157   92E0         MOV     0xE0 /* A   */.0,C
-   \   000159   F9           MOV     R1,A
-   \   00015A   EE           MOV     A,R6
-   \   00015B   2410         ADD     A,#0x10
-   \   00015D   F582         MOV     DPL,A
-   \   00015F   EF           MOV     A,R7
-   \   000160   3400         ADDC    A,#0x0
-   \   000162   F583         MOV     DPH,A
-   \   000164   E0           MOVX    A,@DPTR
-   \   000165   F8           MOV     R0,A
-   \   000166   A3           INC     DPTR
-   \   000167   E0           MOVX    A,@DPTR
-   \   000168   F583         MOV     DPH,A
-   \   00016A   8882         MOV     DPL,R0
-   \   00016C   12....       LCALL   ?CALL_IND
     858              }
     859              }
     860          
@@ -3053,17 +1242,9 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Components\hal\target\CC2430EB\hal_uart.
     877            } while ( TRUE );
     878          #else
     879            return;
+   \   000000   02....       LJMP    ?BRET
     880          #endif
     881          }
-   \                     ??HalUARTPoll_6:
-   \   00016F   7F02         MOV     R7,#0x2
-   \   000171   02....       LJMP    ?BANKED_LEAVE_XDATA
-   \   000174                REQUIRE ST0
-
-   \                                 In  segment XDATA_Z, align 1, keep-with-next
-   \                     ??tickShdw:
-   \   000000                DS 1
-   \   000001                REQUIRE __INIT_XDATA_Z
     882          
     883          /**************************************************************************************************
     884           * @fn      Hal_UART_RxBufLen()
@@ -3083,26 +1264,14 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Components\hal\target\CC2430EB\hal_uart.
    \   000002   C083         PUSH    DPH
    \   000004                ; Saved register size: 2
    \   000004                ; Auto size: 0
-   \   000004   E9           MOV     A,R1
     894            uartCfg_t *cfg = NULL;
-   \   000005   7C00         MOV     R4,#0x0
-   \   000007   7D00         MOV     R5,#0x0
+   \   000004   7C00         MOV     R4,#0x0
+   \   000006   7D00         MOV     R5,#0x0
     895          
     896          #if HAL_UART_0_ENABLE
     897            if ( port == HAL_UART_PORT_0 )
-   \   000009   700C         JNZ     ??Hal_UART_RxBufLen_0
     898            {
     899              cfg = cfg0;
-   \   00000B   90....       MOV     DPTR,#cfg0
-   \   00000E   E0           MOVX    A,@DPTR
-   \   00000F   F8           MOV     R0,A
-   \   000010   A3           INC     DPTR
-   \   000011   E0           MOVX    A,@DPTR
-   \   000012   F9           MOV     R1,A
-   \   000013   E8           MOV     A,R0
-   \   000014   FC           MOV     R4,A
-   \   000015   E9           MOV     A,R1
-   \   000016   FD           MOV     R5,A
     900            }
     901          #endif
     902          #if HAL_UART_1_ENABLE
@@ -3115,93 +1284,92 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Components\hal\target\CC2430EB\hal_uart.
     909            HAL_UART_ASSERT( cfg );
     910          
     911            return UART_RX_AVAIL( cfg );
-   \                     ??Hal_UART_RxBufLen_0:
-   \   000017   8C82         MOV     DPL,R4
-   \   000019   8D83         MOV     DPH,R5
-   \   00001B   A3           INC     DPTR
-   \   00001C   A3           INC     DPTR
-   \   00001D   E0           MOVX    A,@DPTR
-   \   00001E   C0E0         PUSH    A
+   \   000008   8C82         MOV     DPL,R4
+   \   00000A   8D83         MOV     DPH,R5
+   \   00000C   A3           INC     DPTR
+   \   00000D   A3           INC     DPTR
+   \   00000E   E0           MOVX    A,@DPTR
+   \   00000F   C0E0         PUSH    A
+   \   000011   8C82         MOV     DPL,R4
+   \   000013   8D83         MOV     DPH,R5
+   \   000015   A3           INC     DPTR
+   \   000016   A3           INC     DPTR
+   \   000017   A3           INC     DPTR
+   \   000018   E0           MOVX    A,@DPTR
+   \   000019   FA           MOV     R2,A
+   \   00001A   D0E0         POP     A
+   \   00001C   C3           CLR     C
+   \   00001D   9A           SUBB    A,R2
+   \   00001E   401E         JC      ??Hal_UART_RxBufLen_0
    \   000020   8C82         MOV     DPL,R4
    \   000022   8D83         MOV     DPH,R5
    \   000024   A3           INC     DPTR
    \   000025   A3           INC     DPTR
-   \   000026   A3           INC     DPTR
-   \   000027   E0           MOVX    A,@DPTR
-   \   000028   FB           MOV     R3,A
-   \   000029   D0E0         POP     A
-   \   00002B   C3           CLR     C
-   \   00002C   9B           SUBB    A,R3
-   \   00002D   401E         JC      ??Hal_UART_RxBufLen_1
-   \   00002F   8C82         MOV     DPL,R4
-   \   000031   8D83         MOV     DPH,R5
-   \   000033   A3           INC     DPTR
-   \   000034   A3           INC     DPTR
-   \   000035   E0           MOVX    A,@DPTR
-   \   000036   F8           MOV     R0,A
-   \   000037   7900         MOV     R1,#0x0
-   \   000039   8C82         MOV     DPL,R4
-   \   00003B   8D83         MOV     DPH,R5
-   \   00003D   A3           INC     DPTR
-   \   00003E   A3           INC     DPTR
-   \   00003F   A3           INC     DPTR
-   \   000040   E0           MOVX    A,@DPTR
-   \   000041   FA           MOV     R2,A
-   \   000042   7B00         MOV     R3,#0x0
-   \   000044   E8           MOV     A,R0
-   \   000045   C3           CLR     C
-   \   000046   9A           SUBB    A,R2
-   \   000047   FA           MOV     R2,A
-   \   000048   E9           MOV     A,R1
-   \   000049   9B           SUBB    A,R3
-   \   00004A   FB           MOV     R3,A
-   \   00004B   8034         SJMP    ??Hal_UART_RxBufLen_2
+   \   000026   E0           MOVX    A,@DPTR
+   \   000027   F8           MOV     R0,A
+   \   000028   7900         MOV     R1,#0x0
+   \   00002A   8C82         MOV     DPL,R4
+   \   00002C   8D83         MOV     DPH,R5
+   \   00002E   A3           INC     DPTR
+   \   00002F   A3           INC     DPTR
+   \   000030   A3           INC     DPTR
+   \   000031   E0           MOVX    A,@DPTR
+   \   000032   FA           MOV     R2,A
+   \   000033   7B00         MOV     R3,#0x0
+   \   000035   E8           MOV     A,R0
+   \   000036   C3           CLR     C
+   \   000037   9A           SUBB    A,R2
+   \   000038   FA           MOV     R2,A
+   \   000039   E9           MOV     A,R1
+   \   00003A   9B           SUBB    A,R3
+   \   00003B   FB           MOV     R3,A
+   \   00003C   8034         SJMP    ??Hal_UART_RxBufLen_1
+   \                     ??Hal_UART_RxBufLen_0:
+   \   00003E   8C82         MOV     DPL,R4
+   \   000040   8D83         MOV     DPH,R5
+   \   000042   A3           INC     DPTR
+   \   000043   A3           INC     DPTR
+   \   000044   A3           INC     DPTR
+   \   000045   A3           INC     DPTR
+   \   000046   E0           MOVX    A,@DPTR
+   \   000047   F8           MOV     R0,A
+   \   000048   7900         MOV     R1,#0x0
+   \   00004A   8C82         MOV     DPL,R4
+   \   00004C   8D83         MOV     DPH,R5
+   \   00004E   A3           INC     DPTR
+   \   00004F   A3           INC     DPTR
+   \   000050   A3           INC     DPTR
+   \   000051   E0           MOVX    A,@DPTR
+   \   000052   FA           MOV     R2,A
+   \   000053   7B00         MOV     R3,#0x0
+   \   000055   E8           MOV     A,R0
+   \   000056   C3           CLR     C
+   \   000057   9A           SUBB    A,R2
+   \   000058   F8           MOV     R0,A
+   \   000059   E9           MOV     A,R1
+   \   00005A   9B           SUBB    A,R3
+   \   00005B   F9           MOV     R1,A
+   \   00005C   8C82         MOV     DPL,R4
+   \   00005E   8D83         MOV     DPH,R5
+   \   000060   A3           INC     DPTR
+   \   000061   A3           INC     DPTR
+   \   000062   E0           MOVX    A,@DPTR
+   \   000063   7B00         MOV     R3,#0x0
+   \   000065   28           ADD     A,R0
+   \   000066   F8           MOV     R0,A
+   \   000067   EB           MOV     A,R3
+   \   000068   39           ADDC    A,R1
+   \   000069   F9           MOV     R1,A
+   \   00006A   7401         MOV     A,#0x1
+   \   00006C   28           ADD     A,R0
+   \   00006D   FA           MOV     R2,A
+   \   00006E   7400         MOV     A,#0x0
+   \   000070   39           ADDC    A,R1
+   \   000071   FB           MOV     R3,A
    \                     ??Hal_UART_RxBufLen_1:
-   \   00004D   8C82         MOV     DPL,R4
-   \   00004F   8D83         MOV     DPH,R5
-   \   000051   A3           INC     DPTR
-   \   000052   A3           INC     DPTR
-   \   000053   A3           INC     DPTR
-   \   000054   A3           INC     DPTR
-   \   000055   E0           MOVX    A,@DPTR
-   \   000056   F8           MOV     R0,A
-   \   000057   7900         MOV     R1,#0x0
-   \   000059   8C82         MOV     DPL,R4
-   \   00005B   8D83         MOV     DPH,R5
-   \   00005D   A3           INC     DPTR
-   \   00005E   A3           INC     DPTR
-   \   00005F   A3           INC     DPTR
-   \   000060   E0           MOVX    A,@DPTR
-   \   000061   FA           MOV     R2,A
-   \   000062   7B00         MOV     R3,#0x0
-   \   000064   E8           MOV     A,R0
-   \   000065   C3           CLR     C
-   \   000066   9A           SUBB    A,R2
-   \   000067   F8           MOV     R0,A
-   \   000068   E9           MOV     A,R1
-   \   000069   9B           SUBB    A,R3
-   \   00006A   F9           MOV     R1,A
-   \   00006B   8C82         MOV     DPL,R4
-   \   00006D   8D83         MOV     DPH,R5
-   \   00006F   A3           INC     DPTR
-   \   000070   A3           INC     DPTR
-   \   000071   E0           MOVX    A,@DPTR
-   \   000072   7B00         MOV     R3,#0x0
-   \   000074   28           ADD     A,R0
-   \   000075   F8           MOV     R0,A
-   \   000076   EB           MOV     A,R3
-   \   000077   39           ADDC    A,R1
-   \   000078   F9           MOV     R1,A
-   \   000079   7401         MOV     A,#0x1
-   \   00007B   28           ADD     A,R0
-   \   00007C   FA           MOV     R2,A
-   \   00007D   7400         MOV     A,#0x0
-   \   00007F   39           ADDC    A,R1
-   \   000080   FB           MOV     R3,A
-   \                     ??Hal_UART_RxBufLen_2:
-   \   000081   D083         POP     DPH
-   \   000083   D082         POP     DPL
-   \   000085   02....       LJMP    ?BRET
+   \   000072   D083         POP     DPH
+   \   000074   D082         POP     DPL
+   \   000076   02....       LJMP    ?BRET
     912          }
     913          
     914          /*****************************************************************************
@@ -3220,37 +1388,24 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Components\hal\target\CC2430EB\hal_uart.
     925          uint16 HalUARTRead( uint8 port, uint8 *buf, uint16 len )
    \                     HalUARTRead:
     926          {
-   \   000000   74F4         MOV     A,#-0xc
+   \   000000   74F3         MOV     A,#-0xd
    \   000002   12....       LCALL   ?BANKED_ENTER_XDATA
-   \   000005                ; Saved register size: 12
+   \   000005                ; Saved register size: 13
    \   000005                ; Auto size: 0
-   \   000005   89..         MOV     ?V0 + 2,R1
-   \   000007   EA           MOV     A,R2
-   \   000008   F8           MOV     R0,A
-   \   000009   EB           MOV     A,R3
-   \   00000A   F9           MOV     R1,A
+   \   000005   EA           MOV     A,R2
+   \   000006   F8           MOV     R0,A
+   \   000007   EB           MOV     A,R3
+   \   000008   F9           MOV     R1,A
     927            uartCfg_t *cfg = NULL;
-   \   00000B   7E00         MOV     R6,#0x0
-   \   00000D   7F00         MOV     R7,#0x0
+   \   000009   75..00       MOV     ?V0 + 2,#0x0
+   \   00000C   75..00       MOV     ?V0 + 3,#0x0
     928            uint8 cnt = 0;
-   \   00000F   75..00       MOV     ?V0 + 3,#0x0
+   \   00000F   75..00       MOV     ?V0 + 4,#0x0
     929          
     930          #if HAL_UART_0_ENABLE
     931            if ( port == HAL_UART_PORT_0 )
-   \   000012   E5..         MOV     A,?V0 + 2
-   \   000014   700C         JNZ     ??HalUARTRead_0
     932            {
     933              cfg = cfg0;
-   \   000016   90....       MOV     DPTR,#cfg0
-   \   000019   E0           MOVX    A,@DPTR
-   \   00001A   FA           MOV     R2,A
-   \   00001B   A3           INC     DPTR
-   \   00001C   E0           MOVX    A,@DPTR
-   \   00001D   FB           MOV     R3,A
-   \   00001E   EA           MOV     A,R2
-   \   00001F   FE           MOV     R6,A
-   \   000020   EB           MOV     A,R3
-   \   000021   FF           MOV     R7,A
     934            }
     935          #endif
     936          #if HAL_UART_1_ENABLE
@@ -3264,102 +1419,102 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Components\hal\target\CC2430EB\hal_uart.
     944          
     945            while ( (cfg->rxTail != cfg->rxHead) && (cnt < len) )
    \                     ??HalUARTRead_0:
-   \   000022   8E82         MOV     DPL,R6
-   \   000024   8F83         MOV     DPH,R7
-   \   000026   A3           INC     DPTR
-   \   000027   A3           INC     DPTR
-   \   000028   A3           INC     DPTR
-   \   000029   E0           MOVX    A,@DPTR
-   \   00002A   FA           MOV     R2,A
-   \   00002B   8E82         MOV     DPL,R6
-   \   00002D   8F83         MOV     DPH,R7
-   \   00002F   A3           INC     DPTR
-   \   000030   A3           INC     DPTR
-   \   000031   E0           MOVX    A,@DPTR
-   \   000032   6A           XRL     A,R2
-   \   000033   6069         JZ      ??HalUARTRead_1
-   \   000035   85....       MOV     ?V0 + 0,?V0 + 3
-   \   000038   75..00       MOV     ?V0 + 1,#0x0
-   \   00003B   C3           CLR     C
-   \   00003C   E5..         MOV     A,?V0 + 0
-   \   00003E   9C           SUBB    A,R4
-   \   00003F   E5..         MOV     A,?V0 + 1
-   \   000041   9D           SUBB    A,R5
-   \   000042   505A         JNC     ??HalUARTRead_1
+   \   000012   85..82       MOV     DPL,?V0 + 2
+   \   000015   85..83       MOV     DPH,?V0 + 3
+   \   000018   A3           INC     DPTR
+   \   000019   A3           INC     DPTR
+   \   00001A   A3           INC     DPTR
+   \   00001B   E0           MOVX    A,@DPTR
+   \   00001C   FA           MOV     R2,A
+   \   00001D   85..82       MOV     DPL,?V0 + 2
+   \   000020   85..83       MOV     DPH,?V0 + 3
+   \   000023   A3           INC     DPTR
+   \   000024   A3           INC     DPTR
+   \   000025   E0           MOVX    A,@DPTR
+   \   000026   6A           XRL     A,R2
+   \   000027   6074         JZ      ??HalUARTRead_1
+   \   000029   85....       MOV     ?V0 + 0,?V0 + 4
+   \   00002C   75..00       MOV     ?V0 + 1,#0x0
+   \   00002F   C3           CLR     C
+   \   000030   E5..         MOV     A,?V0 + 0
+   \   000032   9C           SUBB    A,R4
+   \   000033   E5..         MOV     A,?V0 + 1
+   \   000035   9D           SUBB    A,R5
+   \   000036   5065         JNC     ??HalUARTRead_1
     946            {
     947              *buf++ = cfg->rxBuf[cfg->rxTail];
-   \   000044   8E82         MOV     DPL,R6
-   \   000046   8F83         MOV     DPH,R7
-   \   000048   A3           INC     DPTR
-   \   000049   A3           INC     DPTR
-   \   00004A   A3           INC     DPTR
+   \   000038   85..82       MOV     DPL,?V0 + 2
+   \   00003B   85..83       MOV     DPH,?V0 + 3
+   \   00003E   A3           INC     DPTR
+   \   00003F   A3           INC     DPTR
+   \   000040   A3           INC     DPTR
+   \   000041   E0           MOVX    A,@DPTR
+   \   000042   FA           MOV     R2,A
+   \   000043   7B00         MOV     R3,#0x0
+   \   000045   85..82       MOV     DPL,?V0 + 2
+   \   000048   85..83       MOV     DPH,?V0 + 3
    \   00004B   E0           MOVX    A,@DPTR
-   \   00004C   FA           MOV     R2,A
-   \   00004D   7B00         MOV     R3,#0x0
-   \   00004F   8E82         MOV     DPL,R6
-   \   000051   8F83         MOV     DPH,R7
-   \   000053   E0           MOVX    A,@DPTR
-   \   000054   2A           ADD     A,R2
-   \   000055   F5..         MOV     ?V0 + 0,A
-   \   000057   A3           INC     DPTR
-   \   000058   E0           MOVX    A,@DPTR
-   \   000059   3B           ADDC    A,R3
-   \   00005A   85..82       MOV     DPL,?V0 + 0
-   \   00005D   F583         MOV     DPH,A
-   \   00005F   E0           MOVX    A,@DPTR
-   \   000060   8882         MOV     DPL,R0
-   \   000062   8983         MOV     DPH,R1
-   \   000064   F0           MOVX    @DPTR,A
-   \   000065   8882         MOV     DPL,R0
-   \   000067   8983         MOV     DPH,R1
-   \   000069   A3           INC     DPTR
-   \   00006A   A882         MOV     R0,DPL
-   \   00006C   A983         MOV     R1,DPH
+   \   00004C   2A           ADD     A,R2
+   \   00004D   FF           MOV     R7,A
+   \   00004E   A3           INC     DPTR
+   \   00004F   E0           MOVX    A,@DPTR
+   \   000050   3B           ADDC    A,R3
+   \   000051   8F82         MOV     DPL,R7
+   \   000053   F583         MOV     DPH,A
+   \   000055   E0           MOVX    A,@DPTR
+   \   000056   8882         MOV     DPL,R0
+   \   000058   8983         MOV     DPH,R1
+   \   00005A   F0           MOVX    @DPTR,A
+   \   00005B   8882         MOV     DPL,R0
+   \   00005D   8983         MOV     DPH,R1
+   \   00005F   A3           INC     DPTR
+   \   000060   A882         MOV     R0,DPL
+   \   000062   A983         MOV     R1,DPH
     948              if ( cfg->rxTail == cfg->rxMax )
-   \   00006E   8E82         MOV     DPL,R6
-   \   000070   8F83         MOV     DPH,R7
-   \   000072   A3           INC     DPTR
-   \   000073   A3           INC     DPTR
-   \   000074   A3           INC     DPTR
-   \   000075   E0           MOVX    A,@DPTR
-   \   000076   FA           MOV     R2,A
-   \   000077   8E82         MOV     DPL,R6
-   \   000079   8F83         MOV     DPH,R7
-   \   00007B   A3           INC     DPTR
-   \   00007C   A3           INC     DPTR
-   \   00007D   A3           INC     DPTR
-   \   00007E   A3           INC     DPTR
-   \   00007F   E0           MOVX    A,@DPTR
-   \   000080   6A           XRL     A,R2
-   \   000081   700C         JNZ     ??HalUARTRead_2
+   \   000064   85..82       MOV     DPL,?V0 + 2
+   \   000067   85..83       MOV     DPH,?V0 + 3
+   \   00006A   A3           INC     DPTR
+   \   00006B   A3           INC     DPTR
+   \   00006C   A3           INC     DPTR
+   \   00006D   E0           MOVX    A,@DPTR
+   \   00006E   FA           MOV     R2,A
+   \   00006F   85..82       MOV     DPL,?V0 + 2
+   \   000072   85..83       MOV     DPH,?V0 + 3
+   \   000075   A3           INC     DPTR
+   \   000076   A3           INC     DPTR
+   \   000077   A3           INC     DPTR
+   \   000078   A3           INC     DPTR
+   \   000079   E0           MOVX    A,@DPTR
+   \   00007A   6A           XRL     A,R2
+   \   00007B   700E         JNZ     ??HalUARTRead_2
     949              {
     950                cfg->rxTail = 0;
-   \   000083   7400         MOV     A,#0x0
-   \   000085   8E82         MOV     DPL,R6
-   \   000087   8F83         MOV     DPH,R7
-   \   000089   A3           INC     DPTR
-   \   00008A   A3           INC     DPTR
-   \   00008B   A3           INC     DPTR
-   \   00008C   F0           MOVX    @DPTR,A
-   \   00008D   800B         SJMP    ??HalUARTRead_3
+   \   00007D   7400         MOV     A,#0x0
+   \   00007F   85..82       MOV     DPL,?V0 + 2
+   \   000082   85..83       MOV     DPH,?V0 + 3
+   \   000085   A3           INC     DPTR
+   \   000086   A3           INC     DPTR
+   \   000087   A3           INC     DPTR
+   \   000088   F0           MOVX    @DPTR,A
+   \   000089   800D         SJMP    ??HalUARTRead_3
     951              }
     952              else
     953              {
     954                cfg->rxTail++;
    \                     ??HalUARTRead_2:
-   \   00008F   8E82         MOV     DPL,R6
-   \   000091   8F83         MOV     DPH,R7
+   \   00008B   85..82       MOV     DPL,?V0 + 2
+   \   00008E   85..83       MOV     DPH,?V0 + 3
+   \   000091   A3           INC     DPTR
+   \   000092   A3           INC     DPTR
    \   000093   A3           INC     DPTR
-   \   000094   A3           INC     DPTR
-   \   000095   A3           INC     DPTR
-   \   000096   E0           MOVX    A,@DPTR
-   \   000097   2401         ADD     A,#0x1
-   \   000099   F0           MOVX    @DPTR,A
+   \   000094   E0           MOVX    A,@DPTR
+   \   000095   2401         ADD     A,#0x1
+   \   000097   F0           MOVX    @DPTR,A
     955              }
     956              cnt++;
    \                     ??HalUARTRead_3:
-   \   00009A   05..         INC     ?V0 + 3
-   \   00009C   8084         SJMP    ??HalUARTRead_0
+   \   000098   05..         INC     ?V0 + 4
+   \   00009A   02....       LJMP    ??HalUARTRead_0 & 0xFFFF
     957            }
     958          
     959          #if HAL_UART_DMA
@@ -3375,28 +1530,9 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Components\hal\target\CC2430EB\hal_uart.
     969               * the end portion of the incoming packet that does not fit would be lost.
     970               */
     971              if ( !(cfg->flag & UART_CFG_FLW) )
-   \                     ??HalUARTRead_1:
-   \   00009E   EE           MOV     A,R6
-   \   00009F   240F         ADD     A,#0xf
-   \   0000A1   F582         MOV     DPL,A
-   \   0000A3   EF           MOV     A,R7
-   \   0000A4   3400         ADDC    A,#0x0
-   \   0000A6   F583         MOV     DPH,A
-   \   0000A8   E0           MOVX    A,@DPTR
-   \   0000A9   A2E5         MOV     C,0xE0 /* A   */.5
-   \   0000AB   400E         JC      ??HalUARTRead_4
     972              {
     973                // This is a trick to trigger the DMA abort and restart logic in pollDMA.
     974                cfg->flag |= UART_CFG_RXF;
-   \   0000AD   EE           MOV     A,R6
-   \   0000AE   240F         ADD     A,#0xf
-   \   0000B0   F582         MOV     DPL,A
-   \   0000B2   EF           MOV     A,R7
-   \   0000B3   3400         ADDC    A,#0x0
-   \   0000B5   F583         MOV     DPH,A
-   \   0000B7   E0           MOVX    A,@DPTR
-   \   0000B8   D2E1         SETB    0xE0 /* A   */.1
-   \   0000BA   F0           MOVX    @DPTR,A
     975              }
     976            }
     977          #endif
@@ -3419,13 +1555,13 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Components\hal\target\CC2430EB\hal_uart.
     994          #endif
     995          
     996            return cnt;
-   \                     ??HalUARTRead_4:
-   \   0000BB   E5..         MOV     A,?V0 + 3
-   \   0000BD   F5..         MOV     ?V0 + 0,A
-   \   0000BF   AA..         MOV     R2,?V0 + 0
-   \   0000C1   7B00         MOV     R3,#0x0
-   \   0000C3   7F04         MOV     R7,#0x4
-   \   0000C5   02....       LJMP    ?BANKED_LEAVE_XDATA
+   \                     ??HalUARTRead_1:
+   \   00009D   E5..         MOV     A,?V0 + 4
+   \   00009F   F5..         MOV     ?V0 + 0,A
+   \   0000A1   AA..         MOV     R2,?V0 + 0
+   \   0000A3   7B00         MOV     R3,#0x0
+   \   0000A5   7F05         MOV     R7,#0x5
+   \   0000A7   02....       LJMP    ?BANKED_LEAVE_XDATA
     997          }
     998          
     999          /******************************************************************************
@@ -3448,32 +1584,19 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Components\hal\target\CC2430EB\hal_uart.
    \   000002   12....       LCALL   ?BANKED_ENTER_XDATA
    \   000005                ; Saved register size: 12
    \   000005                ; Auto size: 0
-   \   000005   89..         MOV     ?V0 + 2,R1
-   \   000007   EA           MOV     A,R2
-   \   000008   FE           MOV     R6,A
-   \   000009   EB           MOV     A,R3
-   \   00000A   FF           MOV     R7,A
+   \   000005   EA           MOV     A,R2
+   \   000006   F8           MOV     R0,A
+   \   000007   EB           MOV     A,R3
+   \   000008   F9           MOV     R1,A
    1012            uartCfg_t *cfg = NULL;
-   \   00000B   7800         MOV     R0,#0x0
-   \   00000D   7900         MOV     R1,#0x0
+   \   000009   7E00         MOV     R6,#0x0
+   \   00000B   7F00         MOV     R7,#0x0
    1013            uint8 cnt;
    1014          
    1015          #if HAL_UART_0_ENABLE
    1016            if ( port == HAL_UART_PORT_0 )
-   \   00000F   E5..         MOV     A,?V0 + 2
-   \   000011   700C         JNZ     ??HalUARTWrite_0
    1017            {
    1018              cfg = cfg0;
-   \   000013   90....       MOV     DPTR,#cfg0
-   \   000016   E0           MOVX    A,@DPTR
-   \   000017   FA           MOV     R2,A
-   \   000018   A3           INC     DPTR
-   \   000019   E0           MOVX    A,@DPTR
-   \   00001A   FB           MOV     R3,A
-   \   00001B   EA           MOV     A,R2
-   \   00001C   F8           MOV     R0,A
-   \   00001D   EB           MOV     A,R3
-   \   00001E   F9           MOV     R1,A
    1019            }
    1020          #endif
    1021          #if HAL_UART_1_ENABLE
@@ -3486,59 +1609,10 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Components\hal\target\CC2430EB\hal_uart.
    1028            HAL_UART_ASSERT( cfg );
    1029          
    1030            if ( cfg->txHead == cfg->txTail )
-   \                     ??HalUARTWrite_0:
-   \   00001F   8882         MOV     DPL,R0
-   \   000021   8983         MOV     DPH,R1
-   \   000023   A3           INC     DPTR
-   \   000024   A3           INC     DPTR
-   \   000025   A3           INC     DPTR
-   \   000026   A3           INC     DPTR
-   \   000027   A3           INC     DPTR
-   \   000028   A3           INC     DPTR
-   \   000029   A3           INC     DPTR
-   \   00002A   A3           INC     DPTR
-   \   00002B   A3           INC     DPTR
-   \   00002C   A3           INC     DPTR
-   \   00002D   E0           MOVX    A,@DPTR
-   \   00002E   FA           MOV     R2,A
-   \   00002F   E8           MOV     A,R0
-   \   000030   240B         ADD     A,#0xb
-   \   000032   F582         MOV     DPL,A
-   \   000034   E9           MOV     A,R1
-   \   000035   3400         ADDC    A,#0x0
-   \   000037   F583         MOV     DPH,A
-   \   000039   E0           MOVX    A,@DPTR
-   \   00003A   6A           XRL     A,R2
-   \   00003B   7022         JNZ     ??HalUARTWrite_1
    1031            {
    1032          #if HAL_UART_DMA
    1033              // When pointers are equal, reset to zero to get max len w/out wrapping.
    1034              cfg->txHead = cfg->txTail = 0;
-   \   00003D   7A00         MOV     R2,#0x0
-   \   00003F   EA           MOV     A,R2
-   \   000040   C0E0         PUSH    A
-   \   000042   E8           MOV     A,R0
-   \   000043   240B         ADD     A,#0xb
-   \   000045   F582         MOV     DPL,A
-   \   000047   E9           MOV     A,R1
-   \   000048   3400         ADDC    A,#0x0
-   \   00004A   F583         MOV     DPH,A
-   \   00004C   D0E0         POP     A
-   \   00004E   F0           MOVX    @DPTR,A
-   \   00004F   EA           MOV     A,R2
-   \   000050   8882         MOV     DPL,R0
-   \   000052   8983         MOV     DPH,R1
-   \   000054   A3           INC     DPTR
-   \   000055   A3           INC     DPTR
-   \   000056   A3           INC     DPTR
-   \   000057   A3           INC     DPTR
-   \   000058   A3           INC     DPTR
-   \   000059   A3           INC     DPTR
-   \   00005A   A3           INC     DPTR
-   \   00005B   A3           INC     DPTR
-   \   00005C   A3           INC     DPTR
-   \   00005D   A3           INC     DPTR
-   \   00005E   F0           MOVX    @DPTR,A
    1035          #endif
    1036          #if HAL_UART_ISR
    1037          #if HAL_UART_DMA
@@ -3552,296 +1626,295 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Components\hal\target\CC2430EB\hal_uart.
    1045          
    1046            // Accept "all-or-none" on write request.
    1047            if ( TX_AVAIL( cfg ) < len )
-   \                     ??HalUARTWrite_1:
-   \   00005F   E8           MOV     A,R0
-   \   000060   240B         ADD     A,#0xb
-   \   000062   F582         MOV     DPL,A
-   \   000064   E9           MOV     A,R1
-   \   000065   3400         ADDC    A,#0x0
-   \   000067   F583         MOV     DPH,A
-   \   000069   E0           MOVX    A,@DPTR
-   \   00006A   FA           MOV     R2,A
-   \   00006B   8882         MOV     DPL,R0
-   \   00006D   8983         MOV     DPH,R1
-   \   00006F   A3           INC     DPTR
-   \   000070   A3           INC     DPTR
-   \   000071   A3           INC     DPTR
-   \   000072   A3           INC     DPTR
-   \   000073   A3           INC     DPTR
-   \   000074   A3           INC     DPTR
-   \   000075   A3           INC     DPTR
-   \   000076   A3           INC     DPTR
-   \   000077   A3           INC     DPTR
-   \   000078   A3           INC     DPTR
-   \   000079   E0           MOVX    A,@DPTR
-   \   00007A   6A           XRL     A,R2
-   \   00007B   701B         JNZ     ??HalUARTWrite_2
-   \   00007D   E8           MOV     A,R0
-   \   00007E   240C         ADD     A,#0xc
-   \   000080   F582         MOV     DPL,A
-   \   000082   E9           MOV     A,R1
-   \   000083   3400         ADDC    A,#0x0
-   \   000085   F583         MOV     DPH,A
-   \   000087   E0           MOVX    A,@DPTR
-   \   000088   FA           MOV     R2,A
-   \   000089   7B00         MOV     R3,#0x0
-   \   00008B   74FF         MOV     A,#-0x1
-   \   00008D   2A           ADD     A,R2
-   \   00008E   F5..         MOV     ?V0 + 0,A
-   \   000090   74FF         MOV     A,#-0x1
-   \   000092   3B           ADDC    A,R3
-   \   000093   F5..         MOV     ?V0 + 1,A
-   \   000095   02....       LJMP    ??HalUARTWrite_3 & 0xFFFF
+   \   00000D   EE           MOV     A,R6
+   \   00000E   240B         ADD     A,#0xb
+   \   000010   F582         MOV     DPL,A
+   \   000012   EF           MOV     A,R7
+   \   000013   3400         ADDC    A,#0x0
+   \   000015   F583         MOV     DPH,A
+   \   000017   E0           MOVX    A,@DPTR
+   \   000018   FA           MOV     R2,A
+   \   000019   8E82         MOV     DPL,R6
+   \   00001B   8F83         MOV     DPH,R7
+   \   00001D   A3           INC     DPTR
+   \   00001E   A3           INC     DPTR
+   \   00001F   A3           INC     DPTR
+   \   000020   A3           INC     DPTR
+   \   000021   A3           INC     DPTR
+   \   000022   A3           INC     DPTR
+   \   000023   A3           INC     DPTR
+   \   000024   A3           INC     DPTR
+   \   000025   A3           INC     DPTR
+   \   000026   A3           INC     DPTR
+   \   000027   E0           MOVX    A,@DPTR
+   \   000028   6A           XRL     A,R2
+   \   000029   701B         JNZ     ??HalUARTWrite_0
+   \   00002B   EE           MOV     A,R6
+   \   00002C   240C         ADD     A,#0xc
+   \   00002E   F582         MOV     DPL,A
+   \   000030   EF           MOV     A,R7
+   \   000031   3400         ADDC    A,#0x0
+   \   000033   F583         MOV     DPH,A
+   \   000035   E0           MOVX    A,@DPTR
+   \   000036   FA           MOV     R2,A
+   \   000037   7B00         MOV     R3,#0x0
+   \   000039   74FF         MOV     A,#-0x1
+   \   00003B   2A           ADD     A,R2
+   \   00003C   F5..         MOV     ?V0 + 0,A
+   \   00003E   74FF         MOV     A,#-0x1
+   \   000040   3B           ADDC    A,R3
+   \   000041   F5..         MOV     ?V0 + 1,A
+   \   000043   02....       LJMP    ??HalUARTWrite_1 & 0xFFFF
+   \                     ??HalUARTWrite_0:
+   \   000046   8E82         MOV     DPL,R6
+   \   000048   8F83         MOV     DPH,R7
+   \   00004A   A3           INC     DPTR
+   \   00004B   A3           INC     DPTR
+   \   00004C   A3           INC     DPTR
+   \   00004D   A3           INC     DPTR
+   \   00004E   A3           INC     DPTR
+   \   00004F   A3           INC     DPTR
+   \   000050   A3           INC     DPTR
+   \   000051   A3           INC     DPTR
+   \   000052   A3           INC     DPTR
+   \   000053   A3           INC     DPTR
+   \   000054   E0           MOVX    A,@DPTR
+   \   000055   C0E0         PUSH    A
+   \   000057   EE           MOV     A,R6
+   \   000058   240B         ADD     A,#0xb
+   \   00005A   F582         MOV     DPL,A
+   \   00005C   EF           MOV     A,R7
+   \   00005D   3400         ADDC    A,#0x0
+   \   00005F   F583         MOV     DPH,A
+   \   000061   E0           MOVX    A,@DPTR
+   \   000062   FA           MOV     R2,A
+   \   000063   D0E0         POP     A
+   \   000065   C3           CLR     C
+   \   000066   9A           SUBB    A,R2
+   \   000067   5035         JNC     ??HalUARTWrite_2
+   \   000069   EE           MOV     A,R6
+   \   00006A   240B         ADD     A,#0xb
+   \   00006C   F582         MOV     DPL,A
+   \   00006E   EF           MOV     A,R7
+   \   00006F   3400         ADDC    A,#0x0
+   \   000071   F583         MOV     DPH,A
+   \   000073   E0           MOVX    A,@DPTR
+   \   000074   FA           MOV     R2,A
+   \   000075   7B00         MOV     R3,#0x0
+   \   000077   8E82         MOV     DPL,R6
+   \   000079   8F83         MOV     DPH,R7
+   \   00007B   A3           INC     DPTR
+   \   00007C   A3           INC     DPTR
+   \   00007D   A3           INC     DPTR
+   \   00007E   A3           INC     DPTR
+   \   00007F   A3           INC     DPTR
+   \   000080   A3           INC     DPTR
+   \   000081   A3           INC     DPTR
+   \   000082   A3           INC     DPTR
+   \   000083   A3           INC     DPTR
+   \   000084   A3           INC     DPTR
+   \   000085   E0           MOVX    A,@DPTR
+   \   000086   F5..         MOV     ?V0 + 0,A
+   \   000088   75..00       MOV     ?V0 + 1,#0x0
+   \   00008B   EA           MOV     A,R2
+   \   00008C   C3           CLR     C
+   \   00008D   95..         SUBB    A,?V0 + 0
+   \   00008F   FA           MOV     R2,A
+   \   000090   EB           MOV     A,R3
+   \   000091   95..         SUBB    A,?V0 + 1
+   \   000093   FB           MOV     R3,A
+   \   000094   74FF         MOV     A,#-0x1
+   \   000096   2A           ADD     A,R2
+   \   000097   FA           MOV     R2,A
+   \   000098   74FF         MOV     A,#-0x1
+   \   00009A   3B           ADDC    A,R3
+   \   00009B   FB           MOV     R3,A
+   \   00009C   8043         SJMP    ??HalUARTWrite_3
    \                     ??HalUARTWrite_2:
-   \   000098   8882         MOV     DPL,R0
-   \   00009A   8983         MOV     DPH,R1
-   \   00009C   A3           INC     DPTR
-   \   00009D   A3           INC     DPTR
-   \   00009E   A3           INC     DPTR
-   \   00009F   A3           INC     DPTR
-   \   0000A0   A3           INC     DPTR
-   \   0000A1   A3           INC     DPTR
-   \   0000A2   A3           INC     DPTR
-   \   0000A3   A3           INC     DPTR
-   \   0000A4   A3           INC     DPTR
-   \   0000A5   A3           INC     DPTR
-   \   0000A6   E0           MOVX    A,@DPTR
-   \   0000A7   C0E0         PUSH    A
-   \   0000A9   E8           MOV     A,R0
-   \   0000AA   240B         ADD     A,#0xb
-   \   0000AC   F582         MOV     DPL,A
-   \   0000AE   E9           MOV     A,R1
-   \   0000AF   3400         ADDC    A,#0x0
-   \   0000B1   F583         MOV     DPH,A
-   \   0000B3   E0           MOVX    A,@DPTR
-   \   0000B4   FA           MOV     R2,A
-   \   0000B5   D0E0         POP     A
-   \   0000B7   C3           CLR     C
-   \   0000B8   9A           SUBB    A,R2
-   \   0000B9   5035         JNC     ??HalUARTWrite_4
-   \   0000BB   E8           MOV     A,R0
-   \   0000BC   240B         ADD     A,#0xb
-   \   0000BE   F582         MOV     DPL,A
-   \   0000C0   E9           MOV     A,R1
-   \   0000C1   3400         ADDC    A,#0x0
-   \   0000C3   F583         MOV     DPH,A
-   \   0000C5   E0           MOVX    A,@DPTR
-   \   0000C6   FA           MOV     R2,A
-   \   0000C7   7B00         MOV     R3,#0x0
-   \   0000C9   8882         MOV     DPL,R0
-   \   0000CB   8983         MOV     DPH,R1
-   \   0000CD   A3           INC     DPTR
-   \   0000CE   A3           INC     DPTR
-   \   0000CF   A3           INC     DPTR
-   \   0000D0   A3           INC     DPTR
-   \   0000D1   A3           INC     DPTR
-   \   0000D2   A3           INC     DPTR
-   \   0000D3   A3           INC     DPTR
-   \   0000D4   A3           INC     DPTR
-   \   0000D5   A3           INC     DPTR
-   \   0000D6   A3           INC     DPTR
-   \   0000D7   E0           MOVX    A,@DPTR
-   \   0000D8   F5..         MOV     ?V0 + 0,A
-   \   0000DA   75..00       MOV     ?V0 + 1,#0x0
-   \   0000DD   EA           MOV     A,R2
-   \   0000DE   C3           CLR     C
-   \   0000DF   95..         SUBB    A,?V0 + 0
-   \   0000E1   FA           MOV     R2,A
-   \   0000E2   EB           MOV     A,R3
-   \   0000E3   95..         SUBB    A,?V0 + 1
-   \   0000E5   FB           MOV     R3,A
-   \   0000E6   74FF         MOV     A,#-0x1
-   \   0000E8   2A           ADD     A,R2
-   \   0000E9   FA           MOV     R2,A
-   \   0000EA   74FF         MOV     A,#-0x1
-   \   0000EC   3B           ADDC    A,R3
-   \   0000ED   FB           MOV     R3,A
-   \   0000EE   8043         SJMP    ??HalUARTWrite_5
-   \                     ??HalUARTWrite_4:
-   \   0000F0   E8           MOV     A,R0
-   \   0000F1   240C         ADD     A,#0xc
-   \   0000F3   F582         MOV     DPL,A
-   \   0000F5   E9           MOV     A,R1
-   \   0000F6   3400         ADDC    A,#0x0
-   \   0000F8   F583         MOV     DPH,A
-   \   0000FA   E0           MOVX    A,@DPTR
-   \   0000FB   FA           MOV     R2,A
-   \   0000FC   7B00         MOV     R3,#0x0
-   \   0000FE   8882         MOV     DPL,R0
-   \   000100   8983         MOV     DPH,R1
-   \   000102   A3           INC     DPTR
-   \   000103   A3           INC     DPTR
-   \   000104   A3           INC     DPTR
-   \   000105   A3           INC     DPTR
-   \   000106   A3           INC     DPTR
-   \   000107   A3           INC     DPTR
-   \   000108   A3           INC     DPTR
-   \   000109   A3           INC     DPTR
-   \   00010A   A3           INC     DPTR
-   \   00010B   A3           INC     DPTR
-   \   00010C   E0           MOVX    A,@DPTR
-   \   00010D   F5..         MOV     ?V0 + 0,A
-   \   00010F   75..00       MOV     ?V0 + 1,#0x0
-   \   000112   EA           MOV     A,R2
-   \   000113   C3           CLR     C
-   \   000114   95..         SUBB    A,?V0 + 0
-   \   000116   FA           MOV     R2,A
-   \   000117   EB           MOV     A,R3
-   \   000118   95..         SUBB    A,?V0 + 1
-   \   00011A   FB           MOV     R3,A
-   \   00011B   E8           MOV     A,R0
-   \   00011C   240B         ADD     A,#0xb
-   \   00011E   F582         MOV     DPL,A
-   \   000120   E9           MOV     A,R1
-   \   000121   3400         ADDC    A,#0x0
-   \   000123   F583         MOV     DPH,A
-   \   000125   E0           MOVX    A,@DPTR
-   \   000126   F5..         MOV     ?V0 + 0,A
-   \   000128   75..00       MOV     ?V0 + 1,#0x0
-   \   00012B   E5..         MOV     A,?V0 + 0
-   \   00012D   2A           ADD     A,R2
-   \   00012E   FA           MOV     R2,A
-   \   00012F   E5..         MOV     A,?V0 + 1
-   \   000131   3B           ADDC    A,R3
-   \   000132   FB           MOV     R3,A
-   \                     ??HalUARTWrite_5:
-   \   000133   8A..         MOV     ?V0 + 0,R2
-   \   000135   8B..         MOV     ?V0 + 1,R3
+   \   00009E   EE           MOV     A,R6
+   \   00009F   240C         ADD     A,#0xc
+   \   0000A1   F582         MOV     DPL,A
+   \   0000A3   EF           MOV     A,R7
+   \   0000A4   3400         ADDC    A,#0x0
+   \   0000A6   F583         MOV     DPH,A
+   \   0000A8   E0           MOVX    A,@DPTR
+   \   0000A9   FA           MOV     R2,A
+   \   0000AA   7B00         MOV     R3,#0x0
+   \   0000AC   8E82         MOV     DPL,R6
+   \   0000AE   8F83         MOV     DPH,R7
+   \   0000B0   A3           INC     DPTR
+   \   0000B1   A3           INC     DPTR
+   \   0000B2   A3           INC     DPTR
+   \   0000B3   A3           INC     DPTR
+   \   0000B4   A3           INC     DPTR
+   \   0000B5   A3           INC     DPTR
+   \   0000B6   A3           INC     DPTR
+   \   0000B7   A3           INC     DPTR
+   \   0000B8   A3           INC     DPTR
+   \   0000B9   A3           INC     DPTR
+   \   0000BA   E0           MOVX    A,@DPTR
+   \   0000BB   F5..         MOV     ?V0 + 0,A
+   \   0000BD   75..00       MOV     ?V0 + 1,#0x0
+   \   0000C0   EA           MOV     A,R2
+   \   0000C1   C3           CLR     C
+   \   0000C2   95..         SUBB    A,?V0 + 0
+   \   0000C4   FA           MOV     R2,A
+   \   0000C5   EB           MOV     A,R3
+   \   0000C6   95..         SUBB    A,?V0 + 1
+   \   0000C8   FB           MOV     R3,A
+   \   0000C9   EE           MOV     A,R6
+   \   0000CA   240B         ADD     A,#0xb
+   \   0000CC   F582         MOV     DPL,A
+   \   0000CE   EF           MOV     A,R7
+   \   0000CF   3400         ADDC    A,#0x0
+   \   0000D1   F583         MOV     DPH,A
+   \   0000D3   E0           MOVX    A,@DPTR
+   \   0000D4   F5..         MOV     ?V0 + 0,A
+   \   0000D6   75..00       MOV     ?V0 + 1,#0x0
+   \   0000D9   E5..         MOV     A,?V0 + 0
+   \   0000DB   2A           ADD     A,R2
+   \   0000DC   FA           MOV     R2,A
+   \   0000DD   E5..         MOV     A,?V0 + 1
+   \   0000DF   3B           ADDC    A,R3
+   \   0000E0   FB           MOV     R3,A
    \                     ??HalUARTWrite_3:
-   \   000137   C3           CLR     C
-   \   000138   E5..         MOV     A,?V0 + 0
-   \   00013A   9C           SUBB    A,R4
-   \   00013B   E5..         MOV     A,?V0 + 1
-   \   00013D   9D           SUBB    A,R5
-   \   00013E   5007         JNC     ??HalUARTWrite_6
+   \   0000E1   8A..         MOV     ?V0 + 0,R2
+   \   0000E3   8B..         MOV     ?V0 + 1,R3
+   \                     ??HalUARTWrite_1:
+   \   0000E5   C3           CLR     C
+   \   0000E6   E5..         MOV     A,?V0 + 0
+   \   0000E8   9C           SUBB    A,R4
+   \   0000E9   E5..         MOV     A,?V0 + 1
+   \   0000EB   9D           SUBB    A,R5
+   \   0000EC   5007         JNC     ??HalUARTWrite_4
    1048            {
    1049              return 0;
-   \   000140   7A00         MOV     R2,#0x0
-   \   000142   7B00         MOV     R3,#0x0
-   \   000144   02....       LJMP    ??HalUARTWrite_7 & 0xFFFF
+   \   0000EE   7A00         MOV     R2,#0x0
+   \   0000F0   7B00         MOV     R3,#0x0
+   \   0000F2   02....       LJMP    ??HalUARTWrite_5 & 0xFFFF
    1050            }
    1051          
    1052            for ( cnt = len; cnt; cnt-- )
+   \                     ??HalUARTWrite_4:
+   \   0000F5   EC           MOV     A,R4
+   \   0000F6   F5..         MOV     ?V0 + 3,A
    \                     ??HalUARTWrite_6:
-   \   000147   EC           MOV     A,R4
-   \   000148   F5..         MOV     ?V0 + 3,A
-   \                     ??HalUARTWrite_8:
-   \   00014A   E5..         MOV     A,?V0 + 3
-   \   00014C   7003         JNZ     $+5
-   \   00014E   02....       LJMP    ??HalUARTWrite_9 & 0xFFFF
+   \   0000F8   E5..         MOV     A,?V0 + 3
+   \   0000FA   7003         JNZ     $+5
+   \   0000FC   02....       LJMP    ??HalUARTWrite_7 & 0xFFFF
    1053            {
    1054              cfg->txBuf[ cfg->txHead ] = *buf++;
-   \   000151   8E82         MOV     DPL,R6
-   \   000153   8F83         MOV     DPH,R7
-   \   000155   E0           MOVX    A,@DPTR
-   \   000156   C0E0         PUSH    A
-   \   000158   8882         MOV     DPL,R0
-   \   00015A   8983         MOV     DPH,R1
-   \   00015C   A3           INC     DPTR
-   \   00015D   A3           INC     DPTR
-   \   00015E   A3           INC     DPTR
-   \   00015F   A3           INC     DPTR
+   \   0000FF   8882         MOV     DPL,R0
+   \   000101   8983         MOV     DPH,R1
+   \   000103   E0           MOVX    A,@DPTR
+   \   000104   C0E0         PUSH    A
+   \   000106   8E82         MOV     DPL,R6
+   \   000108   8F83         MOV     DPH,R7
+   \   00010A   A3           INC     DPTR
+   \   00010B   A3           INC     DPTR
+   \   00010C   A3           INC     DPTR
+   \   00010D   A3           INC     DPTR
+   \   00010E   A3           INC     DPTR
+   \   00010F   A3           INC     DPTR
+   \   000110   A3           INC     DPTR
+   \   000111   A3           INC     DPTR
+   \   000112   A3           INC     DPTR
+   \   000113   A3           INC     DPTR
+   \   000114   E0           MOVX    A,@DPTR
+   \   000115   FA           MOV     R2,A
+   \   000116   7B00         MOV     R3,#0x0
+   \   000118   8E82         MOV     DPL,R6
+   \   00011A   8F83         MOV     DPH,R7
+   \   00011C   A3           INC     DPTR
+   \   00011D   A3           INC     DPTR
+   \   00011E   A3           INC     DPTR
+   \   00011F   A3           INC     DPTR
+   \   000120   A3           INC     DPTR
+   \   000121   A3           INC     DPTR
+   \   000122   A3           INC     DPTR
+   \   000123   A3           INC     DPTR
+   \   000124   E0           MOVX    A,@DPTR
+   \   000125   2A           ADD     A,R2
+   \   000126   F5..         MOV     ?V0 + 0,A
+   \   000128   A3           INC     DPTR
+   \   000129   E0           MOVX    A,@DPTR
+   \   00012A   3B           ADDC    A,R3
+   \   00012B   85..82       MOV     DPL,?V0 + 0
+   \   00012E   F583         MOV     DPH,A
+   \   000130   D0E0         POP     A
+   \   000132   F0           MOVX    @DPTR,A
+   \   000133   8882         MOV     DPL,R0
+   \   000135   8983         MOV     DPH,R1
+   \   000137   A3           INC     DPTR
+   \   000138   A882         MOV     R0,DPL
+   \   00013A   A983         MOV     R1,DPH
+   1055          
+   1056              if ( cfg->txHead == cfg->txMax )
+   \   00013C   8E82         MOV     DPL,R6
+   \   00013E   8F83         MOV     DPH,R7
+   \   000140   A3           INC     DPTR
+   \   000141   A3           INC     DPTR
+   \   000142   A3           INC     DPTR
+   \   000143   A3           INC     DPTR
+   \   000144   A3           INC     DPTR
+   \   000145   A3           INC     DPTR
+   \   000146   A3           INC     DPTR
+   \   000147   A3           INC     DPTR
+   \   000148   A3           INC     DPTR
+   \   000149   A3           INC     DPTR
+   \   00014A   E0           MOVX    A,@DPTR
+   \   00014B   FA           MOV     R2,A
+   \   00014C   EE           MOV     A,R6
+   \   00014D   240C         ADD     A,#0xc
+   \   00014F   F582         MOV     DPL,A
+   \   000151   EF           MOV     A,R7
+   \   000152   3400         ADDC    A,#0x0
+   \   000154   F583         MOV     DPH,A
+   \   000156   E0           MOVX    A,@DPTR
+   \   000157   6A           XRL     A,R2
+   \   000158   7013         JNZ     ??HalUARTWrite_8
+   1057              {
+   1058                cfg->txHead = 0;
+   \   00015A   7400         MOV     A,#0x0
+   \   00015C   8E82         MOV     DPL,R6
+   \   00015E   8F83         MOV     DPH,R7
    \   000160   A3           INC     DPTR
    \   000161   A3           INC     DPTR
    \   000162   A3           INC     DPTR
    \   000163   A3           INC     DPTR
    \   000164   A3           INC     DPTR
    \   000165   A3           INC     DPTR
-   \   000166   E0           MOVX    A,@DPTR
-   \   000167   FA           MOV     R2,A
-   \   000168   7B00         MOV     R3,#0x0
-   \   00016A   8882         MOV     DPL,R0
-   \   00016C   8983         MOV     DPH,R1
-   \   00016E   A3           INC     DPTR
-   \   00016F   A3           INC     DPTR
-   \   000170   A3           INC     DPTR
+   \   000166   A3           INC     DPTR
+   \   000167   A3           INC     DPTR
+   \   000168   A3           INC     DPTR
+   \   000169   A3           INC     DPTR
+   \   00016A   F0           MOVX    @DPTR,A
+   \   00016B   8012         SJMP    ??HalUARTWrite_9
+   1059              }
+   1060              else
+   1061              {
+   1062                cfg->txHead++;
+   \                     ??HalUARTWrite_8:
+   \   00016D   8E82         MOV     DPL,R6
+   \   00016F   8F83         MOV     DPH,R7
    \   000171   A3           INC     DPTR
    \   000172   A3           INC     DPTR
    \   000173   A3           INC     DPTR
    \   000174   A3           INC     DPTR
    \   000175   A3           INC     DPTR
-   \   000176   E0           MOVX    A,@DPTR
-   \   000177   2A           ADD     A,R2
-   \   000178   F5..         MOV     ?V0 + 0,A
+   \   000176   A3           INC     DPTR
+   \   000177   A3           INC     DPTR
+   \   000178   A3           INC     DPTR
+   \   000179   A3           INC     DPTR
    \   00017A   A3           INC     DPTR
    \   00017B   E0           MOVX    A,@DPTR
-   \   00017C   3B           ADDC    A,R3
-   \   00017D   85..82       MOV     DPL,?V0 + 0
-   \   000180   F583         MOV     DPH,A
-   \   000182   D0E0         POP     A
-   \   000184   F0           MOVX    @DPTR,A
-   \   000185   8E82         MOV     DPL,R6
-   \   000187   8F83         MOV     DPH,R7
-   \   000189   A3           INC     DPTR
-   \   00018A   AE82         MOV     R6,DPL
-   \   00018C   AF83         MOV     R7,DPH
-   1055          
-   1056              if ( cfg->txHead == cfg->txMax )
-   \   00018E   8882         MOV     DPL,R0
-   \   000190   8983         MOV     DPH,R1
-   \   000192   A3           INC     DPTR
-   \   000193   A3           INC     DPTR
-   \   000194   A3           INC     DPTR
-   \   000195   A3           INC     DPTR
-   \   000196   A3           INC     DPTR
-   \   000197   A3           INC     DPTR
-   \   000198   A3           INC     DPTR
-   \   000199   A3           INC     DPTR
-   \   00019A   A3           INC     DPTR
-   \   00019B   A3           INC     DPTR
-   \   00019C   E0           MOVX    A,@DPTR
-   \   00019D   FA           MOV     R2,A
-   \   00019E   E8           MOV     A,R0
-   \   00019F   240C         ADD     A,#0xc
-   \   0001A1   F582         MOV     DPL,A
-   \   0001A3   E9           MOV     A,R1
-   \   0001A4   3400         ADDC    A,#0x0
-   \   0001A6   F583         MOV     DPH,A
-   \   0001A8   E0           MOVX    A,@DPTR
-   \   0001A9   6A           XRL     A,R2
-   \   0001AA   7013         JNZ     ??HalUARTWrite_10
-   1057              {
-   1058                cfg->txHead = 0;
-   \   0001AC   7400         MOV     A,#0x0
-   \   0001AE   8882         MOV     DPL,R0
-   \   0001B0   8983         MOV     DPH,R1
-   \   0001B2   A3           INC     DPTR
-   \   0001B3   A3           INC     DPTR
-   \   0001B4   A3           INC     DPTR
-   \   0001B5   A3           INC     DPTR
-   \   0001B6   A3           INC     DPTR
-   \   0001B7   A3           INC     DPTR
-   \   0001B8   A3           INC     DPTR
-   \   0001B9   A3           INC     DPTR
-   \   0001BA   A3           INC     DPTR
-   \   0001BB   A3           INC     DPTR
-   \   0001BC   F0           MOVX    @DPTR,A
-   \   0001BD   8012         SJMP    ??HalUARTWrite_11
-   1059              }
-   1060              else
-   1061              {
-   1062                cfg->txHead++;
-   \                     ??HalUARTWrite_10:
-   \   0001BF   8882         MOV     DPL,R0
-   \   0001C1   8983         MOV     DPH,R1
-   \   0001C3   A3           INC     DPTR
-   \   0001C4   A3           INC     DPTR
-   \   0001C5   A3           INC     DPTR
-   \   0001C6   A3           INC     DPTR
-   \   0001C7   A3           INC     DPTR
-   \   0001C8   A3           INC     DPTR
-   \   0001C9   A3           INC     DPTR
-   \   0001CA   A3           INC     DPTR
-   \   0001CB   A3           INC     DPTR
-   \   0001CC   A3           INC     DPTR
-   \   0001CD   E0           MOVX    A,@DPTR
-   \   0001CE   2401         ADD     A,#0x1
-   \   0001D0   F0           MOVX    @DPTR,A
+   \   00017C   2401         ADD     A,#0x1
+   \   00017E   F0           MOVX    @DPTR,A
    1063              }
    1064            }
-   \                     ??HalUARTWrite_11:
-   \   0001D1   15..         DEC     ?V0 + 3
-   \   0001D3   02....       LJMP    ??HalUARTWrite_8 & 0xFFFF
+   \                     ??HalUARTWrite_9:
+   \   00017F   15..         DEC     ?V0 + 3
+   \   000181   02....       LJMP    ??HalUARTWrite_6 & 0xFFFF
    1065          
    1066          #if HAL_UART_ISR
    1067          #if HAL_UART_DMA
@@ -3864,20 +1937,15 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Components\hal\target\CC2430EB\hal_uart.
    1084          #endif
    1085          
    1086            return len;
-   \                     ??HalUARTWrite_9:
-   \   0001D6   EC           MOV     A,R4
-   \   0001D7   FA           MOV     R2,A
-   \   0001D8   ED           MOV     A,R5
-   \   0001D9   FB           MOV     R3,A
    \                     ??HalUARTWrite_7:
-   \   0001DA   7F04         MOV     R7,#0x4
-   \   0001DC   02....       LJMP    ?BANKED_LEAVE_XDATA
+   \   000184   EC           MOV     A,R4
+   \   000185   FA           MOV     R2,A
+   \   000186   ED           MOV     A,R5
+   \   000187   FB           MOV     R3,A
+   \                     ??HalUARTWrite_5:
+   \   000188   7F04         MOV     R7,#0x4
+   \   00018A   02....       LJMP    ?BANKED_LEAVE_XDATA
    1087          }
-
-   \                                 In  segment BANK_RELAYS, align 1
-   \                     ??pollDMA?relay:
-   \   000000   12....       LCALL   ?BDISPATCH
-   \   000003   ......       DC24    pollDMA
 
    \                                 In  segment BANK_RELAYS, align 1
    \                     ??HalUARTInit?relay:
@@ -4035,52 +2103,28 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Components\hal\target\CC2430EB\hal_uart.
      Function            ISTACK PSTACK XSTACK
      --------            ------ ------ ------
      HalUARTClose            0      0      0
-     HalUARTInit             3      0      0
-     HalUARTOpen             1      0     15
-       -> osal_mem_alloc     0      0     30
-       -> osal_mem_alloc     0      0     30
-       -> osal_mem_alloc     0      0     30
-       -> osal_memset        0      0     30
-     HalUARTPoll             1      0     10
-       -> pollDMA            0      0     20
-     HalUARTRead             1      0     12
+     HalUARTInit             0      0      0
+     HalUARTOpen             1      0     13
+       -> osal_mem_alloc     0      0     26
+       -> osal_mem_alloc     0      0     26
+     HalUARTPoll             0      0      0
+     HalUARTRead             1      0     13
      HalUARTWrite            1      0     12
      Hal_UART_RxBufLen       3      0      0
-     pollDMA                 1      0     22
-       -> osal_memset        0      0     24
 
 
    Segment part sizes:
 
      Function/Label            Bytes
      --------------            -----
-     _A_P0                        1
-     U0CSR                        1
-     _A_P1                        1
-     ST0                          1
-     U0DBUF                       1
-     U0BAUD                       1
-     U0UCR                        1
-     U0GCR                        1
-     DMAIRQ                       1
-     DMAARM                       1
-     DMAREQ                       1
-     PERCFG                       1
-     ADCCFG                       1
-     P0SEL                        1
-     P0DIR                        1
      P2DIR                        1
-     cfg0                         2
-     pollDMA                   1062
-     HalUARTInit                686
-     HalUARTOpen                598
+     HalUARTInit                 11
+     HalUARTOpen                278
      HalUARTClose                 3
-     HalUARTPoll                372
-     tickShdw                     1
-     Hal_UART_RxBufLen          136
-     HalUARTRead                200
-     HalUARTWrite               479
-     ??pollDMA?relay              6
+     HalUARTPoll                  3
+     Hal_UART_RxBufLen          121
+     HalUARTRead                170
+     HalUARTWrite               397
      ??HalUARTInit?relay          6
      ??HalUARTOpen?relay          6
      ??HalUARTClose?relay         6
@@ -4090,14 +2134,12 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Components\hal\target\CC2430EB\hal_uart.
      ??HalUARTWrite?relay         6
 
  
- 3 536 bytes in segment BANKED_CODE
-    48 bytes in segment BANK_RELAYS
-    16 bytes in segment SFR_AN
-     3 bytes in segment XDATA_Z
+ 983 bytes in segment BANKED_CODE
+  42 bytes in segment BANK_RELAYS
+   1 byte  in segment SFR_AN
  
- 3 584 bytes of CODE  memory
-     0 bytes of DATA  memory (+ 16 bytes shared)
-     3 bytes of XDATA memory
+ 1 025 bytes of CODE memory
+     0 bytes of DATA memory (+ 1 byte shared)
 
 Errors: none
 Warnings: none

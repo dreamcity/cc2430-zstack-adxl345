@@ -1,6 +1,10 @@
 ###############################################################################
 #                                                                             #
+<<<<<<< HEAD
 # IAR 8051 C/C++ Compiler V7.30B/W32                    10/Mar/2013  13:19:53 #
+=======
+# IAR 8051 C/C++ Compiler V7.30B/W32                    03/Jan/2013  20:31:28 #
+>>>>>>> develop
 # Copyright 2004-2007 IAR Systems. All rights reserved.                       #
 #                                                                             #
 #    Core               =  plain                                              #
@@ -40,8 +44,8 @@
 #                          -DREJOIN_POLL_RATE=440 "C:\Texas                   #
 #                          Instruments\ZStack-1.4.3-1.2.1\Components\mt\Debug #
 #                          Trace.c" -D CC2430EB -D AXD_END -D NWK_AUTO_POLL   #
-#                          -D REFLECTOR -D ZTOOL_P1 -D MT_TASK -D             #
-#                          xMT_ZDO_FUNC -D LCD_SUPPORTED=DEBUG -D             #
+#                          -D REFLECTOR -D xZTOOL_P1 -D xMT_TASK -D           #
+#                          xMT_ZDO_FUNC -D xLCD_SUPPORTED=DEBUG -D            #
 #                          xPOWER_SAVING -lC "C:\Texas                        #
 #                          Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\Sam #
 #                          ples\cc2430-zstack-adxl345\CC2430DB\EndDeviceEB\Li #
@@ -246,28 +250,9 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Components\mt\DebugTrace.c
     108           *
     109           * @return  void
     110           */
-
-   \                                 In  segment BANKED_CODE, align 1, keep-with-next
     111          void debug_msg( byte compID, byte severity, byte numParams, UINT16 param1,
-   \                     debug_msg:
     112          																								UINT16 param2, UINT16 param3 )
     113          {
-   \   000000   74F0         MOV     A,#-0x10
-   \   000002   12....       LCALL   ?BANKED_ENTER_XDATA
-   \   000005                ; Saved register size: 16
-   \   000005                ; Auto size: 2
-   \   000005   74FE         MOV     A,#-0x2
-   \   000007   12....       LCALL   ?ALLOC_XSTACK8
-   \   00000A   85..82       MOV     DPL,?XSP + 0
-   \   00000D   85..83       MOV     DPH,?XSP + 1
-   \   000010   EC           MOV     A,R4
-   \   000011   F0           MOVX    @DPTR,A
-   \   000012   A3           INC     DPTR
-   \   000013   ED           MOV     A,R5
-   \   000014   F0           MOVX    @DPTR,A
-   \   000015   89..         MOV     ?V0 + 2,R1
-   \   000017   8A..         MOV     ?V0 + 3,R2
-   \   000019   8B..         MOV     ?V0 + 4,R3
     114          
     115            mtDebugMsg_t *mtDebugMsg;
     116            UINT16 timestamp;
@@ -278,166 +263,26 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Components\mt\DebugTrace.c
     121          #endif
     122          
     123            if ( debugThreshold == 0 || debugCompId != compID )
-   \   00001B   90....       MOV     DPTR,#debugThreshold
-   \   00001E   E0           MOVX    A,@DPTR
-   \   00001F   7003         JNZ     $+5
-   \   000021   02....       LJMP    ??debug_msg_0 & 0xFFFF
-   \   000024   90....       MOV     DPTR,#debugCompId
-   \   000027   E0           MOVX    A,@DPTR
-   \   000028   65..         XRL     A,?V0 + 2
-   \   00002A   6003         JZ      $+5
-   \   00002C   02....       LJMP    ??debug_msg_0 & 0xFFFF
     124              return;
     125          
     126            // Fill in the timestamp
     127            timestamp = 0;
-   \   00002F   75..00       MOV     ?V0 + 6,#0x0
-   \   000032   75..00       MOV     ?V0 + 7,#0x0
     128          
     129            // Get a message buffer to build the debug message
     130            mtDebugMsg = (mtDebugMsg_t *)osal_msg_allocate( sizeof( mtDebugMsg_t ) );
-   \   000035                ; Setup parameters for call to function osal_msg_allocate
-   \   000035   7A0D         MOV     R2,#0xd
-   \   000037   7B00         MOV     R3,#0x0
-   \   000039   12....       LCALL   ??osal_msg_allocate?relay
-   \   00003C   8A..         MOV     ?V0 + 0,R2
-   \   00003E   8B..         MOV     ?V0 + 1,R3
-   \   000040   AE..         MOV     R6,?V0 + 0
-   \   000042   AF..         MOV     R7,?V0 + 1
     131            if ( mtDebugMsg )
-   \   000044   EE           MOV     A,R6
-   \   000045   6400         XRL     A,#0x0
-   \   000047   7003         JNZ     ??debug_msg_1
-   \   000049   EF           MOV     A,R7
-   \   00004A   6400         XRL     A,#0x0
-   \                     ??debug_msg_1:
-   \   00004C   7003         JNZ     $+5
-   \   00004E   02....       LJMP    ??debug_msg_0 & 0xFFFF
     132            {
     133                mtDebugMsg->hdr.event = CMD_DEBUG_MSG;
-   \   000051   7402         MOV     A,#0x2
-   \   000053   8E82         MOV     DPL,R6
-   \   000055   8F83         MOV     DPH,R7
-   \   000057   F0           MOVX    @DPTR,A
     134                mtDebugMsg->compID = compID;
-   \   000058   8E82         MOV     DPL,R6
-   \   00005A   8F83         MOV     DPH,R7
-   \   00005C   A3           INC     DPTR
-   \   00005D   A3           INC     DPTR
-   \   00005E   E5..         MOV     A,?V0 + 2
-   \   000060   F0           MOVX    @DPTR,A
     135                mtDebugMsg->severity = severity;
-   \   000061   8E82         MOV     DPL,R6
-   \   000063   8F83         MOV     DPH,R7
-   \   000065   A3           INC     DPTR
-   \   000066   A3           INC     DPTR
-   \   000067   A3           INC     DPTR
-   \   000068   E5..         MOV     A,?V0 + 3
-   \   00006A   F0           MOVX    @DPTR,A
     136                mtDebugMsg->numParams = numParams;
-   \   00006B   8E82         MOV     DPL,R6
-   \   00006D   8F83         MOV     DPH,R7
-   \   00006F   A3           INC     DPTR
-   \   000070   A3           INC     DPTR
-   \   000071   A3           INC     DPTR
-   \   000072   A3           INC     DPTR
-   \   000073   E5..         MOV     A,?V0 + 4
-   \   000075   F0           MOVX    @DPTR,A
     137          
     138                mtDebugMsg->param1 = param1;
-   \   000076   85..82       MOV     DPL,?XSP + 0
-   \   000079   85..83       MOV     DPH,?XSP + 1
-   \   00007C   E0           MOVX    A,@DPTR
-   \   00007D   F8           MOV     R0,A
-   \   00007E   A3           INC     DPTR
-   \   00007F   E0           MOVX    A,@DPTR
-   \   000080   F9           MOV     R1,A
-   \   000081   8E82         MOV     DPL,R6
-   \   000083   8F83         MOV     DPH,R7
-   \   000085   A3           INC     DPTR
-   \   000086   A3           INC     DPTR
-   \   000087   A3           INC     DPTR
-   \   000088   A3           INC     DPTR
-   \   000089   A3           INC     DPTR
-   \   00008A   E8           MOV     A,R0
-   \   00008B   F0           MOVX    @DPTR,A
-   \   00008C   A3           INC     DPTR
-   \   00008D   E9           MOV     A,R1
-   \   00008E   F0           MOVX    @DPTR,A
     139                mtDebugMsg->param2 = param2;
-   \   00008F   7412         MOV     A,#0x12
-   \   000091   12....       LCALL   ?XSTACK_DISP0_8
-   \   000094   E0           MOVX    A,@DPTR
-   \   000095   F8           MOV     R0,A
-   \   000096   A3           INC     DPTR
-   \   000097   E0           MOVX    A,@DPTR
-   \   000098   F9           MOV     R1,A
-   \   000099   8E82         MOV     DPL,R6
-   \   00009B   8F83         MOV     DPH,R7
-   \   00009D   A3           INC     DPTR
-   \   00009E   A3           INC     DPTR
-   \   00009F   A3           INC     DPTR
-   \   0000A0   A3           INC     DPTR
-   \   0000A1   A3           INC     DPTR
-   \   0000A2   A3           INC     DPTR
-   \   0000A3   A3           INC     DPTR
-   \   0000A4   E8           MOV     A,R0
-   \   0000A5   F0           MOVX    @DPTR,A
-   \   0000A6   A3           INC     DPTR
-   \   0000A7   E9           MOV     A,R1
-   \   0000A8   F0           MOVX    @DPTR,A
     140                mtDebugMsg->param3 = param3;
-   \   0000A9   7414         MOV     A,#0x14
-   \   0000AB   12....       LCALL   ?XSTACK_DISP0_8
-   \   0000AE   E0           MOVX    A,@DPTR
-   \   0000AF   F8           MOV     R0,A
-   \   0000B0   A3           INC     DPTR
-   \   0000B1   E0           MOVX    A,@DPTR
-   \   0000B2   F9           MOV     R1,A
-   \   0000B3   8E82         MOV     DPL,R6
-   \   0000B5   8F83         MOV     DPH,R7
-   \   0000B7   A3           INC     DPTR
-   \   0000B8   A3           INC     DPTR
-   \   0000B9   A3           INC     DPTR
-   \   0000BA   A3           INC     DPTR
-   \   0000BB   A3           INC     DPTR
-   \   0000BC   A3           INC     DPTR
-   \   0000BD   A3           INC     DPTR
-   \   0000BE   A3           INC     DPTR
-   \   0000BF   A3           INC     DPTR
-   \   0000C0   E8           MOV     A,R0
-   \   0000C1   F0           MOVX    @DPTR,A
-   \   0000C2   A3           INC     DPTR
-   \   0000C3   E9           MOV     A,R1
-   \   0000C4   F0           MOVX    @DPTR,A
     141                mtDebugMsg->timestamp = timestamp;
-   \   0000C5   EE           MOV     A,R6
-   \   0000C6   240B         ADD     A,#0xb
-   \   0000C8   F582         MOV     DPL,A
-   \   0000CA   EF           MOV     A,R7
-   \   0000CB   3400         ADDC    A,#0x0
-   \   0000CD   F583         MOV     DPH,A
-   \   0000CF   E5..         MOV     A,?V0 + 6
-   \   0000D1   F0           MOVX    @DPTR,A
-   \   0000D2   A3           INC     DPTR
-   \   0000D3   E5..         MOV     A,?V0 + 7
-   \   0000D5   F0           MOVX    @DPTR,A
     142                
     143                osal_msg_send( MT_TaskID, (uint8 *)mtDebugMsg );
-   \   0000D6                ; Setup parameters for call to function osal_msg_send
-   \   0000D6   EE           MOV     A,R6
-   \   0000D7   FA           MOV     R2,A
-   \   0000D8   EF           MOV     A,R7
-   \   0000D9   FB           MOV     R3,A
-   \   0000DA   90....       MOV     DPTR,#MT_TaskID
-   \   0000DD   E0           MOVX    A,@DPTR
-   \   0000DE   F9           MOV     R1,A
-   \   0000DF   12....       LCALL   ??osal_msg_send?relay
-   \                     ??debug_msg_0:
-   \   0000E2   7402         MOV     A,#0x2
-   \   0000E4   12....       LCALL   ?DEALLOC_XSTACK8
-   \   0000E7   7F08         MOV     R7,#0x8
-   \   0000E9   02....       LJMP    ?BANKED_LEAVE_XDATA
     144            }
     145          
     146          } /* debug_msg() */
@@ -458,172 +303,42 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Components\mt\DebugTrace.c
     161           *
     162           * @return  void
     163           */
-
-   \                                 In  segment BANKED_CODE, align 1, keep-with-next
     164          void debug_str( byte *str_ptr )
-   \                     debug_str:
     165          {
-   \   000000   74F0         MOV     A,#-0x10
-   \   000002   12....       LCALL   ?BANKED_ENTER_XDATA
-   \   000005                ; Saved register size: 16
-   \   000005                ; Auto size: 0
-   \   000005   8A..         MOV     ?V0 + 6,R2
-   \   000007   8B..         MOV     ?V0 + 7,R3
     166            mtDebugStr_t *msg;
     167            byte mln;
     168            byte sln;
     169          
     170            // Text string length
     171            sln = (byte)osal_strlen( (void*)str_ptr );
-   \   000009                ; Setup parameters for call to function osal_strlen
-   \   000009   AA..         MOV     R2,?V0 + 6
-   \   00000B   AB..         MOV     R3,?V0 + 7
-   \   00000D   12....       LCALL   ??osal_strlen?relay
-   \   000010   EA           MOV     A,R2
-   \   000011   F5..         MOV     ?V0 + 3,A
     172          
     173            // Debug string message length
     174            mln = sizeof ( mtDebugStr_t ) + sln;
-   \   000013   7405         MOV     A,#0x5
-   \   000015   25..         ADD     A,?V0 + 3
-   \   000017   F5..         MOV     ?V0 + 4,A
     175          
     176            // Get a message buffer to build the debug message
     177            msg = (mtDebugStr_t *)osal_msg_allocate( mln );
-   \   000019                ; Setup parameters for call to function osal_msg_allocate
-   \   000019   E5..         MOV     A,?V0 + 4
-   \   00001B   F5..         MOV     ?V0 + 0,A
-   \   00001D   AA..         MOV     R2,?V0 + 0
-   \   00001F   7B00         MOV     R3,#0x0
-   \   000021   12....       LCALL   ??osal_msg_allocate?relay
-   \   000024   8A..         MOV     ?V0 + 0,R2
-   \   000026   8B..         MOV     ?V0 + 1,R3
-   \   000028   AE..         MOV     R6,?V0 + 0
-   \   00002A   AF..         MOV     R7,?V0 + 1
     178            if ( msg )
-   \   00002C   EE           MOV     A,R6
-   \   00002D   6400         XRL     A,#0x0
-   \   00002F   7003         JNZ     ??debug_str_0
-   \   000031   EF           MOV     A,R7
-   \   000032   6400         XRL     A,#0x0
-   \                     ??debug_str_0:
-   \   000034   605A         JZ      ??debug_str_1
     179            {
     180              // Message type, length
     181              msg->hdr.event = CMD_DEBUG_STR;
-   \   000036   7406         MOV     A,#0x6
-   \   000038   8E82         MOV     DPL,R6
-   \   00003A   8F83         MOV     DPH,R7
-   \   00003C   F0           MOVX    @DPTR,A
     182              msg->sln = sln;
-   \   00003D   8E82         MOV     DPL,R6
-   \   00003F   8F83         MOV     DPH,R7
-   \   000041   A3           INC     DPTR
-   \   000042   A3           INC     DPTR
-   \   000043   E5..         MOV     A,?V0 + 3
-   \   000045   F0           MOVX    @DPTR,A
     183          
     184              // Append message, no terminator
     185              msg->pString = (uint8 *)(msg+1);
-   \   000046   EE           MOV     A,R6
-   \   000047   2405         ADD     A,#0x5
-   \   000049   F8           MOV     R0,A
-   \   00004A   EF           MOV     A,R7
-   \   00004B   3400         ADDC    A,#0x0
-   \   00004D   F9           MOV     R1,A
-   \   00004E   8E82         MOV     DPL,R6
-   \   000050   8F83         MOV     DPH,R7
-   \   000052   A3           INC     DPTR
-   \   000053   A3           INC     DPTR
-   \   000054   A3           INC     DPTR
-   \   000055   E8           MOV     A,R0
-   \   000056   F0           MOVX    @DPTR,A
-   \   000057   A3           INC     DPTR
-   \   000058   E9           MOV     A,R1
-   \   000059   F0           MOVX    @DPTR,A
     186              osal_memcpy ( msg->pString, str_ptr, sln );
-   \   00005A                ; Setup parameters for call to function osal_memcpy
-   \   00005A   85....       MOV     ?V0 + 0,?V0 + 6
-   \   00005D   85....       MOV     ?V0 + 1,?V0 + 7
-   \   000060   75..00       MOV     ?V0 + 2,#0x0
-   \   000063   78..         MOV     R0,#?V0 + 0
-   \   000065   12....       LCALL   ?PUSH_XSTACK_I_THREE
-   \   000068   E5..         MOV     A,?V0 + 3
-   \   00006A   F5..         MOV     ?V0 + 0,A
-   \   00006C   AC..         MOV     R4,?V0 + 0
-   \   00006E   7D00         MOV     R5,#0x0
-   \   000070   8E82         MOV     DPL,R6
-   \   000072   8F83         MOV     DPH,R7
-   \   000074   A3           INC     DPTR
-   \   000075   A3           INC     DPTR
-   \   000076   A3           INC     DPTR
-   \   000077   E0           MOVX    A,@DPTR
-   \   000078   FA           MOV     R2,A
-   \   000079   A3           INC     DPTR
-   \   00007A   E0           MOVX    A,@DPTR
-   \   00007B   FB           MOV     R3,A
-   \   00007C   12....       LCALL   ??osal_memcpy?relay
-   \   00007F   7403         MOV     A,#0x3
-   \   000081   12....       LCALL   ?DEALLOC_XSTACK8
     187          
     188              osal_msg_send( MT_TaskID, (uint8 *)msg );
-   \   000084                ; Setup parameters for call to function osal_msg_send
-   \   000084   EE           MOV     A,R6
-   \   000085   FA           MOV     R2,A
-   \   000086   EF           MOV     A,R7
-   \   000087   FB           MOV     R3,A
-   \   000088   90....       MOV     DPTR,#MT_TaskID
-   \   00008B   E0           MOVX    A,@DPTR
-   \   00008C   F9           MOV     R1,A
-   \   00008D   12....       LCALL   ??osal_msg_send?relay
     189            }
     190          } // debug_str()
-   \                     ??debug_str_1:
-   \   000090   7F08         MOV     R7,#0x8
-   \   000092   02....       LJMP    ?BANKED_LEAVE_XDATA
-
-   \                                 In  segment BANK_RELAYS, align 1
-   \                     ??debug_msg?relay:
-   \   000000   12....       LCALL   ?BDISPATCH
-   \   000003   ......       DC24    debug_msg
-
-   \                                 In  segment BANK_RELAYS, align 1
-   \                     ??debug_str?relay:
-   \   000000   12....       LCALL   ?BDISPATCH
-   \   000003   ......       DC24    debug_str
     191          
     192          /*********************************************************************
     193          *********************************************************************/
     194          #endif  // MT_TASK
 
-   Maximum stack usage in bytes:
-
-     Function               ISTACK PSTACK XSTACK
-     --------               ------ ------ ------
-     debug_msg                  1      0     22
-       -> osal_msg_allocate     0      0     36
-       -> osal_msg_send         0      0     36
-     debug_str                  1      0     19
-       -> osal_strlen           0      0     32
-       -> osal_msg_allocate     0      0     32
-       -> osal_memcpy           0      0     38
-       -> osal_msg_send         0      0     32
-
-
-   Segment part sizes:
-
-     Function/Label    Bytes
-     --------------    -----
-     debug_msg          236
-     debug_str          149
-     ??debug_msg?relay    6
-     ??debug_str?relay    6
 
  
- 385 bytes in segment BANKED_CODE
-  12 bytes in segment BANK_RELAYS
  
- 397 bytes of CODE memory
+ 0 bytes of memory
 
 Errors: none
 Warnings: none

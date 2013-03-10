@@ -31,6 +31,6 @@ extern void ADXL345_ReadPage(void);
 extern void ADXL345_WritePage(void);
 extern void Multiple_Read_ADXL345(void);
 extern void conversion(INT16U temp_data);
-extern void displayXYZ(char *pData);
+extern void displayXYZ(INT8U *pData);
 extern INT8U Single_Read_ADXL345(INT8U REG_Address);
 #endif

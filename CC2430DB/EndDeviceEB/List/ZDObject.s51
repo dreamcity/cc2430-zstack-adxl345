@@ -1,6 +1,10 @@
 ///////////////////////////////////////////////////////////////////////////////
 //                                                                            /
+<<<<<<< HEAD
 // IAR 8051 C/C++ Compiler V7.30B/W32                   10/Mar/2013  13:19:59 /
+=======
+// IAR 8051 C/C++ Compiler V7.30B/W32                   03/Jan/2013  20:31:34 /
+>>>>>>> develop
 // Copyright 2004-2007 IAR Systems. All rights reserved.                      /
 //                                                                            /
 //    Core               =  plain                                             /
@@ -40,8 +44,8 @@
 //                          -DRESPONSE_POLL_RATE=100) -DREJOIN_POLL_RATE=440  /
 //                          "C:\Texas Instruments\ZStack-1.4.3-1.2.1\Componen /
 //                          ts\stack\zdo\ZDObject.c" -D CC2430EB -D AXD_END   /
-//                          -D NWK_AUTO_POLL -D REFLECTOR -D ZTOOL_P1 -D      /
-//                          MT_TASK -D xMT_ZDO_FUNC -D LCD_SUPPORTED=DEBUG    /
+//                          -D NWK_AUTO_POLL -D REFLECTOR -D xZTOOL_P1 -D     /
+//                          xMT_TASK -D xMT_ZDO_FUNC -D xLCD_SUPPORTED=DEBUG  /
 //                          -D xPOWER_SAVING -lC "C:\Texas                    /
 //                          Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\Sa /
 //                          mples\cc2430-zstack-adxl345\CC2430DB\EndDeviceEB\ /
@@ -481,7 +485,6 @@ NLME_DeviceJoiningInit SYMBOL "NLME_DeviceJoiningInit"
 NLME_NetworkDiscoveryRequest SYMBOL "NLME_NetworkDiscoveryRequest"
 nwk_ScanJoiningOrphan SYMBOL "nwk_ScanJoiningOrphan"
 NLME_OrphanJoinRequest SYMBOL "NLME_OrphanJoinRequest"
-HalLcdWriteScreen   SYMBOL "HalLcdWriteScreen"
 osal_start_timerEx  SYMBOL "osal_start_timerEx"
 NLME_GetShortAddr   SYMBOL "NLME_GetShortAddr"
 NLME_GetExtAddr     SYMBOL "NLME_GetExtAddr"
@@ -489,7 +492,6 @@ osal_msg_allocate   SYMBOL "osal_msg_allocate"
 osal_msg_send       SYMBOL "osal_msg_send"
 osal_mem_free       SYMBOL "osal_mem_free"
 ZDP_SendData        SYMBOL "ZDP_SendData"
-HalLcdWriteString   SYMBOL "HalLcdWriteString"
 ZDP_NodeDescMsg     SYMBOL "ZDP_NodeDescMsg"
 ZDP_GenericRsp      SYMBOL "ZDP_GenericRsp"
 ZDP_PowerDescMsg    SYMBOL "ZDP_PowerDescMsg"
@@ -516,8 +518,6 @@ AddrMgrEntryUpdate  SYMBOL "AddrMgrEntryUpdate"
 ??APS_ReflectorInit?relay SYMBOL "?relay", APS_ReflectorInit
 ??AddrMgrEntryUpdate?relay SYMBOL "?relay", AddrMgrEntryUpdate
 ??AddrMgrExtAddrSet?relay SYMBOL "?relay", AddrMgrExtAddrSet
-??HalLcdWriteScreen?relay SYMBOL "?relay", HalLcdWriteScreen
-??HalLcdWriteString?relay SYMBOL "?relay", HalLcdWriteString
 ??NLME_DeviceJoiningInit?relay SYMBOL "?relay", NLME_DeviceJoiningInit
 ??NLME_GetExtAddr?relay SYMBOL "?relay", NLME_GetExtAddr
 ??NLME_GetShortAddr?relay SYMBOL "?relay", NLME_GetShortAddr
@@ -638,13 +638,6 @@ ZDO_UpdateNwkStatus SYMBOL "ZDO_UpdateNwkStatus"
         ARGFRAME XSTACK, 26, STACK
         ARGFRAME IOVERLAY, 0, STATIC
         ARGFRAME DOVERLAY, 0, STATIC
-        EXTERN HalLcdWriteScreen
-        FUNCTION HalLcdWriteScreen,0202H
-        ARGFRAME ISTACK, 0, STACK
-        ARGFRAME PSTACK, 0, STACK
-        ARGFRAME XSTACK, 34, STACK
-        ARGFRAME IOVERLAY, 0, STATIC
-        ARGFRAME DOVERLAY, 0, STATIC
         EXTERN osal_start_timerEx
         FUNCTION osal_start_timerEx,0202H
         ARGFRAME ISTACK, 0, STACK
@@ -692,13 +685,6 @@ ZDO_UpdateNwkStatus SYMBOL "ZDO_UpdateNwkStatus"
         ARGFRAME ISTACK, 0, STACK
         ARGFRAME PSTACK, 0, STACK
         ARGFRAME XSTACK, 29, STACK
-        ARGFRAME IOVERLAY, 0, STATIC
-        ARGFRAME DOVERLAY, 0, STATIC
-        EXTERN HalLcdWriteString
-        FUNCTION HalLcdWriteString,0202H
-        ARGFRAME ISTACK, 0, STACK
-        ARGFRAME PSTACK, 0, STACK
-        ARGFRAME XSTACK, 13, STACK
         ARGFRAME IOVERLAY, 0, STATIC
         ARGFRAME DOVERLAY, 0, STATIC
         EXTERN ZDP_NodeDescMsg
@@ -853,10 +839,6 @@ ZDO_UpdateNwkStatus SYMBOL "ZDO_UpdateNwkStatus"
         FUNCTION ??AddrMgrEntryUpdate?relay,00H
         EXTERN ??AddrMgrExtAddrSet?relay
         FUNCTION ??AddrMgrExtAddrSet?relay,00H
-        EXTERN ??HalLcdWriteScreen?relay
-        FUNCTION ??HalLcdWriteScreen?relay,00H
-        EXTERN ??HalLcdWriteString?relay
-        FUNCTION ??HalLcdWriteString?relay,00H
         EXTERN ??NLME_DeviceJoiningInit?relay
         FUNCTION ??NLME_DeviceJoiningInit?relay,00H
         EXTERN ??NLME_GetExtAddr?relay
@@ -1345,17 +1327,6 @@ ZDO_StartDevice:
         ARGFRAME XSTACK, 26, STACK
         ARGFRAME IOVERLAY, 0, STATIC
         ARGFRAME DOVERLAY, 0, STATIC
-        FUNCALL ZDO_StartDevice, HalLcdWriteScreen
-        LOCFRAME ISTACK, 0, STACK
-        LOCFRAME PSTACK, 0, STACK
-        LOCFRAME XSTACK, 26, STACK
-        LOCFRAME IOVERLAY, 0, STATIC
-        LOCFRAME DOVERLAY, 0, STATIC
-        ARGFRAME ISTACK, 0, STACK
-        ARGFRAME PSTACK, 0, STACK
-        ARGFRAME XSTACK, 26, STACK
-        ARGFRAME IOVERLAY, 0, STATIC
-        ARGFRAME DOVERLAY, 0, STATIC
         FUNCALL ZDO_StartDevice, osal_start_timerEx
         LOCFRAME ISTACK, 0, STACK
         LOCFRAME PSTACK, 0, STACK
@@ -1474,12 +1445,12 @@ ZDO_StartDevice:
 ??ZDO_StartDevice_3:
         MOV     A,#0x1
         XRL     A,R7
-        JNZ     ??ZDO_StartDevice_4
+        JNZ     ??ZDO_StartDevice_1
 //  335     {
 //  336       if ( logicalType == NODETYPE_ROUTER )
         MOV     A,#0x1
         XRL     A,?V0 + 4
-        JNZ     ??ZDO_StartDevice_5
+        JNZ     ??ZDO_StartDevice_4
 //  337       {
 //  338         ZMacScanCnf_t scanCnf;
 //  339         devState = DEV_NWK_ORPHAN;
@@ -1547,7 +1518,7 @@ ZDO_StartDevice:
 //  350       else
 //  351       {
 //  352         devState = DEV_NWK_ORPHAN;
-??ZDO_StartDevice_5:
+??ZDO_StartDevice_4:
         MOV     A,#0xa
         MOV     DPTR,#devState
         MOVX    @DPTR,A
@@ -1567,20 +1538,12 @@ ZDO_StartDevice:
         LCALL   ??NLME_OrphanJoinRequest?relay
         MOV     A,R1
         MOV     R6,A
-        SJMP    ??ZDO_StartDevice_1
 //  355       }
 //  356     }
 //  357     else
 //  358     {
 //  359 #if defined( LCD_SUPPORTED )
 //  360       HalLcdWriteScreen( "StartDevice ERR", "MODE unknown" );
-??ZDO_StartDevice_4:
-        ; Setup parameters for call to function HalLcdWriteScreen
-        MOV     R4,#(`?<Constant "MODE unknown">` & 0xff)
-        MOV     R5,#((`?<Constant "MODE unknown">` >> 8) & 0xff)
-        MOV     R2,#(`?<Constant "StartDevice ERR">` & 0xff)
-        MOV     R3,#((`?<Constant "StartDevice ERR">` >> 8) & 0xff)
-        LCALL   ??HalLcdWriteScreen?relay
 //  361 #endif
 //  362     }
 //  363   }
@@ -1589,7 +1552,7 @@ ZDO_StartDevice:
 //  366   if ( ret != ZSuccess )
 ??ZDO_StartDevice_1:
         MOV     A,R6
-        JZ      ??ZDO_StartDevice_6
+        JZ      ??ZDO_StartDevice_5
 //  367     osal_start_timerEx(ZDAppTaskID, ZDO_NETWORK_INIT, NWK_RETRY_DELAY );
         ; Setup parameters for call to function osal_start_timerEx
         MOV     R4,#-0x18
@@ -1601,7 +1564,7 @@ ZDO_StartDevice:
         MOV     R1,A
         LCALL   ??osal_start_timerEx?relay
 //  368 }
-??ZDO_StartDevice_6:
+??ZDO_StartDevice_5:
         MOV     A,#0xb
         LCALL   ?DEALLOC_XSTACK8
         CFI CFA_XSP16 add(XSP16, 15)
@@ -2025,39 +1988,6 @@ ZDO_SendEDBindRsp:
         ARGFRAME XSTACK, 18, STACK
         ARGFRAME IOVERLAY, 0, STATIC
         ARGFRAME DOVERLAY, 0, STATIC
-        FUNCALL ZDO_SendEDBindRsp, HalLcdWriteString
-        LOCFRAME ISTACK, 0, STACK
-        LOCFRAME PSTACK, 0, STACK
-        LOCFRAME XSTACK, 13, STACK
-        LOCFRAME IOVERLAY, 0, STATIC
-        LOCFRAME DOVERLAY, 0, STATIC
-        ARGFRAME ISTACK, 0, STACK
-        ARGFRAME PSTACK, 0, STACK
-        ARGFRAME XSTACK, 13, STACK
-        ARGFRAME IOVERLAY, 0, STATIC
-        ARGFRAME DOVERLAY, 0, STATIC
-        FUNCALL ZDO_SendEDBindRsp, HalLcdWriteString
-        LOCFRAME ISTACK, 0, STACK
-        LOCFRAME PSTACK, 0, STACK
-        LOCFRAME XSTACK, 13, STACK
-        LOCFRAME IOVERLAY, 0, STATIC
-        LOCFRAME DOVERLAY, 0, STATIC
-        ARGFRAME ISTACK, 0, STACK
-        ARGFRAME PSTACK, 0, STACK
-        ARGFRAME XSTACK, 13, STACK
-        ARGFRAME IOVERLAY, 0, STATIC
-        ARGFRAME DOVERLAY, 0, STATIC
-        FUNCALL ZDO_SendEDBindRsp, HalLcdWriteString
-        LOCFRAME ISTACK, 0, STACK
-        LOCFRAME PSTACK, 0, STACK
-        LOCFRAME XSTACK, 13, STACK
-        LOCFRAME IOVERLAY, 0, STATIC
-        LOCFRAME DOVERLAY, 0, STATIC
-        ARGFRAME ISTACK, 0, STACK
-        ARGFRAME PSTACK, 0, STACK
-        ARGFRAME XSTACK, 13, STACK
-        ARGFRAME IOVERLAY, 0, STATIC
-        ARGFRAME DOVERLAY, 0, STATIC
         MOV     A,#-0xb
         LCALL   ?BANKED_ENTER_XDATA
         CFI DPH0 load(1, XDATA, add(CFA_XSP16, literal(-1)))
@@ -2130,35 +2060,13 @@ ZDO_SendEDBindRsp:
 //  447 
 //  448 #if defined( LCD_SUPPORTED )
 //  449   HalLcdWriteString( "End Device Bind", HAL_LCD_LINE_1 );
-        ; Setup parameters for call to function HalLcdWriteString
-        MOV     R1,#0x0
-        MOV     R2,#(`?<Constant "End Device Bind">` & 0xff)
-        MOV     R3,#((`?<Constant "End Device Bind">` >> 8) & 0xff)
-        LCALL   ??HalLcdWriteString?relay
 //  450   if ( Status == ZDP_SUCCESS )
-        MOV     DPL,?XSP + 0
-        MOV     DPH,?XSP + 1
-        MOVX    A,@DPTR
-        JNZ     ??ZDO_SendEDBindRsp_0
 //  451     HalLcdWriteString( "Success Sent", HAL_LCD_LINE_2 );
-        ; Setup parameters for call to function HalLcdWriteString
-        MOV     R1,#0x2
-        MOV     R2,#(`?<Constant "Success Sent">` & 0xff)
-        MOV     R3,#((`?<Constant "Success Sent">` >> 8) & 0xff)
-        LCALL   ??HalLcdWriteString?relay
-        SJMP    ??ZDO_SendEDBindRsp_1
 //  452   else
 //  453     HalLcdWriteString( "Timeout", HAL_LCD_LINE_2 );
-??ZDO_SendEDBindRsp_0:
-        ; Setup parameters for call to function HalLcdWriteString
-        MOV     R1,#0x2
-        MOV     R2,#(`?<Constant "Timeout">` & 0xff)
-        MOV     R3,#((`?<Constant "Timeout">` >> 8) & 0xff)
-        LCALL   ??HalLcdWriteString?relay
 //  454 #endif
 //  455 
 //  456 }
-??ZDO_SendEDBindRsp_1:
         MOV     A,#0x2
         LCALL   ?DEALLOC_XSTACK8
         CFI CFA_XSP16 add(XSP16, 11)
@@ -3544,28 +3452,6 @@ ZDO_ProcessMatchDescReq:
         ARGFRAME XSTACK, 41, STACK
         ARGFRAME IOVERLAY, 0, STATIC
         ARGFRAME DOVERLAY, 0, STATIC
-        FUNCALL ZDO_ProcessMatchDescReq, HalLcdWriteScreen
-        LOCFRAME ISTACK, 0, STACK
-        LOCFRAME PSTACK, 0, STACK
-        LOCFRAME XSTACK, 34, STACK
-        LOCFRAME IOVERLAY, 0, STATIC
-        LOCFRAME DOVERLAY, 0, STATIC
-        ARGFRAME ISTACK, 0, STACK
-        ARGFRAME PSTACK, 0, STACK
-        ARGFRAME XSTACK, 34, STACK
-        ARGFRAME IOVERLAY, 0, STATIC
-        ARGFRAME DOVERLAY, 0, STATIC
-        FUNCALL ZDO_ProcessMatchDescReq, HalLcdWriteScreen
-        LOCFRAME ISTACK, 0, STACK
-        LOCFRAME PSTACK, 0, STACK
-        LOCFRAME XSTACK, 34, STACK
-        LOCFRAME IOVERLAY, 0, STATIC
-        LOCFRAME DOVERLAY, 0, STATIC
-        ARGFRAME ISTACK, 0, STACK
-        ARGFRAME PSTACK, 0, STACK
-        ARGFRAME XSTACK, 34, STACK
-        ARGFRAME IOVERLAY, 0, STATIC
-        ARGFRAME DOVERLAY, 0, STATIC
         FUNCALL ZDO_ProcessMatchDescReq, osal_mem_free
         LOCFRAME ISTACK, 0, STACK
         LOCFRAME PSTACK, 0, STACK
@@ -4912,18 +4798,9 @@ ZDO_ProcessMatchDescReq:
         MOV     A,#0x7
         LCALL   ?DEALLOC_XSTACK8
         CFI CFA_XSP16 add(XSP16, 34)
-        MOV     A,R1
-        JNZ     ??ZDO_ProcessMatchDescReq_25
 //  833     {
 //  834 #if defined( LCD_SUPPORTED )
 //  835       HalLcdWriteScreen( "Match Desc Req", "Rsp Sent" );
-        ; Setup parameters for call to function HalLcdWriteScreen
-        MOV     R4,#(`?<Constant "Rsp Sent">` & 0xff)
-        MOV     R5,#((`?<Constant "Rsp Sent">` >> 8) & 0xff)
-        MOV     R2,#(`?<Constant "Match Desc Req">` & 0xff)
-        MOV     R3,#((`?<Constant "Match Desc Req">` >> 8) & 0xff)
-        LCALL   ??HalLcdWriteScreen?relay
-        SJMP    ??ZDO_ProcessMatchDescReq_25
 //  836 #endif
 //  837     }
 //  838   }
@@ -4931,28 +4808,21 @@ ZDO_ProcessMatchDescReq:
 //  840   {
 //  841 #if defined( LCD_SUPPORTED )
 //  842     HalLcdWriteScreen( "Match Desc Req", "Non Matched" );
-??ZDO_ProcessMatchDescReq_24:
-        ; Setup parameters for call to function HalLcdWriteScreen
-        MOV     R4,#(`?<Constant "Non Matched">` & 0xff)
-        MOV     R5,#((`?<Constant "Non Matched">` >> 8) & 0xff)
-        MOV     R2,#(`?<Constant "Match Desc Req">` & 0xff)
-        MOV     R3,#((`?<Constant "Match Desc Req">` >> 8) & 0xff)
-        LCALL   ??HalLcdWriteScreen?relay
 //  843 #endif
 //  844   }
 //  845   
 //  846   if ( inClusters )
-??ZDO_ProcessMatchDescReq_25:
+??ZDO_ProcessMatchDescReq_24:
         MOV     A,#0x8
         LCALL   ?XSTACK_DISP0_8
         MOVX    A,@DPTR
         XRL     A,#0x0
-        JNZ     ??ZDO_ProcessMatchDescReq_26
+        JNZ     ??ZDO_ProcessMatchDescReq_25
         INC     DPTR
         MOVX    A,@DPTR
         XRL     A,#0x0
-??ZDO_ProcessMatchDescReq_26:
-        JZ      ??ZDO_ProcessMatchDescReq_27
+??ZDO_ProcessMatchDescReq_25:
+        JZ      ??ZDO_ProcessMatchDescReq_26
 //  847     osal_mem_free( inClusters );
         ; Setup parameters for call to function osal_mem_free
         MOV     A,#0x8
@@ -4964,16 +4834,16 @@ ZDO_ProcessMatchDescReq:
         MOV     R3,A
         LCALL   ??osal_mem_free?relay
 //  848   if ( outClusters )
-??ZDO_ProcessMatchDescReq_27:
+??ZDO_ProcessMatchDescReq_26:
         MOV     A,#0xa
         LCALL   ?XSTACK_DISP0_8
         MOVX    A,@DPTR
         XRL     A,#0x0
-        JNZ     ??ZDO_ProcessMatchDescReq_28
+        JNZ     ??ZDO_ProcessMatchDescReq_27
         INC     DPTR
         MOVX    A,@DPTR
         XRL     A,#0x0
-??ZDO_ProcessMatchDescReq_28:
+??ZDO_ProcessMatchDescReq_27:
         JZ      ??ZDO_ProcessMatchDescReq_1
 //  849     osal_mem_free( outClusters );
         ; Setup parameters for call to function osal_mem_free
@@ -12116,45 +11986,12 @@ ZDO_ParseDeviceAnnce:
         LJMP    ?BANKED_LEAVE_XDATA
         CFI EndBlock cfiBlock31
 
-        RSEG XDATA_ID:CODE:NOROOT(0)
+        RSEG XDATA_I:XDATA:NOROOT(0)
         DATA
-`?<Initializer for <Constant "StartDevice ERR">`:
-        DB "StartDevice ERR"
-
-        RSEG XDATA_ID:CODE:NOROOT(0)
-        DATA
-`?<Initializer for <Constant "MODE unknown">>`:
-        DB "MODE unknown"
-
-        RSEG XDATA_ID:CODE:NOROOT(0)
-        DATA
-`?<Initializer for <Constant "End Device Bind">`:
-        DB "End Device Bind"
-
-        RSEG XDATA_ID:CODE:NOROOT(0)
-        DATA
-`?<Initializer for <Constant "Success Sent">>`:
-        DB "Success Sent"
-
-        RSEG XDATA_ID:CODE:NOROOT(0)
-        DATA
-`?<Initializer for <Constant "Timeout">>`:
-        DB "Timeout"
-
-        RSEG XDATA_ID:CODE:NOROOT(0)
-        DATA
-`?<Initializer for <Constant "Match Desc Req">>`:
-        DB "Match Desc Req"
-
-        RSEG XDATA_ID:CODE:NOROOT(0)
-        DATA
-`?<Initializer for <Constant "Rsp Sent">>`:
-        DB "Rsp Sent"
-
-        RSEG XDATA_ID:CODE:NOROOT(0)
-        DATA
-`?<Initializer for <Constant "Non Matched">>`:
-        DB "Non Matched"
+__Constant_0:
+        DS 4
+        REQUIRE `?<Initializer for __Constant_0>`
+        REQUIRE __INIT_XDATA_I
 
         RSEG XDATA_ID:CODE:NOROOT(0)
         DATA
@@ -12353,69 +12190,6 @@ ZDO_ParseDeviceAnnce:
         DATA
         DC24    ZDO_ParseDeviceAnnce
 
-        RSEG XDATA_I:XDATA:NOROOT(0)
-        DATA
-`?<Constant "StartDevice ERR">`:
-        DS 16
-        REQUIRE `?<Initializer for <Constant "StartDevice ERR">`
-        REQUIRE __INIT_XDATA_I
-
-        RSEG XDATA_I:XDATA:NOROOT(0)
-        DATA
-`?<Constant "MODE unknown">`:
-        DS 13
-        REQUIRE `?<Initializer for <Constant "MODE unknown">>`
-        REQUIRE __INIT_XDATA_I
-
-        RSEG XDATA_I:XDATA:NOROOT(0)
-        DATA
-`?<Constant "End Device Bind">`:
-        DS 16
-        REQUIRE `?<Initializer for <Constant "End Device Bind">`
-        REQUIRE __INIT_XDATA_I
-
-        RSEG XDATA_I:XDATA:NOROOT(0)
-        DATA
-`?<Constant "Success Sent">`:
-        DS 13
-        REQUIRE `?<Initializer for <Constant "Success Sent">>`
-        REQUIRE __INIT_XDATA_I
-
-        RSEG XDATA_I:XDATA:NOROOT(0)
-        DATA
-`?<Constant "Timeout">`:
-        DS 8
-        REQUIRE `?<Initializer for <Constant "Timeout">>`
-        REQUIRE __INIT_XDATA_I
-
-        RSEG XDATA_I:XDATA:NOROOT(0)
-        DATA
-`?<Constant "Match Desc Req">`:
-        DS 15
-        REQUIRE `?<Initializer for <Constant "Match Desc Req">>`
-        REQUIRE __INIT_XDATA_I
-
-        RSEG XDATA_I:XDATA:NOROOT(0)
-        DATA
-`?<Constant "Rsp Sent">`:
-        DS 9
-        REQUIRE `?<Initializer for <Constant "Rsp Sent">>`
-        REQUIRE __INIT_XDATA_I
-
-        RSEG XDATA_I:XDATA:NOROOT(0)
-        DATA
-`?<Constant "Non Matched">`:
-        DS 12
-        REQUIRE `?<Initializer for <Constant "Non Matched">>`
-        REQUIRE __INIT_XDATA_I
-
-        RSEG XDATA_I:XDATA:NOROOT(0)
-        DATA
-__Constant_0:
-        DS 4
-        REQUIRE `?<Initializer for __Constant_0>`
-        REQUIRE __INIT_XDATA_I
-
         END
 // 2790 
 // 2791 /*********************************************************************
@@ -12423,14 +12197,14 @@ __Constant_0:
 // 2793 
 // 2794 
 // 
-// 10 366 bytes in segment BANKED_CODE
+// 10 288 bytes in segment BANKED_CODE
 //    192 bytes in segment BANK_RELAYS
-//    106 bytes in segment XDATA_I
-//    106 bytes in segment XDATA_ID
+//      4 bytes in segment XDATA_I
+//      4 bytes in segment XDATA_ID
 //     54 bytes in segment XDATA_Z
 // 
-// 10 660 bytes of CODE  memory (+ 4 bytes shared)
-//    156 bytes of XDATA memory (+ 4 bytes shared)
+// 10 480 bytes of CODE  memory (+ 4 bytes shared)
+//     54 bytes of XDATA memory (+ 4 bytes shared)
 //
 //Errors: none
 //Warnings: none

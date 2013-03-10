@@ -1,6 +1,10 @@
 ###############################################################################
 #                                                                             #
+<<<<<<< HEAD
 # IAR 8051 C/C++ Compiler V7.30B/W32                    10/Mar/2013  13:19:55 #
+=======
+# IAR 8051 C/C++ Compiler V7.30B/W32                    03/Jan/2013  20:31:30 #
+>>>>>>> develop
 # Copyright 2004-2007 IAR Systems. All rights reserved.                       #
 #                                                                             #
 #    Core               =  plain                                              #
@@ -40,9 +44,9 @@
 #                          -DREJOIN_POLL_RATE=440 "C:\Texas                   #
 #                          Instruments\ZStack-1.4.3-1.2.1\Components\osal\com #
 #                          mon\OSAL_Memory.c" -D CC2430EB -D AXD_END -D       #
-#                          NWK_AUTO_POLL -D REFLECTOR -D ZTOOL_P1 -D MT_TASK  #
-#                          -D xMT_ZDO_FUNC -D LCD_SUPPORTED=DEBUG -D          #
-#                          xPOWER_SAVING -lC "C:\Texas                        #
+#                          NWK_AUTO_POLL -D REFLECTOR -D xZTOOL_P1 -D         #
+#                          xMT_TASK -D xMT_ZDO_FUNC -D xLCD_SUPPORTED=DEBUG   #
+#                          -D xPOWER_SAVING -lC "C:\Texas                     #
 #                          Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\Sam #
 #                          ples\cc2430-zstack-adxl345\CC2430DB\EndDeviceEB\Li #
 #                          st\" -lA "C:\Texas Instruments\ZStack-1.4.3-1.2.1\ #
@@ -1108,6 +1112,30 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Components\osal\common\OSAL_Memory.c
    \   000055   7F03         MOV     R7,#0x3
    \   000057   02....       LJMP    ?BANKED_LEAVE_XDATA
    \   00005A                REQUIRE _A_IEN0
+
+   \                                 In  segment XDATA_ID, align 1, keep-with-next
+   \                     `?<Initializer for theHeap>`:
+   \   000000   ....         DW _theHeap
+
+   \                                 In  segment BANK_RELAYS, align 1
+   \                     ??osal_mem_init?relay:
+   \   000000   12....       LCALL   ?BDISPATCH
+   \   000003   ......       DC24    osal_mem_init
+
+   \                                 In  segment BANK_RELAYS, align 1
+   \                     ??osal_mem_kick?relay:
+   \   000000   12....       LCALL   ?BDISPATCH
+   \   000003   ......       DC24    osal_mem_kick
+
+   \                                 In  segment BANK_RELAYS, align 1
+   \                     ??osal_mem_alloc?relay:
+   \   000000   12....       LCALL   ?BDISPATCH
+   \   000003   ......       DC24    osal_mem_alloc
+
+   \                                 In  segment BANK_RELAYS, align 1
+   \                     ??osal_mem_free?relay:
+   \   000000   12....       LCALL   ?BDISPATCH
+   \   000003   ......       DC24    osal_mem_free
     513          
     514          #if ( OSALMEM_METRICS )
     515          /*********************************************************************
@@ -1177,51 +1205,14 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Components\osal\common\OSAL_Memory.c
     579           *
     580           * @return  Highest number of bytes ever used by the stack.
     581           */
-
-   \                                 In  segment BANKED_CODE, align 1, keep-with-next
     582          uint16 osal_heap_high_water( void )
-   \                     osal_heap_high_water:
     583          {
-   \   000000                ; Saved register size: 0
-   \   000000                ; Auto size: 0
     584          #if ( OSALMEM_METRICS )
     585            return memMax;
     586          #else
     587            return MAXMEMHEAP;
-   \   000000   7A80         MOV     R2,#-0x80
-   \   000002   7B06         MOV     R3,#0x6
-   \   000004   02....       LJMP    ?BRET
     588          #endif
     589          }
-
-   \                                 In  segment XDATA_ID, align 1, keep-with-next
-   \                     `?<Initializer for theHeap>`:
-   \   000000   ....         DW _theHeap
-
-   \                                 In  segment BANK_RELAYS, align 1
-   \                     ??osal_mem_init?relay:
-   \   000000   12....       LCALL   ?BDISPATCH
-   \   000003   ......       DC24    osal_mem_init
-
-   \                                 In  segment BANK_RELAYS, align 1
-   \                     ??osal_mem_kick?relay:
-   \   000000   12....       LCALL   ?BDISPATCH
-   \   000003   ......       DC24    osal_mem_kick
-
-   \                                 In  segment BANK_RELAYS, align 1
-   \                     ??osal_mem_alloc?relay:
-   \   000000   12....       LCALL   ?BDISPATCH
-   \   000003   ......       DC24    osal_mem_alloc
-
-   \                                 In  segment BANK_RELAYS, align 1
-   \                     ??osal_mem_free?relay:
-   \   000000   12....       LCALL   ?BDISPATCH
-   \   000003   ......       DC24    osal_mem_free
-
-   \                                 In  segment BANK_RELAYS, align 1
-   \                     ??osal_heap_high_water?relay:
-   \   000000   12....       LCALL   ?BDISPATCH
-   \   000003   ......       DC24    osal_heap_high_water
     590          #endif
     591          
     592          /*********************************************************************
@@ -1229,49 +1220,46 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Components\osal\common\OSAL_Memory.c
 
    Maximum stack usage in bytes:
 
-     Function             ISTACK PSTACK XSTACK
-     --------             ------ ------ ------
-     osal_heap_high_water     0      0      0
-     osal_mem_alloc           0      0     25
-       -> osal_mem_init       0      0     32
-     osal_mem_free            0      0     11
-       -> osal_mem_init       0      0     22
-     osal_mem_init            0      0     25
-       -> osal_mem_alloc      0      0     18
-     osal_mem_kick            2      0      0
+     Function            ISTACK PSTACK XSTACK
+     --------            ------ ------ ------
+     osal_mem_alloc          0      0     25
+       -> osal_mem_init      0      0     32
+     osal_mem_free           0      0     11
+       -> osal_mem_init      0      0     22
+     osal_mem_init           0      0     25
+       -> osal_mem_alloc     0      0     18
+     osal_mem_kick           2      0      0
 
 
    Segment part sizes:
 
-     Function/Label               Bytes
-     --------------               -----
-     _A_IEN0                         1
-     ready                           1
-     ff1                             2
-     ff2                             2
-     _theHeap                     1664
-     theHeap                         2
-     osal_mem_init                 132
-     osal_mem_kick                  40
-     osal_mem_alloc                358
-     osal_mem_free                  90
-     osal_heap_high_water            7
-     ?<Initializer for theHeap>      2
-     ??osal_mem_init?relay           6
-     ??osal_mem_kick?relay           6
-     ??osal_mem_alloc?relay          6
-     ??osal_mem_free?relay           6
-     ??osal_heap_high_water?relay    6
+     Function/Label             Bytes
+     --------------             -----
+     _A_IEN0                       1
+     ready                         1
+     ff1                           2
+     ff2                           2
+     _theHeap                   1664
+     theHeap                       2
+     osal_mem_init               132
+     osal_mem_kick                40
+     osal_mem_alloc              358
+     osal_mem_free                90
+     ?<Initializer for theHeap>    2
+     ??osal_mem_init?relay         6
+     ??osal_mem_kick?relay         6
+     ??osal_mem_alloc?relay        6
+     ??osal_mem_free?relay         6
 
  
-   627 bytes in segment BANKED_CODE
-    30 bytes in segment BANK_RELAYS
+   620 bytes in segment BANKED_CODE
+    24 bytes in segment BANK_RELAYS
      1 byte  in segment SFR_AN
      2 bytes in segment XDATA_I
      2 bytes in segment XDATA_ID
  1 669 bytes in segment XDATA_Z
  
-   659 bytes of CODE  memory
+   646 bytes of CODE  memory
      0 bytes of DATA  memory (+ 1 byte shared)
  1 671 bytes of XDATA memory
 

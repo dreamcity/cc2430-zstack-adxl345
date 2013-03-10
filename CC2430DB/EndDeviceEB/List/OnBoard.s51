@@ -1,6 +1,10 @@
 ///////////////////////////////////////////////////////////////////////////////
 //                                                                            /
+<<<<<<< HEAD
 // IAR 8051 C/C++ Compiler V7.30B/W32                   10/Mar/2013  13:19:57 /
+=======
+// IAR 8051 C/C++ Compiler V7.30B/W32                   03/Jan/2013  20:31:32 /
+>>>>>>> develop
 // Copyright 2004-2007 IAR Systems. All rights reserved.                      /
 //                                                                            /
 //    Core               =  plain                                             /
@@ -41,8 +45,8 @@
 //                          "C:\Texas Instruments\ZStack-1.4.3-1.2.1\Projects /
 //                          \zstack\ZMain\TI2430DB\OnBoard.c" -D CC2430EB -D  /
 //                          AXD_END -D NWK_AUTO_POLL -D REFLECTOR -D          /
-//                          ZTOOL_P1 -D MT_TASK -D xMT_ZDO_FUNC -D            /
-//                          LCD_SUPPORTED=DEBUG -D xPOWER_SAVING -lC          /
+//                          xZTOOL_P1 -D xMT_TASK -D xMT_ZDO_FUNC -D          /
+//                          xLCD_SUPPORTED=DEBUG -D xPOWER_SAVING -lC         /
 //                          "C:\Texas Instruments\ZStack-1.4.3-1.2.1\Projects /
 //                          \zstack\Samples\cc2430-zstack-adxl345\CC2430DB\En /
 //                          dDeviceEB\List\" -lA "C:\Texas                    /
@@ -346,7 +350,6 @@
 osal_int_disable    SYMBOL "osal_int_disable"
 HalLedSet           SYMBOL "HalLedSet"
 HalTimerConfig      SYMBOL "HalTimerConfig"
-MT_IndReset         SYMBOL "MT_IndReset"
 HalKeyConfig        SYMBOL "HalKeyConfig"
 osal_msg_allocate   SYMBOL "osal_msg_allocate"
 osal_msg_send       SYMBOL "osal_msg_send"
@@ -355,7 +358,6 @@ osal_update_timers  SYMBOL "osal_update_timers"
 ??HalKeyConfig?relay SYMBOL "?relay", HalKeyConfig
 ??HalLedSet?relay   SYMBOL "?relay", HalLedSet
 ??HalTimerConfig?relay SYMBOL "?relay", HalTimerConfig
-??MT_IndReset?relay SYMBOL "?relay", MT_IndReset
 ??macMcuRandomByte?relay SYMBOL "?relay", macMcuRandomByte
 ??osal_int_disable?relay SYMBOL "?relay", osal_int_disable
 ??osal_msg_allocate?relay SYMBOL "?relay", osal_msg_allocate
@@ -411,13 +413,6 @@ _itoa               SYMBOL "_itoa"
         ARGFRAME XSTACK, 12, STACK
         ARGFRAME IOVERLAY, 0, STATIC
         ARGFRAME DOVERLAY, 0, STATIC
-        EXTERN MT_IndReset
-        FUNCTION MT_IndReset,0202H
-        ARGFRAME ISTACK, 0, STACK
-        ARGFRAME PSTACK, 0, STACK
-        ARGFRAME XSTACK, 10, STACK
-        ARGFRAME IOVERLAY, 0, STATIC
-        ARGFRAME DOVERLAY, 0, STATIC
         EXTERN HalKeyConfig
         FUNCTION HalKeyConfig,0202H
         ARGFRAME ISTACK, 0, STACK
@@ -459,8 +454,6 @@ _itoa               SYMBOL "_itoa"
         FUNCTION ??HalLedSet?relay,00H
         EXTERN ??HalTimerConfig?relay
         FUNCTION ??HalTimerConfig?relay,00H
-        EXTERN ??MT_IndReset?relay
-        FUNCTION ??MT_IndReset?relay,00H
         EXTERN ??macMcuRandomByte?relay
         FUNCTION ??macMcuRandomByte?relay,00H
         EXTERN ??osal_int_disable?relay
@@ -671,17 +664,6 @@ InitBoard:
         ARGFRAME XSTACK, 12, STACK
         ARGFRAME IOVERLAY, 0, STATIC
         ARGFRAME DOVERLAY, 0, STATIC
-        FUNCALL InitBoard, MT_IndReset
-        LOCFRAME ISTACK, 0, STACK
-        LOCFRAME PSTACK, 0, STACK
-        LOCFRAME XSTACK, 10, STACK
-        LOCFRAME IOVERLAY, 0, STATIC
-        LOCFRAME DOVERLAY, 0, STATIC
-        ARGFRAME ISTACK, 0, STACK
-        ARGFRAME PSTACK, 0, STACK
-        ARGFRAME XSTACK, 10, STACK
-        ARGFRAME IOVERLAY, 0, STATIC
-        ARGFRAME DOVERLAY, 0, STATIC
         FUNCALL InitBoard, HalKeyConfig
         LOCFRAME ISTACK, 0, STACK
         LOCFRAME PSTACK, 0, STACK
@@ -768,13 +750,11 @@ InitBoard:
 //  142   {
 //  143 #ifdef ZTOOL_PORT
 //  144     MT_IndReset();
-??InitBoard_0:
-        ; Setup parameters for call to function MT_IndReset
-        LCALL   ??MT_IndReset?relay
 //  145 #endif
 //  146 
 //  147      /* Initialize Key stuff */
 //  148     OnboardKeyIntEnable = HAL_KEY_INTERRUPT_DISABLE;
+??InitBoard_0:
         MOV     A,#0x0
         MOV     DPTR,#OnboardKeyIntEnable
         MOVX    @DPTR,A
@@ -1992,14 +1972,14 @@ GetUserDipSw:
 //  482 /*********************************************************************
 //  483 *********************************************************************/
 // 
-// 774 bytes in segment BANKED_CODE
+// 771 bytes in segment BANKED_CODE
 //  90 bytes in segment BANK_RELAYS
 //   2 bytes in segment SFR_AN
 //   1 byte  in segment XDATA_I
 //   1 byte  in segment XDATA_ID
 //  10 bytes in segment XDATA_Z
 // 
-// 865 bytes of CODE  memory
+// 862 bytes of CODE  memory
 //   0 bytes of DATA  memory (+ 2 bytes shared)
 //  11 bytes of XDATA memory
 //

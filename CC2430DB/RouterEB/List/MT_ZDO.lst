@@ -1,6 +1,6 @@
 ###############################################################################
 #                                                                             #
-# IAR 8051 C/C++ Compiler V7.30B/W32                    19/Dec/2012  20:17:07 #
+# IAR 8051 C/C++ Compiler V7.30B/W32                    03/Jan/2013  17:10:57 #
 # Copyright 2004-2007 IAR Systems. All rights reserved.                       #
 #                                                                             #
 #    Core               =  plain                                              #
@@ -39,13 +39,14 @@
 #                          -DQUEUED_POLL_RATE=100 -DRESPONSE_POLL_RATE=100)   #
 #                          -DREJOIN_POLL_RATE=440 "C:\Texas                   #
 #                          Instruments\ZStack-1.4.3-1.2.1\Components\mt\MT_ZD #
-#                          O.c" -D CC2430EB -D REFLECTOR -D ZTOOL_P1 -D       #
-#                          MT_TASK -D MT_ZDO_FUNC -D LCD_SUPPORTED=DEBUG -lC  #
+#                          O.c" -D CC2430EB -D AXD_ROUTER -D REFLECTOR -D     #
+#                          ZTOOL_P1 -D MT_TASK -D xMT_ZDO_FUNC -D             #
+#                          xLCD_SUPPORTED=DEBUG -lC "C:\Texas                 #
+#                          Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\Sam #
+#                          ples\AXDApp\CC2430DB\RouterEB\List\" -lA           #
 #                          "C:\Texas Instruments\ZStack-1.4.3-1.2.1\Projects\ #
 #                          zstack\Samples\AXDApp\CC2430DB\RouterEB\List\"     #
-#                          -lA "C:\Texas Instruments\ZStack-1.4.3-1.2.1\Proje #
-#                          cts\zstack\Samples\AXDApp\CC2430DB\RouterEB\List\" #
-#                           --diag_suppress Pe001,Pa010 --diag_remark pe550   #
+#                          --diag_suppress Pe001,Pa010 --diag_remark pe550    #
 #                          -o "C:\Texas Instruments\ZStack-1.4.3-1.2.1\Projec #
 #                          ts\zstack\Samples\AXDApp\CC2430DB\RouterEB\Obj\"   #
 #                          -e --require_prototypes -z9 --no_code_motion       #
@@ -199,12 +200,7 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Components\mt\MT_ZDO.c
      73          /*********************************************************************
      74           * GLOBAL VARIABLES
      75           */
-
-   \                                 In  segment XDATA_Z, align 1, keep-with-next
      76          uint32 _zdoCallbackSub;
-   \                     _zdoCallbackSub:
-   \   000000                DS 4
-   \   000004                REQUIRE __INIT_XDATA_Z
      77          
      78          /*********************************************************************
      79           * EXTERNAL VARIABLES
@@ -217,12 +213,7 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Components\mt\MT_ZDO.c
      86          /*********************************************************************
      87           * LOCAL VARIABLES
      88           */
-
-   \                                 In  segment XDATA_Z, align 1, keep-with-next
      89          uint8 mtzdoResponseBuffer[100];
-   \                     mtzdoResponseBuffer:
-   \   000000                DS 100
-   \   000064                REQUIRE __INIT_XDATA_Z
      90          
      91          /*********************************************************************
      92           * LOCAL FUNCTIONS
@@ -260,52 +251,7 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Components\mt\MT_ZDO.c
     124            pfnMtZdoRspProc   pFn;
     125          } MTZDO_ConversionItem_t;
     126          
-
-   \                                 In  segment CODE_C, align 1
     127          CONST MTZDO_ConversionItem_t mtzdoConvTable[] = 
-   \                     mtzdoConvTable:
-   \   000000   0080         DW 32768
-   \   000002   01000000     DD 1
-   \   000006   800A....     DW 2688, ??zdo_MTCB_NwkIEEEAddrRspCB?relay, 32769
-   \            0180    
-   \   00000C   02000000     DD 2
-   \   000010   810A....     DW 2689, ??zdo_MTCB_NwkIEEEAddrRspCB?relay, 32770
-   \            0280    
-   \   000016   04000000     DD 4
-   \   00001A   820A....     DW 2690, ??zdo_MTCB_NodeDescRspCB?relay, 32771
-   \            0380    
-   \   000020   08000000     DD 8
-   \   000024   830A....     DW 2691, ??zdo_MTCB_PowerDescRspCB?relay, 32772
-   \            0480    
-   \   00002A   10000000     DD 16
-   \   00002E   840A....     DW 2692, ??zdo_MTCB_SimpleDescRspCB?relay, 32773
-   \            0580    
-   \   000034   20000000     DD 32
-   \   000038   850A....     DW 2693, ??zdo_MTCB_MatchActiveEPRspCB?relay, 32774
-   \            0680    
-   \   00003E   40000000     DD 64
-   \   000042   860A....     DW 2694, ??zdo_MTCB_MatchActiveEPRspCB?relay, 32801
-   \            2180    
-   \   000048   00010000     DD 256
-   \   00004C   880A....     DW 2696, ??zdo_MTCB_BindRspCB?relay, 32802
-   \            2280    
-   \   000052   00020000     DD 512
-   \   000056   890A....     DW 2697, ??zdo_MTCB_BindRspCB?relay, 32800
-   \            2080    
-   \   00005C   80000000     DD 128
-   \   000060   870A....     DW 2695, ??zdo_MTCB_BindRspCB?relay, 32785
-   \            1180    
-   \   000066   00800000     DD 32768
-   \   00006A   8F0A....     DW 2703, ??zdo_MTCB_UserDescRspCB?relay, 32788
-   \            1480    
-   \   000070   00000100     DD 65536
-   \   000074   900A....     DW 2704, ??zdo_MTCB_UserDescConfCB?relay, 32789
-   \            1580    
-   \   00007A   00000800     DD 524288
-   \   00007E   930A....     DW 2707, ??zdo_MTCB_ServerDiscRspCB?relay, 0
-   \            0000    
-   \   000084   00000000     DD 0
-   \   000088   00000000     DW 0, 0H
     128          {
     129          #if defined ( ZDO_NWKADDR_REQUEST )
     130            {NWK_addr_rsp, CB_ID_ZDO_NWK_ADDR_RSP, SPI_CB_ZDO_NWK_ADDR_RSP, zdo_MTCB_NwkIEEEAddrRspCB},
@@ -381,28 +327,8 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Components\mt\MT_ZDO.c
     200           *
     201           * @return  void
     202           */
-
-   \                                 In  segment BANKED_CODE, align 1, keep-with-next
     203          void MT_ZdoCommandProcessing( uint16 cmd_id , byte len , byte *pData )
-   \                     MT_ZdoCommandProcessing:
     204          {
-   \   000000   74F0         MOV     A,#-0x10
-   \   000002   12....       LCALL   ?BANKED_ENTER_XDATA
-   \   000005                ; Saved register size: 16
-   \   000005                ; Auto size: 161
-   \   000005   745F         MOV     A,#0x5f
-   \   000007   12....       LCALL   ?ALLOC_XSTACK8
-   \   00000A   7409         MOV     A,#0x9
-   \   00000C   12....       LCALL   ?XSTACK_DISP0_8
-   \   00000F   EA           MOV     A,R2
-   \   000010   F0           MOVX    @DPTR,A
-   \   000011   A3           INC     DPTR
-   \   000012   EB           MOV     A,R3
-   \   000013   F0           MOVX    @DPTR,A
-   \   000014   EC           MOV     A,R4
-   \   000015   FE           MOV     R6,A
-   \   000016   ED           MOV     A,R5
-   \   000017   FF           MOV     R7,A
     205            byte i;
     206            byte x;
     207            byte ret;
@@ -424,47 +350,10 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Components\mt\MT_ZDO.c
     223          #endif
     224          
     225            ret = UNSUPPORTED_COMMAND;
-   \   000018   7901         MOV     R1,#0x1
     226            len = SPI_0DATA_MSG_LEN + SPI_RESP_LEN_ZDO_DEFAULT;
     227            respLen = SPI_RESP_LEN_ZDO_DEFAULT;
     228          
     229            switch (cmd_id)
-   \   00001A   7409         MOV     A,#0x9
-   \   00001C   12....       LCALL   ?XSTACK_DISP0_8
-   \   00001F   E0           MOVX    A,@DPTR
-   \   000020   F5..         MOV     ?V0 + 0,A
-   \   000022   A3           INC     DPTR
-   \   000023   E0           MOVX    A,@DPTR
-   \   000024   F5..         MOV     ?V0 + 1,A
-   \   000026   78..         MOV     R0,#?V0 + 0
-   \   000028   12....       LCALL   ?US_SWITCH_DENSE
-   \                     `?<Jumptable for MT_ZdoCommandProcessing>_0`:
-   \   00002B   020A         DW        2562
-   \   00002D   16           DB        22
-   \   00002E   ....         DW        ??MT_ZdoCommandProcessing_0
-   \   000030   ....         DW        ??MT_ZdoCommandProcessing_1
-   \   000032   ....         DW        ??MT_ZdoCommandProcessing_2
-   \   000034   ....         DW        ??MT_ZdoCommandProcessing_3
-   \   000036   ....         DW        ??MT_ZdoCommandProcessing_4
-   \   000038   ....         DW        ??MT_ZdoCommandProcessing_5
-   \   00003A   ....         DW        ??MT_ZdoCommandProcessing_6
-   \   00003C   ....         DW        ??MT_ZdoCommandProcessing_7
-   \   00003E   ....         DW        ??MT_ZdoCommandProcessing_8
-   \   000040   ....         DW        ??MT_ZdoCommandProcessing_9
-   \   000042   ....         DW        ??MT_ZdoCommandProcessing_10
-   \   000044   ....         DW        ??MT_ZdoCommandProcessing_11
-   \   000046   ....         DW        ??MT_ZdoCommandProcessing_12
-   \   000048   ....         DW        ??MT_ZdoCommandProcessing_0
-   \   00004A   ....         DW        ??MT_ZdoCommandProcessing_0
-   \   00004C   ....         DW        ??MT_ZdoCommandProcessing_0
-   \   00004E   ....         DW        ??MT_ZdoCommandProcessing_0
-   \   000050   ....         DW        ??MT_ZdoCommandProcessing_0
-   \   000052   ....         DW        ??MT_ZdoCommandProcessing_13
-   \   000054   ....         DW        ??MT_ZdoCommandProcessing_0
-   \   000056   ....         DW        ??MT_ZdoCommandProcessing_0
-   \   000058   ....         DW        ??MT_ZdoCommandProcessing_0
-   \   00005A   ....         DW        ??MT_ZdoCommandProcessing_14
-   \   00005C   ....         DW        ??MT_ZdoCommandProcessing_15
     230            {
     231              case SPI_CMD_ZDO_AUTO_FIND_DESTINATION_REQ:
     232              case SPI_CMD_ZDO_AUTO_ENDDEVICEBIND_REQ:
@@ -476,55 +365,24 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Components\mt\MT_ZDO.c
     238              case SPI_CMD_ZDO_NWK_ADDR_REQ:
     239                // Copy and flip incoming 64-bit address
     240                pData = zdo_MT_MakeExtAddr( &devAddr, pData );
-   \                     ??MT_ZdoCommandProcessing_1:
-   \   00005E                ; Setup parameters for call to function zdo_MT_MakeExtAddr
-   \   00005E   85..82       MOV     DPL,?XSP + 0
-   \   000061   85..83       MOV     DPH,?XSP + 1
-   \   000064   AA82         MOV     R2,DPL
-   \   000066   AB83         MOV     R3,DPH
-   \   000068   12....       LCALL   ??zdo_MT_MakeExtAddr?relay
-   \   00006B   8A..         MOV     ?V0 + 0,R2
-   \   00006D   8B..         MOV     ?V0 + 1,R3
-   \   00006F   AE..         MOV     R6,?V0 + 0
-   \   000071   AF..         MOV     R7,?V0 + 1
     241          
     242                ptr = (byte*)&devAddr.addr.extAddr;
     243          
     244                attr = *pData++;   // RequestType
-   \   000073   12....       LCALL   ?Subroutine27 & 0xFFFF
     245                attr1 = *pData++;  // StartIndex
     246                x = *pData;
     247                ret = (byte)ZDP_NwkAddrReq( ptr, attr, attr1, x );
-   \                     ??CrossCallReturnLabel_101:
-   \   000076   85..82       MOV     DPL,?XSP + 0
-   \   000079   85..83       MOV     DPH,?XSP + 1
-   \   00007C   AA82         MOV     R2,DPL
-   \   00007E   AB83         MOV     R3,DPH
-   \   000080   12....       LCALL   ??ZDP_NwkAddrReq?relay
-   \   000083   02....       LJMP    ??MT_ZdoCommandProcessing_0 & 0xFFFF
     248                break;
     249          #endif
     250          
     251          #if defined ( ZDO_IEEEADDR_REQUEST )
     252              case SPI_CMD_ZDO_IEEE_ADDR_REQ:
     253                shortAddr = BUILD_UINT16( pData[1], pData[0] );
-   \                     ??MT_ZdoCommandProcessing_2:
-   \   000086   8E82         MOV     DPL,R6
-   \   000088   8F83         MOV     DPH,R7
-   \   00008A   12....       LCALL   ?Subroutine54 & 0xFFFF
-   \                     ??CrossCallReturnLabel_170:
-   \   00008D   12....       LCALL   ?Subroutine63 & 0xFFFF
     254                pData += sizeof( shortAddr );
     255                attr = *pData++;   // RequestType
-   \                     ??CrossCallReturnLabel_183:
-   \   000090   12....       LCALL   ?Subroutine27 & 0xFFFF
     256                attr1 = *pData++;  // StartIndex
     257                x = *pData;        // SecuritySuite
     258                ret = (byte)ZDP_IEEEAddrReq( shortAddr, attr, attr1, x );
-   \                     ??CrossCallReturnLabel_102:
-   \   000093   AB..         MOV     R3,?V0 + 5
-   \   000095   12....       LCALL   ??ZDP_IEEEAddrReq?relay
-   \   000098   02....       LJMP    ??MT_ZdoCommandProcessing_0 & 0xFFFF
     259                break;
     260          #endif
     261          
@@ -532,10 +390,6 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Components\mt\MT_ZDO.c
     263              case SPI_CMD_ZDO_NODE_DESC_REQ:
     264                // destination address
     265                devAddr.addrMode = Addr16Bit;
-   \                     ??MT_ZdoCommandProcessing_3:
-   \   00009B   7408         MOV     A,#0x8
-   \   00009D   12....       LCALL   ?XSTACK_DISP0_8
-   \   0000A0   12....       LCALL   ?Subroutine1 & 0xFFFF
     266                devAddr.addr.shortAddr = BUILD_UINT16( pData[1], pData[0] );
     267                pData += 2;
     268          
@@ -545,28 +399,6 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Components\mt\MT_ZDO.c
     272          
     273                attr = *pData;
     274                ret = (byte)ZDP_NodeDescReq( &devAddr, shortAddr, attr );
-   \                     ??CrossCallReturnLabel_3:
-   \   0000A3   12....       LCALL   ?PUSH_XSTACK_I_ONE
-   \   0000A6   7902         MOV     R1,#0x2
-   \                     ??MT_ZdoCommandProcessing_16:
-   \   0000A8   8E82         MOV     DPL,R6
-   \   0000AA   8F83         MOV     DPH,R7
-   \   0000AC   A3           INC     DPTR
-   \   0000AD   E0           MOVX    A,@DPTR
-   \   0000AE   FC           MOV     R4,A
-   \   0000AF   8E82         MOV     DPL,R6
-   \   0000B1   8F83         MOV     DPH,R7
-   \   0000B3   E0           MOVX    A,@DPTR
-   \   0000B4   FD           MOV     R5,A
-   \   0000B5   7401         MOV     A,#0x1
-   \   0000B7   12....       LCALL   ?XSTACK_DISP0_8
-   \   0000BA   AA82         MOV     R2,DPL
-   \   0000BC   AB83         MOV     R3,DPH
-   \   0000BE   12....       LCALL   ??ZDP_NWKAddrOfInterestReq?relay
-   \                     ??MT_ZdoCommandProcessing_17:
-   \   0000C1   7401         MOV     A,#0x1
-   \   0000C3   12....       LCALL   ?DEALLOC_XSTACK8
-   \   0000C6   02....       LJMP    ??MT_ZdoCommandProcessing_0 & 0xFFFF
     275                break;
     276          #endif
     277          
@@ -574,10 +406,6 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Components\mt\MT_ZDO.c
     279              case SPI_CMD_ZDO_POWER_DESC_REQ:
     280                // destination address
     281                devAddr.addrMode = Addr16Bit;
-   \                     ??MT_ZdoCommandProcessing_4:
-   \   0000C9   7408         MOV     A,#0x8
-   \   0000CB   12....       LCALL   ?XSTACK_DISP0_8
-   \   0000CE   12....       LCALL   ?Subroutine1 & 0xFFFF
     282                devAddr.addr.shortAddr = BUILD_UINT16( pData[1], pData[0] );
     283                pData += 2;
     284          
@@ -587,10 +415,6 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Components\mt\MT_ZDO.c
     288          
     289                attr = *pData;
     290                ret = (byte)ZDP_PowerDescReq( &devAddr, shortAddr, attr );
-   \                     ??CrossCallReturnLabel_4:
-   \   0000D1   12....       LCALL   ?PUSH_XSTACK_I_ONE
-   \   0000D4   7903         MOV     R1,#0x3
-   \   0000D6   80D0         SJMP    ??MT_ZdoCommandProcessing_16
     291                break;
     292          #endif
     293          
@@ -598,10 +422,6 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Components\mt\MT_ZDO.c
     295              case SPI_CMD_ZDO_SIMPLE_DESC_REQ:
     296                // destination address
     297                devAddr.addrMode = Addr16Bit;
-   \                     ??MT_ZdoCommandProcessing_5:
-   \   0000D8   7408         MOV     A,#0x8
-   \   0000DA   12....       LCALL   ?XSTACK_DISP0_8
-   \   0000DD   12....       LCALL   ?Subroutine6 & 0xFFFF
     298                devAddr.addr.shortAddr = BUILD_UINT16( pData[1], pData[0] );
     299                pData += 2;
     300          
@@ -610,24 +430,8 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Components\mt\MT_ZDO.c
     303                pData += 2;
     304          
     305                attr = *pData++;  // endpoint/interface
-   \                     ??CrossCallReturnLabel_21:
-   \   0000E0   F5..         MOV     ?V0 + 2,A
-   \   0000E2   A3           INC     DPTR
     306                attr1 = *pData;   // SecuritySuite
     307                ret = (byte)ZDP_SimpleDescReq( &devAddr, shortAddr, attr, attr1 );
-   \   0000E3                ; Setup parameters for call to function ZDP_SimpleDescReq
-   \   0000E3   12....       LCALL   ??Subroutine56_0 & 0xFFFF
-   \                     ??CrossCallReturnLabel_173:
-   \   0000E6   12....       LCALL   ?PUSH_XSTACK_I_ONE
-   \   0000E9   A9..         MOV     R1,?V0 + 2
-   \   0000EB   AC..         MOV     R4,?V0 + 4
-   \   0000ED   AD..         MOV     R5,?V0 + 5
-   \   0000EF   7401         MOV     A,#0x1
-   \   0000F1   12....       LCALL   ?XSTACK_DISP0_8
-   \   0000F4   AA82         MOV     R2,DPL
-   \   0000F6   AB83         MOV     R3,DPH
-   \   0000F8   12....       LCALL   ??ZDP_SimpleDescReq?relay
-   \   0000FB   80C4         SJMP    ??MT_ZdoCommandProcessing_17
     308                break;
     309          #endif
     310          
@@ -635,10 +439,6 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Components\mt\MT_ZDO.c
     312              case SPI_CMD_ZDO_ACTIVE_EPINT_REQ:
     313                // destination address
     314                devAddr.addrMode = Addr16Bit;
-   \                     ??MT_ZdoCommandProcessing_6:
-   \   0000FD   7408         MOV     A,#0x8
-   \   0000FF   12....       LCALL   ?XSTACK_DISP0_8
-   \   000102   12....       LCALL   ?Subroutine1 & 0xFFFF
     315                devAddr.addr.shortAddr = BUILD_UINT16( pData[1], pData[0] );
     316                pData += 2;
     317          
@@ -648,10 +448,6 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Components\mt\MT_ZDO.c
     321          
     322                attr = *pData;  // SecuritySuite
     323                ret = (byte)ZDP_ActiveEPReq( &devAddr, shortAddr, attr );
-   \                     ??CrossCallReturnLabel_5:
-   \   000105   12....       LCALL   ?PUSH_XSTACK_I_ONE
-   \   000108   7905         MOV     R1,#0x5
-   \   00010A   809C         SJMP    ??MT_ZdoCommandProcessing_16
     324                break;
     325          #endif
     326          
@@ -662,100 +458,32 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Components\mt\MT_ZDO.c
     331          
     332                  // destination address
     333                  devAddr.addrMode = Addr16Bit;
-   \                     ??MT_ZdoCommandProcessing_7:
-   \   00010C   7408         MOV     A,#0x8
-   \   00010E   12....       LCALL   ?XSTACK_DISP0_8
-   \   000111   12....       LCALL   ?Subroutine8 & 0xFFFF
     334                  devAddr.addr.shortAddr = BUILD_UINT16( pData[1], pData[0] );
     335                  pData += 2;
     336          
     337                  // Network address of interest
     338                  shortAddr = BUILD_UINT16( pData[1], pData[0] );
-   \                     ??CrossCallReturnLabel_27:
-   \   000114   12....       LCALL   ?Subroutine36 & 0xFFFF
     339                  pData += 2;
     340          
     341                  uAttr = BUILD_UINT16( pData[1], pData[0] );   // Profile ID
-   \                     ??CrossCallReturnLabel_121:
-   \   000117   12....       LCALL   ?Subroutine54 & 0xFFFF
-   \                     ??CrossCallReturnLabel_171:
-   \   00011A   FB           MOV     R3,A
     342                  pData += 2;
-   \   00011B   12....       LCALL   ?Subroutine35 & 0xFFFF
     343          
     344                  attr = *pData++;   // NumInClusters
-   \                     ??CrossCallReturnLabel_119:
-   \   00011E   AE82         MOV     R6,DPL
-   \   000120   AF83         MOV     R7,DPH
     345                  for (i=0; i<16; ++i)  {
-   \   000122   7D00         MOV     R5,#0x0
     346                    inC[i] = BUILD_UINT16(pData[1], pData[0]);
-   \                     ??MT_ZdoCommandProcessing_18:
-   \   000124   12....       LCALL   ?Subroutine25 & 0xFFFF
-   \                     ??CrossCallReturnLabel_97:
-   \   000127   7425         MOV     A,#0x25
-   \   000129   12....       LCALL   ?XSTACK_DISP0_8
-   \   00012C   12....       LCALL   ?Subroutine12 & 0xFFFF
     347                    pData += 2;
     348                  }
-   \                     ??CrossCallReturnLabel_41:
-   \   00012F   40F3         JC      ??MT_ZdoCommandProcessing_18
     349          
     350                  attr1 = *pData++;  // NumOutClusters
-   \   000131   12....       LCALL   ?Subroutine32 & 0xFFFF
     351                  for (i=0; i<16; ++i)  {
     352                    outC[i] = BUILD_UINT16(pData[1], pData[0]);
-   \                     ??CrossCallReturnLabel_112:
-   \   000134   12....       LCALL   ?Subroutine25 & 0xFFFF
-   \                     ??CrossCallReturnLabel_98:
-   \   000137   7445         MOV     A,#0x45
-   \   000139   12....       LCALL   ?XSTACK_DISP0_8
-   \   00013C   12....       LCALL   ?Subroutine12 & 0xFFFF
     353                    pData += 2;
     354                  }
-   \                     ??CrossCallReturnLabel_42:
-   \   00013F   40F3         JC      ??CrossCallReturnLabel_112
     355          
     356                  i = *pData;        // SecuritySuite
     357          
     358                  ret = (byte)ZDP_MatchDescReq( &devAddr, shortAddr, uAttr,
     359                                            attr, inC, attr1, outC, i );
-   \   000141                ; Setup parameters for call to function ZDP_MatchDescReq
-   \   000141   12....       LCALL   ?Subroutine56 & 0xFFFF
-   \                     ??CrossCallReturnLabel_174:
-   \   000144   12....       LCALL   ?PUSH_XSTACK_I_ONE
-   \   000147   7446         MOV     A,#0x46
-   \   000149   12....       LCALL   ?XSTACK_DISP0_8
-   \   00014C   8582..       MOV     ?V0 + 0,DPL
-   \   00014F   8583..       MOV     ?V0 + 1,DPH
-   \   000152   78..         MOV     R0,#?V0 + 0
-   \   000154   12....       LCALL   ?PUSH_XSTACK_I_TWO
-   \   000157   EC           MOV     A,R4
-   \   000158   F5..         MOV     ?V0 + 0,A
-   \   00015A   78..         MOV     R0,#?V0 + 0
-   \   00015C   12....       LCALL   ?PUSH_XSTACK_I_ONE
-   \   00015F   7429         MOV     A,#0x29
-   \   000161   12....       LCALL   ?XSTACK_DISP0_8
-   \   000164   8582..       MOV     ?V0 + 0,DPL
-   \   000167   8583..       MOV     ?V0 + 1,DPH
-   \   00016A   78..         MOV     R0,#?V0 + 0
-   \   00016C   12....       LCALL   ?PUSH_XSTACK_I_TWO
-   \   00016F   8A..         MOV     ?V0 + 0,R2
-   \   000171   8B..         MOV     ?V0 + 1,R3
-   \   000173   78..         MOV     R0,#?V0 + 0
-   \   000175   12....       LCALL   ?PUSH_XSTACK_I_TWO
-   \   000178   A9..         MOV     R1,?V0 + 2
-   \   00017A   AC..         MOV     R4,?V0 + 4
-   \   00017C   AD..         MOV     R5,?V0 + 5
-   \   00017E   7408         MOV     A,#0x8
-   \   000180   12....       LCALL   ?XSTACK_DISP0_8
-   \   000183   AA82         MOV     R2,DPL
-   \   000185   AB83         MOV     R3,DPH
-   \   000187   12....       LCALL   ??ZDP_MatchDescReq?relay
-   \                     ??MT_ZdoCommandProcessing_19:
-   \   00018A   7408         MOV     A,#0x8
-   \   00018C   12....       LCALL   ?DEALLOC_XSTACK8
-   \   00018F   02....       LJMP    ??MT_ZdoCommandProcessing_0 & 0xFFFF
     360                }
     361                break;
     362          #endif
@@ -764,10 +492,6 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Components\mt\MT_ZDO.c
     365              case SPI_CMD_ZDO_COMPLEX_DESC_REQ:
     366                // destination address
     367                devAddr.addrMode = Addr16Bit;
-   \                     ??MT_ZdoCommandProcessing_8:
-   \   000192   7408         MOV     A,#0x8
-   \   000194   12....       LCALL   ?XSTACK_DISP0_8
-   \   000197   12....       LCALL   ?Subroutine1 & 0xFFFF
     368                devAddr.addr.shortAddr = BUILD_UINT16( pData[1], pData[0] );
     369                pData += 2;
     370          
@@ -777,10 +501,6 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Components\mt\MT_ZDO.c
     374          
     375                attr = *pData;  // SecuritySuite
     376                ret = (byte)ZDP_ComplexDescReq( &devAddr, shortAddr, attr );
-   \                     ??CrossCallReturnLabel_6:
-   \   00019A   12....       LCALL   ?PUSH_XSTACK_I_ONE
-   \   00019D   7910         MOV     R1,#0x10
-   \   00019F   02....       LJMP    ??MT_ZdoCommandProcessing_16 & 0xFFFF
     377                break;
     378          #endif
     379          
@@ -788,10 +508,6 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Components\mt\MT_ZDO.c
     381              case SPI_CMD_ZDO_USER_DESC_REQ:
     382                // destination address
     383                devAddr.addrMode = Addr16Bit;
-   \                     ??MT_ZdoCommandProcessing_9:
-   \   0001A2   7408         MOV     A,#0x8
-   \   0001A4   12....       LCALL   ?XSTACK_DISP0_8
-   \   0001A7   12....       LCALL   ?Subroutine1 & 0xFFFF
     384                devAddr.addr.shortAddr = BUILD_UINT16( pData[1], pData[0] );
     385                pData += 2;
     386          
@@ -801,10 +517,6 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Components\mt\MT_ZDO.c
     390          
     391                attr = *pData;  // SecuritySuite
     392                ret = (byte)ZDP_UserDescReq( &devAddr, shortAddr, attr );
-   \                     ??CrossCallReturnLabel_7:
-   \   0001AA   12....       LCALL   ?PUSH_XSTACK_I_ONE
-   \   0001AD   7911         MOV     R1,#0x11
-   \   0001AF   02....       LJMP    ??MT_ZdoCommandProcessing_16 & 0xFFFF
     393                break;
     394          #endif
     395          
@@ -816,10 +528,6 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Components\mt\MT_ZDO.c
     401          
     402                  // destination address
     403                  devAddr.addrMode = Addr16Bit;
-   \                     ??MT_ZdoCommandProcessing_10:
-   \   0001B2   7408         MOV     A,#0x8
-   \   0001B4   12....       LCALL   ?XSTACK_DISP0_8
-   \   0001B7   12....       LCALL   ?Subroutine6 & 0xFFFF
     404                  devAddr.addr.shortAddr = BUILD_UINT16( pData[1], pData[0] );
     405                  pData += 2;
     406          
@@ -828,120 +536,26 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Components\mt\MT_ZDO.c
     409                  pData += 2;
     410          
     411                  x = *pData++;      // EPInt
-   \                     ??CrossCallReturnLabel_22:
-   \   0001BA   F9           MOV     R1,A
-   \   0001BB   A3           INC     DPTR
-   \   0001BC   AE82         MOV     R6,DPL
-   \   0001BE   AF83         MOV     R7,DPH
     412          
     413                  uAttr = BUILD_UINT16( pData[1], pData[0] );   // Profile ID
-   \   0001C0   12....       LCALL   ?Subroutine28 & 0xFFFF
     414                  pData += 2;
-   \                     ??CrossCallReturnLabel_103:
-   \   0001C3   12....       LCALL   ?Subroutine35 & 0xFFFF
     415          
     416                  attr = *pData++;   // NumInClusters
-   \                     ??CrossCallReturnLabel_120:
-   \   0001C6   0E           INC     R6
-   \   0001C7   AF83         MOV     R7,DPH
     417                  for (i=0; i<15; ++i)  {
-   \   0001C9   7D00         MOV     R5,#0x0
     418                    inC[i] = BUILD_UINT16(pData[1], pData[0]);
-   \                     ??MT_ZdoCommandProcessing_20:
-   \   0001CB   8E82         MOV     DPL,R6
-   \   0001CD   8F83         MOV     DPH,R7
-   \   0001CF   A3           INC     DPTR
-   \   0001D0   E0           MOVX    A,@DPTR
-   \   0001D1   F5..         MOV     ?V0 + 6,A
-   \   0001D3   8E82         MOV     DPL,R6
-   \   0001D5   8F83         MOV     DPH,R7
-   \   0001D7   E0           MOVX    A,@DPTR
-   \   0001D8   F5..         MOV     ?V0 + 1,A
-   \   0001DA   E4           CLR     A
-   \   0001DB   25..         ADD     A,?V0 + 6
-   \   0001DD   E5..         MOV     A,?V0 + 1
-   \   0001DF   F5..         MOV     ?V0 + 7,A
-   \   0001E1   ED           MOV     A,R5
-   \   0001E2   33           RLC     A
-   \   0001E3   F5..         MOV     ?V0 + 0,A
-   \   0001E5   E4           CLR     A
-   \   0001E6   33           RLC     A
-   \   0001E7   F5..         MOV     ?V0 + 1,A
-   \   0001E9   7465         MOV     A,#0x65
-   \   0001EB   12....       LCALL   ?XSTACK_DISP0_8
-   \   0001EE   12....       LCALL   ?Subroutine13 & 0xFFFF
     419                    pData += 2;
     420                  }
-   \                     ??CrossCallReturnLabel_43:
-   \   0001F1   40D8         JC      ??MT_ZdoCommandProcessing_20
     421          
     422                  attr1 = *pData++;  // NumOutClusters
-   \   0001F3   12....       LCALL   ?Subroutine32 & 0xFFFF
     423                  for (i=0; i<15; ++i)  {
     424                    outC[i] = BUILD_UINT16(pData[1], pData[0]);
-   \                     ??CrossCallReturnLabel_113:
-   \   0001F6   12....       LCALL   ?Subroutine57 & 0xFFFF
-   \                     ??CrossCallReturnLabel_205:
-   \   0001F9   F5..         MOV     ?V0 + 7,A
-   \   0001FB   E4           CLR     A
-   \   0001FC   25..         ADD     A,?V0 + 0
-   \   0001FE   F5..         MOV     ?V0 + 6,A
-   \   000200   ED           MOV     A,R5
-   \   000201   33           RLC     A
-   \   000202   F5..         MOV     ?V0 + 0,A
-   \   000204   E4           CLR     A
-   \   000205   33           RLC     A
-   \   000206   F5..         MOV     ?V0 + 1,A
-   \   000208   7483         MOV     A,#-0x7d
-   \   00020A   12....       LCALL   ?XSTACK_DISP0_8
-   \   00020D   12....       LCALL   ?Subroutine13 & 0xFFFF
     425                    pData += 2;
     426                  }
-   \                     ??CrossCallReturnLabel_44:
-   \   000210   40E4         JC      ??CrossCallReturnLabel_113
     427          
     428                  i = *pData;        // SecuritySuite
     429          
     430                  ret = (byte)ZDP_EndDeviceBindReq( &devAddr, shortAddr, x, uAttr,
     431                                          attr, inC, attr1, outC, i );
-   \   000212                ; Setup parameters for call to function ZDP_EndDeviceBindReq
-   \   000212   12....       LCALL   ?Subroutine56 & 0xFFFF
-   \                     ??CrossCallReturnLabel_175:
-   \   000215   12....       LCALL   ?PUSH_XSTACK_I_ONE
-   \   000218   7484         MOV     A,#-0x7c
-   \   00021A   12....       LCALL   ?XSTACK_DISP0_8
-   \   00021D   8582..       MOV     ?V0 + 0,DPL
-   \   000220   8583..       MOV     ?V0 + 1,DPH
-   \   000223   78..         MOV     R0,#?V0 + 0
-   \   000225   12....       LCALL   ?PUSH_XSTACK_I_TWO
-   \   000228   EC           MOV     A,R4
-   \   000229   F5..         MOV     ?V0 + 0,A
-   \   00022B   78..         MOV     R0,#?V0 + 0
-   \   00022D   12....       LCALL   ?PUSH_XSTACK_I_ONE
-   \   000230   7469         MOV     A,#0x69
-   \   000232   12....       LCALL   ?XSTACK_DISP0_8
-   \   000235   8582..       MOV     ?V0 + 0,DPL
-   \   000238   8583..       MOV     ?V0 + 1,DPH
-   \   00023B   78..         MOV     R0,#?V0 + 0
-   \   00023D   12....       LCALL   ?PUSH_XSTACK_I_TWO
-   \   000240   E5..         MOV     A,?V0 + 2
-   \   000242   F5..         MOV     ?V0 + 0,A
-   \   000244   78..         MOV     R0,#?V0 + 0
-   \   000246   12....       LCALL   ?PUSH_XSTACK_I_ONE
-   \   000249   8A..         MOV     ?V0 + 0,R2
-   \   00024B   8B..         MOV     ?V0 + 1,R3
-   \   00024D   78..         MOV     R0,#?V0 + 0
-   \   00024F   12....       LCALL   ?PUSH_XSTACK_I_TWO
-   \   000252   AC..         MOV     R4,?V0 + 4
-   \   000254   AD..         MOV     R5,?V0 + 5
-   \   000256   7409         MOV     A,#0x9
-   \   000258   12....       LCALL   ?XSTACK_DISP0_8
-   \   00025B   AA82         MOV     R2,DPL
-   \   00025D   AB83         MOV     R3,DPH
-   \   00025F   12....       LCALL   ??ZDP_EndDeviceBindReq?relay
-   \   000262   7409         MOV     A,#0x9
-   \   000264   12....       LCALL   ?DEALLOC_XSTACK8
-   \   000267   02....       LJMP    ??MT_ZdoCommandProcessing_0 & 0xFFFF
     432                }
     433                break;
     434          #endif
@@ -950,10 +564,6 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Components\mt\MT_ZDO.c
     437              case SPI_CMD_ZDO_BIND_REQ:
     438                // destination address
     439                devAddr.addrMode = Addr16Bit;
-   \                     ??MT_ZdoCommandProcessing_11:
-   \   00026A   7408         MOV     A,#0x8
-   \   00026C   12....       LCALL   ?XSTACK_DISP0_8
-   \   00026F   12....       LCALL   ?Subroutine5 & 0xFFFF
     440                devAddr.addr.shortAddr = BUILD_UINT16( pData[1], pData[0] );
     441                pData += 2;
     442          
@@ -967,53 +577,20 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Components\mt\MT_ZDO.c
     450                pData += 2;
     451                
     452                dstAddr.addrMode = *pData++;
-   \                     ??CrossCallReturnLabel_19:
-   \   000272   C0E0         PUSH    A
-   \   000274   7413         MOV     A,#0x13
-   \   000276   12....       LCALL   ?XSTACK_DISP0_8
-   \   000279   D0E0         POP     A
-   \   00027B   12....       LCALL   ?Subroutine11 & 0xFFFF
     453                
     454                MT_ReverseBytes( pData, Z_EXTADDR_LEN );
     455                if ( dstAddr.addrMode == Addr64Bit )
-   \                     ??CrossCallReturnLabel_39:
-   \   00027E   12....       LCALL   ?XSTACK_DISP0_8
-   \   000281   E0           MOVX    A,@DPTR
-   \   000282   6403         XRL     A,#0x3
-   \   000284   7012         JNZ     ??MT_ZdoCommandProcessing_21
     456                {
     457                  ptr1 = pData;      // DstAddress
     458                  osal_cpyExtAddr( dstAddr.addr.extAddr, ptr1 );
-   \   000286                ; Setup parameters for call to function osal_cpyExtAddr
-   \   000286   EE           MOV     A,R6
-   \   000287   FC           MOV     R4,A
-   \   000288   EF           MOV     A,R7
-   \   000289   FD           MOV     R5,A
-   \   00028A   740B         MOV     A,#0xb
-   \   00028C   12....       LCALL   ?XSTACK_DISP0_8
-   \   00028F   AA82         MOV     R2,DPL
-   \   000291   AB83         MOV     R3,DPH
-   \   000293   12....       LCALL   ??osal_cpyExtAddr?relay
-   \   000296   800B         SJMP    ??MT_ZdoCommandProcessing_22
     459                }
     460                else
     461                {
     462                  dstAddr.addr.shortAddr = BUILD_UINT16( pData[0], pData[1] ); 
-   \                     ??MT_ZdoCommandProcessing_21:
-   \   000298   12....       LCALL   ?Subroutine29 & 0xFFFF
-   \                     ??CrossCallReturnLabel_105:
-   \   00029B   12....       LCALL   ?XSTACK_DISP0_8
-   \   00029E   E8           MOV     A,R0
-   \   00029F   F0           MOVX    @DPTR,A
-   \   0002A0   A3           INC     DPTR
-   \   0002A1   E9           MOV     A,R1
-   \   0002A2   F0           MOVX    @DPTR,A
     463                }
     464                
     465                // The short address occupies lsb two bytes
     466                pData += Z_EXTADDR_LEN;
-   \                     ??MT_ZdoCommandProcessing_22:
-   \   0002A3   12....       LCALL   ?Subroutine34 & 0xFFFF
     467          
     468                
     469                attr1 = *pData++;  // DstEPInt
@@ -1021,32 +598,6 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Components\mt\MT_ZDO.c
     471                x = *pData;        // SecuritySuite
     472               
     473                ret = (byte)ZDP_BindReq( &devAddr, ptr, attr, cID, &dstAddr, attr1, x );
-   \                     ??CrossCallReturnLabel_117:
-   \   0002A6   12....       LCALL   ?PUSH_XSTACK_I_ONE
-   \   0002A9   EC           MOV     A,R4
-   \   0002AA   F5..         MOV     ?V0 + 3,A
-   \   0002AC   78..         MOV     R0,#?V0 + 3
-   \   0002AE   12....       LCALL   ?PUSH_XSTACK_I_ONE
-   \   0002B1   740D         MOV     A,#0xd
-   \   0002B3   12....       LCALL   ?XSTACK_DISP0_8
-   \   0002B6   8582..       MOV     ?V0 + 6,DPL
-   \   0002B9   8583..       MOV     ?V0 + 7,DPH
-   \   0002BC   78..         MOV     R0,#?V0 + 6
-   \   0002BE   12....       LCALL   ?PUSH_XSTACK_I_TWO
-   \   0002C1   78..         MOV     R0,#?V0 + 0
-   \   0002C3   12....       LCALL   ?PUSH_XSTACK_I_TWO
-   \   0002C6   78..         MOV     R0,#?V0 + 4
-   \   0002C8   12....       LCALL   ?PUSH_XSTACK_I_TWO
-   \   0002CB   A9..         MOV     R1,?V0 + 2
-   \   0002CD   7408         MOV     A,#0x8
-   \   0002CF   12....       LCALL   ?XSTACK_DISP0_8
-   \   0002D2   AC82         MOV     R4,DPL
-   \   0002D4   AD83         MOV     R5,DPH
-   \   0002D6   7A21         MOV     R2,#0x21
-   \                     ??MT_ZdoCommandProcessing_23:
-   \   0002D8   7B00         MOV     R3,#0x0
-   \   0002DA   12....       LCALL   ??ZDP_BindUnbindReq?relay
-   \   0002DD   02....       LJMP    ??MT_ZdoCommandProcessing_19 & 0xFFFF
     474                break;
     475          #endif
     476          
@@ -1054,10 +605,6 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Components\mt\MT_ZDO.c
     478              case SPI_CMD_ZDO_UNBIND_REQ:
     479                // destination address
     480                devAddr.addrMode = Addr16Bit;
-   \                     ??MT_ZdoCommandProcessing_12:
-   \   0002E0   7408         MOV     A,#0x8
-   \   0002E2   12....       LCALL   ?XSTACK_DISP0_8
-   \   0002E5   12....       LCALL   ?Subroutine5 & 0xFFFF
     481                devAddr.addr.shortAddr = BUILD_UINT16( pData[1], pData[0] );
     482                pData += 2;
     483          
@@ -1071,80 +618,24 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Components\mt\MT_ZDO.c
     491                pData += 2;
     492          
     493                dstAddr.addrMode = *pData++;
-   \                     ??CrossCallReturnLabel_20:
-   \   0002E8   C0E0         PUSH    A
-   \   0002EA   7413         MOV     A,#0x13
-   \   0002EC   12....       LCALL   ?XSTACK_DISP0_8
-   \   0002EF   D0E0         POP     A
-   \   0002F1   12....       LCALL   ?Subroutine11 & 0xFFFF
     494                
     495                MT_ReverseBytes( pData, Z_EXTADDR_LEN );
     496                if ( dstAddr.addrMode == Addr64Bit )
-   \                     ??CrossCallReturnLabel_40:
-   \   0002F4   12....       LCALL   ?XSTACK_DISP0_8
-   \   0002F7   E0           MOVX    A,@DPTR
-   \   0002F8   6403         XRL     A,#0x3
-   \   0002FA   7012         JNZ     ??MT_ZdoCommandProcessing_24
     497                {
     498                  ptr1 = pData;      // DstAddress
     499                  osal_cpyExtAddr( dstAddr.addr.extAddr, ptr1 );
-   \   0002FC                ; Setup parameters for call to function osal_cpyExtAddr
-   \   0002FC   EE           MOV     A,R6
-   \   0002FD   FC           MOV     R4,A
-   \   0002FE   EF           MOV     A,R7
-   \   0002FF   FD           MOV     R5,A
-   \   000300   740B         MOV     A,#0xb
-   \   000302   12....       LCALL   ?XSTACK_DISP0_8
-   \   000305   AA82         MOV     R2,DPL
-   \   000307   AB83         MOV     R3,DPH
-   \   000309   12....       LCALL   ??osal_cpyExtAddr?relay
-   \   00030C   800B         SJMP    ??MT_ZdoCommandProcessing_25
     500                }
     501                else
     502                {
     503                  dstAddr.addr.shortAddr = BUILD_UINT16( pData[0], pData[1] ); 
-   \                     ??MT_ZdoCommandProcessing_24:
-   \   00030E   12....       LCALL   ?Subroutine29 & 0xFFFF
-   \                     ??CrossCallReturnLabel_106:
-   \   000311   12....       LCALL   ?XSTACK_DISP0_8
-   \   000314   E8           MOV     A,R0
-   \   000315   F0           MOVX    @DPTR,A
-   \   000316   A3           INC     DPTR
-   \   000317   E9           MOV     A,R1
-   \   000318   F0           MOVX    @DPTR,A
     504                }      
     505                pData += Z_EXTADDR_LEN;
-   \                     ??MT_ZdoCommandProcessing_25:
-   \   000319   12....       LCALL   ?Subroutine34 & 0xFFFF
     506          
     507                attr1 = *pData++;  // DstEPInt
     508          
     509                x = *pData;        // SecuritySuite
     510          
     511                ret = (byte)ZDP_UnbindReq( &devAddr, ptr, attr, cID, &dstAddr, attr1, x );
-   \                     ??CrossCallReturnLabel_118:
-   \   00031C   12....       LCALL   ?PUSH_XSTACK_I_ONE
-   \   00031F   EC           MOV     A,R4
-   \   000320   F5..         MOV     ?V0 + 3,A
-   \   000322   78..         MOV     R0,#?V0 + 3
-   \   000324   12....       LCALL   ?PUSH_XSTACK_I_ONE
-   \   000327   740D         MOV     A,#0xd
-   \   000329   12....       LCALL   ?XSTACK_DISP0_8
-   \   00032C   8582..       MOV     ?V0 + 6,DPL
-   \   00032F   8583..       MOV     ?V0 + 7,DPH
-   \   000332   78..         MOV     R0,#?V0 + 6
-   \   000334   12....       LCALL   ?PUSH_XSTACK_I_TWO
-   \   000337   78..         MOV     R0,#?V0 + 0
-   \   000339   12....       LCALL   ?PUSH_XSTACK_I_TWO
-   \   00033C   78..         MOV     R0,#?V0 + 4
-   \   00033E   12....       LCALL   ?PUSH_XSTACK_I_TWO
-   \   000341   A9..         MOV     R1,?V0 + 2
-   \   000343   7408         MOV     A,#0x8
-   \   000345   12....       LCALL   ?XSTACK_DISP0_8
-   \   000348   AC82         MOV     R4,DPL
-   \   00034A   AD83         MOV     R5,DPH
-   \   00034C   7A22         MOV     R2,#0x22
-   \   00034E   8088         SJMP    ??MT_ZdoCommandProcessing_23
     512                break;
     513          #endif
     514          
@@ -1216,80 +707,19 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Components\mt\MT_ZDO.c
     580              case SPI_CMD_ZDO_USER_DESC_SET:
     581                // destination address
     582                devAddr.addrMode = Addr16Bit;
-   \                     ??MT_ZdoCommandProcessing_13:
-   \   000350   7408         MOV     A,#0x8
-   \   000352   12....       LCALL   ?XSTACK_DISP0_8
-   \   000355   12....       LCALL   ?Subroutine8 & 0xFFFF
     583                devAddr.addr.shortAddr = BUILD_UINT16( pData[1], pData[0] );
     584                pData += 2;
     585          
     586                // Network address of interest
     587                shortAddr = BUILD_UINT16( pData[1], pData[0] );
-   \                     ??CrossCallReturnLabel_28:
-   \   000358   F8           MOV     R0,A
-   \   000359   E4           CLR     A
-   \   00035A   C8           XCH     A,R0
-   \   00035B   12....       LCALL   ?Subroutine36 & 0xFFFF
     588                pData += 2;
     589          
     590                // User descriptor
     591                userDesc.len = *pData++;
-   \                     ??CrossCallReturnLabel_122:
-   \   00035E   E0           MOVX    A,@DPTR
-   \   00035F   C0E0         PUSH    A
-   \   000361   7414         MOV     A,#0x14
-   \   000363   12....       LCALL   ?XSTACK_DISP0_8
-   \   000366   D0E0         POP     A
-   \   000368   12....       LCALL   ?Subroutine68 & 0xFFFF
-   \                     ??CrossCallReturnLabel_196:
-   \   00036B   AE82         MOV     R6,DPL
-   \   00036D   AF83         MOV     R7,DPH
     592                osal_memcpy( userDesc.desc, pData, userDesc.len );
-   \   00036F                ; Setup parameters for call to function osal_memcpy
-   \   00036F   8E..         MOV     ?V0 + 0,R6
-   \   000371   8F..         MOV     ?V0 + 1,R7
-   \   000373   88..         MOV     ?V0 + 2,R0
-   \   000375   78..         MOV     R0,#?V0 + 0
-   \   000377   12....       LCALL   ?PUSH_XSTACK_I_THREE
-   \   00037A   7417         MOV     A,#0x17
-   \   00037C   12....       LCALL   ?XSTACK_DISP0_8
-   \   00037F   E0           MOVX    A,@DPTR
-   \   000380   FC           MOV     R4,A
-   \   000381   7D00         MOV     R5,#0x0
-   \   000383   7418         MOV     A,#0x18
-   \   000385   12....       LCALL   ?XSTACK_DISP0_8
-   \   000388   AA82         MOV     R2,DPL
-   \   00038A   AB83         MOV     R3,DPH
-   \   00038C   12....       LCALL   ??osal_memcpy?relay
-   \   00038F   7403         MOV     A,#0x3
-   \   000391   12....       LCALL   ?DEALLOC_XSTACK8
     593                pData += 16;  // len of user desc
     594          
     595                ret =(byte)ZDP_UserDescSet( &devAddr, shortAddr, &userDesc, pData[0] );
-   \   000394                ; Setup parameters for call to function ZDP_UserDescSet
-   \   000394   7414         MOV     A,#0x14
-   \   000396   12....       LCALL   ?XSTACK_DISP0_8
-   \   000399   8582..       MOV     ?V0 + 0,DPL
-   \   00039C   8583..       MOV     ?V0 + 1,DPH
-   \   00039F   78..         MOV     R0,#?V0 + 0
-   \   0003A1   12....       LCALL   ?PUSH_XSTACK_I_TWO
-   \   0003A4   EE           MOV     A,R6
-   \   0003A5   2410         ADD     A,#0x10
-   \   0003A7   F582         MOV     DPL,A
-   \   0003A9   EF           MOV     A,R7
-   \   0003AA   12....       LCALL   ??Subroutine39_0 & 0xFFFF
-   \                     ??CrossCallReturnLabel_127:
-   \   0003AD   F9           MOV     R1,A
-   \   0003AE   AC..         MOV     R4,?V0 + 4
-   \   0003B0   AD..         MOV     R5,?V0 + 5
-   \   0003B2   7402         MOV     A,#0x2
-   \   0003B4   12....       LCALL   ?XSTACK_DISP0_8
-   \   0003B7   AA82         MOV     R2,DPL
-   \   0003B9   AB83         MOV     R3,DPH
-   \   0003BB   12....       LCALL   ??ZDP_UserDescSet?relay
-   \   0003BE   7402         MOV     A,#0x2
-   \   0003C0   12....       LCALL   ?DEALLOC_XSTACK8
-   \   0003C3   801B         SJMP    ??MT_ZdoCommandProcessing_0
     596                break;
     597          #endif
     598          
@@ -1320,20 +750,6 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Components\mt\MT_ZDO.c
     623                attr = *pData++; // Security suite
     624                
     625                ret = (byte) ZDP_ServerDiscReq( uAttr, attr );
-   \                     ??MT_ZdoCommandProcessing_14:
-   \   0003C5                ; Setup parameters for call to function ZDP_ServerDiscReq
-   \   0003C5   8E82         MOV     DPL,R6
-   \   0003C7   8F83         MOV     DPH,R7
-   \   0003C9   A3           INC     DPTR
-   \   0003CA   A3           INC     DPTR
-   \   0003CB   E0           MOVX    A,@DPTR
-   \   0003CC   F9           MOV     R1,A
-   \   0003CD   8E82         MOV     DPL,R6
-   \   0003CF   8F83         MOV     DPH,R7
-   \   0003D1   12....       LCALL   ?Subroutine28 & 0xFFFF
-   \                     ??CrossCallReturnLabel_104:
-   \   0003D4   12....       LCALL   ??ZDP_ServerDiscReq?relay
-   \   0003D7   8007         SJMP    ??MT_ZdoCommandProcessing_0
     626                break;
     627          #endif
     628                
@@ -1343,11 +759,6 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Components\mt\MT_ZDO.c
     632          //      ret = ZDApp_StartUpFromApp( ZDAPP_STARTUP_AUTO );
     633                // Replaced with 
     634                ret = ZDOInitDevice( 100 );
-   \                     ??MT_ZdoCommandProcessing_15:
-   \   0003D9                ; Setup parameters for call to function ZDOInitDevice
-   \   0003D9   7A64         MOV     R2,#0x64
-   \   0003DB   7B00         MOV     R3,#0x0
-   \   0003DD   12....       LCALL   ??ZDOInitDevice?relay
     635                break;
     636              
     637          #endif
@@ -1357,406 +768,7 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Components\mt\MT_ZDO.c
     641            }
     642          
     643            MT_SendSPIRespMsg( ret, cmd_id, len, respLen );
-   \                     ??MT_ZdoCommandProcessing_0:
-   \   0003E0                ; Setup parameters for call to function MT_SendSPIRespMsg
-   \   0003E0   7D01         MOV     R5,#0x1
-   \   0003E2   7C06         MOV     R4,#0x6
-   \   0003E4   7409         MOV     A,#0x9
-   \   0003E6   12....       LCALL   ?XSTACK_DISP0_8
-   \   0003E9   E0           MOVX    A,@DPTR
-   \   0003EA   FA           MOV     R2,A
-   \   0003EB   A3           INC     DPTR
-   \   0003EC   E0           MOVX    A,@DPTR
-   \   0003ED   FB           MOV     R3,A
-   \   0003EE   12....       LCALL   ??MT_SendSPIRespMsg?relay
     644          }
-   \   0003F1   74A1         MOV     A,#-0x5f
-   \   0003F3   12....       LCALL   ?DEALLOC_XSTACK8
-   \   0003F6   02....       LJMP    ??Subroutine71_0 & 0xFFFF
-
-   \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine36:
-   \   000000   F9           MOV     R1,A
-   \   000001   EA           MOV     A,R2
-   \   000002   F5..         MOV     ?V0 + 4,A
-   \   000004   E9           MOV     A,R1
-   \   000005   12....       LCALL   ?Subroutine63 & 0xFFFF
-   \                     ??CrossCallReturnLabel_184:
-   \   000008   8E82         MOV     DPL,R6
-   \   00000A   8F83         MOV     DPH,R7
-   \   00000C   22           RET
-
-   \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine63:
-   \   000000   F5..         MOV     ?V0 + 5,A
-   \   000002   12....       LCALL   ?Subroutine67 & 0xFFFF
-   \                     ??CrossCallReturnLabel_194:
-   \   000005   22           RET
-
-   \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine67:
-   \   000000   12....       LCALL   ?Subroutine70 & 0xFFFF
-   \                     ??CrossCallReturnLabel_199:
-   \   000003   22           RET
-
-   \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine35:
-   \   000000   12....       LCALL   ?Subroutine59 & 0xFFFF
-   \                     ??CrossCallReturnLabel_200:
-   \   000003   F5..         MOV     ?V0 + 2,A
-   \   000005   A3           INC     DPTR
-   \   000006   22           RET
-
-   \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine34:
-   \   000000   12....       LCALL   ?Subroutine62 & 0xFFFF
-   \                     ??CrossCallReturnLabel_203:
-   \   000003   FC           MOV     R4,A
-   \   000004   A3           INC     DPTR
-   \   000005                ; Setup parameters for call to function ZDP_BindUnbindReq
-   \   000005                ; Setup parameters for call to function ZDP_BindUnbindReq
-   \   000005   E0           MOVX    A,@DPTR
-   \   000006   F5..         MOV     ?V0 + 3,A
-   \   000008   78..         MOV     R0,#?V0 + 3
-   \   00000A   22           RET
-
-   \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine32:
-   \   000000   8E82         MOV     DPL,R6
-   \   000002   8F83         MOV     DPH,R7
-   \   000004   E0           MOVX    A,@DPTR
-   \   000005   FC           MOV     R4,A
-   \   000006   A3           INC     DPTR
-   \   000007   AE82         MOV     R6,DPL
-   \   000009   AF83         MOV     R7,DPH
-   \   00000B   7D00         MOV     R5,#0x0
-   \   00000D   22           RET
-
-   \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine29:
-   \   000000   8E82         MOV     DPL,R6
-   \   000002   8F83         MOV     DPH,R7
-   \   000004   E0           MOVX    A,@DPTR
-   \   000005   FA           MOV     R2,A
-   \   000006   A3           INC     DPTR
-   \   000007   E0           MOVX    A,@DPTR
-   \   000008   F9           MOV     R1,A
-   \   000009   EA           MOV     A,R2
-   \   00000A   F8           MOV     R0,A
-   \   00000B   740B         MOV     A,#0xb
-   \   00000D   22           RET
-
-   \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine28:
-   \   000000   A3           INC     DPTR
-   \   000001   E0           MOVX    A,@DPTR
-   \   000002   FC           MOV     R4,A
-   \   000003   8E82         MOV     DPL,R6
-   \   000005   8F83         MOV     DPH,R7
-   \   000007   E0           MOVX    A,@DPTR
-   \   000008   FB           MOV     R3,A
-   \   000009   EC           MOV     A,R4
-   \   00000A   FA           MOV     R2,A
-   \   00000B   22           RET
-
-   \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine27:
-   \   000000   8E82         MOV     DPL,R6
-   \   000002   8F83         MOV     DPH,R7
-   \   000004   E0           MOVX    A,@DPTR
-   \   000005   F5..         MOV     ?V0 + 2,A
-   \   000007   A3           INC     DPTR
-   \   000008   E0           MOVX    A,@DPTR
-   \   000009   FC           MOV     R4,A
-   \   00000A   A3           INC     DPTR
-   \   00000B                ; Setup parameters for call to function ZDP_NwkAddrReq
-   \   00000B                ; Setup parameters for call to function ZDP_IEEEAddrReq
-   \   00000B   E0           MOVX    A,@DPTR
-   \   00000C   FD           MOV     R5,A
-   \   00000D   A9..         MOV     R1,?V0 + 2
-   \   00000F   22           RET
-
-   \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine25:
-   \   000000   12....       LCALL   ?Subroutine57 & 0xFFFF
-   \                     ??CrossCallReturnLabel_206:
-   \   000003   F9           MOV     R1,A
-   \   000004   E4           CLR     A
-   \   000005   25..         ADD     A,?V0 + 0
-   \   000007   E9           MOV     A,R1
-   \   000008   F5..         MOV     ?V0 + 1,A
-   \   00000A   ED           MOV     A,R5
-   \   00000B   33           RLC     A
-   \   00000C   F8           MOV     R0,A
-   \   00000D   E4           CLR     A
-   \   00000E   33           RLC     A
-   \   00000F   F9           MOV     R1,A
-   \   000010   22           RET
-
-   \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine57:
-   \   000000   8E82         MOV     DPL,R6
-   \   000002   8F83         MOV     DPH,R7
-   \   000004   A3           INC     DPTR
-   \   000005   E0           MOVX    A,@DPTR
-   \   000006   F5..         MOV     ?V0 + 0,A
-   \   000008   02....       LJMP    ?Subroutine72 & 0xFFFF
-
-   \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine13:
-   \   000000   E582         MOV     A,DPL
-   \   000002   25..         ADD     A,?V0 + 0
-   \   000004   F582         MOV     DPL,A
-   \   000006   E583         MOV     A,DPH
-   \   000008   35..         ADDC    A,?V0 + 1
-   \   00000A   F583         MOV     DPH,A
-   \   00000C   E5..         MOV     A,?V0 + 6
-   \   00000E   F0           MOVX    @DPTR,A
-   \   00000F   A3           INC     DPTR
-   \   000010   E5..         MOV     A,?V0 + 7
-   \   000012   12....       LCALL   ?Subroutine51 & 0xFFFF
-   \                     ??CrossCallReturnLabel_165:
-   \   000015   940F         SUBB    A,#0xf
-   \   000017   22           RET
-
-   \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine12:
-   \   000000   E582         MOV     A,DPL
-   \   000002   28           ADD     A,R0
-   \   000003   F582         MOV     DPL,A
-   \   000005   E583         MOV     A,DPH
-   \   000007   39           ADDC    A,R1
-   \   000008   F583         MOV     DPH,A
-   \   00000A   E5..         MOV     A,?V0 + 0
-   \   00000C   F0           MOVX    @DPTR,A
-   \   00000D   A3           INC     DPTR
-   \   00000E   E5..         MOV     A,?V0 + 1
-   \   000010   12....       LCALL   ?Subroutine51 & 0xFFFF
-   \                     ??CrossCallReturnLabel_166:
-   \   000013   9410         SUBB    A,#0x10
-   \   000015   22           RET
-
-   \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine51:
-   \   000000   F0           MOVX    @DPTR,A
-   \   000001   12....       LCALL   ?Subroutine67 & 0xFFFF
-   \                     ??CrossCallReturnLabel_192:
-   \   000004   0D           INC     R5
-   \   000005   ED           MOV     A,R5
-   \   000006   C3           CLR     C
-   \   000007   22           RET
-
-   \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine11:
-   \   000000   12....       LCALL   ?Subroutine68 & 0xFFFF
-   \                     ??CrossCallReturnLabel_197:
-   \   000003   0E           INC     R6
-   \   000004   AF83         MOV     R7,DPH
-   \   000006                ; Setup parameters for call to function MT_ReverseBytes
-   \   000006                ; Setup parameters for call to function MT_ReverseBytes
-   \   000006   7908         MOV     R1,#0x8
-   \   000008   EE           MOV     A,R6
-   \   000009   FA           MOV     R2,A
-   \   00000A   EF           MOV     A,R7
-   \   00000B   FB           MOV     R3,A
-   \   00000C   12....       LCALL   ??MT_ReverseBytes?relay
-   \   00000F   7413         MOV     A,#0x13
-   \   000011   22           RET
-
-   \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine68:
-   \   000000   F0           MOVX    @DPTR,A
-   \   000001   8E82         MOV     DPL,R6
-   \   000003   8F83         MOV     DPH,R7
-   \   000005   A3           INC     DPTR
-   \   000006   22           RET
-
-   \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine8:
-   \   000000   12....       LCALL   ?Subroutine45 & 0xFFFF
-   \                     ??CrossCallReturnLabel_141:
-   \   000003   22           RET
-
-   \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine45:
-   \   000000   12....       LCALL   ?Subroutine65 & 0xFFFF
-   \                     ??CrossCallReturnLabel_185:
-   \   000003   8E82         MOV     DPL,R6
-   \   000005   8F83         MOV     DPH,R7
-   \   000007   12....       LCALL   ?Subroutine69 & 0xFFFF
-   \                     ??CrossCallReturnLabel_207:
-   \   00000A   22           RET
-
-   \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine6:
-   \   000000   12....       LCALL   ?Subroutine45 & 0xFFFF
-   \                     ??CrossCallReturnLabel_142:
-   \   000003   F9           MOV     R1,A
-   \   000004   EA           MOV     A,R2
-   \   000005   F5..         MOV     ?V0 + 4,A
-   \   000007   E9           MOV     A,R1
-   \   000008   F5..         MOV     ?V0 + 5,A
-   \   00000A   12....       LCALL   ?Subroutine59 & 0xFFFF
-   \                     ??CrossCallReturnLabel_201:
-   \   00000D   22           RET
-
-   \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine5:
-   \   000000   12....       LCALL   ?Subroutine46 & 0xFFFF
-   \                     ??CrossCallReturnLabel_143:
-   \   000003                ; Setup parameters for call to function MT_ReverseBytes
-   \   000003                ; Setup parameters for call to function MT_ReverseBytes
-   \   000003   7908         MOV     R1,#0x8
-   \   000005   EE           MOV     A,R6
-   \   000006   FA           MOV     R2,A
-   \   000007   EF           MOV     A,R7
-   \   000008   FB           MOV     R3,A
-   \   000009   12....       LCALL   ??MT_ReverseBytes?relay
-   \   00000C   8E..         MOV     ?V0 + 4,R6
-   \   00000E   8F..         MOV     ?V0 + 5,R7
-   \   000010   12....       LCALL   ?Subroutine62 & 0xFFFF
-   \                     ??CrossCallReturnLabel_204:
-   \   000013   F5..         MOV     ?V0 + 2,A
-   \   000015   A3           INC     DPTR
-   \   000016   AE82         MOV     R6,DPL
-   \   000018   AF83         MOV     R7,DPH
-   \   00001A   12....       LCALL   ?Subroutine54 & 0xFFFF
-   \                     ??CrossCallReturnLabel_172:
-   \   00001D   F9           MOV     R1,A
-   \   00001E   EA           MOV     A,R2
-   \   00001F   F5..         MOV     ?V0 + 0,A
-   \   000021   E9           MOV     A,R1
-   \   000022   F5..         MOV     ?V0 + 1,A
-   \   000024   12....       LCALL   ?Subroutine59 & 0xFFFF
-   \                     ??CrossCallReturnLabel_202:
-   \   000027   22           RET
-
-   \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine62:
-   \   000000   EE           MOV     A,R6
-   \   000001   2408         ADD     A,#0x8
-   \   000003   FE           MOV     R6,A
-   \   000004   EF           MOV     A,R7
-   \   000005   3400         ADDC    A,#0x0
-   \   000007   FF           MOV     R7,A
-   \   000008   80..         SJMP    ?Subroutine72
-
-   \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine59:
-   \   000000   12....       LCALL   ?Subroutine67 & 0xFFFF
-   \                     ??CrossCallReturnLabel_193:
-   \   000003                REQUIRE ?Subroutine72
-   \   000003                ; // Fall through to label ?Subroutine72
-
-   \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine72:
-   \   000000   8E82         MOV     DPL,R6
-   \   000002   8F83         MOV     DPH,R7
-   \   000004   E0           MOVX    A,@DPTR
-   \   000005   22           RET
-
-   \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine54:
-   \   000000   12....       LCALL   ?Subroutine69 & 0xFFFF
-   \                     ??CrossCallReturnLabel_208:
-   \   000003   22           RET
-
-   \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine69:
-   \   000000   A3           INC     DPTR
-   \                     ??Subroutine69_0:
-   \   000001   E0           MOVX    A,@DPTR
-   \   000002   FA           MOV     R2,A
-   \   000003   80..         SJMP    ?Subroutine72
-
-   \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine1:
-   \   000000   12....       LCALL   ?Subroutine46 & 0xFFFF
-   \                     ??CrossCallReturnLabel_144:
-   \   000003                ; Setup parameters for call to function ZDP_NWKAddrOfInterestReq
-   \   000003                ; Setup parameters for call to function ZDP_NWKAddrOfInterestReq
-   \   000003                ; Setup parameters for call to function ZDP_NWKAddrOfInterestReq
-   \   000003                ; Setup parameters for call to function ZDP_NWKAddrOfInterestReq
-   \   000003                ; Setup parameters for call to function ZDP_NWKAddrOfInterestReq
-   \   000003   8E82         MOV     DPL,R6
-   \   000005   8F83         MOV     DPH,R7
-   \   000007   A3           INC     DPTR
-   \   000008   A3           INC     DPTR
-   \   000009   12....       LCALL   ??Subroutine56_0 & 0xFFFF
-   \                     ??CrossCallReturnLabel_176:
-   \   00000C   22           RET
-
-   \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine56:
-   \   000000   8E82         MOV     DPL,R6
-   \   000002   8F83         MOV     DPH,R7
-   \                     ??Subroutine56_0:
-   \   000004   E0           MOVX    A,@DPTR
-   \   000005   F5..         MOV     ?V0 + 0,A
-   \   000007   78..         MOV     R0,#?V0 + 0
-   \   000009   22           RET
-
-   \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine46:
-   \   000000   12....       LCALL   ?Subroutine65 & 0xFFFF
-   \                     ??CrossCallReturnLabel_186:
-   \   000003   22           RET
-
-   \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine65:
-   \   000000   7402         MOV     A,#0x2
-   \   000002   12....       LCALL   ?Subroutine68 & 0xFFFF
-   \                     ??CrossCallReturnLabel_195:
-   \   000005   12....       LCALL   ??Subroutine69_0 & 0xFFFF
-   \                     ??CrossCallReturnLabel_209:
-   \   000008   F9           MOV     R1,A
-   \   000009   EA           MOV     A,R2
-   \   00000A   85..82       MOV     DPL,?XSP + 0
-   \   00000D   85..83       MOV     DPH,?XSP + 1
-   \   000010   F0           MOVX    @DPTR,A
-   \   000011   A3           INC     DPTR
-   \   000012   E9           MOV     A,R1
-   \   000013   F0           MOVX    @DPTR,A
-   \   000014   12....       LCALL   ?Subroutine70 & 0xFFFF
-   \                     ??CrossCallReturnLabel_198:
-   \   000017   22           RET
-
-   \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine70:
-   \   000000   EE           MOV     A,R6
-   \   000001   2402         ADD     A,#0x2
-   \   000003   0E           INC     R6
-   \   000004   0E           INC     R6
-   \   000005   EF           MOV     A,R7
-   \   000006   3400         ADDC    A,#0x0
-   \   000008   FF           MOV     R7,A
-   \   000009   22           RET
-
-   \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine71:
-   \   000000   A9..         MOV     R1,?V0 + 2
-   \                     ??Subroutine71_0:
-   \   000002   7F08         MOV     R7,#0x8
-   \   000004   02....       LJMP    ?BANKED_LEAVE_XDATA
-
-   \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine39:
-   \   000000   F582         MOV     DPL,A
-   \   000002   EB           MOV     A,R3
-   \                     ??Subroutine39_0:
-   \   000003   12....       LCALL   ??Subroutine64_0 & 0xFFFF
-   \                     ??CrossCallReturnLabel_216:
-   \   000006   E0           MOVX    A,@DPTR
-   \   000007   22           RET
-
-   \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine64:
-   \   000000   F582         MOV     DPL,A
-   \   000002   E5..         MOV     A,?V0 + 5
-   \                     ??Subroutine64_0:
-   \   000004   3400         ADDC    A,#0x0
-   \   000006   F583         MOV     DPH,A
-   \   000008   22           RET
     645          
     646          /*********************************************************************
     647           * Utility FUNCTIONS
@@ -1766,93 +778,28 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Components\mt\MT_ZDO.c
     651           * @fn      zdo_MT_CopyRevExtAddr
     652           *
     653           */
-
-   \                                 In  segment BANKED_CODE, align 1, keep-with-next
     654          byte *zdo_MT_CopyRevExtAddr( byte *dstMsg, byte *addr )
-   \                     zdo_MT_CopyRevExtAddr:
     655          {
-   \   000000   74F7         MOV     A,#-0x9
-   \   000002   12....       LCALL   ?BANKED_ENTER_XDATA
-   \   000005                ; Saved register size: 9
-   \   000005                ; Auto size: 0
-   \   000005   EA           MOV     A,R2
-   \   000006   FE           MOV     R6,A
-   \   000007   EB           MOV     A,R3
-   \   000008   FF           MOV     R7,A
     656            // Copy the 64-bit address
     657            osal_cpyExtAddr( dstMsg, addr );
-   \   000009                ; Setup parameters for call to function osal_cpyExtAddr
-   \   000009   12....       LCALL   ??osal_cpyExtAddr?relay
     658            // Reverse byte order
     659            MT_ReverseBytes( dstMsg, Z_EXTADDR_LEN );
-   \   00000C                ; Setup parameters for call to function MT_ReverseBytes
-   \   00000C   7908         MOV     R1,#0x8
-   \   00000E   EE           MOV     A,R6
-   \   00000F   FA           MOV     R2,A
-   \   000010   EF           MOV     A,R7
-   \   000011   FB           MOV     R3,A
-   \   000012   12....       LCALL   ??MT_ReverseBytes?relay
     660            // Return ptr to next destination location
     661            return ( dstMsg + Z_EXTADDR_LEN );
-   \   000015                REQUIRE ?Subroutine75
-   \   000015                ; // Fall through to label ?Subroutine75
     662          }
-
-   \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine75:
-   \   000000   12....       LCALL   ?Subroutine43 & 0xFFFF
-   \                     ??CrossCallReturnLabel_222:
-   \   000003   02....       LJMP    ?BANKED_LEAVE_XDATA
-
-   \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine43:
-   \   000000   EE           MOV     A,R6
-   \   000001   2408         ADD     A,#0x8
-   \   000003   FA           MOV     R2,A
-   \   000004   EF           MOV     A,R7
-   \   000005   3400         ADDC    A,#0x0
-   \   000007   FB           MOV     R3,A
-   \   000008   7F01         MOV     R7,#0x1
-   \   00000A   22           RET
     663          
     664          /*********************************************************************
     665           * @fn      zdo_MT_MakeExtAddr
     666           *
     667           */
-
-   \                                 In  segment BANKED_CODE, align 1, keep-with-next
     668          byte *zdo_MT_MakeExtAddr( zAddrType_t *devAddr, byte *pData )
-   \                     zdo_MT_MakeExtAddr:
     669          {
-   \   000000   74F7         MOV     A,#-0x9
-   \   000002   12....       LCALL   ?BANKED_ENTER_XDATA
-   \   000005                ; Saved register size: 9
-   \   000005                ; Auto size: 0
-   \   000005   EC           MOV     A,R4
-   \   000006   FE           MOV     R6,A
-   \   000007   ED           MOV     A,R5
-   \   000008   FF           MOV     R7,A
     670            // Define a 64-bit address
     671            devAddr->addrMode = Addr64Bit;
-   \   000009   7403         MOV     A,#0x3
-   \   00000B   8A82         MOV     DPL,R2
-   \   00000D   8B83         MOV     DPH,R3
-   \   00000F   A3           INC     DPTR
-   \   000010   A3           INC     DPTR
-   \   000011   A3           INC     DPTR
-   \   000012   A3           INC     DPTR
-   \   000013   A3           INC     DPTR
-   \   000014   A3           INC     DPTR
-   \   000015   A3           INC     DPTR
-   \   000016   A3           INC     DPTR
-   \   000017   F0           MOVX    @DPTR,A
     672            // Copy and reverse the 64-bit address
     673            zdo_MT_CopyRevExtAddr( devAddr->addr.extAddr, pData );
-   \   000018                ; Setup parameters for call to function zdo_MT_CopyRevExtAddr
-   \   000018   12....       LCALL   ??zdo_MT_CopyRevExtAddr?relay
     674            // Return ptr to next destination location
     675            return ( pData + Z_EXTADDR_LEN );
-   \   00001B   80..         SJMP    ?Subroutine75
     676          }
     677          
     678          /*********************************************************************
@@ -1875,383 +822,58 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Components\mt\MT_ZDO.c
     695           *
     696           * @return  none
     697           */
-
-   \                                 In  segment BANKED_CODE, align 1, keep-with-next
     698          uint8 zdo_MTCB_NwkIEEEAddrRspCB( zdoIncomingMsg_t *inMsg, uint8 *msg )
-   \                     zdo_MTCB_NwkIEEEAddrRspCB:
     699          {
-   \   000000   74F0         MOV     A,#-0x10
-   \   000002   12....       LCALL   ?BANKED_ENTER_XDATA
-   \   000005                ; Saved register size: 16
-   \   000005                ; Auto size: 0
-   \   000005   8A..         MOV     ?V0 + 6,R2
-   \   000007   8B..         MOV     ?V0 + 7,R3
-   \   000009   EC           MOV     A,R4
-   \   00000A   FE           MOV     R6,A
-   \   00000B   ED           MOV     A,R5
-   \   00000C   FF           MOV     R7,A
     700            uint8 len = 0;
-   \   00000D   75..00       MOV     ?V0 + 2,#0x0
     701            uint8 x;
     702            ZDO_NwkIEEEAddrResp_t * pRsp;
     703            
     704            pRsp = ZDO_ParseAddrRsp( inMsg );
-   \   000010                ; Setup parameters for call to function ZDO_ParseAddrRsp
-   \   000010   12....       LCALL   ??ZDO_ParseAddrRsp?relay
-   \   000013   8A..         MOV     ?V0 + 0,R2
-   \   000015   8B..         MOV     ?V0 + 1,R3
     705            if ( pRsp )
-   \   000017   EA           MOV     A,R2
-   \   000018   7001         JNZ     ??zdo_MTCB_NwkIEEEAddrRspCB_0
-   \   00001A   EB           MOV     A,R3
-   \                     ??zdo_MTCB_NwkIEEEAddrRspCB_0:
-   \   00001B   7003         JNZ     $+5
-   \   00001D   02....       LJMP    ??zdo_MTCB_NwkIEEEAddrRspCB_1 & 0xFFFF
     706            {
     707              //First fill in details
     708              if ( inMsg->srcAddr.addrMode == Addr16Bit )
-   \   000020   85..82       MOV     DPL,?V0 + 6
-   \   000023   85..83       MOV     DPH,?V0 + 7
-   \   000026   A3           INC     DPTR
-   \   000027   A3           INC     DPTR
-   \   000028   A3           INC     DPTR
-   \   000029   A3           INC     DPTR
-   \   00002A   A3           INC     DPTR
-   \   00002B   A3           INC     DPTR
-   \   00002C   A3           INC     DPTR
-   \   00002D   A3           INC     DPTR
-   \   00002E   A3           INC     DPTR
-   \   00002F   A3           INC     DPTR
-   \   000030   E0           MOVX    A,@DPTR
-   \   000031   6402         XRL     A,#0x2
-   \   000033   7011         JNZ     ??zdo_MTCB_NwkIEEEAddrRspCB_2
     709              {
     710                *msg++ = Addr16Bit;
-   \   000035   7402         MOV     A,#0x2
-   \   000037   12....       LCALL   ??Subroutine24_2 & 0xFFFF
     711                for ( x = 0; x < (Z_EXTADDR_LEN - 2); x++ )
-   \                     ??CrossCallReturnLabel_86:
-   \   00003A   7A06         MOV     R2,#0x6
     712                  *msg++ = 0;
-   \                     ??zdo_MTCB_NwkIEEEAddrRspCB_3:
-   \   00003C   12....       LCALL   ?Subroutine23 & 0xFFFF
-   \                     ??CrossCallReturnLabel_84:
-   \   00003F   70FB         JNZ     ??zdo_MTCB_NwkIEEEAddrRspCB_3
     713                *msg++ = HI_UINT16( inMsg->srcAddr.addr.shortAddr );
-   \   000041   12....       LCALL   ?Subroutine4 & 0xFFFF
     714                *msg++ = LO_UINT16( inMsg->srcAddr.addr.shortAddr );
-   \                     ??CrossCallReturnLabel_12:
-   \   000044   8012         SJMP    ??CrossCallReturnLabel_125
     715              }
     716              else
     717              {
     718                *msg++ = Addr64Bit;
-   \                     ??zdo_MTCB_NwkIEEEAddrRspCB_2:
-   \   000046   7403         MOV     A,#0x3
-   \   000048   8E82         MOV     DPL,R6
-   \   00004A   8F83         MOV     DPH,R7
-   \   00004C   F0           MOVX    @DPTR,A
-   \   00004D   A3           INC     DPTR
     719                msg = zdo_MT_CopyRevExtAddr( msg, inMsg->srcAddr.addr.extAddr );
-   \   00004E                ; Setup parameters for call to function zdo_MT_CopyRevExtAddr
-   \   00004E   E5..         MOV     A,?V0 + 6
-   \   000050   2402         ADD     A,#0x2
-   \   000052   FC           MOV     R4,A
-   \   000053   E5..         MOV     A,?V0 + 7
-   \   000055   12....       LCALL   ?Subroutine38 & 0xFFFF
     720              }
     721              len = Z_EXTADDR_LEN + 1;
     722            
     723              *msg++ = pRsp->status;
-   \                     ??CrossCallReturnLabel_125:
-   \   000058   85..82       MOV     DPL,?V0 + 0
-   \   00005B   85..83       MOV     DPH,?V0 + 1
-   \   00005E   12....       LCALL   ?Subroutine33 & 0xFFFF
-   \                     ??CrossCallReturnLabel_114:
-   \   000061   A3           INC     DPTR
     724              msg = zdo_MT_CopyRevExtAddr( msg, pRsp->extAddr );
-   \   000062                ; Setup parameters for call to function zdo_MT_CopyRevExtAddr
-   \   000062   E5..         MOV     A,?V0 + 0
-   \   000064   2403         ADD     A,#0x3
-   \   000066   FC           MOV     R4,A
-   \   000067   E5..         MOV     A,?V0 + 1
-   \   000069   12....       LCALL   ?Subroutine38 & 0xFFFF
     725              len += Z_EXTADDR_LEN + 1;
-   \                     ??CrossCallReturnLabel_126:
-   \   00006C   75..12       MOV     ?V0 + 2,#0x12
     726            
     727              if ( inMsg->clusterID == NWK_addr_rsp )
-   \   00006F   E5..         MOV     A,?V0 + 6
-   \   000071   240C         ADD     A,#0xc
-   \   000073   F582         MOV     DPL,A
-   \   000075   E5..         MOV     A,?V0 + 7
-   \   000077   12....       LCALL   ??Subroutine39_0 & 0xFFFF
-   \                     ??CrossCallReturnLabel_128:
-   \   00007A   7004         JNZ     ??zdo_MTCB_NwkIEEEAddrRspCB_4
-   \   00007C   A3           INC     DPTR
-   \   00007D   E0           MOVX    A,@DPTR
-   \   00007E   6480         XRL     A,#0x80
-   \                     ??zdo_MTCB_NwkIEEEAddrRspCB_4:
-   \   000080   7011         JNZ     ??zdo_MTCB_NwkIEEEAddrRspCB_5
     728              {
     729                *msg++ = HI_UINT16( pRsp->nwkAddr );
-   \   000082   85..82       MOV     DPL,?V0 + 0
-   \   000085   85..83       MOV     DPH,?V0 + 1
-   \   000088   A3           INC     DPTR
-   \   000089   A882         MOV     R0,DPL
-   \   00008B   A983         MOV     R1,DPH
-   \   00008D   12....       LCALL   ??Subroutine7_1 & 0xFFFF
     730                *msg++ = LO_UINT16( pRsp->nwkAddr );
     731                len += 2;
-   \                     ??CrossCallReturnLabel_26:
-   \   000090   75..14       MOV     ?V0 + 2,#0x14
     732              }
     733            
     734              *msg++ = pRsp->startIndex;
-   \                     ??zdo_MTCB_NwkIEEEAddrRspCB_5:
-   \   000093   E5..         MOV     A,?V0 + 0
-   \   000095   240C         ADD     A,#0xc
-   \   000097   12....       LCALL   ?Subroutine61 & 0xFFFF
-   \                     ??CrossCallReturnLabel_179:
-   \   00009A   12....       LCALL   ??Subroutine24_1 & 0xFFFF
     735              *msg++ = pRsp->numAssocDevs;
-   \                     ??CrossCallReturnLabel_87:
-   \   00009D   E5..         MOV     A,?V0 + 0
-   \   00009F   240B         ADD     A,#0xb
-   \   0000A1   FA           MOV     R2,A
-   \   0000A2   E5..         MOV     A,?V0 + 1
-   \   0000A4   3400         ADDC    A,#0x0
-   \   0000A6   FB           MOV     R3,A
-   \   0000A7   12....       LCALL   ?Subroutine22 & 0xFFFF
     736              len += 2;
-   \                     ??CrossCallReturnLabel_68:
-   \   0000AA   05..         INC     ?V0 + 2
-   \   0000AC   05..         INC     ?V0 + 2
     737          
     738              uint8 cnt = pRsp->numAssocDevs - pRsp->startIndex;
-   \   0000AE   8882         MOV     DPL,R0
-   \   0000B0   8983         MOV     DPH,R1
-   \   0000B2   E0           MOVX    A,@DPTR
-   \   0000B3   FC           MOV     R4,A
-   \   0000B4   8A82         MOV     DPL,R2
-   \   0000B6   8B83         MOV     DPH,R3
-   \   0000B8   E0           MOVX    A,@DPTR
-   \   0000B9   C3           CLR     C
-   \   0000BA   9C           SUBB    A,R4
-   \   0000BB   FD           MOV     R5,A
     739            
     740              for ( x = 0; x < cnt; x++ )
-   \   0000BC   7C00         MOV     R4,#0x0
-   \   0000BE   8018         SJMP    ??zdo_MTCB_NwkIEEEAddrRspCB_6
     741              {
     742                *msg++ = HI_UINT16( pRsp->devList[x] );
-   \                     ??zdo_MTCB_NwkIEEEAddrRspCB_7:
-   \   0000C0   EC           MOV     A,R4
-   \   0000C1   C3           CLR     C
-   \   0000C2   33           RLC     A
-   \   0000C3   F8           MOV     R0,A
-   \   0000C4   E4           CLR     A
-   \   0000C5   33           RLC     A
-   \   0000C6   F9           MOV     R1,A
-   \   0000C7   12....       LCALL   ??Subroutine42_0 & 0xFFFF
-   \                     ??CrossCallReturnLabel_135:
-   \   0000CA   740D         MOV     A,#0xd
-   \   0000CC   28           ADD     A,R0
-   \   0000CD   F8           MOV     R0,A
-   \   0000CE   E4           CLR     A
-   \   0000CF   39           ADDC    A,R1
-   \   0000D0   12....       LCALL   ??Subroutine7_0 & 0xFFFF
     743                *msg++ = LO_UINT16( pRsp->devList[x] );
     744                len += 2;
-   \                     ??CrossCallReturnLabel_25:
-   \   0000D3   05..         INC     ?V0 + 2
-   \   0000D5   05..         INC     ?V0 + 2
     745              }
-   \   0000D7   0C           INC     R4
-   \                     ??zdo_MTCB_NwkIEEEAddrRspCB_6:
-   \   0000D8   EC           MOV     A,R4
-   \   0000D9   C3           CLR     C
-   \   0000DA   9D           SUBB    A,R5
-   \   0000DB   40E3         JC      ??zdo_MTCB_NwkIEEEAddrRspCB_7
     746              osal_mem_free ( pRsp );
-   \   0000DD                ; Setup parameters for call to function osal_mem_free
-   \   0000DD   AA..         MOV     R2,?V0 + 0
-   \   0000DF   AB..         MOV     R3,?V0 + 1
-   \   0000E1   12....       LCALL   ??osal_mem_free?relay
     747            }
     748            return ( len );
-   \                     ??zdo_MTCB_NwkIEEEAddrRspCB_1:
-   \   0000E4   02....       LJMP    ?Subroutine71 & 0xFFFF
     749          }
-
-   \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine38:
-   \   000000   3400         ADDC    A,#0x0
-   \   000002   FD           MOV     R5,A
-   \   000003   AA82         MOV     R2,DPL
-   \   000005   AB83         MOV     R3,DPH
-   \   000007   12....       LCALL   ??zdo_MT_CopyRevExtAddr?relay
-   \   00000A   8A..         MOV     ?V0 + 2,R2
-   \   00000C   8B..         MOV     ?V0 + 3,R3
-   \   00000E   AE..         MOV     R6,?V0 + 2
-   \   000010   AF..         MOV     R7,?V0 + 3
-   \   000012   22           RET
-
-   \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine33:
-   \   000000   E0           MOVX    A,@DPTR
-   \   000001   8E82         MOV     DPL,R6
-   \   000003   8F83         MOV     DPH,R7
-   \   000005   F0           MOVX    @DPTR,A
-   \   000006   22           RET
-
-   \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine7:
-   \   000000   3400         ADDC    A,#0x0
-   \                     ??Subroutine7_0:
-   \   000002   F9           MOV     R1,A
-   \   000003   8882         MOV     DPL,R0
-   \   000005   8983         MOV     DPH,R1
-   \                     ??Subroutine7_1:
-   \   000007   12....       LCALL   ?Subroutine47 & 0xFFFF
-   \                     ??CrossCallReturnLabel_145:
-   \   00000A   22           RET
-
-   \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine47:
-   \   000000   A3           INC     DPTR
-   \   000001   E0           MOVX    A,@DPTR
-   \   000002   8E82         MOV     DPL,R6
-   \   000004   8F83         MOV     DPH,R7
-   \   000006   F0           MOVX    @DPTR,A
-   \   000007   A3           INC     DPTR
-   \   000008   AE82         MOV     R6,DPL
-   \   00000A   AF83         MOV     R7,DPH
-   \   00000C   12....       LCALL   ?Subroutine66 & 0xFFFF
-   \                     ??CrossCallReturnLabel_187:
-   \   00000F   22           RET
-
-   \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine24:
-   \   000000   12....       LCALL   ?Subroutine58 & 0xFFFF
-   \                     ??CrossCallReturnLabel_178:
-   \   000003   F583         MOV     DPH,A
-   \                     ??Subroutine24_0:
-   \   000005   A3           INC     DPTR
-   \                     ??Subroutine24_1:
-   \   000006   E0           MOVX    A,@DPTR
-   \                     ??Subroutine24_2:
-   \   000007   12....       LCALL   ?Subroutine53 & 0xFFFF
-   \                     ??CrossCallReturnLabel_169:
-   \   00000A   22           RET
-
-   \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine53:
-   \   000000   8E82         MOV     DPL,R6
-   \   000002   8F83         MOV     DPH,R7
-   \   000004   F0           MOVX    @DPTR,A
-   \   000005   A3           INC     DPTR
-   \   000006   AE82         MOV     R6,DPL
-   \   000008   AF83         MOV     R7,DPH
-   \   00000A   22           RET
-
-   \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine22:
-   \   000000   8A82         MOV     DPL,R2
-   \   000002   8B83         MOV     DPH,R3
-   \                     ??Subroutine22_0:
-   \   000004   E0           MOVX    A,@DPTR
-   \                     ??Subroutine22_1:
-   \   000005   12....       LCALL   ??Subroutine50_2 & 0xFFFF
-   \                     ??CrossCallReturnLabel_164:
-   \   000008   22           RET
-
-   \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine50:
-   \   000000   F582         MOV     DPL,A
-   \   000002   E5..         MOV     A,?V0 + 5
-   \   000004   3400         ADDC    A,#0x0
-   \                     ??Subroutine50_0:
-   \   000006   F583         MOV     DPH,A
-   \                     ??Subroutine50_1:
-   \   000008   E0           MOVX    A,@DPTR
-   \                     ??Subroutine50_2:
-   \   000009   12....       LCALL   ??Subroutine66_1 & 0xFFFF
-   \                     ??CrossCallReturnLabel_191:
-   \   00000C   22           RET
-
-   \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine42:
-   \   000000   E5..         MOV     A,?V0 + 3
-   \   000002   75F015       MOV     B,#0x15
-   \   000005   A4           MUL     AB
-   \   000006   F8           MOV     R0,A
-   \   000007   A9F0         MOV     R1,B
-   \                     ??Subroutine42_0:
-   \   000009   E5..         MOV     A,?V0 + 0
-   \   00000B   28           ADD     A,R0
-   \   00000C   F8           MOV     R0,A
-   \   00000D   E5..         MOV     A,?V0 + 1
-   \   00000F   39           ADDC    A,R1
-   \   000010   F9           MOV     R1,A
-   \   000011   22           RET
-
-   \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine23:
-   \   000000   E4           CLR     A
-   \   000001   12....       LCALL   ?Subroutine53 & 0xFFFF
-   \                     ??CrossCallReturnLabel_168:
-   \   000004   1A           DEC     R2
-   \   000005   EA           MOV     A,R2
-   \   000006   22           RET
-
-   \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine4:
-   \   000000   E5..         MOV     A,?V0 + 6
-   \   000002   2402         ADD     A,#0x2
-   \                     ??Subroutine4_0:
-   \   000004   F8           MOV     R0,A
-   \   000005   E5..         MOV     A,?V0 + 7
-   \   000007   12....       LCALL   ??Subroutine61_0 & 0xFFFF
-   \                     ??Subroutine4_1:
-   \   00000A   12....       LCALL   ?Subroutine48 & 0xFFFF
-   \                     ??CrossCallReturnLabel_148:
-   \   00000D   22           RET
-
-   \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine61:
-   \   000000   F8           MOV     R0,A
-   \   000001   E5..         MOV     A,?V0 + 1
-   \                     ??Subroutine61_0:
-   \   000003   3400         ADDC    A,#0x0
-   \   000005   F9           MOV     R1,A
-   \   000006   8882         MOV     DPL,R0
-   \   000008   8983         MOV     DPH,R1
-   \   00000A   22           RET
-
-   \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine48:
-   \   000000   A3           INC     DPTR
-   \   000001   12....       LCALL   ??Subroutine66_0 & 0xFFFF
-   \                     ??CrossCallReturnLabel_188:
-   \   000004   12....       LCALL   ?Subroutine66 & 0xFFFF
-   \                     ??CrossCallReturnLabel_189:
-   \   000007   22           RET
-
-   \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine66:
-   \   000000   8882         MOV     DPL,R0
-   \   000002   8983         MOV     DPH,R1
-   \                     ??Subroutine66_0:
-   \   000004   E0           MOVX    A,@DPTR
-   \                     ??Subroutine66_1:
-   \   000005   8E82         MOV     DPL,R6
-   \   000007   8F83         MOV     DPH,R7
-   \   000009   F0           MOVX    @DPTR,A
-   \   00000A   A3           INC     DPTR
-   \   00000B   0E           INC     R6
-   \   00000C   AF83         MOV     R7,DPH
-   \   00000E   22           RET
     750          
     751          /*********************************************************************
     752           * @fn      zdo_MTCB_NodeDescRspCB()
@@ -2268,203 +890,41 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Components\mt\MT_ZDO.c
     763           *
     764           * @return  none
     765           */
-
-   \                                 In  segment BANKED_CODE, align 1, keep-with-next
     766          uint8 zdo_MTCB_NodeDescRspCB( zdoIncomingMsg_t *inMsg, uint8 *msg )
-   \                     zdo_MTCB_NodeDescRspCB:
     767          {
-   \   000000   74F6         MOV     A,#-0xa
-   \   000002   12....       LCALL   ?BANKED_ENTER_XDATA
-   \   000005                ; Saved register size: 10
-   \   000005                ; Auto size: 13
-   \   000005   74F3         MOV     A,#-0xd
-   \   000007   12....       LCALL   ?ALLOC_XSTACK8
-   \   00000A   8A..         MOV     ?V0 + 0,R2
-   \   00000C   8B..         MOV     ?V0 + 1,R3
-   \   00000E   EC           MOV     A,R4
-   \   00000F   FE           MOV     R6,A
-   \   000010   ED           MOV     A,R5
-   \   000011   FF           MOV     R7,A
     768            ZDO_NodeDescRsp_t NDRsp;
     769            
     770            ZDO_ParseNodeDescRsp( inMsg, &NDRsp );
-   \   000012                ; Setup parameters for call to function ZDO_ParseNodeDescRsp
-   \   000012   85..82       MOV     DPL,?XSP + 0
-   \   000015   85..83       MOV     DPH,?XSP + 1
-   \   000018   AC82         MOV     R4,DPL
-   \   00001A   AD83         MOV     R5,DPH
-   \   00001C   12....       LCALL   ??ZDO_ParseNodeDescRsp?relay
     771            
     772            //Fill up the data bytes
     773            *msg++ = NDRsp.status;
-   \   00001F   12....       LCALL   ?Subroutine2 & 0xFFFF
     774            *msg++ = HI_UINT16( inMsg->srcAddr.addr.shortAddr );
     775            *msg++ = LO_UINT16( inMsg->srcAddr.addr.shortAddr );
     776          
     777            *msg++ = HI_UINT16( NDRsp.nwkAddr );
-   \                     ??CrossCallReturnLabel_8:
-   \   000022   12....       LCALL   ?XSTACK_DISP0_8
-   \   000025   12....       LCALL   ?Subroutine14 & 0xFFFF
     778            *msg++ = LO_UINT16( NDRsp.nwkAddr );
-   \                     ??CrossCallReturnLabel_45:
-   \   000028   12....       LCALL   ?XSTACK_DISP0_8
-   \   00002B   E0           MOVX    A,@DPTR
-   \   00002C   12....       LCALL   ??Subroutine9_1 & 0xFFFF
     779          
     780            *msg++ = (byte)(NDRsp.nodeDesc.LogicalType);
-   \                     ??CrossCallReturnLabel_32:
-   \   00002F   12....       LCALL   ?XSTACK_DISP0_8
-   \   000032   E0           MOVX    A,@DPTR
-   \   000033   5407         ANL     A,#0x7
-   \   000035   12....       LCALL   ??Subroutine9_1 & 0xFFFF
     781          
     782            // Since Z-Tool can't treat V1.0 and V1.1 differently,
     783            // we just output these two byte in both cases, although
     784            // in V1.0, they are always zeros.
     785            *msg++ = (byte) NDRsp.nodeDesc.ComplexDescAvail;
-   \                     ??CrossCallReturnLabel_33:
-   \   000038   12....       LCALL   ?XSTACK_DISP0_8
-   \   00003B   E0           MOVX    A,@DPTR
-   \   00003C   A2E3         MOV     C,0xE0 /* A   */.3
-   \   00003E   E4           CLR     A
-   \   00003F   92E0         MOV     0xE0 /* A   */.0,C
-   \   000041   12....       LCALL   ??Subroutine9_1 & 0xFFFF
     786            *msg++ = (byte) NDRsp.nodeDesc.UserDescAvail;
-   \                     ??CrossCallReturnLabel_34:
-   \   000044   12....       LCALL   ?XSTACK_DISP0_8
-   \   000047   E0           MOVX    A,@DPTR
-   \   000048   A2E4         MOV     C,0xE0 /* A   */.4
-   \   00004A   E4           CLR     A
-   \   00004B   92E0         MOV     0xE0 /* A   */.0,C
-   \   00004D   12....       LCALL   ??Subroutine15_0 & 0xFFFF
     787          
     788            *msg++ = NDRsp.nodeDesc.APSFlags;
-   \                     ??CrossCallReturnLabel_51:
-   \   000050   12....       LCALL   ?XSTACK_DISP0_8
-   \   000053   E0           MOVX    A,@DPTR
-   \   000054   5407         ANL     A,#0x7
-   \   000056   12....       LCALL   ??Subroutine15_0 & 0xFFFF
     789            *msg++ = NDRsp.nodeDesc.FrequencyBand;
-   \                     ??CrossCallReturnLabel_52:
-   \   000059   12....       LCALL   ?XSTACK_DISP0_8
-   \   00005C   E0           MOVX    A,@DPTR
-   \   00005D   13           RRC     A
-   \   00005E   13           RRC     A
-   \   00005F   13           RRC     A
-   \   000060   541F         ANL     A,#0x1f
-   \   000062   12....       LCALL   ??Subroutine22_1 & 0xFFFF
     790            *msg++ = NDRsp.nodeDesc.CapabilityFlags;
-   \                     ??CrossCallReturnLabel_69:
-   \   000065   7405         MOV     A,#0x5
-   \   000067   12....       LCALL   ?XSTACK_DISP0_8
-   \   00006A   12....       LCALL   ??Subroutine22_0 & 0xFFFF
     791            *msg++ = NDRsp.nodeDesc.ManufacturerCode[1];
-   \                     ??CrossCallReturnLabel_70:
-   \   00006D   7407         MOV     A,#0x7
-   \   00006F   12....       LCALL   ?XSTACK_DISP0_8
-   \   000072   12....       LCALL   ?Subroutine16 & 0xFFFF
     792            *msg++ = NDRsp.nodeDesc.ManufacturerCode[0];
-   \                     ??CrossCallReturnLabel_53:
-   \   000075   12....       LCALL   ?XSTACK_DISP0_8
-   \   000078   12....       LCALL   ?Subroutine17 & 0xFFFF
     793            *msg++ = NDRsp.nodeDesc.MaxBufferSize;
-   \                     ??CrossCallReturnLabel_56:
-   \   00007B   12....       LCALL   ?XSTACK_DISP0_8
-   \   00007E   12....       LCALL   ??Subroutine22_0 & 0xFFFF
     794            *msg++ = NDRsp.nodeDesc.MaxTransferSize[1];
-   \                     ??CrossCallReturnLabel_71:
-   \   000081   740A         MOV     A,#0xa
-   \   000083   12....       LCALL   ?XSTACK_DISP0_8
-   \   000086   12....       LCALL   ??Subroutine22_0 & 0xFFFF
     795            *msg++ = NDRsp.nodeDesc.MaxTransferSize[0];
-   \                     ??CrossCallReturnLabel_72:
-   \   000089   7409         MOV     A,#0x9
-   \   00008B   12....       LCALL   ?XSTACK_DISP0_8
-   \   00008E   12....       LCALL   ??Subroutine22_0 & 0xFFFF
     796            *msg++ = HI_UINT16( NDRsp.nodeDesc.ServerMask);
-   \                     ??CrossCallReturnLabel_73:
-   \   000091   740B         MOV     A,#0xb
-   \   000093   12....       LCALL   ?XSTACK_DISP0_8
-   \   000096   A3           INC     DPTR
-   \   000097   12....       LCALL   ??Subroutine22_0 & 0xFFFF
     797            *msg++ = LO_UINT16(NDRsp.nodeDesc.ServerMask);
-   \                     ??CrossCallReturnLabel_74:
-   \   00009A   740B         MOV     A,#0xb
-   \   00009C   12....       LCALL   ?XSTACK_DISP0_8
-   \   00009F   12....       LCALL   ?Subroutine33 & 0xFFFF
     798            
     799            return ( 18 );
-   \                     ??CrossCallReturnLabel_115:
-   \   0000A2   7912         MOV     R1,#0x12
-   \   0000A4   740D         MOV     A,#0xd
-   \   0000A6   02....       LJMP    ?Subroutine76 & 0xFFFF
     800          }
-
-   \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine17:
-   \   000000   E0           MOVX    A,@DPTR
-   \                     ??Subroutine17_0:
-   \   000001   12....       LCALL   ??Subroutine50_2 & 0xFFFF
-   \                     ??CrossCallReturnLabel_160:
-   \   000004   7408         MOV     A,#0x8
-   \   000006   22           RET
-
-   \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine9:
-   \   000000   E0           MOVX    A,@DPTR
-   \                     ??Subroutine9_0:
-   \   000001   540F         ANL     A,#0xf
-   \                     ??Subroutine9_1:
-   \   000003   12....       LCALL   ??Subroutine50_2 & 0xFFFF
-   \                     ??CrossCallReturnLabel_154:
-   \   000006   7403         MOV     A,#0x3
-   \   000008   22           RET
-
-   \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine76:
-   \   000000   12....       LCALL   ?DEALLOC_XSTACK8
-   \   000003   7F02         MOV     R7,#0x2
-   \   000005   02....       LJMP    ?BANKED_LEAVE_XDATA
-
-   \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine16:
-   \   000000   12....       LCALL   ??Subroutine50_1 & 0xFFFF
-   \                     ??CrossCallReturnLabel_159:
-   \   000003   7406         MOV     A,#0x6
-   \   000005   22           RET
-
-   \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine15:
-   \   000000   E0           MOVX    A,@DPTR
-   \                     ??Subroutine15_0:
-   \   000001   12....       LCALL   ??Subroutine50_2 & 0xFFFF
-   \                     ??CrossCallReturnLabel_158:
-   \   000004   7404         MOV     A,#0x4
-   \   000006   22           RET
-
-   \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine14:
-   \   000000   A3           INC     DPTR
-   \   000001   12....       LCALL   ??Subroutine50_1 & 0xFFFF
-   \                     ??CrossCallReturnLabel_157:
-   \   000004   7401         MOV     A,#0x1
-   \   000006   22           RET
-
-   \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine2:
-   \   000000   85..82       MOV     DPL,?XSP + 0
-   \   000003   85..83       MOV     DPH,?XSP + 1
-   \   000006   E0           MOVX    A,@DPTR
-   \   000007   12....       LCALL   ?Subroutine53 & 0xFFFF
-   \                     ??CrossCallReturnLabel_167:
-   \   00000A   E5..         MOV     A,?V0 + 0
-   \   00000C   2402         ADD     A,#0x2
-   \   00000E   12....       LCALL   ?Subroutine61 & 0xFFFF
-   \                     ??CrossCallReturnLabel_181:
-   \   000011   12....       LCALL   ?Subroutine48 & 0xFFFF
-   \                     ??CrossCallReturnLabel_147:
-   \   000014   7401         MOV     A,#0x1
-   \   000016   22           RET
     801          
     802          /*********************************************************************
     803           * @fn      zdo_MTCB_PowerDescRspCB()
@@ -2481,83 +941,25 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Components\mt\MT_ZDO.c
     814           *
     815           * @return  none
     816           */
-
-   \                                 In  segment BANKED_CODE, align 1, keep-with-next
     817          uint8 zdo_MTCB_PowerDescRspCB( zdoIncomingMsg_t *inMsg, uint8 *msg )
-   \                     zdo_MTCB_PowerDescRspCB:
     818          {
-   \   000000   74F6         MOV     A,#-0xa
-   \   000002   12....       LCALL   ?BANKED_ENTER_XDATA
-   \   000005                ; Saved register size: 10
-   \   000005                ; Auto size: 5
-   \   000005   74FB         MOV     A,#-0x5
-   \   000007   12....       LCALL   ?ALLOC_XSTACK8
-   \   00000A   8A..         MOV     ?V0 + 0,R2
-   \   00000C   8B..         MOV     ?V0 + 1,R3
-   \   00000E   EC           MOV     A,R4
-   \   00000F   FE           MOV     R6,A
-   \   000010   ED           MOV     A,R5
-   \   000011   FF           MOV     R7,A
     819            ZDO_PowerRsp_t NPRsp;
     820            
     821            ZDO_ParsePowerDescRsp( inMsg, &NPRsp );
-   \   000012                ; Setup parameters for call to function ZDO_ParsePowerDescRsp
-   \   000012   85..82       MOV     DPL,?XSP + 0
-   \   000015   85..83       MOV     DPH,?XSP + 1
-   \   000018   AC82         MOV     R4,DPL
-   \   00001A   AD83         MOV     R5,DPH
-   \   00001C   12....       LCALL   ??ZDO_ParsePowerDescRsp?relay
     822            
     823            //Fill up the data bytes
     824            *msg++ = NPRsp.status;
-   \   00001F   12....       LCALL   ?Subroutine2 & 0xFFFF
     825            *msg++ = HI_UINT16( inMsg->srcAddr.addr.shortAddr );
     826            *msg++ = LO_UINT16( inMsg->srcAddr.addr.shortAddr );
     827            *msg++ = HI_UINT16( NPRsp.nwkAddr );
-   \                     ??CrossCallReturnLabel_9:
-   \   000022   12....       LCALL   ?XSTACK_DISP0_8
-   \   000025   12....       LCALL   ?Subroutine14 & 0xFFFF
     828            *msg++ = LO_UINT16( NPRsp.nwkAddr );
-   \                     ??CrossCallReturnLabel_46:
-   \   000028   12....       LCALL   ?XSTACK_DISP0_8
-   \   00002B   E0           MOVX    A,@DPTR
-   \   00002C   12....       LCALL   ??Subroutine9_1 & 0xFFFF
     829          
     830            *msg++ = NPRsp.pwrDesc.PowerMode;
-   \                     ??CrossCallReturnLabel_35:
-   \   00002F   12....       LCALL   ?XSTACK_DISP0_8
-   \   000032   12....       LCALL   ?Subroutine9 & 0xFFFF
     831            *msg++ = NPRsp.pwrDesc.AvailablePowerSources;
-   \                     ??CrossCallReturnLabel_29:
-   \   000035   12....       LCALL   ?XSTACK_DISP0_8
-   \   000038   E0           MOVX    A,@DPTR
-   \   000039   C4           SWAP    A
-   \   00003A   12....       LCALL   ??Subroutine9_0 & 0xFFFF
     832            *msg++ = NPRsp.pwrDesc.CurrentPowerSource;
-   \                     ??CrossCallReturnLabel_31:
-   \   00003D   12....       LCALL   ?XSTACK_DISP0_8
-   \   000040   A3           INC     DPTR
-   \   000041   12....       LCALL   ?Subroutine9 & 0xFFFF
     833            *msg   = NPRsp.pwrDesc.CurrentPowerSourceLevel;
-   \                     ??CrossCallReturnLabel_30:
-   \   000044   12....       LCALL   ?XSTACK_DISP0_8
-   \   000047   E0           MOVX    A,@DPTR
-   \   000048   F5..         MOV     ?V0 + 0,A
-   \   00004A   A3           INC     DPTR
-   \   00004B   E0           MOVX    A,@DPTR
-   \   00004C   F5..         MOV     ?V0 + 1,A
-   \   00004E   740C         MOV     A,#0xc
-   \   000050   78..         MOV     R0,#?V0 + 0
-   \   000052   12....       LCALL   ?US_SHR
-   \   000055   8E82         MOV     DPL,R6
-   \   000057   8F83         MOV     DPH,R7
-   \   000059   E5..         MOV     A,?V0 + 0
-   \   00005B   F0           MOVX    @DPTR,A
     834            
     835            return ( 9 );
-   \   00005C   7909         MOV     R1,#0x9
-   \   00005E   7405         MOV     A,#0x5
-   \   000060   02....       LJMP    ?Subroutine76 & 0xFFFF
     836          }
     837          
     838          #define ZDO_SIMPLE_DESC_CB_LEN  78
@@ -2577,239 +979,57 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Components\mt\MT_ZDO.c
     852           *
     853           * @return  none
     854           */
-
-   \                                 In  segment BANKED_CODE, align 1, keep-with-next
     855          uint8 zdo_MTCB_SimpleDescRspCB( zdoIncomingMsg_t *inMsg, uint8 *msg  )
-   \                     zdo_MTCB_SimpleDescRspCB:
     856          {
-   \   000000   74F6         MOV     A,#-0xa
-   \   000002   12....       LCALL   ?BANKED_ENTER_XDATA
-   \   000005                ; Saved register size: 10
-   \   000005                ; Auto size: 15
-   \   000005   74F1         MOV     A,#-0xf
-   \   000007   12....       LCALL   ?ALLOC_XSTACK8
-   \   00000A   8A..         MOV     ?V0 + 0,R2
-   \   00000C   8B..         MOV     ?V0 + 1,R3
-   \   00000E   EC           MOV     A,R4
-   \   00000F   FE           MOV     R6,A
-   \   000010   ED           MOV     A,R5
-   \   000011   FF           MOV     R7,A
     857            byte len = 0;
     858            byte x;
     859            ZDO_SimpleDescRsp_t SimpleDescRsp;
     860          
     861            ZDO_ParseSimpleDescRsp( inMsg, &SimpleDescRsp );
-   \   000012                ; Setup parameters for call to function ZDO_ParseSimpleDescRsp
-   \   000012   85..82       MOV     DPL,?XSP + 0
-   \   000015   85..83       MOV     DPH,?XSP + 1
-   \   000018   AC82         MOV     R4,DPL
-   \   00001A   AD83         MOV     R5,DPH
-   \   00001C   12....       LCALL   ??ZDO_ParseSimpleDescRsp?relay
     862            
     863            //Fill up the data bytes
     864            *msg++ = SimpleDescRsp.status;
-   \   00001F   12....       LCALL   ?Subroutine2 & 0xFFFF
     865            *msg++ = HI_UINT16( inMsg->srcAddr.addr.shortAddr );
     866            *msg++ = LO_UINT16( inMsg->srcAddr.addr.shortAddr );
     867            *msg++ = HI_UINT16( SimpleDescRsp.nwkAddr );
-   \                     ??CrossCallReturnLabel_10:
-   \   000022   12....       LCALL   ?XSTACK_DISP0_8
-   \   000025   12....       LCALL   ?Subroutine14 & 0xFFFF
     868            *msg++ = LO_UINT16( SimpleDescRsp.nwkAddr );
-   \                     ??CrossCallReturnLabel_47:
-   \   000028   12....       LCALL   ?XSTACK_DISP0_8
-   \   00002B   E0           MOVX    A,@DPTR
-   \   00002C   12....       LCALL   ??Subroutine9_1 & 0xFFFF
     869            *msg++ = SimpleDescRsp.simpleDesc.EndPoint;
-   \                     ??CrossCallReturnLabel_36:
-   \   00002F   12....       LCALL   ?XSTACK_DISP0_8
-   \   000032   12....       LCALL   ?Subroutine15 & 0xFFFF
     870            *msg++ = HI_UINT16( SimpleDescRsp.simpleDesc.AppProfId );
-   \                     ??CrossCallReturnLabel_49:
-   \   000035   12....       LCALL   ?XSTACK_DISP0_8
-   \   000038   A3           INC     DPTR
-   \   000039   12....       LCALL   ?Subroutine15 & 0xFFFF
     871            *msg++ = LO_UINT16( SimpleDescRsp.simpleDesc.AppProfId );
-   \                     ??CrossCallReturnLabel_50:
-   \   00003C   12....       LCALL   ?XSTACK_DISP0_8
-   \   00003F   12....       LCALL   ?Subroutine16 & 0xFFFF
     872            *msg++ = HI_UINT16( SimpleDescRsp.simpleDesc.AppDeviceId );
-   \                     ??CrossCallReturnLabel_54:
-   \   000042   12....       LCALL   ?XSTACK_DISP0_8
-   \   000045   A3           INC     DPTR
-   \   000046   12....       LCALL   ?Subroutine16 & 0xFFFF
     873            *msg++ = LO_UINT16( SimpleDescRsp.simpleDesc.AppDeviceId );
-   \                     ??CrossCallReturnLabel_55:
-   \   000049   12....       LCALL   ?XSTACK_DISP0_8
-   \   00004C   12....       LCALL   ?Subroutine17 & 0xFFFF
     874            *msg++ = SimpleDescRsp.simpleDesc.AppDevVer;
-   \                     ??CrossCallReturnLabel_57:
-   \   00004F   12....       LCALL   ?XSTACK_DISP0_8
-   \   000052   E0           MOVX    A,@DPTR
-   \   000053   540F         ANL     A,#0xf
-   \   000055   12....       LCALL   ??Subroutine17_0 & 0xFFFF
     875            *msg++ = SimpleDescRsp.simpleDesc.Reserved;
-   \                     ??CrossCallReturnLabel_58:
-   \   000058   12....       LCALL   ?XSTACK_DISP0_8
-   \   00005B   E0           MOVX    A,@DPTR
-   \   00005C   C4           SWAP    A
-   \   00005D   540F         ANL     A,#0xf
-   \   00005F   12....       LCALL   ??Subroutine22_1 & 0xFFFF
     876            len = 12;
     877            
     878            *msg++ = SimpleDescRsp.simpleDesc.AppNumInClusters;
-   \                     ??CrossCallReturnLabel_75:
-   \   000062   7409         MOV     A,#0x9
-   \   000064   12....       LCALL   ?XSTACK_DISP0_8
-   \   000067   12....       LCALL   ??Subroutine22_0 & 0xFFFF
     879            len++;
-   \                     ??CrossCallReturnLabel_76:
-   \   00006A   75..0D       MOV     ?V0 + 0,#0xd
     880            
     881            // ZTool supports 16 bits the code has taken it into account      
     882            for ( x = 0; x < SimpleDescRsp.simpleDesc.AppNumInClusters; x++ )
-   \   00006D   7C00         MOV     R4,#0x0
-   \   00006F   8017         SJMP    ??CrossCallReturnLabel_64
     883            {
     884              *msg++ = HI_UINT16( SimpleDescRsp.simpleDesc.pAppInClusterList[x]);
-   \                     ??zdo_MTCB_SimpleDescRspCB_0:
-   \   000071   EC           MOV     A,R4
-   \   000072   C3           CLR     C
-   \   000073   33           RLC     A
-   \   000074   F8           MOV     R0,A
-   \   000075   E4           CLR     A
-   \   000076   33           RLC     A
-   \   000077   F9           MOV     R1,A
-   \   000078   740A         MOV     A,#0xa
-   \   00007A   12....       LCALL   ?XSTACK_DISP0_8
-   \   00007D   12....       LCALL   ?Subroutine24 & 0xFFFF
     885              *msg++ = LO_UINT16( SimpleDescRsp.simpleDesc.pAppInClusterList[x]);
-   \                     ??CrossCallReturnLabel_88:
-   \   000080   740A         MOV     A,#0xa
-   \   000082   12....       LCALL   ?XSTACK_DISP0_8
-   \   000085   12....       LCALL   ?Subroutine20 & 0xFFFF
     886              len += 2;
     887            }
-   \                     ??CrossCallReturnLabel_64:
-   \   000088   7409         MOV     A,#0x9
-   \   00008A   12....       LCALL   ?XSTACK_DISP0_8
-   \   00008D   E0           MOVX    A,@DPTR
-   \   00008E   FA           MOV     R2,A
-   \   00008F   EC           MOV     A,R4
-   \   000090   C3           CLR     C
-   \   000091   9A           SUBB    A,R2
-   \   000092   40DD         JC      ??zdo_MTCB_SimpleDescRspCB_0
     888            
     889            *msg++ = SimpleDescRsp.simpleDesc.AppNumOutClusters;
-   \   000094   740C         MOV     A,#0xc
-   \   000096   12....       LCALL   ?XSTACK_DISP0_8
-   \   000099   12....       LCALL   ??Subroutine24_1 & 0xFFFF
     890            len++;
-   \                     ??CrossCallReturnLabel_89:
-   \   00009C   05..         INC     ?V0 + 0
     891          
     892            for ( x = 0; x < SimpleDescRsp.simpleDesc.AppNumOutClusters; x++ )
-   \   00009E   7C00         MOV     R4,#0x0
-   \   0000A0   8017         SJMP    ??CrossCallReturnLabel_65
     893            {
     894              *msg++ = HI_UINT16( SimpleDescRsp.simpleDesc.pAppOutClusterList[x]);
-   \                     ??zdo_MTCB_SimpleDescRspCB_1:
-   \   0000A2   EC           MOV     A,R4
-   \   0000A3   C3           CLR     C
-   \   0000A4   33           RLC     A
-   \   0000A5   F8           MOV     R0,A
-   \   0000A6   E4           CLR     A
-   \   0000A7   33           RLC     A
-   \   0000A8   F9           MOV     R1,A
-   \   0000A9   740D         MOV     A,#0xd
-   \   0000AB   12....       LCALL   ?XSTACK_DISP0_8
-   \   0000AE   12....       LCALL   ?Subroutine24 & 0xFFFF
     895              *msg++ = LO_UINT16( SimpleDescRsp.simpleDesc.pAppOutClusterList[x]);
-   \                     ??CrossCallReturnLabel_90:
-   \   0000B1   740D         MOV     A,#0xd
-   \   0000B3   12....       LCALL   ?XSTACK_DISP0_8
-   \   0000B6   12....       LCALL   ?Subroutine20 & 0xFFFF
     896              len += 2;
     897            }
-   \                     ??CrossCallReturnLabel_65:
-   \   0000B9   740C         MOV     A,#0xc
-   \   0000BB   12....       LCALL   ?XSTACK_DISP0_8
-   \   0000BE   E0           MOVX    A,@DPTR
-   \   0000BF   FA           MOV     R2,A
-   \   0000C0   EC           MOV     A,R4
-   \   0000C1   C3           CLR     C
-   \   0000C2   9A           SUBB    A,R2
-   \   0000C3   40DD         JC      ??zdo_MTCB_SimpleDescRspCB_1
     898            
     899            if ( SimpleDescRsp.simpleDesc.pAppInClusterList )
-   \   0000C5   740A         MOV     A,#0xa
-   \   0000C7   12....       LCALL   ?XSTACK_DISP0_8
-   \   0000CA   E0           MOVX    A,@DPTR
-   \   0000CB   7002         JNZ     ??zdo_MTCB_SimpleDescRspCB_2
-   \   0000CD   A3           INC     DPTR
-   \   0000CE   E0           MOVX    A,@DPTR
-   \                     ??zdo_MTCB_SimpleDescRspCB_2:
-   \   0000CF   6008         JZ      ??CrossCallReturnLabel_107
     900              osal_mem_free( SimpleDescRsp.simpleDesc.pAppInClusterList );
-   \   0000D1                ; Setup parameters for call to function osal_mem_free
-   \   0000D1   740A         MOV     A,#0xa
-   \   0000D3   12....       LCALL   ?XSTACK_DISP0_8
-   \   0000D6   12....       LCALL   ?Subroutine30 & 0xFFFF
     901            if ( SimpleDescRsp.simpleDesc.pAppOutClusterList )
-   \                     ??CrossCallReturnLabel_107:
-   \   0000D9   740D         MOV     A,#0xd
-   \   0000DB   12....       LCALL   ?XSTACK_DISP0_8
-   \   0000DE   E0           MOVX    A,@DPTR
-   \   0000DF   7002         JNZ     ??zdo_MTCB_SimpleDescRspCB_3
-   \   0000E1   A3           INC     DPTR
-   \   0000E2   E0           MOVX    A,@DPTR
-   \                     ??zdo_MTCB_SimpleDescRspCB_3:
-   \   0000E3   6008         JZ      ??CrossCallReturnLabel_108
     902              osal_mem_free( SimpleDescRsp.simpleDesc.pAppOutClusterList );
-   \   0000E5                ; Setup parameters for call to function osal_mem_free
-   \   0000E5   740D         MOV     A,#0xd
-   \   0000E7   12....       LCALL   ?XSTACK_DISP0_8
-   \   0000EA   12....       LCALL   ?Subroutine30 & 0xFFFF
     903            
     904            return ( len );
-   \                     ??CrossCallReturnLabel_108:
-   \   0000ED   A9..         MOV     R1,?V0 + 0
-   \   0000EF   740F         MOV     A,#0xf
-   \   0000F1                REQUIRE ?Subroutine76
-   \   0000F1                ; // Fall through to label ?Subroutine76
     905          }
-
-   \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine30:
-   \   000000   E0           MOVX    A,@DPTR
-   \   000001   FA           MOV     R2,A
-   \   000002   A3           INC     DPTR
-   \   000003   E0           MOVX    A,@DPTR
-   \   000004   FB           MOV     R3,A
-   \   000005   12....       LCALL   ??osal_mem_free?relay
-   \   000008   22           RET
-
-   \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine20:
-   \   000000   12....       LCALL   ?Subroutine58 & 0xFFFF
-   \                     ??CrossCallReturnLabel_177:
-   \   000003   12....       LCALL   ??Subroutine50_0 & 0xFFFF
-   \                     ??CrossCallReturnLabel_162:
-   \   000006   05..         INC     ?V0 + 0
-   \   000008   05..         INC     ?V0 + 0
-   \   00000A   0C           INC     R4
-   \   00000B   22           RET
-
-   \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine58:
-   \   000000   E0           MOVX    A,@DPTR
-   \   000001   28           ADD     A,R0
-   \   000002   FA           MOV     R2,A
-   \   000003   A3           INC     DPTR
-   \   000004   E0           MOVX    A,@DPTR
-   \   000005   39           ADDC    A,R1
-   \   000006   8A82         MOV     DPL,R2
-   \   000008   22           RET
     906          
     907          /*********************************************************************
     908           * @fn      zdo_MTCB_ActiveEPRspCB()
@@ -2826,152 +1046,35 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Components\mt\MT_ZDO.c
     919           *
     920           * @return  none
     921           */
-
-   \                                 In  segment BANKED_CODE, align 1, keep-with-next
     922          uint8 zdo_MTCB_MatchActiveEPRspCB( zdoIncomingMsg_t *inMsg, uint8 *msg )
-   \                     zdo_MTCB_MatchActiveEPRspCB:
     923          {
-   \   000000   74F0         MOV     A,#-0x10
-   \   000002   12....       LCALL   ?BANKED_ENTER_XDATA
-   \   000005                ; Saved register size: 16
-   \   000005                ; Auto size: 0
-   \   000005   8A..         MOV     ?V0 + 6,R2
-   \   000007   8B..         MOV     ?V0 + 7,R3
-   \   000009   EC           MOV     A,R4
-   \   00000A   FE           MOV     R6,A
-   \   00000B   ED           MOV     A,R5
-   \   00000C   FF           MOV     R7,A
     924            uint8 len = 0;
-   \   00000D   75..00       MOV     ?V0 + 0,#0x0
     925            ZDO_ActiveEndpointRsp_t *pRsp = ZDO_ParseEPListRsp( inMsg );
-   \   000010                ; Setup parameters for call to function ZDO_ParseEPListRsp
-   \   000010   12....       LCALL   ??ZDO_ParseEPListRsp?relay
-   \   000013   8A..         MOV     ?V0 + 4,R2
-   \   000015   8B..         MOV     ?V0 + 5,R3
     926          
     927            if ( pRsp )
-   \   000017   EA           MOV     A,R2
-   \   000018   7001         JNZ     ??zdo_MTCB_MatchActiveEPRspCB_0
-   \   00001A   EB           MOV     A,R3
-   \                     ??zdo_MTCB_MatchActiveEPRspCB_0:
-   \   00001B   605A         JZ      ??zdo_MTCB_MatchActiveEPRspCB_1
     928            {
     929              //Fill up the data bytes
     930              *msg++ = pRsp->status;
-   \   00001D   8A82         MOV     DPL,R2
-   \   00001F   8B83         MOV     DPH,R3
-   \   000021   12....       LCALL   ??Subroutine24_1 & 0xFFFF
     931              if ( pRsp->status != ZDP_SUCCESS )
-   \                     ??CrossCallReturnLabel_91:
-   \   000024   8A82         MOV     DPL,R2
-   \   000026   8B83         MOV     DPH,R3
-   \   000028   E0           MOVX    A,@DPTR
-   \   000029   6005         JZ      ??zdo_MTCB_MatchActiveEPRspCB_2
     932                pRsp->cnt = 0;
-   \   00002B   E4           CLR     A
-   \   00002C   A3           INC     DPTR
-   \   00002D   A3           INC     DPTR
-   \   00002E   A3           INC     DPTR
-   \   00002F   F0           MOVX    @DPTR,A
     933              
     934              *msg++ = HI_UINT16( inMsg->srcAddr.addr.shortAddr );
-   \                     ??zdo_MTCB_MatchActiveEPRspCB_2:
-   \   000030   12....       LCALL   ?Subroutine4 & 0xFFFF
     935              *msg++ = LO_UINT16( inMsg->srcAddr.addr.shortAddr );
     936              *msg++ = HI_UINT16( pRsp->nwkAddr );
-   \                     ??CrossCallReturnLabel_13:
-   \   000033   8A82         MOV     DPL,R2
-   \   000035   8B83         MOV     DPH,R3
-   \   000037   A3           INC     DPTR
-   \   000038   A882         MOV     R0,DPL
-   \   00003A   A983         MOV     R1,DPH
-   \   00003C   12....       LCALL   ??Subroutine4_1 & 0xFFFF
     937              *msg++ = LO_UINT16( pRsp->nwkAddr );
     938              *msg++ = pRsp->cnt;
-   \                     ??CrossCallReturnLabel_17:
-   \   00003F   EA           MOV     A,R2
-   \   000040   2403         ADD     A,#0x3
-   \   000042   F8           MOV     R0,A
-   \   000043   EB           MOV     A,R3
-   \   000044   12....       LCALL   ?Subroutine21 & 0xFFFF
     939            
     940              if ( pRsp->cnt )
-   \                     ??CrossCallReturnLabel_66:
-   \   000047   6019         JZ      ??zdo_MTCB_MatchActiveEPRspCB_3
     941              {
     942                osal_memcpy( msg, pRsp->epList, pRsp->cnt );
-   \   000049                ; Setup parameters for call to function osal_memcpy
-   \   000049   EA           MOV     A,R2
-   \   00004A   2404         ADD     A,#0x4
-   \   00004C   F5..         MOV     ?V0 + 0,A
-   \   00004E   EB           MOV     A,R3
-   \   00004F   12....       LCALL   ?Subroutine40 & 0xFFFF
-   \                     ??CrossCallReturnLabel_131:
-   \   000052   12....       LCALL   ?PUSH_XSTACK_I_THREE
-   \   000055   8A82         MOV     DPL,R2
-   \   000057   8B83         MOV     DPH,R3
-   \   000059   A3           INC     DPTR
-   \   00005A   A3           INC     DPTR
-   \   00005B   A3           INC     DPTR
-   \   00005C   12....       LCALL   ?Subroutine26 & 0xFFFF
-   \                     ??CrossCallReturnLabel_99:
-   \   00005F   12....       LCALL   ?DEALLOC_XSTACK8
     943              }
     944              
     945              len = 6 + pRsp->cnt;
-   \                     ??zdo_MTCB_MatchActiveEPRspCB_3:
-   \   000062   85..82       MOV     DPL,?V0 + 4
-   \   000065   85..83       MOV     DPH,?V0 + 5
-   \   000068   A3           INC     DPTR
-   \   000069   A3           INC     DPTR
-   \   00006A   A3           INC     DPTR
-   \   00006B   E0           MOVX    A,@DPTR
-   \   00006C   2406         ADD     A,#0x6
-   \   00006E   F5..         MOV     ?V0 + 0,A
     946              
     947              osal_mem_free( pRsp );
-   \   000070                ; Setup parameters for call to function osal_mem_free
-   \   000070   AA..         MOV     R2,?V0 + 4
-   \   000072   AB..         MOV     R3,?V0 + 5
-   \   000074   12....       LCALL   ??osal_mem_free?relay
     948            }
     949            return ( len );
-   \                     ??zdo_MTCB_MatchActiveEPRspCB_1:
-   \   000077   A9..         MOV     R1,?V0 + 0
-   \   000079   02....       LJMP    ??Subroutine71_0 & 0xFFFF
     950          }
-
-   \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine21:
-   \   000000   12....       LCALL   ??Subroutine61_0 & 0xFFFF
-   \                     ??CrossCallReturnLabel_182:
-   \   000003   12....       LCALL   ??Subroutine50_1 & 0xFFFF
-   \                     ??CrossCallReturnLabel_163:
-   \   000006   8882         MOV     DPL,R0
-   \   000008   8983         MOV     DPH,R1
-   \   00000A   E0           MOVX    A,@DPTR
-   \   00000B   22           RET
-
-   \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine40:
-   \   000000   3400         ADDC    A,#0x0
-   \   000002   F5..         MOV     ?V0 + 1,A
-   \   000004   75..00       MOV     ?V0 + 2,#0x0
-   \   000007   78..         MOV     R0,#?V0 + 0
-   \   000009   22           RET
-
-   \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine26:
-   \   000000   E0           MOVX    A,@DPTR
-   \   000001   FC           MOV     R4,A
-   \   000002   7D00         MOV     R5,#0x0
-   \   000004   EE           MOV     A,R6
-   \   000005   FA           MOV     R2,A
-   \   000006   EF           MOV     A,R7
-   \   000007   FB           MOV     R3,A
-   \   000008   12....       LCALL   ??osal_memcpy?relay
-   \   00000B   7403         MOV     A,#0x3
-   \   00000D   22           RET
     951          
     952          /*********************************************************************
     953           * @fn      zdo_MTCB_BindRspCB()
@@ -2986,91 +1089,7 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Components\mt\MT_ZDO.c
     962           *
     963           * @return  none
     964           */
-
-   \                                 In  segment BANKED_CODE, align 1, keep-with-next
     965          uint8 zdo_MTCB_BindRspCB( zdoIncomingMsg_t *inMsg, uint8 *msg )
-   \                     zdo_MTCB_BindRspCB:
-   \   000000   02....       LJMP    ?Subroutine74 & 0xFFFF
-
-   \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine74:
-   \   000000   74F7         MOV     A,#-0x9
-   \   000002   12....       LCALL   ?BANKED_ENTER_XDATA
-   \   000005                ; Saved register size: 9
-   \   000005                ; Auto size: 0
-   \   000005                ; Saved register size: 9
-   \   000005                ; Auto size: 0
-   \   000005                ; Saved register size: 9
-   \   000005                ; Auto size: 0
-   \   000005                ; Saved register size: 9
-   \   000005                ; Auto size: 0
-   \   000005   12....       LCALL   ?Subroutine3 & 0xFFFF
-   \                     ??CrossCallReturnLabel_210:
-   \   000008   02....       LJMP    ?BANKED_LEAVE_XDATA
-
-   \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine3:
-   \   000000   EA           MOV     A,R2
-   \   000001   2411         ADD     A,#0x11
-   \   000003   F582         MOV     DPL,A
-   \   000005   EB           MOV     A,R3
-   \   000006   12....       LCALL   ??Subroutine64_0 & 0xFFFF
-   \                     ??CrossCallReturnLabel_217:
-   \   000009   E0           MOVX    A,@DPTR
-   \   00000A   12....       LCALL   ?Subroutine55 & 0xFFFF
-   \                     ??CrossCallReturnLabel_219:
-   \   00000D   F0           MOVX    @DPTR,A
-   \   00000E   12....       LCALL   ?Subroutine60 & 0xFFFF
-   \                     ??CrossCallReturnLabel_221:
-   \   000011   A3           INC     DPTR
-   \   000012   12....       LCALL   ?Subroutine52 & 0xFFFF
-   \                     ??CrossCallReturnLabel_212:
-   \   000015   A3           INC     DPTR
-   \   000016   F0           MOVX    @DPTR,A
-   \   000017   7903         MOV     R1,#0x3
-   \   000019   7F01         MOV     R7,#0x1
-   \   00001B   22           RET
-
-   \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine60:
-   \   000000   EA           MOV     A,R2
-   \   000001   2402         ADD     A,#0x2
-   \   000003   F8           MOV     R0,A
-   \   000004   EB           MOV     A,R3
-   \   000005   3400         ADDC    A,#0x0
-   \   000007   F9           MOV     R1,A
-   \   000008   8882         MOV     DPL,R0
-   \   00000A   8983         MOV     DPH,R1
-   \   00000C   A3           INC     DPTR
-   \   00000D                REQUIRE ?Subroutine73
-   \   00000D                ; // Fall through to label ?Subroutine73
-
-   \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine73:
-   \   000000   E0           MOVX    A,@DPTR
-   \   000001   8C82         MOV     DPL,R4
-   \   000003   8D83         MOV     DPH,R5
-   \   000005   22           RET
-
-   \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine55:
-   \   000000   F8           MOV     R0,A
-   \   000001   A3           INC     DPTR
-   \   000002   E0           MOVX    A,@DPTR
-   \   000003   F583         MOV     DPH,A
-   \   000005   8882         MOV     DPL,R0
-   \   000007   80..         SJMP    ?Subroutine73
-
-   \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine52:
-   \   000000   F0           MOVX    @DPTR,A
-   \   000001   8882         MOV     DPL,R0
-   \   000003   8983         MOV     DPH,R1
-   \   000005   E0           MOVX    A,@DPTR
-   \   000006   8C82         MOV     DPL,R4
-   \   000008   8D83         MOV     DPH,R5
-   \   00000A   A3           INC     DPTR
-   \   00000B   22           RET
     966          {
     967            msg[0] = ZDO_ParseBindRsp( inMsg );
     968            msg[1] = HI_UINT16( inMsg->srcAddr.addr.shortAddr );
@@ -3092,59 +1111,18 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Components\mt\MT_ZDO.c
     984           *
     985           * @return  none
     986           */
-
-   \                                 In  segment BANKED_CODE, align 1, keep-with-next
     987          uint8 zdo_MTCB_MgmtLqiRspCB( zdoIncomingMsg_t *inMsg, uint8 *msg )
-   \                     zdo_MTCB_MgmtLqiRspCB:
     988          {
-   \   000000   74F0         MOV     A,#-0x10
-   \   000002   12....       LCALL   ?BANKED_ENTER_XDATA
-   \   000005                ; Saved register size: 16
-   \   000005                ; Auto size: 0
-   \   000005   8A..         MOV     ?V0 + 6,R2
-   \   000007   8B..         MOV     ?V0 + 7,R3
-   \   000009   EC           MOV     A,R4
-   \   00000A   FE           MOV     R6,A
-   \   00000B   ED           MOV     A,R5
-   \   00000C   FF           MOV     R7,A
     989            byte len = 0;
-   \   00000D   75..00       MOV     ?V0 + 2,#0x0
     990            byte x;
     991            ZDO_MgmtLqiRsp_t *pRsp = ZDO_ParseMgmtLqiRsp( inMsg );
-   \   000010                ; Setup parameters for call to function ZDO_ParseMgmtLqiRsp
-   \   000010   12....       LCALL   ??ZDO_ParseMgmtLqiRsp?relay
-   \   000013   8A..         MOV     ?V0 + 0,R2
-   \   000015   8B..         MOV     ?V0 + 1,R3
     992          
     993            if ( pRsp )
-   \   000017   EA           MOV     A,R2
-   \   000018   7001         JNZ     ??zdo_MTCB_MgmtLqiRspCB_0
-   \   00001A   EB           MOV     A,R3
-   \                     ??zdo_MTCB_MgmtLqiRspCB_0:
-   \   00001B   6056         JZ      ??zdo_MTCB_MgmtLqiRspCB_1
     994            {
     995              if ( pRsp->neighborLqiCount > ZDO_MAX_LQI_ITEMS )
-   \   00001D   8A82         MOV     DPL,R2
-   \   00001F   8B83         MOV     DPH,R3
-   \   000021   A3           INC     DPTR
-   \   000022   A3           INC     DPTR
-   \   000023   A3           INC     DPTR
-   \   000024   E0           MOVX    A,@DPTR
-   \   000025   C3           CLR     C
-   \   000026   9404         SUBB    A,#0x4
-   \   000028   400A         JC      ??zdo_MTCB_MgmtLqiRspCB_2
     996                pRsp->neighborLqiCount = ZDO_MAX_LQI_ITEMS;
-   \   00002A   7403         MOV     A,#0x3
-   \   00002C   8A82         MOV     DPL,R2
-   \   00002E   8B83         MOV     DPH,R3
-   \   000030   A3           INC     DPTR
-   \   000031   A3           INC     DPTR
-   \   000032   A3           INC     DPTR
-   \   000033   F0           MOVX    @DPTR,A
     997              
     998              *msg++ = HI_UINT16( inMsg->srcAddr.addr.shortAddr );
-   \                     ??zdo_MTCB_MgmtLqiRspCB_2:
-   \   000034   12....       LCALL   ?Subroutine0 & 0xFFFF
     999              *msg++ = LO_UINT16( inMsg->srcAddr.addr.shortAddr );    
    1000              *msg++ = pRsp->status;
    1001              *msg++ = pRsp->neighborLqiEntries;
@@ -3153,150 +1131,21 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Components\mt\MT_ZDO.c
    1004              len = 2 + 1 + 1 + 1 + 1;
    1005          
    1006              for ( x = 0; x < pRsp->neighborLqiCount; x++ )
-   \                     ??CrossCallReturnLabel_0:
-   \   000037   802E         SJMP    ??CrossCallReturnLabel_138
    1007              {
    1008                osal_cpyExtAddr(msg, pRsp->list[x].extPANId);
-   \                     ??zdo_MTCB_MgmtLqiRspCB_3:
-   \   000039   E5..         MOV     A,?V0 + 3
-   \   00003B   75F00E       MOV     B,#0xe
-   \   00003E   A4           MUL     AB
-   \   00003F   F8           MOV     R0,A
-   \   000040   A9F0         MOV     R1,B
-   \   000042   E5..         MOV     A,?V0 + 0
-   \   000044   28           ADD     A,R0
-   \   000045   F5..         MOV     ?V0 + 4,A
-   \   000047   E5..         MOV     A,?V0 + 1
-   \   000049   39           ADDC    A,R1
-   \   00004A   F5..         MOV     ?V0 + 5,A
-   \   00004C                ; Setup parameters for call to function osal_cpyExtAddr
-   \   00004C   E5..         MOV     A,?V0 + 4
-   \   00004E   2408         ADD     A,#0x8
-   \   000050   12....       LCALL   ?Subroutine37 & 0xFFFF
    1009                msg += Z_EXTADDR_LEN;
    1010                *msg++ = HI_UINT16( pRsp->list[x].nwkAddr );
-   \                     ??CrossCallReturnLabel_123:
-   \   000053   2404         ADD     A,#0x4
-   \   000055   F8           MOV     R0,A
-   \   000056   E5..         MOV     A,?V0 + 5
-   \   000058   12....       LCALL   ?Subroutine7 & 0xFFFF
    1011                *msg++ = LO_UINT16( pRsp->list[x].nwkAddr );
    1012                *msg++ = pRsp->list[x].rxLqi;
-   \                     ??CrossCallReturnLabel_23:
-   \   00005B   E5..         MOV     A,?V0 + 4
-   \   00005D   2411         ADD     A,#0x11
-   \   00005F   12....       LCALL   ?Subroutine10 & 0xFFFF
    1013                *msg++ = pRsp->list[x].txQuality;
    1014                len += Z_EXTADDR_LEN + 4;
-   \                     ??CrossCallReturnLabel_37:
-   \   000062   740C         MOV     A,#0xc
-   \   000064   12....       LCALL   ?Subroutine44 & 0xFFFF
    1015              }
-   \                     ??CrossCallReturnLabel_138:
-   \   000067   12....       LCALL   ?Subroutine31 & 0xFFFF
-   \                     ??CrossCallReturnLabel_109:
-   \   00006A   40CD         JC      ??zdo_MTCB_MgmtLqiRspCB_3
    1016          
    1017              osal_mem_free( pRsp );
-   \   00006C                ; Setup parameters for call to function osal_mem_free
-   \   00006C   AA..         MOV     R2,?V0 + 0
-   \   00006E   AB..         MOV     R3,?V0 + 1
-   \   000070   12....       LCALL   ??osal_mem_free?relay
    1018            }
    1019            
    1020            return ( len );
-   \                     ??zdo_MTCB_MgmtLqiRspCB_1:
-   \   000073   02....       LJMP    ?Subroutine71 & 0xFFFF
    1021          }
-
-   \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine44:
-   \   000000   25..         ADD     A,?V0 + 2
-   \   000002   F5..         MOV     ?V0 + 2,A
-   \   000004   05..         INC     ?V0 + 3
-   \   000006   22           RET
-
-   \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine37:
-   \   000000   FC           MOV     R4,A
-   \   000001   E5..         MOV     A,?V0 + 5
-   \   000003   3400         ADDC    A,#0x0
-   \   000005   FD           MOV     R5,A
-   \   000006   EE           MOV     A,R6
-   \   000007   FA           MOV     R2,A
-   \   000008   EF           MOV     A,R7
-   \   000009   FB           MOV     R3,A
-   \   00000A   12....       LCALL   ??osal_cpyExtAddr?relay
-   \   00000D   EE           MOV     A,R6
-   \   00000E   2408         ADD     A,#0x8
-   \   000010   FE           MOV     R6,A
-   \   000011   EF           MOV     A,R7
-   \   000012   3400         ADDC    A,#0x0
-   \   000014   FF           MOV     R7,A
-   \   000015   E5..         MOV     A,?V0 + 4
-   \   000017   22           RET
-
-   \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine31:
-   \   000000   85..82       MOV     DPL,?V0 + 0
-   \   000003   85..83       MOV     DPH,?V0 + 1
-   \   000006   A3           INC     DPTR
-   \   000007   A3           INC     DPTR
-   \   000008   A3           INC     DPTR
-   \   000009   E0           MOVX    A,@DPTR
-   \   00000A   FA           MOV     R2,A
-   \   00000B   E5..         MOV     A,?V0 + 3
-   \   00000D   C3           CLR     C
-   \   00000E   9A           SUBB    A,R2
-   \   00000F   22           RET
-
-   \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine10:
-   \   000000   12....       LCALL   ?Subroutine50 & 0xFFFF
-   \                     ??CrossCallReturnLabel_155:
-   \   000003   E5..         MOV     A,?V0 + 4
-   \   000005   2410         ADD     A,#0x10
-   \   000007   12....       LCALL   ?Subroutine50 & 0xFFFF
-   \                     ??CrossCallReturnLabel_156:
-   \   00000A   22           RET
-
-   \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine0:
-   \   000000   E5..         MOV     A,?V0 + 6
-   \   000002   2402         ADD     A,#0x2
-   \   000004   F8           MOV     R0,A
-   \   000005   E5..         MOV     A,?V0 + 7
-   \   000007   12....       LCALL   ??Subroutine61_0 & 0xFFFF
-   \                     ??CrossCallReturnLabel_180:
-   \   00000A   12....       LCALL   ?Subroutine47 & 0xFFFF
-   \                     ??CrossCallReturnLabel_146:
-   \   00000D   8A82         MOV     DPL,R2
-   \   00000F   8B83         MOV     DPH,R3
-   \   000011   12....       LCALL   ??Subroutine50_1 & 0xFFFF
-   \                     ??CrossCallReturnLabel_152:
-   \   000014   8A82         MOV     DPL,R2
-   \   000016   8B83         MOV     DPH,R3
-   \   000018   A3           INC     DPTR
-   \   000019   12....       LCALL   ?Subroutine49 & 0xFFFF
-   \                     ??CrossCallReturnLabel_149:
-   \   00001C   12....       LCALL   ?Subroutine49 & 0xFFFF
-   \                     ??CrossCallReturnLabel_150:
-   \   00001F   A3           INC     DPTR
-   \   000020   12....       LCALL   ??Subroutine50_1 & 0xFFFF
-   \                     ??CrossCallReturnLabel_153:
-   \   000023   75..06       MOV     ?V0 + 2,#0x6
-   \   000026   75..00       MOV     ?V0 + 3,#0x0
-   \   000029   22           RET
-
-   \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine49:
-   \   000000   12....       LCALL   ??Subroutine66_0 & 0xFFFF
-   \                     ??CrossCallReturnLabel_190:
-   \   000003   8A82         MOV     DPL,R2
-   \   000005   8B83         MOV     DPH,R3
-   \   000007   A3           INC     DPTR
-   \   000008   A3           INC     DPTR
-   \   000009   22           RET
    1022          
    1023          /*********************************************************************
    1024           * @fn      zdo_MTCB_MgmtNwkDiscRspCB()
@@ -3311,60 +1160,19 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Components\mt\MT_ZDO.c
    1033           *
    1034           * @return  none
    1035           */
-
-   \                                 In  segment BANKED_CODE, align 1, keep-with-next
    1036          uint8 zdo_MTCB_MgmtNwkDiscRspCB( zdoIncomingMsg_t *inMsg, uint8 *msg )
-   \                     zdo_MTCB_MgmtNwkDiscRspCB:
    1037          {
-   \   000000   74F0         MOV     A,#-0x10
-   \   000002   12....       LCALL   ?BANKED_ENTER_XDATA
-   \   000005                ; Saved register size: 16
-   \   000005                ; Auto size: 0
-   \   000005   8A..         MOV     ?V0 + 6,R2
-   \   000007   8B..         MOV     ?V0 + 7,R3
-   \   000009   EC           MOV     A,R4
-   \   00000A   FE           MOV     R6,A
-   \   00000B   ED           MOV     A,R5
-   \   00000C   FF           MOV     R7,A
    1038            uint8 x;
    1039            uint8 len = 0;
-   \   00000D   75..00       MOV     ?V0 + 2,#0x0
    1040            ZDO_MgmNwkDiscRsp_t *pRsp = ZDO_ParseMgmNwkDiscRsp( inMsg );
-   \   000010                ; Setup parameters for call to function ZDO_ParseMgmNwkDiscRsp
-   \   000010   12....       LCALL   ??ZDO_ParseMgmNwkDiscRsp?relay
-   \   000013   8A..         MOV     ?V0 + 0,R2
-   \   000015   8B..         MOV     ?V0 + 1,R3
    1041          
    1042            if ( pRsp )
-   \   000017   EA           MOV     A,R2
-   \   000018   7001         JNZ     ??zdo_MTCB_MgmtNwkDiscRspCB_0
-   \   00001A   EB           MOV     A,R3
-   \                     ??zdo_MTCB_MgmtNwkDiscRspCB_0:
-   \   00001B   6070         JZ      ??zdo_MTCB_MgmtNwkDiscRspCB_1
    1043            {
    1044              if ( pRsp->networkListCount > ZDO_MAX_NWKDISC_ITEMS )
-   \   00001D   8A82         MOV     DPL,R2
-   \   00001F   8B83         MOV     DPH,R3
-   \   000021   A3           INC     DPTR
-   \   000022   A3           INC     DPTR
-   \   000023   A3           INC     DPTR
-   \   000024   E0           MOVX    A,@DPTR
-   \   000025   C3           CLR     C
-   \   000026   9406         SUBB    A,#0x6
-   \   000028   400A         JC      ??zdo_MTCB_MgmtNwkDiscRspCB_2
    1045                pRsp->networkListCount = ZDO_MAX_NWKDISC_ITEMS;
-   \   00002A   7405         MOV     A,#0x5
-   \   00002C   8A82         MOV     DPL,R2
-   \   00002E   8B83         MOV     DPH,R3
-   \   000030   A3           INC     DPTR
-   \   000031   A3           INC     DPTR
-   \   000032   A3           INC     DPTR
-   \   000033   F0           MOVX    @DPTR,A
    1046              
    1047              //Fill up the data bytes
    1048              *msg++ = HI_UINT16( inMsg->srcAddr.addr.shortAddr );
-   \                     ??zdo_MTCB_MgmtNwkDiscRspCB_2:
-   \   000034   12....       LCALL   ?Subroutine0 & 0xFFFF
    1049              *msg++ = LO_UINT16( inMsg->srcAddr.addr.shortAddr );
    1050              *msg++ = pRsp->status;
    1051              *msg++ = pRsp->networkCount;
@@ -3373,85 +1181,23 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Components\mt\MT_ZDO.c
    1054              len = 2 + 1 + 1 + 1 + 1; 
    1055            
    1056              for ( x = 0; x < pRsp->networkListCount; x++ )
-   \                     ??CrossCallReturnLabel_1:
-   \   000037   8048         SJMP    ??CrossCallReturnLabel_139
    1057              {
    1058                osal_cpyExtAddr( msg, pRsp->list[x].extendedPANID );
-   \                     ??zdo_MTCB_MgmtNwkDiscRspCB_3:
-   \   000039   85....       MOV     ?V0 + 4,?V0 + 3
-   \   00003C   75..00       MOV     ?V0 + 5,#0x0
-   \   00003F   7404         MOV     A,#0x4
-   \   000041   78..         MOV     R0,#?V0 + 4
-   \   000043   12....       LCALL   ?S_SHL
-   \   000046   E5..         MOV     A,?V0 + 0
-   \   000048   25..         ADD     A,?V0 + 4
-   \   00004A   F5..         MOV     ?V0 + 4,A
-   \   00004C   E5..         MOV     A,?V0 + 1
-   \   00004E   35..         ADDC    A,?V0 + 5
-   \   000050   F5..         MOV     ?V0 + 5,A
-   \   000052                ; Setup parameters for call to function osal_cpyExtAddr
-   \   000052   E5..         MOV     A,?V0 + 4
-   \   000054   2404         ADD     A,#0x4
-   \   000056   12....       LCALL   ?Subroutine37 & 0xFFFF
    1059                msg += Z_EXTADDR_LEN;
    1060                *msg++ = pRsp->list[x].logicalChannel;
-   \                     ??CrossCallReturnLabel_124:
-   \   000059   240E         ADD     A,#0xe
-   \   00005B   12....       LCALL   ?Subroutine64 & 0xFFFF
-   \                     ??CrossCallReturnLabel_213:
-   \   00005E   12....       LCALL   ??Subroutine24_1 & 0xFFFF
    1061                *msg++ = pRsp->list[x].stackProfile;
-   \                     ??CrossCallReturnLabel_92:
-   \   000061   E5..         MOV     A,?V0 + 4
-   \   000063   240F         ADD     A,#0xf
-   \   000065   12....       LCALL   ?Subroutine10 & 0xFFFF
    1062                *msg++ = pRsp->list[x].version;
    1063                *msg++ = pRsp->list[x].beaconOrder;
-   \                     ??CrossCallReturnLabel_38:
-   \   000068   E5..         MOV     A,?V0 + 4
-   \   00006A   2411         ADD     A,#0x11
-   \   00006C   12....       LCALL   ?Subroutine18 & 0xFFFF
    1064                *msg++ = pRsp->list[x].superFrameOrder;
-   \                     ??CrossCallReturnLabel_59:
-   \   00006F   2412         ADD     A,#0x12
-   \   000071   12....       LCALL   ?Subroutine18 & 0xFFFF
    1065                *msg++ = pRsp->list[x].permitJoining;
-   \                     ??CrossCallReturnLabel_60:
-   \   000074   2413         ADD     A,#0x13
-   \   000076   12....       LCALL   ?Subroutine64 & 0xFFFF
-   \                     ??CrossCallReturnLabel_214:
-   \   000079   12....       LCALL   ??Subroutine22_0 & 0xFFFF
    1066                len += Z_EXTADDR_LEN + 6;
-   \                     ??CrossCallReturnLabel_77:
-   \   00007C   740E         MOV     A,#0xe
-   \   00007E   12....       LCALL   ?Subroutine44 & 0xFFFF
    1067              }
-   \                     ??CrossCallReturnLabel_139:
-   \   000081   12....       LCALL   ?Subroutine31 & 0xFFFF
-   \                     ??CrossCallReturnLabel_110:
-   \   000084   40B3         JC      ??zdo_MTCB_MgmtNwkDiscRspCB_3
    1068              
    1069              osal_mem_free( pRsp );
-   \   000086                ; Setup parameters for call to function osal_mem_free
-   \   000086   AA..         MOV     R2,?V0 + 0
-   \   000088   AB..         MOV     R3,?V0 + 1
-   \   00008A   12....       LCALL   ??osal_mem_free?relay
    1070            }
    1071          
    1072            return ( len );
-   \                     ??zdo_MTCB_MgmtNwkDiscRspCB_1:
-   \   00008D   02....       LJMP    ?Subroutine71 & 0xFFFF
    1073          }
-
-   \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine18:
-   \   000000   12....       LCALL   ?Subroutine64 & 0xFFFF
-   \                     ??Subroutine18_0:
-   \   000003   12....       LCALL   ??Subroutine50_1 & 0xFFFF
-   \                     ??CrossCallReturnLabel_161:
-   \   000006                ; Setup parameters for call to function osal_memcpy
-   \   000006   E5..         MOV     A,?V0 + 4
-   \   000008   22           RET
    1074          
    1075          /*********************************************************************
    1076           * @fn      zdo_MTCB_MgmtRtgRspCB()
@@ -3466,183 +1212,40 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Components\mt\MT_ZDO.c
    1085           *
    1086           * @return  none
    1087           */
-
-   \                                 In  segment BANKED_CODE, align 1, keep-with-next
    1088          uint8 zdo_MTCB_MgmtRtgRspCB( zdoIncomingMsg_t *inMsg, uint8 *msg  )
-   \                     zdo_MTCB_MgmtRtgRspCB:
    1089          {
-   \   000000   74F2         MOV     A,#-0xe
-   \   000002   12....       LCALL   ?BANKED_ENTER_XDATA
-   \   000005                ; Saved register size: 14
-   \   000005                ; Auto size: 0
-   \   000005   8A..         MOV     ?V0 + 0,R2
-   \   000007   8B..         MOV     ?V0 + 1,R3
-   \   000009   EC           MOV     A,R4
-   \   00000A   FE           MOV     R6,A
-   \   00000B   ED           MOV     A,R5
-   \   00000C   FF           MOV     R7,A
    1090            uint8 len = 0;
-   \   00000D   75..00       MOV     ?V0 + 2,#0x0
    1091            uint8 x;
    1092            ZDO_MgmtRtgRsp_t *pRsp = ZDO_ParseMgmtRtgRsp( inMsg );
-   \   000010                ; Setup parameters for call to function ZDO_ParseMgmtRtgRsp
-   \   000010   12....       LCALL   ??ZDO_ParseMgmtRtgRsp?relay
    1093            
    1094            if ( pRsp )
-   \   000013   EA           MOV     A,R2
-   \   000014   7001         JNZ     ??zdo_MTCB_MgmtRtgRspCB_0
-   \   000016   EB           MOV     A,R3
-   \                     ??zdo_MTCB_MgmtRtgRspCB_0:
-   \   000017   7003         JNZ     $+5
-   \   000019   02....       LJMP    ??zdo_MTCB_MgmtRtgRspCB_1 & 0xFFFF
    1095            {
    1096              if ( pRsp->rtgListCount > ZDO_MAX_RTG_ITEMS )
-   \   00001C   8A82         MOV     DPL,R2
-   \   00001E   8B83         MOV     DPH,R3
-   \   000020   A3           INC     DPTR
-   \   000021   A3           INC     DPTR
-   \   000022   A3           INC     DPTR
-   \   000023   E0           MOVX    A,@DPTR
-   \   000024   C3           CLR     C
-   \   000025   940B         SUBB    A,#0xb
-   \   000027   400A         JC      ??zdo_MTCB_MgmtRtgRspCB_2
    1097                pRsp->rtgListCount = ZDO_MAX_RTG_ITEMS;
-   \   000029   740A         MOV     A,#0xa
-   \   00002B   8A82         MOV     DPL,R2
-   \   00002D   8B83         MOV     DPH,R3
-   \   00002F   A3           INC     DPTR
-   \   000030   A3           INC     DPTR
-   \   000031   A3           INC     DPTR
-   \   000032   F0           MOVX    @DPTR,A
    1098              
    1099              //Fill up the data bytes
    1100              *msg++ = HI_UINT16( inMsg->srcAddr.addr.shortAddr );
-   \                     ??zdo_MTCB_MgmtRtgRspCB_2:
-   \   000033   E5..         MOV     A,?V0 + 0
-   \   000035   2402         ADD     A,#0x2
-   \   000037   F8           MOV     R0,A
-   \   000038   E5..         MOV     A,?V0 + 1
-   \   00003A   12....       LCALL   ?Subroutine7 & 0xFFFF
    1101              *msg++ = LO_UINT16( inMsg->srcAddr.addr.shortAddr );
    1102              *msg++ = pRsp->status;
-   \                     ??CrossCallReturnLabel_24:
-   \   00003D   12....       LCALL   ?Subroutine22 & 0xFFFF
    1103              *msg++ = pRsp->rtgCount;
-   \                     ??CrossCallReturnLabel_78:
-   \   000040   8A82         MOV     DPL,R2
-   \   000042   8B83         MOV     DPH,R3
-   \   000044   A3           INC     DPTR
-   \   000045   12....       LCALL   ?Subroutine19 & 0xFFFF
    1104              *msg++ = pRsp->startIndex;
-   \                     ??CrossCallReturnLabel_62:
-   \   000048   12....       LCALL   ?Subroutine19 & 0xFFFF
    1105              *msg++ = pRsp->rtgListCount;
-   \                     ??CrossCallReturnLabel_63:
-   \   00004B   A3           INC     DPTR
-   \   00004C   12....       LCALL   ??Subroutine22_0 & 0xFFFF
    1106              len = 2 + 1 + 1 + 1 + 1; //  SrcAddr + Status + RtgCount + StartIndex + RtgListCount
-   \                     ??CrossCallReturnLabel_79:
-   \   00004F   75..06       MOV     ?V0 + 2,#0x6
    1107          
    1108              for ( x = 0; x < pRsp->rtgListCount; x++ )
-   \   000052   75..00       MOV     ?V0 + 0,#0x0
-   \   000055   8055         SJMP    ??zdo_MTCB_MgmtRtgRspCB_3
    1109              {
    1110                *msg++ = HI_UINT16( pRsp->list[x].dstAddress );
-   \                     ??zdo_MTCB_MgmtRtgRspCB_4:
-   \   000057   E5..         MOV     A,?V0 + 0
-   \   000059   75F006       MOV     B,#0x6
-   \   00005C   A4           MUL     AB
-   \   00005D   F8           MOV     R0,A
-   \   00005E   A9F0         MOV     R1,B
-   \   000060   EA           MOV     A,R2
-   \   000061   28           ADD     A,R0
-   \   000062   F8           MOV     R0,A
-   \   000063   EB           MOV     A,R3
-   \   000064   39           ADDC    A,R1
-   \   000065   F9           MOV     R1,A
-   \   000066   E8           MOV     A,R0
-   \   000067   2404         ADD     A,#0x4
-   \   000069   FC           MOV     R4,A
-   \   00006A   E9           MOV     A,R1
-   \   00006B   3400         ADDC    A,#0x0
-   \   00006D   FD           MOV     R5,A
-   \   00006E   8C82         MOV     DPL,R4
-   \   000070   8D83         MOV     DPH,R5
-   \   000072   12....       LCALL   ??Subroutine24_0 & 0xFFFF
    1111                *msg++ = LO_UINT16( pRsp->list[x].dstAddress );
-   \                     ??CrossCallReturnLabel_93:
-   \   000075   8C82         MOV     DPL,R4
-   \   000077   8D83         MOV     DPH,R5
-   \   000079   12....       LCALL   ??Subroutine22_0 & 0xFFFF
    1112                *msg++ = HI_UINT16( pRsp->list[x].nextHopAddress );
-   \                     ??CrossCallReturnLabel_80:
-   \   00007C   E8           MOV     A,R0
-   \   00007D   2406         ADD     A,#0x6
-   \   00007F   0C           INC     R4
-   \   000080   0C           INC     R4
-   \   000081   E9           MOV     A,R1
-   \   000082   3400         ADDC    A,#0x0
-   \   000084   FD           MOV     R5,A
-   \   000085   8C82         MOV     DPL,R4
-   \   000087   8D83         MOV     DPH,R5
-   \   000089   A3           INC     DPTR
-   \   00008A   12....       LCALL   ??Subroutine22_0 & 0xFFFF
    1113                *msg++ = LO_UINT16( pRsp->list[x].nextHopAddress );
-   \                     ??CrossCallReturnLabel_81:
-   \   00008D   8C82         MOV     DPL,R4
-   \   00008F   8D83         MOV     DPH,R5
-   \   000091   12....       LCALL   ??Subroutine22_0 & 0xFFFF
    1114                *msg++ = pRsp->list[x].status;
-   \                     ??CrossCallReturnLabel_82:
-   \   000094   8882         MOV     DPL,R0
-   \   000096   8983         MOV     DPH,R1
-   \   000098   A3           INC     DPTR
-   \   000099   A3           INC     DPTR
-   \   00009A   A3           INC     DPTR
-   \   00009B   A3           INC     DPTR
-   \   00009C   A3           INC     DPTR
-   \   00009D   A3           INC     DPTR
-   \   00009E   A3           INC     DPTR
-   \   00009F   A3           INC     DPTR
-   \   0000A0   A3           INC     DPTR
-   \   0000A1   12....       LCALL   ??Subroutine22_0 & 0xFFFF
    1115                len += 5;
-   \                     ??CrossCallReturnLabel_83:
-   \   0000A4   7405         MOV     A,#0x5
-   \   0000A6   25..         ADD     A,?V0 + 2
-   \   0000A8   F5..         MOV     ?V0 + 2,A
    1116              }
-   \   0000AA   05..         INC     ?V0 + 0
-   \                     ??zdo_MTCB_MgmtRtgRspCB_3:
-   \   0000AC   8A82         MOV     DPL,R2
-   \   0000AE   8B83         MOV     DPH,R3
-   \   0000B0   A3           INC     DPTR
-   \   0000B1   A3           INC     DPTR
-   \   0000B2   A3           INC     DPTR
-   \   0000B3   E0           MOVX    A,@DPTR
-   \   0000B4   FC           MOV     R4,A
-   \   0000B5   E5..         MOV     A,?V0 + 0
-   \   0000B7   C3           CLR     C
-   \   0000B8   9C           SUBB    A,R4
-   \   0000B9   409C         JC      ??zdo_MTCB_MgmtRtgRspCB_4
    1117          
    1118              osal_mem_free( pRsp );
-   \   0000BB                ; Setup parameters for call to function osal_mem_free
-   \   0000BB   12....       LCALL   ??osal_mem_free?relay
    1119            }
    1120            return ( len );
-   \                     ??zdo_MTCB_MgmtRtgRspCB_1:
-   \   0000BE   A9..         MOV     R1,?V0 + 2
-   \   0000C0   7F06         MOV     R7,#0x6
-   \   0000C2   02....       LJMP    ?BANKED_LEAVE_XDATA
    1121          }
-
-   \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine19:
-   \   000000   12....       LCALL   ?Subroutine49 & 0xFFFF
-   \                     ??CrossCallReturnLabel_151:
-   \   000003   22           RET
    1122          
    1123          /*********************************************************************
    1124           * @fn      zdo_MTCB_MgmtBindRspCB()
@@ -3657,61 +1260,19 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Components\mt\MT_ZDO.c
    1133           *
    1134           * @return  none
    1135           */
-
-   \                                 In  segment BANKED_CODE, align 1, keep-with-next
    1136          uint8 zdo_MTCB_MgmtBindRspCB( zdoIncomingMsg_t *inMsg, uint8 *msg )
-   \                     zdo_MTCB_MgmtBindRspCB:
    1137          {
-   \   000000   74F0         MOV     A,#-0x10
-   \   000002   12....       LCALL   ?BANKED_ENTER_XDATA
-   \   000005                ; Saved register size: 16
-   \   000005                ; Auto size: 0
-   \   000005   8A..         MOV     ?V0 + 6,R2
-   \   000007   8B..         MOV     ?V0 + 7,R3
-   \   000009   EC           MOV     A,R4
-   \   00000A   FE           MOV     R6,A
-   \   00000B   ED           MOV     A,R5
-   \   00000C   FF           MOV     R7,A
    1138            uint8 len = 0;       
-   \   00000D   75..00       MOV     ?V0 + 2,#0x0
    1139            uint8 x, y;
    1140            ZDO_MgmtBindRsp_t *pRsp = ZDO_ParseMgmtBindRsp( inMsg );
-   \   000010                ; Setup parameters for call to function ZDO_ParseMgmtBindRsp
-   \   000010   12....       LCALL   ??ZDO_ParseMgmtBindRsp?relay
-   \   000013   8A..         MOV     ?V0 + 0,R2
-   \   000015   8B..         MOV     ?V0 + 1,R3
    1141            
    1142            if ( pRsp )
-   \   000017   EA           MOV     A,R2
-   \   000018   7001         JNZ     ??zdo_MTCB_MgmtBindRspCB_0
-   \   00001A   EB           MOV     A,R3
-   \                     ??zdo_MTCB_MgmtBindRspCB_0:
-   \   00001B   7003         JNZ     $+5
-   \   00001D   02....       LJMP    ??zdo_MTCB_MgmtBindRspCB_1 & 0xFFFF
    1143            {
    1144              if ( pRsp->bindingListCount > ZDO_MAX_BIND_ITEMS )
-   \   000020   8A82         MOV     DPL,R2
-   \   000022   8B83         MOV     DPH,R3
-   \   000024   A3           INC     DPTR
-   \   000025   A3           INC     DPTR
-   \   000026   A3           INC     DPTR
-   \   000027   E0           MOVX    A,@DPTR
-   \   000028   C3           CLR     C
-   \   000029   9404         SUBB    A,#0x4
-   \   00002B   400A         JC      ??zdo_MTCB_MgmtBindRspCB_2
    1145                pRsp->bindingListCount = ZDO_MAX_BIND_ITEMS;
-   \   00002D   7403         MOV     A,#0x3
-   \   00002F   8A82         MOV     DPL,R2
-   \   000031   8B83         MOV     DPH,R3
-   \   000033   A3           INC     DPTR
-   \   000034   A3           INC     DPTR
-   \   000035   A3           INC     DPTR
-   \   000036   F0           MOVX    @DPTR,A
    1146              
    1147              //Fill up the data bytes
    1148              *msg++ = HI_UINT16( inMsg->srcAddr.addr.shortAddr );
-   \                     ??zdo_MTCB_MgmtBindRspCB_2:
-   \   000037   12....       LCALL   ?Subroutine0 & 0xFFFF
    1149              *msg++ = LO_UINT16( inMsg->srcAddr.addr.shortAddr );
    1150              *msg++ = pRsp->status;
    1151              *msg++ = pRsp->bindingCount;
@@ -3720,8 +1281,6 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Components\mt\MT_ZDO.c
    1154              len = (2 + 1 + 1 + 1 + 1);    //  SrcAddr + Status + BindCount + StartIndex + BindListCount
    1155                
    1156              for ( x = 0; x < pRsp->bindingListCount; x++ )
-   \                     ??CrossCallReturnLabel_2:
-   \   00003A   8022         SJMP    ??CrossCallReturnLabel_140
    1157              {
    1158                msg = zdo_MT_CopyRevExtAddr( msg, pRsp->list[x].srcAddr );
    1159                *msg++ = pRsp->list[x].srcEP;
@@ -3736,115 +1295,17 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Components\mt\MT_ZDO.c
    1168                else
    1169                {
    1170                  for ( y = 0; y < (Z_EXTADDR_LEN - 2); y++ )
-   \                     ??zdo_MTCB_MgmtBindRspCB_3:
-   \   00003C   7A06         MOV     R2,#0x6
    1171                    *msg++ = 0;
-   \                     ??zdo_MTCB_MgmtBindRspCB_4:
-   \   00003E   12....       LCALL   ?Subroutine23 & 0xFFFF
-   \                     ??CrossCallReturnLabel_85:
-   \   000041   70FB         JNZ     ??zdo_MTCB_MgmtBindRspCB_4
    1172                  *msg++ = HI_UINT16( pRsp->list[x].dstAddr.addr.shortAddr );
-   \   000043   E5..         MOV     A,?V0 + 6
-   \   000045   240F         ADD     A,#0xf
-   \   000047   12....       LCALL   ??Subroutine4_0 & 0xFFFF
    1173                  *msg++ = LO_UINT16( pRsp->list[x].dstAddr.addr.shortAddr );
    1174                }
    1175                *msg++ = pRsp->list[x].dstEP;           
-   \                     ??CrossCallReturnLabel_15:
-   \   00004A   12....       LCALL   ?Subroutine42 & 0xFFFF
-   \                     ??CrossCallReturnLabel_136:
-   \   00004D   7418         MOV     A,#0x18
-   \   00004F   28           ADD     A,R0
-   \   000050   F582         MOV     DPL,A
-   \   000052   E4           CLR     A
-   \   000053   39           ADDC    A,R1
-   \   000054   F583         MOV     DPH,A
-   \   000056   12....       LCALL   ??Subroutine24_1 & 0xFFFF
    1176                len += (Z_EXTADDR_LEN + 1 + 2 + 1) + (Z_EXTADDR_LEN + 1);
-   \                     ??CrossCallReturnLabel_94:
-   \   000059   7415         MOV     A,#0x15
-   \   00005B   12....       LCALL   ?Subroutine44 & 0xFFFF
-   \                     ??CrossCallReturnLabel_140:
-   \   00005E   12....       LCALL   ?Subroutine31 & 0xFFFF
-   \                     ??CrossCallReturnLabel_111:
-   \   000061   5050         JNC     ??zdo_MTCB_MgmtBindRspCB_5
-   \   000063   E5..         MOV     A,?V0 + 3
-   \   000065   75F015       MOV     B,#0x15
-   \   000068   A4           MUL     AB
-   \   000069   F8           MOV     R0,A
-   \   00006A   A9F0         MOV     R1,B
-   \   00006C   E5..         MOV     A,?V0 + 0
-   \   00006E   28           ADD     A,R0
-   \   00006F   F5..         MOV     ?V0 + 6,A
-   \   000071   E5..         MOV     A,?V0 + 1
-   \   000073   39           ADDC    A,R1
-   \   000074   F5..         MOV     ?V0 + 7,A
-   \   000076                ; Setup parameters for call to function zdo_MT_CopyRevExtAddr
-   \   000076   E5..         MOV     A,?V0 + 6
-   \   000078   2404         ADD     A,#0x4
-   \   00007A   FC           MOV     R4,A
-   \   00007B   E5..         MOV     A,?V0 + 7
-   \   00007D   3400         ADDC    A,#0x0
-   \   00007F   12....       LCALL   ?Subroutine41 & 0xFFFF
-   \                     ??CrossCallReturnLabel_133:
-   \   000082   E5..         MOV     A,?V0 + 6
-   \   000084   240C         ADD     A,#0xc
-   \   000086   F582         MOV     DPL,A
-   \   000088   E5..         MOV     A,?V0 + 7
-   \   00008A   12....       LCALL   ??Subroutine64_0 & 0xFFFF
-   \                     ??CrossCallReturnLabel_215:
-   \   00008D   12....       LCALL   ??Subroutine24_1 & 0xFFFF
-   \                     ??CrossCallReturnLabel_95:
-   \   000090   E5..         MOV     A,?V0 + 6
-   \   000092   240D         ADD     A,#0xd
-   \   000094   12....       LCALL   ??Subroutine4_0 & 0xFFFF
-   \                     ??CrossCallReturnLabel_16:
-   \   000097   E5..         MOV     A,?V0 + 6
-   \   000099   2417         ADD     A,#0x17
-   \   00009B   F8           MOV     R0,A
-   \   00009C   E5..         MOV     A,?V0 + 7
-   \   00009E   12....       LCALL   ?Subroutine21 & 0xFFFF
-   \                     ??CrossCallReturnLabel_67:
-   \   0000A1   6403         XRL     A,#0x3
-   \   0000A3   7097         JNZ     ??zdo_MTCB_MgmtBindRspCB_3
-   \   0000A5                ; Setup parameters for call to function zdo_MT_CopyRevExtAddr
-   \   0000A5   12....       LCALL   ?Subroutine42 & 0xFFFF
-   \                     ??CrossCallReturnLabel_137:
-   \   0000A8   740F         MOV     A,#0xf
-   \   0000AA   28           ADD     A,R0
-   \   0000AB   FC           MOV     R4,A
-   \   0000AC   E4           CLR     A
-   \   0000AD   39           ADDC    A,R1
-   \   0000AE   12....       LCALL   ?Subroutine41 & 0xFFFF
-   \                     ??CrossCallReturnLabel_134:
-   \   0000B1   8097         SJMP    ??CrossCallReturnLabel_15
    1177              }
    1178              osal_mem_free( pRsp );
-   \                     ??zdo_MTCB_MgmtBindRspCB_5:
-   \   0000B3                ; Setup parameters for call to function osal_mem_free
-   \   0000B3   AA..         MOV     R2,?V0 + 0
-   \   0000B5   AB..         MOV     R3,?V0 + 1
-   \   0000B7   12....       LCALL   ??osal_mem_free?relay
    1179            }
    1180            return ( len );
-   \                     ??zdo_MTCB_MgmtBindRspCB_1:
-   \   0000BA                REQUIRE ?Subroutine71
-   \   0000BA                ; // Fall through to label ?Subroutine71
    1181          }
-
-   \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine41:
-   \   000000   FD           MOV     R5,A
-   \   000001   EE           MOV     A,R6
-   \   000002   FA           MOV     R2,A
-   \   000003   EF           MOV     A,R7
-   \   000004   FB           MOV     R3,A
-   \   000005   12....       LCALL   ??zdo_MT_CopyRevExtAddr?relay
-   \   000008   8A..         MOV     ?V0 + 4,R2
-   \   00000A   8B..         MOV     ?V0 + 5,R3
-   \   00000C   AE..         MOV     R6,?V0 + 4
-   \   00000E   AF..         MOV     R7,?V0 + 5
-   \   000010   22           RET
    1182          
    1183          /*********************************************************************
    1184           * @fn      zdo_MTCB_MgmtDirectJoinRspCB()
@@ -3859,37 +1320,13 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Components\mt\MT_ZDO.c
    1193           *
    1194           * @return  none
    1195           */
-
-   \                                 In  segment BANKED_CODE, align 1, keep-with-next
    1196          uint8 zdo_MTCB_MgmtDirectJoinRspCB( zdoIncomingMsg_t *inMsg, uint8 *msg )
-   \                     zdo_MTCB_MgmtDirectJoinRspCB:
    1197          {
-   \   000000   74F7         MOV     A,#-0x9
-   \   000002   12....       LCALL   ?BANKED_ENTER_XDATA
-   \   000005                ; Saved register size: 9
-   \   000005                ; Auto size: 0
    1198            msg[0] = HI_UINT16( inMsg->srcAddr.addr.shortAddr );
-   \   000005   12....       LCALL   ?Subroutine60 & 0xFFFF
-   \                     ??CrossCallReturnLabel_220:
-   \   000008   12....       LCALL   ?Subroutine52 & 0xFFFF
    1199            msg[1] = LO_UINT16( inMsg->srcAddr.addr.shortAddr );
-   \                     ??CrossCallReturnLabel_211:
-   \   00000B   F0           MOVX    @DPTR,A
    1200            msg[2] = ZDO_ParseMgmtDirectJoinRsp( inMsg );
-   \   00000C   EA           MOV     A,R2
-   \   00000D   2411         ADD     A,#0x11
-   \   00000F   12....       LCALL   ?Subroutine39 & 0xFFFF
-   \                     ??CrossCallReturnLabel_129:
-   \   000012   12....       LCALL   ?Subroutine55 & 0xFFFF
-   \                     ??CrossCallReturnLabel_218:
-   \   000015   A3           INC     DPTR
-   \   000016   A3           INC     DPTR
-   \   000017   F0           MOVX    @DPTR,A
    1201          
    1202            return ( 3 );
-   \   000018   7903         MOV     R1,#0x3
-   \   00001A   7F01         MOV     R7,#0x1
-   \   00001C   02....       LJMP    ?BANKED_LEAVE_XDATA
    1203          }
    1204          
    1205          /*********************************************************************
@@ -3905,11 +1342,7 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Components\mt\MT_ZDO.c
    1215           *
    1216           * @return  none
    1217           */
-
-   \                                 In  segment BANKED_CODE, align 1, keep-with-next
    1218          uint8 zdo_MTCB_MgmtLeaveRspCB( zdoIncomingMsg_t *inMsg, uint8 *msg )
-   \                     zdo_MTCB_MgmtLeaveRspCB:
-   \   000000   80..         SJMP    ?Subroutine74
    1219          {
    1220            msg[0] = ZDO_ParseMgmtLeaveRsp( inMsg );
    1221            msg[1] = HI_UINT16( inMsg->srcAddr.addr.shortAddr );
@@ -3931,12 +1364,7 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Components\mt\MT_ZDO.c
    1237           *
    1238           * @return  none
    1239           */
-
-   \                                 In  segment BANKED_CODE, align 1, keep-with-next
    1240          uint8 zdo_MTCB_MgmtPermitJoinRspCB( zdoIncomingMsg_t *inMsg, uint8 *msg )
-   \                     zdo_MTCB_MgmtPermitJoinRspCB:
-   \   000000                REQUIRE ?Subroutine74
-   \   000000                ; // Fall through to label ?Subroutine74
    1241          {
    1242          
    1243            msg[0] = ZDO_ParseMgmtPermitJoinRsp( inMsg );
@@ -3964,105 +1392,27 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Components\mt\MT_ZDO.c
    1265           *
    1266           * @return  none
    1267           */
-
-   \                                 In  segment BANKED_CODE, align 1, keep-with-next
    1268          uint8 zdo_MTCB_UserDescRspCB( zdoIncomingMsg_t *inMsg, uint8 *msg )
-   \                     zdo_MTCB_UserDescRspCB:
    1269          {
-   \   000000   74F0         MOV     A,#-0x10
-   \   000002   12....       LCALL   ?BANKED_ENTER_XDATA
-   \   000005                ; Saved register size: 16
-   \   000005                ; Auto size: 0
-   \   000005   8A..         MOV     ?V0 + 6,R2
-   \   000007   8B..         MOV     ?V0 + 7,R3
-   \   000009   EC           MOV     A,R4
-   \   00000A   FE           MOV     R6,A
-   \   00000B   ED           MOV     A,R5
-   \   00000C   FF           MOV     R7,A
    1270            uint8 len = 0;
-   \   00000D   75..00       MOV     ?V0 + 3,#0x0
    1271            ZDO_UserDescRsp_t *pRsp = ZDO_ParseUserDescRsp( inMsg );
-   \   000010                ; Setup parameters for call to function ZDO_ParseUserDescRsp
-   \   000010   12....       LCALL   ??ZDO_ParseUserDescRsp?relay
-   \   000013   8A..         MOV     ?V0 + 4,R2
-   \   000015   8B..         MOV     ?V0 + 5,R3
    1272            
    1273            if ( pRsp )
-   \   000017   EA           MOV     A,R2
-   \   000018   7001         JNZ     ??zdo_MTCB_UserDescRspCB_0
-   \   00001A   EB           MOV     A,R3
-   \                     ??zdo_MTCB_UserDescRspCB_0:
-   \   00001B   605C         JZ      ??zdo_MTCB_UserDescRspCB_1
    1274            {
    1275              len = USER_DESC_CB_LEN;
-   \   00001D   75..16       MOV     ?V0 + 3,#0x16
    1276              osal_memset( msg, 0, USER_DESC_CB_LEN );
-   \   000020                ; Setup parameters for call to function osal_memset
-   \   000020   7C16         MOV     R4,#0x16
-   \   000022   7D00         MOV     R5,#0x0
-   \   000024   7900         MOV     R1,#0x0
-   \   000026   EE           MOV     A,R6
-   \   000027   FA           MOV     R2,A
-   \   000028   EF           MOV     A,R7
-   \   000029   FB           MOV     R3,A
-   \   00002A   12....       LCALL   ??osal_memset?relay
    1277            
    1278              *msg++ = pRsp->status;
-   \   00002D   85..82       MOV     DPL,?V0 + 4
-   \   000030   85..83       MOV     DPH,?V0 + 5
-   \   000033   12....       LCALL   ??Subroutine24_1 & 0xFFFF
    1279              *msg++ = HI_UINT16( inMsg->srcAddr.addr.shortAddr );
-   \                     ??CrossCallReturnLabel_96:
-   \   000036   12....       LCALL   ?Subroutine4 & 0xFFFF
    1280              *msg++ = LO_UINT16( inMsg->srcAddr.addr.shortAddr );
    1281              *msg++ = HI_UINT16( pRsp->nwkAddr );
-   \                     ??CrossCallReturnLabel_14:
-   \   000039   85..82       MOV     DPL,?V0 + 4
-   \   00003C   85..83       MOV     DPH,?V0 + 5
-   \   00003F   A3           INC     DPTR
-   \   000040   A882         MOV     R0,DPL
-   \   000042   A983         MOV     R1,DPH
-   \   000044   12....       LCALL   ??Subroutine4_1 & 0xFFFF
    1282              *msg++ = LO_UINT16( pRsp->nwkAddr );
    1283              *msg++ = pRsp->length;
-   \                     ??CrossCallReturnLabel_18:
-   \   000047   E5..         MOV     A,?V0 + 4
-   \   000049   2403         ADD     A,#0x3
-   \   00004B   F8           MOV     R0,A
-   \   00004C   E5..         MOV     A,?V0 + 5
-   \   00004E   3400         ADDC    A,#0x0
-   \   000050   F9           MOV     R1,A
-   \   000051   E8           MOV     A,R0
-   \   000052   FA           MOV     R2,A
-   \   000053   E9           MOV     A,R1
-   \   000054   FB           MOV     R3,A
-   \   000055   8A82         MOV     DPL,R2
-   \   000057   8B83         MOV     DPH,R3
-   \   000059   12....       LCALL   ??Subroutine18_0 & 0xFFFF
    1284              osal_memcpy( msg, pRsp->desc, pRsp->length ); 
-   \                     ??CrossCallReturnLabel_61:
-   \   00005C   2404         ADD     A,#0x4
-   \   00005E   F5..         MOV     ?V0 + 0,A
-   \   000060   E5..         MOV     A,?V0 + 5
-   \   000062   12....       LCALL   ?Subroutine40 & 0xFFFF
-   \                     ??CrossCallReturnLabel_132:
-   \   000065   12....       LCALL   ?PUSH_XSTACK_I_THREE
-   \   000068   8A82         MOV     DPL,R2
-   \   00006A   8B83         MOV     DPH,R3
-   \   00006C   12....       LCALL   ?Subroutine26 & 0xFFFF
-   \                     ??CrossCallReturnLabel_100:
-   \   00006F   12....       LCALL   ?DEALLOC_XSTACK8
    1285            
    1286              osal_mem_free( pRsp );
-   \   000072                ; Setup parameters for call to function osal_mem_free
-   \   000072   AA..         MOV     R2,?V0 + 4
-   \   000074   AB..         MOV     R3,?V0 + 5
-   \   000076   12....       LCALL   ??osal_mem_free?relay
    1287            }
    1288            return ( len );
-   \                     ??zdo_MTCB_UserDescRspCB_1:
-   \   000079   A9..         MOV     R1,?V0 + 3
-   \   00007B   02....       LJMP    ??Subroutine71_0 & 0xFFFF
    1289          }
    1290          
    1291          /*********************************************************************
@@ -4079,11 +1429,7 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Components\mt\MT_ZDO.c
    1302           *
    1303           * @return  none
    1304           */
-
-   \                                 In  segment BANKED_CODE, align 1, keep-with-next
    1305          uint8 zdo_MTCB_UserDescConfCB( zdoIncomingMsg_t *inMsg, uint8 *msg )
-   \                     zdo_MTCB_UserDescConfCB:
-   \   000000   02....       LJMP    ?Subroutine74 & 0xFFFF
    1306          {
    1307            msg[0] = ZDO_ParseUserDescConf( inMsg );
    1308            msg[1] = HI_UINT16( inMsg->srcAddr.addr.shortAddr );
@@ -4105,50 +1451,18 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Components\mt\MT_ZDO.c
    1324           *
    1325           * @return  none
    1326           */
-
-   \                                 In  segment BANKED_CODE, align 1, keep-with-next
    1327          uint8 zdo_MTCB_ServerDiscRspCB( zdoIncomingMsg_t *inMsg, uint8 *msg )
-   \                     zdo_MTCB_ServerDiscRspCB:
    1328          {
-   \   000000   74F6         MOV     A,#-0xa
-   \   000002   12....       LCALL   ?BANKED_ENTER_XDATA
-   \   000005                ; Saved register size: 10
-   \   000005                ; Auto size: 3
-   \   000005   74FD         MOV     A,#-0x3
-   \   000007   12....       LCALL   ?ALLOC_XSTACK8
-   \   00000A   8A..         MOV     ?V0 + 0,R2
-   \   00000C   8B..         MOV     ?V0 + 1,R3
-   \   00000E   EC           MOV     A,R4
-   \   00000F   FE           MOV     R6,A
-   \   000010   ED           MOV     A,R5
-   \   000011   FF           MOV     R7,A
    1329            ZDO_ServerDiscRsp_t Rsp;
    1330            ZDO_ParseServerDiscRsp( inMsg, &Rsp );
-   \   000012                ; Setup parameters for call to function ZDO_ParseServerDiscRsp
-   \   000012   85..82       MOV     DPL,?XSP + 0
-   \   000015   85..83       MOV     DPH,?XSP + 1
-   \   000018   AC82         MOV     R4,DPL
-   \   00001A   AD83         MOV     R5,DPH
-   \   00001C   12....       LCALL   ??ZDO_ParseServerDiscRsp?relay
    1331          
    1332            *msg++ = Rsp.status;
-   \   00001F   12....       LCALL   ?Subroutine2 & 0xFFFF
    1333            *msg++ = HI_UINT16( inMsg->srcAddr.addr.shortAddr );
    1334            *msg++ = LO_UINT16( inMsg->srcAddr.addr.shortAddr );
    1335            *msg++ = HI_UINT16( Rsp.serverMask );
-   \                     ??CrossCallReturnLabel_11:
-   \   000022   12....       LCALL   ?XSTACK_DISP0_8
-   \   000025   12....       LCALL   ?Subroutine14 & 0xFFFF
    1336            *msg++ = LO_UINT16( Rsp.serverMask );
-   \                     ??CrossCallReturnLabel_48:
-   \   000028   12....       LCALL   ?XSTACK_DISP0_8
-   \   00002B   12....       LCALL   ?Subroutine33 & 0xFFFF
    1337          
    1338            return ( 5 );
-   \                     ??CrossCallReturnLabel_116:
-   \   00002E   7905         MOV     R1,#0x5
-   \   000030   7403         MOV     A,#0x3
-   \   000032   02....       LJMP    ?Subroutine76 & 0xFFFF
    1339          }
    1340          
    1341          /*********************************************************************
@@ -4160,18 +1474,9 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Components\mt\MT_ZDO.c
    1347           *
    1348           * @return  none
    1349           */
-
-   \                                 In  segment BANKED_CODE, align 1, keep-with-next
    1350          void MT_ZdoRsp( zdoIncomingMsg_t *inMsg )
-   \                     MT_ZdoRsp:
    1351          {
-   \   000000   74F4         MOV     A,#-0xc
-   \   000002   12....       LCALL   ?BANKED_ENTER_XDATA
-   \   000005                ; Saved register size: 12
-   \   000005                ; Auto size: 0
    1352            uint8 x = 0;
-   \   000005   7E00         MOV     R6,#0x0
-   \   000007   8001         SJMP    ??MT_ZdoRsp_0
    1353            
    1354            // Look through the table
    1355            while ( mtzdoConvTable[x].clusterID )
@@ -4192,465 +1497,18 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Components\mt\MT_ZDO.c
    1370                break;    // get out of the loop
    1371              }
    1372              x++;
-   \                     ??MT_ZdoRsp_1:
-   \   000009   0E           INC     R6
-   \                     ??MT_ZdoRsp_0:
-   \   00000A   EE           MOV     A,R6
-   \   00000B   75F00A       MOV     B,#0xa
-   \   00000E   A4           MUL     AB
-   \   00000F   F8           MOV     R0,A
-   \   000010   ACF0         MOV     R4,B
-   \   000012   EC           MOV     A,R4
-   \   000013   F9           MOV     R1,A
-   \   000014   E8           MOV     A,R0
-   \   000015   24..         ADD     A,#(mtzdoConvTable & 0xff)
-   \   000017   F582         MOV     DPL,A
-   \   000019   E9           MOV     A,R1
-   \   00001A   34..         ADDC    A,#((mtzdoConvTable >> 8) & 0xff)
-   \   00001C   F583         MOV     DPH,A
-   \   00001E   E4           CLR     A
-   \   00001F   93           MOVC    A,@A+DPTR
-   \   000020   F8           MOV     R0,A
-   \   000021   7401         MOV     A,#0x1
-   \   000023   93           MOVC    A,@A+DPTR
-   \   000024   F9           MOV     R1,A
-   \   000025   E8           MOV     A,R0
-   \   000026   7001         JNZ     ??MT_ZdoRsp_2
-   \   000028   E9           MOV     A,R1
-   \                     ??MT_ZdoRsp_2:
-   \   000029   7003         JNZ     $+5
-   \   00002B   02....       LJMP    ??MT_ZdoRsp_3 & 0xFFFF
-   \   00002E   E4           CLR     A
-   \   00002F   93           MOVC    A,@A+DPTR
-   \   000030   F8           MOV     R0,A
-   \   000031   7401         MOV     A,#0x1
-   \   000033   93           MOVC    A,@A+DPTR
-   \   000034   F9           MOV     R1,A
-   \   000035   EA           MOV     A,R2
-   \   000036   240C         ADD     A,#0xc
-   \   000038   12....       LCALL   ?Subroutine39 & 0xFFFF
-   \                     ??CrossCallReturnLabel_130:
-   \   00003B   68           XRL     A,R0
-   \   00003C   7003         JNZ     ??MT_ZdoRsp_4
-   \   00003E   A3           INC     DPTR
-   \   00003F   E0           MOVX    A,@DPTR
-   \   000040   69           XRL     A,R1
-   \                     ??MT_ZdoRsp_4:
-   \   000041   70C6         JNZ     ??MT_ZdoRsp_1
-   \   000043   EE           MOV     A,R6
-   \   000044   75F00A       MOV     B,#0xa
-   \   000047   A4           MUL     AB
-   \   000048   F8           MOV     R0,A
-   \   000049   EC           MOV     A,R4
-   \   00004A   F9           MOV     R1,A
-   \   00004B   E8           MOV     A,R0
-   \   00004C   24..         ADD     A,#((mtzdoConvTable + 2) & 0xff)
-   \   00004E   F582         MOV     DPL,A
-   \   000050   E9           MOV     A,R1
-   \   000051   34..         ADDC    A,#(((mtzdoConvTable + 2) >> 8) & 0xff)
-   \   000053   F583         MOV     DPH,A
-   \   000055   78..         MOV     R0,#?V0 + 0
-   \   000057   12....       LCALL   ?L_MOV_C
-   \   00005A   7583..       MOV     DPH,#((_zdoCallbackSub >> 8) & 0xff)
-   \   00005D   7582..       MOV     DPL,#(_zdoCallbackSub & 0xff)
-   \   000060   78..         MOV     R0,#?V0 + 0
-   \   000062   12....       LCALL   ?L_AND_X
-   \   000065   90....       MOV     DPTR,#__Constant_0
-   \   000068   78..         MOV     R0,#?V0 + 0
-   \   00006A   12....       LCALL   ?L_EQ_X
-   \   00006D   6040         JZ      ??MT_ZdoRsp_3
-   \   00006F                ; Setup parameters for indirect call
-   \   00006F   7C..         MOV     R4,#(mtzdoResponseBuffer & 0xff)
-   \   000071   7D..         MOV     R5,#((mtzdoResponseBuffer >> 8) & 0xff)
-   \   000073   EE           MOV     A,R6
-   \   000074   75F00A       MOV     B,#0xa
-   \   000077   A4           MUL     AB
-   \   000078   24..         ADD     A,#((mtzdoConvTable + 8) & 0xff)
-   \   00007A   F582         MOV     DPL,A
-   \   00007C   E9           MOV     A,R1
-   \   00007D   34..         ADDC    A,#(((mtzdoConvTable + 8) >> 8) & 0xff)
-   \   00007F   F583         MOV     DPH,A
-   \   000081   E4           CLR     A
-   \   000082   93           MOVC    A,@A+DPTR
-   \   000083   C0E0         PUSH    A
-   \   000085   7401         MOV     A,#0x1
-   \   000087   93           MOVC    A,@A+DPTR
-   \   000088   F583         MOV     DPH,A
-   \   00008A   D082         POP     DPL
-   \   00008C   12....       LCALL   ?CALL_IND
-   \   00008F   E9           MOV     A,R1
-   \   000090   601D         JZ      ??MT_ZdoRsp_3
-   \   000092                ; Setup parameters for call to function MT_BuildAndSendZToolCB
-   \   000092   7C..         MOV     R4,#(mtzdoResponseBuffer & 0xff)
-   \   000094   7D..         MOV     R5,#((mtzdoResponseBuffer >> 8) & 0xff)
-   \   000096   EE           MOV     A,R6
-   \   000097   75F00A       MOV     B,#0xa
-   \   00009A   A4           MUL     AB
-   \   00009B   24..         ADD     A,#((mtzdoConvTable + 6) & 0xff)
-   \   00009D   F582         MOV     DPL,A
-   \   00009F   E5F0         MOV     A,B
-   \   0000A1   34..         ADDC    A,#(((mtzdoConvTable + 6) >> 8) & 0xff)
-   \   0000A3   F583         MOV     DPH,A
-   \   0000A5   E4           CLR     A
-   \   0000A6   93           MOVC    A,@A+DPTR
-   \   0000A7   FA           MOV     R2,A
-   \   0000A8   7401         MOV     A,#0x1
-   \   0000AA   93           MOVC    A,@A+DPTR
-   \   0000AB   FB           MOV     R3,A
-   \   0000AC   12....       LCALL   ??MT_BuildAndSendZToolCB?relay
    1373            }
    1374          }
-   \                     ??MT_ZdoRsp_3:
-   \   0000AF   7F04         MOV     R7,#0x4
-   \   0000B1   02....       LJMP    ?BANKED_LEAVE_XDATA
-
-   \                                 In  segment XDATA_I, align 1, keep-with-next
-   \                     __Constant_0:
-   \   000000                DS 4
-   \   000004                REQUIRE `?<Initializer for __Constant_0>`
-   \   000004                REQUIRE __INIT_XDATA_I
-
-   \                                 In  segment XDATA_ID, align 1, keep-with-next
-   \                     `?<Initializer for __Constant_0>`:
-   \   000000   00000000     DD 0
-
-   \                                 In  segment BANK_RELAYS, align 1
-   \                     ??MT_ZdoCommandProcessing?relay:
-   \   000000   12....       LCALL   ?BDISPATCH
-   \   000003   ......       DC24    MT_ZdoCommandProcessing
-
-   \                                 In  segment BANK_RELAYS, align 1
-   \                     ??zdo_MT_CopyRevExtAddr?relay:
-   \   000000   12....       LCALL   ?BDISPATCH
-   \   000003   ......       DC24    zdo_MT_CopyRevExtAddr
-
-   \                                 In  segment BANK_RELAYS, align 1
-   \                     ??zdo_MT_MakeExtAddr?relay:
-   \   000000   12....       LCALL   ?BDISPATCH
-   \   000003   ......       DC24    zdo_MT_MakeExtAddr
-
-   \                                 In  segment BANK_RELAYS, align 1
-   \                     ??zdo_MTCB_NwkIEEEAddrRspCB?relay:
-   \   000000   12....       LCALL   ?BDISPATCH
-   \   000003   ......       DC24    zdo_MTCB_NwkIEEEAddrRspCB
-
-   \                                 In  segment BANK_RELAYS, align 1
-   \                     ??zdo_MTCB_NodeDescRspCB?relay:
-   \   000000   12....       LCALL   ?BDISPATCH
-   \   000003   ......       DC24    zdo_MTCB_NodeDescRspCB
-
-   \                                 In  segment BANK_RELAYS, align 1
-   \                     ??zdo_MTCB_PowerDescRspCB?relay:
-   \   000000   12....       LCALL   ?BDISPATCH
-   \   000003   ......       DC24    zdo_MTCB_PowerDescRspCB
-
-   \                                 In  segment BANK_RELAYS, align 1
-   \                     ??zdo_MTCB_SimpleDescRspCB?relay:
-   \   000000   12....       LCALL   ?BDISPATCH
-   \   000003   ......       DC24    zdo_MTCB_SimpleDescRspCB
-
-   \                                 In  segment BANK_RELAYS, align 1
-   \                     ??zdo_MTCB_MatchActiveEPRspCB?relay:
-   \   000000   12....       LCALL   ?BDISPATCH
-   \   000003   ......       DC24    zdo_MTCB_MatchActiveEPRspCB
-
-   \                                 In  segment BANK_RELAYS, align 1
-   \                     ??zdo_MTCB_BindRspCB?relay:
-   \   000000   12....       LCALL   ?BDISPATCH
-   \   000003   ......       DC24    zdo_MTCB_BindRspCB
-
-   \                                 In  segment BANK_RELAYS, align 1
-   \                     ??zdo_MTCB_MgmtLqiRspCB?relay:
-   \   000000   12....       LCALL   ?BDISPATCH
-   \   000003   ......       DC24    zdo_MTCB_MgmtLqiRspCB
-
-   \                                 In  segment BANK_RELAYS, align 1
-   \                     ??zdo_MTCB_MgmtNwkDiscRspCB?relay:
-   \   000000   12....       LCALL   ?BDISPATCH
-   \   000003   ......       DC24    zdo_MTCB_MgmtNwkDiscRspCB
-
-   \                                 In  segment BANK_RELAYS, align 1
-   \                     ??zdo_MTCB_MgmtRtgRspCB?relay:
-   \   000000   12....       LCALL   ?BDISPATCH
-   \   000003   ......       DC24    zdo_MTCB_MgmtRtgRspCB
-
-   \                                 In  segment BANK_RELAYS, align 1
-   \                     ??zdo_MTCB_MgmtBindRspCB?relay:
-   \   000000   12....       LCALL   ?BDISPATCH
-   \   000003   ......       DC24    zdo_MTCB_MgmtBindRspCB
-
-   \                                 In  segment BANK_RELAYS, align 1
-   \                     ??zdo_MTCB_MgmtDirectJoinRspCB?relay:
-   \   000000   12....       LCALL   ?BDISPATCH
-   \   000003   ......       DC24    zdo_MTCB_MgmtDirectJoinRspCB
-
-   \                                 In  segment BANK_RELAYS, align 1
-   \                     ??zdo_MTCB_MgmtLeaveRspCB?relay:
-   \   000000   12....       LCALL   ?BDISPATCH
-   \   000003   ......       DC24    zdo_MTCB_MgmtLeaveRspCB
-
-   \                                 In  segment BANK_RELAYS, align 1
-   \                     ??zdo_MTCB_MgmtPermitJoinRspCB?relay:
-   \   000000   12....       LCALL   ?BDISPATCH
-   \   000003   ......       DC24    zdo_MTCB_MgmtPermitJoinRspCB
-
-   \                                 In  segment BANK_RELAYS, align 1
-   \                     ??zdo_MTCB_UserDescRspCB?relay:
-   \   000000   12....       LCALL   ?BDISPATCH
-   \   000003   ......       DC24    zdo_MTCB_UserDescRspCB
-
-   \                                 In  segment BANK_RELAYS, align 1
-   \                     ??zdo_MTCB_UserDescConfCB?relay:
-   \   000000   12....       LCALL   ?BDISPATCH
-   \   000003   ......       DC24    zdo_MTCB_UserDescConfCB
-
-   \                                 In  segment BANK_RELAYS, align 1
-   \                     ??zdo_MTCB_ServerDiscRspCB?relay:
-   \   000000   12....       LCALL   ?BDISPATCH
-   \   000003   ......       DC24    zdo_MTCB_ServerDiscRspCB
-
-   \                                 In  segment BANK_RELAYS, align 1
-   \                     ??MT_ZdoRsp?relay:
-   \   000000   12....       LCALL   ?BDISPATCH
-   \   000003   ......       DC24    MT_ZdoRsp
    1375          
    1376          /*********************************************************************
    1377          *********************************************************************/
    1378          
    1379          #endif   /*ZDO Command Processing in MT*/
 
-   Maximum stack usage in bytes:
-
-     Function                      ISTACK PSTACK XSTACK
-     --------                      ------ ------ ------
-     MT_ZdoCommandProcessing           1      0    186
-       -> zdo_MT_MakeExtAddr           0      0    354
-       -> ZDP_NwkAddrReq               0      0    354
-       -> ZDP_IEEEAddrReq              0      0    354
-       -> ZDP_NWKAddrOfInterestReq     0      0    356
-       -> ZDP_NWKAddrOfInterestReq     0      0    356
-       -> ZDP_SimpleDescReq            0      0    356
-       -> ZDP_NWKAddrOfInterestReq     0      0    356
-       -> ZDP_MatchDescReq             0      0    370
-       -> ZDP_NWKAddrOfInterestReq     0      0    356
-       -> ZDP_NWKAddrOfInterestReq     0      0    356
-       -> ZDP_EndDeviceBindReq         0      0    372
-       -> MT_ReverseBytes              0      0    354
-       -> MT_ReverseBytes              0      0    354
-       -> osal_cpyExtAddr              0      0    354
-       -> ZDP_BindUnbindReq            0      0    370
-       -> MT_ReverseBytes              0      0    354
-       -> MT_ReverseBytes              0      0    354
-       -> osal_cpyExtAddr              0      0    354
-       -> ZDP_BindUnbindReq            0      0    370
-       -> osal_memcpy                  0      0    360
-       -> ZDP_UserDescSet              0      0    358
-       -> ZDP_ServerDiscReq            0      0    354
-       -> ZDOInitDevice                0      0    354
-       -> MT_SendSPIRespMsg            0      0    354
-     MT_ZdoRsp                         2      0     12
-       -> MT_BuildAndSendZToolCB       0      0     24
-     zdo_MTCB_BindRspCB                1      0      9
-     zdo_MTCB_MatchActiveEPRspCB       1      0     19
-       -> ZDO_ParseEPListRsp           0      0     32
-       -> osal_memcpy                  0      0     38
-       -> osal_mem_free                0      0     32
-     zdo_MTCB_MgmtBindRspCB            1      0     16
-       -> ZDO_ParseMgmtBindRsp         0      0     32
-       -> zdo_MT_CopyRevExtAddr        0      0     32
-       -> zdo_MT_CopyRevExtAddr        0      0     32
-       -> osal_mem_free                0      0     32
-     zdo_MTCB_MgmtDirectJoinRspCB      1      0      9
-     zdo_MTCB_MgmtLeaveRspCB           1      0      9
-     zdo_MTCB_MgmtLqiRspCB             1      0     16
-       -> ZDO_ParseMgmtLqiRsp          0      0     32
-       -> osal_cpyExtAddr              0      0     32
-       -> osal_mem_free                0      0     32
-     zdo_MTCB_MgmtNwkDiscRspCB         1      0     16
-       -> ZDO_ParseMgmNwkDiscRsp       0      0     32
-       -> osal_cpyExtAddr              0      0     32
-       -> osal_mem_free                0      0     32
-     zdo_MTCB_MgmtPermitJoinRspCB      1      0      9
-     zdo_MTCB_MgmtRtgRspCB             1      0     14
-       -> ZDO_ParseMgmtRtgRsp          0      0     28
-       -> osal_mem_free                0      0     28
-     zdo_MTCB_NodeDescRspCB            1      0     23
-       -> ZDO_ParseNodeDescRsp         0      0     46
-     zdo_MTCB_NwkIEEEAddrRspCB         1      0     16
-       -> ZDO_ParseAddrRsp             0      0     32
-       -> zdo_MT_CopyRevExtAddr        0      0     32
-       -> zdo_MT_CopyRevExtAddr        0      0     32
-       -> osal_mem_free                0      0     32
-     zdo_MTCB_PowerDescRspCB           1      0     15
-       -> ZDO_ParsePowerDescRsp        0      0     30
-     zdo_MTCB_ServerDiscRspCB          1      0     13
-       -> ZDO_ParseServerDiscRsp       0      0     26
-     zdo_MTCB_SimpleDescRspCB          1      0     25
-       -> ZDO_ParseSimpleDescRsp       0      0     50
-       -> osal_mem_free                0      0     50
-       -> osal_mem_free                0      0     50
-     zdo_MTCB_UserDescConfCB           1      0      9
-     zdo_MTCB_UserDescRspCB            1      0     19
-       -> ZDO_ParseUserDescRsp         0      0     32
-       -> osal_memset                  0      0     32
-       -> osal_memcpy                  0      0     38
-       -> osal_mem_free                0      0     32
-     zdo_MT_CopyRevExtAddr             0      0     25
-       -> osal_cpyExtAddr              0      0     18
-       -> MT_ReverseBytes              0      0     18
-     zdo_MT_MakeExtAddr                1      0    186
-       -> zdo_MT_CopyRevExtAddr        0      0     18
-
-
-   Segment part sizes:
-
-     Function/Label                 Bytes
-     --------------                 -----
-     _zdoCallbackSub                   4
-     mtzdoResponseBuffer             100
-     mtzdoConvTable                  140
-     MT_ZdoCommandProcessing        1017
-     ?Subroutine36                    13
-     ?Subroutine63                     6
-     ?Subroutine67                     4
-     ?Subroutine35                     7
-     ?Subroutine34                    11
-     ?Subroutine32                    14
-     ?Subroutine29                    14
-     ?Subroutine28                    12
-     ?Subroutine27                    16
-     ?Subroutine25                    17
-     ?Subroutine57                    11
-     ?Subroutine13                    24
-     ?Subroutine12                    22
-     ?Subroutine51                     8
-     ?Subroutine11                    18
-     ?Subroutine68                     7
-     ?Subroutine8                      4
-     ?Subroutine45                    11
-     ?Subroutine6                     14
-     ?Subroutine5                     40
-     ?Subroutine62                    10
-     ?Subroutine59                     3
-     ?Subroutine72                     6
-     ?Subroutine54                     4
-     ?Subroutine69                     5
-     ?Subroutine1                     13
-     ?Subroutine56                    10
-     ?Subroutine46                     4
-     ?Subroutine65                    24
-     ?Subroutine70                    10
-     ?Subroutine71                     7
-     ?Subroutine39                     8
-     ?Subroutine64                     9
-     zdo_MT_CopyRevExtAddr            21
-     ?Subroutine75                     6
-     ?Subroutine43                    11
-     zdo_MT_MakeExtAddr               29
-     zdo_MTCB_NwkIEEEAddrRspCB       231
-     ?Subroutine38                    19
-     ?Subroutine33                     7
-     ?Subroutine7                     11
-     ?Subroutine47                    16
-     ?Subroutine24                    11
-     ?Subroutine53                    11
-     ?Subroutine22                     9
-     ?Subroutine50                    13
-     ?Subroutine42                    18
-     ?Subroutine23                     7
-     ?Subroutine4                     14
-     ?Subroutine61                    11
-     ?Subroutine48                     8
-     ?Subroutine66                    15
-     zdo_MTCB_NodeDescRspCB          169
-     ?Subroutine17                     7
-     ?Subroutine9                      9
-     ?Subroutine76                     8
-     ?Subroutine16                     6
-     ?Subroutine15                     7
-     ?Subroutine14                     7
-     ?Subroutine2                     23
-     zdo_MTCB_PowerDescRspCB          99
-     zdo_MTCB_SimpleDescRspCB        241
-     ?Subroutine30                     9
-     ?Subroutine20                    12
-     ?Subroutine58                     9
-     zdo_MTCB_MatchActiveEPRspCB     124
-     ?Subroutine21                    12
-     ?Subroutine40                    10
-     ?Subroutine26                    14
-     zdo_MTCB_BindRspCB                3
-     ?Subroutine74                    11
-     ?Subroutine3                     28
-     ?Subroutine60                    13
-     ?Subroutine73                     6
-     ?Subroutine55                     9
-     ?Subroutine52                    12
-     zdo_MTCB_MgmtLqiRspCB           118
-     ?Subroutine44                     7
-     ?Subroutine37                    24
-     ?Subroutine31                    16
-     ?Subroutine10                    11
-     ?Subroutine0                     42
-     ?Subroutine49                    10
-     zdo_MTCB_MgmtNwkDiscRspCB       144
-     ?Subroutine18                     9
-     zdo_MTCB_MgmtRtgRspCB           197
-     ?Subroutine19                     4
-     zdo_MTCB_MgmtBindRspCB          186
-     ?Subroutine41                    17
-     zdo_MTCB_MgmtDirectJoinRspCB     31
-     zdo_MTCB_MgmtLeaveRspCB           2
-     zdo_MTCB_MgmtPermitJoinRspCB      0
-     zdo_MTCB_UserDescRspCB          126
-     zdo_MTCB_UserDescConfCB           3
-     zdo_MTCB_ServerDiscRspCB         53
-     MT_ZdoRsp                       180
-     __Constant_0                      4
-     ?<Initializer for __Constant_0>
-                                       4
-     ??MT_ZdoCommandProcessing?relay
-                                       6
-     ??zdo_MT_CopyRevExtAddr?relay     6
-     ??zdo_MT_MakeExtAddr?relay        6
-     ??zdo_MTCB_NwkIEEEAddrRspCB?relay
-                                       6
-     ??zdo_MTCB_NodeDescRspCB?relay    6
-     ??zdo_MTCB_PowerDescRspCB?relay
-                                       6
-     ??zdo_MTCB_SimpleDescRspCB?relay
-                                       6
-     ??zdo_MTCB_MatchActiveEPRspCB?relay
-                                       6
-     ??zdo_MTCB_BindRspCB?relay        6
-     ??zdo_MTCB_MgmtLqiRspCB?relay     6
-     ??zdo_MTCB_MgmtNwkDiscRspCB?relay
-                                       6
-     ??zdo_MTCB_MgmtRtgRspCB?relay     6
-     ??zdo_MTCB_MgmtBindRspCB?relay    6
-     ??zdo_MTCB_MgmtDirectJoinRspCB?relay
-                                       6
-     ??zdo_MTCB_MgmtLeaveRspCB?relay
-                                       6
-     ??zdo_MTCB_MgmtPermitJoinRspCB?relay
-                                       6
-     ??zdo_MTCB_UserDescRspCB?relay    6
-     ??zdo_MTCB_UserDescConfCB?relay
-                                       6
-     ??zdo_MTCB_ServerDiscRspCB?relay
-                                       6
-     ??MT_ZdoRsp?relay                 6
 
  
- 3 899 bytes in segment BANKED_CODE
-   120 bytes in segment BANK_RELAYS
-   140 bytes in segment CODE_C
-     4 bytes in segment XDATA_I
-     4 bytes in segment XDATA_ID
-   104 bytes in segment XDATA_Z
  
- 4 159 bytes of CODE  memory (+ 4 bytes shared)
-   104 bytes of XDATA memory (+ 4 bytes shared)
+ 0 bytes of memory
 
 Errors: none
 Warnings: none

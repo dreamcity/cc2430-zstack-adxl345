@@ -1,0 +1,1863 @@
+###############################################################################
+#                                                                             #
+# IAR 8051 C/C++ Compiler V7.30B/W32                    06/Jan/2013  19:22:36 #
+# Copyright 2004-2007 IAR Systems. All rights reserved.                       #
+#                                                                             #
+#    Core               =  plain                                              #
+#    Code model         =  banked                                             #
+#    Data model         =  large                                              #
+#    Calling convention =  xdata reentrant                                    #
+#    Constant location  =  data                                               #
+#    Dptr setup         =  1,16                                               #
+#    Source file        =  C:\Texas Instruments\ZStack-1.4.3-1.2.1\Projects\z #
+#                          stack\Samples\AXDApp\Drivers\adxl345.c             #
+#    Command line       =  -f "C:\Texas Instruments\ZStack-1.4.3-1.2.1\Projec #
+#                          ts\zstack\Samples\AXDApp\CC2430DB\..\..\..\Tools\C #
+#                          C2430DB\f8wEndev.cfg" (-DCPU32MHZ                  #
+#                          -DFORCE_MAC_NEAR -DROOT=__near_func                #
+#                          -DMAC_OPT_FFD=0 -DBLINK_LEDS "-DCONST=const        #
+#                          __code" -DGENERIC=__generic) -f "C:\Texas          #
+#                          Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\Sam #
+#                          ples\AXDApp\CC2430DB\..\..\..\Tools\CC2430DB\f8wCo #
+#                          nfig.cfg" (-DSECURE=0 -DDEFAULT_CHANLIST=0x0000080 #
+#                          0 -DZDAPP_CONFIG_PAN_ID=0xFFFF                     #
+#                          -DNWK_START_DELAY=100 -DEXTENDED_JOINING_RANDOM_MA #
+#                          SK=0x007F -DBEACON_REQUEST_DELAY=100               #
+#                          -DBEACON_REQ_DELAY_MASK=0x00FF                     #
+#                          -DROUTE_EXPIRY_TIME=30 -DAPSC_ACK_WAIT_DURATION_PO #
+#                          LLED=3000 -DNWK_INDIRECT_MSG_TIMEOUT=7             #
+#                          -DMAX_RREQ_ENTRIES=10 -DAPSC_MAX_FRAME_RETRIES=3   #
+#                          -DNWK_MAX_DATA_RETRIES=2                           #
+#                          -DMAX_POLL_FAILURE_RETRIES=2 -DMAX_BCAST=9         #
+#                          -DAPS_MAX_GROUPS=16 -DMAX_RTG_ENTRIES=20           #
+#                          -DNWK_MAX_BINDING_ENTRIES=10                       #
+#                          -DMAX_BINDING_CLUSTER_IDS=5 "-DDEFAULT_KEY={0x01,  #
+#                          0x03, 0x05, 0x07, 0x09, 0x0B, 0x0D, 0x0F, 0x00,    #
+#                          0x02, 0x04, 0x06, 0x08, 0x0A, 0x0C, 0x0D}"         #
+#                          -DRFD_RCVC_ALWAYS_ON=FALSE -DPOLL_RATE=1000        #
+#                          -DQUEUED_POLL_RATE=100 -DRESPONSE_POLL_RATE=100)   #
+#                          -DREJOIN_POLL_RATE=440 "C:\Texas                   #
+#                          Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\Sam #
+#                          ples\AXDApp\Drivers\adxl345.c" -D CC2430EB -D      #
+#                          AXD_END2 -D NWK_AUTO_POLL -D REFLECTOR -D          #
+#                          xZTOOL_P1 -D xMT_TASK -D xMT_ZDO_FUNC -D           #
+#                          xLCD_SUPPORTED=DEBUG -D xPOWER_SAVING -lC          #
+#                          "C:\Texas Instruments\ZStack-1.4.3-1.2.1\Projects\ #
+#                          zstack\Samples\AXDApp\CC2430DB\ENDDevice2EB\List\" #
+#                           -lA "C:\Texas Instruments\ZStack-1.4.3-1.2.1\Proj #
+#                          ects\zstack\Samples\AXDApp\CC2430DB\ENDDevice2EB\L #
+#                          ist\" --diag_suppress Pe001,Pa010 --diag_remark    #
+#                          pe550 -o "C:\Texas Instruments\ZStack-1.4.3-1.2.1\ #
+#                          Projects\zstack\Samples\AXDApp\CC2430DB\ENDDevice2 #
+#                          EB\Obj\" -e --require_prototypes -z2 --no_cse      #
+#                          --no_unroll --no_inline --no_code_motion           #
+#                          --no_tbaa --debug --core=plain --dptr=16,1         #
+#                          --data_model=large --code_model=banked             #
+#                          --calling_convention=xdata_reentrant               #
+#                          --place_constants=data --nr_virtual_regs 8 -I      #
+#                          "C:\Texas Instruments\ZStack-1.4.3-1.2.1\Projects\ #
+#                          zstack\Samples\AXDApp\CC2430DB\" -I "C:\Texas      #
+#                          Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\Sam #
+#                          ples\AXDApp\CC2430DB\..\SOURCE\" -I "C:\Texas      #
+#                          Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\Sam #
+#                          ples\AXDApp\CC2430DB\..\Drivers\" -I "C:\Texas     #
+#                          Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\Sam #
+#                          ples\AXDApp\CC2430DB\..\..\..\ZMAIN\TI2430DB\" -I  #
+#                          "C:\Texas Instruments\ZStack-1.4.3-1.2.1\Projects\ #
+#                          zstack\Samples\AXDApp\CC2430DB\..\..\..\..\..\COMP #
+#                          ONENTS\MT\" -I "C:\Texas                           #
+#                          Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\Sam #
+#                          ples\AXDApp\CC2430DB\..\..\..\..\..\COMPONENTS\HAL #
+#                          \INCLUDE\" -I "C:\Texas Instruments\ZStack-1.4.3-1 #
+#                          .2.1\Projects\zstack\Samples\AXDApp\CC2430DB\..\.. #
+#                          \..\..\..\COMPONENTS\HAL\TARGET\CC2430EB\" -I      #
+#                          "C:\Texas Instruments\ZStack-1.4.3-1.2.1\Projects\ #
+#                          zstack\Samples\AXDApp\CC2430DB\..\..\..\..\..\COMP #
+#                          ONENTS\OSAL\MCU\CCSOC\" -I "C:\Texas               #
+#                          Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\Sam #
+#                          ples\AXDApp\CC2430DB\..\..\..\..\..\COMPONENTS\OSA #
+#                          L\INCLUDE\" -I "C:\Texas                           #
+#                          Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\Sam #
+#                          ples\AXDApp\CC2430DB\..\..\..\..\..\COMPONENTS\STA #
+#                          CK\AF\" -I "C:\Texas Instruments\ZStack-1.4.3-1.2. #
+#                          1\Projects\zstack\Samples\AXDApp\CC2430DB\..\..\.. #
+#                          \..\..\COMPONENTS\STACK\NWK\" -I "C:\Texas         #
+#                          Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\Sam #
+#                          ples\AXDApp\CC2430DB\..\..\..\..\..\COMPONENTS\STA #
+#                          CK\SEC\" -I "C:\Texas Instruments\ZStack-1.4.3-1.2 #
+#                          .1\Projects\zstack\Samples\AXDApp\CC2430DB\..\..\. #
+#                          .\..\..\COMPONENTS\STACK\SYS\" -I "C:\Texas        #
+#                          Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\Sam #
+#                          ples\AXDApp\CC2430DB\..\..\..\..\..\COMPONENTS\STA #
+#                          CK\ZDO\" -I "C:\Texas Instruments\ZStack-1.4.3-1.2 #
+#                          .1\Projects\zstack\Samples\AXDApp\CC2430DB\..\..\. #
+#                          .\..\..\COMPONENTS\ZMAC\F8W\" -I "C:\Texas         #
+#                          Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\Sam #
+#                          ples\AXDApp\CC2430DB\..\..\..\..\..\COMPONENTS\ZMA #
+#                          C\" -I "C:\Texas Instruments\ZStack-1.4.3-1.2.1\Pr #
+#                          ojects\zstack\Samples\AXDApp\CC2430DB\..\..\..\..\ #
+#                          ..\COMPONENTS\SERVICES\SADDR\" -I "C:\Texas        #
+#                          Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\Sam #
+#                          ples\AXDApp\CC2430DB\..\..\..\..\..\COMPONENTS\SER #
+#                          VICES\SDATA\" -I "C:\Texas                         #
+#                          Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\Sam #
+#                          ples\AXDApp\CC2430DB\..\..\..\..\..\COMPONENTS\MAC #
+#                          \INCLUDE\" -I "C:\Texas Instruments\ZStack-1.4.3-1 #
+#                          .2.1\Projects\zstack\Samples\AXDApp\CC2430DB\..\.. #
+#                          \..\..\..\COMPONENTS\MAC\HIGH_LEVEL\" -I           #
+#                          "C:\Texas Instruments\ZStack-1.4.3-1.2.1\Projects\ #
+#                          zstack\Samples\AXDApp\CC2430DB\..\..\..\..\..\COMP #
+#                          ONENTS\MAC\LOW_LEVEL\SRF03\" -I "C:\Texas          #
+#                          Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\Sam #
+#                          ples\AXDApp\CC2430DB\..\..\..\..\..\COMPONENTS\MAC #
+#                          \LOW_LEVEL\SRF03\SINGLE_CHIP\" -I "C:\Program      #
+#                          Files\IAR Systems\Embedded Workbench 4.0           #
+#                          Evaluation version\8051\INC\" -I "C:\Program       #
+#                          Files\IAR Systems\Embedded Workbench 4.0           #
+#                          Evaluation version\8051\INC\CLIB\"                 #
+#    List file          =  C:\Texas Instruments\ZStack-1.4.3-1.2.1\Projects\z #
+#                          stack\Samples\AXDApp\CC2430DB\ENDDevice2EB\List\ad #
+#                          xl345.lst                                          #
+#    Object file        =  C:\Texas Instruments\ZStack-1.4.3-1.2.1\Projects\z #
+#                          stack\Samples\AXDApp\CC2430DB\ENDDevice2EB\Obj\adx #
+#                          l345.r51                                           #
+#                                                                             #
+#                                                                             #
+###############################################################################
+
+C:\Texas Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\Samples\AXDApp\Drivers\adxl345.c
+      1          #include <ioCC2430.h>
+
+   \                                 In  segment SFR_AN, at 0x90
+   \   union <unnamed> volatile __sfr _A_P1
+   \                     _A_P1:
+   \   000000                DS 1
+
+   \                                 In  segment SFR_AN, at 0xfe
+   \   unsigned char volatile __sfr P1DIR
+   \                     P1DIR:
+   \   000000                DS 1
+      2          #include <string.h>
+      3          #include <math.h>
+      4          #include <stdio.h>
+      5          #include "adxl345.h"
+      6          //#include "LCD3310.h"
+      7          #define SCL     P1_2   
+      8          #define SDA     P1_3
+      9          
+     10          #define SDADirOut P1DIR|=0x08;      //xxxx1M01
+     11          #define SDADirIn  P1DIR&=~0x08;
+     12          
+     13          #define TRUE 1
+     14          #define FALSE 0
+     15          #define	SlaveAddress 0xA6 //定义器件在IIC总线中的从地址,根据ALT  ADDRESS地址引脚不同修改
+     16          
+
+   \                                 In  segment XDATA_Z, align 1, keep-with-next
+     17          INT8U BUFFER[8];
+   \                     BUFFER:
+   \   000000                DS 8
+   \   000008                REQUIRE __INIT_XDATA_Z
+
+   \                                 In  segment XDATA_Z, align 1, keep-with-next
+     18          int  dis_data;
+   \                     dis_data:
+   \   000000                DS 2
+   \   000002                REQUIRE __INIT_XDATA_Z
+     19          
+
+   \                                 In  segment XDATA_Z, align 1, keep-with-next
+     20          char wan,qian,bai,shi,ge;
+   \                     wan:
+   \   000000                DS 1
+   \   000001                REQUIRE __INIT_XDATA_Z
+
+   \                                 In  segment XDATA_Z, align 1, keep-with-next
+   \                     qian:
+   \   000000                DS 1
+   \   000001                REQUIRE __INIT_XDATA_Z
+
+   \                                 In  segment XDATA_Z, align 1, keep-with-next
+   \                     bai:
+   \   000000                DS 1
+   \   000001                REQUIRE __INIT_XDATA_Z
+
+   \                                 In  segment XDATA_Z, align 1, keep-with-next
+   \                     shi:
+   \   000000                DS 1
+   \   000001                REQUIRE __INIT_XDATA_Z
+
+   \                                 In  segment XDATA_Z, align 1, keep-with-next
+   \                     `ge`:
+   \   000000                DS 1
+   \   000001                REQUIRE __INIT_XDATA_Z
+     21          
+     22          void initUARTtest(void);
+     23          void UartTX_Send_String(char *Data,int len);
+     24          void conversion(INT16U temp_data);
+     25          
+     26          void Sendack(unsigned char h);
+     27          unsigned char I2C_Check_ack();
+     28          
+     29          void I2C_Start_1(void);
+     30          void I2C_Stop_1(void);
+     31          
+     32          void WriteI2CByte_1(INT8U b);
+     33          unsigned char ReadI2CByte_1(void);
+     34          
+     35          unsigned char Single_Read_ADXL345(INT8U REG_Address);
+     36          void Single_Write_ADXL345(INT8U REG_Address,INT8U REG_data);
+     37          
+     38          void Init_ADXL345();
+     39          
+     40          void Delay_1u(unsigned int microSecs);
+     41          void Delay(INT16U n);
+     42          
+     43          INT8U I2C_Check_ack(void);
+     44          
+     45          
+     46          void Multiple_Read_ADXL345(void);
+     47          
+
+   \                                 In  segment BANKED_CODE, align 1, keep-with-next
+     48          void Delay(INT16U n)      //(5/32)*n   us
+   \                     Delay:
+     49          {
+   \   000000                ; Saved register size: 0
+   \   000000                ; Auto size: 0
+     50          	INT16U d;
+     51          	for(d=0;d<n;d++);
+   \   000000   7800         MOV     R0,#0x0
+   \   000002   7900         MOV     R1,#0x0
+   \                     ??Delay_0:
+   \   000004   C3           CLR     C
+   \   000005   E8           MOV     A,R0
+   \   000006   9A           SUBB    A,R2
+   \   000007   E9           MOV     A,R1
+   \   000008   9B           SUBB    A,R3
+   \   000009   500A         JNC     ??Delay_1
+   \   00000B   E8           MOV     A,R0
+   \   00000C   2401         ADD     A,#0x1
+   \   00000E   F8           MOV     R0,A
+   \   00000F   E9           MOV     A,R1
+   \   000010   3400         ADDC    A,#0x0
+   \   000012   F9           MOV     R1,A
+   \   000013   80EF         SJMP    ??Delay_0
+     52          	for(d=0;d<n;d++);
+   \                     ??Delay_1:
+   \   000015   7800         MOV     R0,#0x0
+   \   000017   7900         MOV     R1,#0x0
+   \                     ??Delay_2:
+   \   000019   C3           CLR     C
+   \   00001A   E8           MOV     A,R0
+   \   00001B   9A           SUBB    A,R2
+   \   00001C   E9           MOV     A,R1
+   \   00001D   9B           SUBB    A,R3
+   \   00001E   500A         JNC     ??Delay_3
+   \   000020   E8           MOV     A,R0
+   \   000021   2401         ADD     A,#0x1
+   \   000023   F8           MOV     R0,A
+   \   000024   E9           MOV     A,R1
+   \   000025   3400         ADDC    A,#0x0
+   \   000027   F9           MOV     R1,A
+   \   000028   80EF         SJMP    ??Delay_2
+     53          	for(d=0;d<n;d++);
+   \                     ??Delay_3:
+   \   00002A   7800         MOV     R0,#0x0
+   \   00002C   7900         MOV     R1,#0x0
+   \                     ??Delay_4:
+   \   00002E   C3           CLR     C
+   \   00002F   E8           MOV     A,R0
+   \   000030   9A           SUBB    A,R2
+   \   000031   E9           MOV     A,R1
+   \   000032   9B           SUBB    A,R3
+   \   000033   500A         JNC     ??Delay_5
+   \   000035   E8           MOV     A,R0
+   \   000036   2401         ADD     A,#0x1
+   \   000038   F8           MOV     R0,A
+   \   000039   E9           MOV     A,R1
+   \   00003A   3400         ADDC    A,#0x0
+   \   00003C   F9           MOV     R1,A
+   \   00003D   80EF         SJMP    ??Delay_4
+     54          	for(d=0;d<n;d++);
+   \                     ??Delay_5:
+   \   00003F   7800         MOV     R0,#0x0
+   \   000041   7900         MOV     R1,#0x0
+   \                     ??Delay_6:
+   \   000043   C3           CLR     C
+   \   000044   E8           MOV     A,R0
+   \   000045   9A           SUBB    A,R2
+   \   000046   E9           MOV     A,R1
+   \   000047   9B           SUBB    A,R3
+   \   000048   500A         JNC     ??Delay_7
+   \   00004A   E8           MOV     A,R0
+   \   00004B   2401         ADD     A,#0x1
+   \   00004D   F8           MOV     R0,A
+   \   00004E   E9           MOV     A,R1
+   \   00004F   3400         ADDC    A,#0x0
+   \   000051   F9           MOV     R1,A
+   \   000052   80EF         SJMP    ??Delay_6
+     55          	for(d=0;d<n;d++);
+   \                     ??Delay_7:
+   \   000054   7800         MOV     R0,#0x0
+   \   000056   7900         MOV     R1,#0x0
+   \                     ??Delay_8:
+   \   000058   C3           CLR     C
+   \   000059   E8           MOV     A,R0
+   \   00005A   9A           SUBB    A,R2
+   \   00005B   E9           MOV     A,R1
+   \   00005C   9B           SUBB    A,R3
+   \   00005D   500A         JNC     ??Delay_9
+   \   00005F   E8           MOV     A,R0
+   \   000060   2401         ADD     A,#0x1
+   \   000062   F8           MOV     R0,A
+   \   000063   E9           MOV     A,R1
+   \   000064   3400         ADDC    A,#0x0
+   \   000066   F9           MOV     R1,A
+   \   000067   80EF         SJMP    ??Delay_8
+     56          }
+   \                     ??Delay_9:
+   \   000069   02....       LJMP    ?BRET
+     57          
+
+   \                                 In  segment BANKED_CODE, align 1, keep-with-next
+     58          void Delay_1u(unsigned int microSecs) {
+   \                     Delay_1u:
+   \   000000                ; Saved register size: 0
+   \   000000                ; Auto size: 0
+     59            while(microSecs--)
+   \                     ??Delay_1u_0:
+   \   000000   EA           MOV     A,R2
+   \   000001   F8           MOV     R0,A
+   \   000002   EB           MOV     A,R3
+   \   000003   F9           MOV     R1,A
+   \   000004   74FF         MOV     A,#-0x1
+   \   000006   28           ADD     A,R0
+   \   000007   FA           MOV     R2,A
+   \   000008   74FF         MOV     A,#-0x1
+   \   00000A   39           ADDC    A,R1
+   \   00000B   FB           MOV     R3,A
+   \   00000C   7400         MOV     A,#0x0
+   \   00000E   68           XRL     A,R0
+   \   00000F   7003         JNZ     ??Delay_1u_1
+   \   000011   7400         MOV     A,#0x0
+   \   000013   69           XRL     A,R1
+   \                     ??Delay_1u_1:
+   \   000014   6022         JZ      ??Delay_1u_2
+     60            {
+     61              /* 32 NOPs == 1 usecs */
+     62              asm("nop"); asm("nop"); asm("nop"); asm("nop"); asm("nop");
+   \   000016   00           nop
+   \   000017   00           nop
+   \   000018   00           nop
+   \   000019   00           nop
+   \   00001A   00           nop
+     63              asm("nop"); asm("nop"); asm("nop"); asm("nop"); asm("nop");
+   \   00001B   00           nop
+   \   00001C   00           nop
+   \   00001D   00           nop
+   \   00001E   00           nop
+   \   00001F   00           nop
+     64              asm("nop"); asm("nop"); asm("nop"); asm("nop"); asm("nop");
+   \   000020   00           nop
+   \   000021   00           nop
+   \   000022   00           nop
+   \   000023   00           nop
+   \   000024   00           nop
+     65              asm("nop"); asm("nop"); asm("nop"); asm("nop"); asm("nop");
+   \   000025   00           nop
+   \   000026   00           nop
+   \   000027   00           nop
+   \   000028   00           nop
+   \   000029   00           nop
+     66              asm("nop"); asm("nop"); asm("nop"); asm("nop"); asm("nop");
+   \   00002A   00           nop
+   \   00002B   00           nop
+   \   00002C   00           nop
+   \   00002D   00           nop
+   \   00002E   00           nop
+     67              asm("nop"); asm("nop"); asm("nop"); asm("nop"); asm("nop");
+   \   00002F   00           nop
+   \   000030   00           nop
+   \   000031   00           nop
+   \   000032   00           nop
+   \   000033   00           nop
+     68              asm("nop"); asm("nop");
+   \   000034   00           nop
+   \   000035   00           nop
+   \   000036   80C8         SJMP    ??Delay_1u_0
+     69            }
+     70          }
+   \                     ??Delay_1u_2:
+   \   000038   02....       LJMP    ?BRET
+     71          
+
+   \                                 In  segment BANKED_CODE, align 1, keep-with-next
+     72          void conversion(INT16U temp_data)   
+   \                     conversion:
+     73          {   
+   \   000000   74F6         MOV     A,#-0xa
+   \   000002   12....       LCALL   ?BANKED_ENTER_XDATA
+   \   000005                ; Saved register size: 10
+   \   000005                ; Auto size: 0
+   \   000005   EA           MOV     A,R2
+   \   000006   FC           MOV     R4,A
+   \   000007   EB           MOV     A,R3
+   \   000008   FD           MOV     R5,A
+     74              wan=temp_data/10000; 
+   \   000009   EC           MOV     A,R4
+   \   00000A   F8           MOV     R0,A
+   \   00000B   ED           MOV     A,R5
+   \   00000C   F9           MOV     R1,A
+   \   00000D   7A10         MOV     R2,#0x10
+   \   00000F   7B27         MOV     R3,#0x27
+   \   000011   12....       LCALL   ?US_DIV_MOD
+   \   000014   E8           MOV     A,R0
+   \   000015   90....       MOV     DPTR,#wan
+   \   000018   F0           MOVX    @DPTR,A
+     75              temp_data=temp_data%10000;   //取余运算 
+   \   000019   EC           MOV     A,R4
+   \   00001A   F8           MOV     R0,A
+   \   00001B   ED           MOV     A,R5
+   \   00001C   F9           MOV     R1,A
+   \   00001D   7A10         MOV     R2,#0x10
+   \   00001F   7B27         MOV     R3,#0x27
+   \   000021   12....       LCALL   ?US_DIV_MOD
+   \   000024   8A..         MOV     ?V0 + 0,R2
+   \   000026   8B..         MOV     ?V0 + 1,R3
+   \   000028   AC..         MOV     R4,?V0 + 0
+   \   00002A   AD..         MOV     R5,?V0 + 1
+     76          	qian=temp_data/1000; 
+   \   00002C   EC           MOV     A,R4
+   \   00002D   F8           MOV     R0,A
+   \   00002E   ED           MOV     A,R5
+   \   00002F   F9           MOV     R1,A
+   \   000030   7AE8         MOV     R2,#-0x18
+   \   000032   7B03         MOV     R3,#0x3
+   \   000034   12....       LCALL   ?US_DIV_MOD
+   \   000037   E8           MOV     A,R0
+   \   000038   90....       MOV     DPTR,#qian
+   \   00003B   F0           MOVX    @DPTR,A
+     77              temp_data=temp_data%1000;    //取余运算 
+   \   00003C   EC           MOV     A,R4
+   \   00003D   F8           MOV     R0,A
+   \   00003E   ED           MOV     A,R5
+   \   00003F   F9           MOV     R1,A
+   \   000040   7AE8         MOV     R2,#-0x18
+   \   000042   7B03         MOV     R3,#0x3
+   \   000044   12....       LCALL   ?US_DIV_MOD
+   \   000047   8A..         MOV     ?V0 + 0,R2
+   \   000049   8B..         MOV     ?V0 + 1,R3
+   \   00004B   AC..         MOV     R4,?V0 + 0
+   \   00004D   AD..         MOV     R5,?V0 + 1
+     78              bai=temp_data/100; 
+   \   00004F   EC           MOV     A,R4
+   \   000050   F8           MOV     R0,A
+   \   000051   ED           MOV     A,R5
+   \   000052   F9           MOV     R1,A
+   \   000053   7A64         MOV     R2,#0x64
+   \   000055   7B00         MOV     R3,#0x0
+   \   000057   12....       LCALL   ?US_DIV_MOD
+   \   00005A   E8           MOV     A,R0
+   \   00005B   90....       MOV     DPTR,#bai
+   \   00005E   F0           MOVX    @DPTR,A
+     79              temp_data=temp_data%100;     //取余运算 
+   \   00005F   EC           MOV     A,R4
+   \   000060   F8           MOV     R0,A
+   \   000061   ED           MOV     A,R5
+   \   000062   F9           MOV     R1,A
+   \   000063   7A64         MOV     R2,#0x64
+   \   000065   7B00         MOV     R3,#0x0
+   \   000067   12....       LCALL   ?US_DIV_MOD
+   \   00006A   8A..         MOV     ?V0 + 0,R2
+   \   00006C   8B..         MOV     ?V0 + 1,R3
+   \   00006E   AC..         MOV     R4,?V0 + 0
+   \   000070   AD..         MOV     R5,?V0 + 1
+     80              shi=temp_data/10; 
+   \   000072   EC           MOV     A,R4
+   \   000073   F8           MOV     R0,A
+   \   000074   ED           MOV     A,R5
+   \   000075   F9           MOV     R1,A
+   \   000076   7A0A         MOV     R2,#0xa
+   \   000078   7B00         MOV     R3,#0x0
+   \   00007A   12....       LCALL   ?US_DIV_MOD
+   \   00007D   E8           MOV     A,R0
+   \   00007E   90....       MOV     DPTR,#shi
+   \   000081   F0           MOVX    @DPTR,A
+     81              temp_data=temp_data%10;      //取余运算 
+   \   000082   EC           MOV     A,R4
+   \   000083   F8           MOV     R0,A
+   \   000084   ED           MOV     A,R5
+   \   000085   F9           MOV     R1,A
+   \   000086   7A0A         MOV     R2,#0xa
+   \   000088   7B00         MOV     R3,#0x0
+   \   00008A   12....       LCALL   ?US_DIV_MOD
+   \   00008D   8A..         MOV     ?V0 + 0,R2
+     82              ge=temp_data; 	
+   \   00008F   E5..         MOV     A,?V0 + 0
+   \   000091   90....       MOV     DPTR,#`ge`
+   \   000094   F0           MOVX    @DPTR,A
+     83          } 
+   \   000095   7F02         MOV     R7,#0x2
+   \   000097   02....       LJMP    ?BANKED_LEAVE_XDATA
+     84          
+
+   \                                 In  segment BANKED_CODE, align 1, keep-with-next
+     85          void I2C_Start_1(void)
+   \                     I2C_Start_1:
+     86              {
+   \   000000   C082         PUSH    DPL
+   \   000002   C083         PUSH    DPH
+   \   000004                ; Saved register size: 2
+   \   000004                ; Auto size: 0
+     87                  /*启动I2C总线的函数，当SCL为高电平时使SDA产生一个负跳变*/
+     88                  SDADirOut;
+   \   000004   43FE08       ORL     0xfe,#0x8
+     89                  Delay_1u(1); 
+   \   000007                ; Setup parameters for call to function Delay_1u
+   \   000007   7A01         MOV     R2,#0x1
+   \   000009   7B00         MOV     R3,#0x0
+   \   00000B   12....       LCALL   ??Delay_1u?relay
+     90                  SDA=1;
+   \   00000E   D293         SETB    0x90.3
+     91                  SCL=1;
+   \   000010   D292         SETB    0x90.2
+     92                  Delay_1u(5);
+   \   000012                ; Setup parameters for call to function Delay_1u
+   \   000012   7A05         MOV     R2,#0x5
+   \   000014   7B00         MOV     R3,#0x0
+   \   000016   12....       LCALL   ??Delay_1u?relay
+     93                  SDA=0;
+   \   000019   C293         CLR     0x90.3
+     94                  Delay_1u(5);
+   \   00001B                ; Setup parameters for call to function Delay_1u
+   \   00001B   7A05         MOV     R2,#0x5
+   \   00001D   7B00         MOV     R3,#0x0
+   \   00001F   12....       LCALL   ??Delay_1u?relay
+     95                  SCL=0;
+   \   000022   C292         CLR     0x90.2
+     96                  Delay_1u(5);
+   \   000024                ; Setup parameters for call to function Delay_1u
+   \   000024   7A05         MOV     R2,#0x5
+   \   000026   7B00         MOV     R3,#0x0
+   \   000028   12....       LCALL   ??Delay_1u?relay
+     97              }
+   \   00002B   D083         POP     DPH
+   \   00002D   D082         POP     DPL
+   \   00002F   02....       LJMP    ?BRET
+   \   000032                REQUIRE _A_P1
+   \   000032                REQUIRE P1DIR
+     98          
+
+   \                                 In  segment BANKED_CODE, align 1, keep-with-next
+     99              void I2C_Stop_1(void)
+   \                     I2C_Stop_1:
+    100              {
+   \   000000   C082         PUSH    DPL
+   \   000002   C083         PUSH    DPH
+   \   000004                ; Saved register size: 2
+   \   000004                ; Auto size: 0
+    101                  /*终止I2C总线，当SCL为高电平时使SDA产生一个正跳变*/
+    102                  SCL=0;
+   \   000004   C292         CLR     0x90.2
+    103                  Delay_1u(1);
+   \   000006                ; Setup parameters for call to function Delay_1u
+   \   000006   7A01         MOV     R2,#0x1
+   \   000008   7B00         MOV     R3,#0x0
+   \   00000A   12....       LCALL   ??Delay_1u?relay
+    104                  SDADirOut;
+   \   00000D   43FE08       ORL     0xfe,#0x8
+    105                  Delay_1u(1);
+   \   000010                ; Setup parameters for call to function Delay_1u
+   \   000010   7A01         MOV     R2,#0x1
+   \   000012   7B00         MOV     R3,#0x0
+   \   000014   12....       LCALL   ??Delay_1u?relay
+    106                  SDA=0;
+   \   000017   C293         CLR     0x90.3
+    107                  Delay_1u(5);
+   \   000019                ; Setup parameters for call to function Delay_1u
+   \   000019   7A05         MOV     R2,#0x5
+   \   00001B   7B00         MOV     R3,#0x0
+   \   00001D   12....       LCALL   ??Delay_1u?relay
+    108                  SCL=1;
+   \   000020   D292         SETB    0x90.2
+    109                  Delay_1u(5);
+   \   000022                ; Setup parameters for call to function Delay_1u
+   \   000022   7A05         MOV     R2,#0x5
+   \   000024   7B00         MOV     R3,#0x0
+   \   000026   12....       LCALL   ??Delay_1u?relay
+    110                  SDA=1;
+   \   000029   D293         SETB    0x90.3
+    111                  Delay_1u(5);
+   \   00002B                ; Setup parameters for call to function Delay_1u
+   \   00002B   7A05         MOV     R2,#0x5
+   \   00002D   7B00         MOV     R3,#0x0
+   \   00002F   12....       LCALL   ??Delay_1u?relay
+    112              }
+   \   000032   D083         POP     DPH
+   \   000034   D082         POP     DPL
+   \   000036   02....       LJMP    ?BRET
+   \   000039                REQUIRE _A_P1
+   \   000039                REQUIRE P1DIR
+    113          
+
+   \                                 In  segment BANKED_CODE, align 1, keep-with-next
+    114          void Sendack(unsigned char h){
+   \                     Sendack:
+   \   000000   74F7         MOV     A,#-0x9
+   \   000002   12....       LCALL   ?BANKED_ENTER_XDATA
+   \   000005                ; Saved register size: 9
+   \   000005                ; Auto size: 0
+   \   000005   E9           MOV     A,R1
+   \   000006   FE           MOV     R6,A
+    115                  SCL=0;
+   \   000007   C292         CLR     0x90.2
+    116                  Delay_1u(5);
+   \   000009                ; Setup parameters for call to function Delay_1u
+   \   000009   7A05         MOV     R2,#0x5
+   \   00000B   7B00         MOV     R3,#0x0
+   \   00000D   12....       LCALL   ??Delay_1u?relay
+    117                  SDADirOut;
+   \   000010   43FE08       ORL     0xfe,#0x8
+    118                  Delay(5);
+   \   000013                ; Setup parameters for call to function Delay
+   \   000013   7A05         MOV     R2,#0x5
+   \   000015   7B00         MOV     R3,#0x0
+   \   000017   12....       LCALL   ??Delay?relay
+    119                  SDA=h&0x01;
+   \   00001A   EE           MOV     A,R6
+   \   00001B   A2E0         MOV     C,0xE0 /* A   */.0
+   \   00001D   9293         MOV     0x90.3,C
+    120                  Delay_1u(5);
+   \   00001F                ; Setup parameters for call to function Delay_1u
+   \   00001F   7A05         MOV     R2,#0x5
+   \   000021   7B00         MOV     R3,#0x0
+   \   000023   12....       LCALL   ??Delay_1u?relay
+    121                  SCL=1;
+   \   000026   D292         SETB    0x90.2
+    122                  Delay_1u(5);
+   \   000028                ; Setup parameters for call to function Delay_1u
+   \   000028   7A05         MOV     R2,#0x5
+   \   00002A   7B00         MOV     R3,#0x0
+   \   00002C   12....       LCALL   ??Delay_1u?relay
+    123                  SCL=0;
+   \   00002F   C292         CLR     0x90.2
+    124                  Delay_1u(5);
+   \   000031                ; Setup parameters for call to function Delay_1u
+   \   000031   7A05         MOV     R2,#0x5
+   \   000033   7B00         MOV     R3,#0x0
+   \   000035   12....       LCALL   ??Delay_1u?relay
+    125              }
+   \   000038   7F01         MOV     R7,#0x1
+   \   00003A   02....       LJMP    ?BANKED_LEAVE_XDATA
+   \   00003D                REQUIRE _A_P1
+   \   00003D                REQUIRE P1DIR
+    126          
+
+   \                                 In  segment BANKED_CODE, align 1, keep-with-next
+    127          INT8U I2C_Check_ack(void){
+   \                     I2C_Check_ack:
+   \   000000   C082         PUSH    DPL
+   \   000002   C083         PUSH    DPH
+   \   000004                ; Saved register size: 2
+   \   000004                ; Auto size: 0
+    128              SCL=0;
+   \   000004   C292         CLR     0x90.2
+    129              Delay_1u(5);
+   \   000006                ; Setup parameters for call to function Delay_1u
+   \   000006   7A05         MOV     R2,#0x5
+   \   000008   7B00         MOV     R3,#0x0
+   \   00000A   12....       LCALL   ??Delay_1u?relay
+    130              SDADirOut;
+   \   00000D   43FE08       ORL     0xfe,#0x8
+    131              SDA=1;
+   \   000010   D293         SETB    0x90.3
+    132              SDADirIn;
+   \   000012   53FEF7       ANL     0xfe,#0xf7
+    133              Delay_1u(5);          //此处是否有必要使SDA先拉高？！？！
+   \   000015                ; Setup parameters for call to function Delay_1u
+   \   000015   7A05         MOV     R2,#0x5
+   \   000017   7B00         MOV     R3,#0x0
+   \   000019   12....       LCALL   ??Delay_1u?relay
+    134              SCL=1;
+   \   00001C   D292         SETB    0x90.2
+    135              Delay_1u(5);
+   \   00001E                ; Setup parameters for call to function Delay_1u
+   \   00001E   7A05         MOV     R2,#0x5
+   \   000020   7B00         MOV     R3,#0x0
+   \   000022   12....       LCALL   ??Delay_1u?relay
+    136              if(SDA==1)
+   \   000025   A293         MOV     C,0x90.3
+   \   000027   5006         JNC     ??I2C_Check_ack_0
+    137              {
+    138                SCL=0;
+   \   000029   C292         CLR     0x90.2
+    139                return 0;  //er
+   \   00002B   7900         MOV     R1,#0x0
+   \   00002D   8004         SJMP    ??I2C_Check_ack_1
+    140              }
+    141              SCL=0;
+   \                     ??I2C_Check_ack_0:
+   \   00002F   C292         CLR     0x90.2
+    142              return 1;
+   \   000031   7901         MOV     R1,#0x1
+   \                     ??I2C_Check_ack_1:
+   \   000033   D083         POP     DPH
+   \   000035   D082         POP     DPL
+   \   000037   02....       LJMP    ?BRET
+   \   00003A                REQUIRE _A_P1
+   \   00003A                REQUIRE P1DIR
+    143          }
+    144          
+    145              
+    146          
+    147          
+
+   \                                 In  segment BANKED_CODE, align 1, keep-with-next
+    148              void WriteI2CByte_1(unsigned char b)
+   \                     WriteI2CByte_1:
+    149              {
+   \   000000   74F7         MOV     A,#-0x9
+   \   000002   12....       LCALL   ?BANKED_ENTER_XDATA
+   \   000005                ; Saved register size: 9
+   \   000005                ; Auto size: 0
+   \   000005   E9           MOV     A,R1
+   \   000006   FE           MOV     R6,A
+    150                  /*向I2C总线写一个字节*/
+    151                  unsigned char e=8;
+   \   000007   7F08         MOV     R7,#0x8
+    152                  SDADirOut;
+   \   000009   43FE08       ORL     0xfe,#0x8
+    153                  while(e--){
+   \                     ??WriteI2CByte_1_0:
+   \   00000C   EF           MOV     A,R7
+   \   00000D   FA           MOV     R2,A
+   \   00000E   74FF         MOV     A,#-0x1
+   \   000010   2A           ADD     A,R2
+   \   000011   FF           MOV     R7,A
+   \   000012   EA           MOV     A,R2
+   \   000013   602A         JZ      ??WriteI2CByte_1_1
+    154                    SCL=0;
+   \   000015   C292         CLR     0x90.2
+    155                    Delay_1u(5);
+   \   000017                ; Setup parameters for call to function Delay_1u
+   \   000017   7A05         MOV     R2,#0x5
+   \   000019   7B00         MOV     R3,#0x0
+   \   00001B   12....       LCALL   ??Delay_1u?relay
+    156                    if(b&0x80)SDA=1;
+   \   00001E   EE           MOV     A,R6
+   \   00001F   A2E7         MOV     C,0xE0 /* A   */.7
+   \   000021   5004         JNC     ??WriteI2CByte_1_2
+   \   000023   D293         SETB    0x90.3
+   \   000025   8002         SJMP    ??WriteI2CByte_1_3
+    157                    else SDA=0;
+   \                     ??WriteI2CByte_1_2:
+   \   000027   C293         CLR     0x90.3
+    158                    b<<=1;
+   \                     ??WriteI2CByte_1_3:
+   \   000029   EE           MOV     A,R6
+   \   00002A   C3           CLR     C
+   \   00002B   33           RLC     A
+   \   00002C   FE           MOV     R6,A
+    159                    Delay_1u(3);
+   \   00002D                ; Setup parameters for call to function Delay_1u
+   \   00002D   7A03         MOV     R2,#0x3
+   \   00002F   7B00         MOV     R3,#0x0
+   \   000031   12....       LCALL   ??Delay_1u?relay
+    160                    SCL=1;
+   \   000034   D292         SETB    0x90.2
+    161                    Delay_1u(5);
+   \   000036                ; Setup parameters for call to function Delay_1u
+   \   000036   7A05         MOV     R2,#0x5
+   \   000038   7B00         MOV     R3,#0x0
+   \   00003A   12....       LCALL   ??Delay_1u?relay
+   \   00003D   80CD         SJMP    ??WriteI2CByte_1_0
+    162                  }
+    163                  SCL=0;
+   \                     ??WriteI2CByte_1_1:
+   \   00003F   C292         CLR     0x90.2
+    164                  I2C_Check_ack();
+   \   000041                ; Setup parameters for call to function I2C_Check_ack
+   \   000041   12....       LCALL   ??I2C_Check_ack?relay
+    165              }
+   \   000044   7F01         MOV     R7,#0x1
+   \   000046   02....       LJMP    ?BANKED_LEAVE_XDATA
+   \   000049                REQUIRE _A_P1
+   \   000049                REQUIRE P1DIR
+    166          
+
+   \                                 In  segment BANKED_CODE, align 1, keep-with-next
+    167          unsigned char ReadI2CByte_1(void)
+   \                     ReadI2CByte_1:
+    168              {
+   \   000000   74F7         MOV     A,#-0x9
+   \   000002   12....       LCALL   ?BANKED_ENTER_XDATA
+   \   000005                ; Saved register size: 9
+   \   000005                ; Auto size: 0
+    169                  /*从I2C总线读一个字节*/
+    170              unsigned char i=8;
+   \   000005   7E08         MOV     R6,#0x8
+    171              unsigned char c=0;
+   \   000007   7F00         MOV     R7,#0x0
+    172              SCL=0;
+   \   000009   C292         CLR     0x90.2
+    173              SDADirOut;
+   \   00000B   43FE08       ORL     0xfe,#0x8
+    174              SDA=1;
+   \   00000E   D293         SETB    0x90.3
+    175              Delay_1u(3);
+   \   000010                ; Setup parameters for call to function Delay_1u
+   \   000010   7A03         MOV     R2,#0x3
+   \   000012   7B00         MOV     R3,#0x0
+   \   000014   12....       LCALL   ??Delay_1u?relay
+    176              SDADirIn;
+   \   000017   53FEF7       ANL     0xfe,#0xf7
+    177              while(i--){
+   \                     ??ReadI2CByte_1_0:
+   \   00001A   EE           MOV     A,R6
+   \   00001B   FA           MOV     R2,A
+   \   00001C   74FF         MOV     A,#-0x1
+   \   00001E   2A           ADD     A,R2
+   \   00001F   FE           MOV     R6,A
+   \   000020   EA           MOV     A,R2
+   \   000021   6028         JZ      ??ReadI2CByte_1_1
+    178                c<<=1;
+   \   000023   EF           MOV     A,R7
+   \   000024   C3           CLR     C
+   \   000025   33           RLC     A
+   \   000026   FF           MOV     R7,A
+    179                SCL=0;
+   \   000027   C292         CLR     0x90.2
+    180                Delay_1u(5);
+   \   000029                ; Setup parameters for call to function Delay_1u
+   \   000029   7A05         MOV     R2,#0x5
+   \   00002B   7B00         MOV     R3,#0x0
+   \   00002D   12....       LCALL   ??Delay_1u?relay
+    181                SCL=1;
+   \   000030   D292         SETB    0x90.2
+    182                Delay_1u(5);
+   \   000032                ; Setup parameters for call to function Delay_1u
+   \   000032   7A05         MOV     R2,#0x5
+   \   000034   7B00         MOV     R3,#0x0
+   \   000036   12....       LCALL   ??Delay_1u?relay
+    183                if(SDA==1)c|=0x01;
+   \   000039   A293         MOV     C,0x90.3
+   \   00003B   5007         JNC     ??ReadI2CByte_1_2
+   \   00003D   D3           SETB    C
+   \   00003E   EF           MOV     A,R7
+   \   00003F   92E0         MOV     0xE0 /* A   */.0,C
+   \   000041   FF           MOV     R7,A
+   \   000042   80D6         SJMP    ??ReadI2CByte_1_0
+    184                else c&=0xfe;
+   \                     ??ReadI2CByte_1_2:
+   \   000044   C3           CLR     C
+   \   000045   EF           MOV     A,R7
+   \   000046   92E0         MOV     0xE0 /* A   */.0,C
+   \   000048   FF           MOV     R7,A
+   \   000049   80CF         SJMP    ??ReadI2CByte_1_0
+    185              }
+    186              SCL=0;
+   \                     ??ReadI2CByte_1_1:
+   \   00004B   C292         CLR     0x90.2
+    187              SDADirOut;
+   \   00004D   43FE08       ORL     0xfe,#0x8
+    188              return c; 
+   \   000050   EF           MOV     A,R7
+   \   000051   F9           MOV     R1,A
+   \   000052   7F01         MOV     R7,#0x1
+   \   000054   02....       LJMP    ?BANKED_LEAVE_XDATA
+   \   000057                REQUIRE _A_P1
+   \   000057                REQUIRE P1DIR
+    189              }
+    190          //******单字节写入******************************************* 
+    191          
+
+   \                                 In  segment BANKED_CODE, align 1, keep-with-next
+    192          void Single_Write_ADXL345(INT8U REG_Address,INT8U REG_data) 
+   \                     Single_Write_ADXL345:
+    193          { 
+   \   000000   74F7         MOV     A,#-0x9
+   \   000002   12....       LCALL   ?BANKED_ENTER_XDATA
+   \   000005                ; Saved register size: 9
+   \   000005                ; Auto size: 0
+   \   000005   E9           MOV     A,R1
+   \   000006   FE           MOV     R6,A
+   \   000007   EA           MOV     A,R2
+   \   000008   FF           MOV     R7,A
+    194              I2C_Start_1();                  //起始信号 
+   \   000009                ; Setup parameters for call to function I2C_Start_1
+   \   000009   12....       LCALL   ??I2C_Start_1?relay
+    195              WriteI2CByte_1(SlaveAddress);   //发送设备地址+写信号 
+   \   00000C                ; Setup parameters for call to function WriteI2CByte_1
+   \   00000C   79A6         MOV     R1,#-0x5a
+   \   00000E   12....       LCALL   ??WriteI2CByte_1?relay
+    196              WriteI2CByte_1(REG_Address);    //内部寄存器地址，请参考中文pdf22页  
+   \   000011                ; Setup parameters for call to function WriteI2CByte_1
+   \   000011   EE           MOV     A,R6
+   \   000012   F9           MOV     R1,A
+   \   000013   12....       LCALL   ??WriteI2CByte_1?relay
+    197              WriteI2CByte_1(REG_data);       //内部寄存器数据，请参考中文pdf22页  
+   \   000016                ; Setup parameters for call to function WriteI2CByte_1
+   \   000016   EF           MOV     A,R7
+   \   000017   F9           MOV     R1,A
+   \   000018   12....       LCALL   ??WriteI2CByte_1?relay
+    198              I2C_Stop_1();                   //发送停止信号 
+   \   00001B                ; Setup parameters for call to function I2C_Stop_1
+   \   00001B   12....       LCALL   ??I2C_Stop_1?relay
+    199          } 
+   \   00001E   7F01         MOV     R7,#0x1
+   \   000020   02....       LJMP    ?BANKED_LEAVE_XDATA
+    200          
+    201          //********单字节读取***************************************** 
+
+   \                                 In  segment BANKED_CODE, align 1, keep-with-next
+    202          unsigned char Single_Read_ADXL345(INT8U REG_Address) 
+   \                     Single_Read_ADXL345:
+    203          {  INT8U REG_data;
+   \   000000   74F7         MOV     A,#-0x9
+   \   000002   12....       LCALL   ?BANKED_ENTER_XDATA
+   \   000005                ; Saved register size: 9
+   \   000005                ; Auto size: 0
+   \   000005   E9           MOV     A,R1
+   \   000006   FE           MOV     R6,A
+    204              I2C_Start_1();                          //起始信号 
+   \   000007                ; Setup parameters for call to function I2C_Start_1
+   \   000007   12....       LCALL   ??I2C_Start_1?relay
+    205              WriteI2CByte_1(SlaveAddress);           //发送设备地址+写信号 
+   \   00000A                ; Setup parameters for call to function WriteI2CByte_1
+   \   00000A   79A6         MOV     R1,#-0x5a
+   \   00000C   12....       LCALL   ??WriteI2CByte_1?relay
+    206              WriteI2CByte_1(REG_Address);                   //发送存储单元地址，从0开始	
+   \   00000F                ; Setup parameters for call to function WriteI2CByte_1
+   \   00000F   EE           MOV     A,R6
+   \   000010   F9           MOV     R1,A
+   \   000011   12....       LCALL   ??WriteI2CByte_1?relay
+    207              I2C_Start_1();                          //起始信号 
+   \   000014                ; Setup parameters for call to function I2C_Start_1
+   \   000014   12....       LCALL   ??I2C_Start_1?relay
+    208              WriteI2CByte_1(SlaveAddress+1);         //发送设备地址+读信号 
+   \   000017                ; Setup parameters for call to function WriteI2CByte_1
+   \   000017   79A7         MOV     R1,#-0x59
+   \   000019   12....       LCALL   ??WriteI2CByte_1?relay
+    209              REG_data=ReadI2CByte_1();              //读出寄存器数据 
+   \   00001C                ; Setup parameters for call to function ReadI2CByte_1
+   \   00001C   12....       LCALL   ??ReadI2CByte_1?relay
+   \   00001F   E9           MOV     A,R1
+   \   000020   FF           MOV     R7,A
+    210              Sendack(1);   
+   \   000021                ; Setup parameters for call to function Sendack
+   \   000021   7901         MOV     R1,#0x1
+   \   000023   12....       LCALL   ??Sendack?relay
+    211              I2C_Stop_1();                           //停止信号 
+   \   000026                ; Setup parameters for call to function I2C_Stop_1
+   \   000026   12....       LCALL   ??I2C_Stop_1?relay
+    212              return REG_data;  
+   \   000029   EF           MOV     A,R7
+   \   00002A   F9           MOV     R1,A
+   \   00002B   7F01         MOV     R7,#0x1
+   \   00002D   02....       LJMP    ?BANKED_LEAVE_XDATA
+    213          } 
+    214          
+
+   \                                 In  segment BANKED_CODE, align 1, keep-with-next
+    215          void Init_ADXL345() 
+   \                     Init_ADXL345:
+    216          { 
+   \   000000   C082         PUSH    DPL
+   \   000002   C083         PUSH    DPH
+   \   000004                ; Saved register size: 2
+   \   000004                ; Auto size: 0
+    217            P1DIR = 0x0C;
+   \   000004   75FE0C       MOV     0xfe,#0xc
+    218             Single_Write_ADXL345(0x31,0x0B);   //测量范围,正负16g，13位模式 
+   \   000007                ; Setup parameters for call to function Single_Write_ADXL345
+   \   000007   7A0B         MOV     R2,#0xb
+   \   000009   7931         MOV     R1,#0x31
+   \   00000B   12....       LCALL   ??Single_Write_ADXL345?relay
+    219             Single_Write_ADXL345(0x2C,0x0F);   //速率设定为12.5 参考pdf13页 
+   \   00000E                ; Setup parameters for call to function Single_Write_ADXL345
+   \   00000E   7A0F         MOV     R2,#0xf
+   \   000010   792C         MOV     R1,#0x2c
+   \   000012   12....       LCALL   ??Single_Write_ADXL345?relay
+    220             Single_Write_ADXL345(0x2D,0x08);   //选择电源模式   参考pdf24页 
+   \   000015                ; Setup parameters for call to function Single_Write_ADXL345
+   \   000015   7A08         MOV     R2,#0x8
+   \   000017   792D         MOV     R1,#0x2d
+   \   000019   12....       LCALL   ??Single_Write_ADXL345?relay
+    221             Single_Write_ADXL345(0x2E,0x80);   //使能 DATA_READY 中断 
+   \   00001C                ; Setup parameters for call to function Single_Write_ADXL345
+   \   00001C   7A80         MOV     R2,#-0x80
+   \   00001E   792E         MOV     R1,#0x2e
+   \   000020   12....       LCALL   ??Single_Write_ADXL345?relay
+    222             Single_Write_ADXL345(0x1E,0x00);   //X 偏移量 根据测试传感器的状态写入pdf29页 
+   \   000023                ; Setup parameters for call to function Single_Write_ADXL345
+   \   000023   7A00         MOV     R2,#0x0
+   \   000025   791E         MOV     R1,#0x1e
+   \   000027   12....       LCALL   ??Single_Write_ADXL345?relay
+    223             Single_Write_ADXL345(0x1F,0x00);   //Y 偏移量 根据测试传感器的状态写入pdf29页 
+   \   00002A                ; Setup parameters for call to function Single_Write_ADXL345
+   \   00002A   7A00         MOV     R2,#0x0
+   \   00002C   791F         MOV     R1,#0x1f
+   \   00002E   12....       LCALL   ??Single_Write_ADXL345?relay
+    224             Single_Write_ADXL345(0x20,0x05);   //Z 偏移量 根据测试传感器的状态写入pdf29页 
+   \   000031                ; Setup parameters for call to function Single_Write_ADXL345
+   \   000031   7A05         MOV     R2,#0x5
+   \   000033   7920         MOV     R1,#0x20
+   \   000035   12....       LCALL   ??Single_Write_ADXL345?relay
+    225          } 
+   \   000038   D083         POP     DPH
+   \   00003A   D082         POP     DPL
+   \   00003C   02....       LJMP    ?BRET
+   \   00003F                REQUIRE P1DIR
+    226          
+    227          //********************************************************* 
+    228          // 
+    229          //连续读出ADXL345内部加速度数据，地址范围0x32~0x37 
+    230          // 
+    231          //********************************************************* 
+
+   \                                 In  segment BANKED_CODE, align 1, keep-with-next
+    232          void Multiple_Read_ADXL345(void) 
+   \                     Multiple_Read_ADXL345:
+    233          {   INT8U f; 
+   \   000000   74F6         MOV     A,#-0xa
+   \   000002   12....       LCALL   ?BANKED_ENTER_XDATA
+   \   000005                ; Saved register size: 10
+   \   000005                ; Auto size: 0
+    234              I2C_Start_1();                          //起始信号 
+   \   000005                ; Setup parameters for call to function I2C_Start_1
+   \   000005   12....       LCALL   ??I2C_Start_1?relay
+    235              WriteI2CByte_1(SlaveAddress);           //发送设备地址+写信号 
+   \   000008                ; Setup parameters for call to function WriteI2CByte_1
+   \   000008   79A6         MOV     R1,#-0x5a
+   \   00000A   12....       LCALL   ??WriteI2CByte_1?relay
+    236              WriteI2CByte_1(0x32);                   //发送存储单元地址，从0x32开始	
+   \   00000D                ; Setup parameters for call to function WriteI2CByte_1
+   \   00000D   7932         MOV     R1,#0x32
+   \   00000F   12....       LCALL   ??WriteI2CByte_1?relay
+    237              I2C_Start_1();                          //起始信号 
+   \   000012                ; Setup parameters for call to function I2C_Start_1
+   \   000012   12....       LCALL   ??I2C_Start_1?relay
+    238              WriteI2CByte_1(SlaveAddress+1);         //发送设备地址+读信号 
+   \   000015                ; Setup parameters for call to function WriteI2CByte_1
+   \   000015   79A7         MOV     R1,#-0x59
+   \   000017   12....       LCALL   ??WriteI2CByte_1?relay
+    239           for (f=0; f<6; f++)                      //连续读取6个地址数据，存储中BUF 
+   \   00001A   7E00         MOV     R6,#0x0
+   \                     ??Multiple_Read_ADXL345_0:
+   \   00001C   EE           MOV     A,R6
+   \   00001D   C3           CLR     C
+   \   00001E   9406         SUBB    A,#0x6
+   \   000020   502E         JNC     ??Multiple_Read_ADXL345_1
+    240              { 
+    241                  BUFFER[f] = ReadI2CByte_1();          //BUF[0]存储0x32地址中的数据 
+   \   000022                ; Setup parameters for call to function ReadI2CByte_1
+   \   000022   12....       LCALL   ??ReadI2CByte_1?relay
+   \   000025   E9           MOV     A,R1
+   \   000026   C0E0         PUSH    A
+   \   000028   8E..         MOV     ?V0 + 0,R6
+   \   00002A   75..00       MOV     ?V0 + 1,#0x0
+   \   00002D   E5..         MOV     A,?V0 + 0
+   \   00002F   24..         ADD     A,#(BUFFER & 0xff)
+   \   000031   F582         MOV     DPL,A
+   \   000033   E5..         MOV     A,?V0 + 1
+   \   000035   34..         ADDC    A,#((BUFFER >> 8) & 0xff)
+   \   000037   F583         MOV     DPH,A
+   \   000039   D0E0         POP     A
+   \   00003B   F0           MOVX    @DPTR,A
+    242                if (f == 5) 
+   \   00003C   7405         MOV     A,#0x5
+   \   00003E   6E           XRL     A,R6
+   \   00003F   7007         JNZ     ??Multiple_Read_ADXL345_2
+    243                  { 
+    244                    Sendack(1);                //最后一个数据需要回NOACK 
+   \   000041                ; Setup parameters for call to function Sendack
+   \   000041   7901         MOV     R1,#0x1
+   \   000043   12....       LCALL   ??Sendack?relay
+   \   000046   8005         SJMP    ??Multiple_Read_ADXL345_3
+    245                  } 
+    246                  else 
+    247                  { 
+    248                    Sendack(0);                //回应ACK 
+   \                     ??Multiple_Read_ADXL345_2:
+   \   000048                ; Setup parameters for call to function Sendack
+   \   000048   7900         MOV     R1,#0x0
+   \   00004A   12....       LCALL   ??Sendack?relay
+    249                 } 
+    250             } 
+   \                     ??Multiple_Read_ADXL345_3:
+   \   00004D   0E           INC     R6
+   \   00004E   80CC         SJMP    ??Multiple_Read_ADXL345_0
+    251              I2C_Stop_1();                          //停止信号 
+   \                     ??Multiple_Read_ADXL345_1:
+   \   000050                ; Setup parameters for call to function I2C_Stop_1
+   \   000050   12....       LCALL   ??I2C_Stop_1?relay
+    252              Delay(500);
+   \   000053                ; Setup parameters for call to function Delay
+   \   000053   7AF4         MOV     R2,#-0xc
+   \   000055   7B01         MOV     R3,#0x1
+   \   000057   12....       LCALL   ??Delay?relay
+    253              Delay(500);
+   \   00005A                ; Setup parameters for call to function Delay
+   \   00005A   7AF4         MOV     R2,#-0xc
+   \   00005C   7B01         MOV     R3,#0x1
+   \   00005E   12....       LCALL   ??Delay?relay
+    254              Delay(500);
+   \   000061                ; Setup parameters for call to function Delay
+   \   000061   7AF4         MOV     R2,#-0xc
+   \   000063   7B01         MOV     R3,#0x1
+   \   000065   12....       LCALL   ??Delay?relay
+    255              Delay(500);
+   \   000068                ; Setup parameters for call to function Delay
+   \   000068   7AF4         MOV     R2,#-0xc
+   \   00006A   7B01         MOV     R3,#0x1
+   \   00006C   12....       LCALL   ??Delay?relay
+    256          } 
+   \   00006F   7F02         MOV     R7,#0x2
+   \   000071   02....       LJMP    ?BANKED_LEAVE_XDATA
+    257          
+
+   \                                 In  segment BANKED_CODE, align 1, keep-with-next
+    258          void displayXYZ(INT8U *pData){
+   \                     displayXYZ:
+   \   000000   74F0         MOV     A,#-0x10
+   \   000002   12....       LCALL   ?BANKED_ENTER_XDATA
+   \   000005                ; Saved register size: 16
+   \   000005                ; Auto size: 4
+   \   000005   74FC         MOV     A,#-0x4
+   \   000007   12....       LCALL   ?ALLOC_XSTACK8
+   \   00000A   7402         MOV     A,#0x2
+   \   00000C   12....       LCALL   ?XSTACK_DISP0_8
+   \   00000F   EA           MOV     A,R2
+   \   000010   F0           MOVX    @DPTR,A
+   \   000011   A3           INC     DPTR
+   \   000012   EB           MOV     A,R3
+   \   000013   F0           MOVX    @DPTR,A
+    259            int  dis_data;
+    260            uint16 temp;
+    261            dis_data=(pData[1]<<8)+pData[0];
+   \   000014   7402         MOV     A,#0x2
+   \   000016   12....       LCALL   ?XSTACK_DISP0_8
+   \   000019   E0           MOVX    A,@DPTR
+   \   00001A   F8           MOV     R0,A
+   \   00001B   A3           INC     DPTR
+   \   00001C   E0           MOVX    A,@DPTR
+   \   00001D   F583         MOV     DPH,A
+   \   00001F   8882         MOV     DPL,R0
+   \   000021   A3           INC     DPTR
+   \   000022   E0           MOVX    A,@DPTR
+   \   000023   F8           MOV     R0,A
+   \   000024   E4           CLR     A
+   \   000025   C8           XCH     A,R0
+   \   000026   F9           MOV     R1,A
+   \   000027   7402         MOV     A,#0x2
+   \   000029   12....       LCALL   ?XSTACK_DISP0_8
+   \   00002C   E0           MOVX    A,@DPTR
+   \   00002D   FA           MOV     R2,A
+   \   00002E   A3           INC     DPTR
+   \   00002F   E0           MOVX    A,@DPTR
+   \   000030   F583         MOV     DPH,A
+   \   000032   8A82         MOV     DPL,R2
+   \   000034   E0           MOVX    A,@DPTR
+   \   000035   7B00         MOV     R3,#0x0
+   \   000037   28           ADD     A,R0
+   \   000038   F8           MOV     R0,A
+   \   000039   EB           MOV     A,R3
+   \   00003A   39           ADDC    A,R1
+   \   00003B   F9           MOV     R1,A
+   \   00003C   85..82       MOV     DPL,?XSP + 0
+   \   00003F   85..83       MOV     DPH,?XSP + 1
+   \   000042   E8           MOV     A,R0
+   \   000043   F0           MOVX    @DPTR,A
+   \   000044   A3           INC     DPTR
+   \   000045   E9           MOV     A,R1
+   \   000046   F0           MOVX    @DPTR,A
+    262              temp=(uint16)((float)dis_data*3.9);  //计算数据和显示,查考ADXL345快速入门第4页
+   \   000047   85..82       MOV     DPL,?XSP + 0
+   \   00004A   85..83       MOV     DPH,?XSP + 1
+   \   00004D   E0           MOVX    A,@DPTR
+   \   00004E   F5..         MOV     ?V0 + 4,A
+   \   000050   A3           INC     DPTR
+   \   000051   E0           MOVX    A,@DPTR
+   \   000052   F5..         MOV     ?V0 + 5,A
+   \   000054   E5..         MOV     A,?V0 + 5
+   \   000056   33           RLC     A
+   \   000057   95E0         SUBB    A,0xE0 /* A   */
+   \   000059   F5..         MOV     ?V0 + 6,A
+   \   00005B   F5..         MOV     ?V0 + 7,A
+   \   00005D   78..         MOV     R0,#?V0 + 4
+   \   00005F   12....       LCALL   ?L_TO_FLT
+   \   000062   90....       MOV     DPTR,#__Constant_4079999a
+   \   000065   78..         MOV     R0,#?V0 + 0
+   \   000067   12....       LCALL   ?L_MOV_X
+   \   00006A   78..         MOV     R0,#?V0 + 4
+   \   00006C   79..         MOV     R1,#?V0 + 0
+   \   00006E   12....       LCALL   ?FLT_MUL
+   \   000071   78..         MOV     R0,#?V0 + 4
+   \   000073   12....       LCALL   ?FLT_TO_L
+   \   000076   AE..         MOV     R6,?V0 + 4
+   \   000078   AF..         MOV     R7,?V0 + 5
+    263          	if(dis_data<0){
+   \   00007A   85..82       MOV     DPL,?XSP + 0
+   \   00007D   85..83       MOV     DPH,?XSP + 1
+   \   000080   C3           CLR     C
+   \   000081   E0           MOVX    A,@DPTR
+   \   000082   9400         SUBB    A,#0x0
+   \   000084   A3           INC     DPTR
+   \   000085   E0           MOVX    A,@DPTR
+   \   000086   9400         SUBB    A,#0x0
+   \   000088   A2D2         MOV     C,0xD0 /* PSW */.2
+   \   00008A   65D0         XRL     A,PSW
+   \   00008C   33           RLC     A
+   \   00008D   5039         JNC     ??displayXYZ_0
+    264          	dis_data=-dis_data;
+   \   00008F   85..82       MOV     DPL,?XSP + 0
+   \   000092   85..83       MOV     DPH,?XSP + 1
+   \   000095   E0           MOVX    A,@DPTR
+   \   000096   F8           MOV     R0,A
+   \   000097   A3           INC     DPTR
+   \   000098   E0           MOVX    A,@DPTR
+   \   000099   F9           MOV     R1,A
+   \   00009A   C3           CLR     C
+   \   00009B   E4           CLR     A
+   \   00009C   98           SUBB    A,R0
+   \   00009D   F8           MOV     R0,A
+   \   00009E   E4           CLR     A
+   \   00009F   99           SUBB    A,R1
+   \   0000A0   F9           MOV     R1,A
+   \   0000A1   85..82       MOV     DPL,?XSP + 0
+   \   0000A4   85..83       MOV     DPH,?XSP + 1
+   \   0000A7   E8           MOV     A,R0
+   \   0000A8   F0           MOVX    @DPTR,A
+   \   0000A9   A3           INC     DPTR
+   \   0000AA   E9           MOV     A,R1
+   \   0000AB   F0           MOVX    @DPTR,A
+    265                  HalLcdWriteStringValue("X: -",temp,10,0);
+   \   0000AC                ; Setup parameters for call to function HalLcdWriteStringValue
+   \   0000AC   75..00       MOV     ?V0 + 0,#0x0
+   \   0000AF   78..         MOV     R0,#?V0 + 0
+   \   0000B1   12....       LCALL   ?PUSH_XSTACK_I_ONE
+   \   0000B4   790A         MOV     R1,#0xa
+   \   0000B6   EE           MOV     A,R6
+   \   0000B7   FC           MOV     R4,A
+   \   0000B8   EF           MOV     A,R7
+   \   0000B9   FD           MOV     R5,A
+   \   0000BA   7A..         MOV     R2,#(`?<Constant "X: -">` & 0xff)
+   \   0000BC   7B..         MOV     R3,#((`?<Constant "X: -">` >> 8) & 0xff)
+   \   0000BE   12....       LCALL   ??HalLcdWriteStringValue?relay
+   \   0000C1   7401         MOV     A,#0x1
+   \   0000C3   12....       LCALL   ?DEALLOC_XSTACK8
+   \   0000C6   801A         SJMP    ??displayXYZ_1
+    266          	}
+    267          	else
+    268              {
+    269                  HalLcdWriteStringValue("X:  ",temp,10,0);
+   \                     ??displayXYZ_0:
+   \   0000C8                ; Setup parameters for call to function HalLcdWriteStringValue
+   \   0000C8   75..00       MOV     ?V0 + 0,#0x0
+   \   0000CB   78..         MOV     R0,#?V0 + 0
+   \   0000CD   12....       LCALL   ?PUSH_XSTACK_I_ONE
+   \   0000D0   790A         MOV     R1,#0xa
+   \   0000D2   EE           MOV     A,R6
+   \   0000D3   FC           MOV     R4,A
+   \   0000D4   EF           MOV     A,R7
+   \   0000D5   FD           MOV     R5,A
+   \   0000D6   7A..         MOV     R2,#(`?<Constant "X:  ">` & 0xff)
+   \   0000D8   7B..         MOV     R3,#((`?<Constant "X:  ">` >> 8) & 0xff)
+   \   0000DA   12....       LCALL   ??HalLcdWriteStringValue?relay
+   \   0000DD   7401         MOV     A,#0x1
+   \   0000DF   12....       LCALL   ?DEALLOC_XSTACK8
+    270              }
+    271              dis_data=(pData[3]<<8)+pData[2];  //合成数据   
+   \                     ??displayXYZ_1:
+   \   0000E2   7402         MOV     A,#0x2
+   \   0000E4   12....       LCALL   ?XSTACK_DISP0_8
+   \   0000E7   E0           MOVX    A,@DPTR
+   \   0000E8   F8           MOV     R0,A
+   \   0000E9   A3           INC     DPTR
+   \   0000EA   E0           MOVX    A,@DPTR
+   \   0000EB   F583         MOV     DPH,A
+   \   0000ED   8882         MOV     DPL,R0
+   \   0000EF   A3           INC     DPTR
+   \   0000F0   A3           INC     DPTR
+   \   0000F1   A3           INC     DPTR
+   \   0000F2   E0           MOVX    A,@DPTR
+   \   0000F3   F8           MOV     R0,A
+   \   0000F4   E4           CLR     A
+   \   0000F5   C8           XCH     A,R0
+   \   0000F6   F9           MOV     R1,A
+   \   0000F7   7402         MOV     A,#0x2
+   \   0000F9   12....       LCALL   ?XSTACK_DISP0_8
+   \   0000FC   E0           MOVX    A,@DPTR
+   \   0000FD   FA           MOV     R2,A
+   \   0000FE   A3           INC     DPTR
+   \   0000FF   E0           MOVX    A,@DPTR
+   \   000100   F583         MOV     DPH,A
+   \   000102   8A82         MOV     DPL,R2
+   \   000104   A3           INC     DPTR
+   \   000105   A3           INC     DPTR
+   \   000106   E0           MOVX    A,@DPTR
+   \   000107   7B00         MOV     R3,#0x0
+   \   000109   28           ADD     A,R0
+   \   00010A   F8           MOV     R0,A
+   \   00010B   EB           MOV     A,R3
+   \   00010C   39           ADDC    A,R1
+   \   00010D   F9           MOV     R1,A
+   \   00010E   85..82       MOV     DPL,?XSP + 0
+   \   000111   85..83       MOV     DPH,?XSP + 1
+   \   000114   E8           MOV     A,R0
+   \   000115   F0           MOVX    @DPTR,A
+   \   000116   A3           INC     DPTR
+   \   000117   E9           MOV     A,R1
+   \   000118   F0           MOVX    @DPTR,A
+    272          	    temp=(uint16)((float)dis_data*3.9);  //计算数据和显示,查考ADXL345快速入门第4页
+   \   000119   85..82       MOV     DPL,?XSP + 0
+   \   00011C   85..83       MOV     DPH,?XSP + 1
+   \   00011F   E0           MOVX    A,@DPTR
+   \   000120   F5..         MOV     ?V0 + 4,A
+   \   000122   A3           INC     DPTR
+   \   000123   E0           MOVX    A,@DPTR
+   \   000124   F5..         MOV     ?V0 + 5,A
+   \   000126   E5..         MOV     A,?V0 + 5
+   \   000128   33           RLC     A
+   \   000129   95E0         SUBB    A,0xE0 /* A   */
+   \   00012B   F5..         MOV     ?V0 + 6,A
+   \   00012D   F5..         MOV     ?V0 + 7,A
+   \   00012F   78..         MOV     R0,#?V0 + 4
+   \   000131   12....       LCALL   ?L_TO_FLT
+   \   000134   90....       MOV     DPTR,#__Constant_4079999a
+   \   000137   78..         MOV     R0,#?V0 + 0
+   \   000139   12....       LCALL   ?L_MOV_X
+   \   00013C   78..         MOV     R0,#?V0 + 4
+   \   00013E   79..         MOV     R1,#?V0 + 0
+   \   000140   12....       LCALL   ?FLT_MUL
+   \   000143   78..         MOV     R0,#?V0 + 4
+   \   000145   12....       LCALL   ?FLT_TO_L
+   \   000148   AE..         MOV     R6,?V0 + 4
+   \   00014A   AF..         MOV     R7,?V0 + 5
+    273          	if(dis_data<0){
+   \   00014C   85..82       MOV     DPL,?XSP + 0
+   \   00014F   85..83       MOV     DPH,?XSP + 1
+   \   000152   C3           CLR     C
+   \   000153   E0           MOVX    A,@DPTR
+   \   000154   9400         SUBB    A,#0x0
+   \   000156   A3           INC     DPTR
+   \   000157   E0           MOVX    A,@DPTR
+   \   000158   9400         SUBB    A,#0x0
+   \   00015A   A2D2         MOV     C,0xD0 /* PSW */.2
+   \   00015C   65D0         XRL     A,PSW
+   \   00015E   33           RLC     A
+   \   00015F   5039         JNC     ??displayXYZ_2
+    274          	dis_data=-dis_data;
+   \   000161   85..82       MOV     DPL,?XSP + 0
+   \   000164   85..83       MOV     DPH,?XSP + 1
+   \   000167   E0           MOVX    A,@DPTR
+   \   000168   F8           MOV     R0,A
+   \   000169   A3           INC     DPTR
+   \   00016A   E0           MOVX    A,@DPTR
+   \   00016B   F9           MOV     R1,A
+   \   00016C   C3           CLR     C
+   \   00016D   E4           CLR     A
+   \   00016E   98           SUBB    A,R0
+   \   00016F   F8           MOV     R0,A
+   \   000170   E4           CLR     A
+   \   000171   99           SUBB    A,R1
+   \   000172   F9           MOV     R1,A
+   \   000173   85..82       MOV     DPL,?XSP + 0
+   \   000176   85..83       MOV     DPH,?XSP + 1
+   \   000179   E8           MOV     A,R0
+   \   00017A   F0           MOVX    @DPTR,A
+   \   00017B   A3           INC     DPTR
+   \   00017C   E9           MOV     A,R1
+   \   00017D   F0           MOVX    @DPTR,A
+    275                  HalLcdWriteStringValue("Y: -",temp,10,1);
+   \   00017E                ; Setup parameters for call to function HalLcdWriteStringValue
+   \   00017E   75..01       MOV     ?V0 + 0,#0x1
+   \   000181   78..         MOV     R0,#?V0 + 0
+   \   000183   12....       LCALL   ?PUSH_XSTACK_I_ONE
+   \   000186   790A         MOV     R1,#0xa
+   \   000188   EE           MOV     A,R6
+   \   000189   FC           MOV     R4,A
+   \   00018A   EF           MOV     A,R7
+   \   00018B   FD           MOV     R5,A
+   \   00018C   7A..         MOV     R2,#(`?<Constant "Y: -">` & 0xff)
+   \   00018E   7B..         MOV     R3,#((`?<Constant "Y: -">` >> 8) & 0xff)
+   \   000190   12....       LCALL   ??HalLcdWriteStringValue?relay
+   \   000193   7401         MOV     A,#0x1
+   \   000195   12....       LCALL   ?DEALLOC_XSTACK8
+   \   000198   801A         SJMP    ??displayXYZ_3
+    276          	}
+    277          	else
+    278              {
+    279                  HalLcdWriteStringValue("Y:  ",temp,10,1);
+   \                     ??displayXYZ_2:
+   \   00019A                ; Setup parameters for call to function HalLcdWriteStringValue
+   \   00019A   75..01       MOV     ?V0 + 0,#0x1
+   \   00019D   78..         MOV     R0,#?V0 + 0
+   \   00019F   12....       LCALL   ?PUSH_XSTACK_I_ONE
+   \   0001A2   790A         MOV     R1,#0xa
+   \   0001A4   EE           MOV     A,R6
+   \   0001A5   FC           MOV     R4,A
+   \   0001A6   EF           MOV     A,R7
+   \   0001A7   FD           MOV     R5,A
+   \   0001A8   7A..         MOV     R2,#(`?<Constant "Y:  ">` & 0xff)
+   \   0001AA   7B..         MOV     R3,#((`?<Constant "Y:  ">` >> 8) & 0xff)
+   \   0001AC   12....       LCALL   ??HalLcdWriteStringValue?relay
+   \   0001AF   7401         MOV     A,#0x1
+   \   0001B1   12....       LCALL   ?DEALLOC_XSTACK8
+    280              }
+    281              dis_data=(pData[5]<<8)+pData[4];    //合成数据  
+   \                     ??displayXYZ_3:
+   \   0001B4   7402         MOV     A,#0x2
+   \   0001B6   12....       LCALL   ?XSTACK_DISP0_8
+   \   0001B9   E0           MOVX    A,@DPTR
+   \   0001BA   F8           MOV     R0,A
+   \   0001BB   A3           INC     DPTR
+   \   0001BC   E0           MOVX    A,@DPTR
+   \   0001BD   F583         MOV     DPH,A
+   \   0001BF   8882         MOV     DPL,R0
+   \   0001C1   A3           INC     DPTR
+   \   0001C2   A3           INC     DPTR
+   \   0001C3   A3           INC     DPTR
+   \   0001C4   A3           INC     DPTR
+   \   0001C5   A3           INC     DPTR
+   \   0001C6   E0           MOVX    A,@DPTR
+   \   0001C7   F8           MOV     R0,A
+   \   0001C8   E4           CLR     A
+   \   0001C9   C8           XCH     A,R0
+   \   0001CA   F9           MOV     R1,A
+   \   0001CB   7402         MOV     A,#0x2
+   \   0001CD   12....       LCALL   ?XSTACK_DISP0_8
+   \   0001D0   E0           MOVX    A,@DPTR
+   \   0001D1   FA           MOV     R2,A
+   \   0001D2   A3           INC     DPTR
+   \   0001D3   E0           MOVX    A,@DPTR
+   \   0001D4   F583         MOV     DPH,A
+   \   0001D6   8A82         MOV     DPL,R2
+   \   0001D8   A3           INC     DPTR
+   \   0001D9   A3           INC     DPTR
+   \   0001DA   A3           INC     DPTR
+   \   0001DB   A3           INC     DPTR
+   \   0001DC   E0           MOVX    A,@DPTR
+   \   0001DD   7B00         MOV     R3,#0x0
+   \   0001DF   28           ADD     A,R0
+   \   0001E0   F8           MOV     R0,A
+   \   0001E1   EB           MOV     A,R3
+   \   0001E2   39           ADDC    A,R1
+   \   0001E3   F9           MOV     R1,A
+   \   0001E4   85..82       MOV     DPL,?XSP + 0
+   \   0001E7   85..83       MOV     DPH,?XSP + 1
+   \   0001EA   E8           MOV     A,R0
+   \   0001EB   F0           MOVX    @DPTR,A
+   \   0001EC   A3           INC     DPTR
+   \   0001ED   E9           MOV     A,R1
+   \   0001EE   F0           MOVX    @DPTR,A
+    282              temp=(uint16)((float)dis_data*3.9);  //计算数据和显示,查考ADXL345快速入门第4页
+   \   0001EF   85..82       MOV     DPL,?XSP + 0
+   \   0001F2   85..83       MOV     DPH,?XSP + 1
+   \   0001F5   E0           MOVX    A,@DPTR
+   \   0001F6   F5..         MOV     ?V0 + 4,A
+   \   0001F8   A3           INC     DPTR
+   \   0001F9   E0           MOVX    A,@DPTR
+   \   0001FA   F5..         MOV     ?V0 + 5,A
+   \   0001FC   E5..         MOV     A,?V0 + 5
+   \   0001FE   33           RLC     A
+   \   0001FF   95E0         SUBB    A,0xE0 /* A   */
+   \   000201   F5..         MOV     ?V0 + 6,A
+   \   000203   F5..         MOV     ?V0 + 7,A
+   \   000205   78..         MOV     R0,#?V0 + 4
+   \   000207   12....       LCALL   ?L_TO_FLT
+   \   00020A   90....       MOV     DPTR,#__Constant_4079999a
+   \   00020D   78..         MOV     R0,#?V0 + 0
+   \   00020F   12....       LCALL   ?L_MOV_X
+   \   000212   78..         MOV     R0,#?V0 + 4
+   \   000214   79..         MOV     R1,#?V0 + 0
+   \   000216   12....       LCALL   ?FLT_MUL
+   \   000219   78..         MOV     R0,#?V0 + 4
+   \   00021B   12....       LCALL   ?FLT_TO_L
+   \   00021E   AE..         MOV     R6,?V0 + 4
+   \   000220   AF..         MOV     R7,?V0 + 5
+    283          	if(dis_data<0){
+   \   000222   85..82       MOV     DPL,?XSP + 0
+   \   000225   85..83       MOV     DPH,?XSP + 1
+   \   000228   C3           CLR     C
+   \   000229   E0           MOVX    A,@DPTR
+   \   00022A   9400         SUBB    A,#0x0
+   \   00022C   A3           INC     DPTR
+   \   00022D   E0           MOVX    A,@DPTR
+   \   00022E   9400         SUBB    A,#0x0
+   \   000230   A2D2         MOV     C,0xD0 /* PSW */.2
+   \   000232   65D0         XRL     A,PSW
+   \   000234   33           RLC     A
+   \   000235   5039         JNC     ??displayXYZ_4
+    284          	dis_data=-dis_data;
+   \   000237   85..82       MOV     DPL,?XSP + 0
+   \   00023A   85..83       MOV     DPH,?XSP + 1
+   \   00023D   E0           MOVX    A,@DPTR
+   \   00023E   F8           MOV     R0,A
+   \   00023F   A3           INC     DPTR
+   \   000240   E0           MOVX    A,@DPTR
+   \   000241   F9           MOV     R1,A
+   \   000242   C3           CLR     C
+   \   000243   E4           CLR     A
+   \   000244   98           SUBB    A,R0
+   \   000245   F8           MOV     R0,A
+   \   000246   E4           CLR     A
+   \   000247   99           SUBB    A,R1
+   \   000248   F9           MOV     R1,A
+   \   000249   85..82       MOV     DPL,?XSP + 0
+   \   00024C   85..83       MOV     DPH,?XSP + 1
+   \   00024F   E8           MOV     A,R0
+   \   000250   F0           MOVX    @DPTR,A
+   \   000251   A3           INC     DPTR
+   \   000252   E9           MOV     A,R1
+   \   000253   F0           MOVX    @DPTR,A
+    285                  HalLcdWriteStringValue("Z: -",temp,10,2);
+   \   000254                ; Setup parameters for call to function HalLcdWriteStringValue
+   \   000254   75..02       MOV     ?V0 + 0,#0x2
+   \   000257   78..         MOV     R0,#?V0 + 0
+   \   000259   12....       LCALL   ?PUSH_XSTACK_I_ONE
+   \   00025C   790A         MOV     R1,#0xa
+   \   00025E   EE           MOV     A,R6
+   \   00025F   FC           MOV     R4,A
+   \   000260   EF           MOV     A,R7
+   \   000261   FD           MOV     R5,A
+   \   000262   7A..         MOV     R2,#(`?<Constant "Z: -">` & 0xff)
+   \   000264   7B..         MOV     R3,#((`?<Constant "Z: -">` >> 8) & 0xff)
+   \   000266   12....       LCALL   ??HalLcdWriteStringValue?relay
+   \   000269   7401         MOV     A,#0x1
+   \   00026B   12....       LCALL   ?DEALLOC_XSTACK8
+   \   00026E   801A         SJMP    ??displayXYZ_5
+    286          	}
+    287          	else
+    288              {
+    289                  HalLcdWriteStringValue("Z:  ",temp,10,2);
+   \                     ??displayXYZ_4:
+   \   000270                ; Setup parameters for call to function HalLcdWriteStringValue
+   \   000270   75..02       MOV     ?V0 + 0,#0x2
+   \   000273   78..         MOV     R0,#?V0 + 0
+   \   000275   12....       LCALL   ?PUSH_XSTACK_I_ONE
+   \   000278   790A         MOV     R1,#0xa
+   \   00027A   EE           MOV     A,R6
+   \   00027B   FC           MOV     R4,A
+   \   00027C   EF           MOV     A,R7
+   \   00027D   FD           MOV     R5,A
+   \   00027E   7A..         MOV     R2,#(`?<Constant "Z:  ">` & 0xff)
+   \   000280   7B..         MOV     R3,#((`?<Constant "Z:  ">` >> 8) & 0xff)
+   \   000282   12....       LCALL   ??HalLcdWriteStringValue?relay
+   \   000285   7401         MOV     A,#0x1
+   \   000287   12....       LCALL   ?DEALLOC_XSTACK8
+    290              }
+    291          }
+   \                     ??displayXYZ_5:
+   \   00028A   7404         MOV     A,#0x4
+   \   00028C   12....       LCALL   ?DEALLOC_XSTACK8
+   \   00028F   7F08         MOV     R7,#0x8
+   \   000291   02....       LJMP    ?BANKED_LEAVE_XDATA
+
+   \                                 In  segment XDATA_ID, align 1, keep-with-next
+   \                     `?<Initializer for <Constant "X: -">>`:
+   \   000000   583A202D     DB "X: -"
+   \            00      
+
+   \                                 In  segment XDATA_ID, align 1, keep-with-next
+   \                     `?<Initializer for <Constant "X:  ">>`:
+   \   000000   583A2020     DB "X:  "
+   \            00      
+
+   \                                 In  segment XDATA_ID, align 1, keep-with-next
+   \                     `?<Initializer for <Constant "Y: -">>`:
+   \   000000   593A202D     DB "Y: -"
+   \            00      
+
+   \                                 In  segment XDATA_ID, align 1, keep-with-next
+   \                     `?<Initializer for <Constant "Y:  ">>`:
+   \   000000   593A2020     DB "Y:  "
+   \            00      
+
+   \                                 In  segment XDATA_ID, align 1, keep-with-next
+   \                     `?<Initializer for <Constant "Z: -">>`:
+   \   000000   5A3A202D     DB "Z: -"
+   \            00      
+
+   \                                 In  segment XDATA_ID, align 1, keep-with-next
+   \                     `?<Initializer for <Constant "Z:  ">>`:
+   \   000000   5A3A2020     DB "Z:  "
+   \            00      
+
+   \                                 In  segment XDATA_ID, align 1, keep-with-next
+   \                     `?<Initializer for __Constant_4079999a>`:
+   \   000000   9A997940     DD 4079999AH
+
+   \                                 In  segment BANK_RELAYS, align 1
+   \                     ??Delay?relay:
+   \   000000   12....       LCALL   ?BDISPATCH
+   \   000003   ......       DC24    Delay
+
+   \                                 In  segment BANK_RELAYS, align 1
+   \                     ??Delay_1u?relay:
+   \   000000   12....       LCALL   ?BDISPATCH
+   \   000003   ......       DC24    Delay_1u
+
+   \                                 In  segment BANK_RELAYS, align 1
+   \                     ??conversion?relay:
+   \   000000   12....       LCALL   ?BDISPATCH
+   \   000003   ......       DC24    conversion
+
+   \                                 In  segment BANK_RELAYS, align 1
+   \                     ??I2C_Start_1?relay:
+   \   000000   12....       LCALL   ?BDISPATCH
+   \   000003   ......       DC24    I2C_Start_1
+
+   \                                 In  segment BANK_RELAYS, align 1
+   \                     ??I2C_Stop_1?relay:
+   \   000000   12....       LCALL   ?BDISPATCH
+   \   000003   ......       DC24    I2C_Stop_1
+
+   \                                 In  segment BANK_RELAYS, align 1
+   \                     ??Sendack?relay:
+   \   000000   12....       LCALL   ?BDISPATCH
+   \   000003   ......       DC24    Sendack
+
+   \                                 In  segment BANK_RELAYS, align 1
+   \                     ??I2C_Check_ack?relay:
+   \   000000   12....       LCALL   ?BDISPATCH
+   \   000003   ......       DC24    I2C_Check_ack
+
+   \                                 In  segment BANK_RELAYS, align 1
+   \                     ??WriteI2CByte_1?relay:
+   \   000000   12....       LCALL   ?BDISPATCH
+   \   000003   ......       DC24    WriteI2CByte_1
+
+   \                                 In  segment BANK_RELAYS, align 1
+   \                     ??ReadI2CByte_1?relay:
+   \   000000   12....       LCALL   ?BDISPATCH
+   \   000003   ......       DC24    ReadI2CByte_1
+
+   \                                 In  segment BANK_RELAYS, align 1
+   \                     ??Single_Write_ADXL345?relay:
+   \   000000   12....       LCALL   ?BDISPATCH
+   \   000003   ......       DC24    Single_Write_ADXL345
+
+   \                                 In  segment BANK_RELAYS, align 1
+   \                     ??Single_Read_ADXL345?relay:
+   \   000000   12....       LCALL   ?BDISPATCH
+   \   000003   ......       DC24    Single_Read_ADXL345
+
+   \                                 In  segment BANK_RELAYS, align 1
+   \                     ??Init_ADXL345?relay:
+   \   000000   12....       LCALL   ?BDISPATCH
+   \   000003   ......       DC24    Init_ADXL345
+
+   \                                 In  segment BANK_RELAYS, align 1
+   \                     ??Multiple_Read_ADXL345?relay:
+   \   000000   12....       LCALL   ?BDISPATCH
+   \   000003   ......       DC24    Multiple_Read_ADXL345
+
+   \                                 In  segment BANK_RELAYS, align 1
+   \                     ??displayXYZ?relay:
+   \   000000   12....       LCALL   ?BDISPATCH
+   \   000003   ......       DC24    displayXYZ
+
+   \                                 In  segment XDATA_I, align 1, keep-with-next
+   \                     `?<Constant "X: -">`:
+   \   000000                DS 5
+   \   000005                REQUIRE `?<Initializer for <Constant "X: -">>`
+   \   000005                REQUIRE __INIT_XDATA_I
+
+   \                                 In  segment XDATA_I, align 1, keep-with-next
+   \                     `?<Constant "X:  ">`:
+   \   000000                DS 5
+   \   000005                REQUIRE `?<Initializer for <Constant "X:  ">>`
+   \   000005                REQUIRE __INIT_XDATA_I
+
+   \                                 In  segment XDATA_I, align 1, keep-with-next
+   \                     `?<Constant "Y: -">`:
+   \   000000                DS 5
+   \   000005                REQUIRE `?<Initializer for <Constant "Y: -">>`
+   \   000005                REQUIRE __INIT_XDATA_I
+
+   \                                 In  segment XDATA_I, align 1, keep-with-next
+   \                     `?<Constant "Y:  ">`:
+   \   000000                DS 5
+   \   000005                REQUIRE `?<Initializer for <Constant "Y:  ">>`
+   \   000005                REQUIRE __INIT_XDATA_I
+
+   \                                 In  segment XDATA_I, align 1, keep-with-next
+   \                     `?<Constant "Z: -">`:
+   \   000000                DS 5
+   \   000005                REQUIRE `?<Initializer for <Constant "Z: -">>`
+   \   000005                REQUIRE __INIT_XDATA_I
+
+   \                                 In  segment XDATA_I, align 1, keep-with-next
+   \                     `?<Constant "Z:  ">`:
+   \   000000                DS 5
+   \   000005                REQUIRE `?<Initializer for <Constant "Z:  ">>`
+   \   000005                REQUIRE __INIT_XDATA_I
+
+   \                                 In  segment XDATA_I, align 1, keep-with-next
+   \                     __Constant_4079999a:
+   \   000000                DS 4
+   \   000004                REQUIRE `?<Initializer for __Constant_4079999a>`
+   \   000004                REQUIRE __INIT_XDATA_I
+
+   Maximum stack usage in bytes:
+
+     Function                    ISTACK PSTACK XSTACK
+     --------                    ------ ------ ------
+     Delay                           0      0     10
+     Delay_1u                        0      0      9
+     I2C_Check_ack                   2      0      9
+       -> Delay_1u                   4      0      0
+       -> Delay_1u                   4      0      0
+       -> Delay_1u                   4      0      0
+     I2C_Start_1                     2      0     10
+       -> Delay_1u                   4      0      0
+       -> Delay_1u                   4      0      0
+       -> Delay_1u                   4      0      0
+       -> Delay_1u                   4      0      0
+     I2C_Stop_1                      2      0     10
+       -> Delay_1u                   4      0      0
+       -> Delay_1u                   4      0      0
+       -> Delay_1u                   4      0      0
+       -> Delay_1u                   4      0      0
+       -> Delay_1u                   4      0      0
+     Init_ADXL345                    2      0      0
+       -> Single_Write_ADXL345       4      0      0
+       -> Single_Write_ADXL345       4      0      0
+       -> Single_Write_ADXL345       4      0      0
+       -> Single_Write_ADXL345       4      0      0
+       -> Single_Write_ADXL345       4      0      0
+       -> Single_Write_ADXL345       4      0      0
+       -> Single_Write_ADXL345       4      0      0
+     Multiple_Read_ADXL345           1      0     10
+       -> I2C_Start_1                0      0     20
+       -> WriteI2CByte_1             0      0     20
+       -> WriteI2CByte_1             0      0     20
+       -> I2C_Start_1                0      0     20
+       -> WriteI2CByte_1             0      0     20
+       -> ReadI2CByte_1              0      0     20
+       -> Sendack                    0      0     20
+       -> Sendack                    0      0     20
+       -> I2C_Stop_1                 0      0     20
+       -> Delay                      0      0     20
+       -> Delay                      0      0     20
+       -> Delay                      0      0     20
+       -> Delay                      0      0     20
+     ReadI2CByte_1                   0      0     19
+       -> Delay_1u                   0      0     18
+       -> Delay_1u                   0      0     18
+       -> Delay_1u                   0      0     18
+     Sendack                         0      0     19
+       -> Delay_1u                   0      0     18
+       -> Delay                      0      0     18
+       -> Delay_1u                   0      0     18
+       -> Delay_1u                   0      0     18
+       -> Delay_1u                   0      0     18
+     Single_Read_ADXL345             0      0      9
+       -> I2C_Start_1                0      0     18
+       -> WriteI2CByte_1             0      0     18
+       -> WriteI2CByte_1             0      0     18
+       -> I2C_Start_1                0      0     18
+       -> WriteI2CByte_1             0      0     18
+       -> ReadI2CByte_1              0      0     18
+       -> Sendack                    0      0     18
+       -> I2C_Stop_1                 0      0     18
+     Single_Write_ADXL345            0      0      9
+       -> I2C_Start_1                0      0     18
+       -> WriteI2CByte_1             0      0     18
+       -> WriteI2CByte_1             0      0     18
+       -> WriteI2CByte_1             0      0     18
+       -> I2C_Stop_1                 0      0     18
+     WriteI2CByte_1                  0      0     19
+       -> Delay_1u                   0      0     18
+       -> Delay_1u                   0      0     18
+       -> Delay_1u                   0      0     18
+       -> I2C_Check_ack              0      0     18
+     conversion                      0      0     10
+     displayXYZ                      0      0     21
+       -> HalLcdWriteStringValue     0      0     42
+       -> HalLcdWriteStringValue     0      0     42
+       -> HalLcdWriteStringValue     0      0     42
+       -> HalLcdWriteStringValue     0      0     42
+       -> HalLcdWriteStringValue     0      0     42
+       -> HalLcdWriteStringValue     0      0     42
+
+
+   Segment part sizes:
+
+     Function/Label                 Bytes
+     --------------                 -----
+     _A_P1                             1
+     P1DIR                             1
+     BUFFER                            8
+     dis_data                          2
+     wan                               1
+     qian                              1
+     bai                               1
+     shi                               1
+     ge                                1
+     Delay                           108
+     ??Delay_1u_0                     59
+     conversion                      154
+     I2C_Start_1                      50
+     I2C_Stop_1                       57
+     Sendack                          61
+     I2C_Check_ack                    58
+     WriteI2CByte_1                   73
+     ReadI2CByte_1                    87
+     Single_Write_ADXL345             35
+     Single_Read_ADXL345              48
+     Init_ADXL345                     63
+     Multiple_Read_ADXL345           116
+     displayXYZ                      660
+     ?<Initializer for <Constant "X: -">>
+                                       5
+     ?<Initializer for <Constant "X:  ">>
+                                       5
+     ?<Initializer for <Constant "Y: -">>
+                                       5
+     ?<Initializer for <Constant "Y:  ">>
+                                       5
+     ?<Initializer for <Constant "Z: -">>
+                                       5
+     ?<Initializer for <Constant "Z:  ">>
+                                       5
+     ?<Initializer for __Constant_4079999a>
+                                       4
+     ??Delay?relay                     6
+     ??Delay_1u?relay                  6
+     ??conversion?relay                6
+     ??I2C_Start_1?relay               6
+     ??I2C_Stop_1?relay                6
+     ??Sendack?relay                   6
+     ??I2C_Check_ack?relay             6
+     ??WriteI2CByte_1?relay            6
+     ??ReadI2CByte_1?relay             6
+     ??Single_Write_ADXL345?relay      6
+     ??Single_Read_ADXL345?relay       6
+     ??Init_ADXL345?relay              6
+     ??Multiple_Read_ADXL345?relay     6
+     ??displayXYZ?relay                6
+     ?<Constant "X: -">                5
+     ?<Constant "X:  ">                5
+     ?<Constant "Y: -">                5
+     ?<Constant "Y:  ">                5
+     ?<Constant "Z: -">                5
+     ?<Constant "Z:  ">                5
+     __Constant_4079999a               4
+
+ 
+ 1 629 bytes in segment BANKED_CODE
+    84 bytes in segment BANK_RELAYS
+     2 bytes in segment SFR_AN
+    34 bytes in segment XDATA_I
+    34 bytes in segment XDATA_ID
+    15 bytes in segment XDATA_Z
+ 
+ 1 743 bytes of CODE  memory (+ 4 bytes shared)
+     0 bytes of DATA  memory (+ 2 bytes shared)
+    45 bytes of XDATA memory (+ 4 bytes shared)
+
+Errors: none
+Warnings: none

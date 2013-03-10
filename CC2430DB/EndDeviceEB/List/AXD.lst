@@ -1,6 +1,10 @@
 ###############################################################################
 #                                                                             #
+<<<<<<< HEAD
 # IAR 8051 C/C++ Compiler V7.30B/W32                    10/Mar/2013  13:19:52 #
+=======
+# IAR 8051 C/C++ Compiler V7.30B/W32                    10/Mar/2013  13:26:56 #
+>>>>>>> develop
 # Copyright 2004-2007 IAR Systems. All rights reserved.                       #
 #                                                                             #
 #    Core               =  plain                                              #
@@ -41,8 +45,8 @@
 #                          Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\Sam #
 #                          ples\cc2430-zstack-adxl345\Source\AXD.c" -D        #
 #                          CC2430EB -D AXD_END -D NWK_AUTO_POLL -D REFLECTOR  #
-#                          -D ZTOOL_P1 -D MT_TASK -D xMT_ZDO_FUNC -D          #
-#                          LCD_SUPPORTED=DEBUG -D xPOWER_SAVING -lC           #
+#                          -D xZTOOL_P1 -D xMT_TASK -D xMT_ZDO_FUNC -D        #
+#                          xLCD_SUPPORTED=DEBUG -D xPOWER_SAVING -lC          #
 #                          "C:\Texas Instruments\ZStack-1.4.3-1.2.1\Projects\ #
 #                          zstack\Samples\cc2430-zstack-adxl345\CC2430DB\EndD #
 #                          eviceEB\List\" -lA "C:\Texas                       #
@@ -368,6 +372,7 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\Samples\cc2430-zstack-ad
     208          /*********************************************************************
     209           * EXTERNAL VARIABLES
     210           */
+<<<<<<< HEAD
 
    \                                 In  segment XDATA_Z, align 1, keep-with-next
     211          uint16 test2 = 0;
@@ -384,6 +389,24 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\Samples\cc2430-zstack-ad
     219           */
 
    \                                 In  segment XDATA_Z, align 1, keep-with-next
+=======
+
+   \                                 In  segment XDATA_Z, align 1, keep-with-next
+    211          uint16 test2 = 0;
+   \                     test2:
+   \   000000                DS 2
+   \   000002                REQUIRE __INIT_XDATA_Z
+    212          
+    213          /*********************************************************************
+    214           * EXTERNAL FUNCTIONS
+    215           */
+    216          
+    217          /*********************************************************************
+    218           * LOCAL VARIABLES
+    219           */
+
+   \                                 In  segment XDATA_Z, align 1, keep-with-next
+>>>>>>> develop
     220          byte AXD_TaskID;   // Task ID for internal task/event processing
    \                     AXD_TaskID:
    \   000000                DS 1
@@ -423,8 +446,13 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\Samples\cc2430-zstack-ad
    \                                 In  segment XDATA_Z, align 1, keep-with-next
     232          static uint8 rxBuf[SERIAL_APP_RX_CNT];
    \                     rxBuf:
+<<<<<<< HEAD
    \   000000                DS 80
    \   000050                REQUIRE __INIT_XDATA_Z
+=======
+   \   000000                DS 6
+   \   000006                REQUIRE __INIT_XDATA_Z
+>>>>>>> develop
     233          #endif
     234          
     235          /*********************************************************************
@@ -578,7 +606,11 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\Samples\cc2430-zstack-ad
     303            uartConfig.rx.maxBufSize        = SERIAL_APP_RX_MAX;
    \   00008D   740A         MOV     A,#0xa
    \   00008F   12....       LCALL   ?XSTACK_DISP0_8
+<<<<<<< HEAD
    \   000092   7480         MOV     A,#-0x80
+=======
+   \   000092   7440         MOV     A,#0x40
+>>>>>>> develop
    \   000094   F0           MOVX    @DPTR,A
    \   000095   A3           INC     DPTR
    \   000096   7400         MOV     A,#0x0
@@ -586,7 +618,11 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\Samples\cc2430-zstack-ad
     304            uartConfig.tx.maxBufSize        = SERIAL_APP_TX_MAX;
    \   000099   7412         MOV     A,#0x12
    \   00009B   12....       LCALL   ?XSTACK_DISP0_8
+<<<<<<< HEAD
    \   00009E   7480         MOV     A,#-0x80
+=======
+   \   00009E   7440         MOV     A,#0x40
+>>>>>>> develop
    \   0000A0   F0           MOVX    @DPTR,A
    \   0000A1   A3           INC     DPTR
    \   0000A2   7400         MOV     A,#0x0
@@ -629,6 +665,7 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\Samples\cc2430-zstack-ad
     314            // Update the display
     315          #if defined ( LCD_SUPPORTED )
     316              HalLcdWriteString( "AXD", HAL_LCD_LINE_1 );
+<<<<<<< HEAD
    \   0000D8                ; Setup parameters for call to function HalLcdWriteString
    \   0000D8   7900         MOV     R1,#0x0
    \   0000DA   7A..         MOV     R2,#(`?<Constant "AXD">` & 0xff)
@@ -677,6 +714,51 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\Samples\cc2430-zstack-ad
    \   000111   12....       LCALL   ?DEALLOC_XSTACK8
    \   000114   7F01         MOV     R7,#0x1
    \   000116   02....       LJMP    ?BANKED_LEAVE_XDATA
+=======
+    317          #endif
+    318          
+    319            ZDO_RegisterForZDOMsg( AXD_TaskID, End_Device_Bind_rsp );
+   \   0000D8                ; Setup parameters for call to function ZDO_RegisterForZDOMsg
+   \   0000D8   7A20         MOV     R2,#0x20
+   \   0000DA   7B80         MOV     R3,#-0x80
+   \   0000DC   90....       MOV     DPTR,#AXD_TaskID
+   \   0000DF   E0           MOVX    A,@DPTR
+   \   0000E0   F9           MOV     R1,A
+   \   0000E1   12....       LCALL   ??ZDO_RegisterForZDOMsg?relay
+    320            ZDO_RegisterForZDOMsg( AXD_TaskID, Match_Desc_rsp );
+   \   0000E4                ; Setup parameters for call to function ZDO_RegisterForZDOMsg
+   \   0000E4   7A06         MOV     R2,#0x6
+   \   0000E6   7B80         MOV     R3,#-0x80
+   \   0000E8   90....       MOV     DPTR,#AXD_TaskID
+   \   0000EB   E0           MOVX    A,@DPTR
+   \   0000EC   F9           MOV     R1,A
+   \   0000ED   12....       LCALL   ??ZDO_RegisterForZDOMsg?relay
+    321            
+    322            AXD_Group.ID = AXD_GROUP;
+   \   0000F0   90....       MOV     DPTR,#AXD_Group
+   \   0000F3   7401         MOV     A,#0x1
+   \   0000F5   F0           MOVX    @DPTR,A
+   \   0000F6   A3           INC     DPTR
+   \   0000F7   7400         MOV     A,#0x0
+   \   0000F9   F0           MOVX    @DPTR,A
+    323            aps_AddGroup(AXD_ENDPOINT,&AXD_Group);
+   \   0000FA                ; Setup parameters for call to function aps_AddGroup
+   \   0000FA   7A..         MOV     R2,#(AXD_Group & 0xff)
+   \   0000FC   7B..         MOV     R3,#((AXD_Group >> 8) & 0xff)
+   \   0000FE   790A         MOV     R1,#0xa
+   \   000100   12....       LCALL   ??aps_AddGroup?relay
+    324            //下面是用户自定义的初始化
+    325          #ifdef AXD_END
+    326            Init_ADXL345();
+   \   000103                ; Setup parameters for call to function Init_ADXL345
+   \   000103   12....       LCALL   ??Init_ADXL345?relay
+    327          #endif
+    328          }
+   \   000106   741D         MOV     A,#0x1d
+   \   000108   12....       LCALL   ?DEALLOC_XSTACK8
+   \   00010B   7F01         MOV     R7,#0x1
+   \   00010D   02....       LJMP    ?BANKED_LEAVE_XDATA
+>>>>>>> develop
     329          
     330          /*********************************************************************
     331           * @fn      AXD_ProcessEvent
@@ -948,7 +1030,11 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\Samples\cc2430-zstack-ad
     437          #endif
     438              osal_start_timerEx( AXD_TaskID,
     439                                  AXD_SEND_MSG_EVT,
+<<<<<<< HEAD
     440                                  (AXD_SEND_MSG_TIMEOUT/5));
+=======
+    440                                  (AXD_SEND_MSG_TIMEOUT/5) );
+>>>>>>> develop
    \   000106                ; Setup parameters for call to function osal_start_timerEx
    \   000106   7CE8         MOV     R4,#-0x18
    \   000108   7D03         MOV     R5,#0x3
@@ -1442,9 +1528,12 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\Samples\cc2430-zstack-ad
     614            {
     615              case AXD_CMD_ID:
     616                displayXYZ(pkt->cmd.Data);
+<<<<<<< HEAD
                                   ^
 Warning[Pe167]: argument of type "unsigned char *" is incompatible with
           parameter of type "char *"
+=======
+>>>>>>> develop
    \                     ??AXD_MessageMSGCB_1:
    \   000028                ; Setup parameters for call to function displayXYZ
    \   000028   EE           MOV     A,R6
@@ -1582,9 +1671,12 @@ Warning[Pe167]: argument of type "unsigned char *" is incompatible with
    \   000005                ; Setup parameters for call to function Multiple_Read_ADXL345
    \   000005   12....       LCALL   ??Multiple_Read_ADXL345?relay
     646            displayXYZ((uint8 *)BUFFER);
+<<<<<<< HEAD
                               ^
 Warning[Pe167]: argument of type "uint8 *" is incompatible with parameter of
           type "char *"
+=======
+>>>>>>> develop
    \   000008                ; Setup parameters for call to function displayXYZ
    \   000008   7A..         MOV     R2,#(BUFFER & 0xff)
    \   00000A   7B..         MOV     R3,#((BUFFER >> 8) & 0xff)
@@ -1825,7 +1917,11 @@ Warning[Pe167]: argument of type "uint8 *" is incompatible with parameter of
     750            if ( !(rxLen = HalUARTRead( port, rxBuf, SERIAL_APP_RX_CNT )) )
    \                     ??rxCB_Loopback_0:
    \   00004E                ; Setup parameters for call to function HalUARTRead
+<<<<<<< HEAD
    \   00004E   7C50         MOV     R4,#0x50
+=======
+   \   00004E   7C06         MOV     R4,#0x6
+>>>>>>> develop
    \   000050   7D00         MOV     R5,#0x0
    \   000052   7A..         MOV     R2,#(rxBuf & 0xff)
    \   000054   7B..         MOV     R3,#((rxBuf >> 8) & 0xff)
@@ -1891,14 +1987,17 @@ Warning[Pe167]: argument of type "uint8 *" is incompatible with parameter of
     764          }
 
    \                                 In  segment XDATA_ID, align 1, keep-with-next
-   \                     `?<Initializer for <Constant "AXD">>`:
-   \   000000   41584400     DB "AXD"
-
-   \                                 In  segment XDATA_ID, align 1, keep-with-next
    \                     `?<Initializer for <Constant "R: ">>`:
    \   000000   523A2000     DB "R: "
 
    \                                 In  segment XDATA_ID, align 1, keep-with-next
+<<<<<<< HEAD
+   \                     `?<Initializer for <Constant "R: ">>`:
+   \   000000   523A2000     DB "R: "
+
+   \                                 In  segment XDATA_ID, align 1, keep-with-next
+=======
+>>>>>>> develop
    \                     `?<Initializer for <Constant "Q: ">>`:
    \   000000   513A2000     DB "Q: "
 
@@ -1957,18 +2056,21 @@ Warning[Pe167]: argument of type "uint8 *" is incompatible with parameter of
    \   000003   ......       DC24    rxCB_Loopback
 
    \                                 In  segment XDATA_I, align 1, keep-with-next
-   \                     `?<Constant "AXD">`:
-   \   000000                DS 4
-   \   000004                REQUIRE `?<Initializer for <Constant "AXD">>`
-   \   000004                REQUIRE __INIT_XDATA_I
-
-   \                                 In  segment XDATA_I, align 1, keep-with-next
    \                     `?<Constant "R: ">`:
    \   000000                DS 4
    \   000004                REQUIRE `?<Initializer for <Constant "R: ">>`
    \   000004                REQUIRE __INIT_XDATA_I
 
    \                                 In  segment XDATA_I, align 1, keep-with-next
+<<<<<<< HEAD
+   \                     `?<Constant "R: ">`:
+   \   000000                DS 4
+   \   000004                REQUIRE `?<Initializer for <Constant "R: ">>`
+   \   000004                REQUIRE __INIT_XDATA_I
+
+   \                                 In  segment XDATA_I, align 1, keep-with-next
+=======
+>>>>>>> develop
    \                     `?<Constant "Q: ">`:
    \   000000                DS 4
    \   000004                REQUIRE `?<Initializer for <Constant "Q: ">>`
@@ -2060,7 +2162,10 @@ Warning[Pe167]: argument of type "uint8 *" is incompatible with parameter of
        -> afRegister                   0      0     76
        -> RegisterForKeys              0      0     76
        -> HalUARTOpen                  0      0     76
+<<<<<<< HEAD
        -> HalLcdWriteString            0      0     76
+=======
+>>>>>>> develop
        -> ZDO_RegisterForZDOMsg        0      0     76
        -> ZDO_RegisterForZDOMsg        0      0     76
        -> aps_AddGroup                 0      0     76
@@ -2116,8 +2221,13 @@ Warning[Pe167]: argument of type "uint8 *" is incompatible with parameter of
      AXD_TransID                       1
      AXD_DstAddr                       4
      rxLen                             1
+<<<<<<< HEAD
      rxBuf                            80
      AXD_Init                        281
+=======
+     rxBuf                             6
+     AXD_Init                        272
+>>>>>>> develop
      AXD_ProcessEvent                314
      AXD_ProcessZDOMsgs              186
      AXD_HandleKeys                  266
@@ -2125,12 +2235,19 @@ Warning[Pe167]: argument of type "uint8 *" is incompatible with parameter of
      AXD_SendTheMessage              102
      AXD_ReceiveDataIndication        68
      rxCB_Loopback                   165
+<<<<<<< HEAD
      ?<Initializer for <Constant "AXD">>
                                        4
      ?<Initializer for <Constant "R: ">>
                                        4
      ?<Initializer for <Constant "Q: ">>
                                        4
+=======
+     ?<Initializer for <Constant "R: ">>
+                                       4
+     ?<Initializer for <Constant "Q: ">>
+                                       4
+>>>>>>> develop
      ?<Initializer for AXD_ClusterList>
                                        6
      ?<Initializer for AXD_SimpleDesc>
@@ -2144,11 +2261,15 @@ Warning[Pe167]: argument of type "uint8 *" is incompatible with parameter of
      ??AXD_ReceiveDataIndication?relay
                                        6
      ??rxCB_Loopback?relay             6
+<<<<<<< HEAD
      ?<Constant "AXD">                 4
+=======
+>>>>>>> develop
      ?<Constant "R: ">                 4
      ?<Constant "Q: ">                 4
 
  
+<<<<<<< HEAD
  1 578 bytes in segment BANKED_CODE
     48 bytes in segment BANK_RELAYS
     30 bytes in segment XDATA_I
@@ -2160,3 +2281,16 @@ Warning[Pe167]: argument of type "uint8 *" is incompatible with parameter of
 
 Errors: none
 Warnings: 2
+=======
+ 1 569 bytes in segment BANKED_CODE
+    48 bytes in segment BANK_RELAYS
+    26 bytes in segment XDATA_I
+    26 bytes in segment XDATA_ID
+    40 bytes in segment XDATA_Z
+ 
+ 1 643 bytes of CODE  memory
+    66 bytes of XDATA memory
+
+Errors: none
+Warnings: none
+>>>>>>> develop

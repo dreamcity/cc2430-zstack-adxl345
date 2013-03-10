@@ -1,6 +1,6 @@
 ///////////////////////////////////////////////////////////////////////////////
 //                                                                            /
-// IAR 8051 C/C++ Compiler V7.30B/W32                   19/Dec/2012  20:32:01 /
+// IAR 8051 C/C++ Compiler V7.30B/W32                   06/Jan/2013  20:02:36 /
 // Copyright 2004-2007 IAR Systems. All rights reserved.                      /
 //                                                                            /
 //    Core               =  plain                                             /
@@ -41,8 +41,9 @@
 //                          -DRESPONSE_POLL_RATE=100) -DREJOIN_POLL_RATE=440  /
 //                          "C:\Texas Instruments\ZStack-1.4.3-1.2.1\Projects /
 //                          \zstack\Samples\AXDApp\Source\ReadAXD.c" -D       /
-//                          CC2430EB -D REFLECTOR -D ZTOOL_P1 -D MT_TASK -D   /
-//                          MT_ZDO_FUNC -D LCD_SUPPORTED=DEBUG -lC "C:\Texas  /
+//                          CC2430EB -D AXD_ROUTER -D REFLECTOR -D ZTOOL_P1   /
+//                          -D MT_TASK -D xMT_ZDO_FUNC -D                     /
+//                          xLCD_SUPPORTED=DEBUG -lC "C:\Texas                /
 //                          Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\Sa /
 //                          mples\AXDApp\CC2430DB\RouterEB\List\" -lA         /
 //                          "C:\Texas Instruments\ZStack-1.4.3-1.2.1\Projects /
@@ -146,14 +147,12 @@
 
         EXTERN ?BDISPATCH
         EXTERN ?BRET
-        EXTERN __INIT_XDATA_I
 
         PUBLIC ??zb_HandleOsalEvent?relay
         FUNCTION ??zb_HandleOsalEvent?relay,0203H
         PUBLIC zb_HandleOsalEvent
-        FUNCTION zb_HandleOsalEvent,021203H
+        FUNCTION zb_HandleOsalEvent,0203H
         ARGFRAME XSTACK, 0, STACK
-        LOCFRAME ISTACK, 2, STACK
         
         CFI Names cfiNames0
         CFI StackFrame CFA_SP SP DATA
@@ -234,20 +233,8 @@
         CFI ?RET_LOW Frame(CFA_SP, 1)
         CFI EndCommon cfiCommon0
         
-HalLcdWriteString   SYMBOL "HalLcdWriteString"
-??HalLcdWriteString?relay SYMBOL "?relay", HalLcdWriteString
 zb_HandleOsalEvent  SYMBOL "zb_HandleOsalEvent"
 ??zb_HandleOsalEvent?relay SYMBOL "?relay", zb_HandleOsalEvent
-
-        EXTERN HalLcdWriteString
-        FUNCTION HalLcdWriteString,0202H
-        ARGFRAME ISTACK, 2, STACK
-        ARGFRAME PSTACK, 0, STACK
-        ARGFRAME XSTACK, 0, STACK
-        ARGFRAME IOVERLAY, 0, STATIC
-        ARGFRAME DOVERLAY, 0, STATIC
-        EXTERN ??HalLcdWriteString?relay
-        FUNCTION ??HalLcdWriteString?relay,00H
 
 // C:\Texas Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\Samples\AXDApp\Source\ReadAXD.c
 //    1 #include "ZComDef.h"
@@ -261,68 +248,37 @@ zb_HandleOsalEvent  SYMBOL "zb_HandleOsalEvent"
 //    9 //#include "SimpleApp.h"
 //   10 
 //   11 #include "readaxd.h"
-//   12 
-//   13 /*********************************************************************
-//   14  * CONSTANTS
-//   15  */
-//   16 
-//   17 // Application States
-//   18 #define APP_INIT                           0    // Initial state
-//   19 #define APP_START                          1    // Sensor has joined network
-//   20 #define APP_BOUND                          2    // Sensor is bound to collector
-//   21 
-//   22 // Application osal event identifiers
-//   23 // Bit mask of events ( from 0x0000 to 0x00FF )
-//   24 #define MY_START_EVT                0x0001
-//   25 #define MY_REPORT_TEMP_EVT          0x0002
-//   26 #define MY_REPORT_BATT_EVT          0x0004
-//   27 #define MY_FIND_COLLECTOR_EVT       0x0008
+//   12 #include "adxl345.h"
+//   13 #include "AXD.h"
+//   14 
+//   15 /*********************************************************************
+//   16  * CONSTANTS
+//   17  */
+//   18 
+//   19 // Application States
+//   20 #define APP_INIT                           0    // Initial state
+//   21 #define APP_START                          1    // Sensor has joined network
+//   22 #define APP_BOUND                          2    // Sensor is bound to collector
+//   23 
+//   24 // Application osal event identifiers
+//   25 // Bit mask of events ( from 0x0000 to 0x00FF )
+//   26 #define MY_START_EVT                0x0001
+//   27 #define MY_REPORT_TEMP_EVT          0x0002
+//   28 #define MY_REPORT_BATT_EVT          0x0004
+//   29 #define MY_FIND_COLLECTOR_EVT       0x0008
 
         RSEG BANKED_CODE:CODE:NOROOT(0)
-//   28 void zb_HandleOsalEvent( uint16 event )
+//   30 void zb_HandleOsalEvent( uint16 event )
 zb_HandleOsalEvent:
         CFI Block cfiBlock0 Using cfiCommon0
         CFI Function zb_HandleOsalEvent
-//   29 {
-        FUNCALL zb_HandleOsalEvent, HalLcdWriteString
-        LOCFRAME ISTACK, 2, STACK
-        LOCFRAME PSTACK, 0, STACK
-        LOCFRAME XSTACK, 0, STACK
-        LOCFRAME IOVERLAY, 0, STATIC
-        LOCFRAME DOVERLAY, 0, STATIC
-        ARGFRAME ISTACK, 2, STACK
-        ARGFRAME PSTACK, 0, STACK
-        ARGFRAME XSTACK, 0, STACK
-        ARGFRAME IOVERLAY, 0, STATIC
-        ARGFRAME DOVERLAY, 0, STATIC
-        PUSH    DPL
-        CFI DPL0 Frame(CFA_SP, 4)
-        CFI CFA_SP SP+-4
-        PUSH    DPH
-        CFI DPH0 Frame(CFA_SP, 5)
-        CFI CFA_SP SP+-5
-        ; Saved register size: 2
+//   31 {
+        ; Saved register size: 0
         ; Auto size: 0
-//   30   HalLcdWriteString( "SampleApp", HAL_LCD_LINE_1 );
-        ; Setup parameters for call to function HalLcdWriteString
-        MOV     R1,#0x0
-        MOV     R2,#(`?<Constant "SampleApp">` & 0xff)
-        MOV     R3,#((`?<Constant "SampleApp">` >> 8) & 0xff)
-        LCALL   ??HalLcdWriteString?relay
-//   31 }
-        POP     DPH
-        CFI DPH0 SameValue
-        CFI CFA_SP SP+-4
-        POP     DPL
-        CFI DPL0 SameValue
-        CFI CFA_SP SP+-3
+//   32   
+//   33 }
         LJMP    ?BRET
         CFI EndBlock cfiBlock0
-
-        RSEG XDATA_ID:CODE:NOROOT(0)
-        DATA
-`?<Initializer for <Constant "SampleApp">>`:
-        DB "SampleApp"
 
         RSEG BANK_RELAYS:CODE:REORDER:NOROOT(0)
 ??zb_HandleOsalEvent?relay:
@@ -330,22 +286,12 @@ zb_HandleOsalEvent:
         DATA
         DC24    zb_HandleOsalEvent
 
-        RSEG XDATA_I:XDATA:NOROOT(0)
-        DATA
-`?<Constant "SampleApp">`:
-        DS 10
-        REQUIRE `?<Initializer for <Constant "SampleApp">>`
-        REQUIRE __INIT_XDATA_I
-
         END
 // 
-// 20 bytes in segment BANKED_CODE
-//  6 bytes in segment BANK_RELAYS
-// 10 bytes in segment XDATA_I
-// 10 bytes in segment XDATA_ID
+// 3 bytes in segment BANKED_CODE
+// 6 bytes in segment BANK_RELAYS
 // 
-// 36 bytes of CODE  memory
-// 10 bytes of XDATA memory
+// 9 bytes of CODE memory
 //
 //Errors: none
 //Warnings: none
