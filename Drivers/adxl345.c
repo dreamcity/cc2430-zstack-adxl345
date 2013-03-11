@@ -14,7 +14,7 @@
 #define FALSE 0
 #define	SlaveAddress 0xA6 //定义器件在IIC总线中的从地址,根据ALT  ADDRESS地址引脚不同修改
 
-signed char BUFFER[13];
+INT8U BUFFER[13];
 int  dis_data;
 
 char wan,qian,bai,shi,ge;
@@ -72,31 +72,31 @@ void Delay_1u(unsigned int microSecs) {
 void conversion(void)   
 {  
   BUFFER[12] = 0xff;
-  float temp_data;
-  if (BUFFER[7] < 0)
+  INT16U temp_data;
+  if ((BUFFER[7] & 0x80) == 0x80)
   {
     BUFFER[12] &= ~0x01;    
   }
   temp_data = ((BUFFER[7] & 0x0f) << 8) + BUFFER[6];    
-  temp_data = (temp_data / 8192) * 100;
-  BUFFER[6] = ((INT8U)temp_data) % 10 + '0';
-  BUFFER[7] = ((INT8U)temp_data) / 10 + '0';
-    if (BUFFER[9] < 0)
+  temp_data = (INT16U)(((float)temp_data /4096 ) * 100);
+  BUFFER[6] = (INT8U)((temp_data) % 10 + '0');
+  BUFFER[7] = (INT8U)((temp_data) / 10 + '0');
+    if ((BUFFER[9] & 0x80) == 0x80)
   {
     BUFFER[12] &= ~0x02;    
   }
   temp_data = ((BUFFER[9] & 0x0f) << 8) + BUFFER[8];    
-  temp_data = (temp_data / 8192) * 100;
-  BUFFER[8] = ((INT8U)temp_data) % 10 + '0';
-  BUFFER[9] = ((INT8U)temp_data) / 10 + '0';
-    if (BUFFER[11] < 0)
+  temp_data = (INT16U)(((float)temp_data / 4096) * 100);
+  BUFFER[8] = (INT8U)((temp_data) % 10 + '0');
+  BUFFER[9] = (INT8U)((temp_data) / 10 + '0');
+    if ((BUFFER[11] & 0x80) == 0x80)
   {
     BUFFER[12] &= ~0x04;    
   }
   temp_data = ((BUFFER[11] & 0x0f) << 8) + BUFFER[10];    
-  temp_data = (temp_data / 8192) * 100;
-  BUFFER[10] = ((INT8U)temp_data) % 10 + '0';
-  BUFFER[11] = ((INT8U)temp_data) / 10 + '0';
+  temp_data = (INT16U)(((float)temp_data / 4096) * 100);
+  BUFFER[10] = (INT8U)((temp_data) % 10 + '0');
+  BUFFER[11] = (INT8U)((temp_data) / 10 + '0');
 } 
 
 void I2C_Start_1(void)
