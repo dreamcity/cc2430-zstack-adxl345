@@ -449,7 +449,7 @@ UINT16 AXD_ProcessEvent( byte task_id, UINT16 events )
 #endif
     osal_start_timerEx( AXD_TaskID,
                         AXD_SEND_MSG_EVT,
-                        (AXD_SEND_MSG_TIMEOUT/50) );
+                        (AXD_SEND_MSG_TIMEOUT/100) );
 
     // return unprocessed events
     return (events ^ AXD_SEND_MSG_EVT);
@@ -656,7 +656,7 @@ void AXD_SendTheMessage( void )
 
   Multiple_Read_ADXL345();
   conversion();
-  displayXYZ((uint8 *)BUFFER);
+//  displayXYZ((uint8 *)BUFFER);
   BUFFER[3] = myApp_ReadTemperature();
   BUFFER[2] = BUFFER[3] % 10 + '0';
   BUFFER[3] = BUFFER[3] / 10 + '0';

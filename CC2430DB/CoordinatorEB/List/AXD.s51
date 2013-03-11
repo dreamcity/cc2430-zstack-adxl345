@@ -1,6 +1,6 @@
 ///////////////////////////////////////////////////////////////////////////////
 //                                                                            /
-// IAR 8051 C/C++ Compiler V7.30B/W32                   11/Mar/2013  14:40:36 /
+// IAR 8051 C/C++ Compiler V7.30B/W32                   11/Mar/2013  16:29:55 /
 // Copyright 2004-2007 IAR Systems. All rights reserved.                      /
 //                                                                            /
 //    Core               =  plain                                             /
@@ -1670,9 +1670,9 @@ AXD_ProcessEvent:
 //  449 #endif
 //  450     osal_start_timerEx( AXD_TaskID,
 //  451                         AXD_SEND_MSG_EVT,
-//  452                         (AXD_SEND_MSG_TIMEOUT/50) );
+//  452                         (AXD_SEND_MSG_TIMEOUT/100) );
         ; Setup parameters for call to function osal_start_timerEx
-        MOV     R4,#0x64
+        MOV     R4,#0x32
         MOV     R5,#0x0
         LCALL   ?Subroutine3 & 0xFFFF
 //  453 
@@ -2757,7 +2757,7 @@ AXD_SendTheMessage:
 //  656 
 //  657   Multiple_Read_ADXL345();
 //  658   conversion();
-//  659   displayXYZ((uint8 *)BUFFER);
+//  659 //  displayXYZ((uint8 *)BUFFER);
 //  660   BUFFER[3] = myApp_ReadTemperature();
 //  661   BUFFER[2] = BUFFER[3] % 10 + '0';
 //  662   BUFFER[3] = BUFFER[3] / 10 + '0';
