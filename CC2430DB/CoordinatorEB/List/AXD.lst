@@ -1,6 +1,6 @@
 ###############################################################################
 #                                                                             #
-# IAR 8051 C/C++ Compiler V7.30B/W32                    12/Mar/2013  15:45:17 #
+# IAR 8051 C/C++ Compiler V7.30B/W32                    12/Mar/2013  16:51:56 #
 # Copyright 2004-2007 IAR Systems. All rights reserved.                       #
 #                                                                             #
 #    Core               =  plain                                              #
@@ -263,335 +263,336 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\Samples\cc2430-zstack-ad
     105          }
     106          
     107          #define HAL_ADC_REF_125V    0x00    /* Internal 1.25V Reference */
-    108          #define HAL_ADC_DEC_064     0x00    /* Decimate by 64 : 8-bit resolution */
-    109          #define HAL_ADC_DEC_128     0x10    /* Decimate by 128 : 10-bit resolution */
-    110          #define HAL_ADC_DEC_512     0x30    /* Decimate by 512 : 14-bit resolution */
-    111          #define HAL_ADC_CHN_VDD3    0x0f    /* Input channel: VDD/3 */
-    112          #define HAL_ADC_CHN_DIFF_0_1 0x08
-    113          #define HAL_ADC_CHN_DIFF_2_3 0x09
-    114          #define HAL_ADC_CHN_TEMP    0x0e    /* Temperature sensor */
-    115          #define ADC_TEMP            0x00
-    116          #define ADC_PULSE           0x01
-    117          
-    118          #define DEVICE_A 0x01;
-    119          #define DEVICE_B 0x02;
-    120          #define DEVICE_C 0x03;
-    121          /*********************************************************************
-    122           * CONSTANTS
-    123           */
-    124          #define ZB_USER_EVENTS                    0x00FF
-    125          #if !defined( SERIAL_APP_PORT )
-    126            #define SERIAL_APP_PORT  0
-    127          #endif
-    128          
-    129          #if !defined( SERIAL_APP_BAUD )
-    130            // CC2430 only allows 38.4k or 115.2k.
-    131            //#define SERIAL_APP_BAUD  HAL_UART_BR_38400
-    132            #define SERIAL_APP_BAUD  HAL_UART_BR_115200
-    133          #endif
-    134          
-    135          // When the Rx buf space is less than this threshold, invoke the Rx callback.
-    136          #if !defined( SERIAL_APP_THRESH )
-    137            #define SERIAL_APP_THRESH  48
-    138          #endif
-    139          
-    140          #if !defined( SERIAL_APP_RX_MAX )
-    141            #if (defined( HAL_UART_DMA )) && HAL_UART_DMA
-    142              #define SERIAL_APP_RX_MAX  128
-    143            #else
-    144              /* The generic safe Rx minimum is 48, but if you know your PC App will not
-    145               * continue to send more than a byte after receiving the ~CTS, lower max
-    146               * here and safe min in _hal_uart.c to just 8.
-    147               */
-    148              #define SERIAL_APP_RX_MAX  64
-    149            #endif
-    150          #endif
-    151          
-    152          #if !defined( SERIAL_APP_TX_MAX )
-    153            #if (defined( HAL_UART_DMA )) && HAL_UART_DMA
-    154            #define SERIAL_APP_TX_MAX  128
-    155            #else
-    156              #define SERIAL_APP_TX_MAX  64
-    157            #endif
-    158          #endif
-    159          
-    160          // Millisecs of idle time after a byte is received before invoking Rx callback.
-    161          #if !defined( SERIAL_APP_IDLE )
-    162            #define SERIAL_APP_IDLE  6
-    163          #endif
-    164          
-    165          // This is the desired byte count per OTA message.
-    166          #if !defined( SERIAL_APP_RX_CNT )
-    167            #if (defined( HAL_UART_DMA )) && HAL_UART_DMA
-    168              #define SERIAL_APP_RX_CNT  80
-    169            #else
-    170              #define SERIAL_APP_RX_CNT  6
-    171            #endif
-    172          #endif
-    173          
-    174          // Loopback Rx bytes to Tx for thruput testing.
-    175          #if !defined( SERIAL_APP_LOOPBACK )
-    176            #define SERIAL_APP_LOOPBACK  TRUE
-    177          #endif
-    178          
-    179          #if SERIAL_APP_LOOPBACK
-    180            #define SERIALAPP_TX_RTRY_EVT      0x0010
-    181            #define SERIALAPP_TX_RTRY_TIMEOUT  250
-    182          #endif
-    183          
-    184          #define SERIAL_APP_RSP_CNT  4
-    185          
-    186          /*********************************************************************
-    187           * TYPEDEFS
-    188           */
-    189          
-    190          /*********************************************************************
-    191           * GLOBAL VARIABLES
-    192           */
+    108          #define HAL_ADC_REF_AIN7    0x40    /* AIN7 Reference */
+    109          #define HAL_ADC_DEC_064     0x00    /* Decimate by 64 : 8-bit resolution */
+    110          #define HAL_ADC_DEC_128     0x10    /* Decimate by 128 : 10-bit resolution */
+    111          #define HAL_ADC_DEC_512     0x30    /* Decimate by 512 : 14-bit resolution */
+    112          #define HAL_ADC_CHN_VDD3    0x0f    /* Input channel: VDD/3 */
+    113          #define HAL_ADC_CHN_AIN1    0x01    /* AIN1 */
+    114          #define HAL_ADC_CHN_AIN2    0x02    /* AIN2 */
+    115          #define HAL_ADC_CHN_TEMP    0x0e    /* Temperature sensor */
+    116          #define ADC_TEMP            0x00
+    117          #define ADC_PULSE           0x01
+    118          
+    119          #define DEVICE_A 0x01;
+    120          #define DEVICE_B 0x02;
+    121          #define DEVICE_C 0x03;
+    122          /*********************************************************************
+    123           * CONSTANTS
+    124           */
+    125          #define ZB_USER_EVENTS                    0x00FF
+    126          #if !defined( SERIAL_APP_PORT )
+    127            #define SERIAL_APP_PORT  0
+    128          #endif
+    129          
+    130          #if !defined( SERIAL_APP_BAUD )
+    131            // CC2430 only allows 38.4k or 115.2k.
+    132            //#define SERIAL_APP_BAUD  HAL_UART_BR_38400
+    133            #define SERIAL_APP_BAUD  HAL_UART_BR_115200
+    134          #endif
+    135          
+    136          // When the Rx buf space is less than this threshold, invoke the Rx callback.
+    137          #if !defined( SERIAL_APP_THRESH )
+    138            #define SERIAL_APP_THRESH  48
+    139          #endif
+    140          
+    141          #if !defined( SERIAL_APP_RX_MAX )
+    142            #if (defined( HAL_UART_DMA )) && HAL_UART_DMA
+    143              #define SERIAL_APP_RX_MAX  128
+    144            #else
+    145              /* The generic safe Rx minimum is 48, but if you know your PC App will not
+    146               * continue to send more than a byte after receiving the ~CTS, lower max
+    147               * here and safe min in _hal_uart.c to just 8.
+    148               */
+    149              #define SERIAL_APP_RX_MAX  64
+    150            #endif
+    151          #endif
+    152          
+    153          #if !defined( SERIAL_APP_TX_MAX )
+    154            #if (defined( HAL_UART_DMA )) && HAL_UART_DMA
+    155            #define SERIAL_APP_TX_MAX  128
+    156            #else
+    157              #define SERIAL_APP_TX_MAX  64
+    158            #endif
+    159          #endif
+    160          
+    161          // Millisecs of idle time after a byte is received before invoking Rx callback.
+    162          #if !defined( SERIAL_APP_IDLE )
+    163            #define SERIAL_APP_IDLE  6
+    164          #endif
+    165          
+    166          // This is the desired byte count per OTA message.
+    167          #if !defined( SERIAL_APP_RX_CNT )
+    168            #if (defined( HAL_UART_DMA )) && HAL_UART_DMA
+    169              #define SERIAL_APP_RX_CNT  80
+    170            #else
+    171              #define SERIAL_APP_RX_CNT  6
+    172            #endif
+    173          #endif
+    174          
+    175          // Loopback Rx bytes to Tx for thruput testing.
+    176          #if !defined( SERIAL_APP_LOOPBACK )
+    177            #define SERIAL_APP_LOOPBACK  TRUE
+    178          #endif
+    179          
+    180          #if SERIAL_APP_LOOPBACK
+    181            #define SERIALAPP_TX_RTRY_EVT      0x0010
+    182            #define SERIALAPP_TX_RTRY_TIMEOUT  250
+    183          #endif
+    184          
+    185          #define SERIAL_APP_RSP_CNT  4
+    186          
+    187          /*********************************************************************
+    188           * TYPEDEFS
+    189           */
+    190          
+    191          /*********************************************************************
+    192           * GLOBAL VARIABLES
+    193           */
 
    \                                 In  segment XDATA_Z, align 1, keep-with-next
-    193          aps_Group_t AXD_Group;
+    194          aps_Group_t AXD_Group;
    \                     AXD_Group:
    \   000000                DS 18
    \   000012                REQUIRE __INIT_XDATA_Z
-    194          
-    195          // This list should be filled with Application specific Cluster IDs.
+    195          
+    196          // This list should be filled with Application specific Cluster IDs.
 
    \                                 In  segment XDATA_I, align 1, keep-with-next
-    196          const cId_t AXD_ClusterList[AXD_MAX_CLUSTERS] =
+    197          const cId_t AXD_ClusterList[AXD_MAX_CLUSTERS] =
    \                     AXD_ClusterList:
    \   000000                DS 6
    \   000006                REQUIRE `?<Initializer for AXD_ClusterList>`
    \   000006                REQUIRE __INIT_XDATA_I
-    197          {
-    198            AXD_CLUSTERID,
-    199            AXD_TEST_CLUSTERID
-    200          };
-    201          
+    198          {
+    199            AXD_CLUSTERID,
+    200            AXD_TEST_CLUSTERID
+    201          };
+    202          
 
    \                                 In  segment XDATA_I, align 1, keep-with-next
-    202          const SimpleDescriptionFormat_t AXD_SimpleDesc =
+    203          const SimpleDescriptionFormat_t AXD_SimpleDesc =
    \                     AXD_SimpleDesc:
    \   000000                DS 12
    \   00000C                REQUIRE `?<Initializer for AXD_SimpleDesc>`
    \   00000C                REQUIRE __INIT_XDATA_I
-    203          {
-    204            AXD_ENDPOINT,              //  int Endpoint;
-    205            AXD_PROFID,                //  uint16 AppProfId[2];
-    206            AXD_DEVICEID,              //  uint16 AppDeviceId[2];
-    207            AXD_DEVICE_VERSION,        //  int   AppDevVer:4;
-    208            AXD_FLAGS,                 //  int   AppFlags:4;
-    209            AXD_MAX_CLUSTERS,          //  byte  AppNumInClusters;
-    210            (cId_t *)AXD_ClusterList,  //  byte *pAppInClusterList;
-    211            AXD_MAX_CLUSTERS,          //  byte  AppNumInClusters;
-    212            (cId_t *)AXD_ClusterList   //  byte *pAppInClusterList;
-    213          };
-    214          
-    215          // This is the Endpoint/Interface description.  It is defined here, but
-    216          // filled-in in AXD_Init().  Another way to go would be to fill
-    217          // in the structure here and make it a "const" (in code space).  The
-    218          // way it's defined in this sample app it is define in RAM.
+    204          {
+    205            AXD_ENDPOINT,              //  int Endpoint;
+    206            AXD_PROFID,                //  uint16 AppProfId[2];
+    207            AXD_DEVICEID,              //  uint16 AppDeviceId[2];
+    208            AXD_DEVICE_VERSION,        //  int   AppDevVer:4;
+    209            AXD_FLAGS,                 //  int   AppFlags:4;
+    210            AXD_MAX_CLUSTERS,          //  byte  AppNumInClusters;
+    211            (cId_t *)AXD_ClusterList,  //  byte *pAppInClusterList;
+    212            AXD_MAX_CLUSTERS,          //  byte  AppNumInClusters;
+    213            (cId_t *)AXD_ClusterList   //  byte *pAppInClusterList;
+    214          };
+    215          
+    216          // This is the Endpoint/Interface description.  It is defined here, but
+    217          // filled-in in AXD_Init().  Another way to go would be to fill
+    218          // in the structure here and make it a "const" (in code space).  The
+    219          // way it's defined in this sample app it is define in RAM.
 
    \                                 In  segment XDATA_Z, align 1, keep-with-next
-    219          endPointDesc_t AXD_epDesc;
+    220          endPointDesc_t AXD_epDesc;
    \                     AXD_epDesc:
    \   000000                DS 6
    \   000006                REQUIRE __INIT_XDATA_Z
-    220          
-    221          /*********************************************************************
-    222           * EXTERNAL VARIABLES
-    223           */
+    221          
+    222          /*********************************************************************
+    223           * EXTERNAL VARIABLES
+    224           */
 
    \                                 In  segment XDATA_Z, align 1, keep-with-next
-    224          uint16 test2 = 0;
+    225          uint16 test2 = 0;
    \                     test2:
    \   000000                DS 2
    \   000002                REQUIRE __INIT_XDATA_Z
-    225          
-    226          /*********************************************************************
-    227           * EXTERNAL FUNCTIONS
-    228           */
-    229          
-    230          /*********************************************************************
-    231           * LOCAL VARIABLES
-    232           */
+    226          
+    227          /*********************************************************************
+    228           * EXTERNAL FUNCTIONS
+    229           */
+    230          
+    231          /*********************************************************************
+    232           * LOCAL VARIABLES
+    233           */
 
    \                                 In  segment XDATA_Z, align 1, keep-with-next
-    233          byte AXD_TaskID;   // Task ID for internal task/event processing
+    234          byte AXD_TaskID;   // Task ID for internal task/event processing
    \                     AXD_TaskID:
    \   000000                DS 1
    \   000001                REQUIRE __INIT_XDATA_Z
-    234                                    // This variable will be received when
-    235                                    // AXD_Init() is called.
+    235                                    // This variable will be received when
+    236                                    // AXD_Init() is called.
 
    \                                 In  segment XDATA_Z, align 1, keep-with-next
-    236          devStates_t AXD_NwkState;
+    237          devStates_t AXD_NwkState;
    \                     AXD_NwkState:
    \   000000                DS 1
    \   000001                REQUIRE __INIT_XDATA_Z
-    237          
     238          
+    239          
 
    \                                 In  segment XDATA_Z, align 1, keep-with-next
-    239          byte AXD_TransID;  // This is the unique message ID (counter)
+    240          byte AXD_TransID;  // This is the unique message ID (counter)
    \                     AXD_TransID:
    \   000000                DS 1
    \   000001                REQUIRE __INIT_XDATA_Z
-    240          //byte AXD_TransID2;
-    241          
+    241          //byte AXD_TransID2;
+    242          
 
    \                                 In  segment XDATA_Z, align 1, keep-with-next
-    242          afAddrType_t AXD_DstAddr;
+    243          afAddrType_t AXD_DstAddr;
    \                     AXD_DstAddr:
    \   000000                DS 4
    \   000004                REQUIRE __INIT_XDATA_Z
-    243          #if SERIAL_APP_LOOPBACK
+    244          #if SERIAL_APP_LOOPBACK
 
    \                                 In  segment XDATA_Z, align 1, keep-with-next
-    244          static uint8 rxLen;
+    245          static uint8 rxLen;
    \                     rxLen:
    \   000000                DS 1
    \   000001                REQUIRE __INIT_XDATA_Z
 
    \                                 In  segment XDATA_Z, align 1, keep-with-next
-    245          static uint8 rxBuf[SERIAL_APP_RX_CNT];
+    246          static uint8 rxBuf[SERIAL_APP_RX_CNT];
    \                     rxBuf:
    \   000000                DS 80
    \   000050                REQUIRE __INIT_XDATA_Z
-    246          #endif
-    247          
-    248          /*********************************************************************
-    249           * LOCAL FUNCTIONS
-    250           */
-    251          void AXD_ProcessZDOMsgs( zdoIncomingMsg_t *inMsg );
-    252          void AXD_HandleKeys( byte shift, byte keys );
-    253          void AXD_MessageMSGCB( afIncomingMSGPacket_t *pckt );
-    254          void AXD_SendTheMessage( void );
-    255          
-    256          #if SERIAL_APP_LOOPBACK
-    257          static void rxCB_Loopback( uint8 port, uint8 event );
-    258          #else
-    259          static void rxCB( uint8 port, uint8 event );
-    260          #endif
-    261          
-    262          /*********************************************************************
-    263           * NETWORK LAYER CALLBACKS
-    264           */
-    265          
-    266          /*********************************************************************
-    267           * PUBLIC FUNCTIONS
-    268           */
-    269          
-    270          /*********************************************************************
-    271           * @fn      AXD_Init
-    272           *
-    273           * @brief   Initialization function for the Generic App Task.
-    274           *          This is called during initialization and should contain
-    275           *          any application specific initialization (ie. hardware
-    276           *          initialization/setup, table initialization, power up
-    277           *          notificaiton ... ).
-    278           *
-    279           * @param   task_id - the ID assigned by OSAL.  This ID should be
-    280           *                    used to send messages and set timers.
-    281           *
-    282           * @return  none
-    283           */
+    247          #endif
+    248          
+    249          /*********************************************************************
+    250           * LOCAL FUNCTIONS
+    251           */
+    252          void AXD_ProcessZDOMsgs( zdoIncomingMsg_t *inMsg );
+    253          void AXD_HandleKeys( byte shift, byte keys );
+    254          void AXD_MessageMSGCB( afIncomingMSGPacket_t *pckt );
+    255          void AXD_SendTheMessage( void );
+    256          
+    257          #if SERIAL_APP_LOOPBACK
+    258          static void rxCB_Loopback( uint8 port, uint8 event );
+    259          #else
+    260          static void rxCB( uint8 port, uint8 event );
+    261          #endif
+    262          
+    263          /*********************************************************************
+    264           * NETWORK LAYER CALLBACKS
+    265           */
+    266          
+    267          /*********************************************************************
+    268           * PUBLIC FUNCTIONS
+    269           */
+    270          
+    271          /*********************************************************************
+    272           * @fn      AXD_Init
+    273           *
+    274           * @brief   Initialization function for the Generic App Task.
+    275           *          This is called during initialization and should contain
+    276           *          any application specific initialization (ie. hardware
+    277           *          initialization/setup, table initialization, power up
+    278           *          notificaiton ... ).
+    279           *
+    280           * @param   task_id - the ID assigned by OSAL.  This ID should be
+    281           *                    used to send messages and set timers.
+    282           *
+    283           * @return  none
+    284           */
 
    \                                 In  segment BANKED_CODE, align 1, keep-with-next
-    284          void AXD_Init( byte task_id )
+    285          void AXD_Init( byte task_id )
    \                     AXD_Init:
-    285          {
+    286          {
    \   000000   C082         PUSH    DPL
    \   000002   C083         PUSH    DPH
    \   000004                ; Saved register size: 2
    \   000004                ; Auto size: 29
    \   000004   74E3         MOV     A,#-0x1d
    \   000006   12....       LCALL   ?ALLOC_XSTACK8
-    286            halUARTCfg_t uartConfig;
-    287            AXD_TaskID = task_id;
+    287            halUARTCfg_t uartConfig;
+    288            AXD_TaskID = task_id;
    \   000009   E9           MOV     A,R1
    \   00000A   90....       MOV     DPTR,#AXD_TaskID
    \   00000D   F0           MOVX    @DPTR,A
-    288            AXD_NwkState = DEV_INIT;
+    289            AXD_NwkState = DEV_INIT;
    \   00000E   7401         MOV     A,#0x1
    \   000010   90....       MOV     DPTR,#AXD_NwkState
    \   000013   F0           MOVX    @DPTR,A
-    289            AXD_TransID = 0;
+    290            AXD_TransID = 0;
    \   000014   E4           CLR     A
    \   000015   90....       MOV     DPTR,#AXD_TransID
    \   000018   F0           MOVX    @DPTR,A
-    290          //  AXD_TransID2 = 1;
-    291          
-    292            // Device hardware initialization can be added here or in main() (Zmain.c).
-    293            // If the hardware is application specific - add it here.
-    294            // If the hardware is other parts of the device add it in main().
-    295          
-    296            AXD_DstAddr.addrMode = (afAddrMode_t)AddrNotPresent;
+    291          //  AXD_TransID2 = 1;
+    292          
+    293            // Device hardware initialization can be added here or in main() (Zmain.c).
+    294            // If the hardware is application specific - add it here.
+    295            // If the hardware is other parts of the device add it in main().
+    296          
+    297            AXD_DstAddr.addrMode = (afAddrMode_t)AddrNotPresent;
    \   000019   90....       MOV     DPTR,#(AXD_DstAddr + 2)
    \   00001C   F0           MOVX    @DPTR,A
-    297            AXD_DstAddr.endPoint = 0;
+    298            AXD_DstAddr.endPoint = 0;
    \   00001D   90....       MOV     DPTR,#(AXD_DstAddr + 3)
    \   000020   F0           MOVX    @DPTR,A
-    298            AXD_DstAddr.addr.shortAddr = 0;
+    299            AXD_DstAddr.addr.shortAddr = 0;
    \   000021   90....       MOV     DPTR,#AXD_DstAddr
    \   000024   F0           MOVX    @DPTR,A
    \   000025   A3           INC     DPTR
    \   000026   F0           MOVX    @DPTR,A
-    299          
-    300            // Fill out the endpoint description.
-    301            AXD_epDesc.endPoint = AXD_ENDPOINT;
+    300          
+    301            // Fill out the endpoint description.
+    302            AXD_epDesc.endPoint = AXD_ENDPOINT;
    \   000027   740A         MOV     A,#0xa
    \   000029   90....       MOV     DPTR,#AXD_epDesc
    \   00002C   F0           MOVX    @DPTR,A
-    302            AXD_epDesc.task_id = &AXD_TaskID;
+    303            AXD_epDesc.task_id = &AXD_TaskID;
    \   00002D   90....       MOV     DPTR,#(AXD_epDesc + 1)
    \   000030   74..         MOV     A,#(AXD_TaskID & 0xff)
    \   000032   F0           MOVX    @DPTR,A
    \   000033   A3           INC     DPTR
    \   000034   74..         MOV     A,#((AXD_TaskID >> 8) & 0xff)
    \   000036   F0           MOVX    @DPTR,A
-    303            AXD_epDesc.simpleDesc
-    304                      = (SimpleDescriptionFormat_t *)&AXD_SimpleDesc;
+    304            AXD_epDesc.simpleDesc
+    305                      = (SimpleDescriptionFormat_t *)&AXD_SimpleDesc;
    \   000037   90....       MOV     DPTR,#(AXD_epDesc + 3)
    \   00003A   74..         MOV     A,#(AXD_SimpleDesc & 0xff)
    \   00003C   F0           MOVX    @DPTR,A
    \   00003D   A3           INC     DPTR
    \   00003E   74..         MOV     A,#((AXD_SimpleDesc >> 8) & 0xff)
    \   000040   F0           MOVX    @DPTR,A
-    305            AXD_epDesc.latencyReq = noLatencyReqs;
+    306            AXD_epDesc.latencyReq = noLatencyReqs;
    \   000041   E4           CLR     A
    \   000042   90....       MOV     DPTR,#(AXD_epDesc + 5)
    \   000045   F0           MOVX    @DPTR,A
-    306          
-    307            // Register the endpoint description with the AF
-    308            afRegister( &AXD_epDesc );
+    307          
+    308            // Register the endpoint description with the AF
+    309            afRegister( &AXD_epDesc );
    \   000046                ; Setup parameters for call to function afRegister
    \   000046   7A..         MOV     R2,#(AXD_epDesc & 0xff)
    \   000048   7B..         MOV     R3,#((AXD_epDesc >> 8) & 0xff)
    \   00004A   12....       LCALL   ??afRegister?relay
-    309          
-    310            // Register for all key events - This app will handle all key events
-    311            RegisterForKeys( AXD_TaskID );
+    310          
+    311            // Register for all key events - This app will handle all key events
+    312            RegisterForKeys( AXD_TaskID );
    \   00004D                ; Setup parameters for call to function RegisterForKeys
    \   00004D   90....       MOV     DPTR,#AXD_TaskID
    \   000050   E0           MOVX    A,@DPTR
    \   000051   F9           MOV     R1,A
    \   000052   12....       LCALL   ??RegisterForKeys?relay
-    312            uartConfig.configured           = TRUE;              // 2430 don't care.
+    313            uartConfig.configured           = TRUE;              // 2430 don't care.
    \   000055   7401         MOV     A,#0x1
    \   000057   85..82       MOV     DPL,?XSP + 0
    \   00005A   85..83       MOV     DPH,?XSP + 1
    \   00005D   F0           MOVX    @DPTR,A
-    313            uartConfig.baudRate             = SERIAL_APP_BAUD;
+    314            uartConfig.baudRate             = SERIAL_APP_BAUD;
    \   00005E   12....       LCALL   ?XSTACK_DISP0_8
    \   000061   7408         MOV     A,#0x8
    \   000063   F0           MOVX    @DPTR,A
-    314            uartConfig.flowControl          = TRUE;
+    315            uartConfig.flowControl          = TRUE;
    \   000064   7402         MOV     A,#0x2
    \   000066   12....       LCALL   ?XSTACK_DISP0_8
    \   000069   7401         MOV     A,#0x1
    \   00006B   F0           MOVX    @DPTR,A
-    315            uartConfig.flowControlThreshold = SERIAL_APP_THRESH;
+    316            uartConfig.flowControlThreshold = SERIAL_APP_THRESH;
    \   00006C   7403         MOV     A,#0x3
    \   00006E   12....       LCALL   ?XSTACK_DISP0_8
    \   000071   7430         MOV     A,#0x30
@@ -599,7 +600,7 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\Samples\cc2430-zstack-ad
    \   000074   A3           INC     DPTR
    \   000075   E4           CLR     A
    \   000076   F0           MOVX    @DPTR,A
-    316            uartConfig.rx.maxBufSize        = SERIAL_APP_RX_MAX;
+    317            uartConfig.rx.maxBufSize        = SERIAL_APP_RX_MAX;
    \   000077   740A         MOV     A,#0xa
    \   000079   12....       LCALL   ?XSTACK_DISP0_8
    \   00007C   7480         MOV     A,#-0x80
@@ -607,7 +608,7 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\Samples\cc2430-zstack-ad
    \   00007F   A3           INC     DPTR
    \   000080   E4           CLR     A
    \   000081   F0           MOVX    @DPTR,A
-    317            uartConfig.tx.maxBufSize        = SERIAL_APP_TX_MAX;
+    318            uartConfig.tx.maxBufSize        = SERIAL_APP_TX_MAX;
    \   000082   7412         MOV     A,#0x12
    \   000084   12....       LCALL   ?XSTACK_DISP0_8
    \   000087   7480         MOV     A,#-0x80
@@ -615,18 +616,18 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\Samples\cc2430-zstack-ad
    \   00008A   A3           INC     DPTR
    \   00008B   E4           CLR     A
    \   00008C   F0           MOVX    @DPTR,A
-    318            uartConfig.idleTimeout          = SERIAL_APP_IDLE;   // 2430 don't care.
+    319            uartConfig.idleTimeout          = SERIAL_APP_IDLE;   // 2430 don't care.
    \   00008D   7405         MOV     A,#0x5
    \   00008F   12....       LCALL   ?XSTACK_DISP0_8
    \   000092   7406         MOV     A,#0x6
    \   000094   F0           MOVX    @DPTR,A
-    319            uartConfig.intEnable            = TRUE;              // 2430 don't care.
+    320            uartConfig.intEnable            = TRUE;              // 2430 don't care.
    \   000095   7416         MOV     A,#0x16
    \   000097   12....       LCALL   ?XSTACK_DISP0_8
    \   00009A   7401         MOV     A,#0x1
    \   00009C   F0           MOVX    @DPTR,A
-    320          #if SERIAL_APP_LOOPBACK
-    321            uartConfig.callBackFunc         = rxCB_Loopback;
+    321          #if SERIAL_APP_LOOPBACK
+    322            uartConfig.callBackFunc         = rxCB_Loopback;
    \   00009D   741B         MOV     A,#0x1b
    \   00009F   12....       LCALL   ?XSTACK_DISP0_8
    \   0000A2   74..         MOV     A,#(??rxCB_Loopback?relay & 0xff)
@@ -634,27 +635,27 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\Samples\cc2430-zstack-ad
    \   0000A5   A3           INC     DPTR
    \   0000A6   74..         MOV     A,#((??rxCB_Loopback?relay >> 8) & 0xff)
    \   0000A8   12....       LCALL   ?Subroutine1 & 0xFFFF
-    322          #else
-    323            uartConfig.callBackFunc         = rxCB;
-    324          #endif
-    325            HalUARTOpen (SERIAL_APP_PORT, &uartConfig);
+    323          #else
+    324            uartConfig.callBackFunc         = rxCB;
+    325          #endif
+    326            HalUARTOpen (SERIAL_APP_PORT, &uartConfig);
    \                     ??CrossCallReturnLabel_2:
    \   0000AB   AA82         MOV     R2,DPL
    \   0000AD   AB83         MOV     R3,DPH
    \   0000AF   7900         MOV     R1,#0x0
    \   0000B1   12....       LCALL   ??HalUARTOpen?relay
-    326          
-    327            // Update the display
-    328          #if defined ( LCD_SUPPORTED )
-    329              HalLcdWriteString( "AXD", HAL_LCD_LINE_1 );
+    327          
+    328            // Update the display
+    329          #if defined ( LCD_SUPPORTED )
+    330              HalLcdWriteString( "AXD", HAL_LCD_LINE_1 );
    \   0000B4                ; Setup parameters for call to function HalLcdWriteString
    \   0000B4   7900         MOV     R1,#0x0
    \   0000B6   7A..         MOV     R2,#(`?<Constant "AXD">` & 0xff)
    \   0000B8   7B..         MOV     R3,#((`?<Constant "AXD">` >> 8) & 0xff)
    \   0000BA   12....       LCALL   ??HalLcdWriteString?relay
-    330          #endif
-    331          
-    332            ZDO_RegisterForZDOMsg( AXD_TaskID, End_Device_Bind_rsp );
+    331          #endif
+    332          
+    333            ZDO_RegisterForZDOMsg( AXD_TaskID, End_Device_Bind_rsp );
    \   0000BD                ; Setup parameters for call to function ZDO_RegisterForZDOMsg
    \   0000BD   7A20         MOV     R2,#0x20
    \   0000BF   7B80         MOV     R3,#-0x80
@@ -662,7 +663,7 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\Samples\cc2430-zstack-ad
    \   0000C4   E0           MOVX    A,@DPTR
    \   0000C5   F9           MOV     R1,A
    \   0000C6   12....       LCALL   ??ZDO_RegisterForZDOMsg?relay
-    333            ZDO_RegisterForZDOMsg( AXD_TaskID, Match_Desc_rsp );
+    334            ZDO_RegisterForZDOMsg( AXD_TaskID, Match_Desc_rsp );
    \   0000C9                ; Setup parameters for call to function ZDO_RegisterForZDOMsg
    \   0000C9   7A06         MOV     R2,#0x6
    \   0000CB   7B80         MOV     R3,#-0x80
@@ -670,26 +671,26 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\Samples\cc2430-zstack-ad
    \   0000D0   E0           MOVX    A,@DPTR
    \   0000D1   F9           MOV     R1,A
    \   0000D2   12....       LCALL   ??ZDO_RegisterForZDOMsg?relay
-    334            
-    335            AXD_Group.ID = AXD_GROUP;
+    335            
+    336            AXD_Group.ID = AXD_GROUP;
    \   0000D5   90....       MOV     DPTR,#AXD_Group
    \   0000D8   7401         MOV     A,#0x1
    \   0000DA   F0           MOVX    @DPTR,A
    \   0000DB   A3           INC     DPTR
    \   0000DC   E4           CLR     A
    \   0000DD   F0           MOVX    @DPTR,A
-    336            aps_AddGroup(AXD_ENDPOINT,&AXD_Group);
+    337            aps_AddGroup(AXD_ENDPOINT,&AXD_Group);
    \   0000DE                ; Setup parameters for call to function aps_AddGroup
    \   0000DE   7A..         MOV     R2,#(AXD_Group & 0xff)
    \   0000E0   7B..         MOV     R3,#((AXD_Group >> 8) & 0xff)
    \   0000E2   790A         MOV     R1,#0xa
    \   0000E4   12....       LCALL   ??aps_AddGroup?relay
-    337            //下面是用户自定义的初始化
-    338          #ifdef AXD_END
-    339            Init_ADXL345();
-    340            HalAdcInit();
-    341          #endif
-    342          }
+    338            //下面是用户自定义的初始化
+    339          #ifdef AXD_END
+    340            Init_ADXL345();
+    341            HalAdcInit();
+    342          #endif
+    343          }
    \   0000E7   741D         MOV     A,#0x1d
    \   0000E9   12....       LCALL   ?DEALLOC_XSTACK8
    \   0000EC   D083         POP     DPH
@@ -703,25 +704,25 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\Samples\cc2430-zstack-ad
    \   000001   85..82       MOV     DPL,?XSP + 0
    \   000004   85..83       MOV     DPH,?XSP + 1
    \   000007   22           RET
-    343          
-    344          /*********************************************************************
-    345           * @fn      AXD_ProcessEvent
-    346           *
-    347           * @brief   Generic Application Task event processor.  This function
-    348           *          is called to process all events for the task.  Events
-    349           *          include timers, messages and any other user defined events.
-    350           *
-    351           * @param   task_id  - The OSAL assigned task ID.
-    352           * @param   events - events to process.  This is a bit map and can
-    353           *                   contain more than one event.
-    354           *
-    355           * @return  none
-    356           */
+    344          
+    345          /*********************************************************************
+    346           * @fn      AXD_ProcessEvent
+    347           *
+    348           * @brief   Generic Application Task event processor.  This function
+    349           *          is called to process all events for the task.  Events
+    350           *          include timers, messages and any other user defined events.
+    351           *
+    352           * @param   task_id  - The OSAL assigned task ID.
+    353           * @param   events - events to process.  This is a bit map and can
+    354           *                   contain more than one event.
+    355           *
+    356           * @return  none
+    357           */
 
    \                                 In  segment BANKED_CODE, align 1, keep-with-next
-    357          UINT16 AXD_ProcessEvent( byte task_id, UINT16 events )
+    358          UINT16 AXD_ProcessEvent( byte task_id, UINT16 events )
    \                     AXD_ProcessEvent:
-    358          {
+    359          {
    \   000000   74F4         MOV     A,#-0xc
    \   000002   12....       LCALL   ?BANKED_ENTER_XDATA
    \   000005                ; Saved register size: 12
@@ -730,21 +731,21 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\Samples\cc2430-zstack-ad
    \   000006   FE           MOV     R6,A
    \   000007   EB           MOV     A,R3
    \   000008   FF           MOV     R7,A
-    359            
-    360            afIncomingMSGPacket_t *MSGpkt;
-    361          //  osal_event_hdr_t *pMsg;
-    362            afDataConfirm_t *afDataConfirm;
-    363          
-    364            // Data Confirmation message fields
-    365            byte sentEP;
-    366            ZStatus_t sentStatus;
-    367            byte sentTransID;       // This should match the value sent
-    368          #ifdef AXD_END
-    369            BUFFER[0] = 0;
-    370            BUFFER[1] = DEVICE_A;
-    371          #endif
-    372          
-    373            if ( events & SYS_EVENT_MSG )
+    360            
+    361            afIncomingMSGPacket_t *MSGpkt;
+    362          //  osal_event_hdr_t *pMsg;
+    363            afDataConfirm_t *afDataConfirm;
+    364          
+    365            // Data Confirmation message fields
+    366            byte sentEP;
+    367            ZStatus_t sentStatus;
+    368            byte sentTransID;       // This should match the value sent
+    369          #ifdef AXD_END
+    370            BUFFER[0] = 0;
+    371            BUFFER[1] = DEVICE_A;
+    372          #endif
+    373          
+    374            if ( events & SYS_EVENT_MSG )
    \   000009   7480         MOV     A,#-0x80
    \   00000B   5F           ANL     A,R7
    \   00000C   F9           MOV     R1,A
@@ -754,51 +755,51 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\Samples\cc2430-zstack-ad
    \                     ??AXD_ProcessEvent_0:
    \   000011   7003         JNZ     $+5
    \   000013   02....       LJMP    ??AXD_ProcessEvent_1 & 0xFFFF
-    374            {
-    375              MSGpkt = (afIncomingMSGPacket_t *)osal_msg_receive( AXD_TaskID );
+    375            {
+    376              MSGpkt = (afIncomingMSGPacket_t *)osal_msg_receive( AXD_TaskID );
    \   000016                ; Setup parameters for call to function osal_msg_receive
    \   000016   8028         SJMP    ??AXD_ProcessEvent_2
-    376              while ( MSGpkt )
-    377              {
-    378                switch ( MSGpkt->hdr.event )
-    379                {
-    380                  case ZDO_CB_MSG:
-    381                    AXD_ProcessZDOMsgs( (zdoIncomingMsg_t *)MSGpkt );
-    382                    break;
-    383          
-    384                  case KEY_CHANGE:
-    385                    AXD_HandleKeys( ((keyChange_t *)MSGpkt)->state, ((keyChange_t *)MSGpkt)->keys );
-    386                    break;
-    387          
-    388                  case AF_DATA_CONFIRM_CMD:
-    389                    // This message is received as a confirmation of a data packet sent.
-    390                    // The status is of ZStatus_t type [defined in ZComDef.h]
-    391                    // The message fields are defined in AF.h
-    392                    afDataConfirm = (afDataConfirm_t *)MSGpkt;
-    393                    sentEP = afDataConfirm->endpoint;
-    394                    sentStatus = afDataConfirm->hdr.status;
-    395                    sentTransID = afDataConfirm->transID;
-    396                    (void)sentEP;
-    397                    (void)sentTransID;
-    398          
-    399                    // Action taken when confirmation is received.
-    400                    if ( sentStatus != ZSuccess )
-    401                    {
-    402                      // The data wasn't delivered -- Do something
-    403                    }
-    404                    break;
-    405          
-    406                  case AF_INCOMING_MSG_CMD:
-    407              //      MSGpkt = (afIncomingMSGPacket_t *) pMsg;
-    408          #ifdef AXD_COR
-    409                    //AXD_ReceiveDataIndication( MSGpkt->srcAddr.addr.shortAddr, MSGpkt->clusterId,
-    410                    //                          MSGpkt->cmd.DataLength, MSGpkt->cmd.Data);
-    411                    AXD_MessageMSGCB( MSGpkt );
-    412          #endif
-    413                    break;
-    414          
-    415                  case ZDO_STATE_CHANGE:
-    416                    AXD_NwkState = (devStates_t)(MSGpkt->hdr.status);
+    377              while ( MSGpkt )
+    378              {
+    379                switch ( MSGpkt->hdr.event )
+    380                {
+    381                  case ZDO_CB_MSG:
+    382                    AXD_ProcessZDOMsgs( (zdoIncomingMsg_t *)MSGpkt );
+    383                    break;
+    384          
+    385                  case KEY_CHANGE:
+    386                    AXD_HandleKeys( ((keyChange_t *)MSGpkt)->state, ((keyChange_t *)MSGpkt)->keys );
+    387                    break;
+    388          
+    389                  case AF_DATA_CONFIRM_CMD:
+    390                    // This message is received as a confirmation of a data packet sent.
+    391                    // The status is of ZStatus_t type [defined in ZComDef.h]
+    392                    // The message fields are defined in AF.h
+    393                    afDataConfirm = (afDataConfirm_t *)MSGpkt;
+    394                    sentEP = afDataConfirm->endpoint;
+    395                    sentStatus = afDataConfirm->hdr.status;
+    396                    sentTransID = afDataConfirm->transID;
+    397                    (void)sentEP;
+    398                    (void)sentTransID;
+    399          
+    400                    // Action taken when confirmation is received.
+    401                    if ( sentStatus != ZSuccess )
+    402                    {
+    403                      // The data wasn't delivered -- Do something
+    404                    }
+    405                    break;
+    406          
+    407                  case AF_INCOMING_MSG_CMD:
+    408              //      MSGpkt = (afIncomingMSGPacket_t *) pMsg;
+    409          #ifdef AXD_COR
+    410                    //AXD_ReceiveDataIndication( MSGpkt->srcAddr.addr.shortAddr, MSGpkt->clusterId,
+    411                    //                          MSGpkt->cmd.DataLength, MSGpkt->cmd.Data);
+    412                    AXD_MessageMSGCB( MSGpkt );
+    413          #endif
+    414                    break;
+    415          
+    416                  case ZDO_STATE_CHANGE:
+    417                    AXD_NwkState = (devStates_t)(MSGpkt->hdr.status);
    \                     ??AXD_ProcessEvent_3:
    \   000018   85..82       MOV     DPL,?V0 + 0
    \   00001B   85..83       MOV     DPH,?V0 + 1
@@ -806,9 +807,9 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\Samples\cc2430-zstack-ad
    \   00001F   E0           MOVX    A,@DPTR
    \   000020   90....       MOV     DPTR,#AXD_NwkState
    \   000023   F0           MOVX    @DPTR,A
-    417                    if ( (AXD_NwkState == DEV_ZB_COORD)
-    418                        || (AXD_NwkState == DEV_ROUTER)
-    419                        || (AXD_NwkState == DEV_END_DEVICE) )
+    418                    if ( (AXD_NwkState == DEV_ZB_COORD)
+    419                        || (AXD_NwkState == DEV_ROUTER)
+    420                        || (AXD_NwkState == DEV_END_DEVICE) )
    \   000024   6409         XRL     A,#0x9
    \   000026   600A         JZ      ??AXD_ProcessEvent_4
    \   000028   E0           MOVX    A,@DPTR
@@ -816,34 +817,34 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\Samples\cc2430-zstack-ad
    \   00002B   6005         JZ      ??AXD_ProcessEvent_4
    \   00002D   E0           MOVX    A,@DPTR
    \   00002E   6406         XRL     A,#0x6
-   \   000030   7007         JNZ     ??CrossCallReturnLabel_9
-    420                    {
-    421                      // Start sending "the" message in a regular interval.
-    422                      osal_start_timerEx( AXD_TaskID,
-    423                                          AXD_SEND_MSG_EVT,
-    424                                          AXD_SEND_MSG_TIMEOUT );
+   \   000030   7007         JNZ     ??CrossCallReturnLabel_7
+    421                    {
+    422                      // Start sending "the" message in a regular interval.
+    423                      osal_start_timerEx( AXD_TaskID,
+    424                                          AXD_SEND_MSG_EVT,
+    425                                          AXD_SEND_MSG_TIMEOUT );
    \                     ??AXD_ProcessEvent_4:
    \   000032                ; Setup parameters for call to function osal_start_timerEx
    \   000032   7C88         MOV     R4,#-0x78
    \   000034   7D13         MOV     R5,#0x13
-   \   000036   12....       LCALL   ?Subroutine4 & 0xFFFF
-    425                    }
-    426                    break;
-    427          
-    428                  default:
-    429                    break;
-    430                }
-    431          
-    432                // Release the memory
-    433                osal_msg_deallocate( (uint8 *)MSGpkt );
-   \                     ??CrossCallReturnLabel_9:
+   \   000036   12....       LCALL   ?Subroutine3 & 0xFFFF
+    426                    }
+    427                    break;
+    428          
+    429                  default:
+    430                    break;
+    431                }
+    432          
+    433                // Release the memory
+    434                osal_msg_deallocate( (uint8 *)MSGpkt );
+   \                     ??CrossCallReturnLabel_7:
    \   000039                ; Setup parameters for call to function osal_msg_deallocate
    \   000039   AA..         MOV     R2,?V0 + 0
    \   00003B   AB..         MOV     R3,?V0 + 1
    \   00003D   12....       LCALL   ??osal_msg_deallocate?relay
-    434          
-    435                // Next
-    436                MSGpkt = (afIncomingMSGPacket_t *)osal_msg_receive( AXD_TaskID );
+    435          
+    436                // Next
+    437                MSGpkt = (afIncomingMSGPacket_t *)osal_msg_receive( AXD_TaskID );
    \   000040                ; Setup parameters for call to function osal_msg_receive
    \                     ??AXD_ProcessEvent_2:
    \   000040   90....       MOV     DPTR,#AXD_TaskID
@@ -872,13 +873,13 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\Samples\cc2430-zstack-ad
    \   000067   ....         DW        ??AXD_ProcessEvent_3
    \   000069   D3           DB        211
    \   00006A   ....         DW        ??AXD_ProcessEvent_9
-   \   00006C   ....         DW        ??CrossCallReturnLabel_9
+   \   00006C   ....         DW        ??CrossCallReturnLabel_7
    \                     ??AXD_ProcessEvent_9:
    \   00006E                ; Setup parameters for call to function AXD_ProcessZDOMsgs
    \   00006E   AA..         MOV     R2,?V0 + 0
    \   000070   AB..         MOV     R3,?V0 + 1
    \   000072   12....       LCALL   ??AXD_ProcessZDOMsgs?relay
-   \   000075   80C2         SJMP    ??CrossCallReturnLabel_9
+   \   000075   80C2         SJMP    ??CrossCallReturnLabel_7
    \                     ??AXD_ProcessEvent_8:
    \   000077                ; Setup parameters for call to function AXD_HandleKeys
    \   000077   85..82       MOV     DPL,?V0 + 0
@@ -895,17 +896,17 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\Samples\cc2430-zstack-ad
    \   00008A   E0           MOVX    A,@DPTR
    \   00008B   F9           MOV     R1,A
    \   00008C   12....       LCALL   ??AXD_HandleKeys?relay
-   \   00008F   80A8         SJMP    ??CrossCallReturnLabel_9
+   \   00008F   80A8         SJMP    ??CrossCallReturnLabel_7
    \                     ??AXD_ProcessEvent_7:
    \   000091                ; Setup parameters for call to function AXD_MessageMSGCB
    \   000091   AA..         MOV     R2,?V0 + 0
    \   000093   AB..         MOV     R3,?V0 + 1
    \   000095   12....       LCALL   ??AXD_MessageMSGCB?relay
-   \   000098   809F         SJMP    ??CrossCallReturnLabel_9
-    437              }
-    438          
-    439              // return unprocessed events
-    440              return (events ^ SYS_EVENT_MSG);
+   \   000098   809F         SJMP    ??CrossCallReturnLabel_7
+    438              }
+    439          
+    440              // return unprocessed events
+    441              return (events ^ SYS_EVENT_MSG);
    \                     ??AXD_ProcessEvent_6:
    \   00009A   EE           MOV     A,R6
    \   00009B   FA           MOV     R2,A
@@ -914,110 +915,110 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\Samples\cc2430-zstack-ad
    \                     ??AXD_ProcessEvent_10:
    \   00009F   FB           MOV     R3,A
    \   0000A0   801C         SJMP    ??AXD_ProcessEvent_11
-    441            }
-    442          
-    443            // Send a message out - This event is generated by a timer
-    444            //  (setup in AXD_Init()).
-    445            if ( events & AXD_SEND_MSG_EVT )
+    442            }
+    443          
+    444            // Send a message out - This event is generated by a timer
+    445            //  (setup in AXD_Init()).
+    446            if ( events & AXD_SEND_MSG_EVT )
    \                     ??AXD_ProcessEvent_1:
    \   0000A2   EE           MOV     A,R6
    \   0000A3   A2E0         MOV     C,0xE0 /* A   */.0
    \   0000A5   500E         JNC     ??AXD_ProcessEvent_12
-    446            {
-    447              //zb_HandleOsalEvent(events);
-    448              AXD_SendTheMessage();
-    449              // Setup to send message again
-    450          #ifdef AXD_ROUTER
-    451              test2++;
-    452          #endif
-    453          #ifdef AXD_END2
-    454              test2--;
-    455          #endif
-    456              osal_start_timerEx( AXD_TaskID,
-    457                                  AXD_SEND_MSG_EVT,
-    458                                  (AXD_SEND_MSG_TIMEOUT/100) );
+    447            {
+    448              //zb_HandleOsalEvent(events);
+    449              AXD_SendTheMessage();
+    450              // Setup to send message again
+    451          #ifdef AXD_ROUTER
+    452              test2++;
+    453          #endif
+    454          #ifdef AXD_END2
+    455              test2--;
+    456          #endif
+    457              osal_start_timerEx( AXD_TaskID,
+    458                                  AXD_SEND_MSG_EVT,
+    459                                  (AXD_SEND_MSG_TIMEOUT/100) );
    \   0000A7                ; Setup parameters for call to function osal_start_timerEx
    \   0000A7   7C32         MOV     R4,#0x32
    \   0000A9   7D00         MOV     R5,#0x0
-   \   0000AB   12....       LCALL   ?Subroutine4 & 0xFFFF
-    459          
-    460              // return unprocessed events
-    461              return (events ^ AXD_SEND_MSG_EVT);
-   \                     ??CrossCallReturnLabel_10:
+   \   0000AB   12....       LCALL   ?Subroutine3 & 0xFFFF
+    460          
+    461              // return unprocessed events
+    462              return (events ^ AXD_SEND_MSG_EVT);
+   \                     ??CrossCallReturnLabel_8:
    \   0000AE   7401         MOV     A,#0x1
    \   0000B0   6E           XRL     A,R6
    \   0000B1   FA           MOV     R2,A
    \   0000B2   EF           MOV     A,R7
    \   0000B3   80EA         SJMP    ??AXD_ProcessEvent_10
-    462            }
-    463              if ( events & ( ZB_USER_EVENTS ) )
+    463            }
+    464              if ( events & ( ZB_USER_EVENTS ) )
    \                     ??AXD_ProcessEvent_12:
    \   0000B5   6003         JZ      ??AXD_ProcessEvent_13
-    464            {
-    465              // User events are passed to the application
-    466              zb_HandleOsalEvent( events );
+    465            {
+    466              // User events are passed to the application
+    467              zb_HandleOsalEvent( events );
    \   0000B7                ; Setup parameters for call to function zb_HandleOsalEvent
    \   0000B7   12....       LCALL   ??zb_HandleOsalEvent?relay
-    467          
-    468              // Do not return here, return 0 later
-    469            }
-    470          
-    471            // Discard unknown events
-    472            return 0;
+    468          
+    469              // Do not return here, return 0 later
+    470            }
+    471          
+    472            // Discard unknown events
+    473            return 0;
    \                     ??AXD_ProcessEvent_13:
    \   0000BA   7A00         MOV     R2,#0x0
    \   0000BC   7B00         MOV     R3,#0x0
    \                     ??AXD_ProcessEvent_11:
-   \   0000BE                REQUIRE ?Subroutine6
-   \   0000BE                ; // Fall through to label ?Subroutine6
-    473          }
+   \   0000BE                REQUIRE ?Subroutine5
+   \   0000BE                ; // Fall through to label ?Subroutine5
+    474          }
 
    \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine6:
+   \                     ?Subroutine5:
    \   000000   7F04         MOV     R7,#0x4
    \   000002   02....       LJMP    ?BANKED_LEAVE_XDATA
 
    \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine4:
+   \                     ?Subroutine3:
    \   000000   7A01         MOV     R2,#0x1
-   \                     ??Subroutine4_0:
+   \                     ??Subroutine3_0:
    \   000002   7B00         MOV     R3,#0x0
    \   000004   90....       MOV     DPTR,#AXD_TaskID
    \   000007   E0           MOVX    A,@DPTR
    \   000008   F9           MOV     R1,A
    \   000009   12....       LCALL   ??osal_start_timerEx?relay
    \   00000C   22           RET
-    474          
-    475          /*********************************************************************
-    476           * Event Generation Functions
-    477           */
-    478          /*********************************************************************
-    479           * @fn      AXD_ProcessZDOMsgs()
-    480           *
-    481           * @brief   Process response messages
-    482           *
-    483           * @param   none
-    484           *
-    485           * @return  none
-    486           */
+    475          
+    476          /*********************************************************************
+    477           * Event Generation Functions
+    478           */
+    479          /*********************************************************************
+    480           * @fn      AXD_ProcessZDOMsgs()
+    481           *
+    482           * @brief   Process response messages
+    483           *
+    484           * @param   none
+    485           *
+    486           * @return  none
+    487           */
 
    \                                 In  segment BANKED_CODE, align 1, keep-with-next
-    487          void AXD_ProcessZDOMsgs( zdoIncomingMsg_t *inMsg )
+    488          void AXD_ProcessZDOMsgs( zdoIncomingMsg_t *inMsg )
    \                     AXD_ProcessZDOMsgs:
-    488          {
+    489          {
    \   000000   74F6         MOV     A,#-0xa
    \   000002   12....       LCALL   ?BANKED_ENTER_XDATA
    \   000005                ; Saved register size: 10
    \   000005                ; Auto size: 0
-    489            switch ( inMsg->clusterID )
+    490            switch ( inMsg->clusterID )
    \   000005   EA           MOV     A,R2
    \   000006   240C         ADD     A,#0xc
    \   000008   F582         MOV     DPL,A
    \   00000A   EB           MOV     A,R3
    \   00000B   3400         ADDC    A,#0x0
    \   00000D   F583         MOV     DPH,A
-   \   00000F   12....       LCALL   ?Subroutine3 & 0xFFFF
-   \                     ??CrossCallReturnLabel_7:
+   \   00000F   12....       LCALL   ?Subroutine2 & 0xFFFF
+   \                     ??CrossCallReturnLabel_5:
    \   000012   12....       LCALL   ?US_SWITCH_SPARSE
    \                     `?<Jumptable for AXD_ProcessZDOMsgs>_0`:
    \   000015   0000         DW        0
@@ -1027,43 +1028,43 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\Samples\cc2430-zstack-ad
    \   00001D   2080         DW        32800
    \   00001F   ....         DW        ??AXD_ProcessZDOMsgs_1
    \   000021   ....         DW        ??AXD_ProcessZDOMsgs_2
-    490            {
-    491              case End_Device_Bind_rsp:
-    492                if ( ZDO_ParseBindRsp( inMsg ) == ZSuccess )
+    491            {
+    492              case End_Device_Bind_rsp:
+    493                if ( ZDO_ParseBindRsp( inMsg ) == ZSuccess )
    \                     ??AXD_ProcessZDOMsgs_1:
    \   000023   EA           MOV     A,R2
    \   000024   2411         ADD     A,#0x11
    \   000026   F582         MOV     DPL,A
    \   000028   EB           MOV     A,R3
-   \   000029   12....       LCALL   ?Subroutine5 & 0xFFFF
-   \                     ??CrossCallReturnLabel_12:
+   \   000029   12....       LCALL   ?Subroutine4 & 0xFFFF
+   \                     ??CrossCallReturnLabel_10:
    \   00002C   7009         JNZ     ??AXD_ProcessZDOMsgs_3
-    493                {
-    494                  // Light LED
-    495                  HalLedSet( HAL_LED_4, HAL_LED_MODE_ON );
+    494                {
+    495                  // Light LED
+    496                  HalLedSet( HAL_LED_4, HAL_LED_MODE_ON );
    \   00002E                ; Setup parameters for call to function HalLedSet
    \   00002E   7A01         MOV     R2,#0x1
    \                     ??AXD_ProcessZDOMsgs_4:
    \   000030   7908         MOV     R1,#0x8
    \   000032   12....       LCALL   ??HalLedSet?relay
    \   000035   8055         SJMP    ??AXD_ProcessZDOMsgs_2
-    496                }
-    497          #if defined(BLINK_LEDS)
-    498                else
-    499                {
-    500                  // Flash LED to show failure
-    501                  HalLedSet ( HAL_LED_4, HAL_LED_MODE_FLASH );
+    497                }
+    498          #if defined(BLINK_LEDS)
+    499                else
+    500                {
+    501                  // Flash LED to show failure
+    502                  HalLedSet ( HAL_LED_4, HAL_LED_MODE_FLASH );
    \                     ??AXD_ProcessZDOMsgs_3:
    \   000037                ; Setup parameters for call to function HalLedSet
    \   000037   7A04         MOV     R2,#0x4
    \   000039   80F5         SJMP    ??AXD_ProcessZDOMsgs_4
-    502                }
-    503          #endif
-    504                break;
-    505          
-    506              case Match_Desc_rsp:
-    507                {
-    508                  ZDO_ActiveEndpointRsp_t *pRsp = ZDO_ParseEPListRsp( inMsg );
+    503                }
+    504          #endif
+    505                break;
+    506          
+    507              case Match_Desc_rsp:
+    508                {
+    509                  ZDO_ActiveEndpointRsp_t *pRsp = ZDO_ParseEPListRsp( inMsg );
    \                     ??AXD_ProcessZDOMsgs_0:
    \   00003B                ; Setup parameters for call to function ZDO_ParseEPListRsp
    \   00003B   12....       LCALL   ??ZDO_ParseEPListRsp?relay
@@ -1071,14 +1072,14 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\Samples\cc2430-zstack-ad
    \   000040   8B..         MOV     ?V0 + 1,R3
    \   000042   AE..         MOV     R6,?V0 + 0
    \   000044   AF..         MOV     R7,?V0 + 1
-    509                  if ( pRsp )
+    510                  if ( pRsp )
    \   000046   EE           MOV     A,R6
    \   000047   7001         JNZ     ??AXD_ProcessZDOMsgs_5
    \   000049   EF           MOV     A,R7
    \                     ??AXD_ProcessZDOMsgs_5:
    \   00004A   6040         JZ      ??AXD_ProcessZDOMsgs_2
-    510                  {
-    511                    if ( pRsp->status == ZSuccess && pRsp->cnt )
+    511                  {
+    512                    if ( pRsp->status == ZSuccess && pRsp->cnt )
    \   00004C   8E82         MOV     DPL,R6
    \   00004E   8F83         MOV     DPH,R7
    \   000050   E0           MOVX    A,@DPTR
@@ -1088,12 +1089,12 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\Samples\cc2430-zstack-ad
    \   000055   A3           INC     DPTR
    \   000056   E0           MOVX    A,@DPTR
    \   000057   602C         JZ      ??AXD_ProcessZDOMsgs_6
-    512                    {
-    513                      AXD_DstAddr.addrMode = (afAddrMode_t)Addr16Bit;
+    513                    {
+    514                      AXD_DstAddr.addrMode = (afAddrMode_t)Addr16Bit;
    \   000059   7402         MOV     A,#0x2
    \   00005B   90....       MOV     DPTR,#(AXD_DstAddr + 2)
    \   00005E   F0           MOVX    @DPTR,A
-    514                      AXD_DstAddr.addr.shortAddr = pRsp->nwkAddr;
+    515                      AXD_DstAddr.addr.shortAddr = pRsp->nwkAddr;
    \   00005F   8E82         MOV     DPL,R6
    \   000061   8F83         MOV     DPH,R7
    \   000063   A3           INC     DPTR
@@ -1108,8 +1109,8 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\Samples\cc2430-zstack-ad
    \   00006E   A3           INC     DPTR
    \   00006F   E9           MOV     A,R1
    \   000070   F0           MOVX    @DPTR,A
-    515                      // Take the first endpoint, Can be changed to search through endpoints
-    516                      AXD_DstAddr.endPoint = pRsp->epList[0];
+    516                      // Take the first endpoint, Can be changed to search through endpoints
+    517                      AXD_DstAddr.endPoint = pRsp->epList[0];
    \   000071   8E82         MOV     DPL,R6
    \   000073   8F83         MOV     DPH,R7
    \   000075   A3           INC     DPTR
@@ -1119,15 +1120,15 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\Samples\cc2430-zstack-ad
    \   000079   E0           MOVX    A,@DPTR
    \   00007A   90....       MOV     DPTR,#(AXD_DstAddr + 3)
    \   00007D   F0           MOVX    @DPTR,A
-    517          
-    518                      // Light LED
-    519                      HalLedSet( HAL_LED_4, HAL_LED_MODE_ON );
+    518          
+    519                      // Light LED
+    520                      HalLedSet( HAL_LED_4, HAL_LED_MODE_ON );
    \   00007E                ; Setup parameters for call to function HalLedSet
    \   00007E   7A01         MOV     R2,#0x1
    \   000080   7908         MOV     R1,#0x8
    \   000082   12....       LCALL   ??HalLedSet?relay
-    520                    }
-    521                    osal_mem_free( pRsp );
+    521                    }
+    522                    osal_mem_free( pRsp );
    \                     ??AXD_ProcessZDOMsgs_6:
    \   000085                ; Setup parameters for call to function osal_mem_free
    \   000085   EE           MOV     A,R6
@@ -1135,21 +1136,21 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\Samples\cc2430-zstack-ad
    \   000087   EF           MOV     A,R7
    \   000088   FB           MOV     R3,A
    \   000089   12....       LCALL   ??osal_mem_free?relay
-    522                  }
-    523                }
-    524                break;
-    525            }
-    526          }
+    523                  }
+    524                }
+    525                break;
+    526            }
+    527          }
    \                     ??AXD_ProcessZDOMsgs_2:
-   \   00008C   02....       LJMP    ?Subroutine7 & 0xFFFF
+   \   00008C   02....       LJMP    ?Subroutine6 & 0xFFFF
 
    \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine7:
+   \                     ?Subroutine6:
    \   000000   7F02         MOV     R7,#0x2
    \   000002   02....       LJMP    ?BANKED_LEAVE_XDATA
 
    \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine3:
+   \                     ?Subroutine2:
    \   000000   E0           MOVX    A,@DPTR
    \   000001   F5..         MOV     ?V0 + 0,A
    \   000003   A3           INC     DPTR
@@ -1159,7 +1160,7 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\Samples\cc2430-zstack-ad
    \   000009   22           RET
 
    \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine5:
+   \                     ?Subroutine4:
    \   000000   3400         ADDC    A,#0x0
    \   000002   F583         MOV     DPH,A
    \   000004   E0           MOVX    A,@DPTR
@@ -1170,26 +1171,26 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\Samples\cc2430-zstack-ad
    \   00000A   8882         MOV     DPL,R0
    \   00000C   E0           MOVX    A,@DPTR
    \   00000D   22           RET
-    527          
-    528          /*********************************************************************
-    529           * @fn      AXD_HandleKeys
-    530           *
-    531           * @brief   Handles all key events for this device.
-    532           *
-    533           * @param   shift - true if in shift/alt.
-    534           * @param   keys - bit field for key events. Valid entries:
-    535           *                 HAL_KEY_SW_4
-    536           *                 HAL_KEY_SW_3
-    537           *                 HAL_KEY_SW_2
-    538           *                 HAL_KEY_SW_1
-    539           *
-    540           * @return  none
-    541           */
+    528          
+    529          /*********************************************************************
+    530           * @fn      AXD_HandleKeys
+    531           *
+    532           * @brief   Handles all key events for this device.
+    533           *
+    534           * @param   shift - true if in shift/alt.
+    535           * @param   keys - bit field for key events. Valid entries:
+    536           *                 HAL_KEY_SW_4
+    537           *                 HAL_KEY_SW_3
+    538           *                 HAL_KEY_SW_2
+    539           *                 HAL_KEY_SW_1
+    540           *
+    541           * @return  none
+    542           */
 
    \                                 In  segment BANKED_CODE, align 1, keep-with-next
-    542          void AXD_HandleKeys( byte shift, byte keys )
+    543          void AXD_HandleKeys( byte shift, byte keys )
    \                     AXD_HandleKeys:
-    543          {
+    544          {
    \   000000   74F6         MOV     A,#-0xa
    \   000002   12....       LCALL   ?BANKED_ENTER_XDATA
    \   000005                ; Saved register size: 10
@@ -1198,62 +1199,62 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\Samples\cc2430-zstack-ad
    \   000007   12....       LCALL   ?ALLOC_XSTACK8
    \   00000A   EA           MOV     A,R2
    \   00000B   FE           MOV     R6,A
-    544            zAddrType_t dstAddr;
-    545          
-    546            // Shift is used to make each button/switch dual purpose.
-    547            if ( shift )
+    545            zAddrType_t dstAddr;
+    546          
+    547            // Shift is used to make each button/switch dual purpose.
+    548            if ( shift )
    \   00000C   E9           MOV     A,R1
    \   00000D   6003         JZ      $+5
    \   00000F   02....       LJMP    ??AXD_HandleKeys_0 & 0xFFFF
-    548            {
-    549              if ( keys & HAL_KEY_SW_1 )
-    550              {
-    551              }
-    552              if ( keys & HAL_KEY_SW_2 )
-    553              {
-    554              }
-    555              if ( keys & HAL_KEY_SW_3 )
-    556              {
-    557              }
-    558              if ( keys & HAL_KEY_SW_4 )
-    559              {
-    560              }
-    561            }
-    562            else
-    563            {
-    564              if ( keys & HAL_KEY_SW_1 )
-    565              {
-    566              }
-    567          
-    568              if ( keys & HAL_KEY_SW_2 )
+    549            {
+    550              if ( keys & HAL_KEY_SW_1 )
+    551              {
+    552              }
+    553              if ( keys & HAL_KEY_SW_2 )
+    554              {
+    555              }
+    556              if ( keys & HAL_KEY_SW_3 )
+    557              {
+    558              }
+    559              if ( keys & HAL_KEY_SW_4 )
+    560              {
+    561              }
+    562            }
+    563            else
+    564            {
+    565              if ( keys & HAL_KEY_SW_1 )
+    566              {
+    567              }
+    568          
+    569              if ( keys & HAL_KEY_SW_2 )
    \   000012   EE           MOV     A,R6
    \   000013   A2E1         MOV     C,0xE0 /* A   */.1
    \   000015   506C         JNC     ??AXD_HandleKeys_1
-    569              {
-    570                HalLedSet ( HAL_LED_4, HAL_LED_MODE_OFF );
+    570              {
+    571                HalLedSet ( HAL_LED_4, HAL_LED_MODE_OFF );
    \   000017                ; Setup parameters for call to function HalLedSet
    \   000017   7A00         MOV     R2,#0x0
    \   000019   7908         MOV     R1,#0x8
    \   00001B   12....       LCALL   ??HalLedSet?relay
-    571          
-    572                // Initiate an End Device Bind Request for the mandatory endpoint
-    573                dstAddr.addrMode = Addr16Bit;
+    572          
+    573                // Initiate an End Device Bind Request for the mandatory endpoint
+    574                dstAddr.addrMode = Addr16Bit;
    \   00001E   7408         MOV     A,#0x8
    \   000020   12....       LCALL   ?XSTACK_DISP0_8
    \   000023   7402         MOV     A,#0x2
    \   000025   12....       LCALL   ?Subroutine1 & 0xFFFF
-    574                dstAddr.addr.shortAddr = 0x0000; // Coordinator
+    575                dstAddr.addr.shortAddr = 0x0000; // Coordinator
    \                     ??CrossCallReturnLabel_3:
    \   000028   E4           CLR     A
    \   000029   F0           MOVX    @DPTR,A
    \   00002A   A3           INC     DPTR
    \   00002B   F0           MOVX    @DPTR,A
-    575                ZDP_EndDeviceBindReq( &dstAddr, NLME_GetShortAddr(),
-    576                                      AXD_epDesc.endPoint,
-    577                                      AXD_PROFID,
-    578                                      AXD_MAX_CLUSTERS, (cId_t *)AXD_ClusterList,
+    576                ZDP_EndDeviceBindReq( &dstAddr, NLME_GetShortAddr(),
+    577                                      AXD_epDesc.endPoint,
+    578                                      AXD_PROFID,
     579                                      AXD_MAX_CLUSTERS, (cId_t *)AXD_ClusterList,
-    580                                      FALSE );
+    580                                      AXD_MAX_CLUSTERS, (cId_t *)AXD_ClusterList,
+    581                                      FALSE );
    \   00002C                ; Setup parameters for call to function NLME_GetShortAddr
    \   00002C   12....       LCALL   ??NLME_GetShortAddr?relay
    \   00002F   8A..         MOV     ?V0 + 0,R2
@@ -1291,42 +1292,42 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\Samples\cc2430-zstack-ad
    \   00007B   12....       LCALL   ??ZDP_EndDeviceBindReq?relay
    \   00007E   7409         MOV     A,#0x9
    \   000080   12....       LCALL   ?DEALLOC_XSTACK8
-    581              }
-    582          
-    583              if ( keys & HAL_KEY_SW_3 )
-    584              {
-    585              }
-    586          
-    587              if ( keys & HAL_KEY_SW_4 )
+    582              }
+    583          
+    584              if ( keys & HAL_KEY_SW_3 )
+    585              {
+    586              }
+    587          
+    588              if ( keys & HAL_KEY_SW_4 )
    \                     ??AXD_HandleKeys_1:
    \   000083   EE           MOV     A,R6
    \   000084   A2E3         MOV     C,0xE0 /* A   */.3
    \   000086   505B         JNC     ??AXD_HandleKeys_0
-    588              {
-    589                HalLedSet ( HAL_LED_4, HAL_LED_MODE_OFF );
+    589              {
+    590                HalLedSet ( HAL_LED_4, HAL_LED_MODE_OFF );
    \   000088                ; Setup parameters for call to function HalLedSet
    \   000088   7A00         MOV     R2,#0x0
    \   00008A   7908         MOV     R1,#0x8
    \   00008C   12....       LCALL   ??HalLedSet?relay
-    590          
-    591                // Initiate a Match Description Request (Service Discovery)
-    592          #ifdef AXD_COR
-    593                dstAddr.addrMode = AddrBroadcast;
+    591          
+    592                // Initiate a Match Description Request (Service Discovery)
+    593          #ifdef AXD_COR
+    594                dstAddr.addrMode = AddrBroadcast;
    \   00008F   7408         MOV     A,#0x8
    \   000091   12....       LCALL   ?XSTACK_DISP0_8
    \   000094   740F         MOV     A,#0xf
    \   000096   12....       LCALL   ?Subroutine1 & 0xFFFF
-    594                dstAddr.addr.shortAddr = NWK_BROADCAST_SHORTADDR;
+    595                dstAddr.addr.shortAddr = NWK_BROADCAST_SHORTADDR;
    \                     ??CrossCallReturnLabel_4:
    \   000099   74FF         MOV     A,#-0x1
    \   00009B   F0           MOVX    @DPTR,A
    \   00009C   A3           INC     DPTR
    \   00009D   F0           MOVX    @DPTR,A
-    595                ZDP_MatchDescReq( &dstAddr, NWK_BROADCAST_SHORTADDR,
-    596                                  AXD_PROFID,
-    597                                  AXD_MAX_CLUSTERS, (cId_t *)AXD_ClusterList,
+    596                ZDP_MatchDescReq( &dstAddr, NWK_BROADCAST_SHORTADDR,
+    597                                  AXD_PROFID,
     598                                  AXD_MAX_CLUSTERS, (cId_t *)AXD_ClusterList,
-    599                                  FALSE );
+    599                                  AXD_MAX_CLUSTERS, (cId_t *)AXD_ClusterList,
+    600                                  FALSE );
    \   00009E                ; Setup parameters for call to function ZDP_MatchDescReq
    \   00009E   75..00       MOV     ?V0 + 0,#0x0
    \   0000A1   78..         MOV     R0,#?V0 + 0
@@ -1355,43 +1356,43 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\Samples\cc2430-zstack-ad
    \   0000DB   12....       LCALL   ??ZDP_MatchDescReq?relay
    \   0000DE   7408         MOV     A,#0x8
    \   0000E0   12....       LCALL   ?DEALLOC_XSTACK8
-    600          #else
-    601                dstAddr.addrMode = Addr16Bit;
-    602                dstAddr.addr.shortAddr = 0x0000;
-    603                ZDP_MatchDescReq( &dstAddr, NWK_BROADCAST_SHORTADDR,
-    604                                  AXD_PROFID,
-    605                                  AXD_MAX_CLUSTERS, (cId_t *)AXD_ClusterList,
+    601          #else
+    602                dstAddr.addrMode = Addr16Bit;
+    603                dstAddr.addr.shortAddr = 0x0000;
+    604                ZDP_MatchDescReq( &dstAddr, NWK_BROADCAST_SHORTADDR,
+    605                                  AXD_PROFID,
     606                                  AXD_MAX_CLUSTERS, (cId_t *)AXD_ClusterList,
-    607                                  FALSE );
-    608          #endif
-    609              }
-    610            }
-    611          }
+    607                                  AXD_MAX_CLUSTERS, (cId_t *)AXD_ClusterList,
+    608                                  FALSE );
+    609          #endif
+    610              }
+    611            }
+    612          }
    \                     ??AXD_HandleKeys_0:
    \   0000E3   7409         MOV     A,#0x9
    \   0000E5   12....       LCALL   ?DEALLOC_XSTACK8
-   \   0000E8   02....       LJMP    ?Subroutine7 & 0xFFFF
-    612          
-    613          /*********************************************************************
-    614           * LOCAL FUNCTIONS
-    615           */
-    616          
-    617          /*********************************************************************
-    618           * @fn      AXD_MessageMSGCB
-    619           *
-    620           * @brief   Data message processor callback.  This function processes
-    621           *          any incoming data - probably from other devices.  So, based
-    622           *          on cluster ID, perform the intended action.
-    623           *
-    624           * @param   none
-    625           *
-    626           * @return  none
-    627           */
+   \   0000E8   02....       LJMP    ?Subroutine6 & 0xFFFF
+    613          
+    614          /*********************************************************************
+    615           * LOCAL FUNCTIONS
+    616           */
+    617          
+    618          /*********************************************************************
+    619           * @fn      AXD_MessageMSGCB
+    620           *
+    621           * @brief   Data message processor callback.  This function processes
+    622           *          any incoming data - probably from other devices.  So, based
+    623           *          on cluster ID, perform the intended action.
+    624           *
+    625           * @param   none
+    626           *
+    627           * @return  none
+    628           */
 
    \                                 In  segment BANKED_CODE, align 1, keep-with-next
-    628          void AXD_MessageMSGCB( afIncomingMSGPacket_t *pkt )
+    629          void AXD_MessageMSGCB( afIncomingMSGPacket_t *pkt )
    \                     AXD_MessageMSGCB:
-    629          {
+    630          {
    \   000000   74F6         MOV     A,#-0xa
    \   000002   12....       LCALL   ?BANKED_ENTER_XDATA
    \   000005                ; Saved register size: 10
@@ -1400,16 +1401,16 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\Samples\cc2430-zstack-ad
    \   000006   FE           MOV     R6,A
    \   000007   EB           MOV     A,R3
    \   000008   FF           MOV     R7,A
-    630            
-    631            switch ( pkt->clusterId )
+    631            
+    632            switch ( pkt->clusterId )
    \   000009   8E82         MOV     DPL,R6
    \   00000B   8F83         MOV     DPH,R7
    \   00000D   A3           INC     DPTR
    \   00000E   A3           INC     DPTR
    \   00000F   A3           INC     DPTR
    \   000010   A3           INC     DPTR
-   \   000011   12....       LCALL   ?Subroutine3 & 0xFFFF
-   \                     ??CrossCallReturnLabel_8:
+   \   000011   12....       LCALL   ?Subroutine2 & 0xFFFF
+   \                     ??CrossCallReturnLabel_6:
    \   000014   12....       LCALL   ?US_SWITCH_DENSE
    \                     `?<Jumptable for AXD_MessageMSGCB>_0`:
    \   000017   0100         DW        1
@@ -1418,9 +1419,9 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\Samples\cc2430-zstack-ad
    \   00001C   ....         DW        ??AXD_MessageMSGCB_1
    \   00001E   ....         DW        ??AXD_MessageMSGCB_2
    \   000020   ....         DW        ??AXD_MessageMSGCB_3
-    632            {
-    633              case AXD_CMD_ID:
-    634                displayXYZ(pkt->cmd.Data);
+    633            {
+    634              case AXD_CMD_ID:
+    635                displayXYZ(pkt->cmd.Data);
    \                     ??AXD_MessageMSGCB_1:
    \   000022   EE           MOV     A,R6
    \   000023   2415         ADD     A,#0x15
@@ -1437,8 +1438,8 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\Samples\cc2430-zstack-ad
    \   000034   E0           MOVX    A,@DPTR
    \   000035   FB           MOV     R3,A
    \   000036   12....       LCALL   ??displayXYZ?relay
-    635                //HalLcdWriteStringValue("R: ",source,10,3);
-    636                HalUARTWrite( SERIAL_APP_PORT, pkt->cmd.Data,pkt->cmd.DataLength);
+    636                //HalLcdWriteStringValue("R: ",source,10,3);
+    637                HalUARTWrite( SERIAL_APP_PORT, pkt->cmd.Data,pkt->cmd.DataLength);
    \   000039                ; Setup parameters for call to function HalUARTWrite
    \   000039   EE           MOV     A,R6
    \   00003A   2413         ADD     A,#0x13
@@ -1461,9 +1462,9 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\Samples\cc2430-zstack-ad
    \   000053   7900         MOV     R1,#0x0
    \   000055   12....       LCALL   ??HalUARTWrite?relay
    \   000058   8028         SJMP    ??AXD_MessageMSGCB_0
-    637              break;
-    638            case AXD_TEST_CMD_ID:
-    639              HalLcdWriteStringValue("R: ",*(pkt->cmd.Data),10,4);
+    638              break;
+    639            case AXD_TEST_CMD_ID:
+    640              HalLcdWriteStringValue("R: ",*(pkt->cmd.Data),10,4);
    \                     ??AXD_MessageMSGCB_2:
    \   00005A                ; Setup parameters for call to function HalLcdWriteStringValue
    \   00005A   75..04       MOV     ?V0 + 0,#0x4
@@ -1474,9 +1475,9 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\Samples\cc2430-zstack-ad
    \   000065   7A..         MOV     R2,#(`?<Constant "R: ">` & 0xff)
    \   000067   7B..         MOV     R3,#((`?<Constant "R: ">` >> 8) & 0xff)
    \   000069   800F         SJMP    ??AXD_MessageMSGCB_4
-    640              break;
-    641            case AXD_TEST2_CMD_ID:
-    642              HalLcdWriteStringValue("Q: ",*(pkt->cmd.Data),10,3);
+    641              break;
+    642            case AXD_TEST2_CMD_ID:
+    643              HalLcdWriteStringValue("Q: ",*(pkt->cmd.Data),10,3);
    \                     ??AXD_MessageMSGCB_3:
    \   00006B                ; Setup parameters for call to function HalLcdWriteStringValue
    \   00006B   75..03       MOV     ?V0 + 0,#0x3
@@ -1490,14 +1491,14 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\Samples\cc2430-zstack-ad
    \   00007A   12....       LCALL   ??HalLcdWriteStringValue?relay
    \   00007D   7401         MOV     A,#0x1
    \   00007F   12....       LCALL   ?DEALLOC_XSTACK8
-    643              break;
-    644            default: break;
-    645            } 
-    646            
-    647          }
+    644              break;
+    645            default: break;
+    646            } 
+    647            
+    648          }
    \                     ??AXD_MessageMSGCB_0:
-   \   000082                REQUIRE ?Subroutine7
-   \   000082                ; // Fall through to label ?Subroutine7
+   \   000082                REQUIRE ?Subroutine6
+   \   000082                ; // Fall through to label ?Subroutine6
 
    \                                 In  segment BANKED_CODE, align 1, keep-with-next
    \                     ?Subroutine0:
@@ -1506,103 +1507,103 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\Samples\cc2430-zstack-ad
    \   000003   2415         ADD     A,#0x15
    \   000005   F582         MOV     DPL,A
    \   000007   EF           MOV     A,R7
-   \   000008   12....       LCALL   ?Subroutine5 & 0xFFFF
-   \                     ??CrossCallReturnLabel_13:
+   \   000008   12....       LCALL   ?Subroutine4 & 0xFFFF
+   \                     ??CrossCallReturnLabel_11:
    \   00000B   FC           MOV     R4,A
    \   00000C   7D00         MOV     R5,#0x0
    \   00000E   22           RET
-    648          
-    649          /*********************************************************************
-    650           * @fn      AXD_SendTheMessage
-    651           *
-    652           * @brief   Send "the" message.
-    653           *
-    654           * @param   none
-    655           *
-    656           * @return  none
-    657           */
+    649          
+    650          /*********************************************************************
+    651           * @fn      AXD_SendTheMessage
+    652           *
+    653           * @brief   Send "the" message.
+    654           *
+    655           * @param   none
+    656           *
+    657           * @return  none
+    658           */
 
    \                                 In  segment BANKED_CODE, align 1, keep-with-next
-    658          void AXD_SendTheMessage( void )
+    659          void AXD_SendTheMessage( void )
    \                     AXD_SendTheMessage:
-    659          {
+    660          {
    \   000000                ; Saved register size: 0
    \   000000                ; Auto size: 0
-    660            //zAddrType_t dstAddr;
-    661          #ifdef AXD_END
-    662          
-    663            Multiple_Read_ADXL345();
-    664            conversion();
-    665            ReadAdcValue(ADC_TEMP);
-    666            ReadAdcValue(ADC_PULSE);
-    667          //  displayXYZ((uint8 *)BUFFER);
-    668          //  BUFFER[3] = myApp_ReadTemperature();
-    669          //  BUFFER[2] = BUFFER[3] % 10 + '0';
-    670          //  BUFFER[3] = BUFFER[3] / 10 + '0';
-    671          //  BUFFER[5] = myApp_ReadTemperature();
-    672          //  BUFFER[4] = BUFFER[5] % 10 + '0';
-    673          //  BUFFER[5] = BUFFER[5] / 10 + '0';
-    674            
-    675            if ( AF_DataRequest( &AXD_DstAddr, &AXD_epDesc,
-    676                                 AXD_CMD_ID,
-    677                                 (byte)(sizeof(BUFFER)),
-    678                                 (byte *)(BUFFER),
-    679                                 &AXD_TransID,
-    680                                 AF_DISCV_ROUTE, AF_DEFAULT_RADIUS ) == afStatus_SUCCESS )
-    681            {
-    682              aps_RemoveGroup(AXD_ENDPOINT,AXD_GROUP);
-    683              // Successfully requested to be sent.
-    684              
-    685            }
-    686            else
-    687            {
-    688              // Error occurred in request to send.
-    689            }
-    690          #endif
-    691          #ifdef AXD_ROUTER
-    692            if ( AF_DataRequest( &AXD_DstAddr, &AXD_epDesc,
-    693                                 AXD_TEST_CMD_ID,
-    694                                 (byte)(sizeof(test2)),
-    695                                 (byte *)(&test2),
-    696                                 &AXD_TransID,
-    697                                 AF_SKIP_ROUTING, AF_DEFAULT_RADIUS ) == afStatus_SUCCESS )
-    698            {
-    699              // Successfully requested to be sent.
-    700          
-    701            }
-    702            else
-    703            {
-    704              // Error occurred in request to send.
-    705            }
-    706            
-    707          #endif
-    708          #ifdef AXD_END2
-    709            if ( AF_DataRequest( &AXD_DstAddr, &AXD_epDesc,
-    710                                 AXD_TEST2_CMD_ID,
-    711                                 (byte)(sizeof(test2)),
-    712                                 (byte *)(&test2),
-    713                                 &AXD_TransID,
-    714                                 AF_SKIP_ROUTING, AF_DEFAULT_RADIUS ) == afStatus_SUCCESS )
-    715            {
-    716              // Successfully requested to be sent.
-    717          
-    718            }
-    719            else
-    720            {
-    721              // Error occurred in request to send.
-    722            }
-    723            
-    724          #endif
-    725          }
+    661            //zAddrType_t dstAddr;
+    662          #ifdef AXD_END
+    663          
+    664            Multiple_Read_ADXL345();
+    665            conversion();
+    666            ReadAdcValue();
+    667          //  ReadAdcValue();
+    668          //  displayXYZ((uint8 *)BUFFER);
+    669          //  BUFFER[3] = myApp_ReadTemperature();
+    670          //  BUFFER[2] = BUFFER[3] % 10 + '0';
+    671          //  BUFFER[3] = BUFFER[3] / 10 + '0';
+    672          //  BUFFER[5] = myApp_ReadTemperature();
+    673          //  BUFFER[4] = BUFFER[5] % 10 + '0';
+    674          //  BUFFER[5] = BUFFER[5] / 10 + '0';
+    675            
+    676            if ( AF_DataRequest( &AXD_DstAddr, &AXD_epDesc,
+    677                                 AXD_CMD_ID,
+    678                                 (byte)(sizeof(BUFFER)),
+    679                                 (byte *)(BUFFER),
+    680                                 &AXD_TransID,
+    681                                 AF_DISCV_ROUTE, AF_DEFAULT_RADIUS ) == afStatus_SUCCESS )
+    682            {
+    683              aps_RemoveGroup(AXD_ENDPOINT,AXD_GROUP);
+    684              // Successfully requested to be sent.
+    685              
+    686            }
+    687            else
+    688            {
+    689              // Error occurred in request to send.
+    690            }
+    691          #endif
+    692          #ifdef AXD_ROUTER
+    693            if ( AF_DataRequest( &AXD_DstAddr, &AXD_epDesc,
+    694                                 AXD_TEST_CMD_ID,
+    695                                 (byte)(sizeof(test2)),
+    696                                 (byte *)(&test2),
+    697                                 &AXD_TransID,
+    698                                 AF_SKIP_ROUTING, AF_DEFAULT_RADIUS ) == afStatus_SUCCESS )
+    699            {
+    700              // Successfully requested to be sent.
+    701          
+    702            }
+    703            else
+    704            {
+    705              // Error occurred in request to send.
+    706            }
+    707            
+    708          #endif
+    709          #ifdef AXD_END2
+    710            if ( AF_DataRequest( &AXD_DstAddr, &AXD_epDesc,
+    711                                 AXD_TEST2_CMD_ID,
+    712                                 (byte)(sizeof(test2)),
+    713                                 (byte *)(&test2),
+    714                                 &AXD_TransID,
+    715                                 AF_SKIP_ROUTING, AF_DEFAULT_RADIUS ) == afStatus_SUCCESS )
+    716            {
+    717              // Successfully requested to be sent.
+    718          
+    719            }
+    720            else
+    721            {
+    722              // Error occurred in request to send.
+    723            }
+    724            
+    725          #endif
+    726          }
    \   000000   02....       LJMP    ?BRET
-    726          
-    727          /*********************************************************************
-    728          *********************************************************************/
+    727          
+    728          /*********************************************************************
+    729          *********************************************************************/
 
    \                                 In  segment BANKED_CODE, align 1, keep-with-next
-    729          void AXD_ReceiveDataIndication( uint16 source, uint16 command, uint16 len, uint8 *pData  )
+    730          void AXD_ReceiveDataIndication( uint16 source, uint16 command, uint16 len, uint8 *pData  )
    \                     AXD_ReceiveDataIndication:
-    730          {
+    731          {
    \   000000   74F4         MOV     A,#-0xc
    \   000002   12....       LCALL   ?BANKED_ENTER_XDATA
    \   000005                ; Saved register size: 12
@@ -1621,17 +1622,17 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\Samples\cc2430-zstack-ad
    \   000019   A3           INC     DPTR
    \   00001A   E0           MOVX    A,@DPTR
    \   00001B   F5..         MOV     ?V0 + 3,A
-    731          #if defined ( MT_SAPI_CB_FUNC )
-    732            /* First check if MT has subscribed for this callback. If so , pass it as
-    733            a event to MonitorTest and return control to calling function after that */
-    734            if ( SAPICB_CHECK( SPI_CB_SAPI_RCV_DATA_IND ) )
-    735            {
-    736              zb_MTCallbackReceiveDataIndication( source, command, len, pData  );
-    737            }
-    738            else
-    739          #endif  //MT_SAPI_CB_FUNC
-    740            {
-    741              zb_ReceiveDataIndication( source, command, len, pData  );
+    732          #if defined ( MT_SAPI_CB_FUNC )
+    733            /* First check if MT has subscribed for this callback. If so , pass it as
+    734            a event to MonitorTest and return control to calling function after that */
+    735            if ( SAPICB_CHECK( SPI_CB_SAPI_RCV_DATA_IND ) )
+    736            {
+    737              zb_MTCallbackReceiveDataIndication( source, command, len, pData  );
+    738            }
+    739            else
+    740          #endif  //MT_SAPI_CB_FUNC
+    741            {
+    742              zb_ReceiveDataIndication( source, command, len, pData  );
    \   00001D                ; Setup parameters for call to function zb_ReceiveDataIndication
    \   00001D   78..         MOV     R0,#?V0 + 2
    \   00001F   12....       LCALL   ?PUSH_XSTACK_I_TWO
@@ -1640,42 +1641,42 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\Samples\cc2430-zstack-ad
    \   000027   12....       LCALL   ??zb_ReceiveDataIndication?relay
    \   00002A   7404         MOV     A,#0x4
    \   00002C   12....       LCALL   ?DEALLOC_XSTACK8
-    742            }
-    743          }
-   \   00002F   02....       LJMP    ?Subroutine6 & 0xFFFF
-    744          
-    745          #if SERIAL_APP_LOOPBACK
-    746          /*********************************************************************
-    747           * @fn      rxCB_Loopback
-    748           *
-    749           * @brief   Process UART Rx event handling.
-    750           *          May be triggered by an Rx timer expiration - less than max
-    751           *          Rx bytes have arrived within the Rx max age time.
-    752           *          May be set by failure to alloc max Rx byte-buffer for the DMA Rx -
-    753           *          system resources are too low, so set flow control?
-    754           *
-    755           * @param   none
-    756           *
-    757           * @return  none
-    758           */
+    743            }
+    744          }
+   \   00002F   02....       LJMP    ?Subroutine5 & 0xFFFF
+    745          
+    746          #if SERIAL_APP_LOOPBACK
+    747          /*********************************************************************
+    748           * @fn      rxCB_Loopback
+    749           *
+    750           * @brief   Process UART Rx event handling.
+    751           *          May be triggered by an Rx timer expiration - less than max
+    752           *          Rx bytes have arrived within the Rx max age time.
+    753           *          May be set by failure to alloc max Rx byte-buffer for the DMA Rx -
+    754           *          system resources are too low, so set flow control?
+    755           *
+    756           * @param   none
+    757           *
+    758           * @return  none
+    759           */
 
    \                                 In  segment BANKED_CODE, align 1, keep-with-next
-    759          static void rxCB_Loopback( uint8 port, uint8 event )
+    760          static void rxCB_Loopback( uint8 port, uint8 event )
    \                     rxCB_Loopback:
-    760          {
+    761          {
    \   000000   74F6         MOV     A,#-0xa
    \   000002   12....       LCALL   ?BANKED_ENTER_XDATA
    \   000005                ; Saved register size: 10
    \   000005                ; Auto size: 0
    \   000005   E9           MOV     A,R1
    \   000006   FE           MOV     R6,A
-    761          
-    762            if ( rxLen )
+    762          
+    763            if ( rxLen )
    \   000007   90....       MOV     DPTR,#rxLen
    \   00000A   E0           MOVX    A,@DPTR
    \   00000B   6029         JZ      ??rxCB_Loopback_0
-    763            {
-    764              if ( !HalUARTWrite( SERIAL_APP_PORT, rxBuf, rxLen ) )
+    764            {
+    765              if ( !HalUARTWrite( SERIAL_APP_PORT, rxBuf, rxLen ) )
    \   00000D                ; Setup parameters for call to function HalUARTWrite
    \   00000D   FC           MOV     R4,A
    \   00000E   7D00         MOV     R5,#0x0
@@ -1688,22 +1689,22 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\Samples\cc2430-zstack-ad
    \   00001C   EB           MOV     A,R3
    \                     ??rxCB_Loopback_1:
    \   00001D   700B         JNZ     ??rxCB_Loopback_2
-    765              {
-    766                osal_start_timerEx( AXD_TaskID, SERIALAPP_TX_RTRY_EVT,
-    767                                                      SERIALAPP_TX_RTRY_TIMEOUT );
+    766              {
+    767                osal_start_timerEx( AXD_TaskID, SERIALAPP_TX_RTRY_EVT,
+    768                                                      SERIALAPP_TX_RTRY_TIMEOUT );
    \                     ??rxCB_Loopback_3:
    \   00001F                ; Setup parameters for call to function osal_start_timerEx
    \   00001F   7CFA         MOV     R4,#-0x6
    \   000021   7D00         MOV     R5,#0x0
    \   000023   7A10         MOV     R2,#0x10
-   \   000025   12....       LCALL   ??Subroutine4_0 & 0xFFFF
-    768                return;
-   \                     ??CrossCallReturnLabel_11:
+   \   000025   12....       LCALL   ??Subroutine3_0 & 0xFFFF
+    769                return;
+   \                     ??CrossCallReturnLabel_9:
    \   000028   8037         SJMP    ??rxCB_Loopback_4
-    769              }
-    770              else
-    771              {
-    772                osal_stop_timerEx( AXD_TaskID, SERIALAPP_TX_RTRY_EVT );
+    770              }
+    771              else
+    772              {
+    773                osal_stop_timerEx( AXD_TaskID, SERIALAPP_TX_RTRY_EVT );
    \                     ??rxCB_Loopback_2:
    \   00002A                ; Setup parameters for call to function osal_stop_timerEx
    \   00002A   7A10         MOV     R2,#0x10
@@ -1712,11 +1713,11 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\Samples\cc2430-zstack-ad
    \   000031   E0           MOVX    A,@DPTR
    \   000032   F9           MOV     R1,A
    \   000033   12....       LCALL   ??osal_stop_timerEx?relay
-    773              }
-    774            }
-    775          
-    776            // HAL UART Manager will turn flow control back on if it can after read.
-    777            if ( !(rxLen = HalUARTRead( port, rxBuf, SERIAL_APP_RX_CNT )) )
+    774              }
+    775            }
+    776          
+    777            // HAL UART Manager will turn flow control back on if it can after read.
+    778            if ( !(rxLen = HalUARTRead( port, rxBuf, SERIAL_APP_RX_CNT )) )
    \                     ??rxCB_Loopback_0:
    \   000036                ; Setup parameters for call to function HalUARTRead
    \   000036   7C50         MOV     R4,#0x50
@@ -1730,11 +1731,11 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\Samples\cc2430-zstack-ad
    \   000044   90....       MOV     DPTR,#rxLen
    \   000047   F0           MOVX    @DPTR,A
    \   000048   6017         JZ      ??rxCB_Loopback_4
-    778            {
-    779              return;
-    780            }
-    781          
-    782            if ( HalUARTWrite( SERIAL_APP_PORT, rxBuf, rxLen ) )
+    779            {
+    780              return;
+    781            }
+    782          
+    783            if ( HalUARTWrite( SERIAL_APP_PORT, rxBuf, rxLen ) )
    \   00004A                ; Setup parameters for call to function HalUARTWrite
    \   00004A   FC           MOV     R4,A
    \   00004B   7D00         MOV     R5,#0x0
@@ -1747,153 +1748,153 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\Samples\cc2430-zstack-ad
    \   000059   EB           MOV     A,R3
    \                     ??rxCB_Loopback_5:
    \   00005A   60C3         JZ      ??rxCB_Loopback_3
-    783            {
-    784              rxLen = 0;
+    784            {
+    785              rxLen = 0;
    \   00005C   E4           CLR     A
    \   00005D   90....       MOV     DPTR,#rxLen
    \   000060   F0           MOVX    @DPTR,A
    \                     ??rxCB_Loopback_4:
-   \   000061   02....       LJMP    ?Subroutine7 & 0xFFFF
-    785            }
-    786            else
-    787            {
-    788              osal_start_timerEx( AXD_TaskID, SERIALAPP_TX_RTRY_EVT,
-    789                                                    SERIALAPP_TX_RTRY_TIMEOUT );
-    790            }
-    791          }
-    792          
-    793          #else
-    794          
-    795          /*********************************************************************
-    796           * @fn      rxCB
-    797           *
-    798           * @brief   Process UART Rx event handling.
-    799           *          May be triggered by an Rx timer expiration - less than max
-    800           *          Rx bytes have arrived within the Rx max age time.
-    801           *          May be set by failure to alloc max Rx byte-buffer for the DMA Rx -
-    802           *          system resources are too low, so set flow control?
-    803           *
-    804           * @param   none
-    805           *
-    806           * @return  none
-    807           */
-    808          static void rxCB( uint8 port, uint8 event )
-    809          {
-    810            uint8 *buf, len;
-    811          
-    812            /* While awaiting retries/response, only buffer 1 next buffer: otaBuf2.
-    813             * If allow the DMA Rx to continue to run, allocating Rx buffers, the heap
-    814             * will become so depleted that an incoming OTA response cannot be received.
-    815             * When the Rx data available is not read, the DMA Rx Machine automatically
-    816             * sets flow control off - it is automatically re-enabled upon Rx data read.
-    817             * When the back-logged otaBuf2 is sent OTA, an Rx data read is scheduled.
-    818             */
-    819            if ( otaBuf2 )
-    820            {
-    821              return;
-    822            }
-    823          
-    824            if ( !(buf = osal_mem_alloc( SERIAL_APP_RX_CNT )) )
-    825            {
-    826              return;
-    827            }
-    828          
-    829            /* HAL UART Manager will turn flow control back on if it can after read.
-    830             * Reserve 1 byte for the 'sequence number'.
-    831             */
-    832            len = HalUARTRead( port, buf+1, SERIAL_APP_RX_CNT-1 );
-    833          
-    834            if ( !len )  // Length is not expected to ever be zero.
-    835            {
-    836              osal_mem_free( buf );
-    837              return;
-    838            }
-    839          
-    840            /* If the local global otaBuf is in use, then either the response handshake
-    841             * is being awaited or retries are being attempted. When the wait/retries
-    842             * process has been exhausted, the next OTA msg will be attempted from
-    843             * otaBuf2, if it is not NULL.
-    844             */
-    845            if ( otaBuf )
-    846            {
-    847              otaBuf2 = buf;
-    848              otaLen2 = len;
-    849            }
-    850            else
-    851            {
-    852              otaBuf = buf;
-    853              otaLen = len;
-    854              /* Don't call SerialApp_SendData() from here in the callback function.
-    855               * Set the event so SerialApp_SendData() runs during this task's time slot.
-    856               */
-    857              osal_set_event( SerialApp_TaskID, SERIALAPP_MSG_SEND_EVT );
-    858            }
-    859          }
-    860          #endif
-    861          
-    862          /*********************************************************************
-    863          *********************************************************************/
+   \   000061   02....       LJMP    ?Subroutine6 & 0xFFFF
+    786            }
+    787            else
+    788            {
+    789              osal_start_timerEx( AXD_TaskID, SERIALAPP_TX_RTRY_EVT,
+    790                                                    SERIALAPP_TX_RTRY_TIMEOUT );
+    791            }
+    792          }
+    793          
+    794          #else
+    795          
+    796          /*********************************************************************
+    797           * @fn      rxCB
+    798           *
+    799           * @brief   Process UART Rx event handling.
+    800           *          May be triggered by an Rx timer expiration - less than max
+    801           *          Rx bytes have arrived within the Rx max age time.
+    802           *          May be set by failure to alloc max Rx byte-buffer for the DMA Rx -
+    803           *          system resources are too low, so set flow control?
+    804           *
+    805           * @param   none
+    806           *
+    807           * @return  none
+    808           */
+    809          static void rxCB( uint8 port, uint8 event )
+    810          {
+    811            uint8 *buf, len;
+    812          
+    813            /* While awaiting retries/response, only buffer 1 next buffer: otaBuf2.
+    814             * If allow the DMA Rx to continue to run, allocating Rx buffers, the heap
+    815             * will become so depleted that an incoming OTA response cannot be received.
+    816             * When the Rx data available is not read, the DMA Rx Machine automatically
+    817             * sets flow control off - it is automatically re-enabled upon Rx data read.
+    818             * When the back-logged otaBuf2 is sent OTA, an Rx data read is scheduled.
+    819             */
+    820            if ( otaBuf2 )
+    821            {
+    822              return;
+    823            }
+    824          
+    825            if ( !(buf = osal_mem_alloc( SERIAL_APP_RX_CNT )) )
+    826            {
+    827              return;
+    828            }
+    829          
+    830            /* HAL UART Manager will turn flow control back on if it can after read.
+    831             * Reserve 1 byte for the 'sequence number'.
+    832             */
+    833            len = HalUARTRead( port, buf+1, SERIAL_APP_RX_CNT-1 );
+    834          
+    835            if ( !len )  // Length is not expected to ever be zero.
+    836            {
+    837              osal_mem_free( buf );
+    838              return;
+    839            }
+    840          
+    841            /* If the local global otaBuf is in use, then either the response handshake
+    842             * is being awaited or retries are being attempted. When the wait/retries
+    843             * process has been exhausted, the next OTA msg will be attempted from
+    844             * otaBuf2, if it is not NULL.
+    845             */
+    846            if ( otaBuf )
+    847            {
+    848              otaBuf2 = buf;
+    849              otaLen2 = len;
+    850            }
+    851            else
+    852            {
+    853              otaBuf = buf;
+    854              otaLen = len;
+    855              /* Don't call SerialApp_SendData() from here in the callback function.
+    856               * Set the event so SerialApp_SendData() runs during this task's time slot.
+    857               */
+    858              osal_set_event( SerialApp_TaskID, SERIALAPP_MSG_SEND_EVT );
+    859            }
+    860          }
+    861          #endif
+    862          
+    863          /*********************************************************************
+    864          *********************************************************************/
 
    \                                 In  segment BANKED_CODE, align 1, keep-with-next
-    864          uint8 myApp_ReadTemperature( void )
+    865          uint8 myApp_ReadTemperature( void )
    \                     myApp_ReadTemperature:
-    865          {
+    866          {
    \   000000   74F0         MOV     A,#-0x10
    \   000002   12....       LCALL   ?BANKED_ENTER_XDATA
    \   000005                ; Saved register size: 16
    \   000005                ; Auto size: 0
-    866          
-    867            uint16 value;
-    868          
-    869            /* Clear ADC interrupt flag */
-    870            ADCIF = 0;
+    867          
+    868            uint16 value;
+    869          
+    870            /* Clear ADC interrupt flag */
+    871            ADCIF = 0;
    \   000005   C28D         CLR     0x88.5
-    871          
-    872            ADCCON3 = (HAL_ADC_REF_125V | HAL_ADC_DEC_512 | HAL_ADC_CHN_TEMP);
+    872          
+    873            ADCCON3 = (HAL_ADC_REF_125V | HAL_ADC_DEC_512 | HAL_ADC_CHN_TEMP);
    \   000007   75B63E       MOV     0xb6,#0x3e
-    873          
-    874            /* Wait for the conversion to finish */
-    875            while ( !ADCIF );
+    874          
+    875            /* Wait for the conversion to finish */
+    876            while ( !ADCIF );
    \                     ??myApp_ReadTemperature_0:
    \   00000A   A28D         MOV     C,0x88.5
    \   00000C   50FC         JNC     ??myApp_ReadTemperature_0
-    876          
-    877            /* Get the result */
-    878            value = ADCL;
+    877          
+    878            /* Get the result */
+    879            value = ADCL;
    \   00000E   AABA         MOV     R2,0xba
    \   000010   8A82         MOV     DPL,R2
    \   000012   A882         MOV     R0,DPL
-    879            value |= ((uint16) ADCH) << 8;
+    880            value |= ((uint16) ADCH) << 8;
    \   000014   E5BB         MOV     A,0xbb
    \   000016   FA           MOV     R2,A
    \   000017   E4           CLR     A
    \   000018   CA           XCH     A,R2
    \   000019   F9           MOV     R1,A
-    880          
-    881            /*
-    882             * value ranges from 0 to 0x8000 indicating 0V and 1.25V
-    883             * VOLTAGE_AT_TEMP_ZERO = 0.743 V = 19477
-    884             * TEMP_COEFFICIENT = 0.0024 V/C = 62.9 /C
-    885             * These parameters are typical values and need to be calibrated
-    886             * See the datasheet for the appropriate chip for more details
-    887             * also, the math below may not be very accurate
-    888             */
-    889          #define VOLTAGE_AT_TEMP_ZERO      19477   // 0.743 V
-    890          #define TEMP_COEFFICIENT          62.9    // 0.0024 V/C
-    891          
-    892            // limit min temp to 0 C
-    893            if ( value < VOLTAGE_AT_TEMP_ZERO )
+    881          
+    882            /*
+    883             * value ranges from 0 to 0x8000 indicating 0V and 1.25V
+    884             * VOLTAGE_AT_TEMP_ZERO = 0.743 V = 19477
+    885             * TEMP_COEFFICIENT = 0.0024 V/C = 62.9 /C
+    886             * These parameters are typical values and need to be calibrated
+    887             * See the datasheet for the appropriate chip for more details
+    888             * also, the math below may not be very accurate
+    889             */
+    890          #define VOLTAGE_AT_TEMP_ZERO      19477   // 0.743 V
+    891          #define TEMP_COEFFICIENT          62.9    // 0.0024 V/C
+    892          
+    893            // limit min temp to 0 C
+    894            if ( value < VOLTAGE_AT_TEMP_ZERO )
    \   00001A   C3           CLR     C
    \   00001B   E8           MOV     A,R0
    \   00001C   9415         SUBB    A,#0x15
    \   00001E   E9           MOV     A,R1
    \   00001F   944C         SUBB    A,#0x4c
    \   000021   5004         JNC     ??myApp_ReadTemperature_1
-    894              value = VOLTAGE_AT_TEMP_ZERO;
+    895              value = VOLTAGE_AT_TEMP_ZERO;
    \   000023   7815         MOV     R0,#0x15
    \   000025   794C         MOV     R1,#0x4c
-    895          
-    896            value = value - VOLTAGE_AT_TEMP_ZERO;
+    896          
+    897            value = value - VOLTAGE_AT_TEMP_ZERO;
    \                     ??myApp_ReadTemperature_1:
    \   000027   E8           MOV     A,R0
    \   000028   24EB         ADD     A,#-0x15
@@ -1901,20 +1902,20 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\Samples\cc2430-zstack-ad
    \   00002B   E9           MOV     A,R1
    \   00002C   34B3         ADDC    A,#-0x4d
    \   00002E   F9           MOV     R1,A
-    897          
-    898            // limit max temp to 99 C
-    899            if ( value > TEMP_COEFFICIENT * 99 )
+    898          
+    899            // limit max temp to 99 C
+    900            if ( value > TEMP_COEFFICIENT * 99 )
    \   00002F   C3           CLR     C
    \   000030   E8           MOV     A,R0
    \   000031   9454         SUBB    A,#0x54
    \   000033   E9           MOV     A,R1
    \   000034   9418         SUBB    A,#0x18
    \   000036   4004         JC      ??myApp_ReadTemperature_2
-    900              value = TEMP_COEFFICIENT * 99;
+    901              value = TEMP_COEFFICIENT * 99;
    \   000038   7853         MOV     R0,#0x53
    \   00003A   7918         MOV     R1,#0x18
-    901          
-    902            return ( (uint8)(value/TEMP_COEFFICIENT) );
+    902          
+    903            return ( (uint8)(value/TEMP_COEFFICIENT) );
    \                     ??myApp_ReadTemperature_2:
    \   00003C   88..         MOV     ?V0 + 0,R0
    \   00003E   89..         MOV     ?V0 + 1,R1
@@ -1931,153 +1932,143 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\Samples\cc2430-zstack-ad
    \   000058   78..         MOV     R0,#?V0 + 0
    \   00005A   12....       LCALL   ?FLT_TO_L
    \   00005D   A9..         MOV     R1,?V0 + 0
-   \   00005F                REQUIRE ?Subroutine8
+   \   00005F                REQUIRE ?Subroutine7
    \   00005F                REQUIRE _A_TCON
    \   00005F                REQUIRE ADCCON3
    \   00005F                REQUIRE ADCL
    \   00005F                REQUIRE ADCH
-   \   00005F                ; // Fall through to label ?Subroutine8
-    903          }
+   \   00005F                ; // Fall through to label ?Subroutine7
+    904          }
 
    \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine8:
+   \                     ?Subroutine7:
    \   000000   7F08         MOV     R7,#0x8
    \   000002   02....       LJMP    ?BANKED_LEAVE_XDATA
 
    \                                 In  segment BANKED_CODE, align 1, keep-with-next
-    904          void ReadAdcValue( uint8 flag )
+    905          void ReadAdcValue( void )
    \                     ReadAdcValue:
-    905          {
+    906          {
    \   000000   74F0         MOV     A,#-0x10
    \   000002   12....       LCALL   ?BANKED_ENTER_XDATA
    \   000005                ; Saved register size: 16
    \   000005                ; Auto size: 0
-   \   000005   E9           MOV     A,R1
-   \   000006   FA           MOV     R2,A
-    906            uint16 value;
-    907            ADCIF = 0;
-   \   000007   C28D         CLR     0x88.5
-    908            if (flag == ADC_TEMP)
-   \   000009   7005         JNZ     ??ReadAdcValue_0
-    909            {
-    910              ADCCON3 = (HAL_ADC_REF_125V | HAL_ADC_DEC_512 | HAL_ADC_CHN_DIFF_0_1);
-   \   00000B   75B638       MOV     0xb6,#0x38
-   \   00000E   8003         SJMP    ??ReadAdcValue_1
-    911              
-    912            }
-    913            else
-    914            {
-    915              ADCCON3 = (HAL_ADC_REF_125V | HAL_ADC_DEC_512 | HAL_ADC_CHN_DIFF_2_3);
+    907            uint16 value;
+    908            ADCIF = 0;
+   \   000005   C28D         CLR     0x88.5
+    909          //  if (flag == ADC_TEMP)
+    910          //  {
+    911              ADCCON3 = (HAL_ADC_REF_AIN7 | HAL_ADC_DEC_512 | HAL_ADC_CHN_AIN1);
+   \   000007   75B671       MOV     0xb6,#0x71
+    912              
+    913          //  }
+    914          //  else
+    915          //  {
+    916          //    ADCCON3 = (HAL_ADC_REF_AIN7 | HAL_ADC_DEC_512 | HAL_ADC_CHN_AIN2);
+    917          //  }
+    918          //    ADCCON3 = (HAL_ADC_REF_125V | HAL_ADC_DEC_512 | HAL_ADC_CHN_TEMP);
+    919              while ( !ADCIF );
    \                     ??ReadAdcValue_0:
-   \   000010   75B639       MOV     0xb6,#0x39
-    916            }
-    917          //    ADCCON3 = (HAL_ADC_REF_125V | HAL_ADC_DEC_512 | HAL_ADC_CHN_TEMP);
-    918              while ( !ADCIF );
-   \                     ??ReadAdcValue_1:
-   \   000013   A28D         MOV     C,0x88.5
-   \   000015   50FC         JNC     ??ReadAdcValue_1
-    919              value = ADCL >> 2;
-   \   000017   E5BA         MOV     A,0xba
-   \   000019   13           RRC     A
-   \   00001A   13           RRC     A
-   \   00001B   543F         ANL     A,#0x3f
-   \   00001D   FC           MOV     R4,A
-    920              value |= ((uint16) ADCH) << 6;
-   \   00001E   85BB..       MOV     ?V0 + 0,0xbb
-   \   000021   75..00       MOV     ?V0 + 1,#0x0
-   \   000024   7406         MOV     A,#0x6
-   \   000026   78..         MOV     R0,#?V0 + 0
-   \   000028   12....       LCALL   ?S_SHL
-   \   00002B   E5..         MOV     A,?V0 + 0
-   \   00002D   4C           ORL     A,R4
-   \   00002E   FC           MOV     R4,A
-    921              value = (INT16U)(25.0 * (float)value / 16384.0);
-   \   00002F   8C..         MOV     ?V0 + 0,R4
-   \   000031   75..00       MOV     ?V0 + 2,#0x0
-   \   000034   75..00       MOV     ?V0 + 3,#0x0
-   \   000037   78..         MOV     R0,#?V0 + 0
-   \   000039   12....       LCALL   ?UL_TO_FLT
-   \   00003C   90....       MOV     DPTR,#__Constant_41c80000
-   \   00003F   78..         MOV     R0,#?V0 + 4
-   \   000041   12....       LCALL   ?L_MOV_X
-   \   000044   78..         MOV     R0,#?V0 + 0
-   \   000046   79..         MOV     R1,#?V0 + 4
-   \   000048   12....       LCALL   ?FLT_MUL
-   \   00004B   90....       MOV     DPTR,#__Constant_46800000
-   \   00004E   78..         MOV     R0,#?V0 + 4
-   \   000050   12....       LCALL   ?L_MOV_X
-   \   000053   78..         MOV     R0,#?V0 + 0
-   \   000055   79..         MOV     R1,#?V0 + 4
-   \   000057   12....       LCALL   ?FLT_DIV
-   \   00005A   78..         MOV     R0,#?V0 + 0
-   \   00005C   12....       LCALL   ?FLT_TO_L
-   \   00005F   AC..         MOV     R4,?V0 + 0
-   \   000061   AD..         MOV     R5,?V0 + 1
-    922              if (flag == ADC_TEMP)
-   \   000063   EA           MOV     A,R2
-   \   000064   701F         JNZ     ??ReadAdcValue_2
-    923            {
-    924              BUFFER[2] = (INT8U)(value % 10 + '0');
-   \   000066   EC           MOV     A,R4
-   \   000067   F8           MOV     R0,A
-   \   000068   ED           MOV     A,R5
-   \   000069   F9           MOV     R1,A
-   \   00006A   7A0A         MOV     R2,#0xa
-   \   00006C   7B00         MOV     R3,#0x0
-   \   00006E   12....       LCALL   ?US_DIV_MOD
-   \   000071   EA           MOV     A,R2
-   \   000072   2430         ADD     A,#0x30
-   \   000074   90....       MOV     DPTR,#(BUFFER + 2)
-   \   000077   12....       LCALL   ?Subroutine2 & 0xFFFF
-    925              BUFFER[3] = (INT8U)(value / 10 + '0');
-   \                     ??CrossCallReturnLabel_5:
-   \   00007A   12....       LCALL   ?US_DIV_MOD
-   \   00007D   E8           MOV     A,R0
-   \   00007E   2430         ADD     A,#0x30
-   \   000080   90....       MOV     DPTR,#(BUFFER + 3)
-   \   000083   801D         SJMP    ??ReadAdcValue_3
-    926            }
-    927            else
-    928            {
-    929              BUFFER[4] = (INT8U)(value % 10 + '0');
-   \                     ??ReadAdcValue_2:
-   \   000085   EC           MOV     A,R4
-   \   000086   F8           MOV     R0,A
-   \   000087   ED           MOV     A,R5
-   \   000088   F9           MOV     R1,A
-   \   000089   7A0A         MOV     R2,#0xa
-   \   00008B   7B00         MOV     R3,#0x0
-   \   00008D   12....       LCALL   ?US_DIV_MOD
-   \   000090   EA           MOV     A,R2
-   \   000091   2430         ADD     A,#0x30
-   \   000093   90....       MOV     DPTR,#(BUFFER + 4)
-   \   000096   12....       LCALL   ?Subroutine2 & 0xFFFF
-    930              BUFFER[5] = (INT8U)(value / 10 + '0');
-   \                     ??CrossCallReturnLabel_6:
+   \   00000A   A28D         MOV     C,0x88.5
+   \   00000C   50FC         JNC     ??ReadAdcValue_0
+    920              value = ADCL >> 2;
+   \   00000E   E5BA         MOV     A,0xba
+   \   000010   13           RRC     A
+   \   000011   13           RRC     A
+   \   000012   543F         ANL     A,#0x3f
+   \   000014   FC           MOV     R4,A
+    921              value |= ((uint16) ADCH) << 6;
+   \   000015   85BB..       MOV     ?V0 + 0,0xbb
+   \   000018   75..00       MOV     ?V0 + 1,#0x0
+   \   00001B   7406         MOV     A,#0x6
+   \   00001D   78..         MOV     R0,#?V0 + 0
+   \   00001F   12....       LCALL   ?S_SHL
+   \   000022   E5..         MOV     A,?V0 + 0
+   \   000024   4C           ORL     A,R4
+   \   000025   FC           MOV     R4,A
+    922              value = (INT16U)(330.0 * (float)value / 16384.0);
+   \   000026   8C..         MOV     ?V0 + 0,R4
+   \   000028   75..00       MOV     ?V0 + 2,#0x0
+   \   00002B   75..00       MOV     ?V0 + 3,#0x0
+   \   00002E   78..         MOV     R0,#?V0 + 0
+   \   000030   12....       LCALL   ?UL_TO_FLT
+   \   000033   90....       MOV     DPTR,#__Constant_43a50000
+   \   000036   78..         MOV     R0,#?V0 + 4
+   \   000038   12....       LCALL   ?L_MOV_X
+   \   00003B   78..         MOV     R0,#?V0 + 0
+   \   00003D   79..         MOV     R1,#?V0 + 4
+   \   00003F   12....       LCALL   ?FLT_MUL
+   \   000042   90....       MOV     DPTR,#__Constant_46800000
+   \   000045   78..         MOV     R0,#?V0 + 4
+   \   000047   12....       LCALL   ?L_MOV_X
+   \   00004A   78..         MOV     R0,#?V0 + 0
+   \   00004C   79..         MOV     R1,#?V0 + 4
+   \   00004E   12....       LCALL   ?FLT_DIV
+   \   000051   78..         MOV     R0,#?V0 + 0
+   \   000053   12....       LCALL   ?FLT_TO_L
+   \   000056   AC..         MOV     R4,?V0 + 0
+   \   000058   AD..         MOV     R5,?V0 + 1
+    923          //    if (flag == ADC_TEMP)
+    924          //  {
+    925              BUFFER[2] = (INT8U)(value % 100 % 10 + '0');
+   \   00005A   EC           MOV     A,R4
+   \   00005B   F8           MOV     R0,A
+   \   00005C   ED           MOV     A,R5
+   \   00005D   F9           MOV     R1,A
+   \   00005E   7A64         MOV     R2,#0x64
+   \   000060   7B00         MOV     R3,#0x0
+   \   000062   12....       LCALL   ?US_DIV_MOD
+   \   000065   8A..         MOV     ?V0 + 0,R2
+   \   000067   8B..         MOV     ?V0 + 1,R3
+   \   000069   AE..         MOV     R6,?V0 + 0
+   \   00006B   AF..         MOV     R7,?V0 + 1
+   \   00006D   EE           MOV     A,R6
+   \   00006E   F8           MOV     R0,A
+   \   00006F   EF           MOV     A,R7
+   \   000070   F9           MOV     R1,A
+   \   000071   7A0A         MOV     R2,#0xa
+   \   000073   7B00         MOV     R3,#0x0
+   \   000075   12....       LCALL   ?US_DIV_MOD
+   \   000078   EA           MOV     A,R2
+   \   000079   2430         ADD     A,#0x30
+   \   00007B   90....       MOV     DPTR,#(BUFFER + 2)
+   \   00007E   F0           MOVX    @DPTR,A
+    926              BUFFER[3] = (INT8U)(value % 100 / 10 + '0');
+   \   00007F   EE           MOV     A,R6
+   \   000080   F8           MOV     R0,A
+   \   000081   EF           MOV     A,R7
+   \   000082   F9           MOV     R1,A
+   \   000083   7A0A         MOV     R2,#0xa
+   \   000085   7B00         MOV     R3,#0x0
+   \   000087   12....       LCALL   ?US_DIV_MOD
+   \   00008A   E8           MOV     A,R0
+   \   00008B   2430         ADD     A,#0x30
+   \   00008D   90....       MOV     DPTR,#(BUFFER + 3)
+   \   000090   F0           MOVX    @DPTR,A
+    927              BUFFER[4] = (INT8U)(value / 100  + '0');
+   \   000091   EC           MOV     A,R4
+   \   000092   F8           MOV     R0,A
+   \   000093   ED           MOV     A,R5
+   \   000094   F9           MOV     R1,A
+   \   000095   7A64         MOV     R2,#0x64
+   \   000097   7B00         MOV     R3,#0x0
    \   000099   12....       LCALL   ?US_DIV_MOD
    \   00009C   E8           MOV     A,R0
    \   00009D   2430         ADD     A,#0x30
-   \   00009F   90....       MOV     DPTR,#(BUFFER + 5)
-   \                     ??ReadAdcValue_3:
+   \   00009F   90....       MOV     DPTR,#(BUFFER + 4)
    \   0000A2   F0           MOVX    @DPTR,A
-    931            }
-    932          }
-   \   0000A3   02....       LJMP    ?Subroutine8 & 0xFFFF
+    928          //  }
+    929          //  else
+    930          //  {
+    931          //    BUFFER[5] = (INT8U)(value % 100 / 10 + '0');
+    932          //    BUFFER[6] = (INT8U)(value / 100 + '0');
+    933          //  }
+    934          }
+   \   0000A3   02....       LJMP    ?Subroutine7 & 0xFFFF
    \   0000A6                REQUIRE _A_TCON
    \   0000A6                REQUIRE ADCCON3
    \   0000A6                REQUIRE ADCL
    \   0000A6                REQUIRE ADCH
-
-   \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine2:
-   \   000000   F0           MOVX    @DPTR,A
-   \   000001   EC           MOV     A,R4
-   \   000002   F8           MOV     R0,A
-   \   000003   ED           MOV     A,R5
-   \   000004   F9           MOV     R1,A
-   \   000005   7A0A         MOV     R2,#0xa
-   \   000007   7B00         MOV     R3,#0x0
-   \   000009   22           RET
 
    \                                 In  segment XDATA_ID, align 1, keep-with-next
    \                     `?<Initializer for <Constant "AXD">>`:
@@ -2110,8 +2101,8 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\Samples\cc2430-zstack-ad
    \   000000   9A997B42     DD 427B999AH
 
    \                                 In  segment XDATA_ID, align 1, keep-with-next
-   \                     `?<Initializer for __Constant_41c80000>`:
-   \   000000   0000C841     DD 41C80000H
+   \                     `?<Initializer for __Constant_43a50000>`:
+   \   000000   0000A543     DD 43A50000H
 
    \                                 In  segment XDATA_ID, align 1, keep-with-next
    \                     `?<Initializer for __Constant_46800000>`:
@@ -2192,9 +2183,9 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\Samples\cc2430-zstack-ad
    \   000004                REQUIRE __INIT_XDATA_I
 
    \                                 In  segment XDATA_I, align 1, keep-with-next
-   \                     __Constant_41c80000:
+   \                     __Constant_43a50000:
    \   000000                DS 4
-   \   000004                REQUIRE `?<Initializer for __Constant_41c80000>`
+   \   000004                REQUIRE `?<Initializer for __Constant_43a50000>`
    \   000004                REQUIRE __INIT_XDATA_I
 
    \                                 In  segment XDATA_I, align 1, keep-with-next
@@ -2277,12 +2268,12 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\Samples\cc2430-zstack-ad
      AXD_Init                        243
      ?Subroutine1                      8
      AXD_ProcessEvent                190
-     ?Subroutine6                      5
-     ?Subroutine4                     13
+     ?Subroutine5                      5
+     ?Subroutine3                     13
      AXD_ProcessZDOMsgs              143
-     ?Subroutine7                      5
-     ?Subroutine3                     10
-     ?Subroutine5                     14
+     ?Subroutine6                      5
+     ?Subroutine2                     10
+     ?Subroutine4                     14
      AXD_HandleKeys                  235
      AXD_MessageMSGCB                130
      ?Subroutine0                     15
@@ -2290,9 +2281,8 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\Samples\cc2430-zstack-ad
      AXD_ReceiveDataIndication        50
      rxCB_Loopback                   100
      myApp_ReadTemperature            95
-     ?Subroutine8                      5
+     ?Subroutine7                      5
      ReadAdcValue                    166
-     ?Subroutine2                     10
      ?<Initializer for <Constant "AXD">>
                                        4
      ?<Initializer for <Constant "R: ">>
@@ -2305,7 +2295,7 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\Samples\cc2430-zstack-ad
                                       12
      ?<Initializer for __Constant_427b999a>
                                        4
-     ?<Initializer for __Constant_41c80000>
+     ?<Initializer for __Constant_43a50000>
                                        4
      ?<Initializer for __Constant_46800000>
                                        4
@@ -2324,18 +2314,18 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\Samples\cc2430-zstack-ad
      ?<Constant "R: ">                 4
      ?<Constant "Q: ">                 4
      __Constant_427b999a               4
-     __Constant_41c80000               4
+     __Constant_43a50000               4
      __Constant_46800000               4
 
  
- 1 440 bytes in segment BANKED_CODE
+ 1 430 bytes in segment BANKED_CODE
     60 bytes in segment BANK_RELAYS
      4 bytes in segment SFR_AN
     42 bytes in segment XDATA_I
     42 bytes in segment XDATA_ID
    114 bytes in segment XDATA_Z
  
- 1 530 bytes of CODE  memory (+ 12 bytes shared)
+ 1 520 bytes of CODE  memory (+ 12 bytes shared)
      0 bytes of DATA  memory (+  4 bytes shared)
    144 bytes of XDATA memory (+ 12 bytes shared)
 

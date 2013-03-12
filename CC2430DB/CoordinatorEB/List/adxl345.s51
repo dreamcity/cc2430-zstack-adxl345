@@ -1,6 +1,6 @@
 ///////////////////////////////////////////////////////////////////////////////
 //                                                                            /
-// IAR 8051 C/C++ Compiler V7.30B/W32                   12/Mar/2013  15:45:29 /
+// IAR 8051 C/C++ Compiler V7.30B/W32                   12/Mar/2013  16:27:42 /
 // Copyright 2004-2007 IAR Systems. All rights reserved.                      /
 //                                                                            /
 //    Core               =  plain                                             /
@@ -778,29 +778,29 @@ conversion:
         CFI CFA_XSP16 add(XSP16, 16)
         ; Saved register size: 16
         ; Auto size: 0
-//   74   BUFFER[12] = 0xff;
+//   74   BUFFER[13] = 0xff;
         MOV     A,#-0x1
-        MOV     DPTR,#(BUFFER + 12)
+        MOV     DPTR,#(BUFFER + 13)
         MOVX    @DPTR,A
 //   75   INT16U temp_data;
-//   76   if ((BUFFER[7] & 0x80) == 0x80)
-        MOV     DPTR,#(BUFFER + 7)
+//   76   if ((BUFFER[8] & 0x80) == 0x80)
+        MOV     DPTR,#(BUFFER + 8)
         MOVX    A,@DPTR
         MOV     C,0xE0 /* A   */.7
         JNC     ??conversion_0
 //   77   {
-//   78     BUFFER[12] &= ~0x01;    
+//   78     BUFFER[13] &= ~0x01;    
         MOV     A,#-0x2
-        MOV     DPTR,#(BUFFER + 12)
+        MOV     DPTR,#(BUFFER + 13)
         MOVX    @DPTR,A
 //   79   }
-//   80   temp_data = ((BUFFER[7] & 0x0f) << 8) + BUFFER[6];    
+//   80   temp_data = ((BUFFER[8] & 0x0f) << 8) + BUFFER[7];    
 //   81   temp_data = (INT16U)(((float)temp_data /4096 ) * 100);
 ??conversion_0:
-        MOV     DPTR,#(BUFFER + 7)
+        MOV     DPTR,#(BUFFER + 8)
         LCALL   ?Subroutine4 & 0xFFFF
 ??CrossCallReturnLabel_14:
-        MOV     DPTR,#(BUFFER + 6)
+        MOV     DPTR,#(BUFFER + 7)
         LCALL   ?Subroutine1 & 0xFFFF
 ??CrossCallReturnLabel_3:
         LCALL   ?UL_TO_FLT
@@ -820,7 +820,7 @@ conversion:
         LCALL   ?FLT_TO_L
         MOV     R4,?V0 + 0
         MOV     R5,?V0 + 1
-//   82   BUFFER[6] = (INT8U)((temp_data) % 10 + '0');
+//   82   BUFFER[7] = (INT8U)((temp_data) % 10 + '0');
         MOV     A,R4
         MOV     R0,A
         MOV     A,R5
@@ -830,34 +830,34 @@ conversion:
         LCALL   ?US_DIV_MOD
         MOV     A,R2
         ADD     A,#0x30
-        MOV     DPTR,#(BUFFER + 6)
+        MOV     DPTR,#(BUFFER + 7)
         LCALL   ?Subroutine3 & 0xFFFF
-//   83   BUFFER[7] = (INT8U)((temp_data) / 10 + '0');
+//   83   BUFFER[8] = (INT8U)((temp_data) / 10 + '0');
 ??CrossCallReturnLabel_11:
         LCALL   ?US_DIV_MOD
         MOV     A,R0
         ADD     A,#0x30
-        MOV     DPTR,#(BUFFER + 7)
+        MOV     DPTR,#(BUFFER + 8)
         MOVX    @DPTR,A
-//   84     if ((BUFFER[9] & 0x80) == 0x80)
-        MOV     DPTR,#(BUFFER + 9)
+//   84     if ((BUFFER[10] & 0x80) == 0x80)
+        MOV     DPTR,#(BUFFER + 10)
         MOVX    A,@DPTR
         MOV     C,0xE0 /* A   */.7
         JNC     ??conversion_1
 //   85   {
-//   86     BUFFER[12] &= ~0x02;    
-        MOV     DPTR,#(BUFFER + 12)
+//   86     BUFFER[13] &= ~0x02;    
+        MOV     DPTR,#(BUFFER + 13)
         MOVX    A,@DPTR
         CLR     0xE0 /* A   */.1
         MOVX    @DPTR,A
 //   87   }
-//   88   temp_data = ((BUFFER[9] & 0x0f) << 8) + BUFFER[8];    
+//   88   temp_data = ((BUFFER[10] & 0x0f) << 8) + BUFFER[9];    
 //   89   temp_data = (INT16U)(((float)temp_data / 4096) * 100);
 ??conversion_1:
-        MOV     DPTR,#(BUFFER + 9)
+        MOV     DPTR,#(BUFFER + 10)
         LCALL   ?Subroutine4 & 0xFFFF
 ??CrossCallReturnLabel_15:
-        MOV     DPTR,#(BUFFER + 8)
+        MOV     DPTR,#(BUFFER + 9)
         LCALL   ?Subroutine1 & 0xFFFF
 ??CrossCallReturnLabel_4:
         LCALL   ?UL_TO_FLT
@@ -877,7 +877,7 @@ conversion:
         LCALL   ?FLT_TO_L
         MOV     R4,?V0 + 0
         MOV     R5,?V0 + 1
-//   90   BUFFER[8] = (INT8U)((temp_data) % 10 + '0');
+//   90   BUFFER[9] = (INT8U)((temp_data) % 10 + '0');
         MOV     A,R4
         MOV     R0,A
         MOV     A,R5
@@ -887,34 +887,34 @@ conversion:
         LCALL   ?US_DIV_MOD
         MOV     A,R2
         ADD     A,#0x30
-        MOV     DPTR,#(BUFFER + 8)
+        MOV     DPTR,#(BUFFER + 9)
         LCALL   ?Subroutine3 & 0xFFFF
-//   91   BUFFER[9] = (INT8U)((temp_data) / 10 + '0');
+//   91   BUFFER[10] = (INT8U)((temp_data) / 10 + '0');
 ??CrossCallReturnLabel_12:
         LCALL   ?US_DIV_MOD
         MOV     A,R0
         ADD     A,#0x30
-        MOV     DPTR,#(BUFFER + 9)
+        MOV     DPTR,#(BUFFER + 10)
         MOVX    @DPTR,A
-//   92     if ((BUFFER[11] & 0x80) == 0x80)
-        MOV     DPTR,#(BUFFER + 11)
+//   92     if ((BUFFER[12] & 0x80) == 0x80)
+        MOV     DPTR,#(BUFFER + 12)
         MOVX    A,@DPTR
         MOV     C,0xE0 /* A   */.7
         JNC     ??conversion_2
 //   93   {
-//   94     BUFFER[12] &= ~0x04;    
-        MOV     DPTR,#(BUFFER + 12)
+//   94     BUFFER[13] &= ~0x04;    
+        MOV     DPTR,#(BUFFER + 13)
         MOVX    A,@DPTR
         CLR     0xE0 /* A   */.2
         MOVX    @DPTR,A
 //   95   }
-//   96   temp_data = ((BUFFER[11] & 0x0f) << 8) + BUFFER[10];    
+//   96   temp_data = ((BUFFER[12] & 0x0f) << 8) + BUFFER[11];    
 //   97   temp_data = (INT16U)(((float)temp_data / 4096) * 100);
 ??conversion_2:
-        MOV     DPTR,#(BUFFER + 11)
+        MOV     DPTR,#(BUFFER + 12)
         LCALL   ?Subroutine4 & 0xFFFF
 ??CrossCallReturnLabel_16:
-        MOV     DPTR,#(BUFFER + 10)
+        MOV     DPTR,#(BUFFER + 11)
         LCALL   ?Subroutine1 & 0xFFFF
 ??CrossCallReturnLabel_5:
         LCALL   ?UL_TO_FLT
@@ -934,7 +934,7 @@ conversion:
         LCALL   ?FLT_TO_L
         MOV     R4,?V0 + 0
         MOV     R5,?V0 + 1
-//   98   BUFFER[10] = (INT8U)((temp_data) % 10 + '0');
+//   98   BUFFER[11] = (INT8U)((temp_data) % 10 + '0');
         MOV     A,R4
         MOV     R0,A
         MOV     A,R5
@@ -944,14 +944,14 @@ conversion:
         LCALL   ?US_DIV_MOD
         MOV     A,R2
         ADD     A,#0x30
-        MOV     DPTR,#(BUFFER + 10)
+        MOV     DPTR,#(BUFFER + 11)
         LCALL   ?Subroutine3 & 0xFFFF
-//   99   BUFFER[11] = (INT8U)((temp_data) / 10 + '0');
+//   99   BUFFER[12] = (INT8U)((temp_data) / 10 + '0');
 ??CrossCallReturnLabel_13:
         LCALL   ?US_DIV_MOD
         MOV     A,R0
         ADD     A,#0x30
-        MOV     DPTR,#(BUFFER + 11)
+        MOV     DPTR,#(BUFFER + 12)
         MOVX    @DPTR,A
         CFI EndBlock cfiBlock8
 //  100 } 
@@ -2733,16 +2733,16 @@ Multiple_Read_ADXL345:
 ??CrossCallReturnLabel_31:
         MOV     R6,#0x0
 //  257     { 
-//  258         BUFFER[6+f] = ReadI2CByte_1();          //BUF[0]存储0x32地址中的数据 
+//  258         BUFFER[7+f] = ReadI2CByte_1();          //BUF[0]存储0x32地址中的数据 
 ??Multiple_Read_ADXL345_0:
         ; Setup parameters for call to function ReadI2CByte_1
         LCALL   ??ReadI2CByte_1?relay
         MOV     ?V0 + 0,R6
         MOV     A,?V0 + 0
-        ADD     A,#((BUFFER + 6) & 0xff)
+        ADD     A,#((BUFFER + 7) & 0xff)
         MOV     DPL,A
         CLR     A
-        ADDC    A,#(((BUFFER + 6) >> 8) & 0xff)
+        ADDC    A,#(((BUFFER + 7) >> 8) & 0xff)
         MOV     DPH,A
         MOV     A,R1
         MOVX    @DPTR,A

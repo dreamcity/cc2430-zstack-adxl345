@@ -105,12 +105,13 @@
 }
 
 #define HAL_ADC_REF_125V    0x00    /* Internal 1.25V Reference */
+#define HAL_ADC_REF_AIN7    0x40    /* AIN7 Reference */
 #define HAL_ADC_DEC_064     0x00    /* Decimate by 64 : 8-bit resolution */
 #define HAL_ADC_DEC_128     0x10    /* Decimate by 128 : 10-bit resolution */
 #define HAL_ADC_DEC_512     0x30    /* Decimate by 512 : 14-bit resolution */
 #define HAL_ADC_CHN_VDD3    0x0f    /* Input channel: VDD/3 */
-#define HAL_ADC_CHN_DIFF_0_1 0x08
-#define HAL_ADC_CHN_DIFF_2_3 0x09
+#define HAL_ADC_CHN_AIN1    0x01    /* AIN1 */
+#define HAL_ADC_CHN_AIN2    0x02    /* AIN2 */
 #define HAL_ADC_CHN_TEMP    0x0e    /* Temperature sensor */
 #define ADC_TEMP            0x00
 #define ADC_PULSE           0x01
@@ -907,26 +908,27 @@ void ReadAdcValue( uint8 flag )
   ADCIF = 0;
   if (flag == ADC_TEMP)
   {
-    ADCCON3 = (HAL_ADC_REF_125V | HAL_ADC_DEC_512 | HAL_ADC_CHN_DIFF_0_1);
+    ADCCON3 = (HAL_ADC_REF_AIN7 | HAL_ADC_DEC_512 | HAL_ADC_CHN_AIN1);
     
   }
   else
   {
-    ADCCON3 = (HAL_ADC_REF_125V | HAL_ADC_DEC_512 | HAL_ADC_CHN_DIFF_2_3);
+    ADCCON3 = (HAL_ADC_REF_AIN7 | HAL_ADC_DEC_512 | HAL_ADC_CHN_AIN2);
   }
-//    ADCCON3 = (HAL_ADC_REF_125V | HAL_ADC_DEC_512 | HAL_ADC_CHN_TEMP);
     while ( !ADCIF );
-    value = ADCL >> 2;
-    value |= ((uint16) ADCH) << 6;
-    value = (INT16U)(25.0 * (float)value / 16384.0);
+    value = ADCL ;
+    value |= ((uint16) ADCH) << 8;
+    value = value >> 2;
+    value = (INT16U)(330.0 * (float)value / 8192.0);
     if (flag == ADC_TEMP)
   {
-    BUFFER[2] = (INT8U)(value % 10 + '0');
-    BUFFER[3] = (INT8U)(value / 10 + '0');
+    BUFFER[2] = (INT8U)(value % 100 % 10 + '0');
+    BUFFER[3] = (INT8U)(value % 100 / 10 + '0');
+    BUFFER[4] = (INT8U)(value / 100  + '0');
   }
   else
   {
-    BUFFER[4] = (INT8U)(value % 10 + '0');
-    BUFFER[5] = (INT8U)(value / 10 + '0');
+    BUFFER[5] = (INT8U)(value % 100 / 10 + '0');
+    BUFFER[6] = (INT8U)(value / 100 + '0');
   }
 }
