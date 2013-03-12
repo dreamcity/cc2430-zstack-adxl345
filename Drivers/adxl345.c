@@ -14,7 +14,7 @@
 #define FALSE 0
 #define	SlaveAddress 0xA6 //定义器件在IIC总线中的从地址,根据ALT  ADDRESS地址引脚不同修改
 
-INT8U BUFFER[13];
+INT8U BUFFER[14];
 int  dis_data;
 
 char wan,qian,bai,shi,ge;

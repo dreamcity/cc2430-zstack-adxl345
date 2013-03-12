@@ -79,6 +79,7 @@
 #include "hal_led.h"
 #include "hal_key.h"
 #include "hal_uart.h"
+#include "hal_adc.h"
 
 /*用户自己的头文件*/
 #include "adxl345.h"
@@ -108,7 +109,11 @@
 #define HAL_ADC_DEC_128     0x10    /* Decimate by 128 : 10-bit resolution */
 #define HAL_ADC_DEC_512     0x30    /* Decimate by 512 : 14-bit resolution */
 #define HAL_ADC_CHN_VDD3    0x0f    /* Input channel: VDD/3 */
+#define HAL_ADC_CHN_DIFF_0_1 0x08
+#define HAL_ADC_CHN_DIFF_2_3 0x09
 #define HAL_ADC_CHN_TEMP    0x0e    /* Temperature sensor */
+#define ADC_TEMP            0x00
+#define ADC_PULSE           0x01
 
 #define DEVICE_A 0x01;
 #define DEVICE_B 0x02;
@@ -332,6 +337,7 @@ void AXD_Init( byte task_id )
   //下面是用户自定义的初始化
 #ifdef AXD_END
   Init_ADXL345();
+  HalAdcInit();
 #endif
 }
 
@@ -656,13 +662,15 @@ void AXD_SendTheMessage( void )
 
   Multiple_Read_ADXL345();
   conversion();
+  ReadAdcValue(ADC_TEMP);
+  ReadAdcValue(ADC_PULSE);
 //  displayXYZ((uint8 *)BUFFER);
-  BUFFER[3] = myApp_ReadTemperature();
-  BUFFER[2] = BUFFER[3] % 10 + '0';
-  BUFFER[3] = BUFFER[3] / 10 + '0';
-  BUFFER[5] = myApp_ReadTemperature();
-  BUFFER[4] = BUFFER[5] % 10 + '0';
-  BUFFER[5] = BUFFER[5] / 10 + '0';
+//  BUFFER[3] = myApp_ReadTemperature();
+//  BUFFER[2] = BUFFER[3] % 10 + '0';
+//  BUFFER[3] = BUFFER[3] / 10 + '0';
+//  BUFFER[5] = myApp_ReadTemperature();
+//  BUFFER[4] = BUFFER[5] % 10 + '0';
+//  BUFFER[5] = BUFFER[5] / 10 + '0';
   
   if ( AF_DataRequest( &AXD_DstAddr, &AXD_epDesc,
                        AXD_CMD_ID,
@@ -892,4 +900,33 @@ uint8 myApp_ReadTemperature( void )
     value = TEMP_COEFFICIENT * 99;
 
   return ( (uint8)(value/TEMP_COEFFICIENT) );
+}
+void ReadAdcValue( uint8 flag )
+{
+  uint16 value;
+  ADCIF = 0;
+  if (flag == ADC_TEMP)
+  {
+    ADCCON3 = (HAL_ADC_REF_125V | HAL_ADC_DEC_512 | HAL_ADC_CHN_DIFF_0_1);
+    
+  }
+  else
+  {
+    ADCCON3 = (HAL_ADC_REF_125V | HAL_ADC_DEC_512 | HAL_ADC_CHN_DIFF_2_3);
+  }
+//    ADCCON3 = (HAL_ADC_REF_125V | HAL_ADC_DEC_512 | HAL_ADC_CHN_TEMP);
+    while ( !ADCIF );
+    value = ADCL >> 2;
+    value |= ((uint16) ADCH) << 6;
+    value = (INT16U)(25.0 * (float)value / 16384.0);
+    if (flag == ADC_TEMP)
+  {
+    BUFFER[2] = (INT8U)(value % 10 + '0');
+    BUFFER[3] = (INT8U)(value / 10 + '0');
+  }
+  else
+  {
+    BUFFER[4] = (INT8U)(value % 10 + '0');
+    BUFFER[5] = (INT8U)(value / 10 + '0');
+  }
 }
