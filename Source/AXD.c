@@ -112,6 +112,8 @@
 #define HAL_ADC_CHN_VDD3    0x0f    /* Input channel: VDD/3 */
 #define HAL_ADC_CHN_AIN1    0x01    /* AIN1 */
 #define HAL_ADC_CHN_AIN2    0x02    /* AIN2 */
+#define HAL_ADC_CHN_AIN4    0x04    /* AIN4 */
+#define HAL_ADC_CHN_AIN5    0x05    /* AIN5 */
 #define HAL_ADC_CHN_TEMP    0x0e    /* Temperature sensor */
 #define ADC_TEMP            0x00
 #define ADC_PULSE           0x01
@@ -368,7 +370,15 @@ UINT16 AXD_ProcessEvent( byte task_id, UINT16 events )
   byte sentTransID;       // This should match the value sent
 #ifdef AXD_END
   BUFFER[0] = 0;
+#ifdef AXD_END_A
   BUFFER[1] = DEVICE_A;
+#endif
+#ifdef AXD_END_B
+  BUFFER[1] = DEVICE_B;
+#endif
+#ifdef AXD_END_C
+  BUFFER[1] = DEVICE_C;
+#endif
 #endif
 
   if ( events & SYS_EVENT_MSG )
@@ -448,12 +458,6 @@ UINT16 AXD_ProcessEvent( byte task_id, UINT16 events )
     //zb_HandleOsalEvent(events);
     AXD_SendTheMessage();
     // Setup to send message again
-#ifdef AXD_ROUTER
-    test2++;
-#endif
-#ifdef AXD_END2
-    test2--;
-#endif
     osal_start_timerEx( AXD_TaskID,
                         AXD_SEND_MSG_EVT,
                         (AXD_SEND_MSG_TIMEOUT/100) );
@@ -706,23 +710,6 @@ void AXD_SendTheMessage( void )
   }
   
 #endif
-#ifdef AXD_END2
-  if ( AF_DataRequest( &AXD_DstAddr, &AXD_epDesc,
-                       AXD_TEST2_CMD_ID,
-                       (byte)(sizeof(test2)),
-                       (byte *)(&test2),
-                       &AXD_TransID,
-                       AF_SKIP_ROUTING, AF_DEFAULT_RADIUS ) == afStatus_SUCCESS )
-  {
-    // Successfully requested to be sent.
-
-  }
-  else
-  {
-    // Error occurred in request to send.
-  }
-  
-#endif
 }
 
 /*********************************************************************
@@ -908,12 +895,12 @@ void ReadAdcValue( uint8 flag )
   ADCIF = 0;
   if (flag == ADC_TEMP)
   {
-    ADCCON3 = (HAL_ADC_REF_AIN7 | HAL_ADC_DEC_512 | HAL_ADC_CHN_AIN1);
+    ADCCON3 = (HAL_ADC_REF_AIN7 | HAL_ADC_DEC_512 | HAL_ADC_CHN_AIN4);
     
   }
   else
   {
-    ADCCON3 = (HAL_ADC_REF_AIN7 | HAL_ADC_DEC_512 | HAL_ADC_CHN_AIN2);
+    ADCCON3 = (HAL_ADC_REF_AIN7 | HAL_ADC_DEC_512 | HAL_ADC_CHN_AIN5);
   }
     while ( !ADCIF );
     value = ADCL ;
