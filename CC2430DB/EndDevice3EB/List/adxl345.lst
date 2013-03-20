@@ -1,6 +1,6 @@
 ###############################################################################
 #                                                                             #
-# IAR 8051 C/C++ Compiler V7.30B/W32                    18/Mar/2013  21:15:49 #
+# IAR 8051 C/C++ Compiler V7.30B/W32                    19/Mar/2013  20:24:44 #
 # Copyright 2004-2007 IAR Systems. All rights reserved.                       #
 #                                                                             #
 #    Core               =  plain                                              #
@@ -429,54 +429,51 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\Samples\cc2430-zstack-ad
    \   000017   C2E0         CLR     0xE0 /* A   */.0
    \   000019   F0           MOVX    @DPTR,A
      79            }
-     80            temp_data = ((BUFFER[8] & 0x0f) << 8) + BUFFER[7];    
+     80            temp_data = ((BUFFER[8] & 0x00) << 8) + BUFFER[7];    
    \                     ??conversion_0:
-   \   00001A   90....       MOV     DPTR,#(BUFFER + 8)
+   \   00001A   90....       MOV     DPTR,#(BUFFER + 7)
    \   00001D   E0           MOVX    A,@DPTR
-   \   00001E   F8           MOV     R0,A
-   \   00001F   740F         MOV     A,#0xf
-   \   000021   58           ANL     A,R0
-   \   000022   F8           MOV     R0,A
-   \   000023   E4           CLR     A
-   \   000024   C8           XCH     A,R0
-   \   000025   F9           MOV     R1,A
-   \   000026   90....       MOV     DPTR,#(BUFFER + 7)
-   \   000029   E0           MOVX    A,@DPTR
-   \   00002A   7B00         MOV     R3,#0x0
-   \   00002C   28           ADD     A,R0
-   \   00002D   F8           MOV     R0,A
-   \   00002E   EB           MOV     A,R3
-   \   00002F   39           ADDC    A,R1
-   \   000030   F9           MOV     R1,A
-   \   000031   E8           MOV     A,R0
-   \   000032   FC           MOV     R4,A
-   \   000033   E9           MOV     A,R1
-   \   000034   FD           MOV     R5,A
+   \   00001E   7900         MOV     R1,#0x0
+   \   000020   FC           MOV     R4,A
+   \   000021   E9           MOV     A,R1
+   \   000022   FD           MOV     R5,A
      81            temp_data = (INT16U)(((float)temp_data /4096 ) * 100);
-   \   000035   8C..         MOV     ?V0 + 0,R4
-   \   000037   8D..         MOV     ?V0 + 1,R5
-   \   000039   E4           CLR     A
-   \   00003A   F5..         MOV     ?V0 + 2,A
-   \   00003C   F5..         MOV     ?V0 + 3,A
-   \   00003E   78..         MOV     R0,#?V0 + 0
-   \   000040   12....       LCALL   ?UL_TO_FLT
-   \   000043   90....       MOV     DPTR,#__Constant_45800000
-   \   000046   78..         MOV     R0,#?V0 + 4
-   \   000048   12....       LCALL   ?L_MOV_X
-   \   00004B   78..         MOV     R0,#?V0 + 0
-   \   00004D   79..         MOV     R1,#?V0 + 4
-   \   00004F   12....       LCALL   ?FLT_DIV
-   \   000052   90....       MOV     DPTR,#__Constant_42c80000
-   \   000055   78..         MOV     R0,#?V0 + 4
-   \   000057   12....       LCALL   ?L_MOV_X
-   \   00005A   78..         MOV     R0,#?V0 + 0
-   \   00005C   79..         MOV     R1,#?V0 + 4
-   \   00005E   12....       LCALL   ?FLT_MUL
-   \   000061   78..         MOV     R0,#?V0 + 0
-   \   000063   12....       LCALL   ?FLT_TO_L
-   \   000066   AC..         MOV     R4,?V0 + 0
-   \   000068   AD..         MOV     R5,?V0 + 1
+   \   000023   8C..         MOV     ?V0 + 0,R4
+   \   000025   8D..         MOV     ?V0 + 1,R5
+   \   000027   E4           CLR     A
+   \   000028   F5..         MOV     ?V0 + 2,A
+   \   00002A   F5..         MOV     ?V0 + 3,A
+   \   00002C   78..         MOV     R0,#?V0 + 0
+   \   00002E   12....       LCALL   ?UL_TO_FLT
+   \   000031   90....       MOV     DPTR,#__Constant_45800000
+   \   000034   78..         MOV     R0,#?V0 + 4
+   \   000036   12....       LCALL   ?L_MOV_X
+   \   000039   78..         MOV     R0,#?V0 + 0
+   \   00003B   79..         MOV     R1,#?V0 + 4
+   \   00003D   12....       LCALL   ?FLT_DIV
+   \   000040   90....       MOV     DPTR,#__Constant_42c80000
+   \   000043   78..         MOV     R0,#?V0 + 4
+   \   000045   12....       LCALL   ?L_MOV_X
+   \   000048   78..         MOV     R0,#?V0 + 0
+   \   00004A   79..         MOV     R1,#?V0 + 4
+   \   00004C   12....       LCALL   ?FLT_MUL
+   \   00004F   78..         MOV     R0,#?V0 + 0
+   \   000051   12....       LCALL   ?FLT_TO_L
+   \   000054   AC..         MOV     R4,?V0 + 0
+   \   000056   AD..         MOV     R5,?V0 + 1
      82            BUFFER[7] = (INT8U)((temp_data) % 10 + '0');
+   \   000058   EC           MOV     A,R4
+   \   000059   F8           MOV     R0,A
+   \   00005A   ED           MOV     A,R5
+   \   00005B   F9           MOV     R1,A
+   \   00005C   7A0A         MOV     R2,#0xa
+   \   00005E   7B00         MOV     R3,#0x0
+   \   000060   12....       LCALL   ?US_DIV_MOD
+   \   000063   EA           MOV     A,R2
+   \   000064   2430         ADD     A,#0x30
+   \   000066   90....       MOV     DPTR,#(BUFFER + 7)
+   \   000069   F0           MOVX    @DPTR,A
+     83            BUFFER[8] = (INT8U)((temp_data) / 10 + '0');
    \   00006A   EC           MOV     A,R4
    \   00006B   F8           MOV     R0,A
    \   00006C   ED           MOV     A,R5
@@ -484,191 +481,149 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\Samples\cc2430-zstack-ad
    \   00006E   7A0A         MOV     R2,#0xa
    \   000070   7B00         MOV     R3,#0x0
    \   000072   12....       LCALL   ?US_DIV_MOD
-   \   000075   EA           MOV     A,R2
+   \   000075   E8           MOV     A,R0
    \   000076   2430         ADD     A,#0x30
-   \   000078   90....       MOV     DPTR,#(BUFFER + 7)
+   \   000078   90....       MOV     DPTR,#(BUFFER + 8)
    \   00007B   F0           MOVX    @DPTR,A
-     83            BUFFER[8] = (INT8U)((temp_data) / 10 + '0');
-   \   00007C   EC           MOV     A,R4
-   \   00007D   F8           MOV     R0,A
-   \   00007E   ED           MOV     A,R5
-   \   00007F   F9           MOV     R1,A
-   \   000080   7A0A         MOV     R2,#0xa
-   \   000082   7B00         MOV     R3,#0x0
-   \   000084   12....       LCALL   ?US_DIV_MOD
-   \   000087   E8           MOV     A,R0
-   \   000088   2430         ADD     A,#0x30
-   \   00008A   90....       MOV     DPTR,#(BUFFER + 8)
-   \   00008D   F0           MOVX    @DPTR,A
      84              if ((BUFFER[10] & 0x80) == 0x80)
-   \   00008E   90....       MOV     DPTR,#(BUFFER + 10)
-   \   000091   E0           MOVX    A,@DPTR
-   \   000092   A2E7         MOV     C,0xE0 /* A   */.7
-   \   000094   5007         JNC     ??conversion_1
+   \   00007C   90....       MOV     DPTR,#(BUFFER + 10)
+   \   00007F   E0           MOVX    A,@DPTR
+   \   000080   A2E7         MOV     C,0xE0 /* A   */.7
+   \   000082   5007         JNC     ??conversion_1
      85            {
      86              BUFFER[13] &= ~0x02;    
-   \   000096   90....       MOV     DPTR,#(BUFFER + 13)
-   \   000099   E0           MOVX    A,@DPTR
-   \   00009A   C2E1         CLR     0xE0 /* A   */.1
-   \   00009C   F0           MOVX    @DPTR,A
+   \   000084   90....       MOV     DPTR,#(BUFFER + 13)
+   \   000087   E0           MOVX    A,@DPTR
+   \   000088   C2E1         CLR     0xE0 /* A   */.1
+   \   00008A   F0           MOVX    @DPTR,A
      87            }
-     88            temp_data = ((BUFFER[10] & 0x0f) << 8) + BUFFER[9];    
+     88            temp_data = ((BUFFER[10] & 0x00) << 8) + BUFFER[9];    
    \                     ??conversion_1:
-   \   00009D   90....       MOV     DPTR,#(BUFFER + 10)
-   \   0000A0   E0           MOVX    A,@DPTR
-   \   0000A1   F8           MOV     R0,A
-   \   0000A2   740F         MOV     A,#0xf
-   \   0000A4   58           ANL     A,R0
-   \   0000A5   F8           MOV     R0,A
-   \   0000A6   E4           CLR     A
-   \   0000A7   C8           XCH     A,R0
-   \   0000A8   F9           MOV     R1,A
-   \   0000A9   90....       MOV     DPTR,#(BUFFER + 9)
-   \   0000AC   E0           MOVX    A,@DPTR
-   \   0000AD   7B00         MOV     R3,#0x0
-   \   0000AF   28           ADD     A,R0
-   \   0000B0   F8           MOV     R0,A
-   \   0000B1   EB           MOV     A,R3
-   \   0000B2   39           ADDC    A,R1
-   \   0000B3   F9           MOV     R1,A
-   \   0000B4   E8           MOV     A,R0
-   \   0000B5   FC           MOV     R4,A
-   \   0000B6   E9           MOV     A,R1
-   \   0000B7   FD           MOV     R5,A
+   \   00008B   90....       MOV     DPTR,#(BUFFER + 9)
+   \   00008E   E0           MOVX    A,@DPTR
+   \   00008F   7900         MOV     R1,#0x0
+   \   000091   FC           MOV     R4,A
+   \   000092   E9           MOV     A,R1
+   \   000093   FD           MOV     R5,A
      89            temp_data = (INT16U)(((float)temp_data / 4096) * 100);
-   \   0000B8   8C..         MOV     ?V0 + 0,R4
-   \   0000BA   8D..         MOV     ?V0 + 1,R5
-   \   0000BC   E4           CLR     A
-   \   0000BD   F5..         MOV     ?V0 + 2,A
-   \   0000BF   F5..         MOV     ?V0 + 3,A
-   \   0000C1   78..         MOV     R0,#?V0 + 0
-   \   0000C3   12....       LCALL   ?UL_TO_FLT
-   \   0000C6   90....       MOV     DPTR,#__Constant_45800000
-   \   0000C9   78..         MOV     R0,#?V0 + 4
-   \   0000CB   12....       LCALL   ?L_MOV_X
-   \   0000CE   78..         MOV     R0,#?V0 + 0
-   \   0000D0   79..         MOV     R1,#?V0 + 4
-   \   0000D2   12....       LCALL   ?FLT_DIV
-   \   0000D5   90....       MOV     DPTR,#__Constant_42c80000
-   \   0000D8   78..         MOV     R0,#?V0 + 4
-   \   0000DA   12....       LCALL   ?L_MOV_X
-   \   0000DD   78..         MOV     R0,#?V0 + 0
-   \   0000DF   79..         MOV     R1,#?V0 + 4
-   \   0000E1   12....       LCALL   ?FLT_MUL
-   \   0000E4   78..         MOV     R0,#?V0 + 0
-   \   0000E6   12....       LCALL   ?FLT_TO_L
-   \   0000E9   AC..         MOV     R4,?V0 + 0
-   \   0000EB   AD..         MOV     R5,?V0 + 1
+   \   000094   8C..         MOV     ?V0 + 0,R4
+   \   000096   8D..         MOV     ?V0 + 1,R5
+   \   000098   E4           CLR     A
+   \   000099   F5..         MOV     ?V0 + 2,A
+   \   00009B   F5..         MOV     ?V0 + 3,A
+   \   00009D   78..         MOV     R0,#?V0 + 0
+   \   00009F   12....       LCALL   ?UL_TO_FLT
+   \   0000A2   90....       MOV     DPTR,#__Constant_45800000
+   \   0000A5   78..         MOV     R0,#?V0 + 4
+   \   0000A7   12....       LCALL   ?L_MOV_X
+   \   0000AA   78..         MOV     R0,#?V0 + 0
+   \   0000AC   79..         MOV     R1,#?V0 + 4
+   \   0000AE   12....       LCALL   ?FLT_DIV
+   \   0000B1   90....       MOV     DPTR,#__Constant_42c80000
+   \   0000B4   78..         MOV     R0,#?V0 + 4
+   \   0000B6   12....       LCALL   ?L_MOV_X
+   \   0000B9   78..         MOV     R0,#?V0 + 0
+   \   0000BB   79..         MOV     R1,#?V0 + 4
+   \   0000BD   12....       LCALL   ?FLT_MUL
+   \   0000C0   78..         MOV     R0,#?V0 + 0
+   \   0000C2   12....       LCALL   ?FLT_TO_L
+   \   0000C5   AC..         MOV     R4,?V0 + 0
+   \   0000C7   AD..         MOV     R5,?V0 + 1
      90            BUFFER[9] = (INT8U)((temp_data) % 10 + '0');
-   \   0000ED   EC           MOV     A,R4
-   \   0000EE   F8           MOV     R0,A
-   \   0000EF   ED           MOV     A,R5
-   \   0000F0   F9           MOV     R1,A
-   \   0000F1   7A0A         MOV     R2,#0xa
-   \   0000F3   7B00         MOV     R3,#0x0
-   \   0000F5   12....       LCALL   ?US_DIV_MOD
-   \   0000F8   EA           MOV     A,R2
-   \   0000F9   2430         ADD     A,#0x30
-   \   0000FB   90....       MOV     DPTR,#(BUFFER + 9)
-   \   0000FE   F0           MOVX    @DPTR,A
+   \   0000C9   EC           MOV     A,R4
+   \   0000CA   F8           MOV     R0,A
+   \   0000CB   ED           MOV     A,R5
+   \   0000CC   F9           MOV     R1,A
+   \   0000CD   7A0A         MOV     R2,#0xa
+   \   0000CF   7B00         MOV     R3,#0x0
+   \   0000D1   12....       LCALL   ?US_DIV_MOD
+   \   0000D4   EA           MOV     A,R2
+   \   0000D5   2430         ADD     A,#0x30
+   \   0000D7   90....       MOV     DPTR,#(BUFFER + 9)
+   \   0000DA   F0           MOVX    @DPTR,A
      91            BUFFER[10] = (INT8U)((temp_data) / 10 + '0');
-   \   0000FF   EC           MOV     A,R4
-   \   000100   F8           MOV     R0,A
-   \   000101   ED           MOV     A,R5
-   \   000102   F9           MOV     R1,A
-   \   000103   7A0A         MOV     R2,#0xa
-   \   000105   7B00         MOV     R3,#0x0
-   \   000107   12....       LCALL   ?US_DIV_MOD
-   \   00010A   E8           MOV     A,R0
-   \   00010B   2430         ADD     A,#0x30
-   \   00010D   90....       MOV     DPTR,#(BUFFER + 10)
-   \   000110   F0           MOVX    @DPTR,A
+   \   0000DB   EC           MOV     A,R4
+   \   0000DC   F8           MOV     R0,A
+   \   0000DD   ED           MOV     A,R5
+   \   0000DE   F9           MOV     R1,A
+   \   0000DF   7A0A         MOV     R2,#0xa
+   \   0000E1   7B00         MOV     R3,#0x0
+   \   0000E3   12....       LCALL   ?US_DIV_MOD
+   \   0000E6   E8           MOV     A,R0
+   \   0000E7   2430         ADD     A,#0x30
+   \   0000E9   90....       MOV     DPTR,#(BUFFER + 10)
+   \   0000EC   F0           MOVX    @DPTR,A
      92              if ((BUFFER[12] & 0x80) == 0x80)
-   \   000111   90....       MOV     DPTR,#(BUFFER + 12)
-   \   000114   E0           MOVX    A,@DPTR
-   \   000115   A2E7         MOV     C,0xE0 /* A   */.7
-   \   000117   5007         JNC     ??conversion_2
+   \   0000ED   90....       MOV     DPTR,#(BUFFER + 12)
+   \   0000F0   E0           MOVX    A,@DPTR
+   \   0000F1   A2E7         MOV     C,0xE0 /* A   */.7
+   \   0000F3   5007         JNC     ??conversion_2
      93            {
      94              BUFFER[13] &= ~0x04;    
-   \   000119   90....       MOV     DPTR,#(BUFFER + 13)
-   \   00011C   E0           MOVX    A,@DPTR
-   \   00011D   C2E2         CLR     0xE0 /* A   */.2
-   \   00011F   F0           MOVX    @DPTR,A
+   \   0000F5   90....       MOV     DPTR,#(BUFFER + 13)
+   \   0000F8   E0           MOVX    A,@DPTR
+   \   0000F9   C2E2         CLR     0xE0 /* A   */.2
+   \   0000FB   F0           MOVX    @DPTR,A
      95            }
-     96            temp_data = ((BUFFER[12] & 0x0f) << 8) + BUFFER[11];    
+     96            temp_data = ((BUFFER[12] & 0x00) << 8) + BUFFER[11];    
    \                     ??conversion_2:
-   \   000120   90....       MOV     DPTR,#(BUFFER + 12)
-   \   000123   E0           MOVX    A,@DPTR
-   \   000124   F8           MOV     R0,A
-   \   000125   740F         MOV     A,#0xf
-   \   000127   58           ANL     A,R0
-   \   000128   F8           MOV     R0,A
-   \   000129   E4           CLR     A
-   \   00012A   C8           XCH     A,R0
-   \   00012B   F9           MOV     R1,A
-   \   00012C   90....       MOV     DPTR,#(BUFFER + 11)
-   \   00012F   E0           MOVX    A,@DPTR
-   \   000130   7B00         MOV     R3,#0x0
-   \   000132   28           ADD     A,R0
-   \   000133   F8           MOV     R0,A
-   \   000134   EB           MOV     A,R3
-   \   000135   39           ADDC    A,R1
-   \   000136   F9           MOV     R1,A
-   \   000137   E8           MOV     A,R0
-   \   000138   FC           MOV     R4,A
-   \   000139   E9           MOV     A,R1
-   \   00013A   FD           MOV     R5,A
+   \   0000FC   90....       MOV     DPTR,#(BUFFER + 11)
+   \   0000FF   E0           MOVX    A,@DPTR
+   \   000100   7900         MOV     R1,#0x0
+   \   000102   FC           MOV     R4,A
+   \   000103   E9           MOV     A,R1
+   \   000104   FD           MOV     R5,A
      97            temp_data = (INT16U)(((float)temp_data / 4096) * 100);
-   \   00013B   8C..         MOV     ?V0 + 0,R4
-   \   00013D   8D..         MOV     ?V0 + 1,R5
-   \   00013F   E4           CLR     A
-   \   000140   F5..         MOV     ?V0 + 2,A
-   \   000142   F5..         MOV     ?V0 + 3,A
-   \   000144   78..         MOV     R0,#?V0 + 0
-   \   000146   12....       LCALL   ?UL_TO_FLT
-   \   000149   90....       MOV     DPTR,#__Constant_45800000
-   \   00014C   78..         MOV     R0,#?V0 + 4
-   \   00014E   12....       LCALL   ?L_MOV_X
-   \   000151   78..         MOV     R0,#?V0 + 0
-   \   000153   79..         MOV     R1,#?V0 + 4
-   \   000155   12....       LCALL   ?FLT_DIV
-   \   000158   90....       MOV     DPTR,#__Constant_42c80000
-   \   00015B   78..         MOV     R0,#?V0 + 4
-   \   00015D   12....       LCALL   ?L_MOV_X
-   \   000160   78..         MOV     R0,#?V0 + 0
-   \   000162   79..         MOV     R1,#?V0 + 4
-   \   000164   12....       LCALL   ?FLT_MUL
-   \   000167   78..         MOV     R0,#?V0 + 0
-   \   000169   12....       LCALL   ?FLT_TO_L
-   \   00016C   AC..         MOV     R4,?V0 + 0
-   \   00016E   AD..         MOV     R5,?V0 + 1
+   \   000105   8C..         MOV     ?V0 + 0,R4
+   \   000107   8D..         MOV     ?V0 + 1,R5
+   \   000109   E4           CLR     A
+   \   00010A   F5..         MOV     ?V0 + 2,A
+   \   00010C   F5..         MOV     ?V0 + 3,A
+   \   00010E   78..         MOV     R0,#?V0 + 0
+   \   000110   12....       LCALL   ?UL_TO_FLT
+   \   000113   90....       MOV     DPTR,#__Constant_45800000
+   \   000116   78..         MOV     R0,#?V0 + 4
+   \   000118   12....       LCALL   ?L_MOV_X
+   \   00011B   78..         MOV     R0,#?V0 + 0
+   \   00011D   79..         MOV     R1,#?V0 + 4
+   \   00011F   12....       LCALL   ?FLT_DIV
+   \   000122   90....       MOV     DPTR,#__Constant_42c80000
+   \   000125   78..         MOV     R0,#?V0 + 4
+   \   000127   12....       LCALL   ?L_MOV_X
+   \   00012A   78..         MOV     R0,#?V0 + 0
+   \   00012C   79..         MOV     R1,#?V0 + 4
+   \   00012E   12....       LCALL   ?FLT_MUL
+   \   000131   78..         MOV     R0,#?V0 + 0
+   \   000133   12....       LCALL   ?FLT_TO_L
+   \   000136   AC..         MOV     R4,?V0 + 0
+   \   000138   AD..         MOV     R5,?V0 + 1
      98            BUFFER[11] = (INT8U)((temp_data) % 10 + '0');
-   \   000170   EC           MOV     A,R4
-   \   000171   F8           MOV     R0,A
-   \   000172   ED           MOV     A,R5
-   \   000173   F9           MOV     R1,A
-   \   000174   7A0A         MOV     R2,#0xa
-   \   000176   7B00         MOV     R3,#0x0
-   \   000178   12....       LCALL   ?US_DIV_MOD
-   \   00017B   EA           MOV     A,R2
-   \   00017C   2430         ADD     A,#0x30
-   \   00017E   90....       MOV     DPTR,#(BUFFER + 11)
-   \   000181   F0           MOVX    @DPTR,A
+   \   00013A   EC           MOV     A,R4
+   \   00013B   F8           MOV     R0,A
+   \   00013C   ED           MOV     A,R5
+   \   00013D   F9           MOV     R1,A
+   \   00013E   7A0A         MOV     R2,#0xa
+   \   000140   7B00         MOV     R3,#0x0
+   \   000142   12....       LCALL   ?US_DIV_MOD
+   \   000145   EA           MOV     A,R2
+   \   000146   2430         ADD     A,#0x30
+   \   000148   90....       MOV     DPTR,#(BUFFER + 11)
+   \   00014B   F0           MOVX    @DPTR,A
      99            BUFFER[12] = (INT8U)((temp_data) / 10 + '0');
-   \   000182   EC           MOV     A,R4
-   \   000183   F8           MOV     R0,A
-   \   000184   ED           MOV     A,R5
-   \   000185   F9           MOV     R1,A
-   \   000186   7A0A         MOV     R2,#0xa
-   \   000188   7B00         MOV     R3,#0x0
-   \   00018A   12....       LCALL   ?US_DIV_MOD
-   \   00018D   E8           MOV     A,R0
-   \   00018E   2430         ADD     A,#0x30
-   \   000190   90....       MOV     DPTR,#(BUFFER + 12)
-   \   000193   F0           MOVX    @DPTR,A
+   \   00014C   EC           MOV     A,R4
+   \   00014D   F8           MOV     R0,A
+   \   00014E   ED           MOV     A,R5
+   \   00014F   F9           MOV     R1,A
+   \   000150   7A0A         MOV     R2,#0xa
+   \   000152   7B00         MOV     R3,#0x0
+   \   000154   12....       LCALL   ?US_DIV_MOD
+   \   000157   E8           MOV     A,R0
+   \   000158   2430         ADD     A,#0x30
+   \   00015A   90....       MOV     DPTR,#(BUFFER + 12)
+   \   00015D   F0           MOVX    @DPTR,A
     100          } 
-   \   000194   7F08         MOV     R7,#0x8
-   \   000196   02....       LJMP    ?BANKED_LEAVE_XDATA
+   \   00015E   7F08         MOV     R7,#0x8
+   \   000160   02....       LJMP    ?BANKED_LEAVE_XDATA
     101          
 
    \                                 In  segment BANKED_CODE, align 1, keep-with-next
@@ -1996,7 +1951,7 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\Samples\cc2430-zstack-ad
      ge                                1
      Delay                           108
      ??Delay_1u_0                     59
-     conversion                      409
+     conversion                      355
      I2C_Start_1                      50
      I2C_Stop_1                       57
      Sendack                          61
@@ -2051,14 +2006,14 @@ C:\Texas Instruments\ZStack-1.4.3-1.2.1\Projects\zstack\Samples\cc2430-zstack-ad
      __Constant_4079999a               4
 
  
- 1 886 bytes in segment BANKED_CODE
+ 1 832 bytes in segment BANKED_CODE
     84 bytes in segment BANK_RELAYS
      2 bytes in segment SFR_AN
     42 bytes in segment XDATA_I
     42 bytes in segment XDATA_ID
     21 bytes in segment XDATA_Z
  
- 2 000 bytes of CODE  memory (+ 12 bytes shared)
+ 1 946 bytes of CODE  memory (+ 12 bytes shared)
      0 bytes of DATA  memory (+  2 bytes shared)
     51 bytes of XDATA memory (+ 12 bytes shared)
 

@@ -77,7 +77,7 @@ void conversion(void)
   {
     BUFFER[13] &= ~0x01;    
   }
-  temp_data = ((BUFFER[8] & 0x0f) << 8) + BUFFER[7];    
+  temp_data = ((BUFFER[8] & 0x00) << 8) + BUFFER[7];    
   temp_data = (INT16U)(((float)temp_data /4096 ) * 100);
   BUFFER[7] = (INT8U)((temp_data) % 10 + '0');
   BUFFER[8] = (INT8U)((temp_data) / 10 + '0');
@@ -85,7 +85,7 @@ void conversion(void)
   {
     BUFFER[13] &= ~0x02;    
   }
-  temp_data = ((BUFFER[10] & 0x0f) << 8) + BUFFER[9];    
+  temp_data = ((BUFFER[10] & 0x00) << 8) + BUFFER[9];    
   temp_data = (INT16U)(((float)temp_data / 4096) * 100);
   BUFFER[9] = (INT8U)((temp_data) % 10 + '0');
   BUFFER[10] = (INT8U)((temp_data) / 10 + '0');
@@ -93,7 +93,7 @@ void conversion(void)
   {
     BUFFER[13] &= ~0x04;    
   }
-  temp_data = ((BUFFER[12] & 0x0f) << 8) + BUFFER[11];    
+  temp_data = ((BUFFER[12] & 0x00) << 8) + BUFFER[11];    
   temp_data = (INT16U)(((float)temp_data / 4096) * 100);
   BUFFER[11] = (INT8U)((temp_data) % 10 + '0');
   BUFFER[12] = (INT8U)((temp_data) / 10 + '0');

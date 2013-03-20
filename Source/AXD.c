@@ -314,7 +314,7 @@ void AXD_Init( byte task_id )
   RegisterForKeys( AXD_TaskID );
   uartConfig.configured           = TRUE;              // 2430 don't care.
   uartConfig.baudRate             = SERIAL_APP_BAUD;
-  uartConfig.flowControl          = TRUE;
+  uartConfig.flowControl          = FALSE;
   uartConfig.flowControlThreshold = SERIAL_APP_THRESH;
   uartConfig.rx.maxBufSize        = SERIAL_APP_RX_MAX;
   uartConfig.tx.maxBufSize        = SERIAL_APP_TX_MAX;
@@ -636,7 +636,7 @@ void AXD_MessageMSGCB( afIncomingMSGPacket_t *pkt )
   switch ( pkt->clusterId )
   {
     case AXD_CMD_ID:
-      displayXYZ(pkt->cmd.Data);
+    //  displayXYZ(pkt->cmd.Data);
       //HalLcdWriteStringValue("R: ",source,10,3);
       HalUARTWrite( SERIAL_APP_PORT, pkt->cmd.Data,pkt->cmd.DataLength);
     break;
