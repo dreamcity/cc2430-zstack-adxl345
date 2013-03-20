@@ -8,4 +8,4 @@ TODO:
 * 计算病人危险情况
 * 增加握手协议，以免浪费资源。
 
-![image](hhttps://raw.github.com/jerusalemdax/cc2430-zstack-adxl345/master/IMG_0021.JPG)
+![image](https://raw.github.com/jerusalemdax/cc2430-zstack-adxl345/master/IMG_0021.JPG)
