@@ -94,12 +94,12 @@ void conversion(void)
     }
     //¼ÆËã½Ç¶È
     temp = acos(data[2] / 256.0);
-    BUFFER[9] = (INT8U)(temp) % 10 + '0';
-    BUFFER[8] = (INT8U)(temp) / 10 + '0';
+    BUFFER[9] = (INT8U)(temp) / 10 + '0';
+    BUFFER[8] = (INT8U)(temp) % 10 + '0';
     if (sqrt( data[0] * data[0] + data[1] * data[1] + data[2] * data[2]) > 384){
-        BUFFER[11] = 0xFF;
+        BUFFER[11] = 0xFF; //in danger
     } else{
-        BUFFER[11] = 0xF0;
+        BUFFER[11] = 0xF0; //safe
     }
 }
 
