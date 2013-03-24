@@ -18,7 +18,8 @@ typedef signed int    INT16S;
 #define BYTE unsigned char
 #define WORD unsigned int
 
-extern INT8U BUFFER[14];
+extern INT8U BUFFER[12];
+extern INT8U POS_TEMP[6];
 
 extern void Init_ADXL345(void);
 extern void ADXL345_Start(void);

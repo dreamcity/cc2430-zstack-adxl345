@@ -22,8 +22,8 @@
   its documentation for any purpose.
 
   YOU FURTHER ACKNOWLEDGE AND AGREE THAT THE SOFTWARE AND DOCUMENTATION ARE
-  PROVIDED 揂S IS?WITHOUT WARRANTY OF ANY KIND, EITHER EXPRESS OR IMPLIED, 
-  INCLUDING WITHOUT LIMITATION, ANY WARRANTY OF MERCHANTABILITY, TITLE, 
+  PROVIDED 揂S IS?WITHOUT WARRANTY OF ANY KIND, EITHER EXPRESS OR IMPLIED,
+  INCLUDING WITHOUT LIMITATION, ANY WARRANTY OF MERCHANTABILITY, TITLE,
   NON-INFRINGEMENT AND FITNESS FOR A PARTICULAR PURPOSE. IN NO EVENT SHALL
   TEXAS INSTRUMENTS OR ITS LICENSORS BE LIABLE OR OBLIGATED UNDER CONTRACT,
   NEGLIGENCE, STRICT LIABILITY, CONTRIBUTION, BREACH OF WARRANTY, OR OTHER
@@ -34,7 +34,7 @@
   (INCLUDING BUT NOT LIMITED TO ANY DEFENSE THEREOF), OR OTHER SIMILAR COSTS.
 
   Should you have any questions regarding your right to use this Software,
-  contact Texas Instruments Incorporated at www.TI.com. 
+  contact Texas Instruments Incorporated at www.TI.com.
 **************************************************************************************************/
 
 /*********************************************************************
@@ -224,7 +224,9 @@ endPointDesc_t AXD_epDesc;
 /*********************************************************************
  * EXTERNAL VARIABLES
  */
-uint16 test2 = 0;
+INT8U pulse_flag, pulse_cnt;
+INT16U timer_flag = 1;
+uint16 temp;
 
 /*********************************************************************
  * EXTERNAL FUNCTIONS
@@ -334,7 +336,7 @@ void AXD_Init( byte task_id )
 
   ZDO_RegisterForZDOMsg( AXD_TaskID, End_Device_Bind_rsp );
   ZDO_RegisterForZDOMsg( AXD_TaskID, Match_Desc_rsp );
-  
+
   AXD_Group.ID = AXD_GROUP;
   aps_AddGroup(AXD_ENDPOINT,&AXD_Group);
   //下面是用户自定义的初始化
@@ -359,7 +361,7 @@ void AXD_Init( byte task_id )
  */
 UINT16 AXD_ProcessEvent( byte task_id, UINT16 events )
 {
-  
+
   afIncomingMSGPacket_t *MSGpkt;
 //  osal_event_hdr_t *pMsg;
   afDataConfirm_t *afDataConfirm;
@@ -456,6 +458,7 @@ UINT16 AXD_ProcessEvent( byte task_id, UINT16 events )
   if ( events & AXD_SEND_MSG_EVT )
   {
     //zb_HandleOsalEvent(events);
+    timer_flag ++;
     AXD_SendTheMessage();
     // Setup to send message again
     osal_start_timerEx( AXD_TaskID,
@@ -632,7 +635,7 @@ void AXD_HandleKeys( byte shift, byte keys )
  */
 void AXD_MessageMSGCB( afIncomingMSGPacket_t *pkt )
 {
-  
+
   switch ( pkt->clusterId )
   {
     case AXD_CMD_ID:
@@ -647,8 +650,8 @@ void AXD_MessageMSGCB( afIncomingMSGPacket_t *pkt )
     HalLcdWriteStringValue("Q: ",*(pkt->cmd.Data),10,3);
     break;
   default: break;
-  } 
-  
+  }
+
 }
 
 /*********************************************************************
@@ -667,16 +670,10 @@ void AXD_SendTheMessage( void )
 
   Multiple_Read_ADXL345();
   conversion();
+  displayXYZ(POS_TEMP);
   ReadAdcValue(ADC_TEMP);
   ReadAdcValue(ADC_PULSE);
-//  displayXYZ((uint8 *)BUFFER);
-//  BUFFER[3] = myApp_ReadTemperature();
-//  BUFFER[2] = BUFFER[3] % 10 + '0';
-//  BUFFER[3] = BUFFER[3] / 10 + '0';
-//  BUFFER[5] = myApp_ReadTemperature();
-//  BUFFER[4] = BUFFER[5] % 10 + '0';
-//  BUFFER[5] = BUFFER[5] / 10 + '0';
-  
+
   if ( AF_DataRequest( &AXD_DstAddr, &AXD_epDesc,
                        AXD_CMD_ID,
                        (byte)(sizeof(BUFFER)),
@@ -686,7 +683,7 @@ void AXD_SendTheMessage( void )
   {
     aps_RemoveGroup(AXD_ENDPOINT,AXD_GROUP);
     // Successfully requested to be sent.
-    
+
   }
   else
   {
@@ -708,7 +705,7 @@ void AXD_SendTheMessage( void )
   {
     // Error occurred in request to send.
   }
-  
+
 #endif
 }
 
@@ -854,6 +851,7 @@ uint8 myApp_ReadTemperature( void )
 
   uint16 value;
 
+
   /* Clear ADC interrupt flag */
   ADCIF = 0;
 
@@ -891,12 +889,13 @@ uint8 myApp_ReadTemperature( void )
 }
 void ReadAdcValue( uint8 flag )
 {
-  uint16 value;
-  ADCIF = 0;
+    uint16 value;
+    
+    ADCIF = 0;
   if (flag == ADC_TEMP)
   {
     ADCCON3 = (HAL_ADC_REF_AIN7 | HAL_ADC_DEC_512 | HAL_ADC_CHN_AIN4);
-    
+
   }
   else
   {
@@ -906,16 +905,38 @@ void ReadAdcValue( uint8 flag )
     value = ADCL ;
     value |= ((uint16) ADCH) << 8;
     value = value >> 2;
-    value = (INT16U)(330.0 * (float)value / 8192.0);
     if (flag == ADC_TEMP)
   {
-    BUFFER[2] = (INT8U)(value % 100 % 10 + '0');
-    BUFFER[3] = (INT8U)(value % 100 / 10 + '0');
+    value = (INT16U)(330.0 * (float)value / 8192.0);
     BUFFER[4] = (INT8U)(value / 100  + '0');
+    value = value % 100;
+    BUFFER[3] = (INT8U)(value / 10 + '0');
+    value = value % 10;
+    BUFFER[2] = (INT8U)(value + '0');
   }
-  else
-  {
-    BUFFER[5] = (INT8U)(value % 100 / 10 + '0');
-    BUFFER[6] = (INT8U)(value / 100 + '0');
+  else{
+    value = (INT16U)(3.3 * (float)value / 8192.0);
+      if (value < 1){
+          pulse_flag = 1;
+      }
+      if (pulse_flag == 1){
+          if (value >= 1){
+              pulse_cnt ++;
+              pulse_flag = 0;
+          }
+      }
+      if (timer_flag >= 100){
+          temp = (INT16U)((float)pulse_cnt / (float)timer_flag * 1200.0);
+      }
+      if (timer_flag >= 1200){
+          pulse_cnt = 0;
+          timer_flag = 0;
+      }
+     // temp = 0;
+      BUFFER[7] = (INT8U)(temp / 100 + '0');
+      temp = temp % 100;
+      BUFFER[6] = (INT8U)(temp / 10 + '0');
+      temp = temp % 10;
+      BUFFER[5] = (INT8U)(temp + '0');
   }
 }

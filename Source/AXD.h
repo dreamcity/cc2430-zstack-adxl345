@@ -78,6 +78,7 @@ extern "C"
 
 // Application Events (OSAL) - These are bit weighted definitions.
 #define AXD_SEND_MSG_EVT       0x0001
+#define AXD_PULSE_MSG_EVT 0x0002
   
 
 /*********************************************************************
