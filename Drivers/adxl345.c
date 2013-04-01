@@ -23,7 +23,6 @@ char wan,qian,bai,shi,ge;
 
 void initUARTtest(void);
 void UartTX_Send_String(char *Data,int len);
-void conversion(void);
 
 void Sendack(unsigned char h);
 unsigned char I2C_Check_ack();
@@ -71,9 +70,9 @@ void Delay_1u(unsigned int microSecs) {
     }
 }
 
-void conversion(void)
+void conversion(SEND_DATA *da)
 {
-    BUFFER[10] = 0xff;
+    da->flag = 0xff;
     int data[3];
     float temp[3];
     float angel;
@@ -81,17 +80,17 @@ void conversion(void)
     data[0] = (POS_TEMP[1] << 8) + POS_TEMP[0];
     if (data[0] < 0){
 //        data[0] = -data[0];
-        BUFFER[10] &= ~0x01;
+        da->flag &= ~0x01;
     }
     data[1] = (POS_TEMP[3] << 8) + POS_TEMP[2];
     if (data[1] < 0){
 //        data[1] = -data[1];
-        BUFFER[10] &= ~0x02;
+        da->flag &= ~0x02;
     }
     data[2] = (POS_TEMP[5] << 8) + POS_TEMP[4];
     if (data[2] < 0){
 //        data[2] = -data[2];
-        BUFFER[10] &= ~0x04;
+        da->flag &= ~0x04;
     }
     //¼ÆËã½Ç¶È
  //   temp = sqrt( data[0] * data[0] + data[1] * data[1] + data[2] * data[2]);
@@ -108,12 +107,12 @@ void conversion(void)
     angel = sqrt(temp[0] * temp[0] + temp[1] * temp[1] + temp[2] * temp[2]);
     angel = acos(temp[2] / angel);
     angel = angel / 3.14 * 180;
-    BUFFER[9] = (INT8U)(angel) / 10 + '0';
-    BUFFER[8] = (INT8U)(angel) % 10 + '0';
+    da->angle[1] = (INT8U)(angel) / 10 + '0';
+    da->angle[0] = (INT8U)(angel) % 10 + '0';
     if (sqrt( temp[0] * temp[0] + temp[1] * temp[1] + temp[2] * temp[2]) > 15){
-        BUFFER[11] = 0xFF; //in danger
+        da->danger = 0xFF; //in danger
     } else{
-        BUFFER[11] = 0xF0; //safe
+        da->danger = 0xF0; //safe
     }
 }
 

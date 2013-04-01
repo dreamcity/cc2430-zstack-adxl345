@@ -60,6 +60,7 @@
 /*********************************************************************
  * INCLUDES
  */
+#include <stdlib.h>
 #include "OSAL.h"
 #include "AF.h"
 #include "ZDApp.h"
@@ -224,6 +225,7 @@ endPointDesc_t AXD_epDesc;
 /*********************************************************************
  * EXTERNAL VARIABLES
  */
+SEND_DATA *dat;
 INT8U pulse_flag, pulse_cnt;
 INT16U timer_flag = 1;
 uint16 temp;
@@ -343,6 +345,8 @@ void AXD_Init( byte task_id )
 #ifdef AXD_END
   Init_ADXL345();
   HalAdcInit();
+  dat = (SEND_DATA *)malloc(sizeof(SEND_DATA));
+  dat->start = 0; 
 #endif
 }
 
@@ -370,17 +374,14 @@ UINT16 AXD_ProcessEvent( byte task_id, UINT16 events )
   byte sentEP;
   ZStatus_t sentStatus;
   byte sentTransID;       // This should match the value sent
-#ifdef AXD_END
-  BUFFER[0] = 0;
 #ifdef AXD_END_A
-  BUFFER[1] = DEVICE_A;
+  dat->device_id = DEVICE_A;
 #endif
 #ifdef AXD_END_B
-  BUFFER[1] = DEVICE_B;
+  dat->device_id = DEVICE_B;
 #endif
 #ifdef AXD_END_C
-  BUFFER[1] = DEVICE_C;
-#endif
+  dat->device_id = DEVICE_C;
 #endif
 
   if ( events & SYS_EVENT_MSG )
@@ -669,15 +670,15 @@ void AXD_SendTheMessage( void )
 #ifdef AXD_END
 
   Multiple_Read_ADXL345();
-  conversion();
+  conversion(dat);
   displayXYZ(POS_TEMP);
-  ReadAdcValue(ADC_TEMP);
-  ReadAdcValue(ADC_PULSE);
+  ReadAdcValue(dat, ADC_TEMP);
+  ReadAdcValue(dat, ADC_PULSE);
 
   if ( AF_DataRequest( &AXD_DstAddr, &AXD_epDesc,
                        AXD_CMD_ID,
-                       (byte)(sizeof(BUFFER)),
-                       (byte *)(BUFFER),
+                       (byte)(sizeof(dat)),
+                       (byte *)(dat),
                        &AXD_TransID,
                        AF_DISCV_ROUTE, AF_DEFAULT_RADIUS ) == afStatus_SUCCESS )
   {
@@ -887,7 +888,7 @@ uint8 myApp_ReadTemperature( void )
 
   return ( (uint8)(value/TEMP_COEFFICIENT) );
 }
-void ReadAdcValue( uint8 flag )
+void ReadAdcValue(SEND_DATA * da, uint8 flag )
 {
     uint16 value;
     
@@ -908,11 +909,11 @@ void ReadAdcValue( uint8 flag )
     if (flag == ADC_TEMP)
   {
     value = (INT16U)(330.0 * (float)value / 8192.0);
-    BUFFER[4] = (INT8U)(value / 100  + '0');
+    da->temp[2] = (INT8U)(value / 100  + '0');
     value = value % 100;
-    BUFFER[3] = (INT8U)(value / 10 + '0');
+    da->temp[1] = (INT8U)(value / 10 + '0');
     value = value % 10;
-    BUFFER[2] = (INT8U)(value + '0');
+    da->temp[0] = (INT8U)(value + '0');
   }
   else{
     value = (INT16U)(3.3 * (float)value / 8192.0);
@@ -933,10 +934,10 @@ void ReadAdcValue( uint8 flag )
           timer_flag = 0;
       }
      // temp = 0;
-      BUFFER[7] = (INT8U)(temp / 100 + '0');
+      da->pulse[2] = (INT8U)(temp / 100 + '0');
       temp = temp % 100;
-      BUFFER[6] = (INT8U)(temp / 10 + '0');
+      da->pulse[1] = (INT8U)(temp / 10 + '0');
       temp = temp % 10;
-      BUFFER[5] = (INT8U)(temp + '0');
+      da->pulse[0] = (INT8U)(temp + '0');
   }
 }

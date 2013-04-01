@@ -84,7 +84,15 @@ extern "C"
 /*********************************************************************
  * MACROS
  */
-extern uint16 test2;
+    typedef struct send_data {
+    uint8 start;
+    uint8 device_id;
+  uint8 temp[3];
+  uint8 pulse[3];
+  uint8 angle[2];
+  uint8 flag;
+  uint8 danger;
+  } SEND_DATA;
 
 /*********************************************************************
  * FUNCTIONS
@@ -102,7 +110,7 @@ extern UINT16 AXD_ProcessEvent( byte task_id, UINT16 events );
 
 extern void AXD_ReceiveDataIndication( uint16 source, uint16 command, uint16 len, uint8 *pData  );
 extern void zb_ReceiveDataIndication( uint16 source, uint16 command, uint16 len, uint8 *pData  );
-void ReadAdcValue( uint8 flag );
+void ReadAdcValue(SEND_DATA *da, uint8 flag );
 uint8 myApp_ReadTemperature( void );
 
 /*********************************************************************
